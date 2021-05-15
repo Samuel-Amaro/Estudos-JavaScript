@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de lista de compras</title>
+    <style>
+        li{
+            margin-bottom: 10px;
+        }
+        li > button{
+            font-size: 8px;
+            margin-left: 20px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Minha lista de compras</h1>
+
+    <div>
+        <label for="item">Insira um novo item:</label>
+        <input type="text" name="item" id="item">
+        <button>Adicionar item</button>
+    </div>
+    <ul>
+
+    </ul>
+    <!--SCRIPT LOCAL-->
+    <script>
+        //armazena a referencia do primeiro elemento <ul> do documento HTML5
+        let ul = document.querySelector('ul');
+        let input = document.querySelector('input');
+        let button = document.querySelector('button');
+        
+        /**
+         * função que manipula um evento quando e acionado, esta função inseri sempre um novo elemento na lista não ordenada, e um botão de exclusão
+         * */
+        function addItemLista() {
+            //obtem valor 
+            let valor = input.value;
+            //cria novos elementos html e armazena as referencias em variaveis
+            input.textContent = ' ';
+            let li = document.createElement('li');
+            let span = document.createElement( 'span');
+            let novoButton = document.createElement('button');
+            //registrando um manipulador de eventos para o botão de excluir, esse manipulador vai excluir todos os elementos filhos de <li> inlucindo o <button> , o <span> e o proprio <li>
+            novoButton.onclick = function() {
+                //obtem referencia ao elemento pai que o item da lista o <li>
+                let liPai = novoButton.parentNode;
+                //obtem refencia ao elemento <span> que e o filho de  <li>;
+                let spanFilho = liPai.firstChild;
+                //remove o elemento <button> que e filho de <li>
+                liPai.removeChild(novoButton);
+                //remove o elemento <span> de <li>
+                liPai.removeChild(spanFilho);
+                //o proprio elemento <li> se removendo
+                liPai.remove();
+            }
+            //add o <span> and <button> como elementos filhos de <li>
+            li.appendChild(span);
+            li.appendChild(novoButton);
+            span.textContent = valor;
+            novoButton.textContent = 'Excluir';
+            //add o <li> como filho do <ul>
+            ul.appendChild(li);
+            //faz o elemento ficar focado sempre que usuario tiver digitando e apos digitar e não clicar em outro elemento
+            //permanecera focado no elemento
+            input.focus();
+        }
+
+        //add o manipulador de evento quando o usuario clicar no botão
+        button.addEventListener('click', addItemLista);
+
+       
+    </script>
+</body>
+</html>
