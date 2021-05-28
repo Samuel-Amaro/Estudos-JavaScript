@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcula IMC</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>IMC</h1>
+        <p><strong>Bem Vindo:</strong> Vamos calcular seu IMC(indice de massa corporal) e mostra em qual classificação você se encontra.</p>
+    </header>
+    <main>
+        <article>
+            <div>
+                <label for="peso">Seu Peso</label>
+                <input type="number" placeholder="digite aqui seu peso ... 75.90kg" id="peso">
+                <!--pattern="[0-9.]{1,6}" -->
+                <label for="altura">Sua Altura</label>
+                <input type="number" name="altura" id="altura"  placeholder="digite aqui sua altura ... 1.75">
+                <!--pattern="[0-9.]{1,6}"-->
+                <button id="calcular">Calcular</button>
+            </div>
+        </article>
+        <article>
+            <p id="resultado"></p>
+        </article>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
