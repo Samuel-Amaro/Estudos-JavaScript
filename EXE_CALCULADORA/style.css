@@ -1,0 +1,125 @@
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/*variaveis css*/
+:root{
+    --cor01: #F0F0EB;
+    --cor02: #FFE849;
+    --cor03: #A9B1A1;
+    --cor04: #8B9386;
+    --cor05: #4D4D3D;
+}
+
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+section.conteiner-geral{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #8B9386;
+    width: 500px;
+    min-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    height: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.visor{
+    background-color: #4D4D3D;
+    width: 100%;
+    height: 30%;
+    /*
+    border-top: 2px;
+    border-right: 2px;
+    border-bottom: 2px;
+    border-left: 2px;
+    border-style: solid;
+    border-color: black;
+    */
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+div.visor > input{
+    display: block;
+    width: 90%;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    /*
+    border-top: 2px;
+    border-right: 2px;
+    border-bottom: 2px;
+    border-left: 2px;
+    border-style: solid;
+    border-color: black;
+    */
+    height: 100%;
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    color: black;
+    text-align: right;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+div.botoes{
+    width: 100%;
+    height: 70%;
+}
+
+div.grupo-botoes{
+    width: 100%;
+    clear: left;
+}
+
+div#botao-zero{
+    width: 50%;
+    border-bottom-left-radius: 20px;
+}
+
+div#botao-igual{
+    border-bottom-right-radius: 20px;
+}
+
+div.botao{
+    width: 25%;
+    display: block;
+    float: left;
+    height: 70px;
+    background-color: white;
+    border-top: 0.1px;
+    border-right: 0.1px;
+    border-bottom: 0.1px;
+    border-left: 0.1px;
+    border-style: solid;
+    border-color: #A9B1A1;
+    text-align: center;
+    font-size: 28px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FFE849;
+}
+
+div.destaque-horizontal{
+    background-color: #F0F0EB;
+}
+
+div.destaque-vertical{
+    background-color: #d8eec5;
+}

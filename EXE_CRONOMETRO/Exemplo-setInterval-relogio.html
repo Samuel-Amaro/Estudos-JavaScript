@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simples setInterval relógio</title>
+    <style>
+        body{
+            background-color: #7F7F7F;
+        }
+        h2{
+            padding-top: 18px;
+            padding-right: 18px;
+            padding-bottom: 18px;
+            padding-left: 18px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        main{
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #FFFFFF;
+            margin-top: 100px;
+            border-radius: 6px;
+            margin-bottom: 100px;
+        }
+        p{
+            font-family: sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            padding-top: 15px;
+            padding-right: 15px;
+            padding-bottom: 15px;
+            padding-left: 15px;
+        }
+        button.button{
+            display: inline-block;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            padding-top: 5px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+            padding-left: 5px;
+            border-radius: 9px;
+            width: 80px;
+        }
+        section.container{
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        div.container-2{
+            width: 40%;
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            background-color: #000000;
+            margin-left: auto;
+            margin-right: auto;
+            height: 60px;
+            border-radius: 4px;
+        }
+        div.display{
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        
+        <h2>Aprendizam Ativo :  Criando seu próprio cronômetro!</h2>
+
+        <section class="container">
+            <button class="button" id="iniciar">Inicio</button>
+            <button class="button" id="parar">Parar</button>
+            <button class="button" id="zerar">Resetar</button>
+        </section>
+
+        <div class="container-2">
+            <div class="display">
+                <p class="clock"></p>
+            </div>
+        </div>
+        
+    </main>
+    <script>
+        let buttonIniciar = document.querySelector('#iniciar');
+        let buttonPausar = document.querySelector('#parar');
+        let buttonRedefinir = document.querySelector('#zerar');
+        var contadorSegundos = 0;
+        let inicioTempo;
+        let countIdSegundos;
+        let contadorMinutos = 0;
+        let contadorHoras = 0;
+        let tempoDecorridoClique;
+    
+        buttonIniciar.addEventListener('click', () => {
+            //O método Date.now() retorna o número de milisegundos decorridos desde 1 de janeiro de 1970 00:00:00 UTC.
+            inicioTempo = Date.now();
+            countIdSegundos = setInterval(incrementaContador, 1000);
+            //habilita o botão para não ser clicavel
+            buttonIniciar.disabled = true;
+        });
+        
+        buttonPausar.addEventListener('click', () => {
+            //cancela o intervalo
+            clearInterval(countIdSegundos);
+            //desabilita o botão para ser clicavel
+            buttonIniciar.disabled = false;
+        });
+
+        buttonRedefinir.addEventListener('click', () => {
+            //cancela intervalo e cria um novo
+            clearInterval(countIdSegundos);
+            //redefine variaiveis
+            contadorSegundos = 0;
+            contadorMinutos = 0;
+            contadorHoras = 0;
+            //desabilita o botão para ser clicavel
+            buttonIniciar.disabled = false;
+        });
+
+        function incrementaContador() {
+            if(contadorSegundos == 59) {
+                contadorSegundos = 0;
+                incrementaMinutos();
+            }else{
+                contadorSegundos = contadorSegundos + 1;
+            }
+        }
+        function incrementaMinutos() {
+            if(contadorMinutos == 59) {
+                contadorMinutos = 0;
+                incrementaHoras();
+            }else{
+                contadorMinutos = contadorMinutos + 1;
+            }
+        }
+        function zerosEsquerda(numero) {
+            let numeroModi = String(numero);
+            return numeroModi.padStart(2,'0');
+        }
+        function incrementaHoras() {
+            contadorHoras = contadorHoras + 1;
+        }
+        //função nomeada que mostra o tempo de horas, minutos segundos
+        function mostraTempo() {
+            //tempo decorrido apos o clique
+            tempoDecorridoClique = Date.now() - inicioTempo;
+            //o conteudo do elemento <p> sera a data especificada
+            if(contadorSegundos < 10 || contadorMinutos < 10 || contadorHoras < 10) {
+                document.querySelector('.clock').textContent = zerosEsquerda(contadorHoras) + ":" + zerosEsquerda(contadorMinutos) + ":" + zerosEsquerda(contadorSegundos);
+            }else{
+                document.querySelector('.clock').textContent = contadorHoras + ":" +  contadorMinutos + ":" + contadorSegundos;
+            }
+        }
+
+        //chama a função 
+        mostraTempo();
+
+        //registrando o setInterval para executar a função repetidamente a cada passar do tempo especificado
+
+        //a cada passar de 1s(1000 milissegundos) a função mostra o valor da variavel tempo atualizada sera executada
+        const createRelogio = setInterval(mostraTempo, 1000);
+
+    </script>
+</body>
+</html>
