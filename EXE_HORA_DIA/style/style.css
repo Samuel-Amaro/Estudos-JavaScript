@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    margin: 30px;
+}
+
+body{
+    font-family:'Times New Roman', Times, serif;
+    background-color: darkkhaki;
+    min-width: 500px;
+}
+
+h2{
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+header{
+    padding: 30px;
+}
+
+section.container{
+    width: 500px;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px rgb(53, 50, 50);
+}
+
+footer{
+    margin: 30px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
+div.message, div.comprimento{
+    text-align: center;
+    padding: 15px;
+    margin: 5px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+div.comprimento{
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+
+div.img{
+    text-align: center;
+}
+
+img{
+    border-radius: 5px;
+}
