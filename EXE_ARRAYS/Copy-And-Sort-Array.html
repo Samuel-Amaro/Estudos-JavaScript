@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array JS</title>
+</head>
+<body>
+    <script>
+        
+        let arr = ["HTML", "JavaScript", "CSS"];
+        
+        function copySorted(arr) {
+            let classificados = [];
+            arr.sort(function(a, b) {
+                //transforma string em maiuscula
+                let aElement = a.toLocaleUpperCase(), bElement = b.toLocaleUpperCase();
+                if(a > b) 
+                    //classifica b para um indice inferior a a
+                    //b vira primeiro
+                    classificados.push(b);
+                if(a < b) 
+                    //classifica a para um indice inferior a b
+                    //a vem primeiro
+                    classificados.push(a);
+                else
+                    //tanto faz ambos são iguais
+                    classificados.push(a);
+            });
+            return classificados;          
+        }
+
+        let s = copySorted(arr); 
+
+        alert(`Copy sorted = ${s}`);
+
+        alert(`Array original = ${arr}`); //["HTML", "JavaScript", "CSS]"
+
+        //["HTML", "CSS"];
+    </script>
+</body>
+</html>

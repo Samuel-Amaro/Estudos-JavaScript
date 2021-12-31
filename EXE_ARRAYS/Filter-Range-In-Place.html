@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array JS</title>
+</head>
+<body>
+    <h1>Array JS</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sit repellat iusto pariatur tempore facere ad odit, doloribus fugit illum a labore at quaerat deserunt libero obcaecati assumenda laboriosam corporis?</p>
+    <h2>Exercicio de Array JS</h2>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima error incidunt minus sit sequi rerum, illo explicabo nesciunt nam aut itaque maiores, rem unde alias ex a. Sapiente, harum nulla!</p>
+    <h3>Filter Range in Place</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur nemo perferendis ad nihil eaque nisi magnam consequuntur tempore quos, veritatis eveniet incidunt debitis voluptatem aspernatur enim ab fugiat minima odio.</p>
+    <script>
+        
+        let arr = [5, 3, 8, 1];
+
+        function filterRangeInPlace(arr, a, b) {
+            for(let i = 0; i < arr.length; i++) {
+                if(arr[i] < a || arr[i] > b) {
+                    //remove do array
+                    arr.splice(i, 1);
+                    //removeu um item do array tem que desconta o numero de indice 
+                    i--;
+                }
+            }
+        }
+
+        filterRangeInPlace(arr, 1, 4);
+
+        alert(arr);
+    </script>
+</body>
+</html>
