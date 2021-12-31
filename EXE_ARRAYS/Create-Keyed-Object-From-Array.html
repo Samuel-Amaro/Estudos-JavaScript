@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array exe</title>
+</head>
+<body>
+    <script>
+
+        let users = [
+            {id: 'john', name: "John Smith", age: 20},
+            {id: 'ann', name: "Ann Smith", age: 24},
+            {id: 'pete', name: "Pete Peterson", age: 31},
+        ];
+
+        function groupById(users) {
+            let objetoGroup = users.map(function(value) {
+                let nome = value.id;
+                console.log(nome);
+                let obj = {
+                    nome : {id: value.id, name: value.name, age: value.age}
+                }
+                return obj;
+            });
+            return objetoGroup;
+        }
+
+        let p = groupById(users);
+
+        console.log(p[0].);
+
+
+    </script>
+</body>
+</html>

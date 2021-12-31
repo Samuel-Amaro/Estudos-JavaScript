@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array JS</title>
+</head>
+<body>
+    <script>
+
+        let strings = ["Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", ":-O"];
+
+        function find(value, arr) {
+            let indexs = [];
+            let index = arr.indexOf(value);
+            while(index != -1) {
+                indexs.push(index);
+                index = arr.indexOf(value, index + 1);
+            }
+            return indexs;
+        }
+
+        function unique(arr) {
+            let uniqueElements = [];
+            for(let i = 0; i < arr.length; i++) {
+                let resultFind = find(arr[i], arr);
+                //so existe um ocorrencia do elemento no array, elemento unique
+                if(resultFind.length === 1) {
+                   uniqueElements.push(arr[i]); 
+                }else{
+                    //elemento possui mais de uma ocorrencia no array
+                }
+            }
+            return uniqueElements;
+        }
+
+        console.log(unique(strings));
+
+    </script>
+</body>
+</html>
