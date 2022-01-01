@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array exe</title>
+</head>
+<body>
+    <script>
+        
+        function Calculator() {
+            this.methods = {
+                "-" : function(a, b) {
+                    return a - b;
+                },
+                "+" : function(a, b) {
+                    return a + b;
+                }
+            };
+            this.calculate = function(str) {
+                let arraySplit =  str.split(' '), numberA = arraySplit[0], numberB = arraySplit[2], operator = arraySplit[1];
+                return this.methods[operator](numberA, numberB);
+            };
+            this.addMethod = function(name,  func) {
+                this.methods[name] = func;
+            }
+        }
+
+        let calc = new Calculator;    
+        
+        console.log(calc.calculate("3 - 7"));
+
+        calc.addMethod("*", function(a, b) { return a * b});
+        calc.addMethod("/", function(a, b) {return a / b});
+        calc.addMethod("**", function(a, b) {return a ** b});
+
+        console.log(calc.calculate("2 / 1"));
+
+        console.log(calc.calculate("2 ** 3"));
+    </script>
+</body>
+</html>

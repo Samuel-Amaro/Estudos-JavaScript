@@ -16,20 +16,15 @@
         ];
 
         function groupById(users) {
-            let objetoGroup = users.map(function(value) {
-                let nome = value.id;
-                console.log(nome);
-                let obj = {
-                    nome : {id: value.id, name: value.name, age: value.age}
-                }
-                return obj;
-            });
-            return objetoGroup;
+           return users.reduce(function(obj, value) {
+            obj[value.id] = value;
+            return obj;  
+           }, {});
         }
 
         let p = groupById(users);
 
-        console.log(p[0].);
+        console.log(p.john);
 
 
     </script>

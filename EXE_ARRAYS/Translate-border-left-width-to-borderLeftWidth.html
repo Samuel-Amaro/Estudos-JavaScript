@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array JS</title>
+</head>
+<body>
+    <script>
+
+        function camelize(str) {
+            let strOriginal = [];
+            for(let index = 0; index < str.length; index++) {
+                strOriginal[index] = str[index];
+            }
+            for (let index = 0; index < strOriginal.length; index++) {
+                if(strOriginal[index] === "-") {
+                    strOriginal[index + 1] = strOriginal[index + 1].toUpperCase(); 
+                }    
+            }
+            let arrayStrSplit = new String(strOriginal).split("-");
+            let arrayJoin = arrayStrSplit.join('');
+            let t = arrayJoin.split(",");
+            let p = t.join('');
+            return p;
+        }
+        
+        console.log(camelize("background-color"));
+        console.log(camelize("list-style-image"));
+        console.log(camelize("-webkit-transition"));
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array JS</title>
+</head>
+<body>
+    <script>  
+        let styles = ["Jazz", "Blues"];
+
+        console.log(styles);
+
+        styles.push("Rock-n-Roll");
+
+        console.log(styles);
+
+        function meioImpar(length) {
+            //impar
+            if(length % 2 != 0) {
+                let meio = new Number(length / 2).toPrecision(1);
+                return Number(meio).valueOf() - 1;
+            }
+        }
+
+        styles[meioImpar(styles.length)] = "Classicos";
+
+        console.log(styles);
+
+        let element0 = styles.shift();
+
+        console.log(`element0 = ${element0}`);
+
+        console.log(styles);
+
+        styles.unshift('Reggae');
+
+        console.log(styles);
+
+        styles.unshift('Rap');
+
+        console.log(styles);
+    </script>   
+</body>
+</html>
