@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+       
+        let hamster = {
+            stomach: [],
+            eat(food) {
+                this.stomach.push(food);
+            }
+        };
+
+        let speedy = {
+            __proto__: hamster,
+            stomach: []
+        };
+
+        let lazy = {
+            __proto__: hamster,
+            stomach : []
+        };
+
+        speedy.eat("apple");
+        console.log(speedy.stomach); //apple
+
+        //Este também tem, por quê? conserte por favor.
+        console.log(lazy.stomach); 
+        
+    </script>
+
+</body>
+</html>

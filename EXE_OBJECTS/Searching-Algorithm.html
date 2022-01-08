@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+
+        let head = {
+            glasses: 1
+        };
+
+        let table = {
+            pen : 3
+        };
+
+        table.__proto__ = head;
+        //pockets -> bed -> table -> bed
+
+        let bed = {
+            sheet: 1,
+            pillow: 2
+        };
+
+        bed.__proto__ = table;
+        //pockets -> bed -> table
+
+        let pockets = {
+            money: 2000
+        };
+
+        pockets.__proto__ = bed;
+        //pockets -> bed
+
+        console.log(pockets.pen); //3
+
+        console.log(bed.glasses); //1
+
+        //obter head.glasses mais rapido pois não tera que pesquisar na cadeia de prototipos
+    </script>
+
+</body>
+</html>
