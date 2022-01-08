@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos JavaScritp</title>
+</head>
+<body>
+    
+    <script>
+
+        function Objetos() {
+
+        }
+
+        console.log(Objetos.prototype); //objeto anonimo com propriedade construtor
+
+        console.log(Objetos.prototype.constructor); //function Objetos
+
+        let obj1 = new Objetos();
+
+        console.log(obj1);
+
+        obj1.constructor = function() {
+            return Objetos.prototype;
+        } 
+
+        console.log(obj1.constructor());
+
+        let obj2 = new obj1.constructor();
+        
+        console.log(obj2);
+    </script>
+
+</body>
+</html>
