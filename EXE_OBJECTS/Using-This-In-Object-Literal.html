@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe this</title>
+</head>
+<body>
+    
+    <script>
+       
+        function makeUser() {
+            return {
+                name: "John",
+                ref: this //window objeto global reference
+            };
+        }
+
+        let p = {
+            name: "Jon",
+            ref: this
+        };
+
+        //console.log(p.ref);
+
+        let user = makeUser();
+
+        console.log(user.ref.name); //undefined ? porque a propriedade name não existe em window objeto global do navegador
+
+    </script>
+
+</body>
+</html>

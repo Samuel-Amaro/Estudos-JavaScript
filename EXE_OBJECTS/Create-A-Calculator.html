@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe This</title>
+</head>
+<body>
+    
+    <script>
+
+        let calculator = {
+            read : function() {
+                this.number1 = Number(prompt('Informe um valor', 0));
+                this.number2 = Number(prompt('Informe outro valor', 0));
+            },
+            sum : function() {
+                return this.number1 + this.number2; 
+            },
+            mul : function() {
+                return this.number1 * this.number2;
+            }
+        };
+
+        calculator.read();
+        console.log(calculator.sum());
+        console.log(calculator.mul());
+        
+    </script>
+
+</body>
+</html>
