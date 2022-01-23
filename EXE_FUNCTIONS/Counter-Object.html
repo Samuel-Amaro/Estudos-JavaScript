@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions Exe</title>
+</head>
+<body>
+    <script>
+
+        function Counter() {
+
+            let count = 0;
+
+            this.up = function() {
+                return ++count; //pre incremento - incrementa primeiro depois retorna
+            };
+
+            this.down = function() {
+                return --count; //pre-decremento - decrementa primeiro depois retorna
+            };
+
+        }
+
+        let counter = new Counter();
+
+        console.log(counter.up()); //1
+        console.log(counter.up()); //2
+        console.log(counter.down()); //1
+        
+    </script>    
+</body>
+</html>

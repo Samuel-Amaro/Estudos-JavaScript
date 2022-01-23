@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions Exe</title>
+</head>
+<body>
+    <script>
+
+        let arr = [1, 2, 3, 4, 5, 6, 7];
+
+        function inBetween(a, b) {
+            return function(x) {
+                return x >= a && x <= b;
+            }        
+        }
+
+        function inArray(array) {
+            return function(x) {
+                return array.indexOf(x) > -1 ? true : false; 
+            }
+        }
+
+        //in betwenn retorna a function callback para filter para ver se o elemento passa no teste da callback
+        console.log(arr.filter(inBetween(3, 6))); //3, 4, 5, 6
+        
+        //retorna a callback, a cada iteração do filter metodo no arr o filter chama a function inArray para retornar a callback para o filter
+        console.log(arr.filter(inArray([1, 2, 10]))); //1, 2
+
+    </script>
+</body>
+</html>
