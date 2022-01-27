@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe Functions Recursives</title>
+</head>
+<body>
+    <script>
+
+        let list = {
+            value: 1,
+            next: {
+                value: 2,
+                next: {
+                    value: 3,
+                    next: {
+                        value: 4,
+                        next: null
+                    }
+                }
+            }
+        };
+
+        function printReverseListLoopWhile(list) {
+            //não tem caminho de volta nessa lista tem que iterar armazenar e depois mostrar o inverso
+            let tmp = list;
+            let arr = [];
+            while(tmp) {
+                arr.push(tmp.value);
+                tmp = tmp.next;
+            }
+            for(let i = arr.length; i > 0; i--) {
+                console.log(i);
+            }
+        }
+
+        function printReverseListRecursive(list) {
+            if(list.next != null) {
+                printReverseListRecursive(list.next);
+            }
+
+            //volta as chamadas recursivas de baixo para cima, lembranado os itens na cadeia de chamadas aninhadas na pilha de contexto de execução
+            //volta desde a ultima chamada até a primeira retornando uma por uma
+            console.log(list.value);
+        }
+
+        //usando loop while
+        printReverseListLoopWhile(list);
+
+        //usando recursividade
+        printReverseListRecursive(list);
+
+    </script>
+</body>
+</html>

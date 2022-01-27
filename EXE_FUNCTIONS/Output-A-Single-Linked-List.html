@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe Functions Recursivas</title>
+</head>
+<body>
+    <script>
+
+        let list = {
+            value: 1,
+            next: {
+                value: 2,
+                next: {
+                    value: 3,
+                    next: {
+                        value: 4,
+                        next: null
+                    }
+                }
+            }
+        };
+
+        function printListLoop(list) {
+            //1 loop for
+            for(const key in list) {
+                console.log(`${key} : ${list[key]}`);
+                if(typeof(list[key]) ==="object") {
+                    //2 loop for subloop
+                    for(const key2 in list[key]) {
+                        console.log(`${key2} : ${list[key][key2]}`);
+                        if(typeof(list[key][key2]) ==="object") {
+                            //3 loop for subloop
+                            for(const key3 in list[key][key2]) {
+                                console.log(`${key3} : ${list[key][key2][key3]}`);
+                                if(typeof(list[key][key2][key3]) === "object") {
+                                    //4 loop for subloop
+                                    for(const key4 in list[key][key2][key3]) {
+                                        console.log(`${key4} : ${list[key][key2][key3][key4]}`);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function printListLoopWhile(list) {
+            let tmp = list;
+            while(tmp) {
+                console.log(tmp.value);
+                tmp = tmp.next;
+            }
+        }
+
+        function printListRecursive(list) {
+            if(list.next != null) {
+                console.log(list.value);
+                printListRecursive(list.next);
+            }else{
+                console.log(list.value);
+            }
+            
+        }
+    
+        //usando loop    
+        printListLoop(list);
+
+        //usando recursividade
+        printListRecursive(list);
+
+        //usando loop while
+        printListLoopWhile(list);
+        
+    </script>
+</body>
+</html>
