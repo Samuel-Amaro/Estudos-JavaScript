@@ -10,36 +10,40 @@
     <script>
         
         let index = 0;
-        let sf = [0, 1, 1];
-        
+        let nf = [0, 1];
+
         function fib(n) {
             if(n > 1) {
-                let s = 0;
-                for(let i = 0; i < n; i++) {
-                    s = sf[i] + sf[i++];
-                    sf.push(s);
+                if(nf.length <= n) {
+                    let f = nf[index] + nf[index+1];
+                    nf.push(f);
+                    index++;
+                    fib(n);
+                }else{
+                    return nf[n];
                 }
-                return sf[n];
             }else{
-                if(n === 1)
-                    return 1;
-                else 
-                    return 0;
+                return n === 1 ? 1 : 0;
             }
+            return nf[n];
         }
-        /*console.log(`n = ${n}`);
-            if(n > 1) {
-                let f = (n - i) + fib(n - i++);
-                console.log(`i = ${i}`);
-                console.log(`f = ${f}`);
-                return f;
+
+        function fibLoop(n) {
+            let arr = [0, 1];
+            let nf = 0;
+            for(let i = 0; i < n; i++) {
+                nf = arr[i] + arr[i + 1];
+                arr.push(nf);
             }
-            return n;
-            */
-        //console.log(fib(3));
-        //console.log(fib(7));
-        console.log(fib(8));
-        //console.log(fib(9));
+            return arr[n];
+        }
+
+        console.log(`fib3 = ${fib(3)}`);
+        //console.log(fibLoop(7));
+        console.log(`fib(7) = ${fib(7)}`);
+        console.log(`fib(8) = ${fib(8)}`);
+        console.log(`fib(9) = ${fib(9)}`);
+        console.log(`fib(77) = ${fib(77)}`);
 
     </script>
 </body>
