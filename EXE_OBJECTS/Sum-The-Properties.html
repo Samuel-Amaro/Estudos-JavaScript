@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe Object</title>
+</head>
+<body>
+    <script>
+
+        function sumSalaries(salaries) {
+            let salarios = Object.values(salaries);
+            if(salarios.length === 0) {
+                return 0
+            }else{
+                let sum = 0;
+                for(const index in salarios) {
+                    sum += salarios[index];
+                }
+                return sum;
+            }
+        }
+
+        let salaries = {
+            "John": 100,
+            "Pete": 300,
+            "Mary": 250
+        };
+
+        console.log(sumSalaries(salaries));
+
+    </script>
+</body>
+</html>
