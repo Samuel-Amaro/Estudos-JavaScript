@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exe</title>
+</head>
+<body>
+    <script>
+
+        let salaries = {
+            "John" : 100,
+            "Pete" : 300,
+            "Mary" : 250
+        };
+
+        function topSalary(salaries) {
+            let topSalary = 0;
+            let topName = '';
+            let salarios = Object.entries(salaries);
+            for(let i = 0; i < salarios.length; i++) {
+                //console.log(salarios[i][1]);
+                for(let j = i; j < salarios.length; j++) {
+                    //console.log(salarios[j][1]);
+                    if(salarios[i][1] > salarios[j][1]) {
+                        topSalary = salarios[i][1];
+                        topName = salarios[i][0];
+                    }
+                }
+            }
+            return `${topName} : ${topSalary}`;
+        }
+
+        console.log(topSalary(salaries));
+
+    </script>
+</body>
+</html>
