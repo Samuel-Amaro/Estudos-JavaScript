@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Extends Object</title>
+</head>
+<body>
+    <script>
+
+        class Rabbit{
+            constructor(name) {
+                this.name = name;
+            }
+        }
+
+        let rabbit = new Rabbit("Rab");
+
+        console.log(rabbit.hasOwnProperty('name')); //true
+
+        class Rabbit2 extends Object{
+            constructor(name) {
+                super(name);
+                this.name = name;
+            }
+        }
+
+        let rabbit2 = new Rabbit2("Rab");
+        console.log(rabbit2.hasOwnProperty('name')); //Error
+        
+    </script>
+</body>
+</html>
