@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Re-resolve-a-promisse</title>
+</head>
+<body>
+    <script>
+
+        //Qual a sáida do código abaixo?
+
+        let promise = new Promise(function(resolve, reject) {
+            
+            resolve(1); //pendente -> cumprida com valor 1
+            //promisse ja e resolvida  não muda mais de estado
+
+            //espera 1 segundo para 
+            //pendente -> cumprida com valor 2
+            //mas não e resolvida pois so se pode resolver uma promisse uma vez
+            setTimeout(() => resolve(2), 1000);
+        });
+
+        promise.then(console.log); //1 
+
+    </script>
+</body>
+</html>
