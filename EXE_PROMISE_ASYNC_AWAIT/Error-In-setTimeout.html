@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Error in setTimeout</title>
+</head>
+<body>
+    <script>
+
+        //O que você acha? Será que o .catch gatilho? Explique sua resposta.
+        
+        //falta o try cathc para tratar o erro da function, o cath encadeado não o trata
+
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                throw new Error("Whoops!");
+            }, 1000);
+        }).catch(console.log); 
+        
+    </script>
+</body>
+</html>
