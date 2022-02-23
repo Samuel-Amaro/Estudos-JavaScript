@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+
+        //array desordenado
+        let array = [71, 45, 3, 1, 4, 7, 13, 10, 14, 21, 18, 24, 19, 40, 37, 15];
+
+        function sortArray() {
+            array.sort((a, b) => {
+                if(a > b) {
+                    return 1;
+                }else if(a < b) {
+                    return -1;
+                }else{
+                    return 0;
+                }
+            });
+        }
+
+        function copyArray(start, end, array) {
+            let tmp = [];
+            for(let i = start; i < end; i++) {
+                tmp.push(array[i]);
+            }
+            return tmp;
+        }
+
+        function encontraMeio(l, r) {
+            //divisão inteira
+            let meio = (l + r) / 2;
+            return meio;
+        }
+
+        function binarySearch(arr, n, elemento) {
+            let l = 0, r = n - 1, m;
+            while(l <= r) {
+                m = encontraMeio(l, r);
+                if(arr[m] < elemento) {
+                   l = m + 1;
+                }else if(arr[m] > elemento) {
+                    r = m - 1;
+                }else{
+                    return m;
+                }
+            }
+        }
+
+        sortArray();
+        console.log(array);
+        console.log(binarySearch(array, array.length, 7));
+
+    </script>
+</body>
+</html>
