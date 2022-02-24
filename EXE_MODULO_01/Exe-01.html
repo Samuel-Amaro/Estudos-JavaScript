@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+
+        //testar conhecimentos em classes
+
+        class Usuario{
+            
+            #_email;
+            #_senha;
+            #_admin;
+
+            constructor(email, senha) {
+                this.#_email = email;
+                this.#_senha = senha;
+            }
+
+            set email(newEmail) {
+                this.#_email = newEmail;
+            }
+            get email() {
+                return this.#_email;
+            }
+            set senha(newSenha) {
+                this.#_senha = newSenha;
+            }
+            get senha() {
+                return this.#_senha;
+            }
+            set admin(ativado) {
+                this.#_admin = ativado;
+            }
+            get admin() {
+                this.#_admin;
+            }
+
+            isAdmin() {
+                if(this.#_admin) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        }
+
+        class Admin extends Usuario{
+            constructor(email, senha) {
+                super(email, senha);
+                this.admin = true;
+            }
+        }
+
+        const user1 = new Usuario('email@teste.com', 'senha123');
+        const adm1 = new Admin('email@teste.com', 'senha123');
+        console.log(user1.isAdmin()); //false
+        console.log(adm1.isAdmin()); //true
+
+    </script>
+</body>
+</html>

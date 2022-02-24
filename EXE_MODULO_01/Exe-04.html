@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+        
+        //desestruturação de objetos
+        
+        const empresa = {
+            nome: 'Rocketseat',
+            endereco: {
+                cidade: 'Rio Do Sul',
+                estado: 'SC'
+            }
+        };
+
+        let {nome, endereco: {cidade, estado}} = empresa;
+
+        console.log(nome);
+        console.log(cidade);
+        console.log(estado);
+
+        //desestruturação em parâmetros
+        /*
+        function mostraInfo(usuario) {
+            return `${usuario.nome} tem ${usuario.idade} anos.`;
+        }
+        */      
+        function mostraInfo({nome, idade}) {
+            return `${nome} tem ${idade} anos`;
+        }
+
+        console.log(mostraInfo({nome: 'Diego', idade: 23}));
+
+    </script>
+</body>
+</html>

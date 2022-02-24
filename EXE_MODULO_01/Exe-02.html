@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+
+        //utilizando métodos de array
+        const usuarios = [
+            {nome: 'Diego', idade: 23, empresa: 'Rocketseat'},
+            {nome: 'Gabriel', idade: 15, empresa: 'Rocketseat'},
+            {nome: 'Lucas', idade: 30, empresa: 'Facebook'}
+        ];
+
+        let idades = usuarios.map((element) => {
+            return element.idade;
+        });
+
+        console.log(idades);
+
+        let filtro = usuarios.filter((element) => {
+            if(element.empresa === 'Rocketseat' && element.idade > 18) {
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        console.log(filtro);
+
+        let find = usuarios.find((element) => {
+            if(element.empresa === 'Google') {
+                return true;
+            }else{
+                return false;
+            }
+        });   
+        
+        console.log(find);
+
+        usuarios.forEach((element) => {
+            element.idade = element.idade * 2;
+        });
+
+        console.log(usuarios);
+
+        let novoFiltro = usuarios.filter((element) => {
+            if(element.idade <= 50) {
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        console.log(novoFiltro);
+
+    </script>
+</body>
+</html>

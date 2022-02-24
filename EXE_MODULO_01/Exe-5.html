@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+        
+        //Utilizaçaõ dos operadores rest/spread para realizar seguintes operações
+
+        const ARR = [1, 2, 3, 4, 5, 6];
+        
+        const[x, ...y] = ARR;
+
+        console.log(x);
+        console.log(y);
+
+
+        //Crie uma função que recebe inúmeros parâmetros e retorna a soma de todos eles:
+        function soma(...args) {
+            let soma = args.reduce((accumulator, currentValue) => {
+                return accumulator + currentValue;
+            }, 0);
+            return soma;
+        }
+
+        console.log(soma(1, 2, 3, 4, 5, 6));
+        console.log(soma(1, 2));
+
+        //Operador Spread
+
+        const usuario = {
+            nome: 'Diego',
+            idade: 23,
+            endereco: {
+                cidade: 'Rio do Sul',
+                uf: 'SC',
+                pais: 'Brasil'
+            }
+        };
+
+        let usuario2 = {...usuario, nome: "Gabriel"};
+        //usuario2.nome = 'Gabriel'
+
+        let usuario3 = {...usuario, endereco: {...usuario.endereco, cidade: "Lontras"}};
+        //usuario3.endereco.cidade = 'Lontras';
+
+        console.log(usuario2);
+        console.log(usuario3);
+
+    </script>
+</body>
+</html>
