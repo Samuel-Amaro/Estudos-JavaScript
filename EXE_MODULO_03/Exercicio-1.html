@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+        
+        //Transforme os seguintes trechos de código utilizando async/await:
+
+        /*
+        // Função delay aciona o .then após 1s
+        const delay = () => new Promise(resolve => setTimeout(resolve, 1000));
+        function umPorSegundo() {
+            delay().then(() => {
+                console.log('1s');
+                delay().then(() => {
+                    console.log('2s');
+                    delay().then(() => {
+                        console.log('3s');
+                    });
+                })
+            });
+        }
+        umPorSegundo();
+        */
+
+        async function delay() {
+            return new Promise((resolve, reject) => {
+                setTimeout(resolve, 1000);
+            });
+        }
+
+        async function umPorSegundo() {
+            let umSegundo = await delay();
+            console.log('1s');
+            let doisSegundos = await delay();
+            console.log('2s');
+            let tresSegundos = await delay();
+            console.log('3s');
+
+        }
+
+        umPorSegundo();
+
+    </script>
+</body>
+</html>

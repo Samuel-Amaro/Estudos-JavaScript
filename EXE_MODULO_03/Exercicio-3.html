@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+    <script>
+        
+        //Transforme os seguintes trechos de código utilizando async/await:
+
+        /*
+        class Github {
+            static getRepositories(repo) {
+                axios.get(`https://api.github.com/repos/${repo}`).then(response => {
+                    console.log(response.data);
+                }).catch(err => {
+                    console.log('Repositório não existe');
+                })
+            }
+        }
+        Github.getRepositories('rocketseat/rocketseat.com.br');
+        Github.getRepositories('rocketseat/dslkvmskv');
+        */
+
+        class Github{
+            static async getRepositories(repo) {
+                try {
+                    let response = await fetch(`https://api.github.com/repos/${repo}`);
+                    let data = await response.json();
+                    console.log(data);    
+                } catch (error) {
+                    console.log('Repositório não existe');
+                    console.error(error);
+                }
+            }
+        }
+
+        Github.getRepositories('Samuel-Amaro/Exercícios-JavaScript');
+        Github.getRepositories('rocketseat/dslkvmskv');
+
+    </script>
+</body>
+</html>
