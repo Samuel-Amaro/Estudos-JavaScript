@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        let messages = [
+            {text: "Hello", from: "John"},
+            {text: "How goes?", from: "John"},
+            {text: "See you soon", from: "Alice"}
+        ];
+
+        let weakMap = new WeakMap();
+
+        weakMap.set(new Date(), messages[0]);
+        weakMap.set(new Date(), messages[1]);
+        weakMap.set(new Date(), messages[2]);
+
+        console.log(weakMap);
+        
+    </script>
+
+</body>
+</html>
