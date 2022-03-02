@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        //Anagramas são palavras que possuem o mesmo número de letras, mas em ordem diferente.
+        //Escreva uma função aclean(arr)que retorne um array limpo de anagramas.
+
+        let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+        function aclean(arr) {
+            let array = [];
+            let map = new Map();
+            for(let anagrama of arr) {
+                let p = anagrama.toLowerCase().split('').sort().join('');
+                console.log(p);
+                array.push(p);
+                map.set(p, anagrama);
+            }
+            console.log(map);
+            return [...map.values()];
+        }
+
+        console.log(aclean(arr));
+        
+    </script>
+
+</body>
+</html>

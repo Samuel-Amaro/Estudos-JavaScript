@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        //Gostaríamos de obter uma matriz de map.keys()em uma variável e, em seguida, aplicar métodos específicos de matriz a ela, por exemplo .push.
+        //Mas isso não funciona:
+        //Por quê? Como podemos corrigir o código para que keys.push funcione?
+
+        let map = new Map();
+
+        map.set("name", "John");
+
+        let keys = map.keys();
+
+        //porque keys referencia uma instancia de objeto de iterator, isso e um objeto para ser iterado, e um objeto imutavel
+        //retorna um iteravel , mas não um array
+        let array = [...keys];
+        array.push("more");
+        console.log(array);
+
+    </script>
+
+</body>
+</html>

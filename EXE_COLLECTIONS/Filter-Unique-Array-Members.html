@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        //Crie uma função unique(arr),que deve retornar um array com itens exclusivos de arr.
+
+        let values = ["Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", "Hare", ":-O"];
+
+        function unique(arr) {
+            let uniqueValues = new Set(arr);
+            let uv = [...uniqueValues.values()];
+            return uv;
+        }
+
+        console.log(unique(values));
+
+    </script>
+
+</body>
+</html>
