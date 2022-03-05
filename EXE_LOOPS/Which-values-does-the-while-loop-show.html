@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Para cada iteração de loop, anote qual valor ele gera e compare-o com a solução.
+        //Ambos os loops alert os mesmos valores, ou não?
+        
+        //1 A forma do prefixo ++i:
+
+        //de 1 a 4
+        let i = 0;
+        while(++i < 5)
+            //++0 -> 1
+            //++1 -> 2
+            //++2 -> 3
+            //++3 -> 4
+            console.log(i);
+        //++4 -> 5 não e mostrado
+
+        //de 1 a 5
+        //2. a forma pós-fixada j++
+        let j = 0;
+        while(j++ < 5) 
+            //1 -> j++ -> 2
+            //2 -> j++ -> 3
+            //3 -> J++ -> 4
+            //4 -> j++ -> 5
+            console.log(j);
+        //5 -> j++ -> 6
+
+        
+        //a diferença entre os loop o primeiro loop forma pre-fixada mostra 4 numeros
+        //o loop abaixo na forma pos-fixada mostra 5 numeros
+    </script>
+</body>
+</html>

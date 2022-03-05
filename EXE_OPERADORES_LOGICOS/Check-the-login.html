@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Escreva o código que pede um login com prompt.
+        //Se o visitante digitar "Admin", então prompt para uma senha, se a entrada for uma linha vazia ou Esc – mostre “Cancelado”, se for outra string – então mostre “Não te conheço”.
+        //A senha é verificada da seguinte forma:
+        //Se for igual a “TheMaster”, então mostre “Welcome!”,
+        //Outra string – mostre “Senha errada”,
+        //Para uma string vazia ou entrada cancelada, mostre “Cancelado”
+        
+        let login = prompt("Login");
+        console.log(login);
+
+        if(login === 'Admin') {
+            let senha = prompt("Senha");
+            if(senha === "TheMaster") {
+                alert("Welcome!");
+            }else if(senha === '' || senha === null) {
+                alert("Cancelado");
+            }else{
+                alert("Senha Errada");
+            }
+        }else if(login === '' || login === null) {
+            alert("Cancelado");
+        }else{
+            alert("Não te conheço");
+        }
+
+    </script>
+</body>
+</html>

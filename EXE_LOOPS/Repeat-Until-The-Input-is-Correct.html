@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Escreva um loop que solicite um número maior que 100. Se o visitante inserir outro número – peça para inserir novamente.
+        //O loop deve solicitar um número até que o visitante insira um número maior 100 ou cancele a entrada/insira uma linha vazia.
+        //Aqui podemos supor que o visitante apenas insere números. Não há necessidade de implementar um tratamento especial para uma entrada não numérica nesta tarefa.
+
+        let numero;
+        do{
+            numero = prompt("Entre com um número maior que 100");
+            console.log(numero);
+        }while(numero < 100 && numero != null && numero != '');
+
+    </script>
+
+</body>
+</html>

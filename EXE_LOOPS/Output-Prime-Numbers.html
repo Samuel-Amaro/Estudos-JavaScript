@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Um número inteiro maior que 1 é chamado de primo se não puder ser dividido sem resto por nada, exceto por 1 ele mesmo.
+        //Em outras palavras, n > 1 é um primo se não puder ser dividido igualmente por nada, exceto 1 e n.
+        //Por exemplo, 5 é um primo, porque não pode ser dividido sem um resto por 2, 3 e 4.
+        //Escreva o código que gera números primos no intervalo de 2 até n.
+        //Pois n = 10 o resultado será 2,3,5,7.
+        //PS O código deve funcionar para qualquer n, não ser ajustado para nenhum valor fixo.
+
+        let n = +prompt("Entre com o n", 0);
+        let naoPrimos = "Não Primos: ", primos = "Primos: ";
+        let fatorPrimo = 0, fatorNaoPrimo = 0;
+        for(let i = 2; i < n; i++) {
+            for(let j = 2; j < i; j++){
+                if(i % j === 0) {
+                    fatorPrimo += 1;
+                }else{
+                    fatorNaoPrimo += 1;
+                }
+            }
+            if(fatorPrimo > 0) {
+                naoPrimos = naoPrimos + ` ${i}`;
+                fatorPrimo = 0;
+            }else{
+                primos = primos + ` ${i}`;
+                fatorNaoPrimo = 0;
+            }
+        }
+
+        console.log(primos);
+        console.log(naoPrimos);
+    </script>
+
+</body>
+</html>

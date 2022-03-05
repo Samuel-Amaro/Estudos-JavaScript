@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Escreva o código usando if..else que corresponderia ao seguinte switch:
+        switch (browser) {
+            case 'Edge':
+                alert( "You've got the Edge!" );
+                break;
+
+            case 'Chrome':
+            case 'Firefox':
+            case 'Safari':
+            case 'Opera':
+                alert( 'Okay we support these browsers too' );
+                break;
+
+            default:
+                alert( 'We hope that this page looks ok!' );
+        }
+
+        if(browser === 'Edge') {
+            alert( "You've got the Edge!" );
+        }else if(browser ==='Chrome') {
+            alert( "You've got the Chrome!" );
+        }else if(browser === 'Firefox') {
+            alert( "You've got the Firefox!" );
+        }else if(browser === 'Safari') {
+            alert( "You've got the Safari!" );
+        }else if(browser === 'Opera') {
+            alert( 'Okay we support these browsers too' );
+        }else{
+            alert( 'We hope that this page looks ok!' );
+        }
+        
+    </script>
+</body>
+</html>
