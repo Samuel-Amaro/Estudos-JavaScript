@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+          - Normalmente, uma tentativa de ler uma propriedade inexistente retorna undefined.
+
+          - Crie um proxy que gere um erro para uma tentativa de leitura de uma propriedade inexistente.
+
+          - Isso pode ajudar a detectar erros de programação precocemente.
+
+          - Escreva uma função wrap(target) que receba um objeto target e retorne um proxy que adicione esse aspecto de funcionalidade.
+
+          - É assim que deve funcionar:
+        */
+
+        let user = {
+            name : "John"
+        };
+
+        function wrap(target) {
+            return new Proxy(target, {
+                get(target, property) {
+                    if(property in target) {
+                        return target[property];
+                    }else{
+                        throw new ReferenceError(`Property does't exist: "${property}"`);
+                    }
+                }
+            });
+        }
+
+        user = wrap(user);
+
+        console.log(user.name);
+        console.log(user.age); //Uncaught ReferenceError: Property does't exist: "age"
+
+    </script>
+
+</body>
+</html>
