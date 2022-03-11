@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+        /**
+         * Crie um decorador spy(func) que deve retornar um wrapper que salve todas as chamadas de função em sua calls propriedade.
+         * 
+         * Cada chamada é salva como uma array de argumentos.
+        */
+
+        function work(a, b) {
+            console.log(a + b);
+        }
+
+        function spy(func) {
+            let array = [];
+            return function(a, b) {
+                let result = func(a, b);
+                array.push([...arguments]);
+                Function.prototype.calls = array;
+            }
+        }
+
+        work = spy(work);
+
+        work(1, 2);
+        work(4, 5);
+
+        for(let args of work.calls) {
+            console.log(`call: ${args.join()}`);
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+        function manipulador() {
+            console.log('Manipulei entrada');
+        }
+
+        function debounce(func, ms) {
+            setTimeout(() => {
+                manipulador();
+            }, ms);
+        }
+
+        let f = debounce(manipulador, 1000);
+        let g = debounce(manipulador, 2500);
+        
+    </script>
+</body>
+</html>
