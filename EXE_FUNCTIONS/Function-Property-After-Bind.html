@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+        /**
+         * Há um valor na propriedade de uma função. Vai mudar depois bind? Por que ou por que não?
+        */
+
+        //this = window
+        function sayHi() {
+            console.log(this.name); //undefined
+        }
+
+        //propriedade definida na instancia da function
+        sayHi.test = 5;
+
+        //this = {name: "John"}
+        //this.sayHi(); -> "John"
+        let bound = sayHi.bind({
+            name: "John"
+        });
+
+        console.log(bound.test); //qual será a saída? porque? //undefined
+        //a saida sera 5, porque a propriedade foi definida na instancia de objeto da function
+        //mas na realida o resultado de bind e outro objeto e não o mesmo
+
+    </script>
+</body>
+</html>

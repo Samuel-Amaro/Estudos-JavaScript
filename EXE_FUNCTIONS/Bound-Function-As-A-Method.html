@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+        /**
+         * Qual será a saída?
+        */
+
+        function f() {
+            console.log(this); //window
+        }
+
+        let user = {
+            //this : {}
+            g: f.bind(null) //error
+        };
+
+        user.g();
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+        /**
+         * A chamada para askPassword() no código abaixo deve verificar a senha e depois ligar user.loginOk/loginFail dependendo da resposta.
+         * 
+         * Mas isso leva a um erro. Por quê?
+         * 
+         * Corrija a linha destacada para que tudo comece a funcionar corretamente (outras linhas não devem ser alteradas).
+        */
+
+        /**
+            function askPassword(ok, fail) {
+                let password = prompt("Password?", '');
+                if (password == "rockstar") 
+                    ok();
+                else 
+                    fail();
+            }
+
+            let user = {
+                name: 'John',
+
+                loginOk() {
+                    alert(`${this.name} logged in`);
+                },
+
+                loginFail() {
+                    alert(`${this.name} failed to log in`);
+                },
+
+            };
+
+            askPassword(user.loginOk, user.loginFail);
+        */
+        
+        function askPassword(ok, fail) {
+            let password = prompt("Password?", '');
+            if(password == 'rockstar')
+                ok();
+            else
+                fail();
+        }
+
+        let user = {
+            name: 'John',
+            loginOk() {
+                console.log(`${this.name} logged in`);
+            },
+            loginFail() {
+                console.log(`${this.name} failed to log in`);
+            }
+        };
+
+        //o this contexto era perdido
+        askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
+        
+    </script>
+</body>
+</html>
