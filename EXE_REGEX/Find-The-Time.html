@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        //A hora tem um formato: hours:minutes. Tanto as horas quanto os minutos têm dois dígitos, como 09:00.
+        //Faça um regexp para encontrar o tempo na string:Breakfast at 09:00 in the room 123:456.
+        //PS Nesta tarefa ainda não há necessidade de verificar a exatidão do tempo, então 25:99 também pode ser um resultado válido.
+        //PPS O regexp não deve corresponder 123:456.
+        let str = 'Breakfast at 09:00 in the room 123:456.';
+        let result = str.match(/\b\d\d:\d\d\b/);
+        console.log(result);
+    </script>
+
+</body>
+</html>

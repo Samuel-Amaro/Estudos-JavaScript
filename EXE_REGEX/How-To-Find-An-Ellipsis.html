@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        //Crie um regexp para encontrar reticências: 3 (ou mais?) pontos seguidos.
+        //escapar o caracter (.) com barra invertida, pois dentro da expressão regular e visto como um classe de caractere
+        let regexp = /\.{3,}/g;
+        console.log("Hello!...How goes?.....".match(regexp));
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Crie um regexp para pesquisar cores HTML escritas como #ABCDEF: primeiro # e depois 6 caracteres hexadecimais.
+        //Um exemplo de uso:
+
+        let regexp = /#\w{6}\b/g; 
+        let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2 #12345678";
+        console.log(str.match(regexp));
+
+    </script>
+
+</body>
+</html>
