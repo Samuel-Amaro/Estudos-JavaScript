@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Encontre todos os comentários HTML no texto:
+
+        let regexp = /<!--.*?-->/gs;
+
+        let str = `...<!-- My -- comment
+        test --> .. <!----> --
+        `;
+
+        console.log(str.match(regexp)); // '<!-- My -- comment \n test -->', '<!---->'
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Crie uma expressão regular para encontrar todas as tags HTML (abertura e fechamento) com seus atributos.
+        //Um exemplo de uso:
+
+        let regexp = /\<.+?\>/g;
+
+        let str = '<> <a href="/"> <input type="radio" checked> <b>';
+
+        console.log(str.match(regexp));
+
+    </script>
+
+</body>
+</html>
