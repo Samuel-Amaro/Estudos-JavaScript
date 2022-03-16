@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        //Temos um regexp /Java[^script]/.
+        //Ele corresponde a alguma coisa na string Java? Na corda JavaScript?
+        //R: Java? nao -> null
+        //R: JavaScript? sim -> JavaS?
+
+        console.log('Java'.match(/Java[^script]/));
+        console.log('JavaScript'.match(/Java[^script]/));
+    </script>
+
+</body>
+</html>

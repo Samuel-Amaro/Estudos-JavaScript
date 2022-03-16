@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       //A hora pode estar no formato hours:minutes ou hours-minutes. Tanto as horas como os minutos têm 2 dígitos: 09:00 ou 21-30.
+       //Escreva um regexp para encontrar o tempo:
+       //PS Nesta tarefa assumimos que a hora está sempre correta, não há necessidade de filtrar strings ruins como “45:67”. Mais tarde vamos lidar com isso também.
+       let regexp = /\d{1,2}[-:]\d{1,2}/g;
+       let str = 'Breakfast at 09:00. Dinner at 21-30';
+       console.log(str.match(regexp));
+    </script>
+
+</body>
+</html>
