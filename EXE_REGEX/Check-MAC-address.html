@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //O endereço MAC de uma interface de rede consiste em 6 números hexadecimais de dois dígitos separados por dois pontos.
+        //Por exemplo: '01:32:54:67:89:AB'.
+        //Escreva um regexp que verifique se uma string é um endereço MAC.
+        //Uso:
+
+        let regexp = /([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2})/;
+
+        console.log(regexp.test('01:32:54:67:89:AB')); //true
+        console.log(regexp.test('0132546789AB')); //false
+        console.log(regexp.test('01:32:54:67:89')); //false
+        console.log(regexp.test('01:32:54:67:89:ZZ')); //false
+    </script>
+
+</body>
+</html>

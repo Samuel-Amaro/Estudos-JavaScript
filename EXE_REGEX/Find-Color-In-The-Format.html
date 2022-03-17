@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+       //Escreva um RegExp que corresponda às cores no formato #abc ou #abcdef. Ou seja: # seguido por 3 ou 6 dígitos hexadecimais.
+       //Exemplo de uso:
+
+       let regexp = /#([A-F0-9a-f]{3}){1,2}\b/ig;
+
+       let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
+
+       console.log(str.match(regexp)); 
+
+    </script>
+
+</body>
+</html>

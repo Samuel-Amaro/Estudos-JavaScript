@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Uma expressão aritmética consiste em 2 números e um operador entre eles, por exemplo:
+        //1 + 2
+        //1.2 * 3.4
+        //-3 / -6
+        //-2 - 2
+        //O operador é um dos seguintes: "+", "-", "*"ou "/".
+        //Pode haver espaços extras no início, no final ou entre as partes.
+        //Crie uma função parse(expr) que receba uma expressão e retorne um array de 3 itens:
+        //O primeiro número.
+        //O operador.
+        //O segundo número.
+        //Por exemplo:
+
+        function parse(expr) {
+            let regexp = /(\d\.\d) ([\/\+\-\*]) (\d\.\d)/;
+            let result = expr.match(regexp);
+            if(result) {
+                result.shift();
+                return result; 
+            }else{
+               return [];
+            }
+        }
+
+        let [a, op, b] = parse("1.2 * 3.4");
+        console.log(a);
+        console.log(op);
+        console.log(b);
+    </script>
+
+</body>
+</html>
