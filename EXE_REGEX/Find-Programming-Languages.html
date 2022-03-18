@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        //Existem muitas linguagens de programação, por exemplo Java, JavaScript, PHP, C, C++.
+        //Crie um regexp que os encontre na string Java JavaScript PHP C++ C:
+        
+        let regexp = /Java(\w+)?|PHP|C(\+\+)?/g;
+
+        let str = "Java JavaScript PHP C++ C";
+
+        console.log(str.match(regexp));
+
+    </script>
+
+</body>
+</html>

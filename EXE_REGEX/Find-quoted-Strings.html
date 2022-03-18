@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        //Crie um regexp para encontrar strings entre aspas duplas "...".
+        //As strings devem suportar escape, da mesma forma que as strings JavaScript. Por exemplo, aspas podem ser inseridas como \" uma nova linha como \n, e a própria barra como \\.
+        let str = "Just like \"here\".";
+        //Observe, em particular, que uma aspa com escape \" não termina uma string.
+        //Portanto, devemos pesquisar de uma citação para outra, ignorando as citações com escape no caminho.
+        //Essa é a parte essencial da tarefa, caso contrário seria trivial.
+        //Exemplos de strings para combinar:
+        //"test me"
+        //"Say \"Hello\"!" ...(citações de escape dentro)
+        //"\\" .. (barra dupla dentro)
+        //"\\ \" .. (barra dupla e uma citação de escape dentro)
+        //Em JavaScript, precisamos dobrar as barras para passá-las direto para a string, assim:
+        let str2 = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+
+        console.log(str2);
+
+        let regex = /.+[^(\").+\1].+/;
+        //a string na memória
+
+        console.log(str.match(regex));
+
+        console.log(str2.match(regex));
+        
+    </script>
+
+</body>
+</html>

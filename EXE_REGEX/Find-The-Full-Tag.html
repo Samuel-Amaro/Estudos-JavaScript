@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        //Escreva um regexp para encontrar a tag <style...>. Deve corresponder à tag completa: pode não ter atributos <style> ou ter vários deles <style type="..." id="...">.
+        //…Mas o regexp não deve corresponder <styler>!
+        //Por exemplo:
+
+        let regexp = /[<]style[>]|[<]style\s.+[>]/g;
+
+        let str = '<style> <styler> <style test="...">';
+
+        console.log(str.match(regexp));
+
+    </script>
+
+</body>
+</html>

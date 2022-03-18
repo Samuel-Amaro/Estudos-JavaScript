@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        //Uma “bb-tag” se parece com [tag]...[/tag], onde tag é um de: b, url ou quote.
+        //Por exemplo:
+        //[b]text[/b]
+        //[url]http://google.com[/url]
+        //BB-tags podem ser aninhadas. Mas uma tag não pode ser aninhada em si mesma, por exemplo:
+        //Normal:
+        //[url] [b]http://google.com[/b] [/url]
+        //[quote] [b]text[/b] [/quote]
+        //Can't happen:
+        //[b][b]text[/b][/b]
+        //As tags podem conter quebras de linha, isso é normal:
+        //[quote]
+        //[b]text[/b]
+        //[/quote]
+        //Crie um regexp para encontrar todas as BB-tags com seus conteúdos.
+        //Por exemplo:
+
+        let regexp = /((\[\w+\]).+(\[\/\w+\]))|((\[\w+\])(\[\w+\]).+(\[\/\w+\])(\[\/\w+\]))/gs;
+        let str = "..[url]http://google.com[/url]..";
+        console.log(str.match(regexp));
+        let str2 = "..[url][b]http://google.com[/b][/url]..";
+        console.log(str2.match(regexp));
+
+        //
+    </script>
+
+</body>
+</html>
