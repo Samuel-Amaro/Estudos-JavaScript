@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Há uma sequência de números inteiros.
+        //Crie um regexp que procure apenas os não negativos (zero é permitido).
+        //Um exemplo de uso:
+
+        let regexp = /(?<![-\d])\d+/g;
+        //\d+(?=\s[\-])
+        //\d+(?=\s(\-))
+        //[\-]\d+(?=\s(\d))
+        //b[^\-]\d+(?=\s(\-|\d))\b
+        //[\"|\-]\d+ -> negativos
+        //[\^-]\d+(?=\s[\-])|\d+(?=\s[\d])
+        let str = "0 12 -5 123 -18";
+
+        console.log(str.match(regexp));
+    </script>
+
+</body>
+</html>

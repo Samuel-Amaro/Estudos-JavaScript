@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+       
+        //Temos uma string com um documento HTML.
+        //Escreva uma expressão regular que seja inserida <h1>Hello</h1> imediatamente após a <body> tag. A tag pode ter atributos.
+        //Por exemplo:
+
+        let regexp =  /(?<=<body.*?>)/s;
+        /// \<body.+?(?=\>)/s
+        let str = `
+        <html>
+            <body style="height: 200px">
+            ...
+            </body>
+        </html>`;
+
+        console.log(str.match(regexp));
+
+        str = str.replace(regexp, '<h1>Hello</h1>');
+
+        console.log(str);
+    </script>
+
+</body>
+</html>
