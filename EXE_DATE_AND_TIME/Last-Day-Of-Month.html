@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        
+        //Escreva uma função getLastDayOfMonth(year, month) que retorne o último dia do mês. Às vezes é 30, 31 ou até 28/29 de fevereiro.
+        //Parâmetros:
+        //year– ano de quatro dígitos, por exemplo 2012.
+        //month– mês, de 0 a 11.
+        
+        function getLastDayOfMonth(year, month) {
+            let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            if(typeof(year) =="number") {
+                let yearStr = new String(year);
+                let dezenaYear = yearStr.substring(2);
+                let divisor = dezenaYear !== '00' ? 4 : 400;
+                let eBissexto = +dezenaYear % 4 === 0 ? true : false;
+                if(eBissexto && month === 1) {
+                    return months[month] + 1;
+                }else if(eBissexto) {
+                    return months[month];
+                }else{
+                    return months[month];
+
+                }
+            }else{
+                return 'year or month type string';
+            }
+        }
+
+        console.log(getLastDayOfMonth(2012, 1));
+        
+    </script>
+</body>
+</html>

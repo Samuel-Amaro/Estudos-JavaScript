@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        
+        //Os países europeus têm dias da semana começando com segunda-feira (número 1), depois terça-feira (número 2) e até domingo (número 7). Escreva uma função getLocalDay(date)que retorne o dia da semana “europeu” para date.
+
+        function getLocalDay(date) {
+            let day = date.getUTCDay();
+            switch(day) {
+                case 1: //segunda
+                    return 'Monday, 1';
+                case 2: //terça
+                    return 'Tuesday, 2';
+                case 3: //quarta
+                    return 'Wednesday, 3';
+                case 4: //quinta
+                    return 'Thursday, 4';
+                case 5: //sexta
+                    return 'Friday, 5';
+                case 6: //sabado
+                    return 'Saturday, 6';
+                case 7: //domingo
+                    return 'Sunday, 7';
+                default: 
+                    return 'Day inexists';
+            }
+        }
+
+        let date = new Date(2012, 0, 3);
+
+        console.log(getLocalDay(date));
+    </script>
+</body>
+</html>

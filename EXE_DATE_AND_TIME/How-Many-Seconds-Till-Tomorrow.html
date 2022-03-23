@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        
+        //Crie uma função getSecondsToTomorrow() que retorne o número de segundos até amanhã.
+        //Por exemplo, se agora é 23:00, então:
+        function getSecondsToTomorrow() {
+            let date = new Date();
+            //ainda não e amanha
+            if(date.getHours() < 24) {
+                let diffHours = 24 - date.getHours();
+                let allSeconds = diffHours * 3600 + date.getMinutes() * 60 + date.getSeconds();
+                return allSeconds;
+            }else{
+                return 'Ja se chegou o amanhã';
+            }
+        }
+        //PS A função deve funcionar a qualquer dia, o “hoje” não é codificado.
+        console.log(getSecondsToTomorrow());
+    </script>
+</body>
+</html>

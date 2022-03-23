@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        
+        //Crie uma função getDateAgo(date, days) para retornar o dia do mês dias atrás da date
+        //Por exemplo, se hoje é dia 20, então getDateAgo(new Date(), 1) deve ser o dia 19 e getDateAgo(new Date(), 2) deve ser o dia 18.
+        //Deve funcionar de forma confiável por dias = 365 ou mais:
+        
+        function getDateAgo(date, days) {
+            //1 dia tem tantos milisegundos
+            const milisegundos = 86400000;
+            const allMili = days * milisegundos;
+            return new Date(date.getTime() - allMili);
+        }
+
+        let date = new Date(2015, 0, 2); //2 Jan 2015
+        console.log(getDateAgo(date, 1)); //01 Jan 2015
+        console.log(getDateAgo(date, 2)); //31 dez 2014
+        console.log(getDateAgo(date, 365)); //02 Jan 2014
+    </script>
+</body>
+</html>

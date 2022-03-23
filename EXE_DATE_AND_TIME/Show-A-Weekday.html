@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        
+        //Escreva uma função getWeekDay(date)para mostrar o dia da semana em formato curto: 'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'.
+        //Por exemplo:
+
+        function getWeekDay(date) {
+            let day = date.getDay();
+            switch(day) {
+                case 0: //domingo
+                    return 'SU';
+                case 1: //segunda
+                    return 'MO';
+                case 2: //terça
+                    return 'TU';
+                case 3: //quarta
+                    return 'WE';
+                case 4: //quinta
+                    return 'TH';
+                case 5: //sexta
+                    return 'FR';
+                case 6: //sabado
+                    return 'SA';
+                default:
+                    return 'Day inexists';
+            }
+        }
+        let date = new Date(2012, 0, 24); // 3 Jan 2012
+        console.log(getWeekDay(date)); //TU
+    </script>
+</body>
+</html>

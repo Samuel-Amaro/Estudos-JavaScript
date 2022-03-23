@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        //Escreva uma função formatDate(date)que deve ser formatada date da seguinte forma:
+            //Se desde que date passou menos de 1 segundo, então "right now".
+            //Caso contrário, se desde que date passou menos de 1 minuto, então "n sec. ago".
+            //Caso contrário, se menos de uma hora, então "m min. ago".
+            //Caso contrário, a data completa no formato "DD.MM.YY HH:mm". Ou seja: "day.month.year hours:minutes", tudo em formato de 2 dígitos, por exemplo 31.12.16 10:00.
+        //Por exemplo:
+
+        function formatDate(date) {
+            let dateCurrent = new Date();
+            let diff = dateCurrent.getTime() - date.getTime();
+            let seconds = diff * 0.001;
+            //1 segundo
+            if(seconds <= 1) {
+                return 'right now';
+                //menos de 1 minuto
+            }else if(seconds < 60) {
+                return `${seconds} sec. ago`;
+                //menos de 1 hora
+            }else if(seconds < 60000) {
+                let mins = seconds * 0.0167;
+                return `${mins} min. ago`;
+                //a um dia
+            }else if(seconds === 86400){
+                return `${date.getDate()}.${date.getMonth() + 1}.${new String(date.getFullYear()).substring(2)} ${date.getHours()}:${date.getMinutes()}`;
+            }
+        }
+
+        console.log(formatDate(new Date(new Date - 1)));
+        console.log(formatDate(new Date(new Date - 30 * 1000)));
+        console.log(formatDate(new Date(new Date - 5 * 60 * 1000)));
+        console.log(formatDate(new Date(new Date - 86400 * 1000)));
+    </script>
+</body>
+</html>
