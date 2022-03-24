@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Em casos simples de referências circulares, podemos excluir uma propriedade ofensiva da serialização por seu nome.
+        //Mas às vezes não podemos usar apenas o nome, pois ele pode ser usado tanto em referências circulares quanto em propriedades normais. Assim, podemos verificar a propriedade pelo seu valor.
+        //Escreva replacer a função para stringificar tudo, mas remova as propriedades que fazem referência meetup:
+        
+        let room = {
+            number : 23
+        };
+
+        let meetup = {
+            title: "Conference",
+            occupiedBy: [{name: "John"}, {name: "Alice"}],
+            place: room
+        };
+
+        //referencia circular
+        room.occupiedBy = meetup;
+        meetup.self = meetup;
+
+        console.log(JSON.stringify(meetup, function replacer(key, value) {
+            if(value == meetup || value == room) {
+                return value == meetup ? {title: "Conference",occupiedBy: [{name: "John"}, {name: "Alice"}], place: {number : 23}} : {number : 23};
+            }else {
+                return value;
+            }
+        }));
+
+        console.log(JSON.stringify(meetup, function replacer(key, value) {
+            if(key != "" && value == meetup) {
+                return undefined;
+            }else {
+                return value;
+            }
+        }));
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf8">
+</head>
+<body>
+    
+    <script>
+
+        //Transforme o user em JSON e, em seguida, leia-o novamente em outra variável.
+        let user = {
+            name: "John Smith",
+            age: 35
+        }; 
+        user = JSON.stringify(user);
+        console.log(user);
+        let userData = JSON.parse(user);
+        console.log(userData);
+        
+    </script>
+</body>
+</html>
