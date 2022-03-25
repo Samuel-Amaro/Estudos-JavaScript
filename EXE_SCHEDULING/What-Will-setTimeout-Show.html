@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        //No código abaixo há uma setTimeout chamada agendada, então é executado um cálculo pesado, que demora mais de 100ms para ser finalizado.
+        //Quando a função agendada será executada?
+        //1.Após o laço.
+        //2.Antes do laço.
+        //3. No início do loop.
+        //O que alert vai mostrar?
+
+        let i = 0;
+
+        setTimeout(() => console.log(i), 100); //?
+
+        //suponha que o tempo para executar esta função seja >100ms
+        for(let j = 0; j < 100000000; j++) {
+            i++;
+        }
+
+        //R: o timeout sera executado apos a conclusão do codigo atual
+    </script>
+
+</body>
+</html>

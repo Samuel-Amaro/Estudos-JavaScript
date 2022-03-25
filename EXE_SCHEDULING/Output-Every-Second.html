@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        //Escreva uma função printNumbers(from, to) que produza um número a cada segundo, começando from e terminando com to.
+        //Faça duas variantes da solução.
+        //Usando setInterval.
+        //Usando aninhado setTimeout.
+
+        function printNumbers(from, to) {
+            let current = from;
+            let intervalID = setInterval(() => {
+                if(current <= to) {
+                    console.log(current);
+                    current++;
+                }else{
+                    clearInterval(intervalID);
+                }
+            }, 1000);
+        }
+
+        printNumbers(0, 10);
+
+        function printNumbers2(from, to) {
+            let current = from;
+            let timeoutID = setTimeout(function print() {
+                if(current <= to) {
+                    console.log(current);
+                    current += 1;
+                }else{
+                    clearTimeout(timeoutID);
+                }
+                timeoutID = setTimeout(print, 1000);
+            }, 1000);
+        }
+
+        printNumbers(11, 21);
+    </script>
+
+</body>
+</html>
