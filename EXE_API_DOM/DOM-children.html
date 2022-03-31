@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <title>Exe Dom</title>
+</head>
+<body>
+
+  <div>Users:</div>
+  <ul>
+      <li>John</li>
+      <li>Pete</li>
+  </ul>
+
+  <script type="text/javascript">
+      //Para cada um dos itens a seguir, forneça pelo menos uma maneira de acessá-los:
+
+      //O <div> nó DOM?
+      let div = document.body.firstElementChild;
+      console.log(div);
+
+      //O <ul>nó DOM?
+      let ul = div.nextElementSibling;
+      console.log(ul);
+
+      //A segunda <li> (com Pete)?
+      let li = ul.lastElementChild;
+      console.log(li);
+
+  </script>
+</body>
+</html>
