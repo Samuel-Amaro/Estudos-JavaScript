@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div>Usuários</div>
+    <ul>
+        <li>John</li>
+        <li>Pete</li>
+    </ul>
+
+    <script type="text/javascript">
+
+        let first = document.body.firstChild;
+
+
+        //<div>
+        console.log(document.body.firstElementChild);
+        console.log(first.nextElementSibling);
+        let div = document.body.firstElementChild;
+        console.log(document.body.children[0]);
+
+        //<ul>
+        console.log(div.nextElementSibling);
+        console.log(div.nextSibling.nextElementSibling);
+        console.log(document.body.children[0].nextElementSibling);
+        console.log(document.body.children[1]);
+
+        //<li>
+        console.log(div.nextElementSibling.lastElementChild);
+        console.log(div.nextElementSibling.firstElementChild.nextElementSibling);
+        console.log(document.body.children[1].lastElementChild);
+
+    </script>
+
+</body>
+</html>

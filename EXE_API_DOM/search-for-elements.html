@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en-us">
 <head>
-    <meta charset="utf-8"/>
-    <title>Exe Dom</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 
@@ -22,56 +22,55 @@
         <td>Age:</td>
         <td id="age-list">
           <label>
-            <input type="radio" name="age" value="young">less than 18</label>
+            <input type="radio" name="age" value="young"/>less than 18</label>
           <label>
-            <input type="radio" name="age" value="mature">18-50</label>
+            <input type="radio" name="age" value="mature"/>18-50</label>
           <label>
-            <input type="radio" name="age" value="senior">more than 50</label>
+            <input type="radio" name="age" value="senior"/>more than 50</label>
         </td>
       </tr>
 
       <tr>
         <td>Additionally:</td>
         <td>
-          <input type="text" name="info[0]">
-          <input type="text" name="info[1]">
-          <input type="text" name="info[2]">
+          <input type="text" name="info[0]"/>
+          <input type="text" name="info[1]"/>
+          <input type="text" name="info[2]"/>
         </td>
       </tr>
 
     </table>
 
-    <input type="submit" value="Search!">
+    <input type="submit" value="Search!"/>
   </form>
 
   <script type="text/javascript">
-        //Aqui está o documento com a tabela e o formulário.
-        //Como encontrar?…
 
-        //1. A tabela com id="age-table".
-        let table = document.getElementById("age-table");
-        console.log(table);
+    //como encontrar?...
 
-        //2. Todos os label elementos dentro dessa tabela (deve haver 3 deles).
-        let labels = table.querySelectorAll('label');
-        console.log(Array.from(labels));
+    //1. A tabela com id="age-table".
+    let table = document.getElementById("age-table");
+    console.log(table);
 
-        //3. O primeiro td dessa tabela (com a palavra “Idade”).
-        let firstTd = table.querySelector('td');
-        console.log(firstTd);
+    //2. Todos os label elementos dentro dessa tabela (deve haver 3 deles).
+    let collectionLabels = table.getElementsByTagName('label');
+    console.log(collectionLabels);
 
-        //4 O form com name="search".
-        let form = document.querySelector('[name=search-person]');
-        console.log(form);
+    //3. O primeiro td dessa tabela (com a palavra “Idade”).
+    let tdAge = table.querySelector('td');
+    console.log(tdAge);
 
-        //5 A primeira entrada nesse formulário.
-        let firstInput = form.querySelector('input');
-        console.log(firstInput);
+    //4. O form com name="search".
+    let form = document.querySelector('form[name="search"]');
+    console.log(form);
 
-        //6 O último input nessa form.
-        let inputs = form.querySelectorAll('input');
-        let lastInput = Array.from(inputs);
-        console.log(lastInput[lastInput.length - 1]);
+    //5. O primeiro input do form.
+    let firstInput = form.querySelector("input:first-child");
+    console.log(firstInput);
+
+    //6. O último input do form
+    let lastInput = form.getElementsByTagName('input');
+    console.log(lastInput[lastInput.length - 1]);
 
   </script>
 </body>
