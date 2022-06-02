@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <ul>
+        <li>Animals
+            <ul>
+                <li>Mammals
+                    <ul>
+                        <li>Cows</li>
+                        <li>Donkeys</li>
+                        <li>Dogs</li>
+                        <li>Tigers</li>
+                    </ul>
+                </li>
+                <li>Other
+                    <ul>
+                        <li>Snakes</li>
+                        <li>Birds</li>
+                        <li>Lizards</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Fishes
+            <ul>
+                <li>Aquarium
+                    <ul>
+                        <li>Guppy</li>
+                        <li>Angelfish</li>
+                    </ul>
+                </li>
+                <li>Sea
+                    <ul>
+                        <li>Sea trout</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        /**
+         * Há uma árvore estruturada como aninhada ul/li.
+         * 
+         * Escreva o código que para cada <li> mostra:
+         
+            1. Qual é o texto dentro dele (sem a subárvore)
+
+            2. O número de aninhados <li> – todos os descendentes, incluindo os profundamente aninhados.
+        */
+
+        let allLis = document.body.querySelectorAll('li');
+        
+        for(let liItem of allLis) {
+            console.log(`${liItem.firstChild.textContent.trim()}: ${liItem.querySelectorAll('li').length}`);
+        }
+    </script>
+
+</body>
+
+</html>
