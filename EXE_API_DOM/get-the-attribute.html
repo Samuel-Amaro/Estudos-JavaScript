@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <div data-widget-name="menu">Choose the genre</div>
+
+    <script type="text/javascript">
+        
+        /**
+         * Escreva o código para selecionar o elemento com data-widget-name atributo do documento e ler seu valor.
+        */  
+
+        let div = document.body.firstElementChild;
+
+        console.log(div.dataset.widgetName); //menu
+
+        console.log(div.getAttribute('data-widget-name')); //menu
+
+    </script>
+
+</body>
+
+</html>
