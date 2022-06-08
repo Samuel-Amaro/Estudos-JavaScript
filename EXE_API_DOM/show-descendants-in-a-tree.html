@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <ul>
+        <li>Animals
+          <ul>
+            <li>Mammals
+              <ul>
+                <li>Cows</li>
+                <li>Donkeys</li>
+                <li>Dogs</li>
+                <li>Tigers</li>
+              </ul>
+            </li>
+            <li>Other
+              <ul>
+                <li>Snakes</li>
+                <li>Birds</li>
+                <li>Lizards</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Fishes
+          <ul>
+            <li>Aquarium
+              <ul>
+                <li>Guppy</li>
+                <li>Angelfish</li>
+              </ul>
+            </li>
+            <li>Sea
+              <ul>
+                <li>Sea trout</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        
+        /**
+         * Há uma árvore organizada como aninhada ul/li.
+         * 
+         * Escreva o código que adiciona a cada um <li> o número de seus descendentes. Saltar folhas (nós sem filhos).
+        */
+
+        let ul = document.querySelector('ul');
+        let allLis = ul.querySelectorAll('li');
+        let count = 0;
+
+        function countDescendants(elem) {
+            count = 0;
+            if(elem.querySelectorAll('li').length > 0) {
+                for(let i = 0; i < elem.querySelectorAll('li').length; i++) {
+                    count++;
+                } 
+            }else{
+                return 0;
+            }
+            return count;
+        }
+
+        for(let j = 0; j < allLis.length; j++) {
+            if(countDescendants(allLis[j]) > 0) {
+                allLis[j].firstChild.textContent = allLis[j].firstChild.textContent + ' [' +countDescendants(allLis[j]) + ']';
+            }
+        }
+
+    </script>
+
+</body>
+</html>

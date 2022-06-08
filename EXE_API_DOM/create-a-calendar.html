@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+    
+        td,
+        th {
+          border: 1px solid black;
+          padding: 3px;
+          text-align: center;
+        }
+    
+        th {
+          font-weight: bold;
+          background-color: #E6E6E6;
+        }
+      </style>
+</head>
+<body>
+
+    <div id="calendar">
+
+    </div>
+
+    <script type="text/javascript">
+        
+        /**
+         * Escreva uma função createCalendar(elem, year, month).
+         * 
+         * A chamada deve criar um calendário para um determinado ano/mês e colocá-lo dentro de elem
+         * 
+         * O calendário deve ser uma tabela, onde uma semana é <tr> e um dia é <td>. O tampo da mesa deve ser <th> com nomes de dias da semana: o primeiro dia deve ser segunda-feira e assim por diante até domingo.
+         * 
+         * Por exemplo, createCalendar(cal, 2012, 9) deve gerar no elemento cal o seguinte calendário:
+         * 
+         * PS Para esta tarefa basta gerar o calendário, ainda não deve ser clicável.
+        */
+
+        function drawCalendar(qtdDaysMonth) {
+            let table = document.createElement('table');
+            let thead = document.createElement('thead');
+            let tbody = document.createElement('tbody');
+            table.prepend(thead);
+            //NOME DOS DIAS DA SEMANA
+            let nameDays = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+            let trDays = document.createElement('tr');
+            for(let i = 0; i < nameDays.length; i++) {
+                let th = document.createElement('th');
+                th.textContent = nameDays[i];
+                trDays.append(th);
+            }
+            thead.append(trDays);
+            //QUANTIDADE DE SEMANAS NO MÊS
+            let qtdSemanas = 0;
+            if(qtdDaysMonth > 28) {
+                qtdSemanas = 5;
+            }else{
+                qtdSemanas = 4;
+            }
+            for(let j = 0; j < qtdSemanas; j++) {
+                let tr = document.createElement("tr");
+                for(let k = 0; k < 7; k++) {
+                    let td = document.createElement("td");
+                    tr.append(td);
+                }
+                tbody.append(tr);
+            }
+            table.append(tbody);
+            document.body.prepend(table);
+            return table;
+        }
+
+        function anoEBissexto(year) {
+            //etapa 1
+            if((year % 4 == 0)) {
+                //etapa 2
+                if(year % 100 == 0) {
+                    //etapa 3
+                    if(year % 400 == 0) {
+                        //ano e bissexto
+                        return true;
+                    }else{
+                        //ano não e bissexto
+                        return false
+                    }
+                }
+                else{
+                    //etapa 4
+                    //ano e bissexto
+                    return true;
+                }
+            }else{
+                //etapa 5
+                //ano não e bissexto
+                return false;
+            }
+        }
+
+        function createCalendar(elem, year, month) {
+            if((year >= 1900 && year <= 2022) && (month >= 1 && month <= 12)) {
+                //key: numberMonth -> value: qtdDaysMonth, firstDayMonth
+                let daysMonths = new Map([
+                    [1, [31, 'SU']], [2, [28, 'WE']], [3, [31, 'WE']], [4, [30, 'SA']], [5, [31, 'MO']], [6, [30, 'TH']], [7, [31, 'SA']], [8, [31, 'TU']], [9, [30, 'FR']], [10, [31, 'WE']], [11, [30, 'WE']], [12, [31, 'FR']]
+                ]);
+                if(anoEBissexto) {
+                    daysMonths = new Map([
+                        [1, [31, 'SU']], [2, [29, 'SA']], [3, [31, 'WE']], [4, [30, 'SA']], [5, [31, 'MO']], [6, [30, 'TH']], [7, [31, 'SA']], [8, [31, 'TU']], [9, [30, 'FR']], [10, [31, 'WE']], [11, [30, 'WE']], [12, [31, 'FR']]
+                    ]);
+                }
+                let table = drawCalendar(year);
+                let tds = table.querySelectorAll('td');
+                let ths = table.querySelectorAll("th");
+                let cellStartMonth = 0;
+                for (let index = 0; index < ths.length; index++) {
+                    if(ths[index].textContent == daysMonths.get(month)[1]) {
+                        //console.log(daysMonths.get(month)[1]);
+                        cellStartMonth = index; 
+                        //console.log(cellStartMonth);
+                    }
+                }
+                //obtendo quantidade de celulas para preenchimento
+                let subCells = Array.from(tds).slice(cellStartMonth);
+                //quantidade dias no mês
+                for(let j = 0; j < daysMonths.get(month)[0]; j++){
+                    subCells[j].textContent = j + 1;
+                }
+            }else{
+                alert('Ano informado invalido!');
+            }
+        }
+
+        createCalendar(calendar, 2010, 3);
+
+    </script>
+
+</body>
+</html>

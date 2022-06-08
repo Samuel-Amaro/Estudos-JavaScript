@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+   <ul id="ul">
+       <li id="one">1</li>
+       <li id="two">4</li>
+   </ul>
+
+    <script type="text/javascript">
+        
+        /**
+         * Escreva o código para inserir <li>2</li><li>3</li> entre dois <li> aqui:
+        */
+
+        let liThree = document.createElement('li');
+        liThree.textContent = 2;
+        let liFour = document.createElement('li');
+        liFour.textContent = 3;
+        ul.firstElementChild.after(liThree, liFour);
+
+    </script>
+
+</body>
+</html>

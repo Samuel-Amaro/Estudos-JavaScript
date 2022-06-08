@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .relogio{
+            display: flex;
+        }
+
+        .hour{
+            color: red;
+        }
+
+        .minutes{
+            color: green;
+        }
+
+        .seconds{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="relogio">
+        <div class="hour"></div>
+        <div class="minutes"></div>
+        <div class="seconds"></div>
+    </div>
+
+    <!-- click on this button calls clockStart() -->
+    <input type="button" onclick="clockStart()" value="Start"/>
+
+    <!-- click on this button calls clockStop() -->
+    <input type="button" onclick="clockStop()" value="Stop"/>
+
+    <script type="text/javascript">
+        
+        /**
+         * Crie um relógio colorido como aqui:
+         * 
+         * Use HTML/CSS para o estilo, JavaScript apenas atualiza o tempo nos elementos.
+        */
+
+        let intervalID;
+
+        function clockStart() {
+            intervalID = setInterval(() => {
+                let now = new Date();
+                document.body.querySelector('.hour').textContent = now.getHours() < 10 ? '0' + now.getHours() + ':' : now.getHours() + ':';
+                document.body.querySelector('.minutes').textContent = now.getMinutes() < 10 ? '0' + now.getMinutes() + ':' : now.getHours() + ':';
+                document.body.querySelector('.seconds').textContent = now.getSeconds() < 10 ? '0' + now.getSeconds() : now.getSeconds();
+            }, 1000);
+        }
+
+        function clockStop() {
+            clearInterval(intervalID);
+            intervalID = null;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <div id="tree"></div>
+
+    <script type="text/javascript">
+        
+        /**
+         * Escreva uma função createTree que cria uma ul/li lista aninhada do objeto aninhado.
+         * 
+         * Escolha uma das duas maneiras de resolver esta tarefa:
+         
+            1. Crie o HTML para a árvore e, em seguida, atribua um container.innerHTML.
+            2. Crie nós de árvore e anexe com métodos DOM.
+
+         * 
+         * Seria ótimo se você pudesse fazer as duas coisas.
+         * 
+         * PS A árvore não deve ter elementos “extras” como vazio <ul></ul> para as folhas.
+        */
+
+        let data = {
+            "Fish": {
+                "trout": {},
+                "salmon": {}
+            },
+            "Tree": {
+                "Huge": {
+                    "sequoia": {},
+                    "oak": {}
+                },
+                "Flowering": {
+                    "apple tree": {},
+                    "magnolia": {}
+                }
+            }
+        };
+
+
+        /*for(const prop in data) {
+            let li = document.createElement('li');
+            console.log('-----nivel 1-----');
+            console.log(`${prop} : ${data[prop]}`);
+            for(const prop2 in data[prop]) {
+                console.log('-----nivel 2-----');
+                console.log(`${prop2} : ${data[prop][prop2]}`);
+                for(const prop3 in data[prop][prop2]) {
+                    console.log('-----nivel 3-----');
+                    console.log(`${prop3} : ${data[prop][prop2][prop3]}`);
+                    for(const prop4 in data[prop][prop2][prop3]) {
+                        console.log('-----nivel 4-----');
+                        console.log(`${prop4} : ${data[prop][prop2][prop3][prop4]}`);
+                    }
+                }
+            }
+        }
+        */
+
+
+        /*function createTree(container, data) {
+            let ul = document.createElement('ul');
+            for(const prop in data) {
+                console.log(`${prop} : ${data[prop]}`);
+                let li = document.createElement('li');
+                li.textContent = prop;
+                ul.append(li);
+            }
+            container.append(ul);
+        }
+
+        createTree(tree, data);
+        createTree(document.querySelector('ul').firstElementChild, data.Fish);
+        createTree(document.querySelector('ul').lastElementChild, data.Tree);
+        createTree(document.querySelector('ul').lastElementChild.firstElementChild.firstElementChild, data.Tree.Huge);
+        createTree(document.querySelector('ul').lastElementChild.firstElementChild.lastElementChild, data.Tree.Flowering);
+        */
+
+        //usando recursão
+
+        function eVazio(data) {
+            for(const prop in data) {
+                if(data.hasOwnProperty(prop)) {
+                    //propriedade existe object não e vazio 
+                    return false;
+                }
+            }
+            //propriedade não existe object e vazio
+            return true;
+        }
+
+        function createTree(container, data) {
+            console.log(eVazio(data));
+            if(!eVazio(data)) {
+                let ul = document.createElement('ul');
+                for(const prop in data) {
+                    let li = document.createElement('li');
+                    li.textContent = prop;
+                    ul.append(li);
+                    createTree(li, data[prop]);
+                }
+                container.append(ul);
+            }
+        }
+
+        createTree(tree, data);
+
+    </script>
+
+</body>
+</html>

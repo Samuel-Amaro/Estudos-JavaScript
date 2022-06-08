@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <table id="table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Surname</th><th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td><td>Smith</td><td>10</td>
+          </tr>
+          <tr>
+            <td>Pete</td><td>Brown</td><td>15</td>
+          </tr>
+          <tr>
+            <td>Ann</td><td>Lee</td><td>5</td>
+          </tr>
+          <tr>
+            <td>...</td><td>...</td><td>...</td>
+          </tr>
+          <tr>
+            <td>Luis</td><td>Castro</td><td>54</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        
+       /**
+        * Tem uma tabela:
+        * 
+        * Pode haver mais linhas nele.
+        * 
+        * Escreva o código para classificá-lo pela "name" coluna.
+        * */
+
+        let table = document.body.querySelector("table");
+        //obtem todas linhas da tabela
+        //table.tBodies[0].rows;
+        let rows = Array.from(table.tBodies[0].rows);
+        let tds = [];
+        for(let index = 0; index < rows.length; index++) {
+            //obtem todas as celulas de um linha
+            //rows[index].cells
+            tds.push(Array.from(rows[index].cells));
+        }
+  
+        //classifica
+        tds.sort((a, b) => {
+            let x = a[0].textContent.toLocaleUpperCase(), y = b[0].textContent.toLocaleUpperCase();
+            if(x > y) {
+                return 1;
+            }
+            if(x < y) {
+                return -1;
+            }
+            return 0;
+        });
+
+        for(let j = 0; j < rows.length; j++) {
+          rows[j].innerHTML = tds[j][0].outerHTML + tds[j][1].outerHTML + tds[j][2].outerHTML;
+        }
+
+    </script>
+
+</body>
+</html>

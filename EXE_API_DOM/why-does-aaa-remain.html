@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <table id="table">
+        aaa
+        <tr>
+            <td>Test</td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        
+        /**
+         * No exemplo abaixo, a chamada table.remove() remove a tabela do documento.
+         * 
+         * Mas se você executá-lo, poderá ver que o texto "aaa" ainda está visível.
+         * 
+         * Por que isso acontece?
+        */
+      
+        console.log(table); //a table, como deve ser
+
+        table.remove(); //por que ainda há "aaa" no documento?
+
+        //R: o texto aaa não e filho de table, por isso permance, porque o navegador formata o html incorretor e adcionada aaa como um no de texto filho de body
+
+    </script>
+
+</body>
+</html>

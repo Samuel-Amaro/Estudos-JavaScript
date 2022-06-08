@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <h1>Create List</h1>
+    <ul></ul>
+
+    <script type="text/javascript">
+        
+        /**
+         * Escreva uma interface para criar uma lista a partir da entrada do usuário.
+         * 
+         * Para cada item da lista:
+         
+            1. Pergunte a um usuário sobre seu conteúdo usando prompt.
+
+            2. Crie o <li> com ele e adicione-o ao <ul>.
+
+            3. Continue até que o usuário cancele a entrada (pressionando Esc ou por meio de uma entrada vazia).
+
+         * Todos os elementos devem ser criados dinamicamente.
+         * 
+         * Se um usuário digitar tags HTML, elas devem ser tratadas como um texto.
+        */
+        
+        let ul = document.body.querySelector("ul"), li;
+        let text = prompt('Digite o texto para o item da lista');
+
+        while(text != null && text != '') {
+            li = document.createElement('li');
+            li.textContent = text;
+            ul.append(li);
+            text = prompt('Digite o texto para o item da lista');
+        }
+
+    </script>
+
+</body>
+</html>

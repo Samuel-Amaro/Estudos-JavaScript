@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+    <ol id="elem">
+        <li>Hello</li>
+        <li>Word</li>
+        <li>Break</li>
+        <li>Line</li>
+    </ol>
+
+    <script type="text/javascript">
+        
+        /**
+         * 
+         * Crie uma função clear(elem) que remova tudo do elemento.
+         */
+
+        function clear(elem) {
+            let allChilds = elem.childNodes;
+            console.log(allChilds);
+            allChilds = Array.from(allChilds);
+            for(let index = 0; index < allChilds.length; index++) {
+                allChilds[index].remove();
+            }
+        }
+
+        clear(elem);
+      
+    </script>
+
+</body>
+</html>
