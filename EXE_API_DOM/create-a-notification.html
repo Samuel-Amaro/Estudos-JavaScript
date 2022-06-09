@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .notification {
+            position: fixed;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            font-size: 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .welcome {
+            background: #b80000;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Notification is on the right</h2>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum aspernatur quam ex eaque inventore quod voluptatem adipisci omnis nemo nulla fugit iste numquam ducimus cumque minima porro ea quidem maxime necessitatibus beatae labore soluta voluptatum
+        magnam consequatur sit laboriosam velit excepturi laborum sequi eos placeat et quia deleniti? Corrupti velit impedit autem et obcaecati fuga debitis nemo ratione iste veniam amet dicta hic ipsam unde cupiditate incidunt aut iure ipsum officiis soluta
+        temporibus. Tempore dicta ullam delectus numquam consectetur quisquam explicabo culpa excepturi placeat quo sequi molestias reprehenderit hic at nemo cumque voluptates quidem repellendus maiores unde earum molestiae ad.
+    </p>
+
+    <script type="text/javascript">
+        
+       /**
+        * Escreva uma função showNotification(options) que crie uma notificação: <div class="notification"> com o conteúdo fornecido. A notificação deve desaparecer automaticamente após 1,5 segundos.
+        * 
+        * Use o posicionamento CSS para mostrar o elemento em determinadas coordenadas superior/direita. O documento de origem tem os estilos necessários.
+        */
+
+        function showNotification(options) {
+            let div = document.createElement('div');
+            div.className = "notification";
+            div.style.top = options.top + "px";
+            div.style.right = options.right + "px";
+            div.textContent = options.html;
+            div.classList.add(options.className);
+            document.body.prepend(div);
+            let idTime = setTimeout(() => {
+                div.remove();
+            }, 1500);
+            //clearTimeout(idTime);
+        }
+
+        //mostra um elemento com o texto "Hello" perto do canto superior direito da janela
+        
+        let i = 0;
+        let id = setInterval(() => {
+            showNotification({
+                top: 10, // 10px da parte superior da janela (por padrão 0px)
+                right: 10, /// 10px da borda direita da janela (por padrão 0px)
+                html: "Hello! " + i++, // o HTML da notificação
+                className: "welcome" // uma classe adicional para o div (opcional)
+            });
+        }, 2000);
+
+    </script>
+
+</body>
+</html>
