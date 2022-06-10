@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <style type="text/css" rel="stylesheet">
+        #elem{
+            display: flex;
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            flex-flow: column nowrap;
+            margin: 0 auto;
+            background-color: rebeccapurple;
+        }
+    </style>    
+</head>
+<body>
+
+    <article id="elem">
+        <h1>Lorem Title</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis maxime tempora at illum quod quae ullam quibusdam tempore qui enim maiores numquam, doloremque omnis quam? Veritatis repellat facere odit dolore?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem culpa impedit explicabo eos dolor accusamus animi mollitia perferendis exercitationem, atque natus fuga. Labore tempora nostrum quo voluptas quos voluptates sapiente.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt nemo id atque asperiores inventore velit exercitationem, officiis dolor natus eaque, in officia cupiditate ex adipisci, mollitia repellendus maiores numquam blanditiis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eos ut excepturi dolor enim nostrum quaerat explicabo, veritatis necessitatibus impedit quisquam illum, doloribus expedita cum. Harum iusto eaque itaque voluptatibus?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quidem officia accusamus doloremque natus ratione quae totam dolore deleniti mollitia atque repudiandae aut quod maiores recusandae, nulla quam fugiat voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga quae reiciendis autem nulla nam at omnis minus sit. Nesciunt laudantium rerum deleniti, et iste officia. Corrupti asperiores natus consequatur reiciendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo esse unde dicta illo rem. Rerum ullam quibusdam repellendus, modi quis sunt ipsum a. Culpa ad nostrum porro corrupti deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt voluptates itaque provident aperiam repellat earum rerum modi quaerat, quasi incidunt. Perferendis ex ut mollitia eum vitae ad officiis placeat odio.</p>
+    </article>
+
+    <script type="text/javascript">
+        
+      /**
+       * A elem.scrollTop propriedade é o tamanho da parte rolada do topo. Como obter o tamanho da rolagem inferior (vamos chamá-la de scrollBottom)?
+       * 
+       * Escreva o código que funciona para um arquivo elem.
+       * 
+       * PS Por favor, verifique seu código: se não houver rolagem ou o elemento estiver totalmente rolado para baixo, ele deverá retornar 0.
+       */
+
+        let elem = document.querySelector('#elem');
+    
+        if(elem.scrollTop === 0) {
+            elem.scrollTop = elem.scrollHeight;
+            console.log(elem.scrollTop);
+        }else{
+            console.log(elem.scrollTop);
+        }
+        
+    </script>
+
+</body>
+</html>
