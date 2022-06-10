@@ -40,46 +40,7 @@
                 }
             }
         };
-
-
-        /*for(const prop in data) {
-            let li = document.createElement('li');
-            console.log('-----nivel 1-----');
-            console.log(`${prop} : ${data[prop]}`);
-            for(const prop2 in data[prop]) {
-                console.log('-----nivel 2-----');
-                console.log(`${prop2} : ${data[prop][prop2]}`);
-                for(const prop3 in data[prop][prop2]) {
-                    console.log('-----nivel 3-----');
-                    console.log(`${prop3} : ${data[prop][prop2][prop3]}`);
-                    for(const prop4 in data[prop][prop2][prop3]) {
-                        console.log('-----nivel 4-----');
-                        console.log(`${prop4} : ${data[prop][prop2][prop3][prop4]}`);
-                    }
-                }
-            }
-        }
-        */
-
-
-        /*function createTree(container, data) {
-            let ul = document.createElement('ul');
-            for(const prop in data) {
-                console.log(`${prop} : ${data[prop]}`);
-                let li = document.createElement('li');
-                li.textContent = prop;
-                ul.append(li);
-            }
-            container.append(ul);
-        }
-
-        createTree(tree, data);
-        createTree(document.querySelector('ul').firstElementChild, data.Fish);
-        createTree(document.querySelector('ul').lastElementChild, data.Tree);
-        createTree(document.querySelector('ul').lastElementChild.firstElementChild.firstElementChild, data.Tree.Huge);
-        createTree(document.querySelector('ul').lastElementChild.firstElementChild.lastElementChild, data.Tree.Flowering);
-        */
-
+        
         //usando recursão
 
         function eVazio(data) {
