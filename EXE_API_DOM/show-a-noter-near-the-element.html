@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <style type="text/css">
+        .note {
+            position: fixed;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            background: white;
+            text-align: center;
+            font: italic 14px serif;
+        }
+
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 0 0 0 100px;
+            padding: .5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            white-space: pre;
+        }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: .1em;
+            margin-right: .25em;
+            vertical-align: -.4em;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
+    
+    <blockquote>
+        Teacher: Why are you late?
+        Student: There was a man who lost a hundred dollar bill.
+        Teacher: That's nice. Were you helping him look for it?
+        Student: No. I was standing on it.
+    </blockquote>
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
+
+    <script type="text/javascript">
+
+        /**
+        * Crie uma função positionAt(anchor, position, elem) que posicione elem, dependendo do elemento position próximo anchor.
+        * 
+        * O position deve ser uma string com qualquer um dos 3 valores:
+         
+            "top"- posicione elem logo acima anchor
+
+            "right"– posicione elem-se imediatamente à direita de anchor
+
+            "bottom"- posição elem logo abaixo anchor
+
+        * 
+        * É usado dentro da função showNote(anchor, position, html), fornecida no código-fonte da tarefa, que cria um elemento “nota” com dado html e o mostra no dado position próximo ao anchor.
+        */
+    
+        /**
+         * Posiciona o elemento em relação à âncora como dito na posição.
+         *
+         * @param {Node} anchor Elemento de ancoragem para posicionamento
+         * @param {string} position Um de: top/right/bottom
+         * @param {Node} elem Elemento para posicionar
+         *
+         * Ambos os elementos: elem e âncora devem estar no documento
+        */
+        function positionAt(anchor, position, elem) {
+            if(position === "top" || position === "bottom" || position === "right") {
+                //coordenadas relativas a window
+                let coordenadas = anchor.getBoundingClientRect();
+                console.log(coordenadas);
+                if(position === "top") {
+                    let coordY = coordenadas.y - elem.offsetHeight;
+                    let coordX = coordenadas.x - elem.offsetWidth;
+                    elem.style.top = coordY + "px";
+                    elem.style.left = coordX + "px";
+                    console.log(coordY + " " + coordX);
+                }else if(position === "bottom") {
+                    let coordYBottom = Math.ceil(coordenadas.bottom); 
+                    let coordX = coordenadas.x - elem.offsetWidth;
+                    elem.style.left = coordX + "px";
+                    elem.style.top = coordYBottom + "px";
+                    console.log(coordYBottom);
+                }else{
+                    let coordY = coordenadas.y - elem.offsetHeight;
+                    let coordX = coordenadas.x + anchor.offsetWidth;
+                    elem.style.top = coordY + "px";
+                    elem.style.left = coordX + "px";
+                    console.log(coordY + " " + coordX);
+                }
+            }else{
+                console.log('Impossivel de posicionar');
+            }
+        }
+
+        /**
+         * Mostra uma nota com o html dado na posição dada
+          * em relação ao elemento anchor.
+         */
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+
+        }
+
+        //teste-o
+        let blockquote = document.querySelector('blockquote');
+
+        showNote(blockquote, "top", "note above");
+        showNote(blockquote, "right", "note at the right");
+        showNote(blockquote, "bottom", "note below");
+
+
+  </script>
+
+</body>
+</html>

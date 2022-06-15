@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <style type="text/css">
+        .note {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            background: white;
+            text-align: center;
+            font: italic 14px serif;
+        }
+
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 0 0 0 100px;
+            padding: .5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            white-space: pre;
+        }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: .1em;
+            margin-right: .25em;
+            vertical-align: -.4em;
+        }
+    </style>
+</head>
+<body style="height: 2000px;">
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
+    
+    <blockquote>
+        Teacher: Why are you late?
+        Student: There was a man who lost a hundred dollar bill.
+        Teacher: That's nice. Were you helping him look for it?
+        Student: No. I was standing on it.
+    </blockquote>
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
+
+    <script type="text/javascript">
+        /**
+        * Estender a tarefa anterior Mostrar uma nota perto do elemento (absoluto) : ensine a função positionAt(anchor, position, elem) a inserir elem dentro do anchor.
+        * 
+        * Novos valores para position:
+        
+            - top-out(cima para fora), right-out(direita para fora), bottom-out(para baixo) – funcionam da mesma forma que antes, eles inserem o elemento sobre(over)/right/over anchor
+
+            - top-in(cima para dentro), right-in(direita para dentro), bottom-in(baixo para dentor ) – insira o elemento dentro da âncora: cole-o na borda top/right/bottom.
+        */
+
+        function getCoords(elem) {
+            //obtem coordenadas relativas a window
+            let coords = elem.getBoundingClientRect();
+            //retorna coordenadas de elem relativas ao document
+            return {
+                //cordenada y + altura da rolagem vertical
+                top: coords.top + window.pageYOffset,
+                left: coords.left + window.pageXOffset,
+                width: coords.width,
+                height: coords.height
+            }
+        }
+    
+        function positionAt(anchor, position, elem) {
+            let coordsElem = getCoords(elem);
+            let coordsAnchor = anchor.getBoundingClientRect();
+            console.log(coordsAnchor);
+            console.log(coordsElem);
+            switch(position) {
+                case "top-out": 
+                    elem.style.top = (coordsAnchor.y - coordsElem.height) + "px";
+                    elem.style.left = coordsAnchor.x + "px";
+                    break;
+                case "right-out":
+                    elem.style.left = (coordsAnchor.x + coordsAnchor.width) + "px";
+                    elem.style.top = coordsAnchor.y + "px";
+                    break;
+                case "bottom-out": 
+                    elem.style.top = (coordsAnchor.y + coordsAnchor.height) + "px";
+                    elem.style.left = coordsAnchor.x + "px";
+                    break;
+                case "top-in": 
+                    elem.style.top = coordsAnchor.y + "px";
+                    elem.style.left = coordsAnchor.x + "px";
+                    break;
+                case "right-in": 
+                    elem.style.left = ((coordsAnchor.x + coordsAnchor.width) - coordsElem.width) + "px";
+                    elem.style.top = coordsAnchor.y + "px";
+                    break;
+                case "bottom-in":
+                    elem.style.top = ((coordsAnchor.y + coordsAnchor.height) - coordsElem.height) + "px";
+                    elem.style.left = coordsAnchor.x + "px";
+                    break;
+                default:
+                    console.log('Position invalid!');
+            }
+        }
+        
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+
+        }
+
+        //teste-o
+        let blockquote = document.querySelector('blockquote');
+        showNote(blockquote, "top-out", "note top-out");
+        showNote(blockquote, "top-in", "note top-in");
+        showNote(blockquote, "right-out", "note right-out");
+        showNote(blockquote, "bottom-out", "note bottom-out");
+        showNote(blockquote, "right-in", "note right-in");
+        showNote(blockquote, "bottom-in", "note bottom-in");
+
+  </script>
+
+</body>
+</html>
