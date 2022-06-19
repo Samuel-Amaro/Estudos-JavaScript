@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+
+    <input type="button" id="button" value="Clique"/>
+
+    <script type="text/javascript">
+
+        /**
+         * Há um botão na variável. Não há manipuladores nele.
+         * 
+         * Quais manipuladores são executados ao clicar após o código a seguir? Quais alertas aparecem?
+        */
+
+        button.addEventListener("click", () => alert("1")); //executa mostra 1
+
+        button.removeEventListener("click", () => alert("1")); //não executa
+
+        button.onclick = () => alert(2); //executa mostra 2
+
+    </script>
+
+</body>
+</html>

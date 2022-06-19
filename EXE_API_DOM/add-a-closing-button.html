@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">
+        body {
+            margin: 10px auto;
+            width: 470px;
+        }
+
+        h3 {
+            margin: 0;
+            padding-bottom: .3em;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin: 0;
+            padding: 0 0 .5em;
+        }
+
+        .frame__pane{
+            background: #edf5e1;
+            padding: 10px 20px 10px;
+            border-top: solid 2px #c4df9b;
+        }
+
+        .frame--remove-button {
+            font-size: 110%;
+            color: darkred;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <article class="frame">
+        <section class="frame__pane">
+            <h3>Horse</h3>
+            <p>The horse is one of two extant subspecies of Equus ferus. It is an odd-toed ungulate mammal belonging to the taxonomic family Equidae. The horse has evolved over the past 45 to 55 million years from a small multi-toed creature, Eohippus, into the large, single-toed animal of today.</p>
+        </section>
+        <section class="frame__pane">
+            <h3>Donkey</h3>
+            <p>The donkey or ass (Equus africanus asinus) is a domesticated member of the horse family, Equidae. The wild ancestor of the donkey is the African wild ass, E. africanus. The donkey has been used as a working animal for at least 5000 years.</p>
+        </section>
+        <section class="frame__pane">
+            <h3>Cat</h3>
+            <p>The domestic cat (Latin: Felis catus) is a small, typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines. Cats are often valued by humans for companionship and for their ability to hunt vermin.</p>
+        </section>
+    </article>
+
+    <script type="text/javascript">
+        /**
+         * Há uma lista de mensagens.
+         * 
+         * Use JavaScript para adicionar um botão de fechamento no canto superior direito de cada mensagem.
+        */
+
+        let allPanes = document.querySelectorAll(".frame__pane");
+
+        function modifier(elem) {
+            let header = document.createElement("header");
+            header.style.cssText = "display: grid; grid-template-columns: repeat(2, 1fr);";
+            let button = document.createElement("button");
+            button.style.cssText = "display: block; justify-self: flex-end;";
+            button.innerHTML = "[x]";
+            button.addEventListener("click", (event) => {
+                elem.remove();
+            });
+            button.classList.add("frame--remove-button");
+            button.classList.add("frame__button");
+            header.append(elem.firstElementChild);
+            header.append(button);
+            elem.prepend(header);
+        }
+
+        for(let pane of allPanes) {
+            modifier(pane);
+        }
+    </script>
+</body>
+</html>

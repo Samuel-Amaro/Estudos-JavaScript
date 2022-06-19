@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">
+        #field {
+          width: 200px;
+          height: 150px;
+          border: 10px solid black;
+          background-color: #00FF00;
+          overflow: hidden;
+          position: relative;
+        }
+
+        #field:hover{
+            cursor: pointer;
+        }
+
+        #ball {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            transition: 0.2s all ease-in-out;
+        }
+    </style>
+</head>
+<body style="height:2000px">
+
+    <p>Click on a field to move the ball there. The ball should never leave the field.</p>
+
+    <div id="field">
+        <img src="./ball.svg" id="ball"/> 
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script type="text/javascript">
+
+        /**
+         * Mova a bola pelo campo com um clique.
+         * 
+         * Requisitos:
+         
+            - O centro da bola deve ficar exatamente abaixo do ponteiro ao clicar (se possível sem cruzar a borda do campo).
+            - Animação CSS é bem-vinda.
+            - A bola não deve cruzar os limites do campo.
+            - Quando a página é rolada, nada deve quebrar.
+
+         * Notas:
+
+            - O código também deve funcionar com diferentes tamanhos de bola e campo, não estando vinculado a nenhum valor fixo.
+            - Use propriedades event.clientX/event.clientY para coordenadas de clique.
+        */
+
+        function getCoordsField(event) {
+            positionBall({x: event.clientX, y: event.clientY});
+        }
+
+        function positionBall(coords) {
+            let field = document.querySelector("#field");
+            let ball = document.querySelector("#ball");
+            let coordsField = field.getBoundingClientRect();
+            let coordsBall = ball.getBoundingClientRect();
+            let coordY = coords.y - coordsField.top - (ball.offsetWidth / 2) - field.clientTop;
+            let coordX = coords.x - coordsField.left - (ball.offsetHeight / 2) - field.clientLeft; 
+            ball.style.top = coordY + "px"; 
+            ball.style.left = coordX + "px";
+            if(coordY < 0) {
+                ball.style.top = 0;
+            }else if(coordX < 0){
+                ball.style.left = 0
+            }
+            
+            if(coordsBall.left + ball.clientWidth > field.clientWidth) {
+                coordsBall.left = field.clientWidth - ball.clientWidth;
+            }
+
+            if(coordsBall.top + ball.clientHeight > field.clientHeight) {
+                coordsBall.top = field.clientHeight - ball.clientHeight;
+            }
+
+        }
+
+        document.querySelector("#field").addEventListener("click", getCoordsField);
+    </script>
+
+</body>
+</html>

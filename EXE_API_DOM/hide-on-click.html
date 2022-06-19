@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+
+    <input type="button" id="hider" value="Clique para ocultar o texto"/>
+
+    <div id="text">Text</div>
+
+    <script type="text/javascript">
+
+        /**
+         * Adicione JavaScript ao button para fazer <div id="text"> desaparecer quando clicarmos nele.
+         * 
+        */
+
+        let button = document.querySelector("#hider");
+        let text = document.querySelector("#text");
+
+        function hidden(event) {
+            text.style.display = "none";
+        }
+
+        button.addEventListener("click", hidden);
+    </script>
+
+</body>
+</html>

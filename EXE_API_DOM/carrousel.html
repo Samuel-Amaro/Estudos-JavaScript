@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">
+        
+        body{
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .block__prev, .block__next {
+            padding: 0;
+            background: #ddd;
+            border-radius: 15px;
+            border: 1px solid gray;
+            font-size: 24px;
+            line-height: 24px;
+            color: #444;
+            display: block;
+        }
+
+        .block__prev:focus, .block__next:focus {
+            outline: none;
+        }
+
+        .block__prev:hover, .block__next:hover {
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        .block__carousel {
+            height: 130px;
+            width: 1300px; /*9999px or 1600px or 1300px*/
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+        }
+
+        .block__img{
+            width: 130px;
+            height: 130px;
+            display: block; /*remove espaço extra perto das imagens*/
+        }
+
+        .block__item-carousel{
+            display: inline-block; /*remove espaço extra entre os itens da lista*/
+            /*position: relative;*/
+            /*margin: 0 15px 0 15px;*/
+        }
+
+        .block__label{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .block{
+            width: 480px;
+            /*overflow: hidden;*/
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px 0 10px;
+            background-color: lightgray;
+            border-radius: 7px;
+        }
+
+        .block__content{
+            width: 390px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="block">
+        <button class="block__prev">⇦</button>
+        <div class="block__content">
+            <ul class="block__carousel">
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/1.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/2.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img  class="block__img" src="https://en.js.cx/carousel/3.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img  class="block__img" src="https://en.js.cx/carousel/4.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/5.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/6.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/7.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/8.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/9.png" alt="image emoj"/>
+                </li>
+                <li class="block__item-carousel">
+                    <img class="block__img" src="https://en.js.cx/carousel/10.png" alt="imag emoj"/>
+                </li>
+            </ul>
+        </div>
+        <button class="block__next">⇨</button>
+    </div>
+
+    <script type="text/javascript">
+       /**
+        * Crie um “carrossel” – uma faixa de imagens que pode ser rolada clicando nas setas.
+        * 
+        * Mais tarde, podemos adicionar mais recursos a ele: rolagem infinita, carregamento dinâmico etc.
+        * 
+        * PS Para esta tarefa, a estrutura HTML/CSS é na verdade 90% da solução.
+        */
+
+        //rotule as imagens para rastreá-las visualmente, apenas por conveniência,
+        // este código pode ser removido
+        let i = 1;
+        let carousel = document.querySelector(".block__carousel");
+        let blockContent = document.querySelector(".block__content");
+        for(let li of carousel.querySelectorAll('li')) {
+            li.insertAdjacentHTML('beforeend', `<span class="block__label">${i}</span>`);
+            i++;
+        }
+
+        //...seu código para dar vida ao carrossel!
+        let arrowNext = document.querySelector(".block__next");
+        let arrowPrev = document.querySelector(".block__prev");
+        let itensCarousel = carousel.children, currentIndex = 0;
+        itensCarousel = Array.from(itensCarousel);
+        blockContent.scrollLeft = 0;
+
+        function countInterIndex(currentIndex, lastIndex) {
+            let count = 1;
+            for(let i = currentIndex; i < lastIndex; i++) {
+                count++;
+            }
+            return count;
+        }
+
+        function widthAll(index, deslocamento, sentido) {
+            //conta deslocamente para frente
+            let itens = [], w = 0;
+            if(sentido === "positivo") {
+                itens = itensCarousel.slice(index, index + deslocamento);
+                for(let i = 0; i < itens.length; i++) {
+                    w = w + itens[i].clientWidth;
+                }
+                return w;
+            }else{
+                //conta deslocamento para tras
+                itens = itensCarousel.slice(index - deslocamento, index);
+                for(let i = itens.length - 1; i >= 0; i--) {
+                    w = w + itens[i].clientWidth;
+                }
+                return w;
+            }
+        }
+
+        arrowNext.addEventListener("click", (event) => {
+            if(currentIndex < itensCarousel.length - 1) {
+                if(currentIndex % 3 === 0) {
+                    //posso mostrar 3
+                    if(countInterIndex(currentIndex, itensCarousel.length) >= 3) {
+                        blockContent.scrollLeft = blockContent.scrollLeft + widthAll(currentIndex, 3, "positivo");
+                        //atualiza para posição atual
+                        currentIndex += 3;
+                    }else{
+                    //não posso mostrar 3
+                    //quanto posso andar ?
+                        blockContent.scrollLeft = blockContent.scrollLeft + widthAll(currentIndex, countInterIndex(currentIndex, itensCarousel.length), "positivo");
+                        currentIndex += countInterIndex(currentIndex, itensCarousel.length);
+                    }
+                }else{
+                    console.log('Não divisivel por três');
+                }
+            }else{
+                blockContent.scrollLeft = blockContent.scrollLeft + itensCarousel[currentIndex].clientWidth;
+            }
+        });
+
+        arrowPrev.addEventListener("click", (event) => {
+            if(currentIndex > 0) {
+                if(currentIndex % 3 === 0) {
+                    //posso mostrar 3 ?
+                    if(countInterIndex(0, currentIndex) >= 3) {
+                        blockContent.scrollLeft = blockContent.scrollLeft - widthAll(currentIndex, 3, "negativo");
+                        //atualiza para posição atual
+                        currentIndex -= 3;
+                    }else{
+                        //não posso mostrar 3
+                        //quanto posso andar ?
+                        blockContent.scrollLeft = blockContent.scrollLeft - widthAll(currentIndex, countInterIndex(0, currentIndex), "negativo");
+                        currentIndex -= countInterIndex(0, currentIndex);
+                    }
+                }else{
+                    console.log('Não divivel por três');
+                }
+            }else{
+                blockContent.scrollLeft = blockContent.scrollLeft - itensCarousel[currentIndex].clientWidth;
+            }
+        });
+    </script>
+</body>
+</html>

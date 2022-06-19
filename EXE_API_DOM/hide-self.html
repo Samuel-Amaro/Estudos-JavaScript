@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+
+    <input type="button" id="hidden" value="Clique para ocultar"/>
+
+    <script type="text/javascript">
+
+        /**
+         * Crie um botão que se esconda ao clicar.
+         * 
+        */
+
+        document.querySelector("#hidden").addEventListener("click", () => {
+            document.querySelector("#hidden").hidden = "true";
+        });
+
+    </script>
+
+</body>
+</html>
