@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en-us">
 <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style type="text/css">
         .note {
             position: fixed;
@@ -11,7 +13,6 @@
             text-align: center;
             font: italic 14px serif;
         }
-
         blockquote {
             background: #f9f9f9;
             border-left: 10px solid #ccc;
@@ -21,7 +22,6 @@
             display: inline-block;
             white-space: pre;
         }
-
         blockquote:before {
             color: #ccc;
             content: open-quote;
@@ -33,20 +33,15 @@
     </style>
 </head>
 <body>
-
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
-    
     <blockquote>
         Teacher: Why are you late?
         Student: There was a man who lost a hundred dollar bill.
         Teacher: That's nice. Were you helping him look for it?
         Student: No. I was standing on it.
     </blockquote>
-    
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
-
     <script type="text/javascript">
-
         /**
         * Crie uma função positionAt(anchor, position, elem) que posicione elem, dependendo do elemento position próximo anchor.
         * 
@@ -99,31 +94,22 @@
                 console.log('Impossivel de posicionar');
             }
         }
-
         /**
          * Mostra uma nota com o html dado na posição dada
           * em relação ao elemento anchor.
          */
         function showNote(anchor, position, html) {
-
             let note = document.createElement('div');
             note.className = "note";
             note.innerHTML = html;
             document.body.append(note);
-
             positionAt(anchor, position, note);
-
         }
-
         //teste-o
         let blockquote = document.querySelector('blockquote');
-
         showNote(blockquote, "top", "note above");
         showNote(blockquote, "right", "note at the right");
         showNote(blockquote, "bottom", "note below");
-
-
   </script>
-
 </body>
 </html>

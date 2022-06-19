@@ -4,14 +4,12 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <style type="text/css">
-        
         body{
             display: flex;
             min-height: 100vh;
             justify-content: center;
             align-items: center;
         }
-
         .block__prev, .block__next {
             padding: 0;
             background: #ddd;
@@ -22,16 +20,11 @@
             color: #444;
             display: block;
         }
-
-        .block__prev:focus, .block__next:focus {
-            outline: none;
-        }
-
+        .block__prev:focus, .block__next:focus { outline: none; }
         .block__prev:hover, .block__next:hover {
             background: #ccc;
             cursor: pointer;
         }
-
         .block__carousel {
             height: 130px;
             width: 1300px; /*9999px or 1600px or 1300px*/
@@ -40,28 +33,19 @@
             list-style: none;
             font-size: 0;
         }
-
         .block__img{
             width: 130px;
             height: 130px;
             display: block; /*remove espaço extra perto das imagens*/
         }
-
-        .block__item-carousel{
-            display: inline-block; /*remove espaço extra entre os itens da lista*/
-            /*position: relative;*/
-            /*margin: 0 15px 0 15px;*/
-        }
-
+        .block__item-carousel{ display: inline-block; /*remove espaço extra entre os itens da lista*/ }
         .block__label{
             position: absolute;
             left: 0;
             top: 0;
         }
-
         .block{
             width: 480px;
-            /*overflow: hidden;*/
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
             justify-content: center;
@@ -70,7 +54,6 @@
             background-color: lightgray;
             border-radius: 7px;
         }
-
         .block__content{
             width: 390px;
             overflow: hidden;
@@ -78,7 +61,6 @@
     </style>
 </head>
 <body>
-
     <div class="block">
         <button class="block__prev">⇦</button>
         <div class="block__content">
@@ -117,7 +99,6 @@
         </div>
         <button class="block__next">⇨</button>
     </div>
-
     <script type="text/javascript">
        /**
         * Crie um “carrossel” – uma faixa de imagens que pode ser rolada clicando nas setas.
@@ -126,7 +107,6 @@
         * 
         * PS Para esta tarefa, a estrutura HTML/CSS é na verdade 90% da solução.
         */
-
         //rotule as imagens para rastreá-las visualmente, apenas por conveniência,
         // este código pode ser removido
         let i = 1;
@@ -136,14 +116,12 @@
             li.insertAdjacentHTML('beforeend', `<span class="block__label">${i}</span>`);
             i++;
         }
-
         //...seu código para dar vida ao carrossel!
         let arrowNext = document.querySelector(".block__next");
         let arrowPrev = document.querySelector(".block__prev");
         let itensCarousel = carousel.children, currentIndex = 0;
         itensCarousel = Array.from(itensCarousel);
         blockContent.scrollLeft = 0;
-
         function countInterIndex(currentIndex, lastIndex) {
             let count = 1;
             for(let i = currentIndex; i < lastIndex; i++) {
@@ -151,7 +129,6 @@
             }
             return count;
         }
-
         function widthAll(index, deslocamento, sentido) {
             //conta deslocamente para frente
             let itens = [], w = 0;
@@ -170,7 +147,6 @@
                 return w;
             }
         }
-
         arrowNext.addEventListener("click", (event) => {
             if(currentIndex < itensCarousel.length - 1) {
                 if(currentIndex % 3 === 0) {
@@ -192,7 +168,6 @@
                 blockContent.scrollLeft = blockContent.scrollLeft + itensCarousel[currentIndex].clientWidth;
             }
         });
-
         arrowPrev.addEventListener("click", (event) => {
             if(currentIndex > 0) {
                 if(currentIndex % 3 === 0) {

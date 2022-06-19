@@ -8,24 +8,20 @@
             margin: 10px auto;
             width: 470px;
         }
-
         h3 {
             margin: 0;
             padding-bottom: .3em;
             font-size: 1.1em;
         }
-
         p {
             margin: 0;
             padding: 0 0 .5em;
         }
-
         .frame__pane{
             background: #edf5e1;
             padding: 10px 20px 10px;
             border-top: solid 2px #c4df9b;
         }
-
         .frame--remove-button {
             font-size: 110%;
             color: darkred;
@@ -39,7 +35,6 @@
     </style>
 </head>
 <body>
-
     <article class="frame">
         <section class="frame__pane">
             <h3>Horse</h3>
@@ -54,16 +49,13 @@
             <p>The domestic cat (Latin: Felis catus) is a small, typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines. Cats are often valued by humans for companionship and for their ability to hunt vermin.</p>
         </section>
     </article>
-
     <script type="text/javascript">
         /**
          * Há uma lista de mensagens.
          * 
          * Use JavaScript para adicionar um botão de fechamento no canto superior direito de cada mensagem.
         */
-
         let allPanes = document.querySelectorAll(".frame__pane");
-
         function modifier(elem) {
             let header = document.createElement("header");
             header.style.cssText = "display: grid; grid-template-columns: repeat(2, 1fr);";
@@ -79,7 +71,6 @@
             header.append(button);
             elem.prepend(header);
         }
-
         for(let pane of allPanes) {
             modifier(pane);
         }

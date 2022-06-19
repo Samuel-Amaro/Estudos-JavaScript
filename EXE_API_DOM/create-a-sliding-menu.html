@@ -8,27 +8,23 @@
             content: "▼"; 
             color: green;
         }
-
         .menu--close .menu__title::before{
             content: "▶";
             color: green;
             font-size: 80%;
         }
-
         .menu__list{
             list-style-type: none;
             list-style: none;
             margin: 0;
             padding-left: 20px;
         }
-
         .menu:hover{
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-
     <nav class="menu menu--close">
         <span class="menu__title">Sweeties (click me)!</span>
         <ul class="menu__list" style="display: none;">
@@ -37,16 +33,13 @@
             <li class="menu__item">Honey</li>
         </ul>
     </nav>
-
     <script type="text/javascript">
         /**
          * Crie um menu que abra/reduza ao clicar:
          * 
          * PS HTML/CSS do documento de origem deve ser modificado.
         */
-
         let menu = document.querySelector(".menu");
-
         function showHideMenu(event) {
             let listMenu = document.querySelector(".menu__list");
             if(listMenu.style.display == "none" && menu.classList.contains("menu--close")) {
@@ -59,9 +52,7 @@
                 menu.classList.add("menu--close");
             }
         }
-
         menu.addEventListener("click", showHideMenu);
-
     </script>
 </body>
 </html>
