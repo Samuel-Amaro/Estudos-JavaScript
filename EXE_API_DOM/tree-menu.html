@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+        .tree span:hover{
+            color: rebeccapurple;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <ul class="tree" id="tree">
+        <li>Animals
+            <ul>
+                <li>Mammals
+                    <ul>
+                        <li>Cows</li>
+                        <li>Donkeys</li>
+                        <li>Dogs</li>
+                        <li>Tigers</li>
+                    </ul>
+                </li>
+                <li>Other
+                    <ul>
+                        <li>Snakes</li>
+                        <li>Birds</li>
+                        <li>Lizards</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Fishes
+            <ul>
+                <li>Aquarium
+                    <ul>
+                        <li>Guppy</li>
+                        <li>Angelfish</li>
+                    </ul>
+                </li>
+                <li>Sea
+                    <ul>
+                        <li>Sea trout</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        /**
+         * Crie uma árvore que mostre/oculte os filhos do nó ao clicar.
+         * 
+         * Requisitos:
+         * 
+         * Apenas um manipulador de eventos (use delegação)
+         * 
+         * Um clique fora do título do nó (em um espaço vazio) não deve fazer nada.
+        */
+
+        function verificaHidden(elem) {
+            let at = elem.getAttribute("hidden");
+            //ja possui atributo
+            if(at != null) {
+                //esta oculto
+                if(at) {
+                    elem.hidden = false; //oculta
+                }else{
+                    elem.hidden = true; //mostra
+                }
+            }else{
+                //não possui atributo definir
+                elem.setAttribute("hidden", true);
+            }
+        }
+
+        let allLis = document.querySelectorAll("li"); 
+        
+        //adiciona span entorno do text
+        for(let li of allLis) {
+            if(li.childNodes[0].nodeType === 3) {
+                let span = document.createElement("span");
+                span.textContent = li.childNodes[0].textContent;
+                li.childNodes[0].replaceWith(span);
+            }
+        }
+
+        document.querySelector("#tree").addEventListener("click", (event) => {
+            if(event.target.tagName === "SPAN") {
+                let elem = event.target.closest("li");
+                if(elem.childNodes.length > 1) {
+                    for(let e of elem.childNodes) {
+                        if(e.nodeType ===  1 && e.tagName != "SPAN") {
+                            verificaHidden(e);
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

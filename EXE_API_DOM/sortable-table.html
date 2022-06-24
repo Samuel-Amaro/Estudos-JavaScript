@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">Age</th>
+                <th data-type="string">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>John</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pete</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Ann</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Eugene</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ilya</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        /**
+         * Torne a tabela classificável: cliques nos <th> elementos devem classificá-la pela coluna correspondente.
+         * 
+         * Cada um <th> tem o tipo no atributo, assim:
+         * 
+         * No exemplo acima a primeira coluna tem números e a segunda – strings. A função de classificação deve tratar a classificação de acordo com o tipo.
+         * 
+         * Somente "string" e "number" tipos devem ser suportados.
+         * 
+         * PS A tabela pode ser grande, com qualquer número de linhas e colunas.
+        */
+
+        let table = document.querySelector("#grid");
+        let arrayCells = [], arrayTds = [], rowsContent;
+
+        function sortTable(type, data) {
+            if(type === "number") {
+                data.sort((a, b) => {
+                    return parseInt(a[0]) - parseInt(b[0]);
+                });
+                return data;
+            }else{
+                data.sort((a, b) => {
+                    let x = a[1].toLocaleUpperCase(), y = b[1].toLocaleUpperCase();
+                    return x == y ? 0 : x > y ? 1 : -1;
+                });
+                return data;
+            }
+        }
+
+        document.querySelector("#grid").addEventListener("click", (event) => {
+            let elem = event.target;
+            if(elem.tagName === "TH") {
+                let typeData = elem.dataset.type;
+                rowsContent = Array.from(table.tBodies[0].rows);
+                for(let tr of rowsContent) {
+                    arrayTds = [];
+                    for(let td of tr.cells) {
+                        arrayTds.push(td.textContent);
+                    }
+                    arrayCells.push(arrayTds);
+                    arrayTds = [];
+                }
+                let dataSorted = sortTable(typeData, arrayCells);
+                arrayCells = [];
+                for(let i = 0; i < rowsContent.length; i++) {
+                    for(let j = 0; j < rowsContent[i].cells.length; j++) {
+                        rowsContent[i].cells[j].textContent = dataSorted[i][j];
+                    }
+                }
+                rowsContent = [];
+            }
+        });
+    </script>
+
+</body>
+
+</html>

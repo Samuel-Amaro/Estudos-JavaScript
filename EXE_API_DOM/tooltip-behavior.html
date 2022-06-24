@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+        body {
+            height: 2000px;
+            /*tornar o corpo rolável, a dica de ferramenta deve funcionar após a rolagem*/
+        }
+
+        .tooltip {
+            /*alguns estilos para a dica de ferramenta, você pode usar o seu próprio*/
+            position: fixed;
+            padding: 10px 20px;
+            border: 1px solid #b3c9ce;
+            border-radius: 4px;
+            text-align: center;
+            font: italic 14px/1.3 sans-serif;
+            color: #333;
+            background: #fff;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+<body>
+
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis, illum itaque voluptatem necessitatibus vel, dolorum praesentium ducimus cum voluptatibus saepe doloribus provident at sapiente quis sequi distinctio harum labore iusto.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos error repellat necessitatibus ea rem veritatis obcaecati sequi voluptatibus asperiores ullam expedita numquam inventore illo voluptatem, aliquid iure cupiditate! Libero, labore.</p>
+    <!--<span class="tooltip" hidden="true">Ola sou tooltip</span>-->
+    <button data-tooltip="a dica de ferramenta é maior que o elemento">Botão curto</button>
+    <button data-tooltip="HTML<br>dica">Mais um botão</button>
+    <p>Role a página para que os botões apareçam na parte superior, verifique se as dicas de ferramentas aparecem corretamente.</p>
+
+    <script type="text/javascript">
+        /**
+         * Crie o código JS para o comportamento da dica de ferramenta.
+         * 
+         * Quando um mouse passa sobre um elemento com data-tooltip, a dica de ferramenta deve aparecer sobre ele e, quando desaparecer, esconda.
+         * 
+         * Nesta tarefa assumimos que todos os elementos com data-tooltip possuem apenas texto dentro. Nenhuma tag aninhada (ainda).
+         * 
+         * Detalhes:
+         
+            - A distância entre o elemento e a dica de ferramenta deve ser 5px.
+
+            - A dica de ferramenta deve ser centralizada em relação ao elemento, se possível.
+
+            - A dica de ferramenta não deve cruzar as bordas da janela. Normalmente deve estar acima do elemento, mas se o elemento estiver no topo da página e não houver espaço para a dica de ferramenta, então abaixo dela.
+
+            - O conteúdo da dica de ferramenta é fornecido no data-tooltip atributo. Pode ser HTML arbitrário.
+
+         * Você precisará de dois eventos aqui:
+
+            - mouseover dispara quando um ponteiro passa sobre um elemento.
+
+            - mouseout dispara quando um ponteiro deixa um elemento.
+
+         * Por favor, use a delegação de eventos: configure dois manipuladores document para rastrear todos os “overs” e “outs” de elementos data-tooltip e gerencie dicas de ferramentas a partir daí.
+         * 
+         * Depois que o comportamento é implementado, mesmo pessoas não familiarizadas com JavaScript podem adicionar elementos anotados.
+         * 
+         * PS Apenas uma dica de ferramenta pode aparecer por vez.
+        */
+
+        function center(coordsElem, coordsTooltip) {
+            //centraliza tooltip em relação a elem, dif anda para frente
+            let widthDif = 0, spacingDif = 0;
+            if(coordsElem.width > coordsTooltip.width) {
+                widthDif = coordsElem.width - coordsTooltip.width;
+                spacingDif = widthDif / 2;
+            }else{
+                //centraliza tooltip em relação a elem, dif anda para tras subtrair
+                widthDif = coordsTooltip.width - coordsElem.width;
+                spacingDif = widthDif / 2;
+                //posso andar quanto para tras para tentar subtrair ?
+                if(coordsElem.x >= spacingDif) {
+                    //pode centralizar
+                    return -spacingDif;
+                }else{
+                    //não pode centralizar para pode tentar deslocar um pouco
+                    return -coordsElem;
+                }
+            }
+            return spacingDif;
+        }
+
+        function addTooltip(elem, text) {
+            let span = document.createElement("span"), deslocamentoX = 0;
+            span.style.marginBottom = "5px";
+            span.style.visibility = "hidden";
+            span.innerHTML = text;
+            span.classList.add("tooltip");
+            elem.before(span);
+            let coordsElem = elem.getBoundingClientRect();
+            //posso mostrar acima do elem, e não cruza a border da janela
+            if(coordsElem.y > span.clientHeight && coordsElem.y >= 0) {
+                //pode centralizar
+                deslocamentoX = center(coordsElem, span.getBoundingClientRect());
+                span.style.left = coordsElem.x + deslocamentoX + "px";
+                span.style.top = coordsElem.y - span.clientHeight - 5 + "px";
+                span.style.visibility = "visible";
+            }else{
+                //verifica se não cruza a border da window
+                if(coordsElem.x >= 0) {
+                    //pode centralizar
+                    deslocamentoX = center(coordsElem, span.getBoundingClientRect());
+                    span.style.left = coordsElem.x + deslocamentoX + "px";
+                    span.style.top = coordsElem.top + elem.clientHeight + 5 + "px";
+                    span.style.marginTop = "5px";
+                    span.style.visibility = "visible";
+                }
+            }
+        }
+
+        function removeTooltip(elem) {
+            let span = elem.previousElementSibling;
+            span.remove();
+        }
+
+        document.addEventListener("mouseover", (event) => {
+            let elem = event.target;
+            if(elem.tagName === "BUTTON") {
+                let textTooltip = elem.dataset.tooltip;
+                addTooltip(elem, textTooltip);
+            }
+        });
+
+        document.addEventListener("mouseout", (event) => {
+            let elem = event.target;
+            if(elem.tagName === "BUTTON") {
+                removeTooltip(elem);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
