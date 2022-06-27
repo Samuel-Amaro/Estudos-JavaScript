@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+    <a href="https://w3.org" onclick="return handler();">o navegador irá para w3.org</a>
+
+    <script type="text/javascript">
+        /**
+         * Por que no código abaixo return false não funciona?
+         * 
+         * O navegador segue o URL ao clicar, mas não o queremos.
+         * 
+         * como consertar?
+         * 
+         * o  manipulador não retorna false.
+        */
+    
+
+        function handler(event) {
+            alert("...");
+            return false;
+        }
+
+    </script>
+
+</body>
+
+</html>
