@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        .slider {
+            border-radius: 5px;
+            background: #E0E0E0;
+            background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+            width: 310px;
+            height: 15px;
+            margin: 5px;
+        }
+
+        .thumb {
+            width: 10px;
+            height: 25px;
+            border-radius: 3px;
+            position: relative;
+            /*left: 10px;*/
+            top: -5px;
+            background: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="slider" class="slider">
+        <div class="thumb"></div>
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * * SLIDER(CONTROLE DESLIZANTE)
+         * 
+         * Crie um controle deslizante:
+         * 
+         * Arraste o polegar azul com o mouse e mova-o.
+         * 
+         * Detalhes importantes:
+         * 
+         * Quando o botão do mouse é pressionado, ao arrastar o mouse pode passar por cima ou por baixo do controle deslizante. O controle deslizante ainda funcionará (conveniente para o usuário).
+         * 
+         * Se o mouse se mover muito rápido para a esquerda ou para a direita, o polegar deve parar exatamente na borda.
+        */
+
+        let thumbElem = document.querySelector(".thumb");
+        let sliderElem = document.querySelector(".slider");
+        let coordSlider = sliderElem.getBoundingClientRect();
+
+        //pressiona botão do mouse sobre thumb
+        thumbElem.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+            //local exato do mouse no thumb
+            let shiftX = event.clientX - sliderElem.getBoundingClientRect().left;
+            function moveAt(clientX) {
+                //so se posiciona na direção horizontal
+                //dentro dos limites do slider
+                if(clientX >= coordSlider.left && clientX <= coordSlider.left + sliderElem.clientWidth - thumbElem.clientWidth - sliderElem.clientLeft) {
+                    thumbElem.style.left = clientX - shiftX + 'px';
+                }
+            }
+            function mouseMove(event) {    
+                moveAt(event.clientX, event.clientY);
+            }
+            //obtem cada movimentação do mouse dentro do slider
+            sliderElem.addEventListener("mousemove", mouseMove);
+
+            thumbElem.addEventListener("mouseup", (event) => {
+                thumbElem.removeEventListener("mousemove", mouseMove);
+                thumbElem.onmouseup = null;
+            });
+        });
+
+        
+    </script>
+</body>
