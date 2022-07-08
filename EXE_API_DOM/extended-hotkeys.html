@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p>Pressione "q" + "w" + "e" + 0 ao mesmo tempo</p>
+
+    <script type="text/javascript">
+        /**
+         * Crie uma função runOnKeys(func, code1, code2, ... code_n) que execute a func ao pressionar simultaneamente as teclas com os códigos code1, code2, …, code_n.
+         * 
+         * Por exemplo, o código abaixo mostra alert quando "Q" e "W" são pressionados juntos (em qualquer idioma, com ou sem CapsLock)
+         
+            runOnKeys(
+                () => alert("Hello!"),
+                "KeyQ",
+                "KeyW"
+            );
+        */
+
+        let keyPress = [];
+        function runOnKeys(func, ...code_n) {
+            document.addEventListener("keydown", (event) => {
+                if(code_n.length > 0) {
+                    code_n.forEach(element => {
+                        if(event.code === element) 
+                            keyPress.includes(event.code) ? "" : keyPress.push(event.code); 
+                    });
+                }
+
+                if(arguments.length - 1 === keyPress.length) {
+                    func();
+                    keyPress = [];
+                }
+                    
+
+                document.addEventListener("keyup", (event) => {
+                    if(keyPress.includes(event.code))
+                        keyPress.pop();
+                });
+            }); 
+        }
+
+        runOnKeys(
+            () => alert("Hello!"),
+            "KeyQ",
+            "KeyW",
+            "KeyE",
+            "Digit0"
+        );
+
+    </script>
+
+</body>
+</html>
