@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body,
+        html {
+          height: 100%;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+    
+        #matrix {
+          width: 400px;
+          margin: auto;
+          overflow: auto;
+          text-align: justify;
+        }
+    
+        #arrowTop {
+          height: 9px;
+          width: 14px;
+          color: green;
+          position: fixed;
+          top: 10px;
+          left: 10px;
+          cursor: pointer;
+          display: none;
+        }
+    
+        #arrowTop::before {
+          content: '▲';
+        }
+      </style>
+</head>
+<body>
+
+    <div id="matrix">
+        <script>
+            for (let i = 0; i < 2000; i++)        
+                document.writeln(i)
+        </script>
+    </div>
+
+    <div id="arrowTop"></div>
+
+    <script type="text/javascript">
+        /**
+         * Crie um botão “para o topo” para ajudar na rolagem da página.
+         * 
+         * Deve funcionar assim:
+         * 
+            * Enquanto a página não é rolada para baixo pelo menos para a altura da janela - é invisível
+            * 
+            * Quando a página é rolada para baixo mais do que a altura da janela – aparece uma seta “para cima” no canto superior esquerdo.
+            * 
+            * Se a página for rolada para trás, ela desaparecerá.
+            * 
+            * Quando a seta é clicada, a página rola para o topo.
+        */
+
+        let btn = document.querySelector("#arrowTop");
+
+        btn.addEventListener("click", (event) => {
+            window.scrollTo(window.pageXOffset, 0);
+        });
+
+        window.addEventListener("scroll", (event) => {
+            if(window.pageYOffset >= document.documentElement.clientHeight) {
+                btn.style.display = "block";
+            }else if(window.pageYOffset <= document.documentElement.clientHeight) {
+                btn.style.display = "none";
+            }
+        });
+
+    </script>
+
+</body>
+</html>

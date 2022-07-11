@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <h1>Role-me</h1>
+
+    <script type="text/javascript">
+        /**
+         * Crie uma página sem fim. Quando um visitante rola até o final, ele anexa automaticamente a data e hora atual ao texto (para que um visitante possa rolar mais).
+         * 
+         * Observe duas características importantes do scroll:
+         *
+            *  O scroll é “elástico”. Podemos rolar um pouco além do início ou fim do documento em alguns navegadores/dispositivos (é mostrado um espaço vazio abaixo e, em seguida, o documento irá automaticamente “voltar” ao normal).
+            * 
+            * O scroll é impreciso. Quando rolamos para o final da página, podemos estar de fato a 0-50px do bottom do documento real.
+         *
+         * Portanto, “rolar até o final” deve significar que o visitante não está a mais de 100px do final do documento.
+         * 
+         *  PS Na vida real podemos querer mostrar “mais mensagens” ou “mais mercadorias”.
+        */
+
+        function createText(fill = 0) {
+            if(fill === 0) {
+                while(document.documentElement.clientWidth === window.innerWidth) {
+                    let div = document.createElement("div");
+                    div.innerHTML = `Date: ${new Date()}`;
+                    document.body.append(div);
+                }
+            }else{
+                let div = document.createElement("div");
+                div.innerHTML = `Date: ${new Date()}`;
+                document.body.append(div);
+            }
+        }
+
+        createText();
+
+        window.addEventListener("scroll", (event) => { 
+            let scrollDif = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if(window.pageYOffset === scrollDif) {
+                createText(1);
+            }
+        });
+    </script>
+
+</body>
+</html>
