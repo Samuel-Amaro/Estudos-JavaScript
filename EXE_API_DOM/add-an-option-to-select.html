@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <select name="genres" id="genres">
+        <option value="rock">Rock</option>
+        <option value="blues" selected>Blues</option>
+    </select>
+
+
+    <script type="text/javascript">
+        /**
+         * Há um <select>:
+         * 
+         * Use JavaScript para:
+         * 
+            * Mostra o valor e o texto da opção selecionada.
+            * 
+            * Adicione uma opção: <option value="classic">Classic</option>.
+            * 
+            * Faça-o selecionado.
+            * 
+         * Observe que, se você fez tudo certo, seu alerta deve mostrar blues. 
+        */
+
+        for(let option of genres.options) {
+            if(option.selected) {
+                console.log(`Text: ${option.text}`);
+                console.log(`value: ${genres.value}`);
+            }
+        }
+
+        let option = new Option("Classic", "classic", true, true);
+
+        genres.append(option);
+    </script>
+
+</body>
+</html>
