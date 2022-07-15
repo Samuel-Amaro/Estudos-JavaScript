@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">
+        .view,
+        .edit {
+            height: 150px;
+            width: 400px;
+            font-family: sans-serif;
+            font-size: 14px;
+            display: block;
+        }
+
+        .view {
+            /* padding + border = 3px */
+            padding: 2px;
+            border: 1px solid black;
+        }
+
+        .edit {
+            /* replace padding with border (still 3px not to shift the contents) */
+            border: 3px solid blue;
+            padding: 0px;
+        }
+
+        .edit:focus {
+            /* remove focus border in Safari */
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>Clique no div para editar.</li>
+        <li>Enter ou blur salva o resultado.</li>
+    </ul>
+    
+    <p>HTML é permitido.</p>
+    
+    <div id="view" class="view">Text</div>
+
+    <script type="text/javascript">
+        /**
+         * Crie um <div> que se transforma em <textarea> quando clicado.
+         * 
+         * A textarea permite editar o HTML no <div>.
+         * 
+         * Quando o usuário pressiona Enter ou perde o foco, <textarea> volta a ser <div>, e seu conteúdo se torna HTML em <div>.
+        */
+
+        /**
+         * Nota: <textarea> deve ter class="edit"
+         * 
+         * <style> tem estilos para torná-lo do mesmo tamanho que div
+        */
+
+        let div = document.querySelector(".view");
+        let textArea = document.createElement("textarea");
+        textArea.setAttribute("class", "edit");
+
+        div.onclick = function(event) {
+            textArea.value = div.innerHTML;
+            div.replaceWith(textArea);
+        };
+
+        textArea.onblur = function(event) {
+            div.innerHTML = textArea.value;
+            textArea.replaceWith(div);
+            div.focus();
+        };
+
+        textArea.onkeydown = function(event) {
+            if(event.code === "Enter") {
+                div.innerHTML = textArea.value;
+                textArea.replaceWith(div);
+                div.focus();
+            }
+        }
+    </script>
+</body>
+</html>
