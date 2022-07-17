@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">
+        td select,
+        td input {
+            width: 150px;
+        }
+
+        #diagram td {
+            vertical-align: bottom;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #diagram div {
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Calculadora de depósito.</h2>
+    
+    <form name="calculator">
+        <table>
+            <tr>
+                <td>Depósito inicial</td>
+                <td>
+                    <input name="money" type="number" value="10000" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Quantos meses?</td>
+                <td>
+                    <select name="months">
+                    <option value="3">3 (mínimo)</option>
+                    <option value="6">6 (meio ano)</option>
+                    <option value="12" selected>12 (um ano)</option>
+                    <option value="18">18 (1,5 anos)</option>
+                    <option value="24">24 (2 anos)</option>
+                    <option value="30">30 (2,5 anos)</option>
+                    <option value="36">36 (3 anos)</option>
+                    <option value="60">60 (5 anos)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Juros por ano?</td>
+                <td>
+                    <input name="interest" type="number" value="5" required/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table id="diagram">
+        <tr>
+          <th>Foi:</th>
+          <th>torna-se:</th>
+        </tr>
+        <tr>
+          <th id="money-before"></th>
+          <th id="money-after"></th>
+        </tr>
+        <td>
+          <div style="background: red;width:40px;height:100px"></div>
+        </td>
+        <td>
+          <div style="background: green;width:40px;height:0" id="height-after"></div>
+        </td>
+    </table>
+
+    <script type="text/javascript">
+        /**
+         * Crie uma interface que permita inserir uma soma de depósito bancário e percentual e, em seguida, calcule quanto será após determinados períodos de tempo.
+         * 
+         * Qualquer alteração de entrada deve ser processada imediatamente.
+         * 
+         * A fórmula é:
+         
+            //inicial: a soma de dinheiro inicial
+            //interesse: por exemplo 0,05 significa 5% ao ano
+            //anos: quantos anos esperar
+            let result = Math.round(initial * (1 + interest) ** years);
+        */
+
+        let form = document.forms.calculator;
+        let moneyElem = form.money;
+        let monthsElem = form.months;
+        let interestElem = form.interest;
+    
+        function calculator(initial, interest, years) {
+            return Math.round(parseFloat(initial) * (1 + (parseFloat(interest) / 100)) ** (parseFloat(years) / 12));
+        }
+
+        function getValues() {
+            return {
+                money: moneyElem.value,
+                months: monthsElem.value,
+                interest: interestElem.value
+            };
+        }
+
+        function setValuesInterface(valueMoneyBefore, valueMoneyAfter) {
+            let moneyBeforeElem = document.querySelector("#money-before");
+            moneyBeforeElem.textContent = valueMoneyBefore;
+            let moneyAfterElem = document.querySelector("#money-after");
+            moneyAfterElem.textContent = valueMoneyAfter;
+            let diference = valueMoneyAfter - valueMoneyBefore;
+            if(diference === 0) {
+                return;
+            }else{
+                let difHeight = diference / (valueMoneyBefore / 100);
+                document.querySelector("#height-after").style.height = 100 + difHeight + "px";
+            }
+            
+        }
+
+        function handlerCalculator(event) {
+            let values = getValues();
+            if(event.target.name === moneyElem.name || event.target.name === monthsElem.name || event.target.name === interestElem.name) {
+                let valueAfter = calculator(values.money, values.interest, values.months);
+                setValuesInterface(values.money, valueAfter);
+                return;
+            }
+        }
+
+        form.addEventListener("input", handlerCalculator); 
+
+        
+
+        
+    </script>
+</body>
+</html>
