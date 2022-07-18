@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #prompt-form {
+            display: inline-block;
+            padding: 5px 5px 5px 70px;
+            width: 200px;
+            border: 1px solid black;
+            background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
+            vertical-align: middle;
+        }
+
+        #prompt-form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        #prompt-form-container:before {
+            display: inline-block;
+            height: 100%;
+            content: '';
+            vertical-align: middle;
+        }
+
+        #prompt-form input[name="text"] {
+            display: block;
+            margin: 5px;
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="prompt-form-container">
+        <form id="prompt-form" autocomplete="off">
+          <div id="prompt-message">Digite algo
+            <br>por favor...</div>
+          <input name="text" type="text" required/>
+          <input type="submit" value="Ok" name="ok"/>
+          <input type="button" name="cancel" value="Cancel"/>
+        </form>
+    </div>
+
+    <h2>Clique no botão abaixo</h2>
+
+    <button type="button" class="btn-modal">clique para mostrar o formulário</button>
+
+    <script type="text/javascript">
+        
+        /**
+         * Crie uma função showPrompt(html, callback) que mostre um formulário com a mensagem html, um campo de entrada e botões OK/CANCEL.
+         * 
+            * Um usuário deve digitar algo em um campo de texto e pressionar Enter ou o botão OK, então callback(value) é chamado com o valor inserido.
+            * 
+            * Caso contrário, se o usuário pressionar Esc ou CANCEL, callback(null) será chamado.
+            * 
+         * Em ambos os casos, isso encerra o processo de entrada e remove o formulário.
+         * 
+         * Requisitos:
+         * 
+            *  O formulário deve estar no centro da janela.
+            * 
+            * O formulário é modal . Em outras palavras, nenhuma interação com o restante da página é possível até que o usuário a feche.
+            * 
+            * Quando o formulário é mostrado, o foco deve estar dentro do <input> para o usuário.
+            * 
+            * As teclas Tab/Shift+Tab devem mudar o foco entre os campos do formulário, não deixe para outros elementos da página.
+            * 
+            * Exemplo de uso:
+            
+                showPrompt("Enter something<br>...smart :)", function(value) {
+                    alert(value);
+                });
+
+            * PS O documento fonte possui HTML/CSS para o formulário com posicionamento fixo, mas cabe a você torná-lo modal.
+        */
+
+        let btnModal = document.querySelector(".btn-modal");
+        let form = conteinerForm.children[0];
+
+        function hiddenPrompt() {
+            let conteinerForm = document.querySelector("#prompt-form-container");
+            conteinerForm.style.display = "none";
+        }
+
+        function showPrompt() {
+            let conteinerForm = document.querySelector("#prompt-form-container");
+            conteinerForm.style.display = "block";
+        }
+
+        function showPrompt(html, callback) {
+            let promptMessage = document.querySelector("#prompt-message");
+            promptMessage.innerHTML = html;
+            showPrompt();
+            form.text.focus();
+            form.addEventListener("submit", (event) => {
+                callback(form.text.value);
+                hiddenPrompt();
+                
+            });
+            form.cancel.addEventListener("click", (event) => {
+                callback(null);
+                hiddenPrompt();
+            });
+            form.addEventListener("keydown", (event) => {
+                if(event.code === "Escape") {
+                    callback(null);
+                    hiddenPrompt();
+                }
+            });
+        }
+
+        btnModal.addEventListener("focus", (event) => {  
+            form.text.focus();
+            return false;       
+        });
+
+
+        btnModal.addEventListener("click", (event) => {
+            showPrompt("Digite algo <br/>...inteligente: )", function(value) {
+                alert("Você digitou: " + value);
+            });
+        });
+
+    </script>
+
+</body>
+</html>
