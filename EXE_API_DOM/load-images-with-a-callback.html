@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Normalmente, as imagens são carregadas quando são criadas. Portanto, quando adicionamos <img> à página, o usuário não vê a imagem imediatamente. O navegador precisa carregá-lo primeiro.
+         * 
+         * Para mostrar uma imagem imediatamente, podemos criá-la “com antecedência”, assim:
+        */
+
+        //let img = document.createElement('img');
+        //img.src = 'my.jpg';
+
+        /**
+         * O navegador começa a carregar a imagem e a lembra no cache. Mais tarde, quando a mesma imagem aparece no documento (não importa como), ela aparece imediatamente.
+         * 
+         * Crie uma função preloadImages(sources, callback) que carregue todas as imagens do array source se, quando estiver pronta, execute callback
+         * 
+         * Por exemplo, isso mostrará alert depois que as imagens forem carregadas:
+        */
+
+        //function loaded() {
+        //    alert("Images loaded")
+        //}
+
+        //preloadImages(["1.jpg", "2.jpg", "3.jpg"], loaded);
+
+        /**
+         * Em caso de erro, a função ainda deve assumir a imagem “carregada”.
+         * 
+         * Em outras palavras, o callback é executado quando todas as imagens são carregadas ou com erros.
+         * 
+         * A função é útil, por exemplo, quando planejamos mostrar uma galeria com muitas imagens roláveis ​​e queremos ter certeza de que todas as imagens serão carregadas.
+         * 
+         * No documento fonte você encontra links para imagens de teste, e também o código para verificar se elas estão carregadas ou não. Deve dar saída 300.
+        */
+
+        function preloadImages(sources, callback) {
+            let counter = 0;
+            function contador() {
+                if(counter === sources.length)
+                    callback();
+            }
+            sources.forEach(img => {
+                let imgElem = document.createElement("img");
+                imgElem.src = img;
+                //so chamar callback quando as três img estiverm carregadas
+                imgElem.onload = function(event) {
+                    counter++;
+                    contador();
+                };
+                imgElem.onerror = function(event) {
+                    callback();
+                };
+            });
+            
+        }
+
+        // ---------- The test ----------
+
+        let sources = [
+            "https://en.js.cx/images-load/1.jpg",
+            "https://en.js.cx/images-load/2.jpg",
+            "https://en.js.cx/images-load/3.jpg"
+        ];
+
+        //adicione caracteres aleatórios para evitar o cache do navegador
+        for (let i = 0; i < sources.length; i++) {
+            sources[i] += '?' + Math.random();
+        }
+
+        // para cada imagem,
+        // vamos criar outra img com o mesmo src e verificar se temos sua largura imediatamente
+        function testLoaded() {
+            let widthSum = 0;
+            for (let i = 0; i < sources.length; i++) {
+                let img = document.createElement('img');
+                img.src = sources[i];
+                widthSum += img.width;
+            }
+            alert(widthSum);
+        }
+
+        // cada imagem é 100x100, a largura total deve ser 300
+        preloadImages(sources, testLoaded);
+    </script>
+</body>
+</html>
