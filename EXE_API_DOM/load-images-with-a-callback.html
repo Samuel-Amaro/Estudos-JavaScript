@@ -49,7 +49,7 @@
             sources.forEach(img => {
                 let imgElem = document.createElement("img");
                 imgElem.src = img;
-                //so chamar callback quando as três img estiverm carregadas
+                //so chamar callback quando as três img estiverm carregadas, atraves do contador, contar as images carregadas e chamar o callback so uma vez
                 imgElem.onload = function(event) {
                     counter++;
                     contador();
