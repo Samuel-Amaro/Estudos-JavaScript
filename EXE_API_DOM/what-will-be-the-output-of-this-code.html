@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+
+        console.log(1); 
+        // A primeira linha é executada imediatamente, ela gera `1`.
+        // As filas de macro e microtarefas estão vazias, a partir de agora.
+
+        //callback e uma macrotarefa
+        setTimeout(() => console.log(2)); 
+        // `setTimeout` anexa o retorno de chamada(CALLBACK) à fila de macrotarefas.
+        // - conteúdo da fila de macrotarefas:
+        // `console.log(2)`
+
+        //callback e a uma microtarefa
+        Promise.resolve().then(() => console.log(3)); 
+        // O retorno de chamada(callback) é anexado à fila de microtarefas.
+        // - conteúdo da fila de microtarefas:
+        // `console.log(3)`
+
+        //callback e uma microtarefa
+        Promise.resolve().then(() => setTimeout(() => console.log(4)));
+        // O retorno de chamada com `setTimeout(...4)` é anexado às microtarefas
+        // - conteúdo da fila de microtarefas:
+        // `console.log(3); setTimeout(...4)`
+
+        //callback e uuma microtarefas
+        Promise.resolve().then(() => console.log(5));
+        // O retorno de chamada é anexado à fila de microtarefas
+        // - conteúdo da fila de microtarefas:
+        // `console.log(3); setTimeout(...4); console.log(5)`
+
+        //callback e uma macrotarefa
+        setTimeout(() => console.log(6));
+        // `setTimeout` anexa o retorno de chamada às macrotarefas
+        // - conteúdo da fila de macrotarefas:
+        // `console.log(2); console.log(6)`
+
+        console.log(7); 
+        // Gera 7 imediatamente.
+    </script>
+</body>
+</html>
