@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Qual a saída do código abaixo?
+        */
+
+        let promise = new Promise(function(resolve, reject) {
+            //resolve imediatamente a promisse - muda seu estado de pendente para resolvida
+            resolve(1);
+            //resolve depois de 1 segundo - chamada ignorada pois promisse ja esta no estado final resolvida, não tem como voltar para pendente.
+            setTimeout(() => resolve(2), 1000);
+        });
+
+        promise.then(alert); //1
+    </script>
+</body>
+</html>

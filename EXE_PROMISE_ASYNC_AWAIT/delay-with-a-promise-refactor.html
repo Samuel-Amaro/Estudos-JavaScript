@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * A função setTimeout interna usa retornos de chamada. Crie uma alternativa baseada em promessas.
+         * 
+         * A função delay(ms) deve retornar uma promessa. Essa promessa deve ser resolvida após ms milissegundos, para que possamos adicioná .then-la, assim:
+        */
+
+        
+        function delay(ms) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(() => {
+                    resolve();
+                }, 3000)
+            });
+        }
+
+        delay(3000).then(() => alert('executou apos 3 segundos'));
+    </script>
+</body>
+</html>
