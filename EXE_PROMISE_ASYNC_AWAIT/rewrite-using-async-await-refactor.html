@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Reescreva este código de exemplo do capítulo Promessas encadeamento usando async/await em vez de .then/catch:
+         
+            function loadJson(url) {
+                return fetch(url)
+                    .then(response => {
+                    if (response.status == 200) {
+                        return response.json();
+                    } else {
+                        throw new Error(response.status);
+                    }
+                });
+            }
+
+            loadJson('https://javascript.info/no-such-user.json')
+                .catch(alert); // Error: 404
+        */
+
+        async function loadJson(url) {
+            let response = await fetch(url);
+            if(response.status == 200) {
+                let user = await response.json();
+                return user;
+            }else{
+                throw new Error(response.status);
+            }
+        }
+
+        loadJson('https://javascript.info/no-such-user.json')
+            .catch(alert); //Error: 404
+    </script>
+
+</body>
+</html>

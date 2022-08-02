@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Temos uma função “regular” chamada f. Como você pode chamar a função assíncrona wait() e usar seu resultado dentro de f?
+         * 
+         * PS A tarefa é tecnicamente muito simples, mas a pergunta é bastante comum para desenvolvedores novatos em async/await.
+        */
+ 
+        async function wait() {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            return 10;
+        }
+
+        function f() {
+            // ...o que você deve escrever aqui?
+            // precisamos chamar async wait() e esperar para obter 10
+            // lembre-se, não podemos usar "await"
+            //mostra 10 apos 1s
+            wait().then((number) => {
+                console.log(number);
+            }).catch(alert);
+        }
+
+        f();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         *  Abaixo você pode encontrar o exemplo “rethrow”. Reescreva-o usando async/await em vez de .then/catch.
+         * 
+         * E livre-se da recursão em favor de um loop in demoGithubUser: com async/await isso fica fácil de fazer.
+        */
+
+        class HttpError extends Error {
+            constructor(response) {
+                super(`${response.status} for ${response.url}`);
+                this.name = 'HttpError';
+                this.response = response;
+            }
+        }
+
+        async function loadJson(url) {
+            let response = await fetch(url);
+            if(response.status == 200) {
+                let user = await response.json();
+                return user;
+            }else{
+                throw new HttpError(response);
+            }
+        }
+
+        //Peça um nome de usuário até que o github retorne um usuário válido
+        async function demoGithubUser() {
+                let procurar = true;
+                do {
+                    let name = prompt("Entre com um nome?", "iliakan");
+                    try {
+                        let user = await loadJson(`https://api.github.com/users/${name}`);
+                        if(user.name) {
+                            alert(`Nome completo: ${user.name}`);
+                            procurar = false;
+                            return user; 
+                        }
+                        console.log(user);
+                    } catch (error) {
+                        if(err instanceof HttpError && err.response.status == 404) {
+                            alert("Nenhum usuário, por favor, reinsira.");
+                            procurar = true;
+                        }else{
+                            procurar = true;
+                            throw err;
+                        }
+                    }
+                } while (procurar);
+                
+        }
+
+        demoGithubUser()
+            .then(user => {
+                console.log(user);
+            }).catch(alert); 
+    </script>
+
+</body>
+</html>

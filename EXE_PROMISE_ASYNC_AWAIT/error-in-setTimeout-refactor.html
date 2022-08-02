@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         *  O que você acha? O .catch será acionado? Explique sua resposta.
+        */
+
+        new Promise(function executor(resolve, reject) {
+            setTimeout(() => {
+                //apos 1s lança exception, essa exception não sera tratada, e um erro sem tratamento, o.catch não sera acionado, mesmo tendo try.catch implicito ao redor do executor não sera captura, pois ocorre apos execução do executor
+                throw Error("Whoops!");
+            }, 1000);
+        }).catch(alert);
+    </script>
+</body>
+</html>
