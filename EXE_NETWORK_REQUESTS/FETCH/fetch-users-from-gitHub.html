@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * Crie uma função assíncrona getUsers(names), que obtém uma array de logins do GitHub, busca os usuários do GitHub e retorna uma array de usuários do GitHub.
+         * 
+         * A url do GitHub com informações do usuário para o dado USERNAME é: https://api.github.com/users/USERNAME.
+         * 
+         * Detalhes importantes:
+         * 
+            * Deve haver uma fetch solicitação por usuário.
+            * 
+            * Os pedidos não devem esperar um pelo outro. Para que os dados cheguem o mais rápido possível.
+            * 
+            *Se alguma solicitação falhar, ou se não houver tal usuário, a função deve retornar null no array resultante.
+        */
+
+        async function getUsers(names) {
+            let responses = [], users = [];
+            for(let i = 0; i < names.length; i++) {
+                try {
+                    let response = await fetch(`https://api.github.com/users/${names[i]}`);
+                    if(response.status === 404) {
+                        responses.push(null);
+                    }else{
+                        responses.push(response);
+                    }
+                } catch (err) {
+                    console.log(err);
+                    responses.push(null);
+                }
+            }
+            for(let j = 0; j < responses.length; j++) {
+                if(responses[j] != null) {
+                    try {
+                        let user = await responses[j].json();
+                        users.push(user);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            }
+            return users;
+        }
+
+        getUsers(['iliakan', 'remy', 'no.such.users']).then((users) => {
+            users.forEach((user) => {
+                if(user) {
+                    console.log(user.login);
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
