@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <textarea style="width:200px; height: 60px;" id="area"></textarea>
+
+    <script>
+        /**
+         * Crie um textare acampo que “salve automaticamente” seu valor em cada alteração.
+         * 
+         * Portanto, se o usuário acidentalmente fechar a página e abri-la novamente, ele encontrará sua entrada inacabada no local.
+         * 
+         * Assim:
+        */
+
+        let textArea = document.querySelector("textarea");
+
+        textArea.addEventListener("input", (event) => {
+            localStorage.setItem("text", textArea.value);
+        });
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            if(localStorage.getItem("text")) {
+                textArea.value = localStorage.getItem("text");
+            }
+        });
+    </script>
+
+</body>
+</html>
