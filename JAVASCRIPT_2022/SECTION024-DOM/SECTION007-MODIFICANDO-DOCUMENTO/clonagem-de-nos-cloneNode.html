@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+
+        .alert{
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="alert" id="div">
+        <strong>Olá</strong> Esta e uma mensagem importante.
+    </div>
+
+    <script type="text/javascript">
+       
+        /**
+         * * CLONAGEM DE NÓS : clodeNode
+         * 
+         * Como inserir mais uma mensagem semelhante?
+         * 
+         * Poderíamos fazer uma função e colocar o código lá. Mas a forma alternativa seria clonar o existente dive modificar o texto dentro dele (se necessário).
+         * 
+         * Às vezes, quando temos um grande elemento, isso pode ser mais rápido e simples.
+         * 
+         * A chamada elem.cloneNode(true) cria um clone “profundo” do elemento – com todos os atributos e subelementos. Se chamarmos elem.cloneNode(false), o clone será feito sem elementos filhos.
+        */
+
+        //o metodo de clonagem de nós elem.cloneNode(true) cria um clone profundo do elemento div com todos atributos e subelementos
+        let div2 = div.cloneNode(true); //clona a message
+
+        //usando a propriedaded elem.innerHTML para inserir um conteudo html dentro do elemento strong
+        div2.querySelector('strong').innerHTML = 'Bye there!'; //modifica o clone
+
+        //usando metodo de inserção elem.after(node ou string) para inserir um node ou string apos elem
+        //aqui inserimos no de elemento div2 apos div
+        div.after(div2); //mostre o clone após a div existente
+    </script>
+</body>
+</html>

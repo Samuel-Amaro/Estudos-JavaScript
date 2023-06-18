@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Um paragrafo</p>
+    <div>A div</div>
+
+    <script type="text/javascript">
+        
+        /**
+         * * innerHTML: o conteúdo
+         * 
+         * A propriedade innerHTML permite obter o HTML dentro do elemento como uma string.
+         * 
+         * Também podemos modificá-lo. Portanto, é uma das maneiras mais poderosas de mudar a página.
+         * 
+         * O exemplo mostra o conteúdo document.body e o substitui completamente:
+        */
+
+        //usando a propriedade element.innerHTML para obter o html dentro do elemento body como uma string
+        //leia o conteúdo atual que esta dentro do elemento <body>
+        console.log(document.body.innerHTML);
+
+        //modificando o conteudo atual dentro do no de elemento <body> usando a propriedade innerHTML, estamos inserindo um novo conteudo dentro de body
+        //substituilo o conteudo antigo que tinha em body pelo atual.
+        document.body.innerHTML = 'The new BODY!';
+
+        /**
+         * * Cuidado: “innerHTML+=" faz uma substituição completa
+         * 
+         * Podemos anexar HTML a um elemento usando elem.innerHTML+= "more html".
+         * 
+         * Assim:
+         
+            chatDiv.innerHTML += "<div>Hello<img src='smile.gif'/> !</div>";
+            chatDiv.innerHTML += "How goes?";
+
+         * 
+         * Mas devemos ter muito cuidado ao fazê-lo, porque o que está acontecendo não é uma adição, mas uma substituição completa.
+         * 
+         * Em outras palavras, innerHTML+= faz isso:
+         
+            1. O conteúdo antigo é removido.
+            2. Em vez disso, o novo innerHTML é escrito (uma concatenação do antigo e do novo).
+
+         * Como o conteúdo é “zerado” e reescrito do zero, todas as imagens e outros recursos serão recarregados .
+         *
+         * No chatDiv exemplo acima, a linha chatDiv.innerHTML += "How goes?" recria o conteúdo HTML e recarrega smile.gif(espero que esteja em cache). Se chatDiv houver muitos outros textos e imagens, o recarregamento se tornará claramente visível.
+         * 
+         * Existem outros efeitos colaterais também. Por exemplo, se o texto existente foi selecionado com o mouse, a maioria dos navegadores removerá a seleção ao reescrever innerHTML. E se houver um <input> com um texto inserido pelo visitante, o texto será removido. E assim por diante.
+         * 
+         * Felizmente, existem outras maneiras de adicionar HTML além do innerHTML, e vamos estudá-las em breve.
+         * */
+
+
+    </script>
+
+</body>
+</html>

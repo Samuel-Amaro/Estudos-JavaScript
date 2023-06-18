@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * AWAIT(AGUARDAR)
+         * 
+         * A sintaxe:
+         
+            // funciona apenas dentro de funções assíncronas
+            let value = await promise;
+
+         * 
+         * A palavra-chave await faz o JavaScript esperar até que essa promessa seja resolvida e retorne seu resultado.
+         * 
+         * Aqui está um exemplo com uma promessa que resolve em 1 segundo:
+        */
+
+        //add palavra chave async antes de uma function
+        //significa que a function retorna um promise
+        async function f() {
+            //declara um promise
+            let promise = new Promise(function executor(resolve, reject) {
+                //trabalho da promise
+                //promise e resolvida apos 1s com o valor "feito!"
+                setTimeout(() => resolve("feito!"), 1000);
+            });
+
+            //palavra-chave await so funciona dentro de functions async
+            //o await faz o JS esperar até que a promise seja resolvida e retorna seu resultado
+            //aqui o JS suspende a execução da function async até que a promise seja resolvida, e então a retoma a execução com o resultado da promise
+            //isso não trava o mecanismo JS, enquanto isso pode fazer outras coisas
+            let result = await promise; //espere até que a promessa resolva (*)
+
+            alert(result); //"feito!"
+        }
+
+        //essa function vai retornar uma promise resolvida com valor "feito!"
+        f();
+
+        /**
+         * A execução da função “pausa” na linha (*) e recomeça quando a promessa se estabelece, result tornando-se seu resultado. Portanto, o código acima mostra "concluído!" em um segundo.
+         * 
+         * Vamos enfatizar: await literalmente suspende a execução da função até que a promessa seja resolvida, e então a retoma com o resultado da promessa. Isso não custa nenhum recurso de CPU, porque o mecanismo JavaScript pode fazer outros trabalhos nesse meio tempo: executar outros scripts, manipular eventos etc.
+         * 
+         * É apenas uma sintaxe mais elegante para obter o resultado da promessa do que promise.then. E, é mais fácil de ler e escrever.
+         * 
+         * * NÃO PODEMOS USAR await em funções regulares
+         * 
+         * Se tentarmos usar await em uma função não assíncrona, haveria um erro de sintaxe:
+        */
+
+        /*
+        function f2() {
+            let promise = Promise.resolve(1);
+            let result = await promise; //Erro de sintaxe
+        }
+        */
+
+        /**
+         * Podemos receber esse erro se esquecermos de colocar async antes de uma função. Como dito anteriormente, await só funciona dentro de uma async função.
+        */
+
+    </script>
+
+</body>
+</html>

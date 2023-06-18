@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * POLYFILL
+         * 
+         * Se o navegador não suportar Promise.allSettled, é fácil fazer o polyfill:
+        */
+
+        //se não tiver a functin definida no navegador, navegador não suporta promise
+        if (!Promise.allSettled) {
+            //function que retorna um objeto anonimo
+            const rejectHandler = reason => ({ status: 'rejected', reason });
+
+            //function que retorna um objeto anonimo
+            const resolveHandler = value => ({ status: 'fulfilled', value });
+
+            Promise.allSettled = function (promises) {
+                //pega cada elemento do array promises e o transforma em promessa e anexa um .then manipulador
+                //o manipulador transforma uma promise resolvida com valor em {status:'fulfilled', value}
+                //e uma promisse rejeitada em {status:'rejected', reason}
+                const convertedPromises = promises.map(p => Promise.resolve(p).then(resolveHandler, rejectHandler));
+                //retorna um nova promise que encapsula todas as outras, retorna uma promisse com os resultados de todas as outras promessas dadas, mesmo que algumas delas sejam rejeitadas
+                return Promise.all(convertedPromises);
+            };
+        }
+
+        /**
+         * Neste código, promises.mappega valores de entrada, transforma-os em promessas (apenas no caso de uma não promessa ter sido passada) com p => Promise.resolve(p), e então adiciona .then um manipulador a cada um.
+         * 
+         * Esse manipulador transforma um resultado bem-sucedido value em {status:'fulfilled', value}, e um erro reason em {status:'rejected', reason}. Esse é exatamente o formato de Promise.allSettled.
+         * */
+    </script>
+
+</body>
+</html>

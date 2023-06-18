@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Aqui está um exemplo completo. O código abaixo carrega a URL /article/xmlhttprequest/example/load do servidor e imprime o progresso:
+        */
+
+        //MODO DE OPERAÇÃO ASSINCRONO
+
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+
+        //2. passo para fazer request
+        //2. Configure-o: GET-request para a URL /article/.../load
+        //configurando o request, informando metodo http, e o url a fazer o request
+        xhr.open('GET', 'https://javascript.info/article/xmlhttprequest/example/load');
+
+        //3. passo para fazer request, 
+        //enviando o request, não informando o body, no caso de method HTTP get não precisa de informar body
+        //aqui a request e enviada pela rede, o metodo abre conexão e envia a request ao servidor.
+        xhr.send();
+
+        //eventos para response
+        //4. Isso será chamado após o recebimento da resposta
+        //acionado quando a request for concluida, e a response for totalmente baixada
+        xhr.onload = function() {
+            //propriedade xhr.status Código de status HTTP 
+            //propriedade xhr.statusText Mensagem de status HTTP (uma string)
+            if(xhr.status != 200) { //analisa o status HTTP da resposta
+                alert(`Error ${xhr.status}: ${xhr.statusText}`);  //e.g. 404: Not Found
+            }else{ //mostra o resultado
+                alert(`Done, got ${xhr.response.length} bytes`); //resposta é a resposta do servidor
+            }
+        };
+
+        //acionado a todo momento, enquanto a response esta sendo baixada, relata quanto foi baixado
+        xhr.onprogress = function(event) { // aciona periodicamente
+            // event.loaded - quantos bytes foram baixados
+            // event.lengthComputable = true se o servidor enviou o cabeçalho Content-Length
+            // event.total - número total de bytes (se lengthComputable)
+            if(event.lengthComputable) {
+                alert(`Received ${event.loaded} of ${event.total} bytes`);   
+            }else{
+                alert(`Received ${event.loaded} bytes`); // no Content-Length
+            }
+        };
+
+        //acionado quando a request não pode ser feita
+        xhr.onerror = function() { // só aciona se a requisição não puder ser feita
+            alert(`Request failed`);
+        };
+
+
+        /**
+         * Uma vez que o servidor tenha respondido, podemos receber o resultado nas seguintes xhr propriedades:
+         * 
+            * status: Código de status HTTP (um número): 200, 404, 403 e assim por diante, pode ser 0 no caso de uma falha não HTTP.
+            * 
+            * statusText: Mensagem de status HTTP (uma string): geralmente OK para 200, Not Found para 404, Forbidden para 403 e assim por diante.
+            * 
+            * response(scripts antigos podem usar responseText): O corpo da resposta do servidor.
+            * 
+            * Também podemos especificar um tempo limite usando a propriedade correspondente:
+            
+                xhr.timeout = 1000; //timeout in ms, 10 seconds
+
+            * 
+            * Se a solicitação não for bem-sucedida dentro do tempo determinado, ela será cancelada e o timeout evento será acionado.
+            * 
+         * * Parâmetros de pesquisa de URL
+         * 
+         * Para adicionar parâmetros ao URL, como ?name=value, e garantir a codificação adequada, podemos usar o objeto URL :
+         
+            let url = new URL('https://google.com/search');
+            url.searchParams.set('q', 'test me!');
+
+            // the parameter 'q' is encoded
+            xhr.open('GET', url); // https://google.com/search?q=test+me%21
+        */
+    </script>
+
+</body>
+</html>

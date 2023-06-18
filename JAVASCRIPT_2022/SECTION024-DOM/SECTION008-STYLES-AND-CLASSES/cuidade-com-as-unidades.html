@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * Cuidado com as unidades
+        * 
+        * Não se esqueça de adicionar unidades CSS aos valores.
+        * 
+        * Por exemplo, não devemos definir elem.style.top como 10, mas sim como 10px. Caso contrário, não funcionaria:
+        */
+
+        //atribuindo uma propriedade de estilo ao no dom body
+        //porem sem adicionar unidade de dimensionamento no valor da propriedade
+        //não funciona
+        document.body.style.margim = 20;
+        console.log(document.body.style.margim); //(string vazia, a atribuição é ignorada)
+
+        //agora adicione a unidade CSS (px) - e funciona
+        document.body.style.margim = '20px';
+        console.log(document.body.style.margim); //20px
+        
+        //obtendo valores das propriedades atribuidas por meio do objeto style element
+        console.log(document.body.style.marginTop); //20px
+        console.log(document.body.style.marginLeft); //20px
+
+        /**
+         * Atenção: o navegador “descompacta” a propriedade style.margin nas últimas linhas e infere style.marginLeft e style.marginTop a partir dela.
+         * */
+    </script>
+</body>
+</html>

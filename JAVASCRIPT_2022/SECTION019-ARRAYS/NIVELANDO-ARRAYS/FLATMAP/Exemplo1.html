@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DO FLATMAP() MÉTODO ARRAY JS
+         * 
+         *  Vamos dar alguns exemplos de uso do flatMap() método.
+         * 
+         * * EXEMPLO 1) EXEMPLO DE CRIAÇÃO DE PALAVRAS A PARTIR DE FRASES
+         * 
+         * Suponha que você tenha a seguinte array:
+        */
+
+        //declara um array dense literal chamado senteneces inicializado com varios elementos
+        let sentences = ["JavaScript Array flatMap()", " ", "is", " ", "Awesome"];
+
+        /**
+         *  A map() função a seguir divide as palavras das frases:
+        */
+
+        //utilizando o metodo da map() da intancia de objeto do tipo array sentences para separar as palavras das frases
+        //o map metodo precisa de dois argumentos aqui passaremos somente um argumento
+        //uma function callback anonima que recebe um parametro chamado s, o s paramentro e o elemento atual que esta sendo avaliado pela iteraçaõ atual no metodo map, o callback anonima definida pela arrow function corta o elemento atual a partir de espaçoes em branco isso e o split metodo no elemento atual da callback corta o elemento pelo espaço em branco e retorna um array com as partes apos o corte
+        //esses corte e passado para o metodo map como argumento assim, o map metodo retorna um nova array com os elementos mapeados pela callbakc function apos cada iteração em cada elemento do array
+        //a arrow function anonima que possui o paramentro s que e o elemento atual avaliado pela iteração do map metodo ira retorna um array de string com as strings cortadas pelo espaço em branco, esse array de string e passado para o metodo map como argumento e e retornado no novo array pelo map metodo como os elementos mapeados
+        //o map metodo retorna um array multidimensional ou um array aninhado com nivel 1 de profundidade
+        
+        let words = sentences.map(s => s.split(' '));
+        console.log(words);
+
+        /**
+         * O resultado é uma array de arrays aninhadas preenchidas por palavras. Para achatar o resultado, você pode usar o flat() método no resultado do map() método. No entanto, será mais conciso usar o flatMap()método.
+         * 
+         * O flatMap()cria um array achatado executando cada sentença no array por meio de uma função de mapeamento e achatando os resultados mapeados:
+        */
+
+        //para corrigir o retorno do metodo map podemos usar o flatMap() metodo que ira fazer a mesma coisa que o map metodo so que ira nivelar o array gerado de resultado fazendo todos os elementos em um mesmo nivel sem aninhamento de array ou retornar um array multidimensional
+        //o flat metodo recebe como argumento uma arrow function anonima que possui um paramentro denonimado s que e vindo do flatMap por que e o elemento atual do array sendo avaliado pela interação, o arrow function retorna uma array string cortdas pelo split metodo nos espaçoes em branco, apos esse retorno o flatMetodo chama o metodo flat no array para nivelar o array de resultado para que possa retornar um array unidimensional nivelado com todos os elementos no memso nivel
+        //o flatMap método primeiro mapeia cada elemento em uma array usando uma função de mapeamento e, em seguida, nivela os resultados em uma nova array.
+        //na ultima iteração o flat metodo nivela o array de resultado
+        let words2 = sentences.flatMap(s => s.split(' '));
+        console.log(words2);
+    </script>
+</body>
+</html>

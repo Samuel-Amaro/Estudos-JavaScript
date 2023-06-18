@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrapper primitivos</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * TIPOS DE WRAPPER PRIMITIVOS DE JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os tipos de wrapper primitivos, incluindo Boolean, String e Number. 
+         * 
+         * * INTRODUÇÃO AOS TIPOS DE WRAPPER PRIMITIVOS
+         * 
+         * JavaScript fornece três tipos de wrapper primitivos: tipos Boolean, Number e String.
+         * 
+         * Os tipos de wrapper primitivos facilitam o uso de valores primitivos, incluindo booleanos, números e strings.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma variavel chamada language que e inicializada com o valor 'JavaScritp' que e do tipo texto que e um string tipo primitivo
+        let language = 'JavaScritp';
+        //aqui usando o metodo substring do wrapper primitivo string obtemos uma substring da string language e dizemos que a substring inicia a partir do indice 4 da string, assim nos bastidores o JS
+        //cria um objeto de um tipo primitivo String
+        //chama o metodo especifico na instancia
+        //exclua a instancia imediatamente
+        let s = language.substring(4);
+
+        /**
+         * Neste exemplo, A variável language contém um valor de string primitivo. Não tem nenhum método como substring(). No entanto, o código acima funciona perfeitamente.
+         * 
+         * Quando você chama um método em uma variável que contém um número, uma string ou um booleano, o JavaScript executa as seguintes etapas nos bastidores:
+         
+            - Crie um objeto de um tipo correspondente.
+
+            - Chame um método específico na instância.
+
+            - Exclua a instância imediatamente.
+
+         * 
+         * Então o código a seguir:
+         
+            let language = 'JavaScript';
+            let str = language.substring(4);
+
+         * 
+         * é tecnicamente equivalente ao seguinte código:
+        */
+
+        let language2 = 'JavaScritp';
+        //os bastidores da language.substring(4);
+        //declara uma instancia de objeto do tipo String informando um argumento
+        let tmp = new String(language);
+        //obtem uma substring de tmp objeto string que esta localizada a partir do indice 4
+        str = tmp.substring(4); //Script
+        //o objeto não possui mais vida
+        tmp = null;
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * 2) EXEMPLO DE MÉTODO ESTÁTICO PRIVADO
+         * 
+         * O seguinte adiciona o #validate()método estático privado à Person classe:
+        */
+
+        //define uma class Chamada Person, usando a palavra chave class
+        class Person{
+            //define propriedades privadas, no corpo da classe, so podem ser acessadas no corpo da Person class
+            #firstName;
+            #lastName;
+            //define um construtor da Person classe, com paramentros firstName, e lastName para inicializar propriedades
+            constructor(firstName, lastName) {
+                //inicializa propriedades
+                this.#firstName = firstName;
+                this.#lastName = lastName;
+            }
+            //define um metodo de instancia publico chamado getFullName que declara um paramentro chamado format que possui um valor padrão true
+            getFullName(format = true) {
+                return format ? this.#firstLast() : this.#lastFirst();
+            }
+            //declara um método estatico privado, usando palavra chave static e sinal # na definição do metodo
+            //metodo estatico esta vinculado a classe e não ha instancias
+            //metodo privado so pode ser acessado dentro do corpo da class
+            //metodo chamado validate que declara uma parametro chamado name
+            static #validate(name) {
+                //verifica se o name argumento e do tipo string
+                if(typeof name === 'string') {
+                    //tira espaços em branco do inicio e do final da string
+                    let str = name.trim();
+                    if(str.length === 3) {
+                       return str;
+                    } 
+                }
+                //lança exceção
+                throw 'The name must be a string with at least 3 chacacters';
+            }
+            //declara um metodo de instancia privado chamado firstLast metodo não declara paramentro, metodo so pode ser acessado no corpo da class
+            #firstLast() {
+                return `${this.#firstName} ${this.#lastName}`;
+            }
+            //declara um metodo de instancia privado chamado lastFirst, metodo não declara paramentro
+            #lastFirst() {
+                return `${this.#lastName} ${this.#firstName}`;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da Person class fornecendo dois argumentos e usando o new operador, o objeto instanciado e atribuido por referencia a variavel person
+        let person = new Person('John', 'Doe');
+        //acessando o metodo de instancia da class Person
+        console.log(person.getFullName());
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina o método estático #validate() que retorna um valor se for uma string com pelo menos três caracteres. O método gera uma exceção caso contrário.
+         * 
+         * Segundo, chame o #validate() método estático privado no construtor para validar os argumentos firstName e lastName antes de atribuí-los aos atributos privados correspondentes.
+         * 
+         * * RESUMO
+         * 
+         * Prefixe um nome de método com o # para torná-lo privado.
+         * 
+         * Métodos privados podem ser chamados dentro da classe, não de fora da classe ou nas subclasses.
+        */
+    </script>
+</body>
+</html>

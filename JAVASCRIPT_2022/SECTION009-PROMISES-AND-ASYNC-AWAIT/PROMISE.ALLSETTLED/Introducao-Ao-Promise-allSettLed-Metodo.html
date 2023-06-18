@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Ao Promise.allSettled() método</title>
+</head>
+<body>
+
+    <h2>Promise.allSettled() Método</h2>
+
+    <p>O diagrama a seguir ilustra como o <span style="color: red;">Promise.allSettled()</span> método funciona:</p>
+    
+    <img src="img/JavaScript-Promise.allSettled.svg" alt="imagen">
+
+    <p>Neste diagrama:</p>
+
+    <pre>
+        - As <span style="color: red;">promise1</span> rejeições ao error em t1.
+
+        - O <span style="color: red;">promise2</span> resolve para um valor em t2
+
+        - O <span style="color: red;">Promise.allSettled()</span> método resolve para uma array contendo objetos que descrevem os status e os resultados do <span style="color: red;">promise1</span> e <span style="color: red;">promise2</span> 
+    </pre>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT Promise.allSettled() - tudo resolvido
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o Promise.allSettled() método para compor promessas.
+         * 
+         * * INTRODUÇÃO AO Promise.allSettled() Método
+         * 
+         * O ES2020 introduziu o Promise.allSettled() método que aceita uma lista de Promises e retorna uma nova promessa que é resolvida após todas as promessas de entrada serem resolvidas, resolvidas ou rejeitadas.
+
+            Promise.allSettled(iterable);
+
+         * 
+         * O iterable contém as promessas. O Promise.allSettled() retorna uma promessa pendente que será cumprida de forma assíncrona assim que todas as promessas de entrada forem resolvidas.
+         *
+         * O Promise.allSettled() método retorna uma promessa que resolve para uma array de objetos em que cada um descreve o resultado da promessa de entrada.
+         * 
+         * Cada objeto tem duas propriedades: status e value(ou reason).
+
+            - O status pode ser fulfilled(cumprida com valor) ou rejected(rejeitada).
+
+            - O value caso se a promessa for cumprida ou reason) se a promessa for rejeitada.
+        */
+
+    </script>
+</body>
+</html>

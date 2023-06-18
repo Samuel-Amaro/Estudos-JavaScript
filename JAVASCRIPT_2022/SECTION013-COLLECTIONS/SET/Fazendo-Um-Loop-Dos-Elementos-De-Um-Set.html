@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * FAZENDO UM LOOP DOS ELEMENTOS DE UM SET JS
+         * 
+         * Um objeto Set mantém a ordem de inserção de seus elementos, portanto, quando você itera sobre seus elementos, a ordem dos elementos é a mesma que a ordem inserida. Suponha que você tenha um conjunto de funções de usuário da seguinte forma.
+        */
+
+        //declara uma nova instancia de objeto do tipo Set, invocando o construtor Set sem passar argumentos, atribui a instancia de objeto criada a variavel roles
+        //o set objeto tipo permite armazena um coleção de valores unicos
+        let roles = new Set();
+
+        //usando o método Set.add(value), para acrecentar um novo elemento especificado por um valor ao set objeto
+        //o método retorna o proprio Set objeto, podendo assim usalo de forma encadeada
+        //aqui adicionaremos três elementos de valores unicos ao set objeto
+        roles.add('admin').add('editor').add('subscriber');
+
+        /**
+         * O exemplo a seguir usa o loop for…of para iterar sobre o conjunto de caracteres.
+        */
+
+        //usando a construção for...of para iterar sobre o objeto iteravel Set
+        //o loop iterara em cada elemento do Set objeto, cada elemento e um valor exclusivo
+        for(let role of roles) {
+            console.log(role);
+        }
+
+        /**
+         * O Set também fornece os métodos keys(), values(), e como o Map. No entanto, as chaves e os valores no são idênticos. Por exemplo: entries()Set
+        */
+
+        //usando o método Set.entries() para retornar um novo Iterator que contenha um array [value, value] como elemento
+        //retorna um array multidimensional, sendo que cada elemento do array e um novo array com dois elementos que representam o mesmo valor
+        //usando a desestruturação de array para atribuir de forma individual os elementos do array retornado do Iterator as variaveis key e value
+        //a construção for...of ira iterar sobre cada elemento retornado do iterator
+        for(let [key, value] of roles.entries()) {
+            //aqui os elementos do array que e um elemento do iterator são o memso vlaor
+            console.log(key === value);
+        }
+
+        /**
+         * * INVOCAR UMA FUNÇÃO DE RETORNO DE CHAMADA(CALLBACK) EM CADA ELEMENTO DE UM CONJUNTO
+         * 
+         * Se você quiser invocar um retorno de chamada em cada elemento de um conjunto, você pode usar o forEach()método.
+        */
+
+        //usando o método Set.forEach(callback), para invocar o callback argumento passado em cada elemento do set objeto
+        //o forEach() método recebe como argumento uma callback function anonima que declara um paramentro chamado role que e o elemento do set objeto que esta sendo iterado
+        //para cada elemento iterado o callback e invocado e executado
+        roles.forEach(role => console.log(role.toUpperCase()));
+
+
+    </script>
+
+</body>
+</html>

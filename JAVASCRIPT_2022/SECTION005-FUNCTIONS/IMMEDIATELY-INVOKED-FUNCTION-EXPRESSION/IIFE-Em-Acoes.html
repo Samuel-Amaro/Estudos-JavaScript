@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIFE em ações</title>
+</head>
+<body>
+    
+    <script src="js/calculator.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        /**
+         * * IIFE EM AÇÕES
+         * 
+         * Suponha que você tenha uma biblioteca chamada calculator.js com as seguintes funções:
+         * 
+         * E você carrega calculator.js em um documento HTML.
+         * 
+         * Posteriormente, você também deseja carregar outra biblioteca JavaScript chamada app.js para o mesmo documento:
+         * 
+         * Quando você usa a add() função no documento HTML, ela retorna a 'add' string em vez da soma de dois números:
+        */
+
+        //chama a function add que esta definida em 2 scritps js arquivos diferentes
+        //let result = add(10, 20);
+        //console.log(result); //'add'
+
+        /**
+         * Isso ocorre porque a add() função no app.js substitui a add() função na calculator.js biblioteca.
+         * 
+         * Para corrigir isso, você pode aplicar o IIFE no calculator.js da seguinte maneira:
+         * 
+         * O IIFE retorna um objeto que contém os métodos adde multipl yque fazem referência às funções add() e multiply().
+         * 
+         * No documento HTML, você pode usar a calculator.js biblioteca da seguinte maneira:
+        */
+
+        //chama o resultado da expressão de função invocada em calculator.js
+        //acessa a propriedade add que faz referencia a uma function declarada dentro da expressãocde função em resultado calculator, e essa referencia a function add retorna a soma dos argumentos passados
+        let result = calculator.add(10, 20); //add em app.js
+        console.log(`10 + 20 = ${result}`); //30
+        //chama a function declarada em arquivo js externo app.js la possui uma function regular declarada que soma dois argumentos e retorna o resultado
+        //porem a function declarada em app.js possui mesmo nome que a function declarada em calculator.js mas a de calculator.js so pode ser chamada uma vez por ser uma expressão de função imediatamente invocada, por isso na segunda chamada refere-se a do app.js
+        //que retorna so uma string não realilzada a soma e nem precisa de arguments
+        console.log(add()); //add in the app.js
+
+        /**
+         * A calculator.add() chamada da add() função exportada pelo calculator.js enquanto a segunda chamada para a add() função faz referência à add()função no app.js.
+        */
+    </script>
+</body>
+</html>

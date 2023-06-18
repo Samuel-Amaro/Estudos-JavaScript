@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        /**
+         * * MÉTODO entries() - valores exemplo
+         * 
+         * O exemplo a seguir usa o entries()método para listar todos os pares de chave/valor de parâmetro de uma string de consulta:
+         */
+
+        //o URLSearchParams retorna uma instancia de objeto atribuida por referencia a constante urlParams
+        //o construtor URLSearchParams recebe como argumento uma string com paramentros de consulta de uma URL
+        const urlParams = new URLSearchParams('?type=list&page=20');
+
+        //usando a construção for...of para iterar sobre os pares de key/value de um iterator(objeto iteravel), sendo que cada par representa um key/value que o paramentro e valor de uma string de consulta de um URL
+        //entries() retorna um iterador que itera sobre os pares (chave, valor) dos parâmetros.        
+        for(const entry of urlParams.entries()) {
+            console.log(entry);
+        }
+
+        //ou usando desestruturação de array para obter elementos individuais
+        for(const [key, value] of urlParams.entries()) {
+            console.log(`${key} : ${value}`);
+        }
+
+    </script>
+</body>
+</html>

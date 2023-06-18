@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Exemplo de JavaScript orientado a objetos</title>
+  </head>
+
+  <body>
+    <p> Este exemplo requer a inserção de comandos no console JavaScript do seu navegador (veja <a a  href = " https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools " > Quais são as ferramentas de desenvolvimento do navegador </a> para mais informações).</p>
+
+  </body>
+  <script>
+
+        //criação de um objeto vazio 
+        var pessoa = {};
+
+        //atualizando o objeto com propriedades e informações
+        var pessoa = {
+            nome: ['Bob','Smith'], //propried do obj
+            idade: 32, //propried do obj
+            sexo: 'masculino', //propried do obj
+            interesses: ['música','esquiar'], //propried do obj
+            bio: function() { //metodo do obj
+                alert(this.nome[0] + ' ' + this.nome[1] + 'tem ' + this.idade + ' anos de idade. Ele gosta de ' + this.interesses[0] + 'e ' + this.interesses[1] + '.')
+            },
+            saudacao: function() { //metodo do obj
+                alert('Oi! Eu sou ' + this.nome[0] + '.');
+            } 
+        };
+        
+        //criando um novo objeto mas com propriedades diferentes
+        //fazendo o valor de um menbro ser outro objeto, e usando a notação de ponto, e usando sub-namespace
+        var pessoa1 = {
+            nome: {
+                primerio : 'Bob',
+                ultimo: 'Smith'
+            }, 
+            idade: 32, //propried obejto
+            sexo: 'masculino', //propried obejto
+            interesses: ['música','esquiar'], //propried obejto
+            bio: function() { //metodo do objeto
+                alert(this.nome[0] + ' ' + this.nome[1] + 'tem ' + this.idade + ' anos de idade. Ele gosta de ' + this.interesses[0] + 'e ' + this.interesses[1] + '.')
+            },
+            saudacao: function() { //metodo do objeto
+                alert('Oi! Eu sou ' + this.nome[0] + '.');
+            } 
+        };
+
+        //setando(atualizando uma nova idade), usando notação de ponto
+        pessoa.idade = 45;
+        pessoa1.idade = 45;
+
+        //setando um novo ultimo nome, usando notação de colchetes
+        pessoa1['nome']['ultimo'] = 'Cratchit';
+
+        //criando novos menbros no objeto pessoa
+        
+        //add nova prorprieda ao obj
+        pessoa['olhos'] = 'castanho';
+        //add um novo metodo ao objeto
+        pessoa.despedida = function() {
+            alert("Adeus a todos!");
+        }
+
+        //setando uma nova propriedade no objeto pessoa usando variaveis, e notação de colchetes.
+        var meuDadoNome = 'altura';
+        var meuDadoValor = '1.75m';
+        pessoa[meuDadoNome] = meuDadoValor;
+        
+  </script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DE MÉTODOS PRIVADOS JS
+         * 
+         * Vamos dar alguns exemplos de uso de métodos privados.
+         * 
+         * * 1) EXEMPLO DE MÉTODO DE INSTÂNCIA PRIVADA
+         * 
+         * O seguinte ilustra como definir a Person classe com métodos de instância privada:
+        */
+
+        //define uma class Chamada Person, usando a palavra chave class
+        class Person{
+            //define propriedades privadas, no corpo da classe, so podem ser acessadas no corpo da Person class
+            #firstName;
+            #lastName;
+            //define um construtor da Person classe, com paramentros firstName, e lastName para inicializar propriedades
+            constructor(firstName, lastName) {
+                //inicializa propriedades
+                this.#firstName = firstName;
+                this.#lastName = lastName;
+            }
+            //define um metodo de instancia chamado getFullName que declara um paramentro chamado format que possui um valor padrão true
+            getFullName(format = true) {
+                return format ? this.#firstLast() : this.#lastFirst();
+            }
+            //declara um metodo privado chamado firstLast metodo não declara paramentro, metodo so pode ser acessado no corpo da class
+            #firstLast() {
+                return `${this.#firstName} ${this.#lastName}`;
+            }
+            //declara um metodo privado chamado lastFirst, metodo não declara paramentro
+            #lastFirst() {
+                return `${this.#lastName} ${this.#firstName}`;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da Person class fornecendo dois argumentos e usando o new operador, o objeto instanciado e atribuido por referencia a variavel person
+        let person = new Person('John', 'Doe');
+        //acessando o metodo de instancia da class Person
+        console.log(person.getFullName());
+
+        /**
+         * Neste exemplo:
+         * 
+         * Primeiro, defina dois campos privados #firstName e #lastName no Person corpo da classe.
+         * 
+         * Segundo, defina os métodos privados #firstLast() e #lastFirst(). Esses métodos retornam o nome completo em diferentes formatos.
+         * 
+         * Terceiro, defina o método de instância pública getFullName() que retorna o nome completo de uma pessoa. O getFullName() método chama o método privado #firstLast() e #lastFirst() retorna o nome completo.
+         * 
+         * Por fim, crie um novo person objeto e envie o nome completo para o console.
+        */
+        
+    </script>
+</body>
+</html>

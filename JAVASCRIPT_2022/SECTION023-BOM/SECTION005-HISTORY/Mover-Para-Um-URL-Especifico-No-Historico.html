@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * MOVER PARA UM URL ESPECIFICO NO HISTORICO
+         * 
+         * Para mover para uma URL específica na pilha de histórico, você usa o go() método. O go() método aceita um inteiro que é a posição relativa à página atual. A posição da página atual é 0.
+         * 
+         * Por exemplo, para retroceder você usa:
+        */
+
+        //objeto history que e a pilha de historico que armazena a pagina atual e as páginas anteriores que você visitou
+        //usando método go() para mover para uma URL especifica na pilha de historico, o metodo aceita um inteiro que e posição relativa á pagina atual, a pagina atual e 0, -1 o argumento passado para o método go representa retroceder um historico antrerior ao atual
+        history.go(-1);
+
+        /**
+         * É como o back() método.
+         * 
+         * Para avançar uma página, basta chamar:
+        */
+
+        //usando método go() para mover para uma URL especifica na pilha de historico, o metodo aceita um inteiro que e posição relativa á pagina atual, a pagina atual e 0, 1 o argumento passado para o método go representa avançar um historico ao atual
+        history.go(1);
+        
+        /**
+         * Para atualizar a página atual, você passa 0 ou nenhum argumento para o go() método:
+        */
+
+        //usando método go() para mover para uma URL especifica na pilha de historico, o metodo aceita um inteiro que e posição relativa á pagina atual, a pagina atual e 0, o argumento passado e 0, se informar 0 ou nenhum argumento a pagina e atualizada
+        history.go(0);
+        history.go();
+
+        /**
+         * Para determinar o número de URLs na pilha de histórico, você usa a length propriedade:
+        */
+
+        console.log(history.length);
+
+        /**
+         * * RESUMO
+         * 
+         *  O window.history objeto permite acessar a pilha de histórico do navegador.
+         * 
+         * Para navegar para uma URL no histórico, você usa os métodos back(), forward(), e .go()
+         * 
+         * O history.length retorna o número de URLs na pilha de histórico.
+        */
+    </script>
+</body>
+</html>

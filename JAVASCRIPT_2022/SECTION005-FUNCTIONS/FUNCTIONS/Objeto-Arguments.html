@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arguments Objeto</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O ARGUMENTS OBJETO
+         * 
+         * Dentro do corpo de uma função, você pode acessar um objeto chamado arguments que representa os argumentos nomeados da função.
+         * 
+         * O arguments objeto se comporta como um array, embora não seja uma instância do tipo Array.
+         * 
+         * Por exemplo, você pode usar o colchete [] para acessar os argumentos: arguments[0] retorna o primeiro argumento, arguments[1]retorna o segundo e assim por diante.
+         * 
+         * Além disso, você pode usar a length propriedade do arguments objeto para determinar o número de argumentos.
+         * 
+         * O exemplo a seguir implementa uma add() função genérica que calcula a soma de qualquer número de argumentos.
+        * */
+
+        //declara uma função chamada add sem paramentros declarados
+        function add() {
+            //corpo da função
+            let sum = 0;
+            //itera sobre os arguments passados para a function, usando o objeto arguments que armazena todos os arguments passado para a function
+            for(let i = 0; i < arguments.length; i++) {
+                //cada argumet passado e somado numa variavel
+                sum += arguments[i];
+            }
+            //retorna o sum valor
+            return sum;
+        }
+
+        /**
+         * Portanto, você pode passar qualquer número de argumentos para a add() função, como este:
+        * */
+
+        //chama(invoca) a function e passa 2 argumentos, a function retorna a soma desses arguments
+        console.log(add(1, 2)); //3
+        //chama(invoca) a function e passa 5 argumentos, a function retorna a soma desses arguments
+        console.log(add(1, 2, 3, 4, 5)); //15
+    </script>
+</body>
+</html>

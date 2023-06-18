@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objetos</title>
+</head>
+<body>
+    
+    <script>
+
+        //declara um fuction construtora chamada Person que possui um parametro, que e um argumento para se tornar valor de uma propriedade do objeto this
+        //essa function retorna uma instancia de um objeto this com as propriedades e metodos definidas dentro da function
+        function Person(name) {
+            //add uma propriedade ao Person objeto this instancia que sera retornado
+            this.name = name;
+        }
+
+        //adiciona um nova propriedade no objeto anonimo que Person.prototype referencia, essa nova propriedade e um metodo, porque e atribuida a ela uma function anonima 
+        Person.prototype.greet = function() {
+            return `Hi, I'm ${this.name}!`;
+        }
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o paramentro
+        //o p1 objeto e vinculado ao objeto anonimo refernciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim p1 aponta para esse objeto anonimo também
+        let p1 = new Person('John');
+
+        //invocando o metodo greet(), adicionando ao objeto anonimo que e referenciado Pela Person.prototype propriedade por meio do p1 objeto mostrando a ligação entre o objeto anonimo e p1 objeto
+        //lembrando que p1 não possui o metodo greet declarado, aqui e uma demostração da ligação do prototipo
+        let saudacao = p1.greet();
+        console.log("Utilizando a ligação de prototipo(linked prototype)");
+        console.log(`p1.greet() = ${saudacao}`);
+
+        /**
+         * * SOMBREAMENTO 
+         * 
+         * Veja a seguinte chamada de método:
+        */
+
+        //chamando o metodo, greet() definido no objeto anonimo que e refenciado pela Person.prototype, mas p1 não possui esse metodo definido diretamente mas pode acessado por que esta ligado a esse objeto anonimo por meio da ligação de prototipo
+        //acessamos o metodo greet por meio o p1 objeto instancia
+        console.log(`p1.greet() da cadeia de prototipo = ${p1.greet()}`);
+
+        /**
+         * O p1 objeto não tem o greet()método definido, portanto o JavaScript sobe até a cadeia de protótipos para encontrá-lo. Nesse caso, ele pode encontrar o método no Person.prototype objeto.
+         * 
+         * Vamos adicionar um novo método ao objeto p1 com o mesmo nome do método no Person.prototype objeto:
+        */
+
+        //adiciona um novo metodo no p1 instancia de objeto Person
+        //e um metodo com o mesmo nome do metodo definido no objeto anonimo que e referenciado por Peson.prototype
+        //porem esse metodo definido em p1 instancia de objeto e um metodo unico so existe em p1 instancia e um metodo que existe so nessa instancia individual
+        //não pode ser acesado por outras instancias
+        //cria um propriedade chamada greet que recebe um function anonima como valor
+        //a function anonima e atribuida a greet propriedade tornandoa um metodo
+        p1.greet = function() {
+            console.log('Hello');
+        }
+
+        /**
+         * E chame o greet() método:
+        */
+
+
+        //exemplo de sombreamento, o p1.greet() executa o metodo definido na instancia individual ao inves de procurar na cadeia de prototipos por meio da ligação de prototipo
+        //o p1.greet() da instancia individual obscurece o p1.greet() definido na objeto anonimo referenciado por Person.prototype fazendo assim não precisar procurar na cadeia de prototipos
+        console.log(`p1.greet() definido invidualmente na instancia p1 = ${p1.greet()}`);
+
+        /**
+         * Como o p1 objeto tem o greet()método, JavaScript apenas o executa imediatamente, sem procurá-lo na cadeia de protótipos.
+         * 
+         * Este é um exemplo de sombreamento. O greet() método do p1 objeto obscurece o greet() método do prototype objeto ao qual o p1 objeto faz referência.
+         * 
+         * * RESUMO
+         * 
+         * A Object() função tem uma propriedade chamada prototype que faz referência a um Object.prototype objeto.
+         * 
+         * O Object.prototype objeto possui todas as propriedades e métodos disponíveis em todos os objetos, como toString() e valueOf().
+         * 
+         * O Object.prototype objeto possui a constructor propriedade que faz referência à Object função.
+         * 
+         * Cada função tem um prototype objeto. Este objeto de protótipo faz referência ao Object.prototype objeto por meio de [[prototype]]ligação ou __proto__ propriedade.
+         * 
+         * A cadeia de protótipo permite que um objeto use os métodos e propriedades de seus prototype objetos por meio das [[prototype]]ligações.
+         * 
+         * O Object.getPrototypeOf() método retorna o objeto protótipo de um determinado objeto. Use o Object.getPrototypeOf() método em vez de __proto__.
+         * */
+    </script>
+
+</body>
+</html>

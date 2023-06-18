@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        - atribuimos uma manipulador de evento por meio do atributo html
+        - o manipulador de evento, e para o evento change(mudanças, alterar), ele e acionado em elementos input text quando o elemento input perde o foco, quando o elemento termina de alterar, e perde o foco logo em seguida ele e acionado. quando o input perde o foco(blur) o evento e acionado.
+        - teste: apos edição de text e usar o pointer para focar em outro local o change foi acionado.
+    -->
+    <input type="text" onchange="alert(this.value)"/>
+    <input type="button" value="Button"/>
+
+    <script>
+        /**
+         * * EVENTOS: CHANGE(ALTERAR), INPUT(INSERIR), CUT(CORTAR), COPY(COPIAR), PASTE(COLAR)
+         *
+         *  Vamos cobrir vários eventos que acompanham as atualizações de dados
+         * 
+         * * EVENTO: CHANGE(mudança, alterar)
+         * 
+         * O change evento é acionado quando o elemento termina de mudar.
+         * 
+         * Para inputs text, isso significa que o evento ocorre quando perde o foco(blur).
+         * 
+         * Por exemplo, enquanto estamos digitando no campo de texto abaixo – não há nenhum evento. Mas quando movemos o foco para outro lugar, por exemplo, clique em um botão – haverá um change evento:
+        */
+    </script>
+</body>
+</html>

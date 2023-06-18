@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * Agora, se uma nova tarefa secundária (por exemplo onclick, evento) aparecer enquanto o mecanismo estiver ocupado executando a parte 1, ela será colocada na fila e será executada quando a parte 1 terminar, antes da próxima parte. Os retornos periódicos ao loop de eventos entre as count execuções fornecem “ar - air” apenas o suficiente para que o mecanismo JavaScript faça outra coisa, para reagir a outras ações do usuário.
+         * 
+         * O notável é que ambas as variantes – com e sem divisão do trabalho setTimeout– são comparáveis ​​em velocidade. Não há muita diferença no tempo total de contagem.
+         * 
+         * Para aproximá-los, vamos fazer uma melhoria.
+         * 
+         * Moveremos o agendamento para o início do count():
+        */
+
+        //Como temos uma tarefa muito grande que pode travar o navegador, impedind o que outras tarefas sejam executadas enquanto a atual não estiver sido executada
+        //Podemos evitar problemas dividindo a grande tarefa em partes.
+        //dividindo a tarefa
+        //agora ela não bloqueia a interface do usuário
+
+        let i = 0;
+
+        let start = Date.now();
+
+        function count() {
+
+            //mover o agendamento para o início
+            //outra parte da tarefa
+            //enquanto i for menor que 999.000.000 milhões chamar count
+            //dividindo a tarefa em partes menores
+            if(i < 1e9 - 1e6) {
+                //chama para contar novamente, apos 0s
+                setTimeout(count); // agenda a nova chamada
+            }
+
+            // faz um trabalho 
+            //de contar até o valor especificado
+            //faça um pedaço do trabalho pesado (*)
+            do{
+                i++;
+            }while(i % 1000000 != 0);
+            
+            //verifica se chegamos a um bilhão
+            if(i == 1e9) {
+                alert("Feito em " + (Date.now() - start) + 'ms'); //Feito em 18339ms
+            }
+        }
+
+        count();  
+
+        /**
+         * Agora, quando começamos count() e vemos que precisaremos de count()mais, agendamos isso imediatamente, antes de fazer o trabalho.
+         * 
+         * Se você executá-lo, é fácil perceber que leva muito menos tempo.
+         * 
+         * Por quê?
+         * 
+         * É simples: como você se lembra, há o atraso mínimo no navegador de 4 ms para muitas setTimeout chamadas aninhadas. Mesmo se definirmos 0, é 4ms(ou um pouco mais). Portanto, quanto mais cedo agendarmos, mais rápido ele será executado.
+         * 
+         * Por fim, dividimos uma tarefa que consome muita CPU em partes – agora ela não bloqueia a interface do usuário. E seu tempo de execução geral não é muito maior.
+         * */
+    </script>
+</body>
+</html>

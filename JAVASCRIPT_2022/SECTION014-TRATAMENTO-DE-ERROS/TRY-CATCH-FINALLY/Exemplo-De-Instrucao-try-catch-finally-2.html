@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo Instrução try...catch...finally</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLO DE INSTRUÇÃO JS try...catch...finally
+         * 
+         * O exemplo a seguir ilustra como usar a try...catch...finally instrução:
+         * 
+         * No exemplo a seguir, definimos a add() função e a chamamos no try bloco:
+        */
+
+        //definimos uma arrow function anonima, que declara dois paramentros chamados x e y, essa arrow function e atribuida a varaivel add por referencia assim a variavel add referencia a arrow function
+        const add = (x, y) => x + y;
+
+        //declara uma variavel chamada result e a inicializa com um valor do tipo number
+        let result = 0;
+
+        //instrução da try...catch...finally instrução, para tratar e lidar com erros e executar um bloco de codígo apos tratamento do erro ou não
+        try{
+            //código pode causar erro
+
+            //a variavel chamada result, que recebe o resultado da invocação da function add, passando dois argumentos do tipo number
+            result = add(10, 20);
+        }catch(e) {
+            //código para lidar com erro
+            //abaixo esta o objeto de erro com suas respectivas propriedades, um objeto que contém informações mais detalhadas sobre erro
+            //propriedade e.name e o nome do erro
+            //aqui usamos a variavel error para armazenar o objeto de exceção que e lançado quando acontece um erro no bloco try
+            console.log(e.message);
+        }finally{
+            //código para executar se as exceções ocorrem ou não
+            //se a exceção ocorrer ou não o codigo a seguir e executado
+            console.log({result});
+        }
+
+        /**
+         * Como a add() função existe, nenhuma exceção ocorre no try bloco. Portanto, o finally bloco emite o valor da result variável, que é a soma de 10 e 20.
+         * 
+         * Em ambos os exemplos, o finally bloco sempre é executado.
+        */
+       
+    </script>
+
+</body>
+</html>

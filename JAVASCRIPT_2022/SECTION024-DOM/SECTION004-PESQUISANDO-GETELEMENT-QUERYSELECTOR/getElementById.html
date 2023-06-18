@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="elem">
+        <div id="elem-content">Element</div>
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * * document.getElementById ou apenas id
+         * 
+         * Se um elemento tiver o id atributo, podemos obter o elemento usando o método document.getElementById(id), não importa onde ele esteja.
+         * */
+
+        //obtem o elemento que possuir o id atributo com o valor elem
+        //o metodo so pode ser chamado a partir do id, e ele procura o dado id em todo documento.
+        let elem = document.getElementById('elem');
+
+        //tornar o fundo do elemento selecionado arbitrariamente vermelho
+        //elem é uma referência ao elemento DOM com id="elem"
+        elem.style.background = 'red';
+
+        /**
+         * Além disso, há uma variável global nomeada por id que faz referência ao elemento:
+         * 
+         * id="elem-content" tem um hífen dentro, então não pode ser um nome de variável
+         * 
+         * ..mas podemos acessá-lo usando colchetes: window['elem-content']
+         * 
+         * …A menos que declaremos uma variável JavaScript com o mesmo nome, ela terá precedência:
+         * */
+
+        //agora elem é 5, não uma referência a <div id="elem">
+        elem = 5;
+
+        console.log(elem); //5
+
+        /**
+         * * Por favor, não use variáveis ​​globais com nome de id para acessar elementos
+         * 
+         * Esse comportamento é descrito na especificação , então é uma espécie de padrão. Mas é suportado principalmente para compatibilidade.
+         * 
+         * O navegador tenta nos ajudar misturando namespaces de JS e DOM. Isso é bom para scripts simples, embutidos em HTML, mas geralmente não é uma coisa boa. Pode haver conflitos de nomenclatura. Além disso, quando alguém lê o código JS e não tem HTML em vista, não é óbvio de onde vem a variável.
+         * 
+         * Aqui no tutorial usamos id para referenciar diretamente um elemento por brevidade, quando é óbvio de onde o elemento vem.
+         * 
+         * Na vida real document.getElementById é o método preferido.
+         * 
+         * * O id deve ser único
+         * 
+         * O id deve ser único. Pode haver apenas um elemento no documento com o dado id.
+         * 
+         * Se houver vários elementos com o mesmo id, o comportamento dos métodos que o utilizam é ​​imprevisível, por exemplo, document.getElementById pode retornar qualquer um desses elementos aleatoriamente. Então, por favor, atenha-se à regra e mantenha-se idúnico.
+         * 
+         * * Apenas document.getElementById, não anyElem.getElementById
+         * 
+         * O método getElementById pode ser chamado apenas no document objeto. Ele procura o dado id em todo o documento.
+         * */
+        
+    </script>
+</body>
+</html>

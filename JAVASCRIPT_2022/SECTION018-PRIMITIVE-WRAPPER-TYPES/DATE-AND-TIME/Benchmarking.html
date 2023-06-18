@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * BENCHMARKING(AVALIAÇÃO COMPARATIVA)
+         * 
+         * Se quisermos um benchmark confiável da função com fome de CPU, devemos ter cuidado.
+         * 
+         * Por exemplo, vamos medir duas funções que calculam a diferença entre duas datas: qual delas é mais rápida?
+         * 
+         * Tais medidas de desempenho são frequentemente chamadas de “benchmarks”.
+        */
+
+        //temos date1 e date2, qual função mais rápido retorna sua diferença em ms?
+
+        //declara uma fucntion regular que possui dois paramentros chamados date1, e date2
+        function diffSubtract(date1, date2) {
+            //a operação de subtração converte as datas para numeros e retorna a diferemça em ms
+            return date2 - date1;
+        }
+
+        //declara uma fucntion regular que possui dois paramentros chamados date1, e date2
+        function diffGetTime(date1, date2) {
+            //o metodo getTime obtem o ms(milisegundos) de cada e retorna a diferença em ms
+            return date2.getTime() - date1.getTime();
+        }
+
+        /**
+         * Esses dois fazem exatamente a mesma coisa, mas um deles usa um explícito date.getTime() para obter a data em ms e o outro depende de uma transformação de data para número. O resultado deles é sempre o mesmo.
+         * 
+         * Então, qual deles é mais rápido?
+         * 
+         * A primeira ideia pode ser executá-los várias vezes seguidas e medir a diferença de tempo. Para o nosso caso, as funções são muito simples, então temos que fazer isso pelo menos 100.000 vezes.
+         * 
+         * Vamos medir:
+        */
+
+        //declara uma function regular chamada bench que declara um paramentro chamado f
+        function bench(f) {
+            //declara uma nova instancia de objeto do tipo date invocando o construtor date passando o argumento 0, cria uma intancia de date que recebe um timestamp que e um representação numerica leve de uma data
+            let date1 = new Date(0);
+            //cria uma instancia de objeto do tipo date sem passar argumentos para o construtor, isso cria uma instancia de objeto date, com data e horas atuais
+            let date2 = new Date();
+            //O método Date.now() retorna o timestamp(carimbo data/hora) atual
+            //inicia contagem da medição de qual função e mais rapida para retornar diferença entre duas datas
+            let start = Date.now();
+            //executa a function pelo menos 10000vezes por ser muito simples
+            for(let i = 0; i < 10000; i++) {
+                f(date1, date2);
+            }
+            //retorna o resultado da diferençla do tempo final - inical de qual foi mais rapida, na execução.
+            return Date.now() - start;
+        }
+
+        console.log('Time of diffSubtract: ' + bench(diffSubtract) + 'ms');
+        console.log('Time of diffGetTime: ' + bench(diffGetTime) + 'ms');
+
+
+        /**
+         * Uau! Usar getTime() é muito mais rápido! Isso porque não há conversão de tipo, é muito mais fácil para os mecanismos otimizarem.
+         * 
+         * Ok, temos algo. Mas isso ainda não é uma boa referência.
+         * 
+         * Imagine que na hora de rodar a bench(diffSubtract) CPU estava fazendo algo em paralelo, e estava consumindo recursos. E no momento da execução bench(diffGetTime) esse trabalho terminou.
+         * 
+         * Um cenário bastante real para um sistema operacional multiprocesso moderno.
+         * 
+         * Como resultado, o primeiro benchmark terá menos recursos de CPU do que o segundo. Isso pode levar a resultados errados.
+         * 
+         * Para um benchmarking mais confiável, todo o pacote de benchmarks deve ser executado novamente várias vezes.
+         * 
+         * Por exemplo, assim:
+        */
+
+        let time1 = 0;
+        let time2 = 0;
+
+        ///executa o banco(diffSubtract) e o banco(diffGetTime) cada 10 vezes alternando
+        for(let i = 0; i < 10; i++) {
+            //ira executar a diffSubtract 100 mil vezes
+            time1 += bench(diffSubtract);
+            //ira executar a diffGetTime 100 mil vezes
+            time2 += bench(diffGetTime);
+        }
+
+        console.log('Total time for diffSubtract: ' + time1);
+        console.log('Total time for diffGetTime: ' + time2);
+
+        /**
+         * Os mecanismos JavaScript modernos começam a aplicar otimizações avançadas apenas ao “código quente” que é executado muitas vezes (não há necessidade de otimizar coisas raramente executadas). Portanto, no exemplo acima, as primeiras execuções não são bem otimizadas. Podemos querer adicionar uma corrida de aquecimento:
+        */
+
+        //adicionado para "aquecimento" antes do loop principal
+        bench(diffSubtract);
+        bench(diffGetTime);
+
+        //agora avalie
+        for(let i = 0; i < 10; i++) {
+            //ira executar a diffSubtract 200 mil vezes
+            time1 += bench(diffSubtract);
+            //ira executar a diffGetTime 200 mil vezes
+            time2 += bench(diffGetTime);
+        }
+
+        /**
+         * Tenha cuidado ao fazer microbenchmarking
+         * 
+         * Os mecanismos JavaScript modernos realizam muitas otimizações. Eles podem ajustar os resultados de “testes artificiais” em comparação com o “uso normal”, especialmente quando comparamos algo muito pequeno, como o funcionamento de um operador ou uma função integrada. Então, se você realmente quer entender o desempenho, estude como o mecanismo JavaScript funciona. E então você provavelmente não precisará de microbenchmarks.
+        */
+    </script>
+</body>
+</html>

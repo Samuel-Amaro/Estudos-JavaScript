@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .focused{
+            outline: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" id="form">
+        <label for="name">Nome</label>
+        <input type="text" name="name" value="Name"/>
+        <label for="seunome">Seu nome</label>
+        <input type="text" name="seunome" value="Seu nome"/>
+    </form>
+
+    <script>
+        /**
+         * Em segundo lugar, existem focusin(foco dentro) e focusout(foco fora) eventos – exatamente iguais a focus/blur, mas eles borbulham.
+         * 
+         * Observe que eles devem ser atribuídos usando elem.addEventListener, não on<event>.
+         * 
+         * Então aqui está outra variante de trabalho:
+        */
+
+        //para acionar o manipulador de evento do <form> elemento, tem que focar em um elemento de controle do form para que o focus evento possa borbulhar até o manipulador do form
+
+        //atribuindo uma manipulador de evento por meio do metodo elem.addEventListener(event, handler, options); 
+        //o manipulador e para o evento de focusin(foco dentro), quando o <form> elemento receber o foco, e igual ao evento focus, porem o focusin evento permite borbulhamento
+        form.addEventListener("focusin", (event) => form.classList.add("focused"));
+        //manipulador para o evento de focusout(foco fora) quando o foco esta fora do elemento <form>, e igual ao evento blur, porem o focusout permite borbulhamento 
+        form.addEventListener("focusout", (event) => form.classList.remove("focused"));
+    </script>
+</body>
+</html>

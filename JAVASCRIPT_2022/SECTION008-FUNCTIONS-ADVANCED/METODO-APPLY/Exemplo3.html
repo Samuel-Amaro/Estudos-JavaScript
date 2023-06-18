@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO O APPLY() MÉTODO PARA ANEXAR UMA ARRAY A OUTRA
+         * 
+         * O apply() método permite anexar elementos de uma array a outra:
+        */
+
+        //declara um array literal denso inicializado com 3 elementos
+        let arr = [1, 2, 3];
+        let numbers = [4, 5, 6];
+
+        console.log(`arr = ${arr}`);
+
+        //usando o apply metodo da instancia de objeto push do tipo function para anexar um array em outro
+        //aqui o this valor sera o arr variavel, assim o number array sera os argumentos a serem passados ao push function
+        //o push function sira anexar os argumetos passado para ele ao final do arr this valor do objeto
+        //o arr.push emprestara a function push para ele mesmo invocando o push metodo por meio do arr passando o numbers array como argumento para push
+        //assim anexara os elementos de numbers para arr
+        arr.push.apply(arr, numbers);
+
+        console.log(`arr = ${arr}`);
+
+        /**
+         * Neste exemplo, o apply()  modifica o array original arr. Observe que o Array.prototype.concat() método também fornece o mesmo resultado, exceto que ele retorna a nova array em vez de modificar a array original.
+         * 
+         * * RESUMO
+         * 
+         * O apply() método invoca uma função com um determinado this valor e argumentos fornecidos como uma array.
+         * 
+         * O apply() método é semelhante ao call() método, exceto que ele aceita os argumentos da função como uma array em vez de argumentos individuais.
+        */
+    </script>
+</body>
+</html>

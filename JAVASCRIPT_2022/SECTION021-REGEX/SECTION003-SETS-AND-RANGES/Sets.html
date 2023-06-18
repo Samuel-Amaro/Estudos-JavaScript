@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * SETS AND RANGES(conjuntos e intervalos)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os conjuntos e intervalos em expressões regulares.
+         * 
+         * * SETS(CONJUNTS)
+         * 
+         * Os colchetes pesquisam qualquer caractere em um conjunto. Por exemplo, [aeiou] corresponde a qualquer um dos cinco caracteres : 'a', 'e', 'i' e 'o'. 'u' O [...] é chamado de conjunto.
+         * 
+         * Por exemplo, a expressão regular /[cbr]ats/g corresponde a cats, bats e rats
+        */
+
+        //declara uma string literal a ser pesquisa
+        let str = 'How cats, rats, and bats became Halloween animals';
+        //declara uma expressão regular que possui o seguinte padrão: 
+        //usando o conjuntos os colchetes, pesquisa qualquer caractere em um conjunto, o seguinte conjunto[cbr] corresponde a qualquer um dos caracters 'c', 'b', 'r', o padrão corresponde a qualquer um destes caracteres que em sequencia tenha o padrão ats
+        //o flag g(global) instrui o objeto a retornar todoas as correspondecias
+        let re  = /[cbr]ats/g;
+        //usando o método String.match(re) para obter todas as correspondencias do regexp na string 
+        let results = str.match(re);
+
+        console.log(results);
+        
+    </script>
+</body>
+</html>
+
+
+

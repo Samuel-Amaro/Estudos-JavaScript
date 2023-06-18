@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinação operador de coalescencia</title>
+</head>
+<body>
+    <script>
+
+        //declara uma function regular chamada getUser que possui um paramentro declarado chamado id essa function e uma instancia de objeto do tipo function
+        //essa function retorna uma instancia de objeto anonima 
+        function getUser(id) {
+            if(id <= 0) {
+                return null;
+            }
+            // obtém o usuário do banco de dados
+            // e retorna null se o id não existir
+            // ...
+            // se o usuário foi encontrado, retorna o usuário
+            //retorna uma instancia de objeto anonimo literal com propriedades
+            return {
+                //propriedades do objeto usando sintaxe chave : valor
+                id: id,
+                username: 'admin',
+                //a propriedade profile refrencia um objeto literal com propriedades
+                profile: {
+                    avatar: '/avatar.png',
+                    language: 'English'
+                }
+            }
+        }
+
+        //invocando a function getUser() passando um valor de argumento 1, a user variavel ira referenciar o objeto literal retornado pela function
+        let user = getUser(1);
+
+        /**
+         * * COMBINANDO COM O OPERADOR DE COALESCENCIA NULO
+         * 
+         * Se você deseja atribuir um perfil padrão ao user, você pode combinar o operador de encadeamento opcional (?.) com o operador de coalescência nulo ( ??) da seguinte forma:
+         *
+         *  
+        */
+
+        //declara um  objeto literal anonimo usando a sintaxe de objeto literal, e atribui o objeto por referencia a variavel defaultProfile
+        //assim defaultProfile variavel referencia o objeto
+        let defaultProfile = {default: '/default.png', language: 'English'};
+
+        //aqui usaremos o operador de encadeamento opcional para verificar se o objeto referenciado pela variavel user e null ou undefined
+        //e usaremos o operador de coalescencia nulo para verificar dois valores sendo que retorna o segundo valor se o primeiro for null ou undefined
+        //aqui verificamos se o user objeto e null ou undefin com o operador de encadeamento opcional e logo em seguida o operador de coalescencia nulo verifica se profile e undefined ou null se sim retorna o valor defautlProfile, se não retorna o profile 
+        let profile = user ?. profile ?? defaultProfile;
+
+        /**
+         * Neste exemplo, se user.profile for null ou undefined, o perfil levará o defaultProfile devido ao operador de coalescência nulo:
+         * 
+        */
+    </script>
+</body>
+</html>

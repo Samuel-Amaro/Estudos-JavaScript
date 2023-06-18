@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objetos</title>
+</head>
+<body>
+    
+    <p>Por padrão, o JavaScript fornece uma Object()função e um objeto de protótipo que pode ser acessado por meio da prototypepropriedade da Object()função:</p>
+
+    <img src="JavaScript-Prototypal-Inheritance-person.png" alt="imagen">
+
+    <img src="JavaScript-Prototypal-Inheritance-person-and-teacher-objects.png" alt="imagen">
+
+    <img src="JavaScript-Prototypal-Inheritance-example.png" alt="imagen">
+
+    <script>
+        /**
+         * * HERANÇA DO PROTÓTIPO DE JS E __proto__ - (PROTOTYPAL INHERITANCE AND __proto__)
+         * 
+         *  Vamos dar um exemplo para tornar o conceito mais claro.
+         * 
+         * O seguinte define um person objeto:
+        */
+
+        //declara um objeto literal chamado person, usando a sintaxe literal, quando se utiliza a sintaxe literal para declarar objeto, o objeto e uma instancia de Object do JavaScritp
+        let person = {
+            //propriedades, declaradas usando sintaxe chave : valor
+            name : "John Doe",
+            //metodo do objeto, declara uma propriedade chamada greet que possui um valor que e uma function anonima que retorna um valor e não possui paramentro declarado
+            //atribui a function anonima a greet propriedade
+            greet: function() {
+                return `Ei, I'm ${this.name}`;
+            }
+        };
+
+        /**
+         * O person objeto possui duas propriedades:
+         
+            - name que contém um valor de string.
+
+            - greet que contém um valor que passa a ser uma função. O greet é conhecido como um método do person objeto.
+
+         * 
+         * Por padrão, o JavaScript fornece uma Object() função e um objeto de protótipo que pode ser acessado por meio da prototype propriedade da Object() função:
+         * 
+         * Quando você usa a sintaxe literal do objeto para definir um objeto, o objeto é uma instância do Object. Portanto, a expressão person instanceof Object retorna true:
+        */
+
+        //o person objeto literal, por ter sido declarado usando sintaxe literal e por padrão uma instancia de Object do JS, assim esta vinculado a objeto e seu prototipo por meio da Object.prototype, referenciando o mesmo prototipo de objeto
+        console.log(`person instanceof Object = ${person instanceof Object}`);
+
+        /**
+         * O person objeto também se vincula ao Object.prototype por meio da [[prototype]] ligação.
+         * 
+         * Em outras palavras, você pode acessar qualquer propriedade do Object.prototype objeto por meio do person objeto. Por exemplo:
+        */
+
+        //o person objeto esta ligado ao objeto anonimo de prototipo que Object.prototype referencia, assim person tem acesso a propriedade e metodos definidos em Object
+        //o JS procura o metodo toString no person objeto literal, como não esta definido la, passa a usar a ligação de prototipo e procura em Object.prototype na cadeia de ligação de prototipos, quando o encontra o executa
+        console.log(`person.toString() = ${person.toString()}`);
+
+        /**
+         * O [object Object] é a conversão padrão de um objeto em string.
+         * 
+         * Quando você chama o toString()método no person objeto, o JavaScript não consegue localizá-lo. Portanto, o JavaScript segue a cadeia de protótipos e procura o método no Object.prototype objeto. JavaScript pode encontrar o método toString () no Object.prototype objeto e executá-lo.
+         * 
+         * Para acessar o protótipo do person objeto, você pode usar sua __proto__ propriedade:
+        */
+
+        //para acessar o prototipo do person objeto literal usa a propriedade __proto__, aqui o prototipo e o Object.prototype objeto anonimo
+        console.log(`person.__proto__ = ${person.__proto__}`);
+
+        /**
+         * O seguinte define outro objeto chamado teacher. O teacher objeto tem o teach() método: 
+        */
+
+        //declara um objeto literal chamado teacher usando a sintaxe literal de objetos, quando se utiliza essa sintaxe para declara objeto, por padrão o JS  fornece uma Object function construtora e um objeto de prototipo, o objeto anonimo de prototipo, compartilhando metodos e propriedades definidos nele
+        //se torna instancia de Object
+        let teacher = {
+            //metodo do objeto, define uma propriedade chamada teach que recebe uma function anonima como objeto, essa function declara um paramentro e retorna uma string
+            //a function anonima e atribuida a teach propriedade fazedo assim um metodo de objeto
+            teach: function(subject) {
+                return `I can teach ${subject}`;
+            }
+        };
+
+        /**
+         * Se quiser que o teacher objeto acesse todas as propriedades do person objeto, você pode definir o protótipo do teacher objeto para o person objeto: 
+        */
+
+        //o teacher objeto literal tera um novo objeto de prototipo, o person.
+        //assim teacher podera acessar metodos e propriedades definidos no objeto person.
+        //observe que o prototipo de teacher sera o objeto literal person, e o prototipo de person e o Object.prototype objeto anonimo 
+        //teacher agora tem como prototipo person obejto
+        //exemplo de herança prototipica que e diferente da herança classica, o teacher acessara propriedades e metodos definidos no person objeto literal que e o prototipo de teacher
+        //o teacher objeto herda propriedades do person objeto. porque so propriedades ? porque propriedades são as que conhecemos, mas metodos também são propriedades mas que tem functions anonimas como valores, por isso so propriedades
+        //herança prototipica em JS
+        teacher.__proto__ = person;
+
+        /**
+         * Observe que você nunca deve usar __proto__ no código de produção. Isso é apenas para fins de aprendizagem e compreensão.
+         * 
+         * Agora, o teacher objeto pode acessar a name propriedade e o greet() método do person objeto por meio da cadeia de protótipo:
+        */
+
+        //como a propriedade name  e o metodo greet() nã estão definidos em teacher objeto, o JS usara a ligação de prototipo junto com a cadeia de prototipos até encontrar a definição da propriedade e metodo, aqui sera encontrados em person objeto
+        //acessando a propriedade name do objeto prototipo person, por meio de teacher
+        console.log(`teacher.name = ${teacher.name}`);
+        //acessando o metodo greet() do objeto prototipo person, por meio de teacher
+        console.log(`teacher.greet() = ${teacher.greet()}`);
+
+        /**
+         * Quando você chama o greet() método no teacher objeto, o JavaScript o encontra no teacher objeto primeiro.
+         * 
+         * Como o JavaScript não consegue encontrar o método no teacher objeto, ele segue a cadeia de protótipo e procura o método no person objeto. Desta vez, o JavaScript pode encontrar o método no person objeto e executa o greet()método.
+         * 
+         * Em JavaScript, dizemos que o teacher objeto herda propriedades do person objeto. E esta é a herança prototípica.
+        */
+    </script>
+
+</body>
+</html>

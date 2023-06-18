@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Octais</title>
+</head>
+<body>
+    <script>
+        /**
+         * * NÚMEROS OCTAIS
+         * 
+         *  Um número literal octal começa com o dígito zero (0) seguido por uma sequência de dígitos octais (números de 0 a 7). Por exemplo:
+        */
+
+        //declara uma variavel e a inicializa com o tipo de dado number um numero octal
+        let num = 071;
+        console.log(num); //mostra valor octal em decimal 
+
+        /**
+         * Se um número octal contiver um número que não esteja no intervalo de 0 a 7, o mecanismo JavaScript ignorará o 0 e tratará o número como um decimal. Por exemplo:
+        */
+
+        //inicializa a variavel com um numero octal fora do intervalo, o motor JS o trata como decimal
+        let num2 = 080;
+        console.log(num2); //mostra valor octal em decimal
+
+        /**
+         * Esse comportamento implícito pode causar problemas. Portanto, o ES6 introduziu um novo literal octal que começa com o 0o seguido por uma sequência de dígitos octais (de 0 a 7). Por exemplo:
+        */
+
+        //declara variavel e a inicializa com um valor numerico octal prefixado por 0o e o numero octal logo em seguida
+        let num3 = 0o71;
+        console.log(num3); //mostra o valor octal em decimal
+
+        /**
+         * Se você tiver um número inválido após 0o, o JavaScript emitirá um erro de sintaxe como este:
+        */
+
+        //inicializa variavel com um valor numerico octal invalido
+        //let num4 = 0o80;
+        //console.log(num4);
+
+
+    </script>
+</body>
+</html>

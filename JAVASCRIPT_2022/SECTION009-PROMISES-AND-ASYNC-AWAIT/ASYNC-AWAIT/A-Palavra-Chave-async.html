@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palavra-Chave async</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * A PALAVRA-CHAVE async(ASSÍNCRONO) 
+         *
+         * A async palavra-chave permite definir uma função que trata de operações assíncronas.
+         * 
+         * Para definir uma async função, você coloca a palavra- chave async na frente da palavra-chave de função da seguinte forma:
+        */
+
+        //define uma function chamada sayHi que trata de operações assicronas, usando a palavra-chave async, uma function definida com async sempre retorna uma promise implicitamente por padrão
+        async function sayHi() {
+            return 'Hi';
+        }
+
+        /**
+         * As funções assíncronas são executadas de forma assíncrona por meio do loop de eventos. Sempre retorna um Promise. 
+         * 
+         * Neste exemplo, como a sayHi()função retorna um Promise, você pode consumi-lo assim:
+        */
+
+        //aqui a say function por ter sido definida usando a async palavra-chave ela retorna uma promise, assim pode-se obter o valor resolvido da promise quando ela for cumprida com valor
+        //usando o then método, Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //O método then() chama o console.log com um valor, se a promessa for cumprida, o console.log e uma function passada sua referencia por argumento para o then método como um callbakc argumento
+        sayHi().then(console.log);
+
+        /**
+         * Você também pode retornar explicitamente a Promiseda sayHi()função, conforme mostrado no código a seguir:
+        */
+
+        //define uma function chamada sayHi2 que trata de operações assicronas, usando a palavra-chave async antes da palavra-chave function, uma function definida com async sempre retorna uma promise implicitamente por padrão, mas aqui neste caso explicitamente faremos a function retornar a promise
+        async function sayHi2() {
+            //fazendo a function retornar uma promise resolvida(cumprida com valor 'Hi') explicitamente
+            //a promise invoca o método resolve para mudar o estado da promise de pendente para cumprida com valor
+            return Promise.resolve('Hi');
+        }
+
+        /**
+         * O efeito é o mesmo.
+         * 
+         * Além das funções regulares, você pode usar a palavra- async chave nas expressões de função:
+        */
+
+        //declara uma function anonima sem paramentro, como uma function assincrona que trata de operação assincrona, usando a palavra-chave async, essa fuction ira retorna uma promise que e definida implicitamente e resolvida para um valor que e retornado pela function anonima, mas no final retorna uma promise resolvida para um valor
+        //a function e atribuida por referencia a variavel sayHi, assim a variavel sayHi referncia a function
+        //aqui abaixo temos uma expressão de função
+        let sayHi3 = async function() {
+            return 'Hi';
+        }
+
+        /*
+         * Arrow function(funções de seta):
+        */
+
+        //declara uma arrow function anonima sem paramentro, como uma arrow function assincrona que trata de operação assincrona, usando a palavra-chave async, a arrow function ira retornar uma promise que e definida implicitamente e resolvida para um valor que sera retornado pela arrow
+        //a arrow e atribuida por referencia a variavel sayHi, assim a variavel sayHi referencia a arrow
+        //obs: uma arrow e uma instancia de objeto do tipo function, e tratada com um valor
+        //aqui abaixo temos uma expressão de função
+        let sayHi4 = async () => {
+            return 'Hi';
+        }
+
+        /**
+         * E métodos das clases:
+        */
+
+        //define uma class chamada Greeter usando a palavra chave class
+        class Greeter{
+            //define um método de instancia assicrono usando palavra-chave async, o método trata de operações assicronas, não declara paramentro, o método ira retornar uma promise definida implicitamente e ja resolvida para o valor retornado pelo método
+            async sayHi() {
+                return 'Hi';
+            }
+        }
+        
+    </script>
+
+</body>
+</html>

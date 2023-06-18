@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function funcionam com um único parâmetro</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTION FUNCIONAM COM UM ÚNICO PARÂMETRO
+         * 
+         * Se uma arrow function usa um único parâmetro, você usa a seguinte sintaxe:
+         
+            (p1) => { statements }
+
+         * 
+         * Observe que você pode omitir os parênteses da seguinte maneira:
+         
+            p => { statements }
+
+         * 
+         * O exemplo a seguir usa uma arrow function como um argumento do map()método que transforma uma array de strings em uma array de comprimentos da string.
+        * */
+
+        //declara um array literal dense inicializado com 3 elementos
+        let names = ['John', 'Mac', 'Peter'];
+
+        console.log(`names = [${names}]`);
+
+        //utilizando o metodo map do tipo Array
+        //iremos transformar o array de string em um array que mostre o comprimento de cada string elemento string transformado
+        //o metodo map precisa de um argumento que e uma callback function
+        //a callback function precisa de outro argument que e passado pelo map metodo internamente a callback a cada iteração, esse argument e um paramentro que significa que o elemento atual da array esta sendo processado
+        //o metodo map chama a callback em cada elemento do array e retorna um nova array que contem resultados
+        //demostrando o uso de uma arro function que sera um callback que possuira somente um paramentro
+        //retorna um novo array, não modifica o original
+        let length = names.map(name => name.length);
+
+        console.log(`lengths = [${length}]`);
+    </script>
+</body>
+</html>

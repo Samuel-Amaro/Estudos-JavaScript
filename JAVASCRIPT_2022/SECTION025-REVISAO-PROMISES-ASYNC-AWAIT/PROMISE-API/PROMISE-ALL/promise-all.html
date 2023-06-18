@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * Promise.all(Promise Tudo) - Método statico da Promise classe
+         * 
+         * Digamos que queremos que muitas promessas sejam executadas em paralelo(de forma simultanea, ao mesmo tempo) e esperemos até que todas estejam prontas.
+         * 
+         * Por exemplo, baixe vários URLs em paralelo e processe o conteúdo assim que terminar.
+         * 
+         * É para isso que Promise.all serve.
+         * 
+         * A sintaxe é:
+         
+            let promise = Promise.all(iterable);
+
+         * 
+         * Promise.all recebe um iterável (geralmente, uma array de promessas) e retorna uma nova promessa.
+         * 
+         * A nova promessa é resolvida quando todas as promessas listadas são resolvidas e a array de seus resultados se torna seu resultado.
+         * 
+         * Por exemplo, o Promise.all abaixo se estabelece após 3 segundos e, em seguida, seu resultado é um array [1, 2, 3]:
+        */
+
+        //chama metodo statico Promise.all(iterable), para executar varias promessas simultaneamente
+        //o argumento passado e um array de promises a serem executadas
+        //o metodo retorna uma nova promise
+        Promise.all([
+            new Promise(resolve => setTimeout(() => resolve(1), 3000)), //1
+            new Promise(resolve => setTimeout(() => resolve(2), 2000)), //2
+            new Promise(resolve => setTimeout(() => resolve(3), 1000)) //3
+        ])
+        //o metodo acima retorna uma nova promise, essa promise e resolvida quando todas as promises passadas por argumento foram resolvidas, assim o resolve metodo e chamado com um array de resultado de todas as promises
+        //consumindo o resultado das promises resolvidas
+        .then(alert); //1,2,3 quando as promessas estiverem prontas: cada promessa contribui com um membro da array
+
+        /**
+         * Observe que a ordem dos membros da array resultante é a mesma de suas promessas de origem. Embora a primeira promessa demore mais tempo para ser resolvida, ela ainda é a primeira na array de resultados.
+         * 
+         * Um truque comum é mapear uma array de dados de trabalho em uma array de promessas e, em seguida, agrupar isso em Promise.all.
+         * 
+         * Por exemplo, se tivermos uma array de URLs, podemos buscá-los todos assim:
+        */
+
+    </script>
+</body>
+</html>

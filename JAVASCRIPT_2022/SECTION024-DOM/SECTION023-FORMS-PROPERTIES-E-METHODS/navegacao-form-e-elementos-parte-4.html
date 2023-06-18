@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        um elemento form no documento 
+    -->
+    <form action="#" method="post" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on" name="my" id="form">
+        <!--elemento do formulario-->
+        <input type="text" name="login"/>
+    </form>
+
+    <script>
+        /**
+         * * NOTAÇÃO MAIS CURTA: form.name
+         * 
+         * Há uma notação mais curta: podemos acessar o elemento como form[index/name].
+         * 
+         * Em outras palavras, em vez de form.elements.login podemos escrever form.login.
+         * 
+         * Isso também funciona, mas há um pequeno problema: se acessarmos um elemento e depois alterarmos seu name, ele ainda estará disponível sob o nome antigo (assim como sob o novo).
+         * 
+         * Isso é fácil de ver em um exemplo:
+        */
+
+        //usando duas formas diferentes de acessar o mesmo elemento do formulario
+        //1. usando a notação tradicional, acessando o elemento form, atraves da collection elements, por meio do nome do elemento que queremos obter
+        //2. usando a notação curta form[index/name], obtendo o elemento do form com o nome login por meio da notação curta sem precisar acessar collections
+        console.log(form.elements.login == form.login); //verdade, o mesmo <input>
+
+        //acessa o atributo name do elemento login e modifica seu nome, atribuindo um novo
+        form.login.name = "username"; //alterar o nome da entrada
+
+        //form.elements atualizou o nome:
+        //acessando o elemento do formulario com nome login antigo e com o nome novo username, por meio da collection elementos, por aqui e normal so pode acessar o elemento por meio do nome atual
+        console.log(form.elements.login); //undefined
+        console.log(form.elements.username); //input
+
+        //formulário permite ambos os nomes: o novo e o antigo
+        //o unico problema que ha quando se usa notação curta e que quando alteramos o nome do elemento ele ainda e acessivel pelo seu nome antigo, e também pelo novo
+        console.log(form.username == form.login); //true
+
+        /**
+         * Isso geralmente não é um problema, porque raramente mudamos os nomes dos elementos do formulário.
+        */
+    </script>
+</body>
+</html>

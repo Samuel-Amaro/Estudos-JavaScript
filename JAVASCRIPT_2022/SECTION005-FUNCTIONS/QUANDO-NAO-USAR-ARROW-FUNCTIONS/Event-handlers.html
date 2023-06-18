@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+
+    <!--campo de input de um forma-->
+    <input type="text" name="username" id="username" placeholder="Entre com seu nome de usuario">
+
+    <!--mostra uma mensagem de saudação-->
+    <div id="greeting"></div>
+
+    <script>
+        /**
+         * * 1) EVENT HANDLERS(MANIPULADORES DE EVENTO)
+         * 
+         * Suponha que você tenha o seguinte campo de texto de entrada:
+         * 
+         * E você deseja mostrar uma mensagem de saudação quando os usuários digitarem seus nomes de usuário. O seguinte mostra o <div> elemento que exibirá a mensagem de saudação:
+         * 
+         * Depois que os usuários digitam seus nomes de usuário, você captura o valor atual da entrada e o atualiza para o <div> elemento:
+        */
+        //elemento html que possui a saudacao
+        const greeting = document.querySelector('#greeting');
+        //obtem o nome de usuario
+        const username = document.querySelector('#username');
+        //cria um manipulador de evento que e acionado toda vez que um tecla e soltada
+        //passa para o metodo add event listerner, uma arrow function anonima que não possui paramentro mas tem varias declarações
+        //não se deve usar uma arrow function em um manipulador de evento
+        //username.addEventListener('keyup', () => {
+            //greeting.textContent = `Hello ${this.value}`;
+        //});
+
+        /**
+         * No entanto, ao executar o código, você receberá a seguinte mensagem, independentemente do que digitar:
+         
+            Hello undefined
+
+         * 
+         * Isso significa que o this.value in no manipulador de eventos sempre retorna undefined.
+         * 
+         * Conforme mencionado anteriormente, a arrow function não tem seu próprio this valor. Ele usa o this valor do escopo léxico delimitador. A this arrow function neste exemplo faz referência ao objeto global.
+         * 
+         * No navegador da web, o objeto global é window. O window objeto não possui a value propriedade. Portanto, o mecanismo JavaScript adiciona a propriedade value ao window objeto e define seus valores como undefined.
+         * 
+         * Para corrigir esse problema, você precisa usar uma função normal. O this valor será vinculado ao <input> elemento que dispara o evento.
+         * */
+
+        //forma correta
+        //usa-se a function regular anonima para manipuladores de evento 
+        username.addEventListener('keyup', function() {
+            greeting.textContent = `Hello ${this.value}`;
+        }); 
+    </script>
+
+</body>
+</html>

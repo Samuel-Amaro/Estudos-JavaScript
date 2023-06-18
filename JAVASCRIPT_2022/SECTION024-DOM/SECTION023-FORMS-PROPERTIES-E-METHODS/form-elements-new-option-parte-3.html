@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * new option(Nova opção)
+         * 
+         * Na especificação , há uma sintaxe curta e agradável para criar um <option> elemento:
+         
+            let option = new Option(text, value, defaultSelected, selected);
+
+         * 
+         * Esta sintaxe é opcional. Podemos usar document.createElement('option')e definir atributos manualmente. Ainda assim, pode ser mais curto, então aqui estão os parâmetros:
+         * 
+            * text– o texto dentro da opção,
+            * 
+            * value – o valor da opção,
+            * 
+            * defaultSelected – if true, então selected o atributo HTML é criado,
+            * 
+            * selected – se true, então a opção está selecionada.
+            * 
+         *
+         * A diferença entre defaultSelected e selected é que defaultSelected define o atributo HTML (que podemos obter usando option.getAttribute('selected'), enquanto selected define se a opção está selecionada ou não.
+         * 
+         * Na prática, geralmente deve-se definir ambos os valores para true ou false. (Ou, simplesmente omita-os; ambos são padronizados para false.)
+         * 
+         * Por exemplo, aqui está uma nova opção "não selecionada":
+        */
+
+        //usando a sintaxe de notação curta para criar um novo <option> elemento
+        //os argumentos passados para o construtor option são: o texto que ira dentro do option elemento, o valor do option
+        let option = new Option("Text", "value");
+        //cria <option value="value">Texto</option>
+
+        /**
+         * A mesma opção, mas selecionada:
+        */
+
+        //cria um novo <option> elemento usando a sintaxe de notação curta da especificação
+        //os argumentos passados são: text que ira dentro do option, valor do option elemento, cria o atributo html selected, para o option elemento
+        //e atribui o valor true para o selected atributo criado para que este option se torne o elemento selecionado do select
+        let option2 = new Option("Text", "value", true, true);
+
+        /**
+         * Os elementos de opção têm propriedades:
+         * 
+            *  option.selected -> A opção está selecionada.
+            *
+            * option.index -> O número da opção entre as demais em seu <select>.
+            * 
+            * option.text -> Conteúdo de texto da opção (visto pelo visitante).
+        */
+    </script>
+</body>
+</html>

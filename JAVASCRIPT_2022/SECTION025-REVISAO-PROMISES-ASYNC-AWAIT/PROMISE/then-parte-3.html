@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Se estamos interessados ​​apenas em conclusões bem-sucedidas, podemos fornecer apenas um argumento de função para .then:
+        */
+       
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        //exemplop abaixo de uma promisse cumprida - promisse fulfilled
+        let promise = new Promise(function(resolve, reject) {
+            //executor realizando tentativa de executar trabalho
+            //a função executor é executada automaticamente quando a promessa é construída
+            //a function callback executor e chamada automaticamente e imediatamente por new Promisse
+            // após 1 segundo sinaliza que o trabalho está concluído com o result "done"
+            //apos passar 1 segundo o trabalho foi realizado e chamamos resolve("feito"), passando string "feito" como valor para sinalizar que trabalho foi bem sucedido
+            //assim a promisse muda seu state propriedade para "fulfilled" e seu result propriedade para "done"
+            //apos 1 segundo altera o estado da promisse para resolvido
+            setTimeout(() => resolve("feito"), 1000);
+        });
+
+        //registrando uma função consumidora com metodo then, ela recebera somente o resultado
+        //quando estamos apenas interessados em apenas conclusões bem-sucedidas podemos fornecer apenas um argumento de função para .then
+        //fornecemos apenas o argumento result, que e o resultado do trabalha ja finalizado pela promisse, estamos consumindo o valor resolvido pela promisse
+        promise.then(result); //mostra "done!" apos 1 segundo
+
+    </script>
+
+</body>
+</html>

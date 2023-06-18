@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <ul id="ul"></ul>
+
+    <script type="text/javascript">
+       
+       /**
+        * DocumentFragment raramente é usado explicitamente. Por que anexar a um tipo especial de nó, se podemos retornar uma array de nós? Exemplo reescrito:
+        */
+
+        function getListContent() {
+
+            //criamos uma instacia de objeto array anonima vazia, atribuida por referencia a variavel result
+            let result = [];
+
+            for(let i = 1; i<=3; i++) {
+                //usando metodo de criação de nós de elemento, document.createElement(tag), cria um no de elemento <li>
+                let li = document.createElement('li');
+                //anexa o valor i no final do li no
+                li.append(i);
+                //anexa o no de elemento <li> no final do array referenciado por result
+                result.push(li); 
+            }
+
+            return result;
+        }
+
+        //como o metodo de inserção elem.append(node ou string) ... pode receber uma lista arbitraria de argumentos, usamos o operador de desestruturação de array para desestruturar cada item do array em elementos individuais passados como argumento para o metodo append, cada item do array desestruturado individualmente e anexado ao final do ul no
+        ul.append(getListContent()); //append + "..." operador = amigos!
+
+        /***
+         * Mencionamos DocumentFragment principalmente porque existem alguns conceitos em cima dele, como elemento de template, que abordaremos muito mais tarde.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto Tipo Array</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO O MÉTODO JS ARRAY UNSHIFT() COM OBJETOS DO TIPO ARRAY
+         * 
+         *  
+         * O unshift() método é genérico. Portanto, ele pode funcionar bem com objetos do tipo array. Para chamar o unshift() método de um objeto tipo array, você o pega emprestado de um objeto array usando o método call()ou apply().
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara um objeto literal com propriedades e metodos, este objeto literal e atribuido a variavel greetings por referencia, assim a variavel referencia greetings
+        //declara um objeto do tipo array
+        let greetings = {
+            //declara propriedades do objeto usando sintaxe chave : valor
+            0: 'Hi',
+            1 : 'Hello',
+            2 : 'Howdy',
+            length: 3,
+            //declara um metodo do objeto usando a sintaxe ES6, ocultando palavra chave function e o :, o metodo chamado prepend declara um parametro chamado message, lembrando que isso e uma function, então e uma instancia de objeto do tipo function possui propriedades e metodos
+            prepend(message) {
+                //aqui utilizamos o metodo call para fazer ligações.
+                //o metodo call e um metodo da instancia de objeto do tipo function chamada unshift o metodo
+                //o metodo unshift ira adionar elementos ou somente um unico elemento no inicio do array    
+                //o metodo call ira fazer a ligação de um this valor invocar o metodo unshift com os argumentos ou argumento passado para call
+                //aqui o this sera o proprio objeto literal que e do tipo array, invocara o unshift metodo por meio de call obtendo os argumentos passados para call, call obtem os argumentos passados para a prepend metodo do objeto literal
+                //em outras palavras o objeto literal referenciado por greetings toma emprestado o unshift metodo de um objeto array[]
+                [].unshift.call(this, message);
+                //depois de adicionar o novo elemento no inicio do objeto
+                //retorna o novo comprimento do objeto tipo array
+                return this.length;
+            }
+        }; 
+
+        //invocando o metodo prepend para adicionar o valor good day como a primeiria propriedade do objeto
+        //isso so e possivel por causa do call metodo
+        greetings.prepend('Good day');
+
+        console.log(greetings);
+
+
+        //para permitir que o prepend metodo adicone mais de um elemento como propriedade no inicio do objeto referenciado por greetings temos que usar os parametro rest e o operador spread
+        //mesmo exemplo acima so que modificamos o metodo prepend
+        let greetings = {
+            0: 'Hi',
+            1 : 'Hello',
+            2 : 'Howdy',
+            length: 3,
+            //modificando o metodo prepend para receber um numero indefinido de argumentos, usando o paramentro do tipo rest o prepend metodo podera receber varios argumentos por meio do rest parametro
+            prepend(...messages) {
+                //utilizando o spread operador para descompactar os argumentos passados para o prepend metodo, o spread operador ira descompactar o rest parametro array em elementos individuais para serem adicionados no inicio do objeto como propriedades por meio da ligaçaõ de call ao unshift metodo
+                [].unshift.call(this, ...messages);
+                return this.length;
+            }
+        }; 
+
+        /**
+         * Neste exemplo, o prepend() método aceita uma ou mais mensagens (...messages) e as passa para o unshift()método individualmente usando o operador spread.
+         * 
+         * * RESUMO 
+         * 
+         * Use o método de array JavaScript unshift() para adicionar um ou mais elementos ao início de uma array.
+         * 
+         * O unshift() método também funciona com o objeto tipo array usando o método call() ou apply().
+        */
+    </script>
+</body>
+</html>

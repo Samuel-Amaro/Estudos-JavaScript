@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(null, script);
+
+            //atribui um manipulador de evento por meio da propriedad dom
+            //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+            //assim o callback e executado, tratando o erro, lançando um erro
+            script.onerror = () => callback(new Error(`Erro de carregamento de script para ${src}`));
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+
+        /**
+         * 
+         * Vamos prometer.
+         * 
+         * Faremos uma nova função loadScriptPromise(src), que faz o mesmo (carrega o script), mas retorna uma promessa ao invés de usar callbacks.
+         * 
+         * Em outras palavras, passamos apenas src(no callback) e recebemos uma promessa em retorno, que resolve script quando o carregamento é bem-sucedido e rejeita com o erro caso contrário.
+         * 
+         * Aqui está:
+        *
+        */
+
+        //APLICANDO promisificação(processo de transformação/conversão de uma função que aceita um callback em uma função que retorna um promisse)
+
+        let loadScriptPromise = function(src) {
+            //cria uma nova Promise
+            return new Promise(function executor(resolve, reject) {
+                //trabalho da promisse, carregar um script externo com um dado src
+                loadScript(src, (err, script) => {
+                    //se um objeto de error existe, e porque houve erro no carregamento
+                    if(err)
+                        //rejeita a promisse com um err argumento
+                        reject(err);
+                    else
+                        //se nenhum erro existe e porque carregamento foi bem sucedido, resolvemos a promisse com o argumento script
+                        resolve(script);
+                });
+            });
+        }
+
+        //uso:
+        //loadScriptPromise('path/script.js').then(...);
+
+        /**
+         * Como podemos ver, a nova função é um wrapper em torno da loadScript função original. Ele o chama fornecendo seu próprio retorno de chamada(callback) que se traduz em promessa resolve/reject.
+         * 
+         * Agora loadScriptPromise se encaixa bem no código baseado em promessa. Se gostamos mais de promessas do que de retornos de chamada (e em breve veremos mais razões para isso), então a usaremos.
+         * 
+         */
+    </script>
+
+</body>
+</html>

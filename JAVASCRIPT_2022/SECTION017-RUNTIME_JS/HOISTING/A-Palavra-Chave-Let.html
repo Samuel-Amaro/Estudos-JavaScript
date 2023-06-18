@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * A PALAVRA-CHAVE LET
+         * 
+         * O seguinte declara a variável counter com a let palavra-chave:
+        */
+       
+        //quando esses script e executado pela primeira vez pelo mecanismo JS, ele cria o contexto de execução global, que possui duas fases a de criação e execução, na fase de criação o mecanismo js move as declarações de variaveis e funções para topo do codigo inicio do script(isso e conhecido como içamento - hosting)
+        //tentar acessar o conteudo que uma variavel armazena antes de ser declarada
+        //essa linha de codigo abaixo gera um erro, pois tenta acessar o conteudo de uma variavel que não foi inicializada, o mecanismo javascript eleva a variavel ao topo do script mas não a inicializa com undefined com a var varaivel
+        //o mecanismo javascript move a declaração da variavel acessada para o inicio do script(içamento - hoisting)
+        console.log(counter);
+
+        //declara uma varaivel de escopo de bloco usando a palavra-chave let, variavel e chamada counter que e inicializada com o valor 1
+        let counter = 1;
+
+        /**
+         * O JavaScript emite o seguinte erro:
+         
+            "ReferenceError: Cannot access 'counter' before initialization
+
+         * A mensagem de erro explica que a variável do contador já está na memória heap. No entanto, não foi inicializado.
+         * 
+         * Nos bastidores, o mecanismo JavaScript eleva as declarações de variáveis ​​que usam a palavra-chave let. No entanto, ele não inicializa as let variáveis.
+         * 
+         * Observe que, se você acessar uma variável que não existe, o JavaScript lançará um erro diferente:
+        */
+
+        //tentar acessar o conteudo de um variavel que não existe, que não foi declarada
+        console.log(alien);
+
+        /**
+         * Aqui esta o erro
+        
+            "ReferenceError: alien is not defined
+        */
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function and propriedade prototype</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTIONS E A PROPRIEDADE PROTOTYPE
+         * 
+         * Quando você define uma função usando uma function palavra - chave, a função tem uma propriedade chamada prototype:
+         * */
+
+        //declara uma function chamada dump que possui um paramentro chamado message
+        function dump(message) {
+            console.log(message);
+        }
+
+        console.log(dump.hasOwnProperty('prototype')); //true
+
+        /**
+         * No entanto, as arrow function não têm a prototype propriedade:
+         * */
+
+        //declara uma expressão de função
+        //declara uma arraw function anonima, que possui uma expressão de retorno, possui um paramentro a arrow function e não precisa usar parentes
+        let dump = message => console.log(message);
+
+        console.log(dump.hasOwnProperty('prototype')); //false
+
+        /**
+         * É uma boa prática usar arrow functions para retornos de chamada e fechamentos porque a sintaxe das arrow functions é mais limpa.
+         * */
+    </script>
+</body>
+</html>

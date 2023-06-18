@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        /**
+         * * MÉTODO keys() - chaves exemplo
+         * 
+         * O exemplo a seguir usa o keys()método para listar todos os nomes de parâmetros de uma string de consulta:
+         * */
+
+        //location.search é uma string que representa a string de consulta da URL:
+        //o URLSearchParams retorna uma instancia de objeto atribuida por referencia a constante urlParams
+        //o construtor URLSearchParams recebe como argumento uma string com paramentros de consulta de uma URL
+        const urlParams = new URLSearchParams('?type=list&page=20');
+
+        //usando a construção for...of para iterar sobre as chaves de um iterator(objeto iteravel), sendo que cada chave representa um nome de paramentro de uma string de consulta de um URL
+        //keys() retorna um iterador que itera sobre as chaves de parâmetro.
+        for(const key of urlParams.keys()) {
+            console.log(key);
+        }
+    </script>
+</body>
+</html>

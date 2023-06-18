@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+
+    <!--
+        atributos data- são atributos não padrão personalizaveis para marcar elementos html para passar dados html para o javascript ou marcar elementos html para o javascript, aqui nesse caso usamos o atributo não padrão personalizavel, para marcar o comportamento do elemento .
+    -->
+    <button data-toggle-id="subscribe-email">
+        Mostrar o formulário de inscrição
+    </button>
+
+    <form id="subscribe-email" hidden="true">
+        <label for="email">Seu Email:</label>
+        <input type="email" name="email"/>
+    </form>
+
+    <script type="text/javascript">
+        /**
+         * * PADRÃO COMPORTAMENTO ALTERNAR
+         * 
+         * Mais um exemplo de comportamento. Um clique em um elemento com o atributo data-toggle-id mostrará/ocultará o elemento com o dado id:
+        */
+
+        //atribui um manipulador de evento usando elem.addEventListener(event, handler, options);
+        //atribui uma manipulador de evento ao document que e o <html> ao clicar no documento o manipulador sera acionado
+        //o manipulador e uma function anonima que declara o  paramentro event que e um event object que contem informações sobre evento ocorrido
+        document.addEventListener('click', function(event) {
+            //se exister um atributo de dados não personalizado chamado data-toggle-id 
+            //no elemento que iniciou o evento(o elemento que recebeu o click) a propriedade abaixo obtera seu valor, obtera o valor do atributo não padrão personalizado especificado
+            //obtem o valor do atributo não padrão personalizado que recebeu o click, que iniciou o evento e borbulhou até o document acionando seu manipulador do document
+            let id = event.target.dataset.toggleId;
+            
+            //verifica se possui valor especificado no atributo
+            if(!id)
+                return;
+
+            //obtem no dom pelo id
+            let elem = document.getElementById(id);
+
+            //se elem estiver ocultado mostra, se não estiver ocultado, oculta
+            elem.hidden = !elem.hidden;
+        });
+
+        /**
+         * Vamos anotar mais uma vez o que fizemos. Agora, para adicionar a funcionalidade de alternância a um elemento – não há necessidade de conhecer JavaScript, basta usar o atributo data-toggle-id.
+         * 
+         * Isso pode se tornar muito conveniente – não há necessidade de escrever JavaScript para cada um desses elementos. Basta usar o comportamento. O manipulador de nível de documento faz com que funcione para qualquer elemento da página.
+         * 
+         * Também podemos combinar vários comportamentos em um único elemento.
+         * 
+         * O padrão “comportamento” pode ser uma alternativa aos mini-fragmentos de JavaScript.
+         * */
+    </script>
+</body>
+</html>

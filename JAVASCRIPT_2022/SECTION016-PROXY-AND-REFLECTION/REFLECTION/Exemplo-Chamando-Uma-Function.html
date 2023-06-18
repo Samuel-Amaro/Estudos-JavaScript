@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REFLECTION JS - REFLEXÃO
+         * 
+         * * CHAMANDO UMA FUNCTION: Reflect.apply()
+         * 
+         * Antes do ES6, você chama uma função com um this valor especificado e arguments usando o Function.prototype.apply() método. Por exemplo:
+        */
+
+        //no codigo abaixo usando o Function.prototype.apply.call, iremos invocar um function com um determinado this valor
+        //aqui iremos invocar a function max, com o this Valor Math, que passa o argumento array literal anonimo para o max metodo
+        let result = Function.prototype.apply.call(Math.max, Math, [10, 20, 30]);
+        console.log(result);
+
+        /**
+         * Essa sintaxe é bastante detalhada.
+         * 
+         *  O Reflect.apply() fornece o mesmo recurso que o, Function.prototype.apply() mas menos detalhado e mais fácil de entender:
+        */
+
+        //usando a API REFLECTION
+        //para invocar o metodo estatico apply
+        //usando o objeto global Reflect, que não e construtor e nem uma function, podemos invocar métodos estaticos por meio dele
+        //o reflect Api permite chamar métodos, construir objetos, obter e definir propriedades, manipular e estender propriedades, por meio de em tempo de execução.
+        //Por meio do objeto Reflect vamos invocar o metodo apply estatico, que chama uma função com argumentos especificados.
+        //apply método permite chamar uma função com um determinado this valor e argumentos fornecidos como um array.
+        //a variavel result recebera o resultado da, invocação do método max que retorna o maior valor
+        //o this valor que ira invocar o max metodo e o Math, que invocar o metodo max, passando o array literal anonimo como argumento
+        //tudo isso sera feito em tempo de execuçaõ do script 
+        let result2 = Reflect.apply(Math.max, Math, [10, 20, 30]);
+        console.log(result2);
+
+        /**
+         * Segue a sintaxe do Reflect.apply() método:
+         
+            Reflect.apply(target, thisArg, args);
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Spread</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OPERADOR DE SPREAD AND MÉTODO APPLY()
+         * 
+         * Veja a compare() função a seguir compara dois números:
+        */
+
+        //declara uma function chamada compare que possui dois paramentros declarados chamdos a, e b
+        //lembrando que uma function e uma instancia de objeto do tipo function que possui propriedades e metodos
+        function compare(a, b) {
+            //retorna a subtração dos argumentos
+            return a - b;
+        }
+
+        /**
+         * No ES5, para passar uma array de dois números para a compare() função, você geralmente usa o apply() método da seguinte forma:
+        */
+
+        //usando a sintaxe do ES5
+        //usando o metodo apply metodo da instancia de objeto do tipo function chamda de compare 
+        //o metodo apply sera usado para  chamar uma function com um determinado this valor e argumentos fornecidos como um array
+        //aqui o apply metodo ira chamar a function compare com um novo this valor que sera o null, passando os argumentos para a function compare como um array por meio de apply metodo
+        //o null this valor e porque não ha um objeto para realizar a chamada pois esta no contexto global não precisa
+        let result = compare.apply(null, [1, 2]);
+        //chama a compare function como 
+        //null.compare([1, 2]);
+        console.log(`1 - 2 = ${result}`);
+
+        /**
+         * No entanto, usando o operador spread, você pode passar uma array de dois números para a compare() função:
+        */
+
+        //mesma logica do exempl acima, so que aqui usamos o operador spread para descompactar o array em elementos invidivuais na ordem declarada dos elementos no proprio array, assim para passar a ordem correta dos elementos como os argumentos individuais para a invocação da function compare
+        //assim o operador spread espalha os elementos do array de forma individual como o elemento 1 e o argumento a e o elemento 2 e o argumento b
+        let result2 = compare(...[1, 2]);
+        console.log(`1 - 2 = ${result2}`); //-1
+
+        /**
+         * O operador de propagação espalha os elementos da array, assim a é 1 e b é 2 neste caso.
+        */
+
+    </script>
+</body>
+</html>

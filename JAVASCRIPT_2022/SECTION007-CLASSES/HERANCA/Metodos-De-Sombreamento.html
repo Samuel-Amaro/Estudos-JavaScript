@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos De Sombreamento</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODOS DE SOMBREAMENTO
+         * 
+         * O ES6 permite que a classe filha e a classe pai tenham métodos com o mesmo nome. Nesse caso, quando você chama o método de um objeto da classe filha, o método da classe filha irá sombrear o método da classe pai.
+         * 
+         * A Dog classe a seguir estende a Animal classe e redefine o walk()método:
+        */
+
+        //define uma class chamada Animal, usando a palavra chave class
+        class Animal{
+            //define um construtor com paramentros declarados, como legs, esses paramentros inicializam propriedades
+            constructor(legs) {
+                //declara uma propriedade chamda legs e a inicializa com o argumento legs
+                this.legs = legs;
+            }
+            //declara um método da classe, chamado walk, sem paramentros declarados
+            walk() {
+                console.log(`Walking on ${this.legs} legs`);
+            }
+        }
+
+        //define um class chamada dog, usando a palavra chave class, essa class dog e uma classe derivada, uma classe filha, porque extende(herda) propriedades e metodos da Animal class
+        class Dog extends Animal{
+            //define um construtor para a Dog class, sem paramentros
+            constructor() {
+                //invoca o construror da super classe, da classe base, classe pai, Animal, informando o argumento 4 para o construtor
+                //o super inicializa o this objeto da Dog classe e necessario chamalo antes de tentar acessar o this objeto
+                super(4);
+            }
+            //declara um metodo chamado walk, um metodo declarada na classe filha, com o mesmo nome de um metodo declarado na classe Pai Animal
+            //esse método declarado em Dog class possui o mesmo nome e mesma assinatura que o método em Animal class pai
+            //O ES6 permite que class pai e filham tenham métodos com o mesmo nome
+            walk() {
+                console.log('go walking');
+            }
+        }
+
+        //declara uma instancia de objeto chamada bingo, usando new operador e invocando o construtor da classe Dog
+        //a instancia de objeto criada e atribuida por referencia a variavel bingo
+        let bingo = new Dog();
+        //exemplo de sombreamento de método
+        //invocando o método walk(), mas qual walk vai ser invocado ? da classe pai ou class filha
+        //chamando o método por meio do objeto da class filha, assim o metodo invocado por meio da class filha ira sombrear o metodo da classe pai, ira encobrir o método da classe pai
+        bingo.walk();
+
+        /**
+         * Para chamar o método da classe pai na classe filha, você usa super.method(arguments) assim:
+        */
+
+        //define um class chamada dog2, usando a palavra chave class, essa class dog2 e uma classe derivada, uma classe filha, porque extende(herda) propriedades e metodos da Animal class
+        class Dog2 extends Animal{
+            //define um construtor para a Dog class, sem paramentros
+            constructor() {
+                //invoca o construror da super classe, da classe base, classe pai, Animal, informando o argumento 4 para o construtor
+                //o super inicializa o this objeto da Dog classe e necessario chamalo antes de tentar acessar o this objeto
+                super(4);
+            }
+            //declara um metodo chamado walk, um metodo declarada na classe filha, com o mesmo nome de um metodo declarado na classe Pai Animal
+            //esse método declarado em Dog class possui o mesmo nome e mesma assinatura que o método em Animal class pai
+            //O ES6 permite que class pai e filham tenham métodos com o mesmo nome
+            walk() {
+                //chama o método que possui o mesmo nome na classe pai
+                //chama(invoca) o método da class Pai
+                super.walk();
+                console.log('go walking');
+            }
+        }
+
+        //declara uma istancia de objeto
+        let bingo2 = new Dog2();
+        //chama o metodo da classe filha - sombreamento
+        bingo2.walk();
+        //walking on 4 legs
+        //go walking
+        
+    </script>
+</body>
+</html>

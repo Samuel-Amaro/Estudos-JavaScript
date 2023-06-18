@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="elem">Clique Aqui!</button>
+
+    <script type="text/javascript">
+        /**
+         * * Object Handlers: handleEvent(Objeto de manipuladores)
+         *
+         * Podemos atribuir não apenas uma função, mas um objeto como manipulador de eventos usando addEventListener. Quando um evento ocorre, seu handleEvent método é chamado.
+         * 
+         * Por exemplo:
+         *  
+        */
+
+        //declara uma objeto literal anonimo que e atribuido por referencia a variavel obj
+        let obj = {
+            //declara um metodo chamado manipulador evento que declara uma paramentro chamado event, que e um objeto de evento que contem detalhes sobre um evento que aconteceu ou esta acontecendo
+            handleEvent(event) {
+                //propriedade event.type retorna o tipo do evento
+                //propriedade event.currentTarget retorna o elemento que tratou o evento
+                alert(event.type + " at " + event.currentTarget);
+            }
+        };
+
+        //atribuindo a variavel obj que referencia o objeto anonimo como o manipulador do evento de click no elem
+        //podemos atribuit um objeto como manipulador de evento também somente por meio de
+        //por meio do metodo elem.addEventListener(event, handler, options);
+        //o metodo elem.addEventListener ao receber obj como manipulador do evento, ele chama o metodo obj.handleEvent(event) em caso de evento para tratar o evento
+        elem.addEventListener('click', obj);
+
+        /**
+         * Como podemos ver, ao addEventListener receber um objeto como manipulador, ele chama obj.handleEvent(event) em caso de evento.
+         * 
+         * Também poderíamos usar uma classe para isso:
+        */
+
+        //declara uma class chamada Menu
+        class Menu{
+            //declara um metodo para a classe chamado handleEvent(manipulador evento) que declara um paramentro chamado event que e um objeto de evento que contem detalhes sobre um evento que aconteceu ou esta acontecendo
+            handleEvent(event) {
+                //analise o tipo de evento
+                switch(event.type) {
+                    //evento de botão de mouse sobre elemento pressionado
+                    case 'mousedown':
+                        //inseri conteudo html em elem
+                        elem.innerHTML = "Mouse botton pressed";
+                        break;
+                    //evento de mouse botão de mouse sobre elemento solto
+                    case 'mouseup':
+                        elem.innerHTML += "...and released.";
+                        break;
+                }
+            }
+        }
+
+        //declara uma instancia de objeto anonima e atribui a variavel menu
+        let menu = new Menu();
+        //atribui um objeto como uma manipulador de evento em elem, o mesmo objeto ira manipular dois tipos de eventos diferentes no mesmo elemento
+        //o metodo elem.addEventListener(event, handler, options) ira chamar obj menu para chamar o seu metodo handleEvent, passando o objeto event com detalhes sobre o evento para que  quando um evento ocorrer em elem, assim dentro de handlerEvent ira determina qual manipulador sera executado
+        elem.addEventListener('mousedown', menu);
+        elem.addEventListener('mouseup', menu);
+
+        /**
+         * Aqui o mesmo objeto trata os dois eventos. Observe que precisamos configurar explicitamente os eventos para ouvir usando addEventListener. O menu objeto só fica mousedown e mouseup aqui, não qualquer outro tipo de evento.
+         * 
+         * O método handleEvent não precisa fazer todo o trabalho sozinho. Ele pode chamar outros métodos específicos do evento, como este:
+        */
+
+        //declara uma class chamada Menu2
+        class Menu2{
+            //declara um metodo para a classe chamado handleEvent(manipulador evento) que declara um paramentro chamado event que e um objeto de evento que contem detalhes sobre um evento que aconteceu ou esta acontecendo
+            handleEvent(event) {
+                // mousedown -> onMousedown
+                //transforma a string
+                let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);
+                //this aqui e o proprio class Menu2 chamando method e passando evento objeto como argumento
+                this[method](event);
+                console.log(this);
+            }
+
+            //metodo da classe
+            //metodo manipulador de evento
+            onMousedown() {
+                elem.innerHTML = "Mouse button pressed";   
+            }
+
+            //metodo da classe
+            //metodo manipulador de evento
+            onMouseup() {
+                elem.innerHTML += "..and released";
+            }
+        }
+        
+        //declara uma instancia de objeto anonima e atribui por referencia a variavel menu2
+        let menu2 = new Menu2();
+        //atribui o obj como uma manipulador do evento em elem
+        //este objeto sera o manipulador de evento para dois eventos diferentes no mesmo elemento
+        //o metodo elem.addEventListener(event, handler, options) ira chamar obj.hadlerEvent(event) passando event como argumento para manipular o evento ocorrido em elem
+        elem.addEventListener('mousedown', menu2);
+        elem.addEventListener('mouseup', menu2);
+
+        /* 
+         * Agora os manipuladores de eventos estão claramente separados, o que pode ser mais fácil de suportar.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * SYNCHRONOUS REQUESTS(REQUEST SINCRONOS)
+         * 
+         * Se no open método o terceiro parâmetro async estiver definido como false, a solicitação será feita de forma síncrona.
+         * 
+         * Em outras palavras, a execução do JavaScript é pausada send() e retomada quando a resposta é recebida. Um pouco como alert ou prompt comandos.
+         * 
+         * Aqui está o exemplo reescrito, o terceiro parâmetro de open é false:
+        */
+
+        //MODO DE OPERAÇÃO ASSINCRONO
+
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+        //2. passo para fazer request
+        //2. Configure-o: GET-request para a URL
+        //configurando o request, informando metodo http, e o url a fazer o request, o terceiro argumento informado no metodo open e para informar que sera uma request sincrona
+        xhr.open('GET', 'https://javascript.info/article/xmlhttprequest/hello.txt', false);
+
+        try {
+            //3. passo para fazer request, 
+            //enviando o request, não informando o body, no caso de method HTTP get não precisa de informar body
+            //aqui a request e enviada pela rede, o metodo abre conexão e envia a request ao servidor.
+            //a execução do mencanismo JavaScript e pausada em send() e retormanda quando a response for recebida
+            xhr.send();    
+            //propriedade xhr.status informa o codigo de status HTTP
+            if(xhr.status != 200) {
+                //propriedade xhr.statusText informa mensagem de status HTTP
+                alert(`Error: ${xhr.status}: ${xhr.statusText}`);
+            }else{
+                //obtem o objeto response, com o recurso solicitado
+                alert(xhr.response);
+            }
+        } catch (error) { //em vez de um erro
+            alert("Request falhou");
+        }
+        
+        /**
+         * Pode parecer bom, mas as chamadas síncronas raramente são usadas, porque bloqueiam o JavaScript na página até que o carregamento seja concluído. Em alguns navegadores torna-se impossível rolar. Se uma chamada síncrona demorar muito, o navegador pode sugerir o fechamento da página da Web "suspensa".
+         * 
+         * Muitos recursos avançados de XMLHttpRequest, como solicitar de outro domínio ou especificar um tempo limite, não estão disponíveis para solicitações síncronas. Além disso, como você pode ver, nenhuma indicação de progresso.
+         * 
+         * Por tudo isso, as solicitações síncronas são usadas com muita parcimônia, quase nunca. Não falaremos mais sobre eles.
+        */
+    </script>
+
+</body>
+</html>

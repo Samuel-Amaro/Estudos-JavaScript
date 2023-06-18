@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+
+    <script>
+        /**
+         * 
+         * Se quisermos executar uma função de forma assíncrona (após o código atual), mas antes que as alterações sejam renderizadas ou novos eventos sejam tratados, podemos agendá-la com queueMicrotask.
+         * 
+         * Aqui está um exemplo com “barra de progresso de contagem”, semelhante à mostrada anteriormente, mas queueMicrotask é usada em vez de setTimeout. Você pode ver que ele renderiza no final. Assim como o código síncrono:
+        */
+
+        let i = 0; 
+
+        function count() {
+            
+            //faça um pedaço do trabalho pesado (*)
+            //conta 1000
+            //executa a macrotarefa de contar
+            do{
+                i++;
+                progress.innerHTML = i;
+            }while(i % 1e3 != 0);
+        }
+
+        //enquanto i for menor que um milhão
+        if(i < 1e6) {
+            //função especial queueMicrotask(func) que enfileira func para execução na fila de microtarefas.
+            queueMicrotask(count);
+        }
+    </script>
+</body>
+</html>

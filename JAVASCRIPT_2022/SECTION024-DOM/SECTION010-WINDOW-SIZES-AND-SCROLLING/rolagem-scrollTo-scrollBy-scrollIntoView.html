@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * Rolagem: scrollTo, scrollBy, scrollIntoView
+        * 
+        * Importante:
+        * 
+        * Para rolar a página com JavaScript, seu DOM deve ser totalmente construído.
+        * 
+        * Por exemplo, se tentarmos rolar a página com um script em <head>, não funcionará.
+        * 
+        * Elementos regulares podem ser rolados alterando scrollTop/scrollLeft.
+        * 
+        * Podemos fazer o mesmo para a página usando document.documentElement.scrollTop/scrollLeft(exceto Safari, onde document.body.scrollTop/Left deve ser usado).
+        * 
+        * Como alternativa, há uma solução universal mais simples: métodos especiais window.scrollBy(x,y) e window.scrollTo(pageX,pageY) .
+        * 
+        
+            - O método scrollBy(x,y) rola a página em relação à sua posição atual . Por exemplo, scrollBy(0,10)rola a página 10px para baixo.
+
+            - O método scrollTo(pageX,pageY) rola a página para coordenadas absolutas , de modo que o canto superior esquerdo da parte visível tenha coordenadas (pageX, pageY)relativas ao canto superior esquerdo do documento. É como configurar scrollLeft/scrollTop.
+
+            Esses métodos funcionam para todos os navegadores da mesma maneira.
+
+         * 
+         * * elem.scrollIntoView
+         * 
+         * Para completar, vamos abordar mais um método: elem.scrollIntoView(top).
+         * 
+         * A chamada para elem.scrollIntoView(top) rola a página para torná-la elem visível. Tem um argumento:
+         
+            - Se top=true(esse é o padrão), a página será rolada para elem aparecer na parte superior da janela. A borda superior do elemento será alinhada com o topo da janela.
+
+            - Se top=false, a página rola para elem aparecer na parte inferior. A borda inferior do elemento será alinhada com a parte inferior da janela.
+
+         * 
+         * * Proibir a rolagem(Forbid the scrolling)
+         * 
+         * Às vezes precisamos tornar o documento “unscrollable(impossível de rolar)”. Por exemplo, quando precisamos cobrir a página com uma mensagem grande que requer atenção imediata e queremos que o visitante interaja com essa mensagem, não com o documento.
+         * 
+         * Para tornar o documento impossível de rolar, basta definir document.body.style.overflow = "hidden". A página irá “congelar” em sua posição de rolagem atual.
+         * 
+         * Podemos usar a mesma técnica para congelar o scroll para outros elementos, não apenas para document.body.
+         * 
+         * A desvantagem do método é que a barra de rolagem desaparece. Se ocupou algum espaço, então esse espaço agora está livre e o conteúdo “salta” para preenchê-lo.
+         * 
+         * Isso parece um pouco estranho, mas pode ser contornado se compararmos clientWidth antes e depois do congelamento. Se aumentou (a barra de rolagem desapareceu), adicione padding no document.body lugar da barra de rolagem para manter a mesma largura do conteúdo.
+         * */
+
+
+    </script>
+</body>
+</html>

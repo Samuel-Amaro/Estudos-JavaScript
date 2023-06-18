@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="./eventflow (1).svg" alt="image"/>
+
+    <form>FORM
+        <div>DIV
+            <p>P</p>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        /**
+         * * CAPTURING(CAPTURANDO)
+         * 
+         * Há outra fase de processamento de eventos chamada “captura”. Raramente é usado em código real, mas às vezes pode ser útil.
+         * 
+         * O padrão DOM Events descreve 3 fases de propagação de eventos:
+         
+            1. Fase de captura(CAPTURING) – o evento desce até o elemento.
+
+            2. Fase alvo(TARGET) – o evento atingiu o elemento alvo.
+
+            3. Fase borbulhante(BUBBLING) – o evento borbulha a partir do elemento.
+
+         * Aqui está a imagem de um clique <td> dentro de uma tabela, tirada da especificação:
+         * 
+         * Ou seja: para um clique no <td> evento, primeiro passa pela cadeia de ancestrais até o elemento (fase de captura), depois atinge o alvo e aciona lá (fase de destino), e depois sobe (fase de borbulhamento), chamando manipuladores em seu caminho.
+         * 
+         * * Antes só falávamos em borbulhar, pois a fase de captura raramente é usada. Normalmente é invisível para nós.
+         * 
+         * Manipuladores adicionados usando on<event>-property ou usando atributos HTML ou usando dois argumentos addEventListener(event, handler) não sabem nada sobre captura, eles são executados apenas na 2ª e 3ª fases.
+         * 
+         * Para capturar um evento na fase de captura, precisamos definir a capture opção do manipulador para true:
+        */
+
+        //exemplo de como capturar um evento na fase de captura, precisa-se definir a capture property de option parametro manipulador
+        //elem.addEventListener(event, handler, {capture: true});
+        //or apenas "true" é um alias para {capture: true}
+        //elem.addEventListener(event, handler, true);
+
+        /**
+         * Existem dois valores possíveis da capture opção:
+         
+            - Se for false(padrão), o manipulador será definido na fase de borbulhamento.
+
+            - Se for true, o manipulador será definido na fase de captura.
+
+         * 
+         * Observe que, embora formalmente existam 3 fases, a 2ª fase (“fase de destino”: o evento atingiu o elemento) não é tratada separadamente: os manipuladores nas fases de captura e borbulhamento são acionados nessa fase.
+         * 
+         * Vamos ver a captura e o borbulhar em ação:
+        */
+       
+        for(let elem of document.querySelectorAll('*')) {
+            //atribui um manipulador de evento, usando o metodo elem.addEventListener(event, handler, options);
+            //o terceiro argumento options define uma objeto com proprerties para o manipulador
+            //para capturar um evento na fase de captura(fase em que o evento desce até o elemento) precisa definir a capture option do manipulador para true
+            //o valor true diz que o manipulador de evento sera definido na fase de captura.
+            elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
+            //fase de bubbling(borbulhamento) o evento borbulha a partir do elemento.
+            elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+        }
+
+        /**
+         * O código define manipuladores de clique em cada elemento do documento para ver quais estão funcionando.
+         * 
+         * Se você clicar em <p>, a sequência será:
+         
+            1. HTML → BODY → FORM → DIV(fase de captura, o primeiro ouvinte):
+            
+            2. P(fase de destino, dispara duas vezes, pois definimos dois ouvintes: capturando e borbulhando)
+
+            3. DIV → FORM → BODY → HTML(fase borbulhante, o segundo ouvinte).
+
+         * 
+         * Existe uma propriedade event.eventPhase que nos informa o número da fase em que o evento foi capturado. Mas raramente é usado, porque geralmente o conhecemos no manipulador.
+         * 
+         * * Para remover o manipulador, removeEventListener precisa da mesma fase
+         * 
+         * Se nós addEventListener(..., true), devemos mencionar a mesma fase removeEventListener(..., true)para remover corretamente o manipulador.
+         * 
+         * * Ouvintes no mesmo elemento e na mesma fase são executados em sua ordem definida
+         * 
+         * Se tivermos vários manipuladores de eventos na mesma fase, atribuídos ao mesmo elemento com addEventListener, eles serão executados na mesma ordem em que são criados:
+        */
+
+        //elem.addEventListener("click", e => alert(1)); //garantido para acionar primeiro
+        //elem.addEventListener("click", e => alert(2)); //
+    </script>
+</body>
+</html>

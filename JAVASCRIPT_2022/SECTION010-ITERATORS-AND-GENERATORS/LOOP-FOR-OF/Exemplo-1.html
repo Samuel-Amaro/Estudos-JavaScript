@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * EXEMPLOS DE LOOP FOR JS
+         * 
+         * Vamos dar uma olhada em alguns exemplos de uso do for...of
+         loop.
+         *
+         * * EXEMPLO 1) ITERANDO SOBRE ARRAYS
+         * 
+         * O exemplo a seguir mostra como usar o for...of para iterar sobre os elementos de uma array:
+        */
+
+        //declara um array literal dense anonimo inicializado com 3 elementos, o array e atribuido por referencia a variavel scores
+        let scores = [80, 90, 70];
+
+        //usando a construção do loop for...of, que itera sobre um objeto iteravel
+        //aqui vamos iterar sobre os elementos do array, cada elemento do array referenciado por scores sera atribuido a score variavel
+        for(let score of scores) {
+            //em cada elemento do array acrecenta uma soma de 5
+            score = score + 5;
+            //mostra elemento
+            console.log(score);
+        }
+
+        /**
+         * Neste exemplo, for...of itera sobre cada elemento da scores array. Ele atribui o elemento da scores array à variável score em cada iteração.
+         * 
+         * Se você não alterar a variável dentro do loop, deverá usar a  palavra- chave const em vez da palavra- chave let da seguinte maneira:
+        */
+
+        //quando não vai alterar a variavel dentro do loop e utiliza a const palavra-chave
+        for(const score of scores) {
+            //mostra elemento
+            console.log(score);
+        }
+
+        /**
+         * Para acessar o índice dos elementos do array dentro do loop, você pode usar a for...of instrução com o entries() método do array.
+        */
+
+        //declara um array literal dense anonimo inicializado com 3 elementos, o array e atribuido por referencia a variavel colors
+        let colors = ['Red', 'Green', 'Blue'];
+
+        //usando o for...of loop construção do ES6 para iterar sobre um objeto iteravel, aqui neste caso uma instancia de array
+        //o método de instancia entries(), da instancia de objeto array referenciado por colors, método retorna um par de [index, element] em cada iteração.
+        //esse par automaticamente e atribuido as variaveis que recebem cada elemento iterado do array, neste caso recebem o elemento e o seu respectivo indice, graças ao entries método
+        //aqui usamos a desestruturação de array para que o  par de resultado de cada chamada do entries método, você atribuida individualmente cada resultado as variaveis da iteração index e color que recebem os elementos iterados 
+        for(const [index, color] of colors.entries()) {
+            console.log(`${color} is at index ${index}`);
+        }
+
+        /**
+         * Neste exemplo, usamos a desestruturação de array para atribuir o resultado do entries()método às variáveis index​​ e color em cada iteração.
+
+            const[index, color] of colors.entries()
+        */
+
+    </script>
+
+</body>
+</html>

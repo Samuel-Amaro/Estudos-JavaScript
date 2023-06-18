@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <select id="select">
+        <option value="apple">Apple</option>
+        <option value="pear">Pear</option>
+        <option value="banana">Banana</option>
+    </select>
+
+    <script>
+        /**
+         * * SELECT AND OPTION(SELEÇÃO E OPÇÕES)
+         * 
+         * Um <select> elemento tem 3 propriedades importantes:
+         * 
+            * select.options – a coleção de <option> subelementos,
+            * 
+            * select.value – o valor do <option> atualmente selecionado.
+            * 
+            * select.selectedIndex – o número do <option> atualmente selecionado .
+            * 
+         * Eles fornecem três maneiras diferentes de definir um valor para um <select>:
+         * 
+            * Encontre o <option> elemento correspondente (por exemplo, entre select.options) e defina-o option.selected como true. 
+            * 
+            * se soubermos um novo valor: defina select.value o novo valor.
+            * 
+            * Se soubermos o novo número da opção: defina select.selectedIndex para esse número.
+            * 
+         * Aqui está um exemplo de todos os três métodos: 
+        */
+
+        // todas as três linhas fazem a mesma coisa
+        //três formas diferentes de definir um valor para um select elemento de formulario
+        //1. primeira forma acessa a collection options de subelementos options por meio do select elemento, usando a indexação do elemento option correspondente e atribuindo um true para a propriedade selected que a mesma do atributo option html
+        select.options[2].selected = true;
+        //2. forma obtem o numero do option subelemento que queremos definir como valor e atribuimos a propriedade select.selectedIndex para selecionar o elemento com option com indice 2 como o elemento selecionado do select
+        select.selectedIndex = 2;
+        //3. forma atribui um novo valor ao select elemento por meio da propriedade select.value, o valor atribuido e um valor de um option elemento existente no select, assim definimos que banana e o option elemento valor selecionado
+        select.value = 'banana';
+        //observe: as opções começam do zero, então o índice 2 significa a 3ª opção.
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO 2) JS STRING REPLACEALL() COM UM EXEMPO DE FUNÇÃO DE RETORNO DE CHAMADA(CALLBACK)
+         * 
+         * O exemplo a seguir usa o método String replaceAll() para pesquisar uma substring por uma expressão regular. Ele substitui cada correspondência por uma substituição específica determinada por uma função de retorno de chamada(callback):
+        */
+
+        
+        //declara uma variavel chamada str, essa variavel e inicializada com uma string literal
+        let str = 'JS will, Js will, js will rock you.';
+
+        //padrão de correspondencia para a substring
+        //expressão regular que ira corresponder a qualquer string que contenha a substring JS sem distinção de maiusculas ou minusculas
+        let pattern = /js/gi;
+
+        //utlizando o metodo string.replacelAll() para substituir todas ocorrencias de js na string literal str
+        //o metodo replaceAll() recebe dois argumentos o primeirio argumento e O pattern pode ser uma string ou uma expressão regular. Quando o pattern é uma expressão regular, ele precisa incluir o sinalizador global (g);
+        //o segundo argumento O replacement argumento pode ser uma string ou uma função de retorno de chamada(callback) que será invocada para cada correspondência.
+        //a callback possui o seguinte formato replacement(match, offset, str);
+        //o match argumento e o é a substring correspondente.
+        //offset é o deslocamento da substring correspondente dentro da string original.
+        //str é a string original.
+        let newStr = str.replaceAll(pattern, function(match, offset, str) {
+            //cada correspondencia tera uma string personalizada para substituição
+            //se a correspondecia a substring o argumento math for JS substitui pela string literal retornada, o callback sempre ira retorna uma string literal personalizada de acordo com as correspondencias da string, assim a string retornada pela callback susbstitui a string pattern do argumento
+            if(match === 'JS') 
+                return 'JavaScript';
+            if(match === 'Js') 
+                return 'Javascript';
+            if(match === 'js') 
+                return 'javascript';
+            return '';
+        });
+
+        console.log(newStr);
+
+        /**
+         * Como funciona
+         * 
+         * A expressão regular /js/gi corresponde a qualquer string que contenha a substring JSsem distinção entre maiúsculas e minúsculas, ou seja, JS, Jsou js.
+         * 
+         * O replaceAll() método substitui a substring JS, Js e js pelo valor retornado do retorno de chamada(callback) de replacement.
+         * 
+         * * RESUMO
+         * 
+         * Use o método de string JavaScript replaceAll() para substituir todas as ocorrências de uma substring por uma nova em uma string.
+        */
+    </script>
+</body>
+</html>

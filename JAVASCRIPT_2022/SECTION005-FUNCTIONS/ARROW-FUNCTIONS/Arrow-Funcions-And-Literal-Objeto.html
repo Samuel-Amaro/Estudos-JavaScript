@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Functions e literal objeto</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * ARROW FUNCTIONS E LITERAL DE OBJETO
+         * 
+         * Considere o seguinte exemplo:
+         * 
+         * */
+
+        //declara uma expressão de função
+        //porque uma expressão ?
+        //por causa da atribuição
+        //a function anonima que possui um paramentro declarado, e um objeto anonimo com uma propriedade como retorno 
+        //function atribui a setColor 
+        let setColor = function(color) {
+            return {value: color}
+        };
+
+        //invoca(chama) a function anonima por meio da variavel setColor e retorna um objeto anonimo com uma propriedade
+        let backgroundColor = setColor('Red');
+
+        //acessando a propriedade do objeto anonimo retornado pela setColor function anonima
+        console.log(backgroundColor.value); //"Red"
+
+        /**
+         * A setColor() expressão da função retorna um objeto que possui a value propriedade definida para o color argumento. 
+         * 
+         * Se você usar a sintaxe a seguir para retornar um literal de objeto de uma função de seta, obterá um erro.
+         
+            p => {object:literal}
+
+         * 
+         * Por exemplo, o código a seguir causa um erro. 
+        * */
+        
+        //a arrow function anonima declarada abaixo, possui um parametro e uma instrução para retorna um objeto anonimo literal que possui uma propriedade
+        //so que dessa forma gera um erro, aqui e um exemplo da forma errada de se fazer
+        let setColor = color => {value:color};
+
+        /**
+         * Como os literais de bloco e objeto usam chaves, o mecanismo JavaScript não pode distinguir entre um bloco e um objeto.
+         * 
+         * Para corrigir isso, você precisa envolver o objeto literal entre parênteses da seguinte maneira:
+        * */
+
+        //aqui e a forma certa de se fazer quando tem que retorna um literal objeto
+        setColor = color => ({value:color});
+
+    </script>
+</body>
+</html>

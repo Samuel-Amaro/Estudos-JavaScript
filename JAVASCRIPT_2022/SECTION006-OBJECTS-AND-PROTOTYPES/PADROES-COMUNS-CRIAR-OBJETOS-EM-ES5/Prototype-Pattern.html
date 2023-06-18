@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype pattern</title>
+</head>
+<body>
+
+    <img src="Create-Objects-in-JavaScript-Prototype-Pattern.png" alt="imagen">
+
+    <img src="Create-Objects-in-JavaScript-Prototype-Pattern-new-Object.png" alt="imagen">
+
+    <script>
+        /**
+         * * PROTOTYPE PATTERN(padrão de protótipo)
+         * 
+         * O padrão de protótipo adiciona as propriedades do objeto ao objeto de protótipo. Então, essas propriedades ficam disponíveis e compartilhadas entre todas as instâncias.
+         * 
+         * O exemplo a seguir usa o padrão de protótipo para reescrever o objeto Animal acima.
+        */
+
+        //declara uma function construtora chamada Animal que não possue paramentro
+        //Apos declarar essa function construtora o JS por padrão definira que o objeto prototipo de Animal sera refenciado por Animal.prototype onde possui um objeto anonimo
+        //esse objeto anonimo possui um propriedade chamda constructor que referncia a function Construtora Animal
+        function Animal() {
+            //propriedades são adicionadas ao protótipo
+        }
+
+        //definindo propriedades herdadas por meio do objeto prototipico De Animal
+        //assim  propriedades ficam disponíveis e compartilhadas entre todas as instâncias.
+        //define uma propriedade chamada name no objeto anonimo de prototipo 
+        Animal.prototype.name = 'Noname';
+        //define uma propriedade chamada identify que recebe como valor uma function anonima que não declara paramentro e não retorna valor
+        //a function anonima e atribuida a identify propriedade tornando a metodo
+        Animal.prototype.identify = function() {
+            //aqui o this objeto value sera o valor usando por new palavra chave ao ser usada  na invocação da function construtora
+            console.log(`I'm ${this.name}`);
+        }
+
+        /**
+         * Vamos criar uma nova instância do Animal.
+        */
+
+        //cria uma instancia de objeto invocando a function construtora Animal usando a new palavra chave
+        //a new palavra chave e substituida pelo this valor da funciton contrutora retornando a referncia a instancia recem criada
+        //por padrão o mecanismo JS liga a instancia de objeto donald ao objeto anonimo de prototipo
+        var donald = new Animal();
+        //aqui estamos definindo uma propriedade chamada name no objeto donald uma propriedade propria com um valor Donald
+        //o prototipo Animal.prototype possui uma propriedade com o mesmo nome mas e uma propriedade herdada por meio de prototipo
+        donald.name = 'Donald'; //obscurece a name propriedade definida em Animal.prototype objeto anonimo prototipo a propriedade propria do objeto obscurece a propriedade herdada pois o mecanismo js ira procurar a propriedade primeiro no objeto em si depois na cadeia de prototipo
+        donald.identify(); //I'M Donald
+
+        /**
+         * Na linha:
+         
+            donald.name = 'Donald';
+
+         * 
+         * O mecanismo JavaScript adiciona a propriedade name ao   donald objeto. Como resultado, os   donald objetos e Animal.prototype têm a mesma propriedade de nome.
+         * 
+         * Dentro do identify() método, o this objeto é definido como o   donald objeto, portanto, this.name faz referência à propriedade name do donald objeto. Como resultado, a saída da seguinte linha:
+         
+            donald.identify();
+
+         * 
+         * é a string I'm Donald
+         * 
+         * Vamos remover a propriedade name do donald objeto.
+        */
+
+        //remove a propriedade propria chamada name do objbeto donald
+        //assim a propriedade herdada entrara em ação pois o mecanismo JS ira procurar a propriedade primeiro no objeto em si, como foi deletada ira procurar na cadeia de prototipo por meio da ligação de prototipos
+        delete donald.name;
+
+        donald.identify(); //I'm Noname
+
+        /**
+         * Agora, o JavaScript não conseguiu encontrar a propriedade name no donald objeto, ele segue a cadeia de protótipo e a encontra no Animal.prototype objeto. Conseqüentemente, os this.name retornos Noname.
+         * 
+         * Para obter mais informações sobre o protótipo, consulte o tutorial de protótipo JavaScript .
+        */
+
+    </script>
+
+</body>
+</html>

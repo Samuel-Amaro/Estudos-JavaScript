@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exponenciação</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OPERADOR DE EXPONENCIAÇÃO JS
+         * 
+         *  Resumo : neste tutorial, você aprenderá a usar o operador de exponenciação JavaScript ( **) para elevar um número à potência de um expoente.
+         * 
+         * * INTRODUÇÃO AO OPERADOR DE EXPONENCIAÇÃO JS
+         * 
+         * Para elevar um número à potência de um expoente, você geralmente usa o método estático Math.power()com a seguinte sintaxe:
+         
+            Math.pow(base, exponent);
+
+         * 
+         * Por exemplo:
+        */
+
+        //eleva o numero 2 ao expoente 2
+        //usando o metodo statico
+        //2 * 2
+        let result = Math.pow(2, 2);
+        console.log(result); //4
+
+        //eleva o numero 2 ao expoente 3
+        //2 * 2 * 2
+        //usando o metodo statico do Math
+        result = Math.pow(2, 3);
+        console.log(result); //8
+
+        /**
+         * O ECMAScript 2016 forneceu uma maneira alternativa de obter uma base para a potência do expoente usando o operador de exponenciação (**) com a seguinte sintaxe:
+         
+            x**n
+
+         * 
+         * O operador ** eleva o x à potência de um expoente n.
+         * 
+         * Observe que alguns linguagens usam o símbolo de acento circunflexo ^ para exponenciação. No entanto, o JavaScript já usa esse símbolo para o operador XOR lógico bit a bit.
+         * 
+         * O exemplo a seguir ilustra como usar o operador de exponenciação ( **):
+        */
+
+        //usando o operador de exponenciação para elevar o numero 2 ao expoente 2
+        //2 * 2
+        let result2 = 2 ** 2;
+        console.log(result2); //4
+
+
+        //usando o operador de exponenciação para elevar o numero 2 ao expoente 3
+        //2 * 2 * 2
+        result2 = 2 ** 3;
+        console.log(result2); //8
+
+        /**
+         * Ambos Math.pow() e o operador ** aceitam valores do number tipo. No entanto, o operador ** também aceita os números do bigint tipo. Por exemplo:
+         * 
+        */
+
+        //usando o operador de exponenciação para elevar o numero 2n do tipo bigint ao expoente 3n bibint
+        //2n * 2n * 2n
+        let result3 = 2n ** 3n;
+        console.log(result3); //8n
+
+        /**
+         * Além disso, você pode usar o operador de exponenciação (**) na notação infixa. Por exemplo:
+        */
+
+        let x = 2;
+        //usando o operador de exponenciação para notação infixa
+        //o mesmo que:
+        //x = x ** 4;
+        //2 * 2 * 2 * 2
+        x **= 4;
+        console.log(x); //16
+
+        /**
+         * JavaScript não permite que você coloque um operador unário imediatamente antes do número base. Se você tentar fazer isso, você receberá um SyntaxError.
+         * 
+         * O seguinte causa um erro de sintaxe:
+        */
+
+        //causa um erro pois coloca um operador unario logo antes do operador de exponenciação no caso o operador e o operador ariteitco de subtração operando no valor2
+        //let result = -2**3;
+
+        /**
+         * Para corrigir isso, você usa parênteses assim:
+        */
+
+        //para corrigir isso acima o erro com o operador unario antes da exponenciação usa-se o parentes como o precende para o motor avaliar as precedencias corretamente
+        //usando o operador de exponenciação junto com o operador unario de subtração
+        //-2 * -2 * -2
+        let result4 = (-2) ** 3;
+        console.log(result4); //-8
+
+        /**
+         * * RESUMO
+         * 
+         *  O operador de exponenciação ** eleva um número à potência de um expoente.
+         * 
+         * O operador de exponenciação ** aceita valores do tipo number ou bigint.
+        */
+    </script>
+</body>
+</html>

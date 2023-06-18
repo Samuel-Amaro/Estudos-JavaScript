@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <img src="./document-client-width-height.svg" alt="image exemplo"/>
+
+    <script type="text/javascript">
+       
+       /**
+        * * Largura(Width)/Altura(Height) da janela(Window)
+        *        
+        * Para obter a largura e a altura da janela(window), podemos usar o clientWidth/clientHeight do document.documentElement: 
+        * 
+        * * Não window.innerWidth/innerHeight
+        * 
+        * Os navegadores também suportam propriedades como window.innerWidth/innerHeight. Eles se parecem com o que queremos, então por que não usá-los?
+        * 
+        * Se existir uma barra de rolagem e ela ocupar algum espaço, clientWidth/clientHeight forneça a largura/altura sem ela (subtraia). Em outras palavras, eles retornam a largura/altura da parte visível do documento, disponível para o conteúdo.
+        * 
+        * window.innerWidth/innerHeight inclui a barra de rolagem.
+        * 
+        * Se houver uma barra de rolagem e ela ocupar algum espaço, essas duas linhas mostrarão valores diferentes:
+        */
+    
+        //usando a propriedade window.innerHeight para obter a largura completa da janela incluindo barra de rolagem vertical se possuir
+        //largura completa da janela
+        console.log(window.innerHeight);
+
+        //usando a propriedade document.documentElement.clientWidth para obter a largura completa da janela da area de conteudo sem a barra de rolagem, somente a largura da area de conteudo, da janela
+        //largura da janela menos a barra de rolagem
+        console.log(document.documentElement.clientWidth);
+
+        /**
+         * Na maioria dos casos, precisamos da largura da janela disponível para desenhar ou posicionar algo dentro das barras de rolagem (se houver), então devemos usar documentElement.clientHeight/clientWidth.
+         * 
+         * * DOCTYPE é importante
+         * 
+         * Observe: as propriedades de geometria de nível superior podem funcionar um pouco diferente quando não há <!DOCTYPE HTML> no HTML. Coisas estranhas são possíveis.
+         * 
+         * No HTML moderno devemos sempre escrever DOCTYPE.
+        */
+    </script>
+</body>
+</html>

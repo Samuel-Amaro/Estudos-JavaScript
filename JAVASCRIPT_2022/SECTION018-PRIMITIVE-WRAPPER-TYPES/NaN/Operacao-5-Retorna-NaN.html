@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * AS OPERAÇÕES RETORNA NAN
+         * 
+         * * 5) USANDO ARGUMENTOS INVÁLIDOS DE FUNÇÕES MATEMÁTICAS
+         * 
+         * Quando uma função matemática recebe um argumento inválido, ela retorna NaN. Por exemplo:
+        */
+
+        //EXEMPLO ABAIXO QUE O JS RETORNA O VALOR ESPECIAL NAN COMO RESULTADO DE UMA OPERAÇÃO COM FALHA EM NÚMEROS
+        //NESTE CASO RETORNA NAN POR PASSAR UM ARGUMENTO INVALIDO PARA UMA FUNÇAÕ MATEMATICA
+
+        //declara uma constante chamada result que e inicializada com o resultado de uma operação matematica realizada por uma função matematica, retorna NaN pois passamos um argumento invalido para a function, o argumento tem que ser um numero não negativo
+        const result = Math.sqrt(-1);
+        
+        //Uma function matematica que não tem o argumento valido retorna NaN com resultado
+        console.log(result); //NaN
+
+        /**
+         * Neste exemplo, o Math.sqrt()que retorna a raiz quadrada de um número. Como ele aceita apenas um número não negativo, passar -1 resulta em NaN.
+         * 
+         * * RESUMO
+         * 
+         * NaN significa Não-um-Número. É um valor especial da NaN propriedade do objeto global.
+         * 
+         * NaN indica uma operação com falha em números.
+         * 
+         * Use isNaN() a função para verificar se um valor é NaN.
+        */
+
+    </script>
+
+</body>
+</html>

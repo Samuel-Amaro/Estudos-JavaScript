@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 4</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLO 4) ITERANDO SOBRE OBJETOS MAP 
+         * 
+         * O exemplo a seguir ilustra como usar a  for...of instrução para iterar em um Map objeto.
+        */
+
+        //declara uma instancia de objeto, invocando o construtor Map, o objeto e atribuido por referencia a variavel colors
+        let colors = new Map();
+
+        //declara um par de chaves e respectivos valores, e adiciona como elemento no Map
+        colors.set('red', '#ff0000');
+        colors.set('green', '#00ff00');
+        colors.set('blue', '#0000ff');
+        
+        //usando a construção do ES6 o loop for...of para iterar sobre objetos iteraveis
+        //iterando sobre um objeto Map, cada elemento iterado e um par chave valor, que e atribuido a variavel color
+        for(let color of colors) {
+            console.log(color);
+        }
+
+    </script>
+
+</body>
+</html>

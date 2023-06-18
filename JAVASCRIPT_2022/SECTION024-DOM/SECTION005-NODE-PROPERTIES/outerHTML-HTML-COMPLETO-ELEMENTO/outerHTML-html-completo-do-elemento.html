@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="elem">Hello <b>World</b></div>
+
+    <div>Hello, world!</div>
+
+    <script type="text/javascript">
+        
+        /**
+         * * outerHTML: HTML COMPLETO DO ELEMENTO
+         * 
+         * A outerHTML propriedade contém o HTML completo do elemento. Isso é innerHTML mais o elemento em si.
+         * 
+         * Aqui está um exemplo:
+        */
+
+        //a propriedade elem.outerHTML obtem o HTML completo que esta contido dentro do elemento. o HTML completo e o conteudo contido dentro do elemento mais o elemento em si.
+        //elem e uma variavel global nomeada por id que faz referencia ao elemento
+        console.log(elem.outerHTML);
+        //console.log(window.elem);
+
+        /**
+         * Cuidado: ao contrário de innerHTML, escrever para outerHTML não altera o elemento. Em vez disso, ele o substitui no DOM.
+         * 
+         * Sim, parece estranho, e estranho é, é por isso que fazemos uma nota separada sobre isso aqui. Dê uma olhada.
+        */
+
+        //obtem o ultimo no de elemento <div> do documento
+        let div = document.querySelector('div:nth-child(2)');
+
+        //substitui div.outerHTML com <p>...</p>
+        //usando a propriedade elem.outerHTML para substituir o elemento no DOM.
+        //substituimos o no de elemento <div> por <p> a propriedade elem.outerHTML substitui todo o HTML completo pelo novo conteudo atribuido a propriedade
+        //assim susbtituimos o no DOM <div> por novo no DOM <p>
+        div.outerHTML = '<p>Um novo paragrafo</p>'; //(*)
+
+        //Uau! 'div' ainda é o mesmo!
+        //a outerHTML atribuição não modifica o elemento DOM, mas o remove do DOM e insere o novo HTML em seu lugar.
+        //a div foi removido do documento
+        //substituida por <p> novo HTML atribuido pela propriedade elem.outerHTML
+        //a div antiga ainda tem seu valor, não salvamos o novo valor HTML em nenhuma variavel
+        console.log(div.outerHTML); //<div>Hello, world!</div>(**)
+        //novo valor HTML que substitui o div
+        console.log(document.querySelector('p'));
+
+
+        /**
+         * Parece realmente estranho, certo?
+         * 
+         * Na linha (*) que substituímos div por <p>A new element</p>. No documento externo (o DOM) podemos ver o novo conteúdo em vez do arquivo <div>. Mas, como podemos ver na linha (**), o valor da div variável antiga não mudou!
+         * 
+         * A outerHTML atribuição não modifica o elemento DOM (o objeto referenciado, neste caso, pela variável 'div'), mas o remove do DOM e insere o novo HTML em seu lugar.
+         * 
+         * Então o que aconteceu em div.outerHTML =...é:
+         
+            - div foi removido do documento.
+           
+            - Outro pedaço de HTML <p>A new element</p> foi inserido em seu lugar
+
+            - div ainda tem seu antigo valor. O novo HTML não foi salvo em nenhuma variável.
+
+         * 
+         * É tão fácil cometer um erro aqui: modifique div.outerHTML e continue a trabalhar div como se tivesse o novo conteúdo nele. Mas não. Tal coisa é correta para innerHTML, mas não para outerHTML.
+         * 
+         * Podemos escrever para elem.outerHTML, mas devemos ter em mente que isso não altera o elemento para o qual estamos escrevendo ('elem'). Ele coloca o novo HTML em seu lugar. Podemos obter referências aos novos elementos consultando o DOM.
+         * */
+    </script>
+
+</body>
+</html>

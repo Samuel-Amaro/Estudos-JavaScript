@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./promise-then-many.svg" alt="image"/>
+
+    <script type="text/javascript">
+        /**
+         * * RETURNING PROMISES(DEVOLUÇÃO PROMESSAS)
+         * 
+         * Um manipulador, usado em .then(handler) pode criar e retornar uma promessa.
+         * 
+         * Nesse caso, outros manipuladores esperam até que ela seja resolvida e, em seguida, obtêm seu resultado.
+         * 
+         * Por exemplo:
+        */
+
+        //cria um objeto promisse
+        new Promise(function executor(resolve, reject) {
+
+            //executa um trabalho de codigo assincrono
+            //apos 1s resolve a promisse para valor 1, o argumento do resolve e passado para o manipulador 
+            setTimeout(() => resolve(1), 1000);
+        })
+            //o then function manipulador abaixo consome o valor resolvido da promisse acima, a cada chamada para um .then retorna um nova promisse para que possa chamar mais manipuladores
+            .then(function(result) {
+
+                //valor resolvido pela promisse
+                alert(result); //1
+
+                //retorna uma nova promisse
+                return new Promise(function executor(resolve, reject) { //(*)
+                    //apos 1 segundo resolve a promisse para o valor 2, o argumento passado para resolve e passado para o proximo manipulador
+                    setTimeout(() => resolve(result * 2), 1000);
+                });
+            })
+            //o manipulador abaixo espera a promisse retornada pelo manipulador acima ser resolvida
+            //obtem o resultado do manipulador anterior encadeado acima, o metodo ja e chamado com o value , consome o valor resolvido da promisse retornado pelo then metodo acima, e retorna um nova promisse 
+            .then(function(result) { //(**)
+
+                //mostra valor resolvido pela promisse do manipulador acima
+                alert(result); //2
+
+                //retorna uma nova promisse
+                return new Promise(function executor(resolve, reject) { //(*)
+                    //apos 1 segundo resolve a promisse para o valor 4 o argumento passado para resolve e passado para o proximo manipulador
+                    setTimeout(() => resolve(result * 2), 1000);
+                });
+            })
+            //o manipulador abaixo espera a promisse retornado pelo manipulador acima ser resolvida
+            //obtem o resultado do manipulador anterior encadeado acima, consome o valor resolvido da promisse retornado pelo then metodo encadeado acima, e retorna uma nova promisse sem valor resolvido
+            .then(function(result) {
+                //mostra valor resolvido pela promisse do manipulador acima
+                alert(result); //4
+
+            });
+
+        /**
+         * Aqui o primeiro .then mostra 1 e retorna new Promise(…) na linha (*). Após um segundo ele resolve, e o resultado (o argumento de resolve, aqui está result * 2) é passado para o manipulador do segundo .then. Esse manipulador está na linha (**), mostra 2 e faz a mesma coisa.
+         * 
+         * Portanto, a saída é a mesma do exemplo anterior: 1 → 2 → 4, mas agora com 1 segundo de atraso entre alertas chamadas.
+         * 
+         * Retornar promessas nos permite construir cadeias de ações assíncronas.
+        */
+    </script>
+</body>
+</html>

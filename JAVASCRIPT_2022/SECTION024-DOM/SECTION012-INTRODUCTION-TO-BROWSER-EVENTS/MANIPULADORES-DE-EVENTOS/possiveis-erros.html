@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input type="button" id="elem" value="Clique Aqui!"/>
+
+    <!--
+        - atribuindo um manipulador de evento por meio de atributo html
+        - atribuindo um manipulador que ira reagir a um evento de click no button
+        - o manipulador de evento pode ser definido em HTML por meio do atributo de evento chamado on<event> 
+        - aqui como exemplo iremos definir um click manipulador para um button, usando o atributo de evento onclick
+        - no clique do mouse o codigo dentro onclick e executado
+        - iremos atribuir uma function existente como manipulador de evento, sayThancks(), inlcuir parenteses na atribuição
+    -->
+    <button onclick="sayThanks()" type="button" id="button">Clique Aqui</button>
+
+
+    <script type="text/javascript">
+        /**
+         * * POSSÍVEIS ERROS
+         *
+         * Se você está começando a trabalhar com eventos – observe algumas sutilezas.
+         * 
+         * Podemos definir uma função existente como um manipulador:
+        */
+
+        //declara uma function regular sem paramentro, function e uma instancia de objeto do tipo function
+        function sayThanks() {
+            alert('Thanks!');
+        }
+
+        //atribuindo um manipulador de evento por meio da propriedade elem.onevent
+        //o manipulador de evento sera uma function existente ja declarada
+        elem.onclick = sayThanks;
+
+        /**
+         * Mas tenha cuidado: a função deve ser atribuída como sayThanks, não sayThanks().
+        */
+
+        //certo
+        //button.onclick = sayThanks;
+
+        //errado
+        //button.onclick = sayThanks();
+
+        /**
+         * Se adicionarmos parênteses, sayThanks() torna-se uma chamada de função. Portanto, a última linha realmente pega o resultado da execução da função, ou seja undefined(já que a função não retorna nada), e o atribui a onclick. Isso não funciona.
+         * 
+         * …Por outro lado, na marcação, precisamos dos parênteses:
+         * 
+         * A diferença é fácil de explicar. Quando o navegador lê o atributo, ele cria uma função de manipulador com corpo do conteúdo do atributo.
+         * 
+         * Portanto, a marcação gera esta propriedade:
+        */
+
+        //a seguinte marcação HTML
+        //<button onclick="sayThanks()" type="button" id="button">Clique Aqui</button>
+
+        //gera o seguinte codigo quando o navegador le o atribuito de evento especificado no elemento buttom
+        //button.onclick = function() {
+        //    sayThanks(); //<-- o conteúdo do atributo vai aqui
+        //};
+
+        /**
+         * Não use setAttribute para manipuladores.
+         * 
+         * Essa chamada não funcionará:
+        */
+
+        // um clique em <body> irá gerar erros,
+        // porque os atributos são sempre strings, a função se torna uma string
+        document.body.setAttribute('onclick', function() { alert(1)});
+
+        /**
+         * O caso da propriedade DOM é importante.
+         * 
+         * Atribua um manipulador a elem.onclick, não elem.ONCLICK, porque as propriedades do DOM diferenciam maiúsculas de minúsculas.
+        */
+    </script>
+</body>
+</html>

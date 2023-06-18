@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <script>
+        /**
+         * * CASO DE USO 2: INDICAÇÃO DE PROGRESSO
+         * 
+         * Outro benefício de dividir tarefas pesadas para scripts de navegador é que podemos mostrar a indicação de progresso.
+         * 
+         * Conforme mencionado anteriormente, as alterações no DOM são pintadas somente após a conclusão da tarefa em execução no momento, independentemente de quanto tempo ela demore.
+         * 
+         * Por um lado, isso é ótimo, pois nossa função pode criar muitos elementos, adicioná-los um a um ao documento e alterar seus estilos – o visitante não verá nenhum estado “intermediário”, inacabado. Uma coisa importante, certo?
+         * 
+         * Aqui está a demonstração, as alterações i não aparecerão até que a função termine, então veremos apenas o último valor:
+        */
+
+        function count() {
+            //tarefa: contar até 1000000 e mostrar na interface cada numero
+            //essa tarefa e pesada, por isso o navegador pode travar, quando tentar executar outras tarefas, assim somente outras tarefas so serão executadas quando a atual estiver terminada
+            //a interface so sera atualizada quando a tarefa estiver concluida.
+            for(let i = 0; i < 1e6; i++) {
+                i++;
+                progress.innerHTML = i;
+            }
+        }
+
+        count();
+
+    </script>
+</body>
+</html>

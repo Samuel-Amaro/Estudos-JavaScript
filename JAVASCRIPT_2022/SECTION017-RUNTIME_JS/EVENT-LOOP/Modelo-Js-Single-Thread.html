@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <img src="./images/javascript-event-loop-callstack.png" alt="imagen">
+
+    <script>
+
+        /**
+         * * LOOP DE EVENTOS - EVENT LOOP
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o loop de eventos em JavaScript e como o JavaScript alcança o modelo de simultaneidade com base no loop de eventos.
+         * 
+         * * MODELO JAVASCRIPT SINGLE-THREAD(unico fio)
+         * 
+         * JavaScript é uma linguagem de programação single-thread. Isso significa que o JavaScript pode fazer apenas uma coisa em um único ponto no tempo.
+         * 
+         * O mecanismo JavaScript executa um script da parte superior do arquivo e desce. Ele cria os contextos de execução, empurra e desempilha funções dentro e fora da pilha de chamadas na fase de execução.
+         * 
+         * Se uma função demorar muito para ser executada, você não poderá interagir com o navegador da Web durante a execução da função porque a página trava.
+         * 
+         * Uma função que leva muito tempo para ser concluída é chamada de função de bloqueio. Tecnicamente, uma função de bloqueio bloqueia todas as interações na página da web, como o clique do mouse.
+         * 
+         * Um exemplo de função de bloqueio é uma função que chama uma API de um servidor remoto.
+         * 
+         * O exemplo a seguir usa um loop grande para simular uma função de bloqueio:
+        */
+
+        //declara uma function chamada task que declara um paramentro chamado message
+        //essa e uma função de bloqueio porque demora muito para ser executada, e esse tipo de função bloquei todoas as interações da pagina da web com o clique do mouse.
+        function task(message) {
+            //emular tarefa demorada
+            let n = 10000000000; //10 bilhões de iteração
+            while(n > 0) {
+                n--;
+            }
+            console.log(message);
+        }
+
+        //ao executar o script pela primeira vez o mecanismo adiciona o contexto global, e logo depois entra na fase de criação, e apos entra na fase de execução
+        //(PONTO 1)
+        //na fase de execução o mecanismo adiciona a chamada do console.log no topo da pilha de chamadas acima da main function do contexto global e executa
+        console.log(`Start script: ...`);
+        //PONTO(2)
+        //logo depois tira a chamada do console.log da pilha coloca a function bloqueante no topo da pilha de chamadas também acima da main do contexto de execução global e executa a function, essa function vai demorar ser executada pois e bloqueante
+        task('Call an API');
+        //PONTO (3)
+        //ao terminar sua execução o mecanismo a tira do topo da pilha de chamadas, 
+        //e chama a console.log para ser executada e colocada no topo da pilha de chamadas e executada rapidamente e sai do topo, 
+        //depois o proprio main do contexto de execução global também e retirado pois ja foi executadao
+        console.log('Done!');
+
+        /**
+         * Neste exemplo, temos um grande while loop dentro da task()função que emula uma tarefa demorada. A task() função é uma função de bloqueio.
+         * 
+         * O script trava por alguns segundos (dependendo da velocidade do computador) e emite a seguinte saída:
+         * 
+         * Para executar o script, o mecanismo JavaScript coloca a primeira chamada console.log() no topo da pilha de chamadas e a executa. Em seguida, ele coloca a task()função no topo da pilha de chamadas e executa a função.
+         * 
+         * No entanto, vai demorar um pouco para completar a task()função. Portanto, você verá a mensagem 'Download a file.'um pouco mais tarde. Depois que a task() função é concluída, o mecanismo JavaScript a retira da pilha de chamadas.
+         * 
+         * Finalmente, o mecanismo JavaScript faz a última chamada para a console.log('Done!')função e a executa, o que será muito rápido.
+        */
+       
+        </script>
+
+</body>
+</html>

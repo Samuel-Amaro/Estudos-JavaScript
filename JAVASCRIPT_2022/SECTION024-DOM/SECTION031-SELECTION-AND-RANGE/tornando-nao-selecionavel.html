@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        #elem{
+            /*propriedade css que impede seleção em elem. impede que a seleção começe em elem, mas pode selecionar elem começando de outro lugar/*/
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        Selecionável <div id="elem">Não selecionável</div> Selecionável
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * * TORNANDO NÃO SELECIONÁVEL
+         * 
+         * Para tornar algo não selecionável, existem três maneiras:
+         * 
+         * Use a propriedade CSS user-select: none.
+         * 
+         * Isso não permite que a seleção comece em elem. Mas o usuário pode iniciar a seleção em outro lugar e incluir elem nela.
+         * 
+         * o elem se tornará parte de document.getSelection(), então a seleção realmente acontece, mas seu conteúdo geralmente é ignorado em copiar e colar.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * O event.preventDefault() não funciona a partir de um beforeunload manipulador
+         * 
+         * Isso pode parecer estranho, mas a maioria dos navegadores ignora event.preventDefault().
+         * 
+         * O que significa que o código a seguir pode não funcionar:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom ao objeto window
+        //o manipulador de evento e para o evento beforeunload(antes de descarregar), esse evcento e acionado quando um visitante inicia a nevegação fora da pagina ou tenta fechar a janela, assim o manipulador solicitara uma confirmação adicional
+        window.addEventListener("beforeunload", (event) => {
+            // não funciona, então este manipulador de eventos não faz nada
+            //o event.preventDefault(), impede a ação padrão do navegador, mas isso não funciona na maioria dos navegadores
+            event.preventDefault();
+        });
+
+        /**
+         * 
+        */
+    </script>
+
+</body>
+</html>

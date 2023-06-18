@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedade Computada</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * PROPRIEDADE COMPUTADA EM JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre as propriedades computadas do JavaScript.
+         * 
+         * * INTRODUÇÃO Á PROPRIEDADE COMPUTADA DO JS
+         * 
+         * ES6 permite que você use uma expressão entre colchetes []. Em seguida, ele usará o resultado da expressão como o nome da propriedade de um objeto.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma variavel e a inicializa com uma string literal
+        let propName = "c";
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal
+        //o objeto declarado e atribuido por referencia a constante rank, assim a constante rank referencia o objeto literal
+        const rank = {
+            //declara propriedade usando sintaxe chave : valor
+            a: 1,
+            b: 2,
+            //exemplo de propriedade computada, usando expressão entre colchetes
+            //usa o resultado da expressão como nome da propriedade
+            //resultado aqui e "c"
+            //o nome da propriedade e derivado do valor da propName variavel
+            [propName]: 3
+        };
+        
+        //acesssando a prorpriedade computada que pertence ao objeto literal referencia por rank
+        console.log(rank.c);
+
+        /**
+         * Neste exemplo, o [propName] é uma propriedade computada do rank objeto. O nome da propriedade é derivado do valor da propName variável.
+         * 
+         * Quando você acessa c a propriedade do rank objeto, o JavaScript avalia propName e retorna o valor da propriedade.
+         * 
+         * Como um literal de objeto , você pode usar propriedades computadas para getters e setters de uma classe . Por exemplo:
+        */
+
+        //declara uma variavel chamda name inicializada com uma string literal
+        let name = 'fullName';
+
+        //define uma class chamada Person, usando a palavra chave class
+        class Person{
+            //define um construtor com paramentros declarados, como firstName e lastName
+            constructor(firstName, lastName) {
+                //define uma propriedade chamada firstName e a inicializa com o argumento firstName
+                this.firstName = firstName;
+                //define uma propriedade chamada lastname e a inicializa com o argumento lastName
+                this.lastName = lastName;
+            }
+            //o nome do metodo sera uma propriedade computada
+            //usando expressão entre colchetes
+            //usa o resultado da expressão como nome da propriedade
+            //o nome da propriedade e derivado da name variavel
+            //usando a sintaxe especifica do ES6 para definir o getter método acessor da propriedades
+            //usando a palavra chave get, para definir o metodo get o nome e uma propriedade computa, que acessa o valor da propriedades
+            get[name]() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        }
+
+        //declara uma instancia de objeto do tipo Person, passando dois argumentos para o construtor
+        //a instancia de objeto e atribuida por referencia a variavel person
+        let person = new Person('John', 'Doe');
+
+        //ao tentar acessar uma propriedade chamada fullName o mecasnimos JS não permite pois não existe propriedade com esse nome, então faz a ligação da propriedade ao um getter metodo, para verificar se existe neste caso temos um getter metodo definido seu nome como uma propriedade computada como fullName, assim vinculase ao fullName get método e acessa a propriedade e retorna os valores
+        console.log(person.fullName);
+
+        /**
+         * Como Funciona:
+
+          - O get[name] é um nome de propriedade computado de um getter da Personclasse. Em tempo de execução, quando você acessa a fullName propriedade, o objeto pessoa chama o getter e retorna o nome completo.
+        */
+
+    </script>
+</body>
+</html>

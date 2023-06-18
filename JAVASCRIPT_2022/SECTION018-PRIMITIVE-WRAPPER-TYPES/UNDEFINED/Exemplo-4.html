@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * JavaScript usa o undefined valor nas seguintes situações.
+         * 
+         * * 4) AS FUNÇÕES RETORNAM UM VALOR
+         * 
+         * Uma função que não possui uma return instrução retorna implicitamente undefined. Por exemplo:
+        */
+
+        //declara uma arrow function anonima que declara um paramentro chamado message, a arrow function e atribuida por referencia a constante log
+        const log = (message) => {
+            const time = (new Date()).toLocaleTimeString();
+            console.log(`${time} : ${message}`);
+            //a arrow function não retorna nenhum valor explicitamente, por não possuir uma instrução return retornando um valor explicitamente, assim o mecanismo JS faz a function retornar undefined
+        };
+
+        //invocando a function por meio da variavel log passando como argumento uma string literal, essa function por não possuir uma instrução return implicitamente ira retornar o valor undefined
+        const result = log('Hi');
+        console.log(result); //undefined
+
+        /**
+         * Da mesma forma, quando uma função tem um return comando sem expressão, ela também retorna undefined. Por exemplo:
+        */
+
+        //declara uma arrow function anonima que declara paramentros chamados a e b, a arrow function e atribuida por referencia a constante add
+        const add = (a, b) => {
+            const result = a + b;
+            //a arrow function tem uma instrução return explicita mas não especifica nenhum valor a ser retornado, a function ira retornar o valor undefined
+            return;
+        }
+
+        //declara uma variavel de escopo chamada result que e inicilizada com o valor retornado pela invocação da function add(), passando dois valores numericos como argumentos, a function add ira retorna o valor undefined, pois na sua instrução return não especificou nenhum valor a ser retornado
+        let result2 = add(10, 20);
+        console.log(result2); //undefined
+
+        /**
+         * Considere o seguinte exemplo:
+        */
+
+        //declara uma arrow function anonima, que declara dois paramentros, chamados a e b, a arrow function e atribuida a variavel add por referencia
+        const add2 = (a, b) => {
+            //a arrow function ira retornar undefined ao inves de a soma dos argumentos
+            //isso por se ter uma nova linha entre a instrução return e a expressão que realiza a soma dos argumentos o compilador entende que e uma nova linha e adiciona ponto e virgula no final da return intrução; 
+            //fazendo assim a function ter uma return instrução, mas que não retorna nenhum valor, neste caso o mecanismo JS faz a function retorna undefined
+            return 
+                 a + b;
+        };
+
+        //declara uma variavel de escopo chamada result3 que e inicilizada com o valor retornado pela invocação da function add3(), passando dois valores numericos como argumentos, a function add3 ira retorna o valor undefined, pois na sua instrução return não especificou nenhum valor a ser retornado
+        let result3 = add2(10, 20);
+        console.log(result3); //undefined
+
+        /**
+         * A add() função retorna undefined. Deveria ter retornado 30 em vez disso.
+         * 
+         * O problema é que quando você cria uma nova linha entre a return palavra-chave e a expressão retornada (a + b), o compilador Javascript automaticamente insere um ponto e vírgula (;) antes da nova linha. Esse recurso é chamado de inserção automática de ponto e vírgula - automatic semicolon insertion (ASI) em JavaScript.
+         * 
+         * A add() função terá a seguinte aparência para o compilador JavaScript:
+         
+            const add = (a, b) => {
+                return 
+                    a + b;
+            };
+
+         * 
+         * É por isso que você obtém o undefined como o resultado de retorno.
+        */
+    </script>
+
+</body>
+</html>

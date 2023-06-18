@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+   
+    <script>
+
+        /**
+         * * CHAMANDO O MÉTODO toLowerCase() em undefined ou null
+         * 
+         * Se você chamar o toLowerCase()método em null ou undefined, o método lançará uma TypeError exceção. Por exemplo, a findUserById() função a seguir retorna uma string se id for maior que zero ou null caso contrário:
+         * 
+        */
+
+        //declara uma arrow function anonima que declara um paramentro chamado id, esse arrow function e atribuida por referencia a variavel findUserById
+        const findUserById = (id) => {
+            if(id > 0) {
+                //procure o usuário no banco de dados
+                //...
+                //
+                //a arrow function so retorna um valor explicitamente quando o argumento for maior que 0
+                return 'admin';
+            }
+            //retorna o valor null, se o argumento id, não for maior que 0
+            return null;
+        };
+
+        /*
+         * Se você chamar o toLowerCase()método no resultado da findUserById() função, você obterá TypeError quando o id for zero ou negativo:
+        */
+        
+        //invocando a function fingUserById(), passando um argumento numerico menor que 0, a function retorna explicitamente o valor null, quando o argumento passado for menor que 0
+        //chamando o método toLowerCase no resultado da invocacao da function findUserById
+        //chamar o método str.toLowerCase em um valor null, o método lançara um typeError
+        try {
+            console.log(findUserById(-1).toLowerCase());
+        } catch (error) {
+            console.log(`Não pode chamar um método de string em undefined`);
+            console.log(`${error.name} : ${error.message}`);
+        }
+
+        /**
+         * Para evitar o erro, você pode usar o operador de encadeamento opcional ?. assim:
+        */
+
+        //O operador de encadeamento opcional verifica implicitamente se o resultado retornado por findUserById não é null ou undefined antes de tentar invocar o toLowerCase no resultado:
+        //se o resultado devolvido pela function findUserById for null ou undefined o operador causa um curto circuito e retorna undefined, antes de converte os resultado da function em caracteres minusculos
+        console.log(findUserById(-1)?.toLowerCase());
+
+
+    </script>
+
+</body>
+</html>

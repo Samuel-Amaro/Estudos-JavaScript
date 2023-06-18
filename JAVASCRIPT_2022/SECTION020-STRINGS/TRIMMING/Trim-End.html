@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método JS trimEnd Da String</title>
+</head>
+<body>
+    <script>
+        /**
+         * * STRING JS TrimEnd() - aparar fim
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o trimEnd() método JavaScript String para remover caracteres de espaço em branco do final de uma string.
+         * 
+         * Para remover os caracteres de espaço em branco do final de uma string, você usa o trimEnd() método:
+         
+            let newString = originalString.trimEnd();
+
+         * 
+         * O trimEnd()método retorna uma nova string da string original com os caracteres de espaço em branco final removidos. O trimEnd()método não altera a string original. Os seguintes caracteres são os caracteres de espaço em branco em JavaScript:
+         
+            - A space character
+
+            - A tab character
+
+            - A carriage return character
+
+            - A new line character
+
+            - A vertical tab character
+
+            - A form feed character
+
+         * 
+         * O exemplo a seguir mostra como usar o trimEnd() para remover os caracteres de espaço em branco do final de uma string:
+        */
+
+        //declara uma constante que e inicializada com uma string literal, que possui espaços em branco no inicio e no final
+        const str = ' JavaScript ';
+        //utilizando o metodo string.trimEnd() para remover os espaços em branco no final da string, esse metodo não modifica a string original, ele retorna uma nova string
+        const result = str.trimEnd();
+        //mostra a string como um objeto com a propriedade str e o valor da variavel str, e uma abreviação da extensão de sintaxe literal de objeto do ES6
+        console.log({str});
+        //mesma coisa
+        console.log({result});
+
+        /**
+         * O trimRight() método é um alias do trimEnd() método. O trimRight()fornece a mesma funcionalidade que o trimRight() método. No entanto, é recomendável que você use o trimEnd() método.
+         * 
+         * * RESUMO
+         * 
+         * O trimEnd() método retorna uma nova string de uma string original com os caracteres de espaço em branco final removidos. O trimEnd()método não altera a string original.
+         * 
+         * O trimRight() método é um alias do trimEnd() método.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Clique com o botão direito do mouse para o menu do documento</p>
+
+    <button type="button" id="elem">Clique com o botão direito do mouse no menu do botão (corrigido com event.stopPropagation)</button>
+    
+
+    <script type="text/javascript">
+        /**
+         * O problema é que quando clicamos em elem, temos dois menus: o nível do botão e (o evento borbulha) o menu do nível do documento.
+         * 
+         * Como corrigi-lo? Uma das soluções é pensar assim: “Quando manipulamos o botão direito do mouse no manipulador de botão, vamos parar de borbulhar” e usar event.stopPropagation():
+        */
+
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        //o evento e o contextmenu(clique direito do botão do mouse sobre elem)
+        elem.oncontextmenu = function(event) {
+            //este metodo do objeto evento, evita a ação padrão do navegador, a ação padrão do navegador e interropida.
+            //a ação padrão de mostrar menu de contexto do navegador e interropida
+            event.preventDefault();
+            //este outro metodo do objeto de evento, decide que ao terminar de processar o evento vamos interroper o borbulhar(deixar de acionar os manipuladores dos elementos ancestrais desse elemento)
+            //deixa de ocorrer botbulhamento
+            event.stopPropagation();
+            //nossa propria ação para o evento acionado
+            alert("Contexto Menu do botão");
+        }
+
+        //atribui outro manipulador de evento por meio de propriedade dom ao document
+        document.oncontextmenu = function(event) {
+            //este metodo do objeto de evento evita a ação padrão do navegador
+            event.preventDefault();
+            //ação padrão, nossa propriedade ação
+            alert("Contexto de menu do documento");
+        };
+
+
+    </script>
+</body>
+</html>

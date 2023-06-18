@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escopo lexico</title>
+</head>
+<body>
+    <script>
+        /**
+         * *  ESCOPO LEXICAL(LEXICO)
+         * 
+         * O escopo léxico define o escopo de uma variável pela posição dessa variável declarada no código-fonte. Por exemplo:
+        */
+
+        //declara uma variavel no escopo global do script, pode ser usada por todo o script
+        //variavel global acessivel em todo lugar
+        let name = 'John';
+
+        //declara uma function regular chmada greeting que não possui paramentro
+        function greeting() {
+            //declara uma variavel no escopo local dentro da function, so pode ser usada aqui dentro
+            //variavel local so pode ser acessivel dentro da function
+            let message = 'Hi';
+            console.log(`${message} ${name}`);
+        }
+
+        /**
+         * Neste exemplo:
+         
+            - A variável name é uma variável global. É acessível de qualquer lugar, inclusive dentro da greeting() função.
+
+            - A variável message é uma variável local acessível apenas dentro da greeting() função.
+
+         * 
+         * Se você tentar acessar a message variável fora da greeting() função, receberá um erro.
+         * 
+         * Portanto, o mecanismo JavaScript usa o escopo para gerenciar a acessibilidade da variável.
+         * 
+         * De acordo com o escopo léxico, os escopos podem ser aninhados e a função interna pode acessar as variáveis ​​declaradas em seu escopo externo. Por exemplo:
+        */
+
+        //declara uma function regular chamada saudacao que não possui paramentro declarado
+        function saudacao() {
+            //declara uma variavel local acessivel somente dentro da functtion
+            let mensagem = 'Hi';
+            //declara uma function interna local chamada digaOla que não possui paramentro declarado
+            //so e acessivel essa funçaõ dentro do escopo da function saudacao e uma funçaõ local
+            function digaOla() {
+                //a função interna acessa a variavel que esta no escopo da function externa, isso e aninhamento de escopo
+                //acessa a variavel declarada no escopo da function externa
+                console.log(mensagem);
+            }
+            digaOla(); //invoca function interna dentro do escopo da function externa
+        }
+
+        //invoca function saudacao no escopo global do scritp
+        saudacao();
+
+        /**
+         * A greeting() função cria uma variável local chamada message e uma função chamada sayHi().
+         * 
+         * The sayHi() é a função interna que está disponível apenas no corpo da greeting() função.
+         * 
+         * A sayHi() função pode acessar as variáveis ​​da função externa, como a message variável da greeting() função.
+         * 
+         * Dentro da greeting() função, chamamos a sayHi() função para exibir a mensagem Hi
+        */
+    </script>
+</body>
+</html>

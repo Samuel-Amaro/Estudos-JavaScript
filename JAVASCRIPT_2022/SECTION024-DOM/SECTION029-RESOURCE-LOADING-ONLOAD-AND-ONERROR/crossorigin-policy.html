@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - nosso script na nossa origem
+    -->
+    <script type="text/javascript">
+        /**
+         * * CROSSORIGIN POLICY(POLITICA DE ORIGEM CRUZADA)
+         * 
+         * Existe uma regra: scripts de um site não podem acessar o conteúdo do outro site. Assim, por exemplo, um script em https://facebook.com não pode ler a caixa de correio do usuário em https://gmail.com.
+         * 
+         * Ou, para ser mais preciso, uma origem (tríplice(triplet) domínio(domain)/porta(port)/protocolo(protocol)) não pode acessar o conteúdo de outra. Portanto, mesmo que tenhamos um subdomínio, ou apenas outra porta, essas são origens diferentes sem acesso umas às outras.
+         * 
+         * Essa regra também afeta recursos de outros domínios.
+         * 
+         * Se estivermos usando um script de outro domínio e houver um erro nele, não poderemos obter detalhes do erro.
+         * 
+         * Por exemplo, vamos pegar um script error.js que consiste em uma única chamada de função (ruim):
+        */
+
+        //error.js
+        //noSuchFunction();
+
+        //Agora carregue-o do mesmo site onde está localizado:
+
+        //o manipulador e para o evento error, esse evento e acionado depois que o recurso externo houve um erro no carregamento do mesmo. e acionado quando ha erros no carregamento do recurso. 
+        //quando ha erros de carregamento no janela
+        window.onerror = function(event, message, url, line, col, errorObj) {
+            alert(`${message}\n${url}, ${line}:${col}`);
+        };
+    </script>
+
+    <!--
+        - script externo. de outra origem
+        - o script externo possui um erro, mas esta em outro domonio/porta/protocol, e nos estamos em outra origem, assim por meio do nosso script não temos acessmo a mais detahles do erro.
+    -->
+    <script type="text/javascript" src="https://javascript.info/article/onload-onerror/crossorigin/error.js"></script>
+
+</body>
+</html>

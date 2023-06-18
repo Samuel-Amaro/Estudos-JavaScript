@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Se tivermos nossas próprias tarefas assíncronas, diferentes de fetch, podemos usar um único AbortController para interrompê-las, junto com as buscas.
+         * 
+         *Só precisamos ouvir seu abort evento em nossas tarefas:
+        */
+
+        (async() => {
+
+            let urls = [/*...*/]; //uma lista de urls para fetch em paralelo
+
+            //criando um controlador
+            //usando Class AbortController Ele pode ser usado para abortar não apenas fetch, mas também outras tarefas assíncronas.
+            let controller = new AbortController();
+
+            //cria uma promise que executa uma tarefa assincrona
+            //atribuimos a essa promise um abort objeto para abortar sua tarefa quando necessario
+            let ourJob = new Promise((resolve, reject) => { //outra tarefa
+                // A parte que realiza uma operação cancelável
+                // obtém o objeto "signal"
+                // e configura o listener para disparar quando controller.abort() é chamado 
+                //atribuindo um manipulador de evento no objeto signal, para manipular o evento abort quando ocorrer, quando o abort evento ocorrer a promise sera rejeitada
+                signal.addEventListener('abort', reject);
+            });
+     
+            //cada item do array mapeado ira receber uma promise resolvida com objeto response apos enviar uma request para o elemento url mapeado
+            //passamos como argumento para o metodo fetch o url que a request ira ser enviada, e passamos um objeto com informações adicionais para o request
+            let fetchJobs = urls.map(url => fetch(url, {
+                //option signal para abortar o fetch, cancelar/abortar request
+                //obtemos o valor da propriedade controller.signal, que permite definir ouvintes de eventos nele, obtem um objeto
+                signal: controller.signal //passa objetct AbortSignal
+            }));
+
+            //agurdamos todas as promises passadas para o metodo Promise.all serem resolvidas, e retorna uma promise resolvida com um array result que cada elemento e um objeto response das promises passadas por argumento resolvidas
+            //Aguarde buscas e nossa tarefa em paralelo
+            let results = await Promise.all([...fetchJobs, ourJob]);
+
+            // se controller.abort() for chamado de qualquer lugar,
+            // aborta todas as buscas e ourJob
+        })();
+
+        /**
+         * 
+         * 
+        */
+
+    </script>
+
+</body>
+</html>

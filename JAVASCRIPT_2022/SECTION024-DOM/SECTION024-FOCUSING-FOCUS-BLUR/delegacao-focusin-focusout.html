@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .focused{
+            outline: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        - atribuindo um manipulador de evento por meio do atributo html.
+        - o manipulador e para o evento de foco, quando o elemento <form> receber o foco se destacar logo em seguida, mas para isso precisamos que os elementos desse form, borbulhem para que possa chegar até esse manipulador. mas eventos como focus ou blur não borbulham.
+    -->
+    <form action="#" onfocus="this.className='focused'">
+        <label for="name">Nome</label>
+        <input type="text" name="name" value="Name"/>
+        <label for="seunome">Seu nome</label>
+        <input type="text" name="seunome" value="Seu nome"/>
+    </form>
+
+    <script>
+        /**
+         * * DELEGAÇÃO: focusin(foco dentro)/focusout(foco fora)
+         * 
+         * Eventos focus e blur não borbulhar.
+         * 
+         * Por exemplo, não podemos colocar onfocus o <form> para destacá-lo, assim:
+         * 
+         * O exemplo acima não funciona, porque quando o usuário foca em um <input>, o focus evento é acionado apenas nessa entrada. Não borbulha. Então form.onfocus nunca aciona.
+         * 
+         * Existem duas soluções.
+        */
+    </script>
+</body>
+</html>

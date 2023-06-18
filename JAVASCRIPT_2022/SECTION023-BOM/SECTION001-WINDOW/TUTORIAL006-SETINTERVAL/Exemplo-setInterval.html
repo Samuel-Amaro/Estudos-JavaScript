@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript setInterval Demo</title>
+</head>
+<body>
+
+    <p id="flashtext">JavaScript setInterval Demo</p>
+
+    <button onclick="start()">Start</button>
+    <button onclick="stop()">Stop</button>
+
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO setInterval() JS
+         * 
+         * O exemplo a seguir usa setInterval()e clearInterval() para alterar a cor de um título uma vez por segundo quando você pressiona o botão Iniciar. Se você parar o botão, o clearInterval() irá cancelar o tempo limite.
+        */
+
+        //declara uma variavel de escopo de bloco chamada intervalID não foi inicializada
+        let intervalID;
+
+        //declara uma function regular chamada toggleColor que não declara paramentros
+        function toggleColor() {
+            let e = document.getElementById('flashtext');
+            e.style.color = e.style.color == 'red' ? 'blue' : 'red';
+        }
+
+        //declara uma function regular chamada start que não declara paramentros
+        function start() {
+            //o codigo abaixo ira chamar a function taggleColor a cada 1 segundo repetidamente, a cada 1 segundo a function toggleColor e chamada
+            //o setInterval(callback, delay, [arg1, arg2, ...]); e um método do window objeto global
+            //o setInterval(callback, delay, [arg1, arg2, ...]); chama repetidamente uma função com um atraso fixo entre cada chamada
+            //o primeiro argumento passado e uma callback que sera executada a cada delay milisegundos, a callback passada aqui e uma referncia a function toggleColor
+            //o segundo argumento e o tempo que o cronometro deve atrasar entre as execuções da callback, aqui queremos que o cronometro atrase 1 segundo antes de chamara a callback
+            //o método setInterval() retorna um numero inteiro diferente de 0, que identifica o cronometro criado
+            intervalID = setInterval(toggleColor, 1000);
+        }
+
+        //declara uma function regular chamada stop que não declara paramentros
+        function stop() {
+            //o método clearInterval(intervalID), e usado para cancelar o interval criado, por um setInterval(), cancela o cronometro definido por um setInterval(), para isso necessita de um parametro que seja o identificador do interval a ser cancelado, o identificar e o valor retornado ao chamar o setInterval
+            //aqui neste caso o indentificador do interval criado esta armazenado na varaivel de escopo de bloco do script intervalID
+            clearInterval(intervalID);
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * O setInterval() chama repetidamente uma função uma vez com um atraso fixo entre cada chamada.
+         * 
+         * O setInterval() retorna um timeoutID que pode ser passado para o clearInterval() para cancelar o tempo limite.
+         * */
+    </script>
+
+</body>
+</html>

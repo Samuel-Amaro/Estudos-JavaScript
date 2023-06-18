@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT CONST E ARRAYS
+         *
+         * Considere o seguinte exemplo:
+        */
+        
+        //declara uma constante de escopo de bloco chamada colors que recebe por referencia um array literal dense anonimo
+        //uma constante e imutavel referencia um valor para somente leitura
+        const colors = ['red'];
+        //adicionado um novo elemento no array referenciado pela constante colors
+        colors.push('green');
+        //mostra o array referenciado pela constante
+        console.log(colors);
+
+        //removendo ultimo elemento do array referenciado pela constante colors
+        colors.pop();
+        colors.pop();
+        console.log(colors); //[]
+
+        try {
+            //reatribuindo um novo valor a constante colors
+            //fazendo a constante receber um novo array literal anonimo por referencia
+            //iso vai dar um erro, pois contante e imutavel, não pode reatribuir ou receber valores diferentes
+            colors = []; //TypeError
+        } catch (error) {
+            console.log(`Erro: ${error.name}, description: ${error.message}`);
+            console.log(`Não pode reatribuir valor a uma constante ja declarada.`);
+        }
+        
+
+        /**
+         * Neste exemplo, declaramos um array colors que possui um elemento usando a palavra- chave const. Em seguida, podemos alterar os elementos do array adicionando a green cor. No entanto, não podemos reatribuir a array colors a outra array.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campos Privados Estaticos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CAMPOS PRIVADOS ESTÁTICOS
+         * 
+         * O exemplo a seguir mostra como usar um campo privado estático:
+        */
+
+        //define uma class chamada Circle que utiliza a palavra-chave class
+        class Circle{
+            //define uma propriedade chamada radius privada no corpo da classe
+            //essa propriedade e uma propriedade privada o # sinal define que a propriedade e privada, so pode ser acessada dentro do escopo da classe
+            //iniciliaza a propriedade com o valor 0 
+            #radius = 0;
+            //define uma propriedade chamada count privada no corpo da classe
+            //essa propriedade e privada, o sinal # identifica a propriedade privada somente a classe declarante tem acesso
+            //essa propriedade também e estatica, usando a palavra-chave static torna a propriedade estatica antes de sua definição, assim ela esta vincula a classe e não ha instancias
+            static #count = 0;
+            //define um construtor para a class Circle e declara um parametro chamado value
+            constructor(radius) {
+                //declara uma propriedade chamada radius e a inicializa com o radius argumento
+                this.radius = radius;
+                //toda chamada realizada para o construtor instanciar um objeto, a propriedade estatica sera incrementada
+                Circle.#count++;
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade
+            //usando a palavra chave get, para definir o metodo get area 
+            //calcula a area do circulo o método
+            get area() {
+                //retorna o produto de uma multiplicação
+                return Math.PI * Math.pow(this.radius, 2);
+            }
+            //define um metodo setter da classe Circle chamado de radius e declara um paramentro chamado value
+            //usando a sintaxe especifica do ES6 para definir o setter método inicializador de propriedade privada #radius
+            set radius(value) {
+                if(typeof value === 'number' && value > 0) {
+                    //inicializa a propriedade privada #radius com o value argumento
+                    this.#radius = value;
+                }else{
+                    //lança exceção
+                    throw 'The radius must be a positive number';
+                }
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade #radius privada para obter o valor da mesma
+            get radius() {
+                return this.#radius;
+            }
+            //declara um método estatico chamado hasRadius que declara um paramentro chamado circle
+            //o metodo estatico e vinculado a classe e não a instancia da mesma
+            //metodos estaticos no ES6 são definidos usando a palavra chave static antes da definição do método
+            //um metodo estatico esta vinculado a classe e não a instancias da classe
+            static hasRadius(circle) {
+                //utilizando o in operador
+                //O operador in retorna verdadeiro se a propriedade especificada estiver no objeto especificado.
+                //verifica se a propriedade privada #radius esta no circle instancia de objeto por meio do operador in
+                //se sim retorna true se não false
+                return #radius in circle;
+            }
+            //outro metodo estatico, vinculado a classe, esse metodo e chamada de getCount retorna o valor da propriedade estatica
+            static getCount() {
+                return Circle.#count;
+            }
+        }
+
+        //declara um array literal dense, esse array e atribuido por referencia a variavel circles, o array e inicializado com 3 elementos, cada elemento e uma instancia de objeto que invoca o construtor da class Circle fornecendo o argumento junto com o operador new para retornar instancia de objetos
+        //a cada chamada ao construtor da classe, incrementa em 1 a propriedade estatica
+        let circles = [new Circle(10), new Circle(20), new Circle(30)];
+        //invoca o método estatico, por meio da class sem precisar da instancia
+        console.log(Circle.getCount()); //3
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, adicione um campo estático privado #count à Circle classe e inicialize seu valor como zero:
+         * 
+         * Segundo, aumente o #count por um no construtor:
+         *
+         * Terceiro, defina um método estático que retorne o valor do #count campo estático privado:
+         * 
+         * Por fim, crie três instâncias da Circle classe e envie o count valor para o console:
+         * 
+         * * RESUMO
+         * 
+         * Prefixe o nome do campo com # um sinal para torná-lo privado.
+         * 
+         * Campos privados são acessíveis apenas dentro da classe, não fora da classe ou subclasses.
+         * 
+         * Use o in operador para verificar se um objeto possui um campo privado.
+        */
+    </script>
+</body>
+</html>

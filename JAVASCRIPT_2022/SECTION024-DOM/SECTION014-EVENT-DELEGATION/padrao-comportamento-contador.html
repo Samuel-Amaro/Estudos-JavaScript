@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+    <!--
+        atributos data- são atributos não padrão personalizaveis para marcar elementos html para passar dados html para o javascript ou marcar elementos html para o javascript, aqui nesse caso usamos o atributo não padrão personalizavel, para marcar o comportamento do elemento .
+    -->
+    <label for="counter">Contador:</label>
+    <input type="button" value="1" name="counter" data-counter=""/>
+    <label for="otherCounter">Mais um contador:</label>
+    <input type="button" value="2" data-counter=""/>
+
+    <script type="text/javascript">
+        /**
+         * * Comportamento: Contador
+         * 
+         * Por exemplo, aqui o atributo data-counter adiciona um comportamento: “aumentar valor ao clicar” aos botões:
+        */
+
+        //atribui um manipulador de evento usando elem.addEventListener(event, handler, options);
+        //atribui uma manipulador de evento ao document que e o <html> ao clicar no documento o manipulador sera acionado
+        //o manipulador e uma function anonima que declara o  paramentro event que e um event object que contem informações sobre evento ocorrido
+        document.addEventListener('click', function(event) {
+            //se exister um atributo de dados não personalizado chamado data-counter no elemento que iniciou o evento(o elemento que recebeu o click) e o atributo desse elemento possuir um valor, isso e o elemento que recebeu o clique esta marcado
+            //se o elemento que iniciou o evento possui o atributo não padrão personalizavel chamado data-counter adicionar um comportamento "aumentar valor ao clicar"
+            if(event.target.dataset.counter != undefined) { //se o atributo existir...
+                //incrementa a propriedade value do elemento que iniciou o evento
+                //adicionar comportamento "aumentar valor ao clicar"
+                event.target.value++;
+            }
+        });
+
+        /**
+         * Se clicarmos em um botão – seu valor é aumentado. Não botões, mas a abordagem geral é importante aqui.
+         * 
+         * Pode haver quantos atributos data-counter quisermos. Podemos adicionar novos ao HTML a qualquer momento. Usando a delegação de eventos nós “estendemos” o HTML, adicionamos um atributo que descreve um novo comportamento.
+         * 
+         * * PARA MANIPULADORES DE NÍVEL DE DOCUMENTO - SEMPRE addEventListener
+         * 
+         * Quando atribuímos um manipulador de eventos ao document objeto, devemos sempre usar addEventListener, não document.on<event>, pois este último causará conflitos: novos manipuladores substituem os antigos.
+         * 
+         * Para objetos reais, é normal que existam muitos manipuladores document definidos por diferentes partes   do código
+        */
+    </script>
+</body>
+</html>

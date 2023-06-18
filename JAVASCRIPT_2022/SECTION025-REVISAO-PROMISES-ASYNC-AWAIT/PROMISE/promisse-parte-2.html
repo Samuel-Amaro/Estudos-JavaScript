@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * E agora um exemplo do executor rejeitando a promessa com um erro:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        //exemplo abaixo de uma promise rejeitada - promisse reject
+        let promise = new Promise(function(resolve, reject) {
+            //executor realizando tentativa de executar trabalho
+            //a função executor é executada automaticamente quando a promessa é construída
+            //a function callback executor e chamada automaticamente e imediatamente por new Promisse
+            // após 1 segundo sinaliza que o trabalho está concluído(finalizado) com um error
+            //trabalho não conlcuido
+            //apos passar 1 segundo o trabalho foi finalizado e chamamos reject com o objeto error, passando o objeto error com mensagem para sinalizar que houve um erro no trabalho
+            //assim a promisse muda seu state propriedade para "reject" e seu result propriedade para error objeto
+            //apos 1 segundo altera o estado da promisse para reject
+            // após 1 segundo sinaliza que o trabalho foi finalizado com erro
+            setTimeout(() => reject(new Error("Whoops!")), 1000);
+        });
+
+        /**
+         * A chamada para reject(...) move o objeto de promessa para o "rejected" estado:
+         * 
+         * 
+        */
+    </script>
+
+    <img src="./promise-resolve-reject.svg" alt="image"/>
+
+    <script type="text/javascript">
+        /**
+         * Para resumir, o executor deve realizar um trabalho (geralmente algo que leva tempo) e então chamar resolveou rejectalterar o estado do objeto de promessa correspondente.
+         * 
+         * Uma promessa que é resolvida ou rejeitada é chamada de “resolvida”, em oposição a uma promessa inicialmente “pendente”.
+        */
+    </script>
+</body>
+</html>

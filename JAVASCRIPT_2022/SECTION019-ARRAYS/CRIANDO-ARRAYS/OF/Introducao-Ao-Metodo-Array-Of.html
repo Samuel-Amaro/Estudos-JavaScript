@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Array Of()</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * *  JS Array.of()
+         * 
+         * Resumo : neste tutorial, você aprenderá como melhorar a construção de arrays usando o Array.of() método JavaScript no ES6.
+         * 
+         * * INTRODUÇÃO AO MÉTODO JS ARRAY.OF()
+         * 
+         * No ES5, quando você passa um número para o construtor Array , o JavaScript cria um array cujo comprimento é igual ao número. Por exemplo:
+        */
+
+        //criando uma instancia de objeto por meio do Array tipo junto com o operador new, invocando a function construtura passando o argumento 2 que diz com quantas posições o array deve possui ou o comprimento do array
+        //no caso cria uma instancia de objeto do tipo array que sera atribuida a variavel numbers assim numbers variavel referencia o objeto retornado pela function construtora Array
+        //decla uma instancia de objeto do tipo array com comprimento 2 referenciado por numbers variavel
+        let numbers = new Array(2);
+        console.log(`numbers.length = ${numbers.length}`); //2
+        //so declara o objeto array não o inicializa
+        console.log(`numbers[0] = ${numbers[0]}`); //undefined
+
+        /**
+         * No entanto, quando você passa para o Array construtor um valor que não é um número, o JavaScript cria uma array que contém um elemento com esse valor. Por exemplo:
+        */
+
+        //se passar um valor de argumento para a function construtora Array sem sem ser do tipo number a function construtura ira criar a instancia de objeto do tipo array e o inicializara com o argumento passado não numerico
+        numbers = new Array("2");
+        //mostra o comprimento do array numbers
+        console.log(`numbers.length = ${numbers.length}`); //1
+        //mostra que o argumento passado para a function construtora serviu para inicializar o array
+        console.log(`numbers[0] = ${numbers[0]}`); //"2"
+
+        /**
+         * Esse comportamento às vezes é confuso e propenso a erros porque você pode não saber o tipo de dados que você passa para o Array construtor.
+         * 
+         * ES6 apresenta o Array.of() método para resolver este problema.
+         * 
+         * O Array.of() método é semelhante ao Array construtor, exceto que o Array.of()método não trata um único valor numérico especial.
+         * 
+         * Em outras palavras, o Array.of() método sempre cria uma array que contém os valores que você passa a ela, independentemente dos tipos ou do número de argumentos.
+         * 
+         * Veja a seguir a sintaxe do Array.of()método:
+         
+            Array.of(element0[, element1[, ...[, elementN]]]);
+
+        */
+    </script>
+</body>
+</html>

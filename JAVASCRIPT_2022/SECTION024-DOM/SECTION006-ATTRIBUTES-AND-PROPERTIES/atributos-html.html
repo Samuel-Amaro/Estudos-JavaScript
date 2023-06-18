@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body id="test" something="não-padrão" type="...">
+    <input id="input" type="text"/>
+
+    <div id="elem" about="Elephant"></div>
+
+    <script type="text/javascript">
+        /**
+         * * ATRIBUTOS HTML
+         * 
+         * Em HTML, as tags podem ter atributos. Quando o navegador analisa o HTML para criar objetos DOM para tags, ele reconhece atributos padrão e cria propriedades DOM a partir deles.
+         * 
+         * Portanto, quando um elemento possui id ou outro atributo padrão , a propriedade correspondente é criada. Mas isso não acontece se o atributo não for padrão.
+         * 
+         * Por exemplo:
+         * */
+
+        //a propriedade id foi criada automaticamente para o objeto de no dom body, pois no elemento body o atributo id e padrão, assim automaticamente atributos padrão de elementos possui propriedades correspondentes no seu objeto interno dom.
+        //acessa o valor da propriedade id que representa um atributo padrão id do elemento html <body>
+        console.log(document.body.id); //test
+
+        //atributo não padrão no elemento <body> não produz uma propriedade no objeto dom correspondente
+        console.log(document.body.something); //undefined
+
+        /**
+         * Portanto, se um atributo não for padrão, não haverá uma propriedade DOM para ele. Existe uma maneira de acessar esses atributos?
+         * 
+         * Claro. Todos os atributos são acessíveis usando os seguintes métodos:
+         
+            - elem.hasAttribute(name)– verifica a existência.
+
+            - elem.getAttribute(name)– recebe o valor.
+
+            - elem.setAttribute(name, value)– define o valor.
+
+            - elem.removeAttribute(name)– remove o atributo.
+
+         * Esses métodos operam exatamente com o que está escrito em HTML.
+         * 
+         * Também pode-se ler todos os atributos usando elem.attributes: uma collection de objetos que pertencem a uma classe name Attr interna , com propriedades e value.
+         * 
+         * Aqui está uma demonstração da leitura de uma propriedade não padrão:
+         * */
+
+        //usando o método de acessor de atributos elem.getAttribute(name atributo) para obter o valor do atributo não padrão something, do no dom body
+        console.log(document.body.getAttribute('something')); //não padrão
+
+        /**
+         * Os atributos HTML têm os seguintes recursos:
+         
+            - Seu nome não diferencia maiúsculas de minúsculas ( id é igual a ID).
+
+            - Seus valores são sempre strings.
+
+         * 
+         * Aqui está uma demonstração estendida de como trabalhar com atributos:
+        */
+
+        //elem e uma variavel global que e nomeada por id que referencia o elemento dom elem
+        //usando o metodo de acessor de atributo podemos obter o valor do atributo about que esta especificado no elem
+        console.log(elem.getAttribute('about')); //(1) 'Elephant', reading
+
+        //usando os metodos de atributos podemos escrever um novo atributo no elemento html correspondente
+        //criando um novo atributo chamado Test que ira possui o valor 123 no elemento html <div> que e o no dom elem
+        elem.setAttribute('Test', 123); //(2), lendo
+
+        //obtendo o html completo que esta dentro do elem, e o innerHtml mais o proprio elem
+        console.log(elem.outerHTML); //(3), veja se o atributo está em HTML (sim)
+
+
+
+    </script>
+</body>
+</html>

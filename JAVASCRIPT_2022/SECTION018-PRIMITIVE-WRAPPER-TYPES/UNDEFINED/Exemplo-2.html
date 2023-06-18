@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * JavaScript usa o undefined valor nas seguintes situações.
+         * 
+         * * 2) ACESSANDO UMA PROPRIEDADE INEXISTENTE DE UM OBJETO
+         * 
+         * Se você acessar uma propriedade inexistente de um objeto , você obterá undefined. Por exemplo:
+        */
+
+        //declara uum objeto literal anonimo que possui somente uma propiedade esse objeto e atribuido por referencia a variavel counter
+        let counter = {
+            //declara propriedade usando sintaxe chave : valor
+            current: 0
+        };
+        
+        //tentando acessar uma propriedade que não foi declarada no objeto literal referenciado por counter
+        //ao tentar acessar um propriedade inexistente o mecanismo JS retorna o undefined valor
+        console.log(counter.max); //undefined
+
+        /**
+         * Neste exemplo, o counter objeto tem uma propriedade current. Acessar a max propriedade que não existe no counter objeto retorna undefined.
+         * 
+         * É uma boa prática verificar se a propriedade existe antes de acessá-la. JavaScript fornece algumas maneiras de fazer isso.
+         * 
+         * E a forma mais comum de verificar se o objeto tem uma propriedade é usar o in operador:
+         
+            'propertyName' in objectName
+
+         *
+         * Observe que você precisa colocar o nome da propriedade do objeto entre aspas simples ou duplas.
+         * 
+         * O exemplo a seguir usa o in operador para verificar se a max propriedade existe no counter objeto antes de acessá-lo:
+        */
+
+        //O in operador retorna true se property Name existe no objectName.
+        if('max' in counter) {
+            console.log(counter.max);
+        }
+
+        /**
+         * Se você deseja atribuir um valor padrão quando a propriedade de um objeto não existe, você pode usar o operador de coalescência nulo (??):
+         
+            const propValue = object.propName ?? defaultValue;
+
+         * 
+         * Nesta sintaxe, o operador nullish coalesing (??) retorna o defaultValue se o object.propName for indefinido ou nulo.
+         * 
+         * Observe que o operador de coalescência nulo está disponível desde o ECMAScript 2020.
+        */
+
+        //declara uma constante de escopo de bloco chamada max que e inicializada com o resulado do operador de coalescencia nulo
+        //usando o operador de coalescencia nul, verificamos se o counter.max retorna undefined ou null valores vazios ao acessar varaivel, se retornarem esse valor, o operado de coalescencia retorna o valor 100
+        const max = counter.max ?? 100;
+    </script>
+
+</body>
+</html>

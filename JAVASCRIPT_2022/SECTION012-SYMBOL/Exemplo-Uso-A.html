@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Uso A</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * USOS DE SÍMBOLOS
+         * 
+         * * EXEMPLO A) USANDO SÍMBOLOS COMO VALORES ÚNICOS
+         *
+         * Sempre que você usar uma string ou um número em seu código, você deve usar símbolos. Por exemplo, você precisa gerenciar o status no aplicativo de gerenciamento de tarefas. Antes do ES6, você usaria strings como open, in progress, completed, canceled e on hold para representar diferentes status de uma tarefa. No ES6, você pode usar símbolos da seguinte forma:
+         * 
+        */
+
+        //declara um objeto literal anonimo, atribuido a variavel statuses
+        let statuses = {
+            //declara propriedades usando sintaxe chave : valor
+            //os valores serão symbols(valores unicos e exclusivos) com description para ajudar descrever o symbol valor, para criar o symbol deve invocar a function global Symbol, passando como argumento um description que ajude a descrever o symbol valor
+            OPEN: Symbol('Open'),
+            IN_PROGRESS: Symbol('In progress'),
+            COMPLETED: Symbol('Completed'),
+            HOLD: Symbol('On hold'),
+            CANCELED: Symbol('Canceled')
+        };
+
+        //uma tarefa completa
+        task.setStatus(statuses.COMPLETED);
+    </script>
+
+</body>
+</html>

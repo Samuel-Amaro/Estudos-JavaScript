@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintaxe De Objeto Literal</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXTENSÕES DE SINTAXE LITERAL DE OBJETO NO ES6
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre as extensões de sintaxe do literal de objeto no ES6 que tornam seu código mais limpo e flexível.
+         * 
+         * O literal de objeto é um dos padrões mais populares para criar objetos em JavaScript devido à sua simplicidade. O ES6 torna o objeto literal mais sucinto e poderoso, estendendo a sintaxe de algumas maneiras.
+         * 
+         * * ABREVIAÇÃO DO INICIALIZADOR DE PROPRIEDADE DO OBJETO
+         * 
+         * Antes do ES6, um literal de objeto é uma coleção de pares nome-valor. Por exemplo:
+        */
+
+        //declara uma function chamada createMachine que possui dois paramentros chamado name, e status, essa function e uma instancia de objeto do tipo function
+        function createMachine(name, status) {
+            //a function ira retornar uma instancia de objeto anonima literal
+            return {
+                //propriedades do objeto literal usando sintaxe chave : valor
+                name: name,
+                status: status
+            };
+        }
+
+        /**
+         * A createMachine() função recebe dois argumentos name e status retorna um novo literal de objeto com duas propriedades: name e status.
+         * 
+         * As propriedades name and status recebem os valores dos parâmetros name e . status Essa sintaxe parece redundante porque foi mencionada duas vezes no nome e no valor das propriedades name.status
+         * 
+         * O ES6 permite eliminar a duplicação quando uma propriedade de um objeto é igual ao nome da variável local, incluindo o nome sem dois pontos e valor.
+         * 
+         * Por exemplo, você pode reescrever a createMachine() função no ES6 da seguinte forma:
+        */
+
+        //reescrevendo a function createMachine usando a sintaxe ES6 de abreviacao do inicializador de propriedades de objetos literal
+        //declara uma function chamda createMachine que possui dois paramentros nomeados de name, e status
+        function createMachine(name, status) {
+            //a function ira retornar uma instancia de objeto literal
+            return {
+                //aqui eliminamos a duplicação de codigo, do nome da propriedade ser igual aos paramentros da function, aqui os internamanete quando a propriedade de um objeto literal tem apenas um nome sem usar a sintaxe chave  : valor, o mecanismo js procura uma variavel(aqui no caso o paramentro) com o mesmo no escopo circundante.
+                //assim o js ira atribuir o nome da propriedade como o nome especificado, e o valor da propriedade como o nome especificado também
+                //aqui atribuimos os argumentos name e status
+                //ao nome das propriedades name e status
+                name, 
+                status
+            };
+        } 
+
+        /**
+         * Internamente, quando uma propriedade de um literal de objeto tem apenas um nome, o mecanismo JavaScript procura uma variável com o mesmo nome no escopo circundante. Se o mecanismo JavaScript encontrar um, ele atribuirá à propriedade o valor da variável.
+         * 
+         * Neste exemplo, o mecanismo JavaScript atribui os valores de propriedade name e status dos argumentos name e status
+         * 
+         * Da mesma forma, você pode construir um literal de objeto a partir de variáveis ​​locais, conforme mostrado no exemplo a seguir:
+        */
+
+        //declara variaveis e as inicializa
+        let nam = 'Computer', status = 'On';
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel machine
+        //machine variavel referencia o objeto
+        let machine = {
+            //declara propriedadades do obbjeto usando a extensão de sintaxe literal do ES6, para abreviação do inicializador de propriedade do objeto
+            //aqui temos que as propriedades name e status, possui o mesmo nome que as variaveis locais name e status no mesmo escopo circuncidante, assim o mecanismo JS entende quando se passa, somente o nome unico sem usar sintaxe chave : valor, e porque temos uma propriedade com o mesmo nome da variavel local para inicializar propriedade, assim vamos ter variaveis com nome name e status para inicializar as propriedades nomeadas também como name e status
+            name,
+            status
+        }
+    </script>
+</body>
+</html>

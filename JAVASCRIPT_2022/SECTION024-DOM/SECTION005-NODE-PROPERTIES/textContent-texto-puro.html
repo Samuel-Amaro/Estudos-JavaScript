@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="news">
+        <h1>Headline!</h1>
+        <p>Martians attack people!</p>
+    </div>
+
+    <div id="elem1"></div>
+    <div id="elem2"></div>
+
+    <script type="text/javascript">
+        
+        /**
+         * * textContent: texto puro
+         * 
+         * O textContent fornece acesso ao texto dentro do elemento: somente texto, menos todas as <tags>.
+         * 
+         * Por exemplo:
+         * */
+
+        //a news e uma variavel global nomeada por id que referencia o elemento DOM
+        console.log(window.news);
+        //a propriedade elem.textContent fornece acesso ao texto dentro do elemento, somente texto.
+        //acessa todo o texto dentro do elemento news
+        console.log(news.textContent); //Headline! Martians attack people!
+        
+        /**
+         * Como podemos ver, apenas o texto é retornado, como se todos <tags> fossem cortados, mas o texto neles permaneceu.
+         * 
+         * Na prática, a leitura desse tipo de texto raramente é necessária.
+         * 
+         * Escrever para textContent é muito mais útil, pois permite escrever texto de maneira “segura”.
+         * 
+         * Digamos que temos uma string arbitrária, por exemplo, inserida por um usuário, e queremos mostrá-la.
+         
+            - Com innerHTMLo teremos inserido “como HTML”, com todas as tags HTML.
+
+            - Com textContento teremos inserido “como texto”, todos os símbolos são tratados literalmente.
+
+         * Compara os dois
+        */
+
+        let name = prompt("Qual e seu nome?", "<b>Winnie-the-Pooh!</b>");
+
+        //elem1 e elem2 são variaveis globais nomeadas por ids que referencia o elemento dom
+        console.log(elem1);
+        console.log(elem2);
+
+        //usando a propriedade elem1.innerHTML para atribuir um novo conteudo HTML dentro do elem1
+        //o conteudo informado a innerHTML e tratado como codigo html.
+        elem1.innerHTML = name;
+
+        //usando a propriedade elem2.textContent para atribuir um novo texto puro como conteudo ao elemento elem2
+        //o conteudo informado para a textContent e tratado como texto puro.
+        elem2.textContent = name;
+        
+        /**
+         * A primeira <div> recebe o nome “como HTML”: todas as tags se tornam tags, então vemos o nome em negrito.
+         * 
+         * O segundo <div> recebe o nome “como texto”, então literalmente vemos <b>Winnie-the-Pooh!</b>.
+         * 
+         * Na maioria dos casos, esperamos o texto de um usuário e queremos tratá-lo como texto. Não queremos HTML inesperado em nosso site. Uma atribuição para textContent faz exatamente isso.
+        */
+    </script>
+
+</body>
+</html>

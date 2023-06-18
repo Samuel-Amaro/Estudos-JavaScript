@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parâmetros Rest</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PARÂMETROS REST(DESCANSO) JS
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar os parâmetros rest do JavaScript para coletar parâmetros e colocá-los todos em um array.
+         * 
+         * * INTRODUÇÃO AOS PARÂMETROS DE DESCANSO DO JS
+         * 
+         * O ES6 fornece um novo tipo de parâmetro chamado parâmetro rest que tem um prefixo de três pontos (...). Um parâmetro rest permite que você represente um número indefinido de argumentos como um array. Veja a seguinte sintaxe:
+         * 
+        */
+
+        function fn(a, b, ...args) {
+            //...
+        }
+
+        /**
+         * O último parâmetro (args) é prefixado com os três pontos ( ...). É chamado de parâmetro rest ( ...args). 
+         * 
+         * Todos os argumentos que você passar para a função serão mapeados para a lista de parâmetros. Na sintaxe acima, o primeiro argumento mapeia para a, o segundo mapeia para b, e o terceiro, o quarto etc., serão armazenados no parâmetro rest args como um array. Por exemplo:
+        */
+
+        fn(1, 2, 3, "A", "B", "C");
+
+        /**
+         * A args array armazena os seguintes valores:
+         
+            [3, 'A', 'B', 'C']
+
+         * 
+         * Se você passar apenas os dois primeiros parâmetros, o parâmetro rest será um array vazio:
+         
+            fn(1, 2);
+
+         * 
+         * O args será:
+
+            []
+
+         * 
+         * Observe que os parâmetros rest devem aparecer no final da lista de argumentos. O código a seguir resultará em um erro:
+         
+            function fn(a, ...rest, b) {
+                //error
+            }
+
+         * Erro:
+
+            SyntaxError: Rest parameter must be last formal parameter
+        */
+    </script>
+</body>
+</html>

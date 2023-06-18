@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Aqui está o exemplo completo (sem fetch ainda):
+        */
+
+        //criando um controlador
+        //usando Class AbortController Ele pode ser usado para abortar não apenas fetch, mas também outras tarefas assíncronas.
+        let controller = new AbortController();
+
+        //obtemos o valor da propriedade controller.signal, que permite definir ouvintes de eventos nele, obtem um objeto
+        let signal = controller.signal;
+
+        // A parte que realiza uma operação cancelável
+        // obtém o objeto "signal"
+        // e configura o listener para disparar quando controller.abort() é chamado 
+        //atribuindo um manipulador de evento no objeto signal, para manipular o evento abort quando ocorrer
+        signal.addEventListener('abort', () => alert('Abort!'));
+
+        //outra parte, que cancela (a qualquer momento depois):
+        //abortando, cancelando, uma tarefa assincrona
+        //chamando metodo controller.abort();
+        //a propriedade controller.signal emite o "abort" evento, acionando o manipulador atribuido em objeto signal
+        //e controller.signal.aborted propriedade se torna true.
+        controller.abort(); //abort!
+
+        // O evento é acionado e o signal.aborted se torna verdadeiro
+        alert(signal.aborted); //true
+
+        /*
+         * Como podemos ver, AbortController é apenas um meio de passar abort eventos quando abort() é chamado.
+         * 
+         * Poderíamos implementar o mesmo tipo de evento escutando em nosso código por conta própria, sem o AbortController objeto.
+         * 
+         * Mas o que vale é que fetch sabe trabalhar com o AbortController objeto. Está integrado nele.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo prático de Promisse</title>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="message"></div>
+        <button id="btnGet">Get Message</button>
+    </div>
+
+    <script>
+
+        /**
+         * * UM EXEMPLO PRÁTICO DE PROMISSE DE JS
+         *
+         * O exemplo a seguir mostra como carregar um arquivo JSON do servidor e exibir seu conteúdo em uma página da Web.
+         * 
+         * Suponha que você tenha o seguinte arquivo JSON:
+
+            https://www.javascripttutorial.net/sample/promise/api.json
+
+         * 
+         * com o seguinte conteúdo:
+         
+            {
+                "message": "JavaScript Promise Demo"
+            }
+
+         * O seguinte mostra a página HTML que contém um botão. Ao clicar no botão, a página carrega os dados do arquivo JSON e mostra a mensagem:
+         * 
+         * Veja a seguir o arquivo promise-demo.js:
+        */
+
+        //function chamada load que declara paramentro url
+        function load(url) {
+            return new Promise(function(resolve, reject) {
+                //objeto XMLHttpRequest para carregar o arquivo JSON do servidor
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if(this.readyState === 4 && this.status == 200) {
+                        //chama resolve function callback quando o codigo HTTP for 200 para mudar o estado da promisse de pendente para cumprida com valor
+                        resolve(this.response);
+                    }else{
+                        //codigo HTTP não e 200, chama reject para mudar estado da promisse de pendente para reject, informando motivo do erro
+                        reject(this.status);
+                    }
+                };
+                request.open('GET', url, true);
+                request.send();
+            });
+        }
+
+        const url = 'https://www.javascripttutorial.net/sample/promise/api.json';
+        const btn = document.querySelector('#btnGet');
+        const msg = document.querySelector('#message');
+
+        //registrando o manipulador de evento de click no button
+        btn.addEventListener('click', () => {
+            //chama o then método quando promisse for cumprida com valor - tiver estado modificado de pendente para cumprida - ja resolvida
+            load(url).then((response) => {
+                //mostra mensagem retornada pelo servidor
+                const result = JSON.parse(response);
+                msg.innerHTML = result.message;
+            //promisse não foi resolvida foi rejeitada, seu estado de pendente foi para rejeitada, executa o catch metodo e mostra o motivo do erro
+            }).catch((error) => {
+                //mostra mensagem de erro com o código de status HTTP
+                msg.innerHTML = `Error getting the message, HTTP status: ${error}`;
+            });
+        });
+
+        /**
+         * * RESUMO
+         * 
+         * Uma promessa é um objeto que encapsula o resultado de uma operação assíncrona.
+         * 
+         * Uma promessa começa no estado pendente e termina no estado cumprido ou no estado rejeitado.
+         *
+         * Use then() o método para agendar um retorno de chamada(CALLBACK) a ser executado quando a promessa for cumprida e catch() o método para agendar um retorno de chamada(CALLBACK) a ser invocado quando a promessa for rejeitada.
+         * 
+         * Coloque o código que você deseja executar no finally() método se a promessa for cumprida ou rejeitada.
+        */
+    </script>
+</body>
+</html>

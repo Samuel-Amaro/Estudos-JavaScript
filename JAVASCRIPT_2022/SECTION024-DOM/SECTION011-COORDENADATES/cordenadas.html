@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <img src="./document-and-window-coordinates-scrolled.svg" alt="image">
+
+    <script type="text/javascript">
+       
+       /**
+        * * COORDINATES(COORDENADAS)
+        * 
+        * Para mover os elementos, devemos estar familiarizados com as coordenadas.
+        * 
+        * A maioria dos métodos JavaScript lida com um dos dois sistemas de coordenadas:
+        
+            1. Relativo à janela(WINDOW) – semelhante a position:fixed, calculado a partir da borda superior/esquerda da janela.
+
+                - vamos denotar essas coordenadas como clientX/clientY, o raciocínio para tal nome ficará claro mais tarde, quando estudarmos as propriedades dos eventos.
+
+            2. Relativo ao documento – semelhante à position: absolute raiz do documento, calculada a partir da borda superior/esquerda do documento.
+
+                - vamos denotá-los pageX/pageY.
+
+        * 
+        * Quando a página é rolada até o início, de modo que o canto superior/esquerdo da janela seja exatamente o canto superior/esquerdo do documento, essas coordenadas são iguais. Mas depois que o documento muda, as coordenadas dos elementos relativas à janela mudam, à medida que os elementos se movem pela janela, enquanto as coordenadas relativas ao documento permanecem as mesmas.
+        * 
+        * Quando o documento rolou:
+        
+            - pageY– a coordenada relativa ao documento permaneceu a mesma, é contada a partir da parte superior do documento (agora rolada).
+
+            - clientY – a coordenada relativa à janela mudou (a seta ficou mais curta), pois o mesmo ponto ficou mais próximo do topo da janela.
+        */
+       
+    </script>
+</body>
+</html>

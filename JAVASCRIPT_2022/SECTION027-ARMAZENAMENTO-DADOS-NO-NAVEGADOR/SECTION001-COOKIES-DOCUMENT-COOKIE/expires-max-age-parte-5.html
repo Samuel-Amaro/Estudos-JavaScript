@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * EXPIRES, MAX-AGE
+         * 
+         * Por padrão, se um cookie não tiver uma dessas opções, ele desaparecerá quando o navegador for fechado. Esses cookies são chamados de “cookies de sessão”
+         * 
+         * Para permitir que os cookies sobrevivam ao fechamento do navegador, podemos definir a opção expires ou max-age.
+         * 
+         * expires=Tue, 19 Jan 2038 03:14:07 GMT
+         * 
+         * A data de expiração do cookie define a hora em que o navegador o excluirá automaticamente.
+         * 
+         * A data deve estar exatamente neste formato, no fuso horário GMT. Podemos usar date.toUTCStringpara obtê-lo. Por exemplo, podemos definir o cookie para expirar em 1 dia:
+        */
+
+        let date = new Date(Date.now() + 86400e3);
+        date = date.toUTCString();
+        //Os cookies têm várias opções, muitas delas são importantes e devem ser definidas
+        //As opções são listadas após key=value, delimitadas por ;, assim: 
+        //definimos um cookie com o name user e o value John
+        //e definimos uma serie de opções importantes
+        //a option expires(data de expiração) define a hora em que o navegador o excluira automaticamente
+        //aqui defirmos para 1 dia a partir da hora atual
+        document.cookie = "user=John; expires=" + date;
+
+        /**
+         * Se definirmos expires uma data no passado, o cookie será excluído.
+         * 
+         * max-age=3600
+         * 
+         * É uma alternativa expires e especifica a expiração do cookie em segundos a partir do momento atual.
+         * 
+         * Se definido como zero ou um valor negativo, o cookie é excluído:
+        */
+
+        //a option max-age e uma alternativa para option expires, especifica a expiração do coolie em segundos a partir do momento atual, aqui neste exemplo o cookie sera expirado apos passar 3600 segundos a partir do mommento atual
+        document.cookie = "user=Jhon; max-age=3600";
+
+        //max-age option definido como 0 ou um valor negativo o cookie e excluido na hora instantaneamente
+        document.cookie = "user=John; max-age=0;";
+
+    </script>
+
+</body>
+</html>

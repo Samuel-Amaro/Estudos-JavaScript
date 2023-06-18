@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * TIPO NUMBER JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o  Number tipo JavaScript e seus métodos úteis para trabalhar com números de forma eficaz.
+         * 
+         * * INTRODUÇÃO AO TIPO NUMBER JS
+         * 
+         * Além do tipo de number primitivo, o JavaScript também fornece o tipo de referência Number para valores numéricos.
+         * 
+         * Para criar um objeto Number, você usa o construtor Number e passa um valor numérico da seguinte forma:
+        */
+
+        //declarando um objeto do tipo Number invocando o construtor Number passando um valor numerico como argumento 
+        //declara uma instancia de obeto do tipo nuumber com um valor numerico de 100
+        let numberObject = new Number(100);
+
+        /**
+         * Este exemplo definiu a number Object com um valor numérico de  100
+         * 
+         * Para obter o valor primitivo de um Number objeto, você usa o valueOf() método da seguinte forma:
+        */
+
+        //para obter o valor primitivo encapsulado pelo objeto number, chamamos o metodo de instancia valueOf, retorna o valor primitivo
+        console.log(numberObject.valueOf()); //100
+
+        /**
+         * Para obter um valor numérico como uma string, você usa os métodos toString() ou .toLocaleString().
+         * 
+         * O toString() método aceita um argumento opcional que determina a base na qual apresentar o número. A raiz (ou base) é o número de dígitos únicos que representam números em um sistema de numeração posicional.
+         * 
+         * Por exemplo, o sistema decimal usa dez dígitos de 0 a 9, portanto, a base é 10.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declarando um objeto do tipo Number invocando o construtor Number passando um valor numerico como argumento 
+        //declara uma instancia de obeto do tipo nuumber com um valor numerico de 10
+        var aNumber = new Number(10);
+        //usando o método Number.toString() para obter um valor numerico como uma string, neste caso queremos que o numero seja apresentado na base 10, para isso temos que informa um argumento para o método informando a raiz(base) que representa um sistema de numeração posicional, para que o numero possa ser apresentado de acordo com a base escolhida
+        //retorna o numero de 10 como string no sistema deecimal
+        console.log(`${aNumber.valueOf()} base 10 = ${aNumber.toString(10)}`); //"10"
+
+        /**
+         * Neste exemplo o aNumber tem um valor primitivo de 10, portanto, o toString() método retorna 10 no sistema decimal.
+         * 
+         * No entanto, o exemplo a seguir retorna a forma binária da aNumber variável.
+        */
+
+        //retorna o numero 10 como string na forma binaria
+        console.log(`${aNumber.valueOf(10)} na base 2 = ${aNumber.toString(2)}`); //"1010"
+
+        /**
+         * Se você chamar um método em um valor de número primitivo, o JavaScript o converterá em um Number objeto temporariamente. Esse recurso é chamado de tipos de wrapper primitivos em JavaScript . Por exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada x ininicializada com o valor primitivo number literal 10
+        let x = 10;
+        //tentando chamar um metodo de instancia em um variavel que armazena um valor primitivo do tipo number
+        //uma variavel que contem um valor de tipo primitivo como string, number, ou boolean, quando e chamada um metodo em uma variavel que contem um destes valores o mecanismo JS executa o seguinte:
+        //1- cria um objeto do tipo correspondente
+        //2- chama o metodo especificado na instancia(na variavel)
+        //3- exclua a instancia imediatamente
+        //neste caso queremos que o valor 10 seja mostrado como uma string mas na forma hexadecimal
+        console.log(`${x} na base 16 = ${x.toString(16)}`); //"a"
+
+    </script>
+
+</body>
+</html>

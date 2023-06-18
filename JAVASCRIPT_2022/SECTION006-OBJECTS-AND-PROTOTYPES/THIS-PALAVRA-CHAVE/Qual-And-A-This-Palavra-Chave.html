@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Palavra-Chave</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * QUAL É A THIS PALAVRA-CHAVE
+         * 
+         *  As this referências ao objeto do qual a função é uma propriedade. Em outras palavras, o this referencia o objeto que está chamando a função no momento.
+         * 
+         * Suponha que você tenha um objeto chamado counter. Este objeto counter possui um método chamado next().
+         * 
+         * Ao chamar o next() método, você pode acessar o this objeto.
+        */
+
+        //declara um objeto literal chamado, counter usando a sintaxe literal de objeto
+        const counter = {
+            //declara uma propriedade usando a sintaxe, chave : valor
+            count: 0,
+            //declara uma propriedade chamada next que recebe como valor uma function anonima que retorna um valor, a function anonima e atribuida a a next propriedade, fazendo assim torna um metodo do objeto
+            next: function() {
+                //aqui o this referencia ao counter objeto literal, acessando a count propriedade
+                //aqui o this e o proprio counter objeto
+                return ++this.count;
+            }
+        }; 
+
+        //invocando o metodo do objeto counter
+        //aqui o this valor faz refencia ao counter objeto
+        //pois this faz referencia ao objeto que chama uma função
+
+        /**
+         * Dentro da next() função, o faz this referência ao counter objeto.
+         * 
+         * Veja a seguinte chamada de método:
+        */
+
+        //o this vai fazer refencia ao counter objeto 
+        //o this referencia o objeto que esta chamando o metodo no momento aqui no caso e o counter objeto instancia
+        counter.next();
+
+        /**
+         * O next() é uma função que é propriedade do counter objeto. Portanto, dentro da next() função, o this referencia o counter objeto.
+         * 
+         * A propósito, quando uma função é uma propriedade de um objeto, ela é chamada de método
+        */
+
+
+    </script>
+
+</body>
+</html>

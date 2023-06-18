@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Arraste a bola</p>
+
+    <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="ball"/>
+
+    <script type="text/javascript">
+
+      /**
+       * * POSICIONAMENTO CORRETO
+       * 
+       * Nos exemplos acima, a bola é sempre movida de modo que seu centro fique abaixo do ponteiro:
+       * 
+       * Não é ruim, mas há um efeito colateral. Para iniciar o arrastar e soltar, podemos mousedown em qualquer lugar da bola. Mas se “pegar” de sua borda, então a bola de repente “salta” para ficar centralizada sob o ponteiro do mouse.
+       * 
+       * Seria melhor se mantivéssemos o deslocamento inicial do elemento em relação ao ponteiro.
+       * 
+       * Por exemplo, se começarmos a arrastar pela borda da bola, o ponteiro deve permanecer sobre a borda enquanto arrastamos.
+       * 
+       * Vamos atualizar nosso algoritmo:
+       
+            1. Quando um visitante pressiona o botão ( mousedown) – lembre-se da distância do ponteiro até o canto superior esquerdo da bola em variáveis shiftX/shiftY​​. Manteremos essa distância enquanto arrastamos.
+
+            Para obter esses deslocamentos, podemos subtrair as coordenadas:
+
+                // onmousedown
+                let shiftX = event.clientX - ball.getBoundingClientRect().left;
+                let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+            Então, enquanto arrastamos, posicionamos a bola no mesmo deslocamento em relação ao ponteiro, assim:
+
+                // onmousemove
+                // ball has position:absolute
+                ball.style.left = event.pageX - shiftX + 'px';
+                ball.style.top = event.pageY - shiftY + 'px';
+
+            O código final com melhor posicionamento:
+       */
+
+        //atribui uma manipulador de evento por meio da propriedade dom
+        //manipulador para o evento de quando o botão do mouse e clicado
+        ball.onmousedown = function(event) {
+            //cordenada do evento do mouse onde clicou em relação a janela menos a cordena do elemento em relação a janela
+            //o ponteiro do mouse vai ficar exatamento onde clicou, espaço da cordenada do clique em relação a janela menos espaço do elemento em relação a janela, resultado e o lugar exato do clique
+            //cordenadas do clique em relação a bola, mostra onde exatamento o clique foi feito dentro da ball
+            let shiftX = event.clientX - ball.getBoundingClientRect().left;
+            let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+            //(1) prepare-se para mover: faça absoluto e no topo por z-index
+            ball.style.position = 'absolute';
+            ball.style.zIndex = 1000;
+
+            // move-o para fora de qualquer pai atual, diretamente para o body
+            // para torná-lo posicionado em relação ao body
+            document.body.append(ball);
+
+            //centra a bola nas coordenadas (pageX, pageY)
+            function moveAt(pageX, pageY) {
+                //posiciona a bola
+                //cordenada de evento do mouse onde o mouse se moveu pela ultima vez dentro do documento em relação ao documento menos cordenadas exatas do clique do mouse dentro de ball, posiciona a bola exatamento onde o cursor do mouse se movimenta em relação a elem
+                //a subtração e necessaria para que o mouse fique exatamente onde foi clicado, para que bola se posicione examente onde o mouse se mover. se não fica um espaço enxtra entre o mouse e bola.
+                console.log(pageX + "/" + pageY);
+                console.log(shiftX + "/" + shiftY);
+                ball.style.left = pageX - shiftX + "px";
+                ball.style.top = pageY - shiftY  + "px";
+            }
+
+            moveAt(event.pageX, event.pageY);
+
+            //function manipuladora do evento mousemove, a cada mover do mouse, mova a bola junto, a bola segue as cordenadas de click do mouse
+            function onMouseMove(event) {
+                //move nossa bola absolutamente posicionada sob o ponteiro
+                //coodernas do evento do mouse, relativas ao documento
+                moveAt(event.pageX, event.pageY);
+            }
+
+            // (2) move a bola no mousemove
+            //toda vez que tiver um movimentação do mouse sobre o documento
+            //atribui um manipulador de evento
+            //esse evento so sera processado apos o termino do mousedown
+            document.addEventListener('mousemove', onMouseMove);
+
+            //(3) soltar a bola, remover manipuladores desnecessários
+            //atribui um manipualador de evento para o evento de liberar botão do mouse pressionado
+            //so ira processar esse evento apos o termino do mousemove evento
+            ball.onmouseup = function() {
+                //remove evento
+                document.removeEventListener("mousemove", onMouseMove);
+                //remove o evento do mouseup
+                ball.onmouseup = null;
+            }
+        }
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        ball.ondragstart = function(event) {
+            //fornecer um return false para uma function manipulador de evento e uma execeção para informar o navegador que queremos impedir a ação padrão do navegador neste evento
+            return false;
+        };
+
+        /**
+         *  Em ação (dentro <iframe>):
+         * 
+         * A diferença é especialmente perceptível se arrastarmos a bola pelo canto inferior direito. No exemplo anterior, a bola “salta” sob o ponteiro. Agora ele segue fluentemente o ponteiro da posição atual.
+        */
+    </script>
+</body>
+</html>

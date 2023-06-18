@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLO 2) DESESTRUTURAÇÃO DE OBJETOS NO LOCAL COM FOR...OF   
+         * 
+         * Considere o seguinte exemplo:  
+        */
+
+        //declara um array dense literal anonimo, inicializado com 4 elementos, cada elemento e um objeto literal anonimo com duas propriedades, o array e atribuido por referencia a variavel ratings
+        const ratings = [
+            {user: 'John', score: 3},
+            {user: 'Jane', score: 4},
+            {user: 'David', score: 5},
+            {user: 'Peter', score: 2}
+        ];
+
+        //declara uma variavel chamada sum e a inicializa com o valor 0 do tipo number
+        let sum = 0;
+        //usando a construção do ES6 o for...of loop que e para iterar sobre objetos iteraveis
+        //aqui vamos iterar sobre uma instancia de objeto do tipo Array referenciado por ratings
+        //usando a desestruturação de array, para que os elemnetos do array seja atribuido um por um individualemente a variavel score, usando a expressão {score}, a variavel score recebera a cada iteração um elemento do array, cada elemento do array e um objeto literal com duas propriedades user, e score, a variavel que ira receber o elemento e um objeto literal que ira possui uma propriedade chamada score que esssa propriedade e inicializada com a propriedade score do elemento do array iterado na iteração atual -> {score: score}
+        for(const {score} of ratings) {
+            //soma 
+            sum += score;
+        }
+
+        console.log(`Total scores: ${sum}`); //14
+
+        /**
+         * Como funciona:
+
+            - O ratings é uma array de objetos. Cada objeto possui duas propriedades user e score.
+
+            - O for...of iterar sobre a ratings array e calcular as pontuações totais de todos os objetos.
+
+            - A expressão const {score} of ratings usa a desestruturação de objetos para atribuir a score propriedade do elemento iterado atual à score variável.
+        */
+        
+    </script>
+
+</body>
+</html>

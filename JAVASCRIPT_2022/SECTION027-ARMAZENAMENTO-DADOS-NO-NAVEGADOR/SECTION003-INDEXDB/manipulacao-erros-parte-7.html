@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * MANIPULAÇÃO DE ERROS
+         * 
+         * As solicitações(requests) de gravação podem falhar.
+         * 
+         * Isso é de se esperar, não apenas por possíveis erros do nosso lado, mas também por motivos não relacionados à transação em si. Por exemplo, a cota de armazenamento pode ser excedida. Portanto, devemos estar prontos para lidar com esse caso.
+         * 
+         * Uma solicitação com falha aborta automaticamente a transação, cancelando todas as suas alterações.
+         * 
+         * Em algumas situações, podemos querer lidar com a falha (por exemplo, tentar outra solicitação), sem cancelar as alterações existentes, e continuar a transação. Isso é possível. O request.onerror manipulador é capaz de impedir a interrupção da transação chamando event.preventDefault().
+         * 
+         * No exemplo abaixo, um novo livro é adicionado com a mesma tecla ( id) do existente. O store.add método gera um "ConstraintError" nesse caso. Lidamos com isso sem cancelar a transação:
+        */
+
+        //Todas as operações de dados devem ser feitas dentro de uma transação(transaction) no IndexedDB.
+        //para iniciar a transação usamos db.transaction(store, typeTransaction);
+        //o argumento store e um nome de store que a transaction vai acessar. pode ser um array de nome de stores se formos acessar varias stores
+        //o type argumento um tipo de transação, o valor readwrite e uma transação que pode apenas ler e gravar dados, mas não criar, remove, alterar store objetos
+        let transaction = db.transaction("books", "readwrite");
+
+        //cria um objeto anonimo literal que e atribuido por referencia a variavel book
+        let book = {
+            id: 'js', //key chave
+            price: 10
+        };
+
+        //cria um objeto store para armazenar algo no indexDB
+        //o primeiro argumento passado e o nome do store objeto
+        //o segundo argumento e um objeto opcional com uma propriedade
+        //a propriedade keyPath e um caminho para um propriedade de objeto que indexDb usara como key, assim todos values armazenados em store tera id como chave
+        let books = transaction.objectStore("books");
+
+        //adiciona o objeto anonimo referenciado por book, ao store, o objeto book e adicionado ao store com a chave sendo o valor da propriedade id do mesmo book, isso salva o book objeto no store objeto
+        //envia uma request ao store objeto para armazenar book
+        //store objeto oferece suporte a metodo para armazenar um valor, metodo add(value, [key]);
+        //adicionar o value a store. o key so e fornecido apenas se o store objeto não tiver uma keyPath option autoIncrement, se ja houver um valor com a mesma chave ele sera susbtituido, se ja houver um valor com a mesma chave armazenado em store a request falaha e sera gerado um erro com o nome "ConstraintError"
+        //adiciona o book a store 
+        let request = books.add(book);
+
+        //atribui manipulador de evento, que e acionado quando uma request de gravação de dados no store objeto falha.
+        //uma request de gravação no store com falha aborta automaticamente a transação, cancelando todas as suas alterações.
+        request.onerror = function(event) {
+            //ConstraintError ocorre quando um objeto com o mesmo id já existe
+            if(request.error.name == "ConstraintError") {
+                console.log("Book with such id already exists"); //manipula o error
+                event.preventDefault(); //não aborte a transação
+                // usa outra chave para o livro?
+            }else{
+                // erro inesperado, não consigo lidar com isso
+                // a transação será abortada
+            }
+        };
+
+        //este manipualdor e acionado quando uma transaction foi abortada, assim cancela todas as suas alterações
+        transaction.onabort = function() {
+            console.log("Error", transaction.error);
+        };
+    </script>
+
+</body>
+</html>

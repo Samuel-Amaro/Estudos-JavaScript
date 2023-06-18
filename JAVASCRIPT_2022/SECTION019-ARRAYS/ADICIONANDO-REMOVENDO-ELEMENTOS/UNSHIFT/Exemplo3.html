@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO 3) USANDO O ARRAY JS UNSHIFT() PARA ADICIONAR ELEMENTOS DE UM ARRAY A OUTRO ARRAY
+         * 
+         *  O exemplo a seguir usa o unshift()método para adicionar elementos de uma array ao início de outra array:
+        */
+
+        //declara um array literal dense inicializado com 5 elementos chamado days
+        let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+        //declara array com 2 elementos
+        let weekends = ['Sat', 'Sun'];
+
+        //utilziando o loop for .. of para iterar sobre o array weekends
+        for(const weekend of weekends) {
+            //cada iteração do loop em um elemento do array weekends ira adiconar cada elemento desse ao elemento days no inicio dele,
+            //cada elemento iterado aqui do array weekwdns sera adicionado ao inicio do array days
+            //utilizando o metodo unshift, passando os elmenetos do array weekwnds como argumento para serem adicionados ao array days 
+            days.unshift(weekend);
+        }
+
+        console.log(days);
+
+        //outra forma de adicionar elementos de um array em outro array e usando o operador spread com o metodo unshift
+        //tornando o codigo mais conciso com a sintaxe do ES6
+        //aqui usando o metodo unshefit adicionaremos todos os elementos individuais descompactados pelo operador spread no array weekends ao inicio do array days 
+        //todos elementos descompactados pelos operador spread na frente do array weekwnds sera adicionado no inicio do array days pelo metodo unshift
+        days.unshift(...weekends);
+
+        console.log(days);
+
+    </script>
+</body>
+</html>

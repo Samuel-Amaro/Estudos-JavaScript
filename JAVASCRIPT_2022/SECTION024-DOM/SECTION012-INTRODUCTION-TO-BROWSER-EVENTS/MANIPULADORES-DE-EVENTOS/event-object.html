@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input id="elem" type="button" value="Click me"/>
+
+    <!--
+        - exemplo de uso de objetos de evento disponiveis em manipuladores HTML
+        - atribuindo uma manipulador de evento por meio de um atributo HTML
+        - o objeto de evento fornece mais detalhes do evento ocorrido, também pode ser acessivel por meio de manipuladores html
+    -->
+    <input type="button" onclick="alert(event.type)" value="Event Type"/>
+
+    <script type="text/javascript">
+        /**
+         * * Event Object(Objeto de Evento)
+         *
+         * Para lidar adequadamente com um evento, gostaríamos de saber mais sobre o que aconteceu. Não apenas um “clique” ou um “keydown”, mas quais eram as coordenadas do ponteiro? Qual tecla foi pressionada? E assim por diante.
+         * 
+         * Quando um evento acontece, o navegador cria um objeto de evento(event object) , coloca detalhes nele e o passa como um argumento para o manipulador.
+         * 
+         * Aqui está um exemplo de como obter as coordenadas do ponteiro do objeto de evento:
+        */
+
+        //atribuindo um manipulador de evento por meio de uma propriedade DOM
+        //o manipulador e uma function anonima que declara uma paramentro chamado event que e um objeto de evento que contem detalhes do evento, que e passado como argumento para essa function manipuladora quando o evento acontece
+        elem.onclick = function(event) {
+            //mostrar tipo de evento, elemento e coordenadas do clique
+            //event.type esta propriedade retorna o tipo de evento
+            //event.currentTarget esta propriedade retorna o elemento que tratou o evento
+            console.log(event.type + " at " + event.currentTarget);
+            //event.clientX / event.clientY coordenadas relativas á janela do cursor.
+            console.log("Coordinates: " + event.clientX + ":" + event.clientY);
+        }
+
+        /**
+         * Algumas propriedades do event objeto:
+         
+            event.type 
+
+                Tipo de evento, aqui está "click".
+
+            event.currentTarget
+
+                Elemento que tratou o evento. Isso é exatamente o mesmo que this, a menos que o manipulador seja uma arrow function ou this esteja vinculado a outra coisa, então podemos obter o elemento de event.currentTarget.
+
+            event.clientX / event.clientY
+
+                Coordenadas relativas à janela(window) do cursor, para eventos de ponteiro.
+
+         * Existem mais propriedades. Muitos deles dependem do tipo de evento: eventos de teclado têm um conjunto de propriedades, eventos de ponteiro – outro, vamos estudá-los mais tarde quando chegarmos a diferentes eventos em detalhes.
+         * 
+         * * O objeto de evento também está disponível em manipuladores HTML
+         *
+         * Se atribuirmos um manipulador em HTML, também podemos usar o event objeto, assim:
+         * 
+         * Isso é possível porque quando o navegador lê o atributo, ele cria um manipulador como este: function(event) { alert(event.type) }. Ou seja: seu primeiro argumento é chamado "event", e o corpo é retirado do atributo.
+         *  
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #parent {
+            background: #99C0C3;
+            width: 160px;
+            height: 120px;
+            position: relative;
+        }
+
+        #child {
+            background: #FFDE99;
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        textarea {
+            height: 140px;
+            width: 300px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        - atribuimos um manipulador de eventos por meio do atributo html, para dois tipos de eventos diferentes
+    -->
+    <div id="parent" onmouseenter="mouselog(event)" onmouseleave="mouselog(event)">
+        parent
+        <div id="child">Child</div>
+    </div>
+
+    <textarea id="text"></textarea>
+
+    <input type="button" onclick="text.value=''" value="Clear"/>
+
+    <script type="text/javascript">
+        /**
+         * * EVENTOS mouseenter é mouseleave
+         * 
+         * Os eventos mouseenter/mouseleave são como mouseover/mouseout. Eles são acionados quando o ponteiro do mouse entra/sai do elemento.
+         * 
+         * Mas há duas diferenças importantes:
+         
+            1. As transições dentro do elemento, FROM/TO descendentes, não são contadas.
+
+            2. Os eventos mouseenter/mouseleavenão borbulham(não aciona manipuladores dos elementos ancestrais).
+
+         * 
+         * Esses eventos são extremamente simples.
+         * 
+         * Quando o ponteiro entra em um elemento – mouseenter dispara. A localização exata do ponteiro dentro do elemento ou seus descendentes não importa.
+         * 
+         * Quando o ponteiro deixa um elemento – mouseleave dispara.
+         * 
+         * Este exemplo é semelhante ao anterior, mas agora o elemento superior tem mouseenter/mouseleave  em vez de mouseover/mouseout.
+         * 
+         * Como você pode ver, os únicos eventos gerados são aqueles relacionados à movimentação do ponteiro para dentro e para fora do elemento superior. Nada acontece quando o ponteiro vai até a criança e volta. As transições entre descendentes são ignoradas
+        */
+
+        function mouselog(event) {
+            let d = new Date();
+            text.value += `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} | ${event.type} [target: ${event.target.id}]\n`.replace(/(:|^)(\d\D)/, '$10$2');
+            //enquanto conteudo e inserido o scroll e movimentado para mostrar o conteudo
+            text.scrollTop = text.scrollHeight;
+        }
+    </script>
+</body>
+</html>

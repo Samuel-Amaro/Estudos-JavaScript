@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * DESCRITOR DE PROPRIEDADE DO OBJETO
+         * 
+         * O  Object.getOwnPropertyDescriptor()método permite obter o objeto descritor de uma propriedade. O Object.getOwnPropertyDescriptor()método leva dois argumentos:
+         
+            1. Um objeto
+            2. Uma propriedade do objeto
+
+         * 
+         * Ele retorna um objeto descritor que descreve uma propriedade. o objeto descritor tem quatro propriedades: configurável(configurable), enumerável(enumerable), gravável(writable) e valor(value).
+         * 
+         * O exemplo a seguir obtém o objeto descritor da name propriedade do product objeto no exemplo anterior.
+         * 
+        */
+
+        //declara um objeto chamado person usando a sintaxe literal
+        let person = {
+            //declara propriedades do objeto person usando a sintaxe chave : valor
+            firstName : 'John',
+            lastName : 'Doe'  
+        };
+
+        //usando o metodo do tipo Object
+        //o metodo getOwnPropertyDescriptor()método permite obter o objeto descritor de uma propriedade.
+        //aqui vamos obter o o objeto descritor da propriedade firstName do objeto person
+        let descriptor = Object.getOwnPropertyDescriptor(person, 'firstName');
+        
+        console.log(descriptor); //mostra o objeto descritor da propriedade firstName do objeto person
+
+        /**
+         * Os objetos JavaScript têm dois tipos de propriedades: propriedades de dados e propriedades do acessador.
+         * 
+         * JavaScript utiliza atributos internos representados por [[...]]descrever as características de propriedades, tais como [[Configurable]], [[Enumerable]], [[Writable]], e  [[Value]], [[Get]], e [[Set]].
+         * 
+         * O método Object.getOwnPropertyDescriptor() retorna um descritor de propriedade de uma propriedade em um objeto.
+         * 
+         * Uma propriedade pode ser definida diretamente em um objeto ou indiretamente por meio dos métodos Object.defineProperty() ou Object.defineProperties(). Esses métodos podem ser usados ​​para alterar os atributos de uma propriedade.
+        */
+    </script>
+
+</body>
+</html>

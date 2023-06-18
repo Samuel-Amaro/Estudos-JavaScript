@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ARROW FUNCTIONS(FUNÇÕES DE SETA)
+         * 
+         * O exemplo a seguir altera a add expressão da função para uma arrow function:
+        */
+       
+        //declara duas variaveis de escopo de bloco, chamadas x e y que são inicializadas com valores numericos
+        let x = 20, y = 10;
+        
+        //quando esses script e executado pela primeira vez pelo mecanismo JS, ele cria o contexto de execução global, que possui duas fases a de criação e execução, na fase de criação o mecanismo js move as declarações de variaveis e funções para topo do codigo inicio do script(isso e conhecido como içamento - hosting)
+        //declara uma variavel de escopo de bloco chamada result que e inicializada com o resultado da invocação da function add
+        //invocando a function add e fornecendo as variaveis x e y como argumentos, antes da function ser declarada
+        //durante a fase de criação do contexto de execução global o mecanismo JS coloca a declaração da variavel add no topo do script e a inicializa com undefined, assim quando se invoca a function por meio da add variavel, gera um erro pois a function não foi definida ainda, so sera na fase de execução de linha a linha
+        //arrow functions não são içadas-elevadas
+        let result = add(x, y);
+        console.log(result);
+
+        //declara uma arrow function function anonima que declara dois paramentros chamados a, e b
+        //obs: uma function e uma instancia de objeto do tipo function e essa intancia e atribuida por referencia a uma variavel chamada add de escopo global, e a add variavel referencia a function
+        var add = (x, y) => x + y;
+        
+
+        /**
+         * O código também emite o mesmo erro que o exemplo de expressão de função porque as funções de seta são açúcar sintático para definir expressões de função.
+         * 
+         * "TypeError: add is not a function
+         * 
+         * Semelhante às expressões de funções, as funções de seta não são içadas.
+         * 
+         * * RESUMO
+         * 
+         * A elevação do JavaScript ocorre durante a fase de criação do contexto de execução que move as declarações de variáveis ​​e funções para o início do script.
+         * 
+         * O mecanismo JavaScript eleva as variáveis ​​declaradas usando a palavra-chave let, mas não as inicializa como as variáveis ​​declaradas com a palavra-chave var.
+         * 
+         * O mecanismo JavaScript não eleva as expressões de função e as funções de seta.
+        */
+        
+    </script>
+
+</body>
+</html>

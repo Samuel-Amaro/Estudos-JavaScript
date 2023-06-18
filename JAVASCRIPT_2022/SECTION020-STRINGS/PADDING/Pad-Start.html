@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pad Métodos Strings</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * PREENCHENDO(PADDING) UMA STRING ATÉ UM DETERMINADO COMPRIMENTO COM OUTRA STRING 
+         * 
+         * Resumo : neste tutorial, você aprenderá como preencher uma string com outra string em um determinado comprimento.
+         * 
+         * * String.prototype.padStart()
+         * 
+         * O padStart() método preenche uma string com outra string até um determinado comprimento desde o início da string e retorna uma string resultante que atinge um determinado comprimento. O seguinte ilustra o padStart()método:
+         
+            String.prototype.padStart(padLength, [, padString]);
+
+         * 
+         * O padStart() método recebe dois parâmetros:
+         
+            - O padLength é o comprimento da string resultante depois de preenchida. Se padLength for menor que o comprimento da string, a string será retornada como está sem preenchimento.
+
+            - O padString é um argumento opcional que é usado para preencher a string. O valor padrão para este parâmetro é ' '. Se o padString for maior que padLength, o padString será truncado e somente a parte mais à esquerda será preenchida.
+
+         *
+         * * EXEMPLOS DE String.prototype.padStart()
+         * 
+         * Suponha que você queira uma string numérica com 8 caracteres. Para a string cujo comprimento é menor que 8, ela será preenchida com zeros (0).
+        */
+
+        //preenche uma string com outra string até um determinado comprimento desde o início da string e retorna uma string resultante que atinge um determinado comprimento
+        //aqui queremos preencher uma string que tenha seu comprimento menor que 8, ira preencher os caracteres da string até chegar o comprimento 8 sera preenchida com caracteres de 0
+        //preenche o inicio da string literal com outra string até um comprimento especifico e no final retorna uma nova string
+        //o metodo String.padStart(); recebe dois argumento o primeiro argumento e o valor 8 que representa O padLength é o comprimento da string resultante depois de preenchida.
+        //o segundo argumento e o O padString é um argumento opcional que é usado para preencher a string.
+        let str = '1234'.padStart(8, '0');
+        console.log(str); //"00001234"
+
+        /**
+         * O exemplo a seguir preenche uma string por espaços porque não passamos a string de preenchimento.
+        */
+
+        //utilizando o metodo string.padStart(), podemos preencher o inicio de uma string ate ela atingir determinado comprimento
+        //aqui queremos preencher o inicio da string literal com espaços em branco até o comprimento total da string atingir o comprimento 5
+        //o metodo String.padStart(); recebe dois argumento o primeiro argumento e o valor 8 que representa O padLength é o comprimento da string resultante depois de preenchida.
+        //o segundo argumento e o O padString é um argumento opcional que é usado para preencher a string.
+        let str2 = 'abc'.padStart(5); //"  abc"
+        console.log(str2);
+
+    </script>
+</body>
+</html>

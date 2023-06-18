@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * Por motivos históricos, retornar uma string não vazia também conta como cancelamento do evento. Algum tempo atrás os navegadores costumavam mostrar isso como uma mensagem, mas como diz a especificação moderna , eles não deveriam.
+         * 
+         * Aqui está um exemplo:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom ao objeto window
+        //o manipulador de evento e para o evento beforeunload(antes de descarregar), esse evcento e acionado quando um visitante inicia a nevegação fora da pagina ou tenta fechar a janela, assim o manipulador solicitara uma confirmação adicional
+        window.onbeforeunload = function(event) {
+            //retorna uma string não vazia, também conta como cancelamento do evento
+            return "Há alterações não salvas. Saia agora?";
+        };
+
+        /**
+         * O comportamento foi alterado, pois alguns webmasters abusaram desse manipulador de eventos mostrando mensagens enganosas e irritantes. Portanto, agora os navegadores antigos ainda podem mostrá-lo como uma mensagem, mas fora isso – não há como personalizar a mensagem mostrada ao usuário.
+        */
+    </script>
+
+</body>
+</html>

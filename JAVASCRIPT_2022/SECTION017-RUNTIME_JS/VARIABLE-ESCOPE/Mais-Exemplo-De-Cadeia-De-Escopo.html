@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * CADEIA DE ESCOPO(SCOPE CHAIN) 
+         *
+         * * MAIS EXEMPLO DE CADEIA DE ESCOPO
+         * 
+         * Considere o seguinte exemplo:
+        */
+        
+        //o mecanismo JS quando executa um script pela primeira vez cria um contexto de execução global que possui duas fases a fase de criação e fase de execução, a variavel e criada no escopo da fase de criação no contexto global
+        //o escopo de uma variavel determina a visibilidade e acessibilidade na variavel
+        //declara uma varaivel de escopo global, chamada y que e incializada com o valor 20
+        //essa variavel pode ser acessada em qualquer lugar no script
+        var y = 20;
+
+        //declara uma function chamada bar que não declara paramentro
+        //o mecanismo JS quando executa o script cria o contexto de execução global, na fase de execução cria o contexto de execução da função, onde a função e executada
+        function bar() {
+            //declara uma variavel local que so pode ser acessivel, dentro do escopo da function bar, pertecence ao escopo da function bar
+            //declara variavel local chamada y inicializada com valor 200
+            var y = 200;
+
+            //declara uma function local chamada baz que não declara paramentro
+            function baz() {
+                //mostra a variavel y do escopo global ou local ?
+                //mostra variavel do escopo local da function bar
+                //o mecanismo JavaScript primeiro procura no contexto de execução da função baz se exsitir variavel mostra se não procura no contexto externo da execução de função da function bar , onde a variavel esta definida
+                console.log(y);
+            }
+
+            //invoca function local
+            baz();
+        }
+
+        //invoca function bar();
+        bar();
+
+        /**
+         * Neste exemplo:
+         
+            - Primeiro, o mecanismo JavaScript encontra a variável y no escopo da baz()função. Não pode encontrar nenhum. Portanto, sai desse escopo.
+
+            - Em seguida, o mecanismo JavaScript encontra a variável y na bar() função. Ele pode encontrar a variável y no escopo da bar() função para que pare de pesquisar.
+         * 
+        */
+    </script>
+
+</body>
+</html>

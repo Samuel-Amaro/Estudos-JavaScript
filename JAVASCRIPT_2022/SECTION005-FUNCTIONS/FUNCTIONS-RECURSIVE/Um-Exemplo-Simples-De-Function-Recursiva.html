@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLOS DE FUNÇÕES RECURSIVAS JS
+         * 
+         * Vamos dar alguns exemplos de uso de funções recursivas.
+         *  
+         * * 1) UM EXEMPLO SIMPLES DE FUNÇÃO RECURSIVA JS
+         * 
+         * Suponha que você precise desenvolver uma função que faça a contagem regressiva de um número especificado até 1. Por exemplo, para fazer a contagem regressiva de 3 a 1:
+         
+            3
+            2
+            1
+
+         * 
+         * A seguir mostra a countDown()função:
+        */
+
+        //declara uma function regular chamada countDown que possui um paramentro declarado chamado fromNumber
+        function countDown(fromNumber) {
+            //corpo da function
+            console.log(fromNumber);
+        }
+
+        //invoca - chama a function
+        countDown(3); //3
+
+        /**
+         * Isso countDown(3) mostra apenas o número 3.
+         * 
+         * Para fazer a contagem regressiva do número 3 a 1, você pode:
+
+            1. mostre o número 3.
+            2. e ligue para o countDown(2)que mostra o número 2.
+            3. e ligue para o countDown(1)que mostra o número 1.
+
+         * 
+         * O seguinte altera o countDown()para uma função recursiva:
+        */
+
+        //declara uma function regular chamada countDown2 que possui um paramentro declarado chamado fromNumber
+        function countDown2(fromNumber) {
+            //corpo da função
+            console.log(fromNumber);
+            //a function countDown2 chama a si mesma passando um argumento que e o paramentro passado para ela mesma na chamada anterior
+            //a function e recursiva pois chama a si mesma no seu corpo
+            //sem condição de parada especificada
+            countDown2(fromNumber - 1);
+        }
+
+        /**
+         * Isso countDown(3) será executado até que o tamanho da pilha de chamadas seja excedido, assim:
+
+            Uncaught RangeError: Maximum call stack size exceeded.
+
+         * 
+         * … porque não tem condição de parar de se chamar.
+         * 
+         * A contagem regressiva parará quando o próximo número for zero. Portanto, você adiciona uma condição if da seguinte maneira:
+        */
+
+        //declara uma function regular chamada, countDown3 que possui um paramentro chamado fromNumber
+        //lembrando que toda function e uma instancia de objeto do tipo Function possuindo propriedades e metodos
+        function countDown3(fromNumber) {
+            //corpo da function
+            console.log(fromNumber);
+            //para a contagem regressiva
+            let nextNumber = fromNumber - 1;
+            //condição de parada para as chamadas recursivas de countDown3, enquanto o valor da variavel nextNumber for maior que 0 podera ir realizando as chamadas recursivas a function countDown3
+            if(nextNumber > 0) {
+                //a function countDow3 chama a si mesma no seu proprio corpo de função, passando o argumento nextNumber
+                countDown3(nextNumber);
+            }
+        }
+
+        //invoca - chama a function countDow3 passando o valor de argumento 3
+        countDown3(3);
+
+        /**
+         * O countDown() parece funcionar como esperado.
+         * 
+         * No entanto, conforme mencionado no tutorial Tipo de função , o nome da função é uma referência ao objeto de função real.
+         * 
+         * Se o nome da função estiver definido em null algum lugar no código, a função recursiva deixará de funcionar.
+         * 
+         * Por exemplo, o código a seguir resultará em um erro:
+        */
+
+        //aqui atribuimos a instancia de objeto countDown3 do tipo function por referencia a variavel newYearCountDown para que possa referenciar a instancia de objeto do tipo function newYearCountDown
+        let newYearCountDown = countDown3;
+
+        //em algum lugar no código
+        countDown3 = null;
+        
+        //como atribuimos null ao instancia de objeto do tipo function countDown3 ele fica como um objeto vazio
+        //assim a variavel newYearCountDown que refencia a instancia de objeto countDown3 ira gerar um erro pois e como se estivesse referenciando um objeto vazio
+        //a seguinte chamada de função causará um erro
+        newYearCountDown(10);
+
+        //Uncaught TypeError: countDown is not a function
+
+        /**
+         * Como o roteiro funciona:
+         
+            - Primeiro, atribua o countDown nome da função à variável newYearCountDown.
+
+            - Segundo, defina a countDown referência da função para null.
+
+            - Terceiro, chame a newYearCountDown função.
+
+         * 
+         * O código causa um erro porque o corpo da countDown() função faz referência ao countDown nome da função, que foi definido null no momento da chamada da função.
+         * 
+         * Para corrigi-lo, você pode usar uma expressão de função nomeada da seguinte maneira:
+        */
+
+        //declara uma instancia de objeto do tipo function nomeada f que possui um paramentro declarado chamado fromNumber, essa instancia sera atribuida por referencia a varaivel countDonw, countDown variavel podera referencia a instancia de objeto function
+        let countDown4 = function f(fromNumber) {
+            //corpo da function
+            console.log(fromNumber);
+
+            //contagem regressiva
+            //a cada chamada da function recursiva diminui um valor ate atingir a condição de parada
+            let nextNumber = fromNumber - 1;
+
+            //condição de parada para as chamadas recursivas de f, enquanto o valor da variavel nextNumber for maior que 0 podera ir realizando as chamadas recursivas a function f
+            if(nextNumber > 0) {
+                //a function f chama a si mesma no seu proprio corpo de função, passando o argumento nextNumber
+                //aqui chamamos o nome original atribuido a instancia de objeto function usada para a recursividade
+                f(nextNumber);
+            }
+        }
+
+        //declara uma variavel nomeada, que recebera um novo valor por referencia, o countDown atribui a referencia a varaivel newYearCountDown para referencia a instancia de objeto do tipo funciton countDown4
+        let newYearCountDown2 = countDown4;
+
+        //em algum lugar no código
+        //atribui null a instancia de objeto do tipo function countDown4
+        //assim o JS faz o objeto se tornar vazio, aponta para um ponteiro vazio
+        //countDown4 atribui por referencia null a instancia de objeto f
+        countDown4 = null;
+
+        //chama invoca a fucntion por meio da varaivel newYearCountDow2
+        newYearCountDown2(10);
+        
+    </script>
+</body>
+</html>

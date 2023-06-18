@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./eventLoop.svg" alt="image"/>
+
+    <script>
+        /**
+         * * EVENT LOOP(CICLO DE EVENTOS)
+         * 
+         * O conceito de loop de eventos é muito simples. Há um loop infinito, onde o mecanismo JavaScript espera por tarefas, as executa e depois dorme, esperando por mais tarefas.
+         * 
+         * O algoritmo geral do motor:
+         * 
+            * Enquanto houver tarefas:
+            * 
+                * executá-los, começando com a tarefa mais antiga.
+                * 
+            * Durma até que uma tarefa apareça, então vá para 1. 
+            * 
+         * Isso é uma formalização para o que vemos ao navegar em uma página. O mecanismo JavaScript não faz nada na maioria das vezes, ele só é executado se um script/handler/evento for ativado.
+         * 
+         * Exemplos de tarefas: 
+         * 
+            * Quando um script externo é <script src="..."> carregado, a tarefa é executá-lo.
+            * 
+            * Quando um usuário move o mouse, a tarefa é despachar mousemove eventos e executar manipuladores.
+            * 
+            * Quando o tempo é devido para um cronometro setTimeout, a tarefa deve executar seu retorno de chamada(callback).
+            * 
+            * …e assim por diante.
+            * 
+         *  As tarefas são definidas – o mecanismo lida com elas – e aguarda por mais tarefas (enquanto dorme e consome quase zero da CPU).
+         * 
+         * Pode acontecer que uma tarefa chegue enquanto o mecanismo está ocupado e, em seguida, é enfileirado.
+         * 
+         * As tarefas formam uma fila, a chamada “fila de macrotarefas - macrotask queue” (termo v8):
+         * 
+         * Por exemplo, enquanto a engine está ocupada executando um script, um usuário pode mover seu mouse causando mousemove, e setTimeout pode estar vencida e assim por diante, essas tarefas formam uma fila.
+         * 
+         * As tarefas da fila são processadas com base no “primeiro a chegar – primeiro a ser servido”. Quando o navegador do mecanismo termina com o script, ele manipula o mousemove evento, depois o setTimeout manipulador e assim por diante.
+         * 
+         * Até aqui, bem simples, certo?
+         * 
+         * Mais dois detalhes:
+         * 
+            * A renderização nunca acontece enquanto o mecanismo executa uma tarefa. Não importa se a tarefa leva muito tempo. As alterações no DOM são pintadas somente após a conclusão da tarefa. 
+            * 
+            * Se uma tarefa demorar muito, o navegador não poderá realizar outras tarefas, como processar eventos do usuário. Então, depois de um tempo, ele gera um alerta como “Page Unresponsive”, sugerindo matar a tarefa com a página inteira. Isso acontece quando há muitos cálculos complexos ou um erro de programação que leva a um loop infinito.
+            * 
+            * Essa era a teoria. Agora vamos ver como podemos aplicar esse conhecimento.
+        */
+    </script>
+</body>
+</html>

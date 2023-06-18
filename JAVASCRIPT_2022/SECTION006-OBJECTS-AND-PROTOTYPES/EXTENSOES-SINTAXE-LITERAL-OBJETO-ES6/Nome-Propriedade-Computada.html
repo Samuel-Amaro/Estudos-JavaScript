@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extensões de sintaxe literal de objetos no ES6</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * NOME DA PROPRIEDADE COMPUTADA
+         * 
+         * Antes do ES6, você podia usar os colchetes([]) para habilitar os nomes das propriedades computadas para as propriedades dos objetos.
+         * 
+         * Os colchetes permitem que você use os literais de string e variáveis ​​como nomes de propriedade.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma variavel e a inicializa
+        let name = 'machine name';
+
+        //declara um objeto anonimo literal, esse objeto e atribuido por referencia a variavel machine
+        let machine = {
+            //usando a sintaxe chave : valor para definir propriedade
+            //usando a propriedade computa, usando uma variavel para definir o nome da propriedade
+            [name] : 'server',
+            //usando literal de string para definir nome da propriedade
+            'machine hours' : 10000
+        };
+
+
+        //mostra a propriedade name do objeto referenciado pela machine objeto
+        //como ambas as propriedades possui nomes com espaços so pode ser referenciadas por meio dos colchetes com literal string
+        console.log(machine[name]); //server
+        //acessando a propriedade computada por meio da notaçaõ de colchetes usando o literal de string como nome da propridade
+        console.log(machine['machine hours']); //10000
+
+        /**
+         * A name variável foi inicializada com um valor de 'machine name'. Como ambas as propriedades do machine objeto contêm um espaço, você só pode referenciá-las usando os colchetes.
+         * 
+         * No ES6, o nome da propriedade computada faz parte da sintaxe literal do objeto e usa a notação de colchetes.
+         * 
+         * Quando um nome de propriedade é colocado entre colchetes, o mecanismo JavaScript o avalia como uma string. Isso significa que você pode usar uma expressão como um nome de propriedade. Por exemplo:
+        */
+
+        //declara uma variavel e a inicializa
+        let prefix = 'machine';
+
+        //renomeando propriedadades usando a sintaxe ES6
+        //declara uma objeto anonimo literal usando a sintaxe literal de objeto, atribui o objeto a variavel machine por referencia, assim machine variavel referencia o objeto
+        let machine2 = {
+            //declara propriedades do objeto literal usando sintaxe chave valor, com nomes de propriedades sendo gerador por meio de expressões
+            //aqui as propriedades computadas serão nomeadas como  uma expressão, podemos usar uma expressão como um nome de propriedade, ja que quando usa notação de colchetes o JS avalia com string
+            [prefix + ' name'] : 'server',
+            [prefix + ' hours']: 10000
+        };
+
+        //mostra o valor das propriedades computadas, acessadas por meio da notação de colchetes usando o [] por causa que seus nomes possui espaço em branco
+          
+        console.log(machine2['machine name']); //server
+        console.log(machine2['machine hours']); //10000
+
+        /**
+         * As machine propriedades do objeto são avaliadas como 'machine name'e 'machine hours', portanto, você pode referenciá-las como as propriedades do machine objeto.
+         * 
+        */
+    </script>
+</body>
+</html>

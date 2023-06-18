@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * CONDICIONAIS
+         * 
+         * Um BigInt é convertido em um booleano por meio da função Boolean() em condicionais, como instrução if ou operadores lógicos ||, &&, !. Em outras palavras, funciona como um número nesses casos. Por exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada count, que e inicializada com um valor literal numerico do tipo primitivo bigInt, que tem um n anexado ao final do literal numerico
+        //o bigInt tipo permite representar valores numericos inteiros maiores que 2 elevado a 53 - 1
+        let count = 0n;
+
+        //quando usamos um valor bigInt em condicionais ele e convertido para um booleano implicitamente pelo mecanismo JS por meio da Boolean função global
+        //o valor 0n e convertido para false em boolean
+        if(count) {
+            console.log(true);
+        }else{
+            console.log(false);
+        }
+        
+        /**
+         * * RESUMO 
+         * 
+         * O BigInt é um novo tipo primitivo que pode representar números inteiros maiores que , que é o maior número que o Javascript pode representar de forma confiável com o tipo.2 elevado a 53 - 1 number.
+         * 
+         * Anexe na um inteiro literal ou use BigInt() a função para criar um arquivo bigint.
+        */
+    </script>
+
+</body>
+</html>

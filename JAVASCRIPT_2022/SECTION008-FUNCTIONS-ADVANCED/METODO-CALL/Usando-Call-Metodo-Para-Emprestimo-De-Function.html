@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprestimo de funções</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO O CALL() MÉTODO JS PARA EMPRÉSTIMO DE FUNÇÃO
+         * 
+         *  O seguinte define dois objetos: car e aircraft:
+        */
+
+        //declara um objeto literal anonimo que e atribuido por referencia a variavel car
+        const car = {
+            //declara propriedade usando sintaxe chave valor
+            name : 'car',
+            //declara uma propriedade chamada start, que recebe como valor uma function anonima que não possui parametro e não retorna valor
+            //a function anonima e atribuida a start propriedade
+            start : function() {
+                //chama a propriedade name declarada no this valor objeto
+                console.log(`Start the ${this.name}`);
+            },
+            //declara uma propriedade chamada speedUp que tem o seu valor como uma function anonima declarada sem paramentro, a function e atribuida a speedUp propriedade
+            speedUp: function() {
+                //a fuction acessa a propriedade name do objeto por meio do this valor
+                console.log(`Speed up the ${this.name}`);
+            },
+            //declara uma propriedade chamada stop que tem o seu valor como uma function anonima declarada sem parametro, a function e atribuida a stop propriedade
+            stop: function() {
+                //acessa a propriedade name pelo this valor objeto
+                console.log(`Stop the ${this.name}`);
+            }
+        };
+
+        //declara um objeto anonimo usando a sintaxe literal de objeto esse objeto e atribuido a variavel aicraft por referencia, assim a variavel referencia o objeto
+        const aircraft = {
+            //declara a propriedade do objeto literal
+            name : 'aircraft',
+            //declara uma propriedade chamada fly que recebe como valor uma function anonima declarada sem paramentro e sem valor de retorno, a function anonima e atribuida a fly propriedade
+            fly: function() {
+                console.log('Fly');
+            }
+        };
+
+        /**
+         * O aircraft objeto tem o fly()método.
+         * 
+         * O código a seguir usa o call()método para invocar o start() método do car objeto no aircraft objeto:
+        */
+
+        //o call metodo permite um this valor invocar a start function, assim o aircraft objeto sera o this valor que invocara a star function por meio do call metodo, sem passar argumentos para o start function
+        //a start function acessa a propriedade name de car objeto onde foi declarada, mas usando o call o start function acessara a name propriedade do this valor aircraft objeto
+        //o objeto car emprestou o seu metodo start para o aicraft objeto
+        //chamado de emprestimo de função
+        car.start.call(aircraft); //Start the aircraft
+
+        /**
+         * Tecnicamente, o aircraft objeto emprestou o start() método do car objeto para o aircraft.
+         * 
+         * Quando um objeto usa um método de outro objeto é chamado de empréstimo da função.
+         * 
+         * As aplicações típicas de empréstimo de função são usar os métodos internos do tipo Array.
+         * 
+         * Por exemplo, o arguments objeto dentro de uma função é um objeto tipo array, não um objeto array. Para usar o slice() método do objeto Array, você precisa usar o call()método:
+        */
+
+        //declara uma function regular chamada getOddNumbers sem paramentro
+        function getOddNumbers() {
+            //A function construtora Array possui a propriedade prototype que referencia o objeto prototipo anonimo que posui metodos e propriedades.
+            //metodo slice do objeto prototipo anonimo permite extrair elementos de subconjunto de uma array e adicioná-los à nova array.
+            //o call metodo permite o arguments objeto chamar o slice metodo por meio de call
+            const args = Array.prototype.slice.call(arguments);
+            //retorna somente os numeros pares, utilizando o metodo filter do Array tipo
+            return args.filter(num => num % 2);
+        }
+
+        //chama a função getOddNumbers, passando uma lista de argumentos
+        let oddNumbers = getOddNumbers(10, 1, 3, 4, 8, 9);
+        //retorna somente os numeros impares
+        console.log(oddNumbers);
+
+        /**
+         * Neste exemplo, passamos qualquer número de números para a função. A função retorna uma array de números ímpares.
+         * 
+         * A instrução a seguir usa a call()função para definir o método this interno para o objeto e executar o método:slice() arguments slice()
+        */
+
+        //o call metodo permite o arguments this valor chamar o slice metodo por meio de call
+        const args = Array.prototype.slice.call(arguments);
+
+        /**
+         * Neste tutorial, você aprendeu sobre o call() método JavaScript e como usá-lo de forma mais eficaz.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiando valores de referência</title>
+</head>
+<body>
+    <script>
+        /**
+         * * COPIANDO VALORES DE REFERÊNCIA
+         * 
+         * Quando você atribui um valor de referência de uma variável a outra, o valor armazenado na variável também é copiado para o local da nova variável.
+         * 
+         * A diferença é que os valores armazenados em ambas as variáveis ​​agora são o endereço do objeto real armazenado no heap. Como resultado, ambas as variáveis ​​estão referenciando o mesmo objeto.
+         * 
+         * Considere o exemplo a seguir.
+         * 
+         * Primeiro, declare uma variável x que contém um objeto cuja propriedade name é 'John'.
+        */
+
+        //declara uma variavel x que ira receber a referencia de um objeto literal anonimo  usando a sintaxe literal de objeto
+        //a x variavel e usada para acessar o obejto por referncia assim não manipulamos o valor real do objeto mas sim a referencia
+        var x = {name : 'John'};
+
+        /**
+         * Segundo, declare outra variável y e atribua a x variável a y. Ambos x e y agora estão referenciando o mesmo objeto no heap.
+        */
+
+        //declara uma variavel chamada y que ira receber a referencia do objeto declarado e atribuido a x variavel, assim o x variavel ira atribuir a y a referencia armazenada em x e não o objeto real, mas sim a referencia para que os duas variaveis tenham referencia do mesmo objeto
+        var y = x;
+
+        /**
+         * Terceiro, modifique o valor armazenado na name propriedade do objeto usando a  y variável.
+        */
+
+        //por meio da referencia, modificaresmos uma propriedade do objeto atribuida a y variavel
+        y.name = 'David';
+
+        /**
+         * Como ambos x e y fazem referência ao mesmo objeto, a alteração também é refletida se você acessar o objeto usando a x variável. 
+        */
+
+        //x e y fazem referencia ao mesmo objeto assim qualquer alteração feita por uma variavel ira refletir na outra pois qualquer modificação feita e refletida no mesmo objeto
+        console.log(`x.name = ${x.name}`); //'David'
+
+        /**
+         * Neste tutorial, você aprendeu sobre como acessar por valor e por referência, e também as diferenças entre eles. 
+        */
+    </script>
+</body>
+</html>

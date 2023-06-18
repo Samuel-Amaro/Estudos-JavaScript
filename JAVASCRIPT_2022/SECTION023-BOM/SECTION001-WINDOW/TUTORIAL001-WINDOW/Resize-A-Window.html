@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * O WINDOW OBJETO EXPÕE A FUNCIONALIDADE DO NAVEGADOR
+         * 
+         * O window objeto expõe a funcionalidade do navegador da Web à página da Web.
+         *  
+         * * 3) RESIZE A WINDOW(REDIMENSIONAR JANELA)
+         * 
+         * Para redimensionar uma janela você usa o resizeTo() método do window objeto:
+
+            window.resizeTo(width,height);
+
+         * 
+         * O exemplo a seguir abre uma nova janela que carrega a http://localhost/js/about.html página e redimensiona a janela (600,300) após 3 segundos:
+        */
+
+        //usando o método window.open() para abrir uma nova janela
+        //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina about.html em uma nova janela
+        //como segundo argumento passamos o nome da janela, o nome que a janela recebera ao ser criada
+        //o terceiro argumento é uma sequência de configurações delimitada por comando que especifica a exibição de informações para a nova janela, como largura, altura, e redimensional, barra de menus, como configuração inicial, iniciaremos a janela com uma largura e altura especifica
+        //o método window.open retorna um objeto do tipo WindowProxy
+        let jsWindow = window.open('file://c:/Users/SAMUE/Documents/PROGRAMACAO_CURSOS_PROJETOS_2020_2021/JAVASCRIPT_2022/SECTION023-BOM/SECTION001-WINDOW/TUTORIAL001-WINDOW/About.html', 'about', 'height=600, width=800');
+
+        setTimeout(() => {
+            //o codigo abaixo ira redimensionar a janela recem criada, apos passar três segundos de atraso a janela sera redimensionada
+            //usando o método window.resizeTo(width, height), passando como primeiro argumento  um valor de 600 como largura para a janela, a janela tera sua largura redimensionada para 600px, e como segundo argumento passamos 300, a janela tera sua altura redimensionada para 300px
+            jsWindow.resizeTo(600, 300);
+        }, 3000);
+
+        /**
+         * O window.resizeBy() método permite redimensionar a janela atual por um valor especificado:
+         
+            window.resizeBy(deltaX,deltaY);
+
+         * 
+         * Por exemplo:
+        */
+
+        //reduza a janela ou redimensione a janela
+        //para 500x500
+        setTimeout(() => {
+            //o codigo abaixo ira redimensionar a janela recem criada, apos passar três segundos de atraso a janela sera redimensionada
+            //usando o método window.resizeBy(deltaX, deltaY), passando como primeiro argumento  um valor de -100 que representa 500 como largura para a janela, a janela tera sua largura redimensionada para 500px, e como segundo argumento passamos -100, a janela tera sua altura redimensionada para 500px
+            jsWindow.resizeBy(-100, -100);
+        }, 3000);
+    </script>
+</body>
+</html>

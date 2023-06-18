@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<!--
+    - atribuindo manipuladores de eventos por meio de atributo html on<event>
+    - atribuindo um manipulador que ira reagir a um evento de click no body 
+    - cada elemento abaixo tem seu proprio manipulador.
+    - aqui abaixo temos um exemplo de interrupção de borbulhamento
+    - ao clicar em button o borbulhamento não sera executado, isso e so sera executado o manipulador de button, não ira executar o de body também seu ancestral
+-->
+<body onclick="alert('o borbulhar não chega aqui')">
+
+    <!--
+        - ao clicar em button o seu manipulador ira executar o seguinte, executa o manipulador de button, e encerra o borbulhamento. não ira executar os manipulados dos elementos ancestrais de button
+    -->
+    <button onclick="event.stopPropagation()">Clique Aqui!</button>
+
+    <script type="text/javascript">
+        /**
+         * * Stopping bubbling(Parando de borbulhar)
+         * 
+         * Um evento borbulhante vai do elemento alvo direto para cima. Normalmente ele vai para cima até <html>, e depois para document object, e alguns eventos chegam até window, chamando todos os manipuladores no caminho.
+         * 
+         * Mas qualquer manipulador pode decidir que o evento foi totalmente processado e interromper o borbulhar.
+         * 
+         * O método para isso é event.stopPropagation()
+         * 
+         * Por exemplo, aqui body.onclick não funciona se você clicar em <button>:
+         * 
+         * * event.stopImmediatePropagation()
+         * 
+         * Se um elemento tiver vários manipuladores de eventos em um único evento, mesmo que um deles pare de borbulhar, os outros ainda serão executados.
+         * 
+         * Em outras palavras, event.stopPropagation() interrompe o movimento para cima, mas no elemento atual todos os outros manipuladores serão executados.
+         * 
+         * Para parar o borbulhar e impedir que os manipuladores do elemento atual sejam executados, existe um método event.stopImmediatePropagation(). Depois disso, nenhum outro manipulador é executado.
+         * 
+         * * Não pare de borbulhar sem necessidade!
+         * 
+         * A borbulhagem é conveniente. Não pare sem uma necessidade real: óbvio e arquitetonicamente bem pensado.
+         * 
+         * Às vezes event.stopPropagation()cria armadilhas ocultas que mais tarde podem se tornar problemas.
+            
+            1. Criamos um menu aninhado. Cada submenu lida com cliques em seus elementos e chamadas stopPropagation para que o menu externo não seja acionado.
+
+            2. Mais tarde, decidimos capturar cliques em toda a janela, para rastrear o comportamento dos usuários (onde as pessoas clicam). Alguns sistemas analíticos fazem isso. Normalmente o código usa document.addEventListener('click'…) para capturar todos os cliques.
+
+            3. Nossa análise não funcionará na área em que os cliques são interrompidos por stopPropagation. Infelizmente, temos uma “zona morta”.
+
+          * Geralmente não há necessidade real de evitar o borbulhamento. Uma tarefa que aparentemente exige que pode ser resolvida por outros meios. Um deles é usar eventos personalizados, vamos cobri-los mais tarde. Também podemos escrever nossos dados no event objeto em um manipulador e lê-los em outro, para que possamos passar para os manipuladores dos pais informações sobre o processamento abaixo.
+        */
+    </script>
+</body>
+</html>

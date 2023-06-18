@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando Promisse</title>
+</head>
+<body>
+
+    <h2>Exemplo de Promisse e Seus Estados</h2>
+    <img src="JavaScript-Promises.svg">
+
+    <script> 
+
+        /**
+         * * CRIANDO UMA PROMISSE(promessa)
+         * 
+         * Para criar um objeto de promessa, você usa o Promise() construtor:
+        */
+
+        //criando uma instancia de objeto promisse, invocando o contrutor Promisse passando uma callback function como argumento junto com o operador new
+        //a callbak function que e uma arrow function anonima que declara dois paramentros chamados resolve, reject.
+        //esses paramentros são callbakc functions chamada resolve e reject
+        //o objeto promisse instanciado e atribuido por referencia a constante promise
+        //a callbak function argumento executa uma operação assincrona - conhecida como executor
+        const promise = new Promise((resolve, reject) => {
+            //contém uma operação
+            //...
+
+            //retorna o estado
+            //operação assincrona concluida com sucesso
+            if(success) {
+                //a resolve callback function e chamda pelo executor para muda o estado da operação de pendente para cumprida com valor
+                resolve(value);
+            }else{
+                //operação assincrona não foi concluida gerou erro, em caso de errro, o executor chama a reject callbak, para muda o estado da operação de pendente para rejeitada com o motivo do erro
+                reject(error);
+            }
+            //promisse atingiu um desses resultados cumprido ou rejeitado não pode mudar mais permanece assim, não pode mudar de estado
+            //depois que promisse e instanciada seu estado e pendente se ela atingir um desses estados ela e resolvida
+        });
+
+        /**
+         * Um construtor de promessa aceita uma função de retorno de chamada(callback) que normalmente executa uma operação assíncrona. Esta função é muitas vezes referida como um executor.
+         * 
+         * Por sua vez, o executor aceita duas funções de retorno de chamada(callbakc) com o nome resolve e reject.
+         * 
+         * Observe que as funções de retorno de chamada(callbakc) passadas para o executor são resolve e reject por convenção apenas.
+         * 
+         * Se a operação assíncrona for concluída com sucesso, o executor chamará a resolve() função para alterar o estado da promessa de pendente para cumprida com um valor.
+         * 
+         * Em caso de erro, o executor chamará a reject() função para alterar o estado da promessa de pendente para rejeitada com o motivo do erro.
+         * 
+         * Quando uma promessa atinge o estado cumprido ou rejeitado, ela permanece nesse estado e não pode ir para outros estados.
+         * 
+         * Em outras palavras, uma promessa não pode ir de fulfilled estado para rejected estado e vice-versa. Além disso, ele não pode voltar do estado fulfilled ou rejected para o pending estado.
+         * 
+         * Depois que um novo Promise objeto é criado, seu estado fica pendente. Se uma promessa atinge fulfilled ou rejected estado, ela é resolvida(resolved).
+         *
+         * Observe que você raramente criará objetos de promessa na prática. Em vez disso, você consumirá promessas fornecidas por bibliotecas.
+        */
+
+    </script>
+</body>
+</html>

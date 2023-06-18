@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * O WINDOW OBJETO EXPÕE A FUNCIONALIDADE DO NAVEGADOR
+         *  
+         * O window objeto expõe a funcionalidade do navegador da Web à página da Web.
+         * 
+         * * 1) WINDOW SIZE(TAMANHO DA JANELA)
+         * 
+         * O window objeto possui quatro propriedades relacionadas ao tamanho da janela:
+
+            - As propriedades innerWidth(LARGURA INTERNA) e innerHeight(ALTURA INTERNA) retornam o tamanho da janela de visualização(VIEW-REPORT) da página dentro da janela do navegador (sem incluir as bordas e as barras de ferramentas).
+            - As propriedades outerWidth(LARGURA EXTERNA) e outerHeight(ALTURA EXTERNA) retornam o tamanho da própria janela do navegador.
+
+         * Além disso, as propriedades document.documentElement.clientWidth(LARGURA DO CLIENTE) e document.documentElement.clientHeight(ALTURA DO CLIENTE) indicam a largura e a altura da janela de visualização(VIEW-PORT) da página. Para obter o tamanho da janela, você usa o seguinte snippet:
+        */
+
+        //a propriedade que retornar um valor numerico que não seja undefined e a largura da pagina 
+        const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+        //a propriedade que retornar um valor numerico que não seja undefined e a altura da pagina 
+        const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        alert(`width: ${width} x height: ${height}`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO 2) CONVERTENDO UM MAP EM UM OBJETO
+         * 
+         *  O exemplo a seguir mostra como usar o Object.fromEntries() método para converter um Mapa em um Objeto:
+        */
+
+        //declara uma instancia de objeto anonima de um Map, invocando o construtor Map e atribuido o objeto por referencia a variavel config
+        const config = new Map();
+
+        //inicializa o map objeto com elmentos, usando sintaxe chave : valor
+        config.set('type', 'database');
+        config.set('duration', 30);
+
+        //usando o método Object.fromEntries(iteravel) para transformar um iteravel em um objeto, com os elementos do iteravel se tornando propriedade do objeto retornado
+        const cache = Object.fromEntries(config);
+
+        //mostra objeto
+        console.log(cache);
+        
+    </script>
+</body>
+</html>

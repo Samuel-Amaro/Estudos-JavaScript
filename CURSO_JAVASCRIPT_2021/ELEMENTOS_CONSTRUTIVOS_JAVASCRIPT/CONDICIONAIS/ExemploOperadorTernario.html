@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Ternario JS</title>
+</head>
+<body>
+    <h1>Exemplo de operador Ternário em JS</h1>
+    <label for="tema">Selecione o tema:</label>
+    <select name="tema" id="tema">
+        <option value="branco">Branco</option>
+        <option value="preto">Preto</option>
+    </select>
+    <h2>Este e meu WebSite</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis alias beatae quas ipsa necessitatibus repellat repudiandae? Temporibus tempore libero molestiae tenetur nihil, officiis maiores quisquam vero doloribus reiciendis dolores blanditiis!</p>
+    <!--java script inline incorporado no documento HTML5-->
+    <script>
+        var select = document.querySelector('select');
+        var html = document.querySelector('html');
+        document.body.style.padding = '10px';
+
+        function atualizar(bgColor, textColor) {
+            html.style.backgroundColor = bgColor;
+            html.style.color = textColor;
+        }
+
+        select.onchange = function() {
+            (select.value === 'preto') ? atualizar('black','white') : atualizar('white','black');
+        }
+    </script>
+</body>
+</html>

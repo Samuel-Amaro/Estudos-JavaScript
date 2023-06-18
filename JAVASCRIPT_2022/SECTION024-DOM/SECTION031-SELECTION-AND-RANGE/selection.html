@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p>Clique nos botões para executar métodos na seleção, "resetExample" para redefini-la.</p>
+
+    <p id="p">Exemplo: <i>itálico</i> e <b>negrito</b></p>
+
+    <p id="result"></p>
+
+    <!--
+    no de elemento como um todo
+    <p id="p">       no de elemento completo <p>
+        Exemplo:     no de texto com indice 0 como numero filho <p>
+        <i>          no de elemento com indice 1 como numero filho <p>
+            itálico  no de texto como numero filho 0 de <i>
+        </i>    
+        e            no de texto com indice 2 como numero filho <p>
+        <b>          no de elemento com indice 3 como numero filho <p>
+            negrito  no de texto como numero filho 0 de <b>
+        </b>
+    </p>
+    -->
+
+    <script type="text/javascript">
+        /**
+         * * SELECTION(SELEÇÃO)
+         * 
+         * Range é um objeto genérico para administrar intervalos de seleção. No entanto, criar um Range não significa que vemos uma seleção na tela.
+         * 
+         * Podemos criar Range objetos, passá-los – eles não selecionam nada visualmente por conta própria.
+         * 
+         * A seleção de documentos é representada por Selection objeto, que pode ser obtido como window.getSelection() ou document.getSelection(). Uma seleção pode incluir zero ou mais intervalos. Pelo menos, a especificação da API de seleção diz isso. Na prática, porém, apenas o Firefox permite selecionar vários intervalos no documento usando ( para Mac).Ctrl+click Cmd+click
+         * 
+         * Aqui está uma captura de tela de uma seleção com 3 intervalos(RANGE), feita no Firefox:
+         * 
+         * Outros navegadores suportam no máximo 1 intervalo. Como veremos, alguns Selection métodos implicam que pode haver muitos intervalos, mas, novamente, em todos os navegadores, exceto no Firefox, há no máximo 1.
+        */
+
+    </script>
+</body>
+</html>

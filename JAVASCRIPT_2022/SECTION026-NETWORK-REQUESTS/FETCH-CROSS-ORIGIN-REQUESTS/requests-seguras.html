@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * REQUESTS SAFE(SOLICITAÇÕES SEGURAS)
+         * 
+         * Existem dois tipos de solicitações de origem cruzada(REQUEST CROSS-ORIGIN):
+         * 
+            *  Safe requests(solicitações seguras)
+            * 
+            * (All the others)Todos os outros
+            * 
+         * As Solicitações Seguras são mais simples de fazer, então vamos começar com elas.
+         * 
+            * 1. Método seguro: GET, POST ou HEAD
+            * 
+            * Cabeçalhos(headers) seguros – os únicos cabeçalhos(headers) personalizados permitidos são:
+            *   
+                * Accept,
+                * 
+                * Accept-Language,
+                * 
+                * Content-Language,
+                * 
+                * Content-Type com o valor application/x-www-form-urlencoded, multipart/form-data ou text/plain.
+                * 
+         * Qualquer outra solicitação é considerada “insegura”. Por exemplo, uma solicitação com PUT método ou com um API-Key cabeçalho(header) HTTP não se enquadra nas limitações.
+         * 
+         * A diferença essencial é que uma solicitação segura(request safe) pode ser feita com a <form> ou a <script>, sem nenhum método especial.
+         * 
+         * Portanto, mesmo um servidor muito antigo deve estar pronto para aceitar uma solicitação segura.
+         * 
+         * Ao contrário disso, solicitações(requests) com cabeçalhos(headers) fora do padrão ou, por exemplo, método DELETE, não podem ser criadas dessa maneira. Por muito tempo o JavaScript foi incapaz de fazer tais solicitações(request). Assim, um servidor antigo pode assumir que tais solicitações vêm de uma fonte privilegiada, “porque uma página da web não consegue enviá-las”.
+         * 
+         * Quando tentamos fazer uma solicitação insegura, o navegador envia uma solicitação especial de “comprovação” que pergunta ao servidor – ele concorda em aceitar essas solicitações de origem cruzada ou não?
+         * 
+         * E, a menos que o servidor confirme explicitamente isso com cabeçalhos(headers), uma solicitação(request) insegura não é enviada.
+         * 
+         * Agora vamos entrar em detalhes.
+        */
+    </script>
+
+</body>
+</html>

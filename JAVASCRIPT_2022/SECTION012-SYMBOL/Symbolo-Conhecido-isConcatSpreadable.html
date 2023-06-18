@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbolos Conhecidos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * SÍMBOLOS CONHECIDOS
+         * 
+         * O ES6 fornece símbolos predefinidos que são chamados de símbolos conhecidos. Os símbolos conhecidos representam os comportamentos comuns em JavaScript. Cada símbolo conhecido é uma propriedade estática do Symbol objeto.
+         *
+         * * Symbol.isConcatSpreadable(é concat espalhável)
+         *
+         * Para concatenar duas arrays, você usa o concat() método conforme mostrado no exemplo a seguir:
+        */
+
+        //declara um array literal dense anonimo inicializado com dois elementos array e atribuido a variavel odd por referencia
+        let odd = [1, 3], even = [2, 4];
+        //usando o método array.concat(array), para, mesclar dois ou mais arrays em um unico array
+        //aqui mesclaresmos, o array enven no final do array odd, não altera os arrays originais
+        //o array final mesclado e retornado e atribuido por referencia a variavel all
+        let all = odd.concat(even);
+        console.log(all); //[1, 3, 2, 4]
+        
+        /**
+         * Neste exemplo, a array resultante contém os elementos únicos de ambas as array. Além disso, o concat() método também aceita um argumento que não seja de array, conforme ilustrado abaixo.
+        */
+
+        //se passamos um valor como argumento para o concat método e esse valor não e um array, o método anexara cada valor passado ao final do array de resultado, que aqui no caso e o array referenciado pela variavel all
+        let extras = all.concat(5);
+        console.log(extras); //[1, 3, 2, 4, 5]
+
+        /**
+         * O número 5 torna-se o quinto elemento da array.
+         *
+         * Como você vê no exemplo acima, quando passamos um array para o concat() método, o concat() método espalha o array em elementos individuais. No entanto, ele trata um único argumento primitivo de maneira diferente. Antes do ES6, você não podia alterar esse comportamento.
+         * 
+         * É por isso que o Symbol.isConcatSpreadable símbolo entra em jogo.
+         *
+         * A Symbol.isConcatSpreadable propriedade é um valor booleano que determina se um objeto é adicionado individualmente ao resultado da concat() função.
+         * 
+         * Considere o seguinte exemplo:
+        */
+
+        //define um objeto literal dense anonimo, atribuido por referencia a variavel list
+        let list = {
+            //define propriedades do objeto literal usando sintaxe chave : valor
+            0: 'JavaScript',
+            1: 'Symbol',
+            length: 2
+        };
+
+        //usando o método Array.concat(array), iremos mesclar um objeto literal referenciado por list em um array, aqui iremos mesclar o objeto literal referenciado por list, no final do array literal inicializado com um unico elemento
+        //so que o objeto mesclado no final do array literal, não espalha seus elementos, ele e mesclado como objeto, seus elementos não são mesclados de forma individual espalhados
+        let message = ['Learning'].concat(list);
+        console.log(message); //["Learning", Object]
+
+        /**
+         * O objeto de lista é concatenado ao ['Learning'] array. No entanto, seus elementos individuais não são espalhados.
+         * 
+         * Para habilitar os elementos do list objeto adicionados ao array individualmente ao passar para o concat() método, você precisa adicionar a Symbol.isConcatSpreadable propriedade ao list objeto da seguinte forma:
+        */
+
+        //define um objeto literal dense anonimo, atribuido por referencia a variavel list
+        let list2 = {
+            //define propriedades do objeto literal usando sintaxe chave : valor
+            0: 'JavaScript',
+            1: 'Symbol',
+            length: 2,
+            //Symbol.isConcatSpreadable propriedade é um valor booleano que determina se um objeto é adicionado individualmente ao resultado da concat() função.
+            //por meio dessa propriedade, especificamos que esse objeto e adicionado invididulamente(sues elementos espalhados) ao resultado da concat function
+            [Symbol.isConcatSpreadable] : true
+        };
+
+        //usando o método Array.concat(array), iremos mesclar um objeto literal referenciado por list em um array, aqui iremos mesclar o objeto literal referenciado por list, no final do array literal inicializado com um unico elemento
+        let message2 = ['Learning'].concat(list2);
+        //so que definido a propriedade Symbol.isConcatSpreadable, permite que o objeto tenha seus elementos espalhados no final do array literal
+        console.log(message2); //["Learning", Object]
+
+        /**
+         * Observe que se você definir o valor de Symbol.isConcatSpreadable para false e passar o list objeto para o concat() método, ele será concatenado ao array como o objeto inteiro.
+        */
+    </script>
+</body>
+</html>

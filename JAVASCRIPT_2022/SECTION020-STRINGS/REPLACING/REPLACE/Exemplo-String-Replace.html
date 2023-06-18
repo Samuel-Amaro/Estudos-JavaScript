@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * EXEMPLOS JS STRING replace()
+         * 
+         * O exemplo a seguir usa o replace() para substituir o JS na string 'JS will, JS will rock you' pela nova substring JavaScript:
+        */
+
+        //declara uma variavel de escopo de bloco, chamada str, que e inicializada com uma string literal
+        let str = 'JS will, JS will rock you!';
+        //usando o método String.replace(), para substituir a substring 'JS' da string referenciada por str, por uma nova susbtring 'JavaScript'
+        //o metodo retorna uma nova string, não altera a string original
+        let newStr = str.replace('JS', 'JavaScript');
+
+        //mostra a nova string com as substring antigas substituida pela nova
+        //so substitui apenas a primeira ocorrencia da substring antiga
+        console.log(newStr);
+
+        /**
+         * Como você pode ver na saída, apenas a primeira ocorrência da substring JS foi substituída pela nova substring JavaScript.
+         * 
+         * Para substituir todas as ocorrências de uma substring em uma string por uma nova, você deve usar uma expressão regular .
+        */
+    </script>
+
+</body>
+</html>

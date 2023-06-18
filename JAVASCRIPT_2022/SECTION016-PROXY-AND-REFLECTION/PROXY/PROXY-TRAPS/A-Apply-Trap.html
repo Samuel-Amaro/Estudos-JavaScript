@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        /**
+         * * A APPLY() TRAP - ARMADILHA
+         * 
+         * O handler.apply() método é uma armadilha para uma chamada de função. Aqui está a sintaxe
+        */
+
+        /*let proxy = new Proxy(target, {
+            apply: function(target, thisArg, args) {
+                //...
+            }
+        });*/
+
+        /**
+         * Veja o seguinte exemplo:
+        */
+
+        //declarando um objeto literal anonimo com 2 propriedades, esse objeto e atribuido por referencia a constante user, assim user so pode referenciar esse unico objeto
+        const user = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //declara uma function anonima que define um parametro chamado user, essa function e atribuida por referencia a constante getFullName, assim a constante referencia a function anonima
+        //lembrando que uma function e uma instancia de objeto do tipo Function, possui prorpiedades e metodos
+        const getFullName = function(user) {
+            return `${user.firstName} ${user.lastName}`;
+        }
+        
+        //declarando uma instancia de objeto proxy, invocando o construtor da class Proxy, passando dois argumentos, um objeto alvo - target, e um manipulador do objeto alvo
+        //um proxy objeto é um objeto que envolve outro objeto (destino) - TARGET e intercepta as operações fundamentais do objeto de destino.
+        //o target paramentro e o objto de destino(o target a ser embrulhado pelo proxy)
+        //o handler argumento e o objeto controlador dos argumentos
+        //o proxyUser objeto usa o user objeto para armazenar dados
+        //o objeto proxyUser pode acessar todas as propriedades do user objeto
+        const getFullNameProxy = new Proxy(getFullName, {
+            //definindo um objeto manipulador, que ira interceptar as operações fundamentais do objeto de destino(target) apontado pelo objeto proxy a ser criado 
+            //um manipulador(handler) é um objeto que contém métodos para controlar os comportamentos do alvo(target). Os métodos dentro do objeto manipulador são chamados de traps.
+            //declarando um objeto literal anonimo que e atribuido por referencia a constante handler
+            //definindo um metodo que ira controlar o comportamento do target objeto, esse método e chamado de trap(armadilhas)
+            //o metodo e definido usando a sintaxe de extensão de objetos literais do ES6, que torna o metodo do objeto mais suscinto removendo os dois pontos e a palavra-chave function
+            //o seguinte método abaixo e um método do tipo trap, define um comportamento do target objeto
+            //o apply método permite chamar uma função com um determinado this valor e argumentos fornecidos como um array.
+            //o target argumento e o objeto de destino o alvo que o proxy embrulha, o thisArg, e o valor this fornecido para a chamada da function 
+            //o args argumento e um array que especifica os argumentos da function a ser chamada
+            apply(target, thisArg, args) {
+                //invoca a target function com um determinado args, o operador spread, descompacta o array args, em elementos individuais no target function, o target function aqui e o getFullName, com o argumento passado pela invocação do proxy tentando chamar afunction e passando o argumento
+                return target(...args).toUpperCase();
+            }
+        });
+
+        //invocando o proxy para chamar a apply trap método para invocar a function passando o argumento user
+        console.log(getFullNameProxy(user));
+
+        
+    </script>
+
+</body>
+</html>

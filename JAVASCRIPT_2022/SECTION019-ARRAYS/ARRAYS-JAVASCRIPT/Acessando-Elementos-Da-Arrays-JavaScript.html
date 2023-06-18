@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessando elementos da array JavaScript</title>
+</head>
+<body>
+    
+    <h1>Acessando elementos da array JavaScript</h1>
+
+    <script>
+        /**
+         * As matrizes de JavaScript são indexadas com base em zero. Em outras palavras, o primeiro elemento de uma array começa no índice 0, o segundo elemento começa no índice 1 e assim por diante.
+         * 
+         * Para acessar um elemento em uma array, você especifica um índice entre colchetes []:
+         * */
+
+        //nomeArray[index]
+        
+        /**
+         * O seguinte mostra como acessar os elementos da mountains array:
+         */
+
+        let montanhas = ['Everest', 'Fuji', 'Nanga Parbat'];
+
+        //acessando os elementos do array,o array indexado pode ser acessado por indices, usando a seguinte sintaxe
+        console.log(montanhas[0]); //'Everest'
+        console.log(montanhas[1]); //'Fuji'
+        console.log(montanhas[2]); //'Nanga Parbat'
+
+        /**
+         * Para alterar o valor de um elemento, você atribui esse valor ao elemento assim:
+         * */
+
+        montanhas[2] = 'K2';
+        console.log(montanhas); //['Everest', 'Fuji', 'K2'];
+        
+    </script>
+</body>
+</html>

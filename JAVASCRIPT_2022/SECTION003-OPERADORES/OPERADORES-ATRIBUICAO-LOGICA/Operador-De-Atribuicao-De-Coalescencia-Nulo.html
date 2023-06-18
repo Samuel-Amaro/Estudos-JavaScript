@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador De Coalescencia Nulo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O OPERADOR DE ATRIBUIÇÃO DE COALESCÊNCIA NULO
+         * 
+         * O operador de atribuição de coalescência nula atribui y apenas x se x e null ou undefined:
+         
+            x ??= y;
+
+         * É equivalente à seguinte declaração que usa o operador de coalescência nulo:
+
+            x ?? (x = y);
+
+         * 
+         * O exemplo a seguir usa o operador de atribuição de coalescência nula para adicionar uma propriedade ausente a um objeto:
+        */
+
+        //declara um objeto anonimo usando a sintaxe literal de objeto, esse objeto e atribuido a variavel user por referencia, assim a variavel user referencia o objeto
+        let user = {
+            //propriedade do objeto usando a sintaxe chave valor
+            username: 'Satoshi'
+        };
+
+        //utilizando o operador de atribuição logica coalescing(coalescencia nula) para definir uma propriedade que esta faltando no objeto
+        //se a propriedade acessada pelo operador for null ou undefined(não inicializada) o operador ira atribuir um novo valor a propriedade usando a logica
+        //como a propriedade não existe esta sendo definida no momento da execução ela e criada mas não inicializada apenas recebe o valor padrão do JS o undefined
+        //se o valor do operando esquerdo e null ou undefined atribui o valor da direita ao operando da esquerda
+        user.nickname ??= 'anonymous';
+        //user.nickname ?? (user.nickname = 'anonymous')
+
+        console.log(`user = ${user}`);
+
+        /**
+         * Neste exemplo, o user.nickname é undefined, portanto, é nulo. O operador de atribuição de coalescência nula atribui a string 'anonymous' à user.nickname propriedade.
+         * 
+         * A tabela a seguir ilustra como os operadores de atribuição lógica funcionam:
+         * 
+         * * RESUMO
+         * 
+         * O operador de atribuição lógica OR ( x ||= y) só atribui y a x se x for falso.
+         * 
+         * O operador de atribuição lógica AND ( x &&= y) só atribui y se x for x verdadeiro.
+         * 
+         * O operador de atribuição de coalesing nullish ( x ??= y) só atribui y a x se x for nullish.
+        */
+    </script>
+</body>
+</html>

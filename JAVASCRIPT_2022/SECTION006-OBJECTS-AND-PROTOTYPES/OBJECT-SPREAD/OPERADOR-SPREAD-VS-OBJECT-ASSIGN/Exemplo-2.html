@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador De Spread Vs. Object.assign()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * OPERADOR DE SPREAD VS Object.assign()
+         * 
+         * O operador de propagação (...) define novas propriedades no objeto de destino enquanto o Object.assign()método as atribui. Tem dois efeitos colaterais.
+         * 
+         * * EXEMPLO 2) Objetos de destino com propriedades somente leitura
+         *
+         * Se um objeto de destino tiver uma propriedade somente leitura, você não poderá usar Object.assign() o método para atribuir um novo valor a essa propriedade. No entanto, o operador spread (...) pode definir uma nova propriedade. Suponha que você tenha um objeto chamado blueSquare cuja color propriedade seja somente leitura:
+        */
+
+        //define um objeto literal anonimo que e atribuido por referencia a variavel blueSquare
+        const blueSquare = {
+            //define propriedades usando sintaxe chave : valor
+            length: 100,
+            color: 'blue'
+        };
+
+        //Usando o método Object.defineProperty();
+        //define uma propriedade do acessador
+        //define propriedade de forma indereta, usando o metodo
+        //definindo atributos do acessador de propriedade 
+        //definindo seus atributos
+        //o metodo defineProperty precisa de 3 argumentos
+        //o objeto literal
+        //a propriedade acessadora, fornecer um identificado para ela
+        //o objeto descritor da propriedade acesssora, que definira os atributos da propriedade
+        Object.defineProperty(blueSquare, 'color', {
+            value: 'blue', //valor que inicializa a prorpiedade
+            enumerable: true, //propriedade e iteravel por qualquer loop como uma construição loop for
+            writable: false// propriedade não e gravavel, e somente leitura, propriedade não pode ter seu valor modificado
+        });
+
+        //mostra objeto
+        console.log(blueSquare);
+
+        /**
+         * O seguinte usa o operador de propagação-spread (...) para mesclar os objetos style e blueSquare:
+        */
+
+        //mescla objetos referenciados poir style e blueSquare
+
+        //declara uma objeto literal anonimo, que e atribuido a variavel style
+        const style = {
+            //define propriedade usando sintaxe chave : valor
+            color: 'green'
+        };
+
+        //define um obejto literal anononimo que e atribuido por referencia a variavel greenSquare
+        //podemos usar o operador spread para mesclar objetos
+        const greenSquare = {
+            //usando o operador spread, descompactaremos todas propriedades enumeraveis proprias do objeto , neste objeto literal, fazendo a junção das propriedade de dois objetos em um unico final
+            ...blueSquare,
+            ...style
+        };
+
+        console.log(greenSquare);
+
+
+        //mas não podemos usar o método Object.assign() para mesclar objetos, recebemos um erro ao tentar, por que precisamos acessar o get e setter do objetos de destino e alvo, e dizemos que a propriedade color do objeto blueSquare não e gravavel e somente leitura por isso não permite a mesclagem
+        const redSquare = Object.assign(blueSquare, {
+            color: 'red'
+        });
+
+        //assim conseguimes ver os pros e contras usando o operador spread e usando o metodo Object.assing
+
+        /**
+         * * RESUMO
+         *
+         * O operador de propagação(SPREAD) de objeto ( ...) descompacta as próprias propriedades enumeráveis ​​de um objeto.
+         * 
+         * O operador de propagação(SPREAD) de objeto pode ser usado para clonar um objeto ou mesclar objetos em um. A clonagem é sempre superficial.
+         * 
+         * Ao mesclar objetos, o operador de propagação define novas propriedades enquanto as Object.assign() atribui.
+        */
+
+    </script>
+</body>
+</html>

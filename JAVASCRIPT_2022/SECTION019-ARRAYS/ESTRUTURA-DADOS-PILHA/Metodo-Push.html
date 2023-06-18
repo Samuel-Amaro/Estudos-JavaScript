@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Push - empurrar método array</title>
+</head>
+<body>
+
+    <header>
+        <h2>método push() empurrar na estrutura de dados pilha na array JS</h2>
+    </header>
+    <main>
+        <p>A figura a seguir ilustra cada etapa do script acima.</p>
+        <img src="JavaScript-Stack-Push-Operations.png" alt="imagen que ilustra a operação de push na estrutura de dados fila">
+    </main>
+    <script>
+        /**
+         * * MÉTODO push() - empurrar na pilha
+         * 
+         *  O push() método permite adicionar um ou mais elementos ao final da array. O push() método retorna o valor da length propriedade que especifica o número de elementos na array.
+         * 
+         * Se você considerar uma array como uma pilha, o push() método adiciona um ou mais elementos no topo da pilha. O exemplo a seguir cria uma matriz(array) vazia denominada stack e adiciona cinco números, um por um, ao final da stack array. É como colocar cada número no topo da pilha.
+         * 
+         * 
+         * */
+
+        let stack = []; //um array vazio
+
+        stack.push(1); //empurra o elemento com valor 1 mas com indice 0 para o final
+        console.log("stack[" + stack + "]"); //[1]
+
+        stack.push(2); //empurra o elemento com valor 2 mas com o indice 1 para o final
+        console.log("stack[" + stack + "]"); //[1,2]
+
+        stack.push(3); //empurra o elemento com valor 3 mas com o indice 2 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3]
+
+        stack.push(4); //empurra o elemento com valor 4 mas com o indice 3 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3,4]
+
+        stack.push(5); //empurra o elemento com valor 5 mas com o indice 4 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3,4,5]
+        
+        /**
+         * Inicialmente, a pilha está vazia. Cada vez, chamamos o push() método para adicionar um número à pilha. Após 5 chamadas, a pilha possui 5 elementos.
+         * 
+         * Observe que o push() método também permite adicionar vários itens ao final da matriz(Array) de cada vez.
+         * */
+    </script>
+</body>
+</html>

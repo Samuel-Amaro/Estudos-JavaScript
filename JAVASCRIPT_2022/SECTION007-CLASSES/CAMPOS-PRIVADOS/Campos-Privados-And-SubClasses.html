@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campos Privados And SubClasses</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CAMPOS PRIVADOS AND SUBCLASSES
+         * 
+         * Os campos privados só são acessíveis dentro da classe em que estão definidos. Além disso, eles não são acessíveis a partir das subclasses. Por exemplo, o seguinte define a Cylinder classe que estende a Circle classe:
+        */
+
+        //define uma class chamada Circle que utiliza a palavra-chave class
+        class Circle{
+            //define uma propriedade chamada radius privada no corpo da classe
+            //essa propriedade e uma propriedade privada o # sinal define que a propriedade e privada, so pode ser acessada dentro do escopo da classe
+            //iniciliaza a propriedade com o valor 0 
+            #radius = 0;
+            //define um construtor para a class Circle e declara um parametro chamado value
+            constructor(radius) {
+                //declara uma propriedade chamada radius e a inicializa com o radius argumento
+                this.radius = radius;
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade
+            //usando a palavra chave get, para definir o metodo get area 
+            //calcula a area do circulo o método
+            get area() {
+                //retorna o produto de uma multiplicação
+                return Math.PI * Math.pow(this.radius, 2);
+            }
+            //define um metodo setter da classe Circle chamado de radius e declara um paramentro chamado value
+            //usando a sintaxe especifica do ES6 para definir o setter método inicializador de propriedade privada #radius
+            set radius(value) {
+                if(typeof value === 'number' && value > 0) {
+                    //inicializa a propriedade privada #radius com o value argumento
+                    this.#radius = value;
+                }else{
+                    //lança exceção
+                    throw 'The radius must be a positive number';
+                }
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade #radius privada para obter o valor da mesma
+            get radius() {
+                return this.#radius;
+            }
+        }
+
+        //definindo uma classe chamada Cylinder que estende(herda) tudo da Circle class
+        //a Cylinder class e uma classe derivda, class filha, uma subClasse da Class Circle
+        class Cylinder extends Circle{
+            //declara uma propriedade privada no corpo da classe chamada height 
+            #height;
+            //define um construtor para a Cylinder classe e declara dois paramentros
+            constructor(radius, height) {
+                //invoca chama o metodo construtor da class Pai, da super classe, da class base fornecendo o argumento radius
+                super(radius);
+                //inicializa a propriedade privada height com o argumento height
+                this.#height = height;
+
+                ///não pode acessar o #radius propriedade privada da classe Circle aqui
+                //as propriedade privadas so podem ser acessados no escopo no corpo da classe declarante, subClasses ou classe derivas não acessam propriedades ou metodos privadas de super classe
+            }
+        }
+
+        /**
+         * Se você tentar acessar o #radius campo privado na Cylinder classe, receberá um arquivo SyntaxError.
+        */
+    </script>
+</body>
+</html>

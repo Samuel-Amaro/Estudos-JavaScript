@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * JS BigInt
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o BigInt tipo que é o objeto interno que pode representar números inteiros maiores que 2 elevado a 53 – 1.
+         * 
+         * * INTRODUÇÃO AO BIGINT 
+         * 
+         * O ES2020 introduziu um novo objeto interno chamado BigInt que permite representar números inteiros maiores .2 elevado a 53 - 1.
+         * 
+         * O bigint é o tipo primitivo como number, string, symbol, boolean undefined e null.
+         * 
+         * Para fazer um BigInt, você anexa n ao final do literal numérico, por exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada bigInt, que e inicializada com um valor literal numerico do tipo primitivo bigInt, que tem um n anexado ao final do literal numerico
+        //o bigInt tipo permite representar valores numericos inteiros maiores que 2 elevado a 53 - 1
+        let bigInt = 9007199254740991n;
+
+        /**
+         * Alternativamente, você pode chamar a função BigInt():
+        */
+
+        //invocando a função global BigInt() e passando como argumento para ela um valor literal numerico do tipo primitivo bigInt
+        let bigInt2 = BigInt(9007199254740991);
+
+        /**
+         * Veja o seguinte cálculo com um Number:
+        */
+
+        //realiza calculos com o tipo primitivo number
+        let x = Number.MAX_SAFE_INTEGER;
+        //soma, com o tipo number
+        x = x + 1; //9007199254740992
+        //não soma
+        x = x + 1; //9007199254740992 (o mesmo que acima)
+
+        /**
+         * e com um BigInt:
+        */
+
+        //realiza calculos com o tipo primitivo BigInt
+        //invocando a função global BigInt() e passando como argumento para ela um valor literal numerico do tipo primitivo number
+        let y = BigInt(Number.MAX_SAFE_INTEGER);
+        //realiza operações de soma com o tipo bigInt
+        y = y + 1; //9007199254740992n
+        y = y + 1; //9007199254740993n (correto agora)
+    </script>
+
+</body>
+</html>

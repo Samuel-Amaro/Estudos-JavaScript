@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(null, script);
+
+            //atribui um manipulador de evento por meio da propriedad dom
+            //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+            //assim o callback e executado, tratando o erro, lançando um erro
+            script.onerror = () => callback(new Error(`Erro de carregamento de script para ${src}`));
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+
+        /**
+         * Mas e se o original f espera um retorno de chamada(callbackl) com mais argumentos callback(err, res1, res2, ...)?
+         * 
+         * Podemos melhorar nosso ajudante. Vamos fazer uma versão mais avançada do promisify.
+         * 
+            * Quando chamado como promisify(f)deve funcionar semelhante à versão acima.
+            * 
+            * Quando chamado como promisify(f, true), ele deve retornar a promessa que resolve com a array de resultados de retorno de chamada(callback). Isso é exatamente para retornos de chamada com muitos argumentos.
+        */
+
+        //APLICANDO promisificação(processo de transformação/conversão de uma função que aceita um callback em uma função que retorna um promisse)
+
+        //promisify(f, true) para obter uma array de resultados
+        function promisify(f, manyArgs = false) {
+            //retorna um function que aceita varios argumentos, declara varios paramentros
+            return function(...args) { 
+                //retorna um nova promisse
+                return new Promise(function executor(resolve, reject) {
+                    //trabalho da promisse 
+
+                    //callback para ser passado para loadScript, o callback precisa mais do que dois paramentros, diversos parametros
+                    function callback(err, ...results) { // nosso retorno de chamada personalizado para f
+                        //se exisitr um erro
+                        if(err) {
+                            //rejeita promisse com err
+                            reject(err);
+                        }else{
+                            //se não existir erro, resolve promisse com results
+                            //resolva com todos os resultados de retorno de chamada se manyArgs for especificado
+                            //se manyArgs possui itens(argumentos passados para callback), resolve promise com todos esses itens, varias argumentos para callback, promise sera resolvida com varios resultados
+                            //se não possuir itens resolve com result[0], primeiro iten, argumento essencial result, para a callback, promise sera resolvida com um unico result
+                            resolve(manyArgs ? results : results[0]);
+                        }
+                    }
+
+                    args.push(callback); // anexa nosso retorno de chamada personalizado ao final dos argumentos f, args tem que possuir src, callback, para ser informado como argumentos para loadScript
+
+                    f.call(this, ...args); // chama a função original
+                    //window.f(...args); f e o mesmo que loadScript(src, callback)
+                });
+            };
+        }
+
+        //uso:
+        f = promisify(f, true);
+        //f(...).then(arrayOfResults => ..., err => ...);
+
+        /**
+         * Como você pode ver, é essencialmente o mesmo que acima, mas resolve é chamado com apenas um ou todos os argumentos, dependendo de manyArgs ser verdadeiro.
+         * 
+         * Para formatos de retorno de chamada mais exóticos, como aqueles sem err: callback(result), podemos prometer essas funções manualmente sem usar o auxiliar.
+         * 
+         * Existem também módulos com funções de promessa um pouco mais flexíveis, por exemplo, es6-promisify . No Node.js, há uma util.promisify função integrada para isso.
+         * 
+         * Observe:
+         * 
+         * Promisificação é uma ótima abordagem, especialmente quando você usa async/await(veja o próximo capítulo), mas não uma substituição total para retornos de chamada.
+         * 
+         * Lembre-se, uma promessa pode ter apenas um resultado, mas um retorno de chamada(callback) tecnicamente pode ser chamado muitas vezes.
+         * 
+         * Portanto, a promisificação destina-se apenas a funções que chamam o retorno de chamada(callback) uma vez. Outras chamadas serão ignoradas.
+        */
+    </script>
+
+</body>
+</html>

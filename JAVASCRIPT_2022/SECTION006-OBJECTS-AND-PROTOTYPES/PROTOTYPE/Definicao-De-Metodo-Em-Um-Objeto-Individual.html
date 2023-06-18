@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objeto</title>
+</head>
+<body>
+
+    <p>Desta vez, o JavaScript adiciona o draw() método ao p1 objeto, não o Person.prototype objeto:</p>
+
+    <img src="JavaScript-Prototype-Adding-a-method-to-person-object.png" alt="imagen">
+    
+    <script>
+
+        //declara um fuction construtora chamada Person que possui um parametro, que e um argumento para se tornar valor de uma propriedade do objeto this
+        //essa function retorna uma instancia de um objeto this com as propriedades e metodos definidas dentro da function
+        function Person(name) {
+            //add uma propriedade ao Person objeto this instancia que sera retornado
+            this.name = name;
+        }
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o argumento
+        //o p1 objeto e vinculado ao objeto anonimo refernciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim p1 aponta para esse objeto anonimo também
+        let p1 = new Person('John');
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o argumento
+        //o jane objeto e vinculado ao objeto anonimo que e referenciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim Jane aponta para esse objeto anonimo também
+        //com esse tipo de ligação acaba o erro de duplicação de metodos definidos na function construtora, asssim exsite somente um objeto anonino de referencia, que ira ter as instancias vinculadas para ele
+        let p2 = new Person('Jane');
+        
+        /**
+         * * DEFINIÇÃO DE MÉTODOS EM UM OBJETO INDIVIDUAL
+         * 
+         * O seguinte define o say() método no p1 objeto.
+        */
+
+        //adiciona um propriedade chamada draw() ao objeto (instancia) chamado p1
+        //a function anonima e atribuida a draw propriedade fazendo assim o draw propriedade ter como valor uma function e fazendo a draw se torna um metodo
+        //define o metodo draw no objeto p1
+        //o metodo draw so existe na instancia de p1 objeto
+        p1.draw = function() {
+            return "I can draw.";
+        };
+
+        /**
+         * Desta vez, o JavaScript adiciona o draw() método ao p1 objeto, não o Person.prototype objeto: 
+         * 
+         * Isso significa que você pode chamar o draw() método no p1 objeto:
+        */
+
+        //o metodo draw so existe na instancia de objeto p1 e um metodo definido em um objeto individual
+        p1.draw();
+        
+        /**
+         * Mas você não pode chamar o draw()método no p2 objeto:
+        */
+
+        //o metodo draw não existe em instancia de p2 pois foi definido somente para o p1 instancia usar
+        p2.draw();
+
+        /**
+         * Quando você define um método em um objeto, o método está disponível apenas para aquele objeto. Não pode ser compartilhado com outros objetos por padrão. 
+        */
+
+    </script>
+
+</body>
+</html>

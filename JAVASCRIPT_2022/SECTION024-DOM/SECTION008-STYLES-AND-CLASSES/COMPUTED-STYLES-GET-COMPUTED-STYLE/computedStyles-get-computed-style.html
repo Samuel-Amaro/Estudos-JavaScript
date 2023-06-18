@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            color: red;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    The red text
+
+    <script type="text/javascript">
+       
+       /**
+        * * COMPUTED STYLE: GET COMPUTED STYLE(ESTILOS COMPUTADOS)
+        * 
+        * Portanto, modificar um estilo é fácil. Mas como lê -lo?
+        * 
+        * Por exemplo, queremos saber o tamanho, as margens, a cor de um elemento. Como fazer isso?
+        * 
+        * A style propriedade opera apenas no valor do "style" atributo, sem nenhuma cascata CSS.
+        * 
+        * Portanto, não podemos ler nada que venha de classes CSS usando elem.style.
+        * 
+        * Por exemplo, aqui style não vê a margem:
+        */
+
+        //não podemos ler valores de propriedades css ou ler css que venha de classes CSS usando elem.style
+        console.log(document.body.style.color); //vazio
+        console.log(document.body.style.marginTop); //vazio
+
+        /**
+         * …Mas e se precisarmos, digamos, aumentar a margem em 20px? Queremos o valor atual dele.
+         * 
+         * Existe outro método para isso: getComputedStyle.
+         * 
+         * A sintaxe é:
+         
+            getComputedStyle(element, [pseudo]);
+
+         * 
+         * element: Elemento para o qual ler o valor.
+         * 
+         * pseudo: Um pseudoelemento, se necessário, por exemplo ::before. Uma string vazia ou nenhum argumento significa o próprio elemento.
+         * 
+         * O resultado é um objeto com estilos, como elem.style, mas agora com relação a todas as classes CSS.
+         * 
+        */
+
+        //o metodo getComputedStyle(element, pseudo) , obtem o css atual especificado no elemento, com relação a todas as classes CSS.
+        //o metodo retorna um objeto style como elem.style
+        let computedStyle = getComputedStyle(document.body);
+
+        //agora podemos ler a margem e a cor dela
+        //acessando o objeto retornado pelo metodo, acessando propriedades do objeto que representam estilos
+        console.log(computedStyle.marginTop); //5px
+        console.log(computedStyle.color); //rgb(255, 0, 0);
+
+        /**
+         * * VALORES CALCULADOS E RESOLVIDOS
+         * 
+         * Existem dois conceitos em CSS :
+         
+            1. Um valor de estilo calculado(COMPUTED) é o valor depois que todas as regras CSS e a herança CSS são aplicadas, como resultado da cascata CSS. Pode parecer height:1em ou font-size:125%.
+
+            2. Um valor de estilo resolvido(RESOLVED) é aquele finalmente aplicado ao elemento. Valores como 1em ou 125% são relativos. O navegador pega o valor calculado e torna todas as unidades fixas e absolutas, por exemplo: height:20px ou font-size:16px. Para propriedades de geometria, os valores resolvidos podem ter um ponto flutuante, como width:50.5px.
+
+         * Há muito tempo getComputedStyle foi criado para obter valores calculados, mas descobriu-se que os valores resolvidos são muito mais convenientes e o padrão mudou.
+         * 
+         * Então, hoje em dia getComputedStyle, na verdade, retorna o valor resolvido da propriedade, geralmente px para geometria.
+         * 
+         * * getComputedStyle requer o nome completo da propriedade
+         * 
+         * Devemos sempre pedir a propriedade exata que queremos, como paddingLeft ou marginTop ou borderTop Width. Caso contrário, o resultado correto não é garantido.
+         * 
+         * Por exemplo, se houver propriedades paddingLeft/paddingTop, então o que devemos obter para getComputedStyle(elem).padding? Nada, ou talvez um valor “gerado” de preenchimentos conhecidos? Não há nenhuma regra padrão aqui.
+         * 
+         * Existem outras incoerências. Como exemplo, alguns navegadores (Chrome) aparecem 10px no documento abaixo, e alguns deles (Firefox) – não:
+        */
+
+        //obtem os estilos aplicados e todas as classes css do elemento body, retorna um objeto style
+        let style = getComputedStyle(document.body);
+
+        //lendo o valor da propriedade css margim aplicada no body
+        console.log(style.margim); //string vazia no Firefox
+
+        /**
+         * * Os estilos aplicados aos :visited links estão ocultos!
+         * 
+         * Os links visitados podem ser coloridos usando :visited pseudoclasse CSS.
+         * 
+         * Mas getComputedStyle não dá acesso a essa cor, pois senão uma página arbitrária poderia descobrir se o usuário visitou um link criando-o na página e verificando os estilos.
+         * 
+         * JavaScript pode não ver os estilos aplicados por :visited. Além disso, há uma limitação no CSS que proíbe a aplicação de estilos de mudança de geometria em arquivos :visited. Isso é para garantir que não há nenhum caminho lateral para uma página maligna testar se um link foi visitado e, portanto, quebrar a privacidade.
+         * */
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * readyState(estado pronto)
+         * 
+         * O que acontece se definirmos o DOMContentLoaded manipulador depois que o documento for carregado?
+         * 
+         * Naturalmente, ele nunca funciona.
+         * 
+         * Há casos em que não temos certeza se o documento está pronto ou não. Gostaríamos que nossa função fosse executada quando o DOM for carregado, seja agora ou mais tarde.
+         * 
+         * A document.readyState propriedade nos informa sobre o estado de carregamento atual.
+         * 
+         * Existem 3 valores possíveis:
+         * 
+            *  "loading"– o documento está sendo carregado.
+            * 
+            * "interactive"– o documento foi lido na íntegra.
+            * 
+            * "complete"– o documento foi totalmente lido e todos os recursos (como imagens) também foram carregados.
+            * 
+         *  Assim, podemos verificar document.readyState e configurar um manipulador ou executar o código imediatamente se estiver pronto.
+         * 
+         * Assim:
+        */
+
+        function work() { /*...*/ }
+
+        //a propriedade document.readyState propriedade nos informa sobre o estado de carregamento atual
+        //o estado 'loading' e quando o documento esta sendo carregado
+        if(document.readyState == 'loading') {
+            //ainda carregando, aguarde o evento
+            //atribuindo um manipulador de evento por meio da propriedade dom
+            //atribuimos um manipulador para o evento DOMContentLoaded, o navegador HTML totalmente carregado e a árvore DOM é construída, mas recursos externos como imagens <img> e folhas de estilo podem ainda não ter sido carregados.
+            //so atribuimos o manipulador quando o documento atingiu a fase de carregamento, documento esta sendo carregado
+            document.addEventListener("DOMContentLoaded", work);
+        }else{
+            //se o document.readyState for igual a 'interactive' ou 'complete'
+            //executamos o manipulador do evento DOMContentLoaded, assim so executamos o manipulador quando o dom esta completo com toda a pagina e recursos carregados.
+            //podendo acessar todos os recursos da pagina
+            //DOM está pronto!
+            work();
+        }
+    </script>
+
+</body>
+</html>

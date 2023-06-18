@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ACESSO TIPO OBJETO
+         * 
+         * Também podemos usar uma maneira de objeto simples de obter/definir chaves, assim:
+        */
+
+        //usando sintaxe de objeto para definir/obter par de chave/valor
+
+        //definindo chave
+        //o localStorage e um objeto de armazenamento da web, permitindo salvar pares de chave e valor no navegador
+        //define propriedade test com o valor 2
+        localStorage.test = 2;
+
+        //obtendo o valor por chave, chama a propriedade definida e obtem seu valor
+        alert(localStorage.test); //2
+
+        //para remover a chave usamos o operador delete
+        delete localStorage.test;
+
+        /**
+         * Isso é permitido por razões históricas e, na maioria das vezes, funciona, mas geralmente não é recomendado, porque:
+         * 
+            * Se a chave for gerada pelo usuário, pode ser qualquer coisa, como length ou toString, ou outro método interno de localStorage. Nesse caso getItem/setItem, funciona bem, enquanto o acesso tipo objeto falha:
+            
+                let key = 'length';
+                localStorage[key] = 5; // Error, can't assign 
+                
+            Há um storage evento, ele é acionado quando modificamos os dados. Esse evento não acontece para acesso tipo objeto. Veremos isso mais adiante neste capítulo.
+        */
+    </script>
+
+</body>
+</html>

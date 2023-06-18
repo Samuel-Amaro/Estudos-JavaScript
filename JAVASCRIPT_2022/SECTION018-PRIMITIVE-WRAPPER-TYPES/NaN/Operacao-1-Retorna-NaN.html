@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * AS OPERAÇÕES RETORNA NAN
+         * 
+         * * 1) ANALISANDO NÚMEROS
+         * 
+         * Em JavaScript, você pode converter uma string numérica em um número. Por exemplo:
+        */
+
+        //declara uma constante de escopo de bloco chamada input, que e inicializada com uma string numerica(uma string que contem numeros como textos)
+        const input = '100';
+        //usando o metodo abaixo parseInt, passando a constante como argumento, o metodo converte o argumento que e uma string em numero, mas so se a string passada for uma string numerica que contenha so numeros, uma string em que seu texto seja so numeros
+        const num = parseInt(input);
+        //mostra o conteudo armazenado na constante num
+        console.log(num); //100
+
+        /**
+         * Se o JavaScript não puder converter uma string em um número, ele retornará NaN. Nesse caso, NaN indica que a análise falhou. Por exemplo:
+        */
+
+
+        //EXEMPLO ABAIXO QUE O JS RETORNA O VALOR ESPECIAL NAN COMO RESULTADO DE UMA OPERAÇÃO COM FALHA EM NÚMEROS
+        //NESTE CASO A FALHA FOI EM ANALISAR NUMERO
+        
+        //declara uma constante de escopo de bloco chamada input2, que e inicializada com uma string não numerica(uma string que contem caracteres e numeros como textos)
+        const input2 = 'X100';
+        //usando o metodo abaixo parseInt, passando a constante input2 como argumento, o metodo converte o argumento que e uma string em numero, mas so se a string passada for uma string numerica que contenha so numeros, uma string em que seu texto seja so numeros.
+        //mas nesse caso o Js não pode converte a string em numero, o método retorna NaN(Não e um numero), o valor retornado NaN, indica que a nalise falhou
+        let num2 = parseInt(input2);
+
+        //mostra o valor armazenado na variavel num2
+        console.log(num2); //NaN
+
+        /**
+         * É uma boa prática verificar o resultado da análise usando a isNaN função:
+        */
+
+        //set num 0 se a conversão falhar
+        //se o valor retornado pelo metodo for NaN, e porque a conversão falhou, não pode converte string em numero
+        if(isNaN(num2)) {
+            num2 = 0;
+        }
+
+        //mostra o valor armazenado na variavel num2
+        console.log(num2); //0
+
+        /**
+         * Neste exemplo, a análise falhou, portanto, retornou NaN. A condição isNaN(num) é verdadeira para que o número seja atribuído a 0. 
+        */
+
+    </script>
+
+</body>
+</html>

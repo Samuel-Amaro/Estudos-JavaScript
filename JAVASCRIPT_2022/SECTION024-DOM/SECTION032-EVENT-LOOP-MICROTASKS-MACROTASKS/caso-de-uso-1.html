@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * CASO DE USO 1: DIVIDIR TAREFAS QUE COMSOMEM MUITA CPU
+         * 
+         * Digamos que temos uma tarefa que consome muita CPU.
+         * 
+         * Por exemplo, o realce de sintaxe (usado para colorir exemplos de código nesta página) exige bastante da CPU. Para destacar o código, ele realiza a análise, cria muitos elementos coloridos, adiciona-os ao documento – para uma grande quantidade de texto que leva muito tempo.
+         * 
+         * Enquanto o mecanismo está ocupado com realce de sintaxe, ele não pode fazer outras coisas relacionadas ao DOM, processar eventos do usuário, etc. Pode até fazer com que o navegador “trave” ou até “trave” um pouco, o que é inaceitável.
+         * 
+         * Podemos evitar problemas dividindo a grande tarefa em partes. Destaque as primeiras 100 linhas, depois programe setTimeout(com atraso zero) para as próximas 100 linhas e assim por diante.
+         * 
+         * Para demonstrar essa abordagem, por uma questão de simplicidade, em vez de realce de texto, vamos usar uma função que conta de 1 até 1000000000.
+         * 
+         * Se você executar o código abaixo, o mecanismo “travará” por algum tempo. Para JS do lado do servidor, isso é claramente perceptível e, se você o estiver executando no navegador, tente clicar em outros botões na página - você verá que nenhum outro evento será tratado até que a contagem termine.
+        */
+
+        let i = 0;
+
+        let start = Date.now();
+
+        function count() {
+
+            // faz um trabalho 
+            //tarefa: conta de 1 até 1000000000 ou 1e9
+            //uma tarefa que consome muita CPU e trava o navegador impedindo que o mecanismo execute outras tarefas, enquanto esta tarefa não for processada e executada nevgador fica travado para executar outras tarefas, somente apos ela, pois e uma tarefa muito pesada
+            for(let j = 0; j < 1000000000; j++) {
+                i++;
+            }
+
+            alert("Feito em " + (Date.now() - start) + 'ms'); 
+        }
+
+        count(); //Feito em 16803ms
+
+        //O navegador pode até mostrar um aviso “o script demora muito”.
+    </script>
+</body>
+</html>

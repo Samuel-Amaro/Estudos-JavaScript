@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div>Both divs below are hidden</div>
+
+    <div hidden="hidden">With o atributo "hidden"</div>
+
+    <div id="elem">JavaScript assigned the property "hidden"</div>
+
+    <div id="elem1">A blinking element</div>
+    
+    <script type="text/javascript">
+       /**
+        * * A PROPRIEDADE "hidden"
+        * 
+        *  O atributo “hidden” e a propriedade DOM especificam se o elemento é visível ou não.
+        * 
+        * Podemos usá-lo em HTML ou atribuí-lo usando JavaScript, assim:
+        */
+
+        //elem e uma variavel global nomeada por id que faz referencia ao elemento dom com um id especificado de valor elem
+        console.log(elem);
+        //o atributo html hidden e propriedade dom especificam se o elemento dom e visivel ou não
+        //o valor true especifica que o elemento ira ficar oculto
+        elem.hidden = true;
+
+        /**
+         * Tecnicamente, hidden funciona da mesma forma que o style="display: none". Mas é mais curto para escrever.
+         * 
+         * Aqui está um elemento piscando:
+        */
+
+        //a cada 1 segundo passado o elemento vai ficando oculto e visivel vai executando a callbackr
+        setInterval(() => elem1.hidden = ! elem1.hidden, 1000);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * WEAKSETS(CONJUNTO FRACOS - SET FRACOS)
+         * 
+         * A WeakSet é semelhante a a Set, exceto que contém apenas objetos. Como os objetos em a WeakSet podem ser coletados automaticamente como lixo, a WeakSet não tem size propriedade. Como a WeakMap, você não pode iterar elementos de a WeakSet, portanto, você descobrirá que o WeakSet raramente é usado na prática. Na verdade, você só usa a WeakSet para verificar se um valor especificado está no conjunto. Aqui está um exemplo:
+        */
+
+        //declara um objeto literal anonimo com uma unica propriedade usando sintaxe chave valor, e atribui o objeto literal por referencia a variavel computer
+        let computer = {type: 'laptor'};
+        let server = {type: 'server'};
+        //declara um nova instancia de objeto do tipo WeakSet, invoca o construtor WeakSet, passando como argumento um array literal dense inicializado com 2 elementos cada elemento e uma referencia a um objeto literal, o objeto WeakSet so armazena objetos, não armazena valores de qualquer tipo, o WeakSet so armazena objetos unicos e exclusivos
+        let equipment = new WeakSet([computer, server]);
+
+        //usando o método WeakSet.has(value) para verificar se o WeakSet objeto contém um determinado elemento especificado por um valor,neste caso queremos saber se o objeto referenciado por equipment contém o elemento referenciado por server como elemento 
+        //se retorna true e porque contém o elemento, retorna false o elemento não esta no objeto
+        if(equipment.has(server)) {
+            console.log('We have a server');
+        }
+
+        /**
+         * Neste tutorial, você aprendeu sobre o Set objeto JavaScript e como manipular seus elementos.
+        */
+    </script>
+
+</body>
+</html>

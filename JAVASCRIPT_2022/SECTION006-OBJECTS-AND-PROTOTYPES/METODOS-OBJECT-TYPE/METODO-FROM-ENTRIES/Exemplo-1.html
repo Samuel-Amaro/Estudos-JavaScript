@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * Object.fromEntries() Exemplos de JS
+         * 
+         * Vamos dar alguns exemplos de uso do Object.fromEntries() método.
+         * 
+         * * EXEMPLO 1) CONVERTENDO UM ARRAY EM UM OBJETO
+         * 
+         * Este exemplo mostra como converter um array em um objeto:
+        */
+
+        //declara um array dense literal inicializado com 3 elementos, cada elemento e um novo array literal que e inicializado com 2 elementos, o array final e um array multidimensional
+        //Um array e um objeto iteravel
+        //o array e atribuido por referencia a variavel arr
+        const arr = [
+            ['firstName', 'John'],
+            ['lastName', 'Doe'],
+            ['age', 20]
+        ];
+
+        //usando o método Object.fromEntries() que aceita como argumento um objeto iteravel, e o transforma em um objeto, essse objeto retornado possui as propriedades que são os elementos do iteravel, o argumento iterador tem que possui elementos que sejam do tipo da sintaxe chave : valor
+        const person = Object.fromEntries(arr); //Object{}
+
+        //mostrando objeto construido com os elementos do iteravel passado por argumento
+        console.log(person); //Object{}
+
+    </script>
+
+</body>
+</html>

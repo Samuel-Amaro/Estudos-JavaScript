@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <script>
+        /**
+         * …Mas também podemos querer mostrar algo durante a tarefa, por exemplo, uma barra de progresso.
+         * 
+         * Se dividirmos a tarefa pesada em partes usando setTimeout, as alterações serão pintadas entre elas.
+        */
+
+        //dividindo a tarefa pesada em partes para não travar o mecanismo do navegdor
+        //para que possar executar todas as sem travar
+    
+        let i = 0;
+
+        function count() {
+            //tarefa: contar até 1000 e mostrar na interface cada numero
+            // faz uma parte do trabalho pesado (*)
+            do{
+                i++;
+                progress.innerHTML = i;
+            }while(i % 1e3 != 0); //1e3: 1000
+
+            //enquanto i for menor que um milhão
+            //divide a tarefa
+            //continua contanto
+            if(i < 1e7) {
+                //chama o contador novamente apos 0s
+                setTimeout(count); 
+            }
+        }
+
+        count();
+
+        /**
+         * Agora o <div> mostra valores crescentes de i, uma espécie de barra de progresso.
+        */
+
+    </script>
+</body>
+</html>

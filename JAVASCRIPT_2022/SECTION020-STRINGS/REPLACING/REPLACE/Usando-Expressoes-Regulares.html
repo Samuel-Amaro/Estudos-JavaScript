@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * USANDO EXPRESSÕES REGULARES
+         * 
+         * O replace() método suporta totalmente expressões regulares:
+         
+            let newStr = str.replace(regexp, newSubstr);
+
+         * 
+         * Nesta sintaxe, o replace()método encontra todas as correspondências no str, substitui-as pelo newSubstr, e retorna uma nova string (newStr).
+         * 
+         * O exemplo a seguir usa o sinalizador global (g) para substituir todas as ocorrências de JS no str pelo JavaScript:
+        */
+
+        //declara uma variavel de escopo de bloco, chamada str, que e inicializada com uma string literal
+        let str = 'JS will, JS will rock you!';
+        //usando o método String.replace(), para substituir a substring 'JS' da string referenciada por str, por uma nova susbtring 'JavaScript'
+        //o metodo retorna uma nova string, não altera a string original
+        //usando expressão regular para encontrar as ocorrencias de 'JS' na string referenciada por str
+        let newStr = str.replace(/JS/g, 'JavaScript');
+        //mostra a nova string com todas as correspondecias da string antiga substituida pela nova
+        console.log(newStr);
+        
+        /**
+         * Se você quiser ignorar casos para pesquisa e substituição, você pode usar o sinalizador ignore (i) na expressão regular assim:
+        */
+
+        newStr = str.replace(/JS/gi, 'JavaScript');
+        console.log(newStr);
+    </script>
+
+</body>
+</html>

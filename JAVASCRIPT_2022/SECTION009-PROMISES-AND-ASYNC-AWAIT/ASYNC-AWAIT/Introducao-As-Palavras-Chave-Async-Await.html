@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Async/Await</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * JS ASYNC(ASSÍNCRONO)/AWAIT(AGUARDANDO).
+         * 
+         * Resumo : neste tutorial, você aprenderá a escrever código assíncrono usando JavaScript async/await palavras-chave.
+         * 
+         * Observe que, para entender como o async/await funciona, você precisa saber como funcionam as promessas.
+         * 
+         * * INTRODUÇÃO ÁS PALAVRAS-CHAVE async/await JS
+         * 
+         * No passado, para lidar com operações assíncronas, você costumava usar as funções de retorno de chamada(callbak). No entanto, quando você aninha muitas funções de retorno de chamada, o código será mais difícil de manter. E você acaba com um problema notório que é conhecido como o inferno de retorno de chamada.
+         * 
+         * Suponha que você precise realizar três operações assíncronas na seguinte sequência:
+
+            1. Selecione o usuário do banco de dados.
+
+            2. Obtenha serviços do usuário de uma API.
+
+            3. Calcule o custo do serviço com base nos serviços do servidor. 
+
+         * 
+         * As funções a seguir ilustram as três tarefas. Observe que usamos a setTimeout() função para simular a operação assíncrona.
+        */
+
+        //declara uma function chamada getUser que declara dois paramentros, um e o userId, outro paramentro e um callbak(uma function que sera passada por argumento para o getUser)
+        function getUser(userId, callback) {
+            console.log('Get user from the database');
+            //simula uma operação assicrona, usando o setTimeout, simula a operação assicrona de selecinar um usuario no banco  de dados
+            //espera 1 segundo de atraso para executar a callbak function argumento
+            setTimeout(() => {
+                //a callbak function argumento recebe como argumento um objeto literal com duas propriedades, assim invocamos a callbak function
+                callback({
+                    userId: userId,
+                    username: 'john'
+                });
+            }, 1000);
+        }
+
+        //declara uma function chamada getServices que declara dois paramentros, um e o user, outro paramentro e um callbak(uma function que sera passada por argumento para o getUser)
+        function getServices(user, callback) {
+            console.log(`Get services of ${user.username} from the API.`);
+            //simula uma operação assicrona, usando o setTimeout, simula a operação assicrona de obter os serviços de um usuario por meio de uma API
+            //espera 2 segundos de atraso para executar a callbak function argumento
+            setTimeout(() => {
+                //a callbak function argumento recebe como argumento um array literal anonimo dense, inicializado com 3 serviços, assim a callbak function e invocada
+                callback(['Email', 'VPN', 'CDN']);
+            }, 2 * 1000);
+        }
+
+        //declara uma function chamada getServiceCost que declara dois paramentros, um e o services, outro paramentro e um callbak(uma function que sera passada por argumento para o getUser)
+        function getServicesCost(services, callback) {
+            console.log(`Calculate service costs of ${services}.`);
+            //simula uma operação assicrona, usando o setTimeout, simula a operação assicrona de Calcule o custo do serviço com base nos serviços do servidor.
+            //espera 3 segundo de atraso para executar a callbak function argumento
+            setTimeout(() => {
+                //a callbak function argumento recebe como argumento um produto de uma multiplicação, assim invoca a callbak function
+                callback(services.length * 100);
+            }, 3 * 1000);
+        }
+
+        /**
+         * Veja a seguir as funções de retorno de chamada(callback) aninhadas:
+        */
+
+        //invocando a function getUser passando o primeiro argumento o valor 100, e o segundo argumento uma arrow function anonima de um paramentro chaamdo user, essa sera o callback argumento
+        //obtem usuario de id 100 do banco de dados
+        getUser(100, (user) => {
+            //invocando a function getServices, passando o argumento user que e da callbak passada para o getUser function invocado, e passando como segundo argumento uma arrow function anonima de um paramentro, essa sera a callback passada como argumento
+            //obtendo os serviços do usuario por meio de uma API
+            getServices(user, (services) => {
+                //invocando a function getServicesCost, passando o argumento services que e da callbak passada para o getServices function invocado, e passando como segundo argumento uma arrow function anonima de um paramentro chaamdo cost, essa sera a callback passada como argumento
+                //calcula o custo dos serviços selecionado pelo usuario
+                getServicesCost(services, (cost) => {
+                    console.log(`The service cost is ${cost}`);
+                });
+            });
+        });
+
+        /**
+         * Para evitar esse problema de retorno de chamada(callbakc), o ES6 introduziu as promessas que permitem escrever código assíncrono de maneiras mais gerenciáveis.
+         * 
+         * usando as promises para substituir as callbakc pelas promises, usando a sintaxe do ES6 permitindo escreve codigo assicrono mais gerenciavel
+         * 
+         * Primeiro, você precisa retornar a Promise em cada função:
+        */
+
+        //primeiro operação assincrona e obter o usuario do banco de dados
+        //define uma function chamada getUser que declara um paramentro chamado userId
+        function getUser2(userId) {
+            //retorna uma instancia anonima de uma promise, substitui o argumento callbak
+            return new Promise((resolve, reject) => {
+                //simula operação assincrona de obter um usuario por seuId em um banco de dados
+                console.log('Obter usuario do banco de dados');
+                //espera 1 segundo de atraso
+                setTimeout(() => {
+                    //resolve callback function muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um objeto literal anonimo com duas propriedades
+                    resolve({
+                        userId: userId,
+                        username: 'admin'
+                    });
+                }, 1000);
+            });
+        }
+
+        //segunda operação assincrona e obter os serviços selecionados pelo usuario
+        //declara uma function chamada getServices que declara um paramentro chamado user
+        function getServices2(user) {
+            //a function ira retorna uma instancia de um promise anonima, substituindo a callbak argumento da function getServices
+            return new Promise((resolve, reject) => {
+                //simula a operação assincrona de obter os serviços selecinados por um usuario
+                console.log(`Get the services of ${user.username} from the API.`);
+                //espera 2 segundo de atraso para resolver promise
+                setTimeout(() => {
+                    //resolve callback function argumento do executor callbak, muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um array literal anonimo, inicializado com os serviços que o usuario solicitou, que sera o valor de resultado
+                    resolve(['Email', 'VPN', 'CDN']);
+                }, 2 * 1000);
+            });
+            
+        }
+
+        //terceira operação assicrona e calcula o custo dos serviços que o usuario selecionou
+        //declara uma function chamada getServiceCost que declara um paramentro chamado services
+        function getServicesCost2(services) {
+            //a function ira retorna uma instancia de objeto anonima de uma promise, substituindo o callbak argumento passado para a function getServicesCost
+            return new Promise((resolve, reject) => {
+                //simulação da operação assincrona de calcular o custo dos serviços escolhidos pelo usuario
+                console.log(`Calculate the service cost of ${services}.`);
+                //espera 3 segundos de atraso para resolver a promise
+                setTimeout(() => {
+                    //resolve callback function argumento do executor callbak, muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um valor numerico que sera o valor de resultado para o then método
+                    resolve(services.length * 100);
+                }, 3 * 1000);
+            });
+        }
+
+        /**
+         * Então, você encadeia as promessas:
+        */
+
+        //usando o encadeamento de promesas
+        //Às vezes, você tem várias tarefas assíncronas que deseja executar em sequência. Além disso, você precisa passar o resultado da etapa anterior para a próxima.
+        //aqui encadearemos as promises pois temos três operações assicronas a serem realizadas em sequencia, e o resultado de uma operação e passado para a proxima
+
+        //invocando a function getUser com o argumento 100 para obter a promise
+        //o then método e Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //o argumento passado para o then método e uma callback function que e chamada quando a promise for cumprida com valor
+        //assim quando a promise de operação assicrona de obter usuario no banco de dados for resolvida, ira chamar a promise de obter serviços do usuario, ai quando ela ja for resolvida tambpem ira chamar a promise de calcualar o custo dos serviços e quando ela for resolvida mostra o resultado pelo then método
+        //aqui são promessas encadeadas porque cada then método retorna uma promisse de resultado para a proxima then método encadeado
+        getUser2(100)
+                    .then(getServices2)
+                    .then(getServicesCost2)
+                    .then(console.log);
+
+        /**
+         * O ES2017 introduziu as palavras-chave async/await que se baseiam em promessas, permitindo que você escreva código assíncrono que se pareça mais com código síncrono e mais legível. Tecnicamente falando, o async/await é açúcar sintático para promessas.
+         * 
+         * Se uma função retornar uma promessa, você pode colocar a palavra- chave await(aguardando) na frente da chamada da função, assim:
+
+            let result = await f();
+
+         * O await vai esperar o Promise retorno do f() para resolver. A await palavra-chave só pode ser usada dentro das async funções.
+         * 
+         * O seguinte define uma async função que chama as três operações assíncronas em sequência:
+         * 
+        */
+
+        //declara uma function async(assicrona) chamada de showServiceCost que não declara paramentro
+        async function showServiceCost() {
+            //usando o await palavra chave na frente de functions que retorna promises, a await vai esperar o retorno da promise por meio da function para ser resolvida
+            //as functions que retornam promises são functions que simulam operações assicronas
+
+            //aqui a user varaivel recebera por referencia uma objeto literal anonimo com duas propriedades que a await resolve e obtem resultado, cumprida por valor
+            let user = await getUser2(100);
+            //aqui o services variavel recebera por referencia uma array literal anonimo inicializado com 3 elementos que o await resolve e obtem o valor, cumprida com valor
+            let services = await getServices2(user);
+            //aqui obtem uum valor numerico que a await resolve e obtem o valor, cumprido com valor
+            let cost = await getServicesCost2(services);
+            console.log(`The service cost is ${cost}`);
+        }
+
+        showServiceCost(); 
+
+        /**
+         * Como você pode ver, o código assíncrono agora se parece com o código síncrono.
+         * 
+         * Vamos mergulhar nas palavras-chave async/await.
+        */
+        
+    </script>
+
+</body>
+</html>

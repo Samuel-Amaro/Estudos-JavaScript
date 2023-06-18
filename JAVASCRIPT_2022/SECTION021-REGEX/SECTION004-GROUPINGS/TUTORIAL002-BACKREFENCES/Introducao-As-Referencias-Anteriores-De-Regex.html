@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * BACKREFERENCES(REFERENCIAS ANTERIORES)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre referências anteriores de regex JavaScript e como aplicá-las de forma eficaz.
+         * 
+         * * INTRODUÇÃO ÁS REFERÊNCIAS ANTERIORES DE REGEX JS
+         * 
+         * As referências anteriores permitem que você faça referência aos grupos de captura nas expressões regulares. Tecnicamente falando, backreferences são como variáveis ​​em expressões regulares.
+         * 
+         * Aqui está a sintaxe de uma backreference:
+         
+            \N
+
+         * 
+         * Nesta sintaxe, N é um número inteiro como 1, 2 e 3 que representa o número do grupo de captura correspondente.
+         * 
+         * Suponha que você tenha uma string com a palavra duplicada JavaScript assim:
+        */
+
+        //declara uma constante de bloco chamada s que e inicilizada com uma string literal
+        const s = 'JavaScript JavaScript is awesome';
+
+        /**
+         * E você deseja remover a palavra duplicada (JavaScript) para que a string de resultado seja:
+         
+            'JavaScript is awesome'
+
+         * Para fazer isso, você pode usar uma referência inversa na expressão regular.
+         * 
+         * Primeiro, combine uma palavra:
+         
+            /\w+\s+/
+
+            - o seguinte acima cria uma expressão regular com o seguinte padrão: inicie com um ou mais caracteres de palavra seguida por um ou mais espaços. o padrão usa os quantificadores de abreviação + que e o {n,} que e ganancioso, e as classes de caracters \w(qualquer caractere de palavra), \s(qualquer caractere de espaço). o padrão e uma palavra seguida com um ou mais espaços.
+
+         * Segundo, crie um grupo de captura que capture a palavra:
+
+            /(\w+)\s+/
+
+            - na seguinte expressão regular, temos o seguinte padrão: um grupo de captura que possui a seguinte regra, um padrão que corresponda a um ou mais caracteres de palavra, continuando o padrão, seja seguido de um ou mais espaços.
+
+            - Terceiro, use uma referência anterior(backreference) para fazer referência ao primeiro grupo de captura:
+
+            \(\w+)\s+\1/
+
+            - usando a backreference, a sintaxe \1 referencia o primeiro grupo de captura o (\w+), assim o padrão na expressão regular e formado pelo, grupo de captura, seguido por um ou mais espaços, referencia o primeiro grupo de captura apos os espaços.
+
+         *
+         * Nesse padrão, \1 é uma referência inversa que faz referência ao \w+ grupo de captura ( ).
+         * 
+         * Por fim, substitua a correspondência inteira pelo primeiro grupo de captura usando o String.replace() método:
+        */
+
+        //string a ser utilizada para pesquisa
+        const s1 = 'JavaScript JavaScritp is cool';
+
+        //cria uma expressão regular que possui um padrão, o padrão esta descrito acima
+        const pattern = /(\w+)\s+\1/;
+
+        //usando o método String.replace(regexp, newSubstr), para substituir as correspondencias 
+        //substituir uma substring em uma string por uma nova.
+        //aqui iremos substituir a primeira correspondencia inteira pelo primeiro grupo de captura, usando o método
+        //Primeira correspondecia inteira: JavaScript JavaScript, corresponde ao padrão em um todo
+        //Segunda correspondecia: JavaScript, corresponde ao valor de correspondencia do primeiro grupo de captura.
+        //Ira substituir JavaScript JavaScript por JavaScript
+        //retorna uma nova string com as correspondecias do padrão inteira susbstituidas por primeiro grupo de captura '$1'
+        const result = s.replace(pattern, '$1');
+
+        console.log(result);
+    </script>
+</body>
+</html>
+
+
+

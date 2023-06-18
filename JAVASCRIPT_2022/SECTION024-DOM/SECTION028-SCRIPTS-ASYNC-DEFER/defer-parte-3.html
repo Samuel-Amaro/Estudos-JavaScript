@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!-- 
+        - o atributo defer especificado na tag script diz ao navegador para não esperar pelo script. o script e carregado em segundo plano, enquanto isso o dom e compilado e construido e renderizado, apos isso o script e executado quando o DOM esta totalmente construido.
+        - o script long.js e small.js são baixado em paralelo pelo navegador para melhorar o desempenho da pagina.
+        - se o small.js for baixado primeiro ele so podera ser executado apos long.js pois a ordem relativa especifica pelo codigo fonte, e mantida, se os scripts estiverem com defer, o atributo defer não bloquea a renderização e mantem a ordem relativa, assim mesmo small.js terminando primeiro tem que espera por long.js e ser executado so depois dele.
+    -->
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js" defer>
+        /**
+         * * Os scripts adiados(defer) mantêm sua ordem relativa, assim como os scripts regulares.
+         * 
+         * Digamos que temos dois scripts adiados: o long.js e o small.js:
+         * 
+         * Os navegadores verificam a página em busca de scripts e os baixam em paralelo, para melhorar o desempenho. Portanto, no exemplo acima, ambos os scripts são baixados em paralelo. O small.js provavelmente termina primeiro.
+         * 
+         * …Mas o defer atributo, além de dizer ao navegador “não bloquear”, garante que a ordem relativa seja mantida. Portanto, mesmo que seja small.js carregado primeiro, ele ainda espera e é executado após a long.js execução.
+         * 
+         * Isso pode ser importante para casos em que precisamos carregar uma biblioteca JavaScript e depois um script que depende dela.
+         * 
+         * * O defer atributo é apenas para scripts externos o defer atributo é ignorado se a <script> tag não tiver src.
+        */
+    </script>
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/small.js" defer></script>
+
+</body>
+</html

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <label for="one">Selecione aqui e clique no botão</label>
+    <input id="input" type="text" style="width: 200px;" value="Selecione aqui e clique no botão"/>
+    <br/>
+    <button id="button">Enrole a seleção em estrelas *...*</button>
+
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO: MODIFICANDO A SELEÇÃO
+         * 
+         * Para modificar o conteúdo da seleção, podemos usar o input.setRangeText() método. Claro, podemos ler selectionStart/End e, com o conhecimento da seleção, alterar a substring correspondente de value, mas setRangeText é mais poderoso e geralmente mais conveniente.
+         * 
+         * Esse é um método um tanto complexo. Em sua forma mais simples de um argumento, ele substitui o intervalo selecionado pelo usuário e remove a seleção.    
+         * 
+         *  Por exemplo, aqui a seleção do usuário será encapsulada por *...*:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        button.onclick = () => {
+            //posição inicial e final da seleção forem iguais não houve seleção ainda
+            if(input.selectionStart == input.selectionEnd) {
+                return; // nada está selecionado
+            }
+
+            //extraimos o texto selecionado 
+            let selected = input.value.slice(input.selectionStart, input.selectionEnd);
+            //substitui o intervalo de texto pelo novo texto passado por argumento
+            //substitui o intervalo de texto da seleção realizada. por novo texto passado por argumento
+            input.setRangeText(`*${selected}*`);
+        };
+
+    </script>
+</body>
+</html>

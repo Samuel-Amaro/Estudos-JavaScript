@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de promessa personalizada</title>
+</head>
+<body>
+    <script>
+        //Aqui, estamos passando dois paramentros para uma função personalizada - uma mensagem com a qual fazer algo e o intervalo de tempo a decorrer antes de fazer a coisa. Dentro da função, retornamos um novo Promiseobjeto - invocar a função retornará a promessa que desejamos usar.
+        function timeoutPromisse(message, interval) {
+            return new Promise(function(resolve, reject){
+                //Em primeiro lugar, verificamos se a mensagem é apropriada para ser alertado. Se for uma string vazia ou não for uma string, rejeitamos a promessa com uma mensagem de erro adequada.
+                if(message === '' || typeof message !== 'string') {
+                    reject('A mensagem está vazia ou não é uma string');
+                //A seguir, verificamos se o intervalo é um valor de intervalo apropriado. Se for negativo ou não for um número, rejeitamos a promessa com uma mensagem de erro adequada
+                }else if(interval < 0 || typeof interval !== 'number') {
+                    reject('O intervalo é negativo ou não é um número');
+                }else{
+                    //Finalmente, se os parâmetros parecerem OK, resolvemos a promessa com a mensagem especificada após o intervalo especificado ter passado usando setTimeout().
+                    setTimeout(function() {
+                        resolve(message);
+                    }, interval);
+                }
+            });
+        }
+
+        //Desde que a timeoutPromise()função retorna um Promise, podemos cadeia .then(), .catch()etc. para ele fazer uso de sua funcionalidade. Vamos usá-lo agora - substitua o timeoutPromiseuso anterior por este:
+        timeoutPromisse('Hello there!', 1000).then(function(message) {
+            alert(message);
+        }).catch(function(e) {
+            console.log('Error: ' + e)
+        });
+
+        //Quando você salva e executa o código como está, após um segundo, você receberá um alerta de mensagem. Agora tente definir a mensagem como uma string vazia ou o intervalo como um número negativo, por exemplo, e você poderá ver a promessa rejeitada com as mensagens de erro apropriadas! Você também pode tentar fazer outra coisa com a mensagem resolvida, em vez de apenas alertá-la.
+    </script>
+</body>
+</html>

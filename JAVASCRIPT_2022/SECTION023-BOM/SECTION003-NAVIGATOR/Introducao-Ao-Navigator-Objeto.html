@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * NAVIGATOR(JAVASCRIPT) - NAVEGADOR
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o objeto JavaScript Navigator e suas propriedades.
+         * 
+         * * INTRODUÇÃO AO NAVIGATOR OBJETO JS
+         * 
+         * O JavaScript Navigator fornece informações sobre o navegador da Web e seus recursos. Você pode fazer referência ao objeto Navigator por meio da window.navigator propriedade somente leitura.
+         * 
+         * O Navigator objeto possui propriedades que transmitem as informações do navegador. Por exemplo, o userAgent é uma propriedade do window.navigator objeto. É uma longa string que identifica o navegador da web.
+         * */
+
+        //acessando a propriedade userAgent do objeto Navigator, que e referenciado pela propriedade window.navigator no objto global window
+        //a propriedade acesada do navigator objeto identifica o navegador da web
+        //Navigator.userAgent
+        console.log(window.navigator.userAgent);
+
+        /**
+         * Observe que o userAgent pode ser um pouco diferente, dependendo da versão do Google Chrome.
+         * 
+         * Os diferentes navegadores da Web fornecem recursos específicos que não são padronizados. É melhor não usar o userAgent para identificar o navegador da Web porque alguns navegadores da Web permitem que os usuários modifiquem o userAgent para fingir que estão usando um navegador diferente.
+         * 
+         * Por exemplo, você pode usar o seguinte código para detectar se o navegador da Web atual é o Internet Explorer:
+         * */
+
+        if(navigator.userAgent.includes('MSIE')) {
+            //IE, use recursos específicos do IE
+        }else{
+            //não IE
+        }
+
+        /**
+         * Para usar um recurso específico de um navegador da Web, você pode usar a detecção de recursos. Por exemplo:
+        */
+
+        if(typeof window.addEventListener === 'function') {
+            //vamos usar addEventListener
+        }else{
+            //addEventListener não é suportado, use outra maneira
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler attribute</title>
+    <style>
+      button {
+        margin: 10px
+      };
+    </style>
+  </head>
+  <body>
+
+    <button>Change color</button>
+    
+    <script>
+        
+      //constante que tem o elemento <button> selecionado do documento HTML5
+      const btn = document.querySelector('button');
+
+      //função JS que retorna um valor aleatorio
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      //função nomeada que faz referencia ao manipulador de evento
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+
+      //registrando o manipulador de eventos no elemento <button>
+      btn.addEventListener('click', bgChange);
+    
+    </script>
+
+  </body>
+</html>

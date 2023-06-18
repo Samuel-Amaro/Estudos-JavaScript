@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * IMPLICIT try...catch (IMPLICITO TRY...CATCH)
+         * 
+         *  O código de um executor de promessa e manipuladores de promessa tem um "invisível try..catch" ao seu redor. Se ocorrer uma exceção, ela será detectada e tratada como uma rejeição.
+         * 
+         * Por exemplo, este código:
+        */
+
+        new Promise(function executor(resolve, reject) {
+            //trabalho da promise e lancar um error
+            //a function executora da promise tem um invisivel try...catch ao seu redor
+            //se ocorrer uma exceção ela sera dectada e trada como uma rejeição
+            throw new Error("Whoops!");
+        })
+        //anexa um .catch manipulador com objetivo de so capturar o objeto error da promisse rejeitada
+        .catch(alert); //Error: Whoops!
+
+
+        /**
+         * …Funciona exatamente da mesma forma que isto:
+        */
+
+        new Promise(function executor(resolve, reject) {
+            //promise e rejeitada instantanemente com um objeto error
+            reject(new Error("Whoops!"));
+        })
+        //anexa um .catch manipulador com objetivo de so capturar o objeto error da promisse rejeitada
+        .catch(alert); //Error: Whoops!
+
+        /**
+         * O "invisível try..catch" ao redor do executor automaticamente pega o erro e o transforma em promessa rejeitada.
+         * 
+         * Isso acontece não apenas na função executora, mas também em seus manipuladores. Se estivermos throw dentro de um .then manipulador, isso significa uma promessa rejeitada, então o controle salta para o manipulador de erros mais próximo.
+        */
+
+        new Promise((resolve, reject) => {
+            //promise e resolvida instantaneamente com o valor "ok"
+            resolve("ok");
+        })
+        //anexa manipulador .then para consumir o resultado de uma promise resolvida
+        .then((result) => {
+            //lança uma exceção de dentro do manipulador
+            //o implicito try.catch ao redor do manipulador automaticamente pega o erro e o transforma em promisse rejeitada com o objeto error
+            throw new Error("whoops!"); //promise rejeitada
+        })
+        //anexa manipulador .catch para capturar o objeto error de promises rejeitadas
+        .catch(alert); //Error: whoops!
+
+        /**
+         * Isso acontece para todos os erros, não apenas aqueles causados ​​pela throw instrução. Por exemplo, um erro de programação:
+        */
+
+        new Promise((resolve, reject) => {
+            //resolve a promisse instantaneamente com o valor "ok"
+            resolve("ok");
+        })
+        //anexa um manipulador .then para consumir o resultado da promise resolvida
+        .then((result) => {
+            //o implicito try.catch ao redor do manipulador automaticamente pega o erro lançado ou erro de progrmação e o transforma em promisse rejeitada com o error
+            blabla(); //erro de programação, chama function que não existe
+        })
+        //anexa manipulador .catch para capturar erros ou o objeto error de promises rejeitadas
+        .catch(alert); //ReferenceError: blabla is not defined
+
+        /**
+         * O final .catch não apenas captura rejeições explícitas, mas também erros acidentais nos manipuladores acima.
+        */
+    </script>
+</body>
+</html>

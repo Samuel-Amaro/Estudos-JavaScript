@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Metodo Pop Com Objetos do Tipo Array</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO O MÉTODO JS POP() COM OBJETOS DO TIPO ARRAY()
+         * 
+         * O pop() método é genérico. Portanto, você pode usar o call() ou apply() para chamar o pop() método no objeto do tipo array. Internamente, o pop() usa a length propriedade do objeto tipo array para determinar o último elemento a ser removido.
+        */
+
+
+        //declara um objeto literal com propriedades e metodos, este objeto literal e atribuido a variavel greetings por referencia, assim a variavel referencia greetings
+        //declara um objeto que seja parecido com um do tipo array, objeto do tipo array com propriedades e metodos parecidos
+        let greetings = {
+            //declara propriedades do objeto usando sintaxe chave : valor
+            //propriedades do objeto tipo array
+            0: 'Hi',
+            1 : 'Hello',
+            length: 2,
+            //declara um metodo do objeto usando a sintaxe ES6, ocultando palavra chave function e o :, metodo se chamada removeLast sem declarar paramentro
+            removeLast() {
+                //utilizando o metodo call da instancia de objeto do tipo function nomeada pop, podemos acessar o pop metodo por meio do call utilizando um novo this valor passando argumentos por meio de call
+                //aqui acessaremos o pop metodo com o this valor dentro do escopo do objeto, aqui o this valor e o proprio  objeto literal, como o pop metodo não precisa de argumentos e o removeLast metodo não declarou argumentos não passamos argumentos para o call metodo 
+                //o metodo pop e responsavel por remover o ultimo elemento do this valor especificado pelo call metodo
+                //o removeLast retornara o elemento removido do objeto array
+                //usando o call metodo do tipo da instancia de função pop para poder ligar o pop metodo ao objeto literal declarado aqui
+                //aqui o this sera o objeto literal que sera o chamador do metodo pop que removera a ultima propriedade do objto pois o objeto e do tipo array
+                return [].pop.call(this);
+            }
+        }; 
+
+        //chamado o metodo removeLast para remover o ultimo elemento do objeto do tipo array
+        //neste caso o ultimo elemento e a propriedade 2 com valor  'Howdy'
+        let greeting = greetings.removeLast();
+
+        console.log(`elemento removido = ${greeting}`);
+        console.log(greetings);
+
+        /**
+         * Como funciona.
+         
+          - Primeiro, defina o greetings objeto que tem:
+
+          - Quatro propriedades 0, 1, 2 e comprimento.
+
+          - Um método removeLast() que usa o call() método de uma array para invocar o pop() método.
+
+          - Terceiro, imprima o elemento removido ( greeting) e  greetings objeto para o console 
+
+         * * RESUMO
+         * 
+         * Use o pop() método para remover o último elemento de uma array.
+         * 
+         * Use o call()  ou apply()para chamar o pop() método em um objeto do tipo array.
+        */
+
+    </script>
+</body>
+</html>

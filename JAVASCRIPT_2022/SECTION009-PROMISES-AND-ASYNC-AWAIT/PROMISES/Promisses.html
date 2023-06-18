@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promisses</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * PROMISSES(PROMESSAS) JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre as promessas de JavaScript e como usá-las de forma eficaz.
+         * 
+         * * POR QUE O JS PROMETE(PROMISSE)
+         *
+         * O exemplo a seguir define uma função getUsers() que retorna uma lista de objetos de usuário:
+        */
+
+        //declara uma function chamada getUsers, essa function não declara paramentro
+        //uma function e uma instancia de objeto do tipo do tipo function
+        function getUsers() {
+            //essa function ira retornar um array literal dense anonimo inicializado com 2 objetos literal usando sintaxe de objeto literal
+            return [
+                //declara um objeto literal anonimo usando sintaxe de objeto literal
+                {
+                    //declara propriedades do objeto literal usando sintaxe chave : valor
+                    username: 'john', email: 'john@test.com'
+                },
+                {
+                    username: 'jane', email: 'jane@test.com'
+                }
+            ];
+        }
+
+        /**
+         * Cada objeto de usuário tem duas propriedades username e email.
+         * 
+         * Para encontrar um usuário por nome de usuário, você pode usar a seguinte findUser() função:
+        */
+        
+        //declara uma function chamada findUser que declara uma paramentro chamado username
+        function findUser(username) {
+            //retorna array literal anonimo com objetos literais, o array sera referenciado por constante users
+            const users = getUsers();
+            //retorna o primeiro elemento que satisfaça um condição determinada por uma function callbak especifica
+            //aqui a callbak e um arrow function anonima que possui somente um paramentro chamado user, que e o elemento do array avalido no momento, pelo find metodo
+            //elemento que satisfazer condição determinada pelo o find metodo retorna true e o find metodo e interropido e retorna o elemento do array
+            //a condição aqui e que argumento passado o username exista em algum elemento do array
+            const user = users.find((user) => user.username === username);
+            return user;
+        }
+
+        /**
+         * Na findUser() função:
+
+            - Primeiro, obtenha uma array de usuário chamando a getUsers() função.
+
+            - Segundo, encontre o usuário com um específico username usando o find() método do Array objeto.
+
+            - Terceiro, retorne o usuário correspondente.
+
+         * 
+         * Veja a seguir o código completo para encontrar um usuário com o nome de usuário 'john':
+        */
+
+        //invoca o metodo que procura um usuario com o argumento 'john' e retorna o objeto literal dele
+        //o codigo para o findUser método e sincrono e bloqueante, primeiro tem que chamar o findUser passar argumento, ai o findUser chama o metodo getUser depois e que retorna o elemento que procuro
+        //então e uma tarefa atras da outra de forma sequencial se uma tarefa travar a outra não e executada
+        console.log(findUser('john'));
+
+        /**
+         * O código na findUser() função é síncrono e bloqueante. A findUser()função executa a getUsers() função para obter a lista de usuários, usa-a para localizar um usuário e retorna o usuário correspondente.
+         * 
+         * Na prática, a getUsers() função pode acessar um banco de dados ou chamar uma API para obter a lista de usuários. Portanto, a getUsers()função terá um atraso.
+         * 
+         * Para simular o atraso, podemos usar a setTimeout() função. Por exemplo:
+        */
+
+        //usando a setTimeout function para simular um atraso da function getUsers, mostrando como que este atraso afeta a function findUser, porque a findUser depende da getUsers
+        //declara uma function chamada getUsers2, essa function não declara paramentro
+        //uma function e uma instancia de objeto do tipo do tipo function
+        function getUsers2() {
+            //declara um array literal dense sem inicializalo e e atribuido por referencia a variavel users
+            let users = [];
+            //usando a function setTimeout para gerar o atraso, a setTimeout ira esperar 1 segundo para atribuir um novo array e inicializado e logo depois para o atribuilo a users variavel e logo depois poder retorna a referencia do array inicializado
+            setTimeout(() => {
+                users = [
+                    {
+                    username: 'john', email: 'john@test.com'},
+                {username: 'jane', email: 'jane@test.com'}
+                ];
+            }, 1000);
+            //aqui vai retorna um array vazio pois o codigo e sincrono, o mecanimo js não ira esperar o setTimeout, o atraso de 1 segundo para inicializar o novo array e atribuir a variavel e logo depois, retorna o array 
+            //o mecanismo JS não espera e assim retorna o array vazio
+            return users;
+        }
+
+        /**
+         * Como funciona.
+
+            - Primeiro, defina um array users e inicialize seu valor com um array vazio.
+
+            - Segundo, atribua uma array de usuários à users variável dentro do retorno de chamada da setTimeout() função.
+
+            - Terceiro, retorne os usuários.
+
+         * 
+         * O getUsers() não funcionará corretamente e sempre retornará uma array vazia. Portanto, a findUser()função não funcionará como esperado:
+        */
+
+        //o metodo a seguir demostra o problema de codigo assincrono e bloqueante, que necessita que uma tarefa anterior seja concluida para que a proxima possa ser executada
+        function findUser2(username) {
+            //isso não funciona como esperado
+            //o metodo retorna um array vazio, pois o mecanismo JS não espera o atraso do setTimeout para inicializar o array
+            const users = getUsers2();
+            //por users não ter o array com os elementos o find metodo não e executadado como esperado 
+            //não tem como procurar elemento em um array vazio
+            //asssim find retorna undfined
+            const user = users.find((user) => user.username === username);
+            //o metodo retorna undefined
+            return user;
+        }
+
+        console.log(findUser2('john'));
+
+        /**
+         * Como getUsers() retorna um array vazio, o método find() retorna undefined.
+         * 
+         * O desafio é como acessar o users retorno da getUsers() função após um segundo. Uma abordagem clássica é usar o callback.
+         * 
+         * * COMO USAR RETORNOS DE CHAMADA(CALLBACKS)
+         * 
+         * O exemplo a seguir adiciona um argumento de retorno de chamada às funções getUsers() and findUser():
+        */
+
+        //a function getUsers2 declara um paramentro chamdo callback que sera um function callback
+        function getUsers3(callbakc) {
+            let users = [];
+            //usando a function setTimeout para gerar o atraso, a setTimeout ira esperar 1 segundo para atribuir um novo array e inicializado e logo depois para o atribuilo a users variavel e logo depois poder retorna a referencia do array inicializado
+            setTimeout(() => {
+                //executa invoca a function callback passada por argumento, passando o array literal dense anonimo inicializado com dois elementos como argumento para a propria callback
+                callbakc([
+                    {username: 'john', email: 'john@test.com'},
+                    {username: 'jane', email: 'jane@test.com'}
+                ]);
+            }, 1000);
+        }
+
+        //o metodo a seguir demostra o uso de callbacks para resolver o problema de codigo sincrono e bloqueante
+        //a function declara dois paramentros um chamado username, o outro e callback
+        function findUser3(username, callback) {
+            //chamando invocando a function getUsers fornecendo como argumento um arrow function anonima que declara um paramentro chamado name, esse argumento e uma callback
+            getUsers3((users) => {
+                //usando o find metodo procura o elemento no array que tenha o user argumento como nome de usuario, o find metodo quando encontra o elemento que satisfaça condiçaõ retorna true, interrope o find metodo e retorna o elemento
+                const user = users.find((user) => user.username === username);
+                //o elemento econtrado e passado como argumento para a invocação da function callbak de argumento do metodo findUser3
+                callback(user);
+            });
+        }
+
+        //chama invoca o método findUser passando dois argumentos o primeiro e o elemento que procuro no array o segundo argumento e a referncia a functin console.log que e passada como um argumento para o callbak parametro
+        findUser3('john', console.log);
+
+        /**
+         * Neste exemplo, a getUsers() função aceita uma função de retorno de chamada(callbakc) como argumento e a invoca com a lista de usuários dentro da setTimeout() função. Além disso, a findUser() função aceita uma função de retorno de chamada que processa o usuário correspondente.
+         * 
+         * A abordagem de retorno de chamada(callback) funciona muito bem, mas torna o código difícil de seguir. Além disso, adiciona complexidade às funções com argumentos de retorno de chamada(Callback).
+         * 
+         * Se o número de funções aumentar, você pode acabar com o problema do inferno de retorno de chamada(callback). Para resolver isso, JavaScript vem com o conceito de promessas.
+        */
+    </script>
+</body>
+</html>

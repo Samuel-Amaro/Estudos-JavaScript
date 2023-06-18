@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0;">
+
+    <canvas id="canvasElem" width="100" height="80" style="border: 1px solid;"></canvas>
+
+    <input type="button" value="Submit" onclick="submit()"/>
+
+    <script type="text/javascript">
+        /**
+         * * ENVIANDO UM FORMULÁRIO COM DADOS DE BLOB   
+         * 
+         * Como vimos no capítulo Fetch , é fácil enviar dados binários gerados dinamicamente, por exemplo, uma imagem, como Blob. Podemos fornecê-lo diretamente como fetch parâmetro body.
+         * 
+         * Na prática, porém, muitas vezes é conveniente enviar uma imagem não separadamente, mas como parte do formulário, com campos adicionais, como “nome” e outros metadados.
+         * 
+         * Além disso, os servidores geralmente são mais adequados para aceitar formulários codificados em várias partes, em vez de dados binários brutos.
+         * 
+         * Este exemplo envia uma imagem de <canvas>, juntamente com alguns outros campos, como um formulário, usando FormData:
+        */
+
+        //a cada mover do moouse, manipulador do evento e acionado
+        canvasElem.onmousemove = function(e) {
+            let ctx = canvasElem.getContext('2d');
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.stroke();
+        };
+
+        async function submit() {
+            
+            let imageBlob = await new Promise(resolve => canvasElem.toBlob(resolve, 'image/png')); 
+
+            //objeto formData é o objeto para representar os dados do formulário HTML.
+            //Se o elemento HTML form for fornecido, ele captura automaticamente seus campos.
+            let formData = new FormData();
+            //metodo formData.append(name, valor) adicione um campo de formulário com o dado name e value,
+            formData.append("firstName", "John");
+            //metodo formData.append(name, blob, fileName)– adicione um campo como se fosse <input type="file">, o terceiro argumento fileName define o nome do arquivo (não o nome do campo do formulário), como se fosse um nome do arquivo no sistema de arquivos do usuário,
+            formData.append("image", imageBlob, "image.png");
+
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            //passamos para o fetch como primeiro argumento o url para fazer a request, e o segundo argumento, e um objeto options, com informações adicionais para o request
+            let response = await fetch('https://javascript.info/article/fetch/post/image', {
+                //objeto com paramentros opcionais para o request header
+                method: 'POST', //method HTTP
+                body: imageBlob //corpo da request, um objeto blob, os dados a serem enviados
+            });
+
+            //o metodo reponse.json() obtem corpo do response objeto, retorna uma promise que resolve e analisa a reposta como JSON
+            let result = await response.json();
+
+            alert(result.message);
+        }
+
+        /**
+         * Observe como a imagem Blob é adicionada:
+         * 
+            formData.append("image", imageBlob, "image.png");
+
+         * 
+         * É o mesmo que se estivesse <input type="file" name="image"> no formulário, e o visitante enviasse um arquivo chamado "image.png"(3º argumento) com os dados imageBlob(2º argumento) de seu sistema de arquivos.
+         * 
+         * O servidor lê os dados do formulário e o arquivo, como se fosse um envio de formulário normal
+        */
+    </script>
+
+</body>
+</html>

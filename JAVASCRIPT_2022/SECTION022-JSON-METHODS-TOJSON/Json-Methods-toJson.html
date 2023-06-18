@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * JSON METHODS, toJSON
+         * 
+         * Digamos que temos um objeto complexo e gostaríamos de convertê-lo em uma string, enviá-lo por uma rede ou apenas enviá-lo para fins de registro.
+         * 
+         * Naturalmente, essa string deve incluir todas as propriedades importantes.
+         * 
+         * Podemos implementar a conversão assim:
+        */
+
+        //declara um objeto literal anonimo que e atribuido por referencia a varaivel user
+        let user = {
+            //declara propriedades usando sintaxe chave : valor
+            name: "John",
+            age: 30,
+            //declara uma método usando sintaxe do ES6 sem precisar usar palavra-chave function e dois pontos
+            toString() {
+                //o método retorna uma string literal 
+                return `{name: "${this.name}", age: ${this.age}}`;
+            }
+        }
+        //ao tentarmos acessar o objeto referenciado pela varaivel user, o método toString e invocado internamente e retorna uma string literal
+        console.log(user);
+
+        /**
+         * Mas no processo de desenvolvimento, novas propriedades são adicionadas, propriedades antigas são renomeadas e removidas. Atualizar isso toString toda vez pode se tornar uma dor. Poderíamos tentar fazer um loop sobre as propriedades nele, mas e se o objeto for complexo e tiver objetos aninhados nas propriedades? Também precisaríamos implementar a conversão deles.
+         * 
+         * Felizmente, não há necessidade de escrever o código para lidar com tudo isso. A tarefa já foi resolvida.
+        */
+    </script>
+</body>
+</html>

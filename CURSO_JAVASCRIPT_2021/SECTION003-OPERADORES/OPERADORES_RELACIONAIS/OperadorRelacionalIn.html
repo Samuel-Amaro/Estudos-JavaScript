@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores</title>
+</head>
+<body>
+    
+    <h2>Operadores Relacionais</h2>
+
+    <script>
+       /**
+        * 
+        * * OPERADORES RELACIONAIS
+        * 
+        * Um operador relacional compara seus operando e retorna um valor booleano baseado em se a comparação é verdadeira.
+        * 
+        * * OPERADOR in(dentro)
+        * 
+        * O operador in retorna verdadeiro se a propriedade especificada estiver no objeto especificado. A sintaxe é:
+
+            nomePropriedadeOuNumero in nomeObjeto;
+
+        * 
+        * onde nomePropriedadeOuNumero é uma string ou uma expressão numérica que representa um nome de propriedade ou um índice de um array, e nomeObjeto é o nome de um objeto.
+        * 
+        * Os exemplos a seguir mostram alguns usos do operador in.
+        * */ 
+
+        //Arrays
+        //Cria um objeto de tipo array, com os seguintes elementos inicializaveis no array
+        var arvores = new Array("pau-brasil", "loureiro", "cedro", "carvalho", "sicômoro");
+
+        //verifica se o indice 0 existe no array
+        //retorna verdadeiro
+        if(0 in arvores) {
+            console.log("O INDICE 0 EXISTE NO ARRAY. O INDICE 0 POSSUI O VALOR: ", arvores[0]);
+        }
+        //verifica se o indice 3 existe no array
+        //retorna verdadeiro
+        if(3 in arvores) {
+            console.log("O INDICE 3 EXISTE NO ARRAY. O INDICE 3 POSSUI O VALOR: ", arvores[3]);
+        }
+        //verifica se o indice 6 existe no array
+        //retorna falso
+        if(6 in arvores) {
+            console.log("O INDICE 6 EXISTE NO ARRAY. O INDICE 6 POSSUI O VALOR: ", arvores[6]);
+        }else{
+            console.log("O INDICE 6 NÃO EXISTE NO ARRAY.");
+        }
+
+        //verifica se o valor "cedro" esta no array arvores
+        //retorna falso (você deve especificar o número do índice,
+        //não o valor naquele índice)
+        if("cedro" in arvores) {
+            //isso não faz nada
+        }
+
+        //verifica se a propriedade existe no objeto array
+        //retorna verdadeiro (length é uma propriedade de Array)
+        if("length" in arvores) {
+            console.log("A PROPRIEDADE length existe no ",typeof(arvores) ," arvores");
+        }
+
+        //OBJETOS PREDEFINIDOS
+        //verifica se a propriedade PI existe no objeto Math
+        //retorna verdadeiro
+        if("PI" in Math) {
+            console.log("PROPRIEDADE PI EXISTE NO ", typeof(Math), " Math");
+        }
+
+        //cria um objeto de tipo string
+        var minhaString = new String("coral");
+
+        //verifica se a propriedade "length" existe no objeto minhaString
+        //retorna verdadeiro
+        if("length" in minhaString) {
+            console.log("PROPRIEDADE length EXISTE NO: ", typeof(minhaString), " minhaString");
+        }
+
+        //OBJETOS PERSONALIZADOS
+
+        //CRIA UM OBJETO PERSONALIZADO USANDO O MODELO DE INICIALIADOR DE OBJETOS, PARA CRIAR UM OBJETO COM AS SEGUINTE PROPRIEDADES, INICIALIZA UM OBJETO COM A SEGUINTE PROPRIEDADES E VALORES DEFINIDOS
+        var meuCarro = {
+            marca: "Honda",
+            modelo: "Accord",
+            ano: 1998
+        };
+
+        //verifica se a propriedade "marca" existe no objeto meuCarro
+        //retorna verdadeiro
+        if("marca" in meuCarro) {
+            console.log("A PROPRIEDADE marca EXISTE no: ", typeof(meuCarro), " meuCarro");
+        }
+
+        //verifica se a propriedade "modelo" existe no objeto meuCarro
+        //retorna verdadeiro
+        if("modelo" in meuCarro) {
+            console.log("A PROPRIEDADE modelo EXISTE no: ", typeof(meuCarro), " meuCarro");
+        }
+
+    </script>
+</body>
+</html>

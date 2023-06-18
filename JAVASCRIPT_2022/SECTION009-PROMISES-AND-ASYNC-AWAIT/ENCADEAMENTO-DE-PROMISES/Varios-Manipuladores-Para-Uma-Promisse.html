@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipuladores para um promise</title>
+</head>
+<body>
+
+    <h2>Manipuladores(handlers) para uma unica promise</h2>
+
+    <p>A <b>imagem</b> a seguir ilustra uma promessa que tem vários manipuladores:</p>
+
+    <img src="JavaScript-Promise-Chaining-multiple-handlers.png" alt="imagen de manipualdor de promise">
+
+    <p>Na prática, você raramente usará vários manipuladores para uma promessa.</p>
+
+    <script>
+
+        /**
+         * * VÁRIOS MANIPULADORES(HANDLERS) PARA UMA PROMISE
+         * 
+         * Quando você chama o then() método várias vezes em uma promessa, não é o encadeamento de promessas. Por exemplo:
+        */
+
+        //declarando uma nova instancia de objeto de promise que recebe como argumento em seu construtor uma callback function anonima conhecida como executora, que declara dois paramentros chamados resolve e reject que são callbakcs que mudam o estado da promisse
+        //a promisse e atribuida a variavel p por referencia
+        //cria uma nova instancia de objeto promise invocando o construtor da class Promise e usando o new operador
+        let p = new Promise((resolve, reject) => {
+            //o codigo abaixo e uma operação assincrona ou simula uma operação a ser executa(encapsulada) pela promisse
+            //a setTimeout espera cerca de 3 segundos antes de executar sua callbakc
+            setTimeout(() =>{
+                //a resolve function callbak resolve a promise, mudando seu estado de pendente para comprida com um valor, no caso resolve a promisse para o numero 10
+                //o argumento 10 e o valor
+                resolve(10);
+            }, 3 * 100);
+        });
+
+        //exemplo a seguir não e encademanto de promessas
+
+        //exemplo de um manipulador de promise que não tem relacionamento com os outros then métodos, são executado independetemente e não passam resultado de um para o outro
+        //usando o método then 
+        //Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //a callbak argumento passado para o the método e executado assim que a promise e resolvida - mudar seu estado
+        //o p variavel referencia uma promisse assim podemos encadear um método then na promisse retornada
+        p.then((result) => {
+            //resultado da promisse resolvida
+            console.log(result); //10
+            //retorna o valor da promisse resolvida multiplicado por dois
+            return result * 2;
+        });
+        
+        //exemplo de um manipulador de promise que não tem relacionamento com os outros then métodos, são executado independetemente e não passam resultado de um para o outro
+        //usando método then, encadeado na promisse referenciada por p variavel
+        p.then((result) => {
+            //resultado da promisse resolvida
+            console.log(result); //10
+            //retorna um valor
+            return result * 3;
+        });
+        
+        //exemplo de um manipulador de promise que não tem relacionamento com os outros then métodos, são executado independetemente e não passam resultado de um para o outro
+        //usando método then, encadeado na promisse referenciada por p variavel
+        p.then((result) => {
+            //resultado da promisse resolvida
+            console.log(result); //10
+            //retorna um valor
+            return result * 4;
+        });
+
+        /**
+         * Neste exemplo, temos vários manipuladores para uma promessa. Esses manipuladores não têm relacionamentos. Além disso, eles são executados independentemente e não passam o resultado de um para outro como a cadeia de promessas acima.
+        */
+    </script>
+</body>
+</html>

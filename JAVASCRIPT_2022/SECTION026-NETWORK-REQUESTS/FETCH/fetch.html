@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * FETCH(BUSCAR)
+         * 
+         * JavaScript pode enviar solicitações de rede para o servidor e carregar novas informações sempre que necessário.
+         * 
+         * Por exemplo, podemos usar uma solicitação de rede para:
+         * 
+            * Envie um pedido,
+            * 
+            * Carregar informações do usuário,
+            * 
+            * Receba as últimas atualizações do servidor,
+            * 
+            * …etc.
+            * 
+         * …E tudo isso sem recarregar a página!
+         * 
+         * Existe um termo abrangente “AJAX” (abreviado Asynchronous JavaScript A and X ML ) para solicitações de rede de JavaScript. No entanto, não precisamos usar XML: o termo vem de tempos antigos, é por isso que essa palavra está lá. Você já deve ter ouvido esse termo.
+         * 
+         * Existem várias maneiras de enviar uma solicitação de rede e obter informações do servidor.
+         * 
+         * O fetch()método é moderno e versátil, então vamos começar por ele. Não é suportado por navegadores antigos (pode ser polyfilled), mas muito bem suportado entre os modernos.
+         * 
+         * A sintaxe básica é:
+         
+            let promise = fetch(url, [options]);
+
+            * url– o URL para acessar. 
+            *
+            * options– parâmetros opcionais: método, cabeçalhos etc.
+            * 
+         * Sem opções, esta é uma solicitação GET simples, baixando o conteúdo da url.
+         * 
+         * O navegador inicia a solicitação imediatamente e retorna uma promessa que o código de chamada deve usar para obter o resultado.
+         * 
+         * Obter uma resposta(response) geralmente é um processo de duas etapas.
+         * 
+         * * Primeiro, o promise, retornado por fetch, resolve com um objeto da classe Response integrada assim que o servidor responde com cabeçalhos(headers).
+         * 
+         * Nesta fase podemos verificar o status do HTTP, para ver se foi bem sucedido ou não, verificar os cabeçalhos(headers), mas ainda não temos o corpo(body).
+         * 
+         * A promessa é rejeitada se fetch não for possível fazer a solicitação HTTP, por exemplo, problemas de rede, ou se não houver tal site. Os status HTTP anormais, como 404 ou 500, não causam erro.
+         * 
+         * Podemos ver o status HTTP nas propriedades de resposta(response objeto):
+         * 
+            * status– Código de status HTTP, por exemplo, 200.
+            * 
+            * ok – boolean, true se o código de status HTTP for 200-299.
+            * 
+         * Por exemplo: 
+        */
+
+        //envia uma solicitação de rede para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+        let response = await fetch(url);
+
+        //propriedade ok do objeto reponse
+        if(response.ok) { //se HTTP-status e 200-299
+            // obtém o corpo da resposta (o método explicado abaixo)
+            let json = await response.json();
+        }else{
+            //acessa propriedade response.status para codigo de status do HTTP
+            alert("HTTP-Error: " + response.status);
+        }
+
+
+    </script>
+
+</body>
+</html>

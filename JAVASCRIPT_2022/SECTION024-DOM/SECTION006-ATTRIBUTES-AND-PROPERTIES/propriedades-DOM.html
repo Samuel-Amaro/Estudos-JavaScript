@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * PROPRIEDADES DOM
+         * 
+         * Já vimos propriedades DOM integradas. Há um monte. Mas tecnicamente ninguém nos limita e, se não houver o suficiente, podemos adicionar o nosso.
+         * 
+         * Os nós DOM são objetos JavaScript regulares. Podemos alterá-los.
+         * 
+         * Por exemplo, vamos criar uma nova propriedade em document.body:
+        */
+
+        //criando uma nova propriedade chamada myData para o objeto dom que e um no de elemento
+        //a propriedade myData recebe como valor um objeto anonimo que e atribuido por referencia a propriedade
+        document.body.myData = {
+            //propriedade do objeto anonimo
+            name: 'Caesar',
+            title: 'Imperator'
+        };
+
+        //acessando a propriedade recem adicionada ao objeto no dom body
+        console.log(document.body.myData.title); //Imperator
+
+        /**
+         * Podemos adicionar um método também:
+         * 
+        */
+
+        //adicionando uma novo método ao objeto no dom body
+        //a propriedade ira receber por referencia uma function anonima 
+        document.body.sayTagName = function() {
+            //aqui o this referencia o objeto body
+            console.log(this.tagName);
+        }
+
+        //chamando o novo metodo
+        document.body.sayTagName(); //BODY (o valor de "this" no método é document.body)
+
+        /**
+         * Também podemos modificar protótipos integrados como Element.prototype e adicionar novos métodos a todos os elementos:
+        */
+
+        //adicionamos um novo metodo no objeto de prototipo, assim todas as instancias poderão compartilhar o mesmo metodo
+        Element.prototype.sayHi = function() {
+            //aqui o this referencia o prototype o objeto de prototipo
+            console.log(`Hello, I'm ${this.tagName}`);
+        };
+
+        document.documentElement.sayHi(); //Hello, I'm HTML
+        document.body.sayHi(); //Hello, I´m BODY
+
+        /**
+         * Portanto, as propriedades e métodos do DOM se comportam exatamente como os objetos JavaScript comuns:
+         
+            - Eles podem ter qualquer valor.
+            
+            - Eles diferenciam maiúsculas de minúsculas (escrever elem.nodeType, não elem.NoDeTyPe).
+        */
+    </script>
+</body>
+</html>

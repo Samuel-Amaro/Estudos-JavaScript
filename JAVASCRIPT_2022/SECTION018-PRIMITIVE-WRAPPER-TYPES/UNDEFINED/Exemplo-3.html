@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * JavaScript usa o undefined valor nas seguintes situações.
+         * 
+         * * 3) PARÂMETROS DE FUNÇÃO
+         * 
+         * Quando você chama uma função com vários parâmetros, geralmente passa o mesmo número de argumentos. Por exemplo:
+        */
+
+        //declara uma arrow function anonima que declara dois paramentros chamados amount e currency esses parametros por padrão o mecanismo JS atribui a eles o valor undefined, a arrow function e atribuida por referencia a constante formatCurrency
+        const formatCurrency = (amount, currency) => {
+            return currency === '$' ? `$${amount}` : `${amount} ${currency}`;
+        }
+
+        /**
+         * A formatCurrency() função tem dois parâmetros. Ao chamá-lo, você pode passar dois argumentos assim:
+        */
+        
+        //invocando a function formatCurrency() passando dois valores como argumentos, de acordo com os paramentros definidos na declaração
+        formatCurrency(100, '$'); //$100
+
+        /**
+         * E voltou $100 como esperado.
+         * 
+         * Mas quando você chama a formatCurrency() função e não passa todos os argumentos, os parâmetros dentro da função se tornam undefined. Por exemplo
+        */
+
+        //invocando a function formatCurrency() passando somente um valor como argumento, de acordo com os paramentros definidos na declaração a function necessita de dois argumentos, se passarmos somente um argumento os paramentros dentro da function se torna undefined
+        formatCurrency(100); //100 undefined
+
+        /**
+         * Para evitar essa situação, você pode definir um valor padrão para os parâmetros da função como este:
+        */
+
+        //declara uma arrow function anonima que declara dois paramentros chamados amount e currency o parametro currency recebe um valor padrão um valor de inicialização, a arrow function e atribuida por referencia a constante formatCurrency
+        const formatCurrency2 = (amount, currency = '$') => {
+            return currency === '$' ? `$${amount}` : `${amount} ${currency}`;
+        }
+
+        /**
+         *E ao chamá-lo sem passar o segundo argumento, você obterá um valor adequado:
+        */
+
+        //invocando a function formatCurrency() passando somente um valor como argumento, de acordo com os paramentros definidos na declaração a function necessita de dois argumentos, se passarmos somente um argumento os paramentros dentro da function se torna undefined, se não possuirem um valor padrão definidos, neste caso o argumento não fornecido possui um valor padrão diferente do undefined
+        formatCurrency(100); //$100 
+    </script>
+
+</body>
+</html>

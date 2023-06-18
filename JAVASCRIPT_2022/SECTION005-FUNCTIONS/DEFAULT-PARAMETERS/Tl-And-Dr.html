@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramentros padrão de Functions</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PARÂMETROS PADRÃO DO JS DE FUNÇÕES - DEFAULT PARAMETERS DE FUNCTIONS
+         * 
+         * Resumo : neste tutorial, você aprenderá a lidar com os parâmetros padrão do JavaScript no ES6.
+         * 
+         * * TL; DR
+        */
+
+        //declara uma function regular chamada say que possui um paramentro declarado chamado message que possui uma valor padrão um valor inicial
+        //'Hi', essa valor deixa o paramentro inicializado com um valor padrão, se nenhum valor for passado com argumento para o paramentro o paramentro ja possui um valor padrão
+        //lembrando que uma function e declarada e uma instancia de objeto do tipo function
+        function say(message='Hi') {
+            console.log(message);
+        }
+
+        //invoca - chama a function
+        say(); //'Hi'
+        say('Hello'); //'Hello'
+
+        /**
+         * O valor padrão do message parâmetro na say() função é 'Hi'.
+         * 
+         * Em JavaScript, os parâmetros de função padrão permitem inicializar parâmetros nomeados com valores padrão se nenhum valor undefined for passado para a função.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * 
+         * * A FLAG u
+         * 
+         * Se um conjunto(sets) tiver um par substituto, você precisará adicionar o sinalizador u à expressão regular para que funcione corretamente:
+        */
+
+        //criando uma expressão regular, que possui o seguinte padrão: Os colchetes pesquisam qualquer caractere em um conjunto. Por exemplo, [🍎🍅🍓] corresponde a qualquer um dos 3 caracteres : , 🍎, 🍅, 🍓  O [...] é chamado de conjunto
+        //o metodo ira retorna todas as correspondecias da string literal que corresponde a algum caractere dentro do conjunto. especificado pelo padrão na expressão regular
+        let result = 'It is 🍎'.match(/[🍎🍅🍓]/);
+        console.log(result);
+        
+        /**
+         * Neste exemplo, o [🍎🍅🍓] tem seis caracteres, não três:
+        */
+
+        let str = '🍎🍅🍓';
+
+        for(let i=0; i < str.length; i++) {
+            //Um número representando o valor de unidade de código UTF-16 do caractere no índice fornecido. O valor NaN é retornado se o índice estiver fora do intervalo aceitável.
+            //mostra a codifição do caractere
+            console.log(str.charCodeAt(i));
+        }
+
+        /**
+         * Se você adicionar o sinalizador u, o comportamento estará correto:
+        */
+
+        //criando uma expressão regular, que possui o seguinte padrão: Os colchetes pesquisam qualquer caractere em um conjunto. Por exemplo, [🍎🍅🍓] corresponde a qualquer um dos 3 caracteres : , 🍎, 🍅, 🍓  O [...] é chamado de conjunto
+        //o metodo ira retorna todas as correspondecias da string literal que corresponde a algum caractere dentro do conjunto. especificado pelo padrão na expressão regular
+        //adiciona a flag u, para que o padrão da expressão regular funcione corretamente.
+        result = 'It is 🍎'.match(/[🍎🍅🍓]/);
+        console.log(result);
+
+        /**
+         * * RESUMO
+         * 
+         * Use [...] para construir um conjunto para corresponder a qualquer caractere nele.
+         * 
+         * Use o - interior de um conjunto para construir um intervalo para corresponder a qualquer caractere no intervalo.
+         * 
+         * Use o ^ para negar um intervalo.
+        */
+    </script>
+</body>
+</html>
+
+
+

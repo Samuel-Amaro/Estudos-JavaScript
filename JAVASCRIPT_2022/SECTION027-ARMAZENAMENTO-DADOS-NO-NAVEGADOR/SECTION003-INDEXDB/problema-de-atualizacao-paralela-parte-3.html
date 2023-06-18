@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * PROBLEMA DE ATUALIZAÇÃO PARALELA
+         * 
+         * Como estamos falando sobre versionamento, vamos resolver um pequeno problema relacionado.
+         * 
+         * Digamos:
+         * 
+            * Um visitante abriu nosso site em uma guia do navegador, com a versão do banco de dados 1.
+            * 
+            *  Em seguida, lançamos uma atualização, então nosso código é mais recente.
+            * 
+            * E então o mesmo visitante abre nosso site em outra aba
+            * 
+            * Portanto, há uma guia com uma conexão aberta para a versão do banco de dados 1, enquanto a segunda tenta atualizá-la para a versão 2 em seu upgradeneeded manipulador.
+            * 
+         * O problema é que um banco de dados é compartilhado entre duas abas, pois é o mesmo site, mesma origem. E não pode ser tanto a versão 1quanto o 2. Para realizar a atualização para a versão 2, todas as conexões com a versão 1 devem ser fechadas, incluindo a da primeira guia. 
+         * 
+         * Para organizar isso, o version change evento é acionado no objeto de banco de dados “desatualizado”. Devemos escutá-lo e fechar a conexão do banco de dados antigo (e provavelmente sugerir um recarregamento da página, para carregar o código atualizado).
+         * 
+         * Se não ouvirmos o versionchange evento e não fecharmos a conexão antiga, a segunda conexão nova não será feita. O openRequest objeto emitirá o blocked evento em vez de success. Portanto, a segunda guia não funcionará.
+         * 
+         * Aqui está o código para lidar corretamente com a atualização paralela. Ele instala o onversionchange manipulador, que é acionado se a conexão do banco de dados atual ficar desatualizada (a versão do banco de dados é atualizada em outro lugar) e fecha a conexão.
+        */
+
+        //conectando,a uma banco de dados.
+        //abrindo uma conexão
+        //o primeiro argumento passado para o metodo open e uma string, informando o nome do banco de dados
+        //o segundo argumento e um numero inteiro positivo, informando a versão
+        let openRequest = indexedDB.open("store", 2);
+
+        //este evento e acionado quando  o banco de dados está pronto, mas sua versão está desatualizada
+        //Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado
+        //O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+        openRequest.onupgradeneeded = function(event) {
+            // a versão do banco de dados existente é menor que 2 (ou não existe)
+            //obtem o objeto de banco de dados armazenado em result
+            let db = openRequest.result;
+            switch(event.oldVersion) { //versão de banco de dados existente
+                case 0:
+                    // versão 0 significa que o cliente não tinha banco de dados
+                    // executa a inicialização
+                    break;
+                case 1:
+                    // cliente tinha a versão 1
+                    // atualizar
+                    break;
+            }
+        };
+
+        //este evento e acionado quando a abertura falhou.
+        openRequest.onerror = function() {
+            console.error("Error", openRequest.error);
+        };
+
+        //este evento e acionado quando banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+        openRequest.onsuccess = function() {
+            //o na propriedade result esta o objeto banco de dados
+            let db = openRequest.result;
+            // continua trabalhando com banco de dados usando objeto db
+
+            //o evento db.onversionchange evento aciona o manipulador quando a conexão do banco de dados atual ficar desatualizada(a versão do banco de dados e atualizada em outro lugar) e fecha a conexão.
+            //informa sobre uma tentativa de atualização paralela, se a versão atual do banco de dados ficar desatualizada.
+            db.onversionchange = function() {
+                //fecha conexão
+                db.close();
+                alert("database is outdated, please reload the page.");
+            };
+
+            //...o db está pronto, use-o...
+        };
+
+        //se não ouvirmos o versionchange evento e não fecharmos a conexão antiga, a segunda conexão nova não será feita. O openRequest objeto emitira o blocked evento em vez de sucess.
+        //assima aciona o blocked evento, quando a conexão para o objeto db esta bloqeuada
+        //nos informa sobre a situação oposta: há uma conexão com uma versão desatualizada em outro lugar, e ela não fecha, então a conexão mais recente não pode ser feita.
+        openRequest.onblocked = function() {
+            // este evento não deve ser acionado se tratarmos onversionchange corretamente
+            // significa que há outra conexão aberta com o mesmo banco de dados
+            // e não foi fechado depois que db.onversionchange foi acionado para ele
+        };
+
+        /**
+         * …Em outras palavras, aqui fazemos duas coisas:
+         * 
+            * O db.onversionchange ouvinte nos informa sobre uma tentativa de atualização paralela, se a versão atual do banco de dados ficar desatualizada.
+            * 
+            * O openRequest.onblocked ouvinte nos informa sobre a situação oposta: há uma conexão com uma versão desatualizada em outro lugar, e ela não fecha, então a conexão mais recente não pode ser feita.
+            * 
+         * Podemos lidar com as coisas com mais facilidade em db.onversionchange, solicitar ao visitante que salve os dados antes que a conexão seja fechada e assim por diante.
+         * 
+         * Ou, uma abordagem alternativa seria não fechar o banco de dados em db.onversionchange, mas usar o onblocked manipulador (na nova guia) para alertar o visitante, dizer a ele que a versão mais recente não pode ser carregada até que fechem outras guias.
+         * 
+         * Essas colisões de atualização acontecem raramente, mas devemos pelo menos ter algum tratamento para elas, pelo menos um onblocked manipulador, para evitar que nosso script morra silenciosamente.
+        */
+    </script>
+
+</body>
+</html>

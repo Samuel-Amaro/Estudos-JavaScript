@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palavra-Chave await</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * A PALAVRA-CHAVE await(aguardando) 
+         * 
+         * Você usa a await palavra-chave para aguardar que Promise a se estabeleça no estado resolvido(cumprido com valor) ou rejeitado(rejeitado com valor). E você pode usar a palavra- await chave apenas dentro de uma asyn cfunção:
+        */
+
+        //declara uma function chamada display, essa function e assincrona, trata operações assincronas, usando palavra-chave async, uma function definida como async retorna uma promise definida implicitamente que e resolvida para um valor(cumprida para um valor) ou rejeitada(rejeitada por um motivo) a function retorna a promise com estado de resolvida ou rejeitda
+        async function display() {
+            //usando a await palavra chave para aguardar a promise estabeler seu estado de resolvido(cumprido com valor) ou rejeitado(rejeitado com motivo)
+            //a await palavra chave so e usada em funções definidas como async
+            //aqui esperamos usando a await a function retornar o valor para qual a promise de retorno resolveu para logo depois em seguida mostrar, o awai faz o agurdo do  resultado de qual estado a promise vai estabelecer
+            let result = await sayHi();
+            console.log(result);
+        }
+
+        /**
+         * Neste exemplo, a palavra-chave  await instrui o mecanismo JavaScript a aguardar sayHi() a conclusão da função antes de exibir a mensagem.
+         * 
+         * Observe que, se você usar o await operador fora de uma async função, receberá um erro.
+        */
+
+    </script>
+
+</body>
+</html>

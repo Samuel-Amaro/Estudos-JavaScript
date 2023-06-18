@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+       /**
+        * * REDIRECIONAR PARA UM URL RELATIVO
+        * 
+        * O script a seguir redireciona para o about.html que está no mesmo nível da página atual.
+        */
+
+        //O location.href é uma string que contém a URL inteira.
+        //O Location objeto representa a localização atual (URL) de um documento.
+        //a URL passada por ser absoluta ou relativa
+        //atribuir um novo valor a propriedade href, e o mesmo que chamar o método location.assign(URL) para navegar até a url fornecida por argumento, e fazer uma entrada na pilha de historico do navegador
+        //uma forma de fazer redirecionamento de endereço so pelo lado do cliente
+        location.href = 'about.html';
+
+        /**
+         * O script a seguir redireciona para a contact.html página localizada na pasta raiz:
+        */
+
+        //location.href = '/contact.html';
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <form method="post" action="" target="_self" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on">
+        <label for="one">Concentre-se aqui e pressione enter</label>
+        <input type="text" name="one" value="text" size="30"/>
+        <br/>
+        <label for="two">Segundo: Clique em "enviar":</label>
+        <!--
+            - atribuindo um manipulador de evento por meio da propriedade onclick.
+            - o manipulador e para um evento de clique no input submit elemento.
+            - o evento de click sera acionado apos o usuario tentar enviar o formulario por meio do pressionamento da tecla enter quando estiver no input elemento do form.
+            - um formulario enviado usando enter em um campo de entrada, aciona um click evento no input type submit
+            - atribuimos uma manipulador no evento para provar que isso realmente acontece
+        -->
+        <input type="submit" value="Enviar" onclick="alert('click');"/>
+    </form>
+
+    <script>
+        /**
+         * * RELAÇÃO ENTRE submit e click
+         * 
+         * Quando um formulário é enviado usando Enter em um campo de entrada(input), um click evento é acionado no <input type="submit">.
+         * 
+         * Isso é bastante engraçado, porque não houve nenhum clique.
+         * 
+         * Aqui esta a demostração:
+        */
+    </script>
+</body>
+</html>

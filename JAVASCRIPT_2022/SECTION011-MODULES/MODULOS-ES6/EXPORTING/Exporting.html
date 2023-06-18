@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exportando</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXPORTING(EXPORTADOR)
+         * 
+         * Para exportar uma variável , uma função ou uma classe , você coloca a palavra- chave export na frente dela da seguinte forma:
+         
+            // log.js
+            export let message = 'Hi';
+
+            export function getMessage() {
+                return message;
+            }
+
+            export function setMessage(msg) {
+                message = msg;
+            }
+
+            export class Logger {
+            }
+
+         * 
+         * Neste exemplo, temos o log.js módulo com uma variável, duas funções e uma classe. Usamos a export palavra-chave para exportar todos os identificadores no módulo.
+         * 
+         * Observe que a palavra- export chave requer que a função ou classe tenha um nome a ser exportado. Você não pode exportar uma função ou classe anônima usando essa sintaxe.
+         * 
+         * O JavaScript permite que você defina uma variável, uma função ou uma classe primeiro e depois exporte-a da seguinte maneira:
+         
+            // foo.js
+            function foo() {
+                console.log('foo');
+            }
+
+            function bar() {
+                console.log('bar');
+            }
+
+            export foo;
+         
+         * 
+         * Neste exemplo, definimos a foo()função primeiro e depois a exportamos. Como não exportamos a bar() função, não conseguimos acessá-la em outros módulos. A bar() função é inacessível fora do módulo ou dizemos que é privada.
+         * */
+
+    </script>
+</body>
+</html>

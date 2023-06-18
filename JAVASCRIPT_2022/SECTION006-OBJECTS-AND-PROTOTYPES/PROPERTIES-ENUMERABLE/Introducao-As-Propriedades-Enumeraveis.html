@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedades enumeraveis</title>
+</head>
+<body>
+    <script>
+        /**
+         * * UM GUIA BÁSICO PARA PROPRIEDADES ENUMERÁVEIS DE UM OBJETO EM JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre as propriedades enumeráveis ​​do JavaScript de um objeto.
+         * 
+         * * INTRODUÇÃO ÁS PROPRIEDADADES ENUMERÁVEIS DE JS
+         * 
+         * Em JavaScript, um objeto é uma lista não ordenada de pares de valores-chave. A chave geralmente é uma string ou um símbolo . O valor pode ser um valor de qualquer tipo primitivo (string, booleano, número, indefinido ou nulo), um objeto ou uma função.
+         * 
+         * O exemplo a seguir cria um novo objeto usando a sintaxe literal do objeto:
+        */
+
+        //cria um objeto literal chamado person usando a sintaxe literal de objeto
+        const person = {
+            //declara propriedades usando pares de chave:valor
+            //por padrão essa propriedade e enumeravel seu atributo interno [[enumerable]] e definido com true por padrão assim as propriedades podem ser iteradas usando o for in loop
+            //por serem criadas usando um inicializador de propriedades
+            firstName : 'John',
+            lastName : 'Doe'
+        };
+
+        /**
+         * O person objeto possui duas propriedades: firstName e lastName.
+         * 
+         * Uma propriedade de objeto possui vários atributos internos value, incluindo writable, enumerable e configurable. Consulte as propriedades do objeto para obter mais detalhes.
+         * 
+         * O enumerable atributo determina se uma propriedade está ou não acessível quando as propriedades do objeto são enumeradas usando o for...in loop ou Object.keys() método.
+         * 
+         * Por padrão, todas as propriedades criadas por meio de uma atribuição simples ou de um inicializador de propriedade são enumeráveis. Por exemplo:
+        */
+
+        //declara uma propriedade usando a atribuição simples de valor a ela
+        //declara uma propriedade chamada age com valor 25, assim por padrão ela possui o atributo interno [[enumerable]] definido seu valor como true podendo ser enumeravel pelo loop for in
+        for(const key in person) {
+            console.log(key);
+        }
+
+        /**
+         * Neste exemplo:
+         
+            - O firstName e lastName são propriedades enumeráveis ​​porque são criadas por meio de um inicializador de propriedade.
+
+            - A age propriedade também é enumerável porque é criada por meio de uma atribuição simples.
+
+         * 
+         * Para alterar o enumerable atributo interno de uma propriedade, você usa o Object.defineProperty() método. Por exemplo:
+        */
+
+        //define uma nova propriedade no objeto person, usando a atribuição simples de valor a propriedade
+        //propriedade se chamara age com valor 25
+        //por usar atribuição simples o JS define que seu atributo interno [[enumerable]] definido com valor true podera ser enumeravel a propriedade
+        person.age = 25;
+
+        //modificando o atributo interno da propriedade ssn, como a propriedade não existe ela sera criada e logo em seguida seus atributos internos serão configurados pelo metodo
+        //usando o metodo Object.defineProperty passando como o primeiro argumento um person objeto literal e o segundor argumento a propriedade a ser criada ou modificada no  caso a ssn
+        //o terceiro argumento um objeto descritor dos atributos da propriedade
+        Object.defineProperty(person, 'ssn', {
+            enumerable : false, //propriedade não podera ser enumeravel não sera iterada pelo loop for in
+            value: '123-456-7890' //valor da propriedade
+        });
+
+        //iterando percorrendo sobre as propriedades do objeto literal person
+        //propriedades herdadas e propriedades primarias do proprio objeto
+        for(const key in person) {
+            console.log(key);
+        }
+
+        /**
+         * Neste exemplo, a ssn propriedade é criada com o enumerable sinalizador definido como false, portanto, não aparece no for...in loop.
+         * 
+         * ES6 fornece um método propertyIsEnumerable() que determina se uma propriedade é enumerável ou não. Ele retorna true se a propriedade for enumerável; caso contrário false. Por exemplo:
+        */
+
+        //usando o metodo object.propertyIsEnumerable('propriedade do objeto') determina se uma propriedade e enumeravel ou não. se e retorna true se não retorna false
+        console.log(`firstName e [[enumerable]] ? ${person.propertyIsEnumerable('firstName')}`); // true
+        console.log(`lastName e [[enumerable]] ? ${person.propertyIsEnumerable('lastName')}`); // true
+        console.log(`age e [[enumerable]] ? ${person.propertyIsEnumerable('age')}`); // true
+        console.log(`ssn e [[enumerable]] ? ${person.propertyIsEnumerable('ssn')}`); // false
+
+        /**
+         * * RESUMO
+         * 
+         *  Uma propriedade é enumerável se tiver o enumerable atributo definido como true. O obj.propertyIsEnumerable() determina se uma propriedade é enumerável ou não.
+         * 
+         * Uma propriedade criada por meio de uma atribuição simples ou um inicializador de propriedade é enumerável.
+        */
+    </script>
+</body>
+</html>

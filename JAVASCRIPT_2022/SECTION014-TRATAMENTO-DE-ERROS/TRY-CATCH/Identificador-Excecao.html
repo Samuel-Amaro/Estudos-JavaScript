@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Identificador de exceção</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * * IDENTIFICADOR DE EXCEÇÃO
+         * 
+         * Quando ocorre uma exceção no bloco try, a variável de exceção (e) no bloco catch armazena o objeto de exceção.
+         * 
+         * Se você não quiser usar a variável de exceção, você pode omiti-la assim:
+        */
+
+        //usando a instrução try...catch para manipular e lidar com o erro
+        try{
+            //codigo que pode causar um erro vai aqui dentro
+        }catch{
+            //aqui vai a logica para tratar o erro
+            //aqui neste bloco catch omitimos a variavel de exceção e que armazena o objeto de exceção
+        }
+
+        /**
+         * Por exemplo, o seguinte usa a instrução try…catch sem a variável de exceção:
+        */
+
+        //declara uma arrow function anonima que declara um paramentro chamado str, a arrow function e atribuida por referencia a variavel isValidJson
+
+        const isValidJson = (str) => {
+            //usando a instrução try...catch para manipular e lidar com o erro
+            try{
+                //codigo que pode causar um erro vai aqui dentro
+                
+                //valida o argumento str como um JSON
+                //O método JSON.parse() analisa uma string JSON e retorna um objeto. Se a string de entrada não for um JSON válido, JSON.parse() lançará uma exceção.
+                JSON.parse(str);
+                //retorna true se o argumento str for um JSON valido, e não ocorrer nehuma exceção
+                return true;
+            }catch{
+                //aqui vai a logica para tratar o erro
+                //aqui neste bloco catch omitimos a variavel de exceção e que armazena o objeto de exceção lançado dentro do try bloco quando emite um erro ou exceção
+                //retorna false se o argumento str não for um JSON valido
+                //retorna false neste bloco caso ocorra uma excecção
+                return false;
+            }
+        };
+
+        //invoca a arrow function, passando um objeto literal anonimo como argumento como uma str e atribuindo o resultado da invocação da arrow function a variavel valid
+        let valid = isValidJson(`{"language":"JavaScript"}`);
+        console.log(valid); //retorna true quando não houve erro e nem exceção ao validar string
+
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina a isValidJSON()função que aceita uma string e retorna true se essa string for um JSON válido ou false não.
+         * 
+         * Para validar o JSON, a isValidJSON() função usa o JSON.parse() método e a try...catch instrução.
+         * 
+         * O método JSON.parse() analisa uma string JSON e retorna um objeto. Se a string de entrada não for um JSON válido, JSON.parse() lançará uma exceção.
+         * 
+         * Se não ocorrer nenhuma exceção, a função retorna true no try bloco. Caso contrário, ele retorna false no catch bloco.
+         * 
+         * Segundo, chame a isValidJSON()função e passe uma string JSON para ela:
+         
+            let valid = isValidJSON(`{"language":"JavaScript"}`);
+
+         * 
+         * Como a string de entrada é um formato JSON válido, a função retorna true.
+         * 
+         * Terceiro, envie o result para o console:
+         
+            console.log(valid);
+
+         *
+         * * RESUMO
+         * 
+         * Use a try...catch instrução para manipular exceções em JavaScript.
+         * 
+         * Coloque apenas o código que pode causar uma exceção no try bloco.
+        */
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This palavra-chave</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * 1) INVOCAÇÃO DE FUNÇÃO SIMPLES
+         * 
+         * No modo não estrito, o this faz referência ao objeto global quando a função é chamada da seguinte maneira: 
+        */
+
+        //declara uma function regular chamada show, que não declara paramentros
+        function show1() {
+            //aqui verificamos se o this dentro do contexto da invocação da função simples show, se referencia ao objeto global window, como no contexto global
+            console.log(`this === window = ${this === window}`); //true
+        }
+
+        //chama(invoca) a função
+        show1();
+
+        /**
+         * Quando você chama a show() função, ela faz this referência ao objeto global , que é o window no navegador da web e global no Node.js.
+         * 
+         * Chamar a show() função é o mesmo que:
+        */
+
+        //quando se chama a show() function sozinha sem o objeto global fica dessa forma
+        show1();
+        //mas pode-se chamar dessa forma também porque a show() function e adiciona no objeto global window pois esta no contexto global
+        window.show1();
+
+        /**
+         * No modo estrito, JavaScript define o this para undefined. Considere o seguinte exemplo:
+        */
+
+        
+
+        //declara uma function regular chamada show que não declara paramentros e não retorna valor
+        function show2() {
+            //aplica diretiva modo estrito somento nesta função especificamente para entender a execução
+            "use strict"; //evita criar variaveis global sem usar a var palavra chave
+
+            //aqui verificamos se o this dentro do contexto da invocação da função simples show, no modo estrito.
+            //deixou de referenciar o global objeto window, e passou a ter o valor undefined no modo estrito
+            console.log(`this === undefined = ${this === undefined}`); //
+        }
+
+        //chama(invoca) a função show() no contexto global no modo estrito
+        show2();
+
+        /**
+         * Para definir o modo estrito, você pode usar a diretiva "use strict"no início do arquivo.
+         * 
+         * Se você deseja aplicar o modo estrito apenas a uma função específica, coloque-o no topo do corpo da função.
+         * 
+         * Observe que o modo estrito está disponível desde ECMAScript 5.1. O strict modo se aplica a funções e funções internas dentro da função. Aqui está um exemplo:
+        */
+
+        //declara uma function regular chamada show3 que não declara paramentros e não retorna valor
+        function show3() {
+            //aplica diretiva modo estrito somente nesta função especificamente para entender a execução do this na invocação de função simples no modo estrito
+            "use strict"; //evita criar variaveis global sem usar a var palavra chave
+
+            //aqui verificamos se o this dentro do contexto da invocação da função simples show3, no modo estrito.
+            //deixou de referenciar o global objeto window, e passou a ter o valor undefined no modo estrito
+            console.log(`this === undefined = ${this === undefined}`); //true
+
+            //declara uma function interna local chamada display() que so pode ser acessada dentro do escopo da function externa show3(), e uma function regular sem paramentro e sem valor de retorno
+            function display() {
+                //aqui por causa do modo estrito o this possui o valor undefined
+                console.log(`this === undefined = ${this === undefined}`);
+            }
+
+            display();
+        }
+
+        //invoca a function show3()
+        //no contexto global
+        show3();
+
+        /**
+         * Na display() função interna, O this também é definido undefined como mostrado no console. 
+        */
+       
+    </script>
+
+</body>
+</html>

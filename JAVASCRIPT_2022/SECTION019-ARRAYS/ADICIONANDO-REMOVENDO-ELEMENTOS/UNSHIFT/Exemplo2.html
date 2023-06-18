@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO 2) USANDO O MÉTODO JS ARRAY UNSHIFT PARA ANEXAR VÁRIOS ELEMENTOS A UM ARRAY
+         * 
+         *  
+        */
+
+        //declara um array literal dense chamado numbers que foi inicializado com 2 elementos
+        const numbers = [30, 40];
+
+        //usando o metodo unshift vamos poder adicionar um ou varios elementos ao inicio de um array
+        //aqui adicionaremos o elemento de 10 ao inicio do array e logo em seguida o elemeneto 20 ao inicio do array também, lembrando que apos cada nova chamado o array reindexa os elementos
+        //chamando o metodo unshift por meio da intancia de objeto do tipo array para adiconar os argumentos 10 e 20 como elementos ao inicio do array, primeiro adicioinar o argumento 10 e depois o 20
+        //e retornara o novo comprimento do array com os elementos adicionados
+        const length = numbers.unshift(10, 20);
+
+        //aqui mostra um objeto declrado com a sintaxe de extensão literal de objeto do ES6
+        //a lenght variavel e o nome da propriedade e valor da propriedade nessa sintaxe
+        console.log({length});
+        //mesma coisa
+        console.log({numbers});
+        
+    </script>
+</body>
+</html>

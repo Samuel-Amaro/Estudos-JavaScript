@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p>...o conteúdo antes do script...</p>
+    
+    <script type="text/javascript">
+        //atribundo um manipulador de evento 
+        //o manipulador de evento e para o evento DOMContentLoaded(conteudo dom carregado) o navegador HTML totalmente carregado e a árvore DOM é construída, mas recursos externos como imagens <img> e folhas de estilo podem ainda não ter sido carregados.
+        //o evento e acionado quando o navegador html esta carregado e a arvore dom totalmente construida
+        //o evento abaixo não espera o script async ser executado. aqui ele funciona normalmente. e acionado apos contrução da arvore dom
+        document.addEventListener("DOMContentLoaded", () => alert("DOM pronto!"));
+    </script>
+
+    <!--
+        - script js externo com atributo async especificado
+        - o atributo async torna o script não bloqueante(não trava a renderização de elemtnos dom), o script e independente. o script async e carregado em segundo plano executado quando estiver pronto. - O DOM e outros scripts não esperam por eles e não esperam por nada. Um script totalmente independente que é executado quando carregado.
+        - abaixo temos dois script async que não esperam um pelo outro, o que quer que seja carregado primeiro e executado.
+    -->
+    <script async type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js" >
+        /**
+         * * ASYNC(ASSÍNCRONO)
+         * 
+         * O async atributo é um pouco parecido com defer. Também torna o script não bloqueante. Mas tem diferenças importantes no comportamento.
+         * 
+         * O async atributo significa que um script é completamente independente: 
+         * 
+            * O navegador não bloqueia async scripts (como defer).
+            * 
+            * Outros scripts não esperam por async scripts, e async scripts não esperam por eles.
+            * 
+            * DOMContentLoaded e scripts assíncronos não esperam um pelo outro:
+            * 
+                * DOMContentLoaded pode acontecer antes de um script assíncrono (se um script assíncrono terminar de carregar após a conclusão da página)
+                * 
+                * …ou após um script assíncrono (se um script assíncrono for curto ou estiver em cache HTTP)
+                * 
+         * Em outras palavras, os scripts ASYNC são carregados em segundo plano e executados quando estiverem prontos. O DOM e outros scripts não esperam por eles e não esperam por nada. Um script totalmente independente que é executado quando carregado. Tão simples, quanto pode ficar, certo? 
+         * 
+         * Aqui está um exemplo semelhante ao que vimos com defer: dois scripts long.js e small.js, mas agora com async em vez de defer.
+         * 
+         * Eles não esperam um pelo outro. O que quer que seja carregado primeiro (provavelmente small.js) – é executado primeiro:
+         */
+    </script>
+    <script async type="text/javascript" src="https://javascript.info/article/script-async-defer/small.js">
+        /**
+         * O conteúdo da página aparece imediatamente: async não o bloqueia.
+         * 
+         * DOMContentLoaded pode acontecer tanto quanto antes async como depois, não há garantias aqui.
+         * 
+         * Um script menor small.js vem em segundo lugar, mas provavelmente carrega antes long.js, então small.js é executado primeiro. Embora, pode ser que long.js carregue primeiro, se armazenado em cache, então ele é executado primeiro. Em outras palavras, os scripts assíncronos são executados na ordem “carregar primeiro”.
+         * 
+        */
+    </script>
+
+    <p>...conteúdo após script...</p>
+
+</body>
+</html

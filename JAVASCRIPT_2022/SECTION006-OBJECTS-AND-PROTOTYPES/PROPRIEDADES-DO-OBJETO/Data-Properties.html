@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    <script>
+        /**
+         * * TIPOS DE PROPRIEDADE DE OBJETO
+         * 
+         * JavaScript especifica características de propriedades de objetos por meio de atributos internos cercados por dois pares de colchetes, por exemplo [[Enumerable]],.
+         * 
+         * Existem dois tipos de propriedades de objeto: propriedades de dados (PROPERTIES DATA) e propriedades de acessador(PROPERTIES ACESSOR).
+         * 
+         * * 1) DATA PROPERTIES(PROPRIEDADES DE DADOS DE UM OBJETO LITERAL) - ATRIBUTOS
+         * 
+         * Uma propriedade de dados contém um único local para um valor de dados. Uma propriedade de dados tem quatro atributos:
+
+            - [[Configurarable]]- determina se uma propriedade pode ser redefinida ou removida por meio do delete operador.
+
+            - [[Enumerable]]- indica que se uma propriedade será retornada no for...in loop.
+
+            - [[Writable]] - especifica que o valor de uma propriedade pode ser alterado.
+
+            -  [[Value]] - contém o valor real de uma propriedade.
+
+         * 
+         * Por padrão, o [[Configurable]], [[Enumerable]] e [[Writable]] atributos definidos para true para todas as propriedades definidas diretamente em um objeto. O valor padrão do [[Value]] atributo é undefined.
+         * 
+         * O exemplo a seguir cria um person objeto que possui as propriedades firstName  e lastName com os atributos configuráveis, enumeráveis ​​e graváveis ​​definidos como true. Seus valores são definidos como 'John'e 'Doe'respectivamente:
+         * 
+        */
+
+        //declara um objeto chamado person, usando a sintaxe literal de objeto
+        //este objeto por padrão possui os atributos do objeto que são, [[configurarable]], [[Enumerable]], [[Writable]], são definidos para true o [[Value]] atributo por padrão possui o valor undefined
+        //esses atributos de objeto são definidos para todas as propriedades declaradas diretamente no objeto 
+        let person = {
+            //declara propriedades para o objeto person, usando o par chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        /**
+         * Para alterar qualquer atributo de uma propriedade, você usa o Object.defineProperty() método.
+         * 
+         * O Object.defineProperty() método aceita três argumentos:
+        
+            - Um objeto(o objeto literal).
+            - Um nome de propriedade do objeto(um atributo definido no objeto).
+            - Um objeto de descritor de propriedade que tem quatro propriedades: configurable, enumerable, writable, e value.
+
+         * 
+         * Se você usar o Object.defineProperty() método para definir uma propriedade do objeto, os valores padrão de [[Configurable]], [[Enumerable]] e [[Writable]] estão definidas para false salvo indicação em contrário.
+         * 
+         * O exemplo a seguir cria um person objeto com a age propriedade:
+        */
+
+        //declara um objeto chamada personVazio, usando a sintaxe literal de objeto, o objeto e vazio não possui nenhuma propriedade no momento que e declarado
+        let personEmpty = {};
+        
+        //adiciona um nova propriedade ao objeto personEmpty, a propriedade se chama age. usando a sintaxe literal
+        //essa propriedade ira possui os atributos descritores de propriedade de objeto como [[Configurable]], [[Enumerable]] e [[Writable]] com seus valores definidos para false
+        personEmpty.age = 25;
+
+        /**
+         * Como o valor padrão do [[Configurable]] atributo é definido como true, você pode removê-lo por meio do delete operador:
+        */
+
+        //usando o operador unario(so um operando), iremos deletar a propriedade age do objeto personEmpty
+        //ao deletar esta propriedade o atributo descritor de propriedade de objeto o [[Configurable]] ira ser removido, o valor do congigurable definido com true permite deletar a propriedade por meio do operador delete
+        delete personEmpty.age;
+        //tentando acessar uma propriedade que não existe foi deletada
+        console.log(personEmpty.age); //undefined
+
+        /**
+         * O exemplo a seguir cria um person objeto e adiciona a ssn propriedade a ele usando o Object.defineProperty()método:
+        */
+
+        'use strict'; //evita criar variaveis global sem usar a var palavra chave
+
+        //add uma propriedade de dados chamada 'ssn' ao objeto personEmpty e add o atributo desta propriedade o [[Configurarable]: determina se uma propriedade pode ser redefinida ou removida por meio do delete operador. como seu valor sera false a propriedade 'ssn' do objeto literal personEmpty não podera ser deletada e nem configurada devido os outros atributos como [[Enumerable]],[[Writable]], [[Configurable]], [[value]], estarem definidos como true, pois a propriedade a ser criada, esta sendo criado apos objeto ter sido declarado, assim recebe por padrão o value false
+        //deixando a propriedade não configuravel
+        //O metodo defineProperty recebe 3 argumentos, o objeto, a propriedade, um objeto descritor do atributo da propriedade
+        Object.defineProperty(personEmpty, 'ssn', {
+            configurable: false, //a 'ssn' property não podera ser deletada e nem configurada
+            value: '012-38-9119' //valor da propriedade 'ssn'
+        });
+
+        //isso gera um erro pois definimos que não podemos deletar a propriedade 'ssn' do objeto literal PersonEmpty
+        delete personEmpty.ssn;
+
+        /**
+         * Neste exemplo, o configurable atributo é definido para, false portanto, excluir a ssn propriedade no modo estrito causa um erro. 
+         * 
+         * Além disso, uma vez que uma propriedade é definida como não configurável, ela não pode se tornar configurável.
+         * 
+         * Se você usar o Object.defineProperty() método para alterar qualquer atributo que não seja o gravável[[Writable]] , obterá um erro. Por exemplo:
+        */
+
+        //tenta modificar o atributo [[configurable]] da propriedade de dados ssn para que a propriedade possa se permita ser deletada
+        //isso ira gera um erro pois, essa propriedade não pode ser modifica, devido ter sido definida inicialmente que não pode ser configuravel, na forma que doi declarada permanece e com os valores
+        //até que a propriedade  - [[Writable]] seja ativida com true para que especifica que o valor de uma propriedade pode ser alterado.
+        Object.defineProperty(personEmpty, 'ssn', {
+            configurable: true //permite que a ssn propriedade seja configuravel, seja deleta, porem não ha efeito devido as outros atributos da proriedade estarem como false, como o [[enumerable]], [[writable]], [[value]], assim a propriedade não pode ser modifica, nem iterada e nem ter seu valor obtido
+        });
+
+        /**
+         * Por padrão, o enumerable atributo de todas as propriedades definidas em um objeto é verdadeiro. Isso significa que você pode iterar em todas as propriedades usando o for...in loop, conforme mostrado no exemplo a seguir:
+        */
+
+        //declara um objeto chamado person2 usando a sintaxe literal
+        let person2 = {};
+        //adiciona uma propriedade chamada age ao person2 objeto literal
+        //essa propriedade tera seus valores de atributos definidos como: [[enumerable]], [[writable]], [[value]], [[configurable]] como false, pois esta sendo criada fora da declaração do objeto não são declaradas diretamente como objeto, assim a atributo da propriedade criada tera os seguintes valores, mesno a [[enumerable]] que por padrão possui o valor true para iterar a propriedade com um for loop in
+        person2.age = 25;
+        //add uma nova propriedade mesma logica acima
+        person2.ssn = '012-38-9119';
+
+        //o atributo [[enumerable]] das propriedades age e ssn permite iterarem sobre o loop for in, isso e padrão do JS
+        for(let prop in person2) {
+            console.log(prop);
+        }
+
+        /**
+         * O seguinte torna a ssn propriedade não enumerável, definindo o enumerable atributo como false.
+        */
+
+        //define um atributo de uma propriedade de dados chamada ssn
+        //fazendo a ssn propriedade ja declarada em person2 objeto não seja enumeravel(não deixando ser iterada) ao usar o for in loop no objeto person2
+        //o metodo precisa de três argumentos
+        //um objeto
+        //a propriedade do objeto
+        //objeto descritor de propriedade que define os atributos da propriedade
+        Object.defineProperty(person2, 'ssn', {
+            enumerable: false //não a 'ssn' propriedade ser iterada quando o objeto person2 usar o for loop in
+        });
+
+        //o atributo [[enumerable]] das propriedades age permitem serem iteradas
+        //a ssn não pode ser iterarem sobre o loop for in, por que o atributo [[enumerable]] esta definido como false
+        for(let prop in person2) {
+            console.log(prop);
+        }
+    </script>
+</body>
+</html>

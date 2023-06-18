@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * 2) USANDO O MÉTODO POP() DE ARRAY JS COM UM ARRAY VAZIO
+         * 
+         *  O exemplo a seguir chama o pop()método em uma array vazia. Nesse caso, o pop() método retorna undefined e o length e do array é zero:
+        */
+
+        //declara um array literal não inicializado vazio chamado numbers
+        const numbers = [];
+        //usando o metodo pop da instancia de objeto do tipo array chamada numbers para remover o ultimo elemento do array numbers, como o numbers array e vazio e seu length propriedade e 0, o pop elemento retorna undefined como forma de dizer que não removeu nenhum elemento, e que o lenght e 0, o array não possui nenhum elemento
+        const last = numbers.pop();
+
+        console.log(`elemento removido = ${last}`);
+        console.log(`comprimento do array numbers = ${numbers.length}`);
+
+
+    </script>
+</body>
+</html>

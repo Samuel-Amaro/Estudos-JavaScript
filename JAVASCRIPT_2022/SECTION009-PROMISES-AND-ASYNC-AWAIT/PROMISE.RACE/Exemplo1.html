@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DE JS Promice.race() - CORRIDA DE PROMESAS
+         * 
+         * Vamos dar alguns exemplos de uso do Promise.race() método estático.
+         *
+         * * 1) EXEMPLOS SIMPLES DE JS Promice.race()
+         * 
+         * O seguinte cria duas promessas: uma resolve em 1 segundo e a outra resolve em 2 segundos. Como a primeira promessa é resolvida mais rapidamente que a segunda, ela é Promise.race() resolvida com o valor da primeira promessa:
+        */
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 10
+                resolve(10);
+            }, 1 * 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 20
+                resolve(20);
+            }, 2 * 1000);
+        });
+
+        //usando o método estatico Promise.race()
+        //O Promise.race() método estático aceita uma lista de promessas  como um objeto iterável e retorna uma nova promessa que cumpre ou rejeita assim que houver uma promessa que cumpra ou rejeite, com o valor ou motivo dessa promessa.
+        //O nome de Promise.race() implica que todas as promessas competem entre si com um único vencedor, resolvido ou rejeitado.
+        //usando esté método para descobrir qual promisse e resolvida ou rejeita em um menor tempo
+        //passamos como argumento um array literal com as varaiveis que referenciam duas promesis de entrada
+        //usando o then método para obter o valor de resultado da primeira promise a ser cumprida com o valor(resolvida) a callbak do método then e chamada quando a primeira promise tiver o estado cumprida com o valor, a callbak ira mostrar o resultado
+        //a catch método e utilizada para obter o motivo do erro no qual a primeira promise tiver sido rejeitada, a callbakc passado para o catch argumento e chamado quando a primeira promise tiver seu estado de rejeita por um motivo, o callbak argumento do catch m´petodo e chamado para mostrar o motivo do erro
+        Promise.race([p1, p2]).then(value => console.log(`Resolved 1ª: ${value}`)).catch(reason => console.log(`Rejected: ${reason}`));
+
+        /**
+         * O exemplo a seguir cria duas promessas. A primeira promessa resolve em 1 segundo enquanto a segunda rejeita em 2 segundos. Como a primeira promessa é mais rápida que a segunda, a promessa retornada resolve para o valor da primeira promessa:
+        */
+
+        const p3 = new Promise((resolve, reject) => {
+            //espera 1 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 10
+                resolve(10);
+            }, 1 * 1000);
+        });
+
+        const p4 = new Promise((resolve, reject) => {
+            //espera 2 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function reject, para mudar o estado da promise de pendente para rejeitada com o motivo (resolvida)
+                //o argumento e o motivo pelo qual a promise foi rejeitada
+                resolve('The second promise has rejected');
+            }, 2 * 1000);
+        });
+
+        //qual promise de entrada forneceida para o método Promice.race() sera rejeitada ou cumprida em menos tempo.
+        Promise.race([p3, p4]).then(value => console.log(`Resolved 1ª: ${value}`)).catch(reason => console.log(`Rejected: ${reason}`));
+
+        /**
+         * Observe que se a segunda promessa fosse mais rápida que a primeira, a promessa de retorno seria rejeitada com o motivo da segunda promessa.
+        */
+        
+    </script>
+</body>
+</html>

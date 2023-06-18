@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        /**
+         * * VERIFIQUE SE EXISTE UM PARÂNETRO DE STRING DE CONSULTA
+         * 
+         * O URLSearchParams.has() método retorna true se existir um parâmetro com um nome especificado.
+         * 
+         * 
+         */
+
+        //o URLSearchParams retorna uma instancia de objeto atribuida por referencia a constante urlParams
+        //o construtor URLSearchParams recebe como argumento uma string com paramentros de consulta de uma URL
+        const urlParams = new URLSearchParams('?type=list&page=20');
+
+        //usando o método URLSearchParams.has(nameParameter) para verifciar se existe um paramentro com o nome especificado por argumento, se existir retorna true
+        console.log(`${'?type=list&page=20'} has type = ${urlParams.has('type')}`); //true
+        console.log(`${'?type=list&page=20'} has foo = ${urlParams.has('foo')}`); //false
+
+        /**
+         * * RESUMO
+         * 
+         * O URLSearchParams fornece uma interface para trabalhar com parâmetros de string de consulta
+         * 
+         * O URLSearchParams é um iterável para que você possa usar a for...of construção para iterar sobre os parâmetros da string de consulta.
+         * 
+         * O has() método do URLSearchParams determina se existe um parâmetro com um nome especificado.
+         * */
+    </script>
+</body>
+</html>

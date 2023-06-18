@@ -1,0 +1,38 @@
+<!DOCTYPE html>   
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo aplicando JavaScript</title>
+</head>
+<body>
+  <button>Clique em mim</button>
+
+  <!--
+      * exemplo de como adicionar java script interno
+  -->
+  <!--
+  <script>
+      function criarParagrafo() {
+          let para = document.createElement('p');
+          para.textContent = 'Você clicou no botão!';
+          document.body.appendChild(para);
+      }
+
+      const botoes = document.querySelectorAll('button');
+
+      for(var i = 0; i < botoes.length; i++) {
+          botoes[i].addEventListener('click', criarParagrafo);
+      }
+  </script>
+  -->
+  
+  <!--
+      * exemplo de como adicionar java script externo ao elemento html.
+      * Todos os scripts com o atributo defer irão carregar na ordem que aparecem na página
+  -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>

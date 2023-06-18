@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Aos Geradores</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * GERADORES DE JS - (GENERATORS)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre geradores de JavaScript e como usá-los de forma eficaz.
+         * 
+         * * INTRODUÇÃO AOS GERADORES(GENERATORS) DE JS
+         * 
+         * Em JavaScript, uma função regular é executada com base no modelo run-to-completion(executar até a conclusão). Ele não pode pausar no meio do caminho e depois continua de onde parou. Por exemplo:
+        */
+
+        //define uma function regular chamada foo que não declara nenhum paramentro, essa function e uma instancia de objeto do tipo function
+        function foo() {
+            //essa function e executada de cima para baixo, unica maneira de sair de foo e retornado algum valor ou lançando um erro
+            console.log('I');
+            console.log('cannot');
+            console.log('pause');
+        }
+
+        /**
+         * A foo() função é executada de cima para baixo. A única maneira de sair do foo() é retornando dele ou lançando um erro. Se você invocar a foo() função novamente, ela iniciará a execução de cima para baixo.
+        */
+
+        //invoca a function foo
+        foo();
+
+        /**
+         * O ES6 introduz um novo tipo de função que é diferente de uma função normal: gerador de função(function generator) ou gerador(generator).
+         * 
+         * Um gerador(generator) pode pausar no meio do caminho e continuar de onde parou. Por exemplo:
+        */
+
+        //define um novo tipo de função no ES6
+        //define uma function generator chamado generate que não declara paramentros
+        //uma função diferente de uma função normal regular, uma função geradora
+        //o * apos a palavra chave function indica que a function chamada generate(e uma função geradora) e um gerador(generate) e não uma função normal
+
+        function* generate() {
+            //corpo da function gerenator
+            console.log('invoked 1st time');
+            //a yield instrução, retorna um valor e pausa a execução da função
+            //retorna o valor 1 e pausa a execução da function generator
+            yield 1;
+            console.log('invoked 2nd time');
+            //retorna o valor 2 e pausa a execução da function generator
+            yield 2;
+        }
+
+        /**
+         * Vamos examinar a generate()função em detalhes.
+
+            - Primeiro, você vê o asterisco (*) após a palavra chave function. O asterisco indica que o generate() é um gerador, não uma função normal.
+
+            - Segundo, a yield instrução retorna um valor e pausa a execução da função.
+
+         * 
+         * O código a seguir invoca o generate() gerador:
+        */
+
+        //invoca a function generator chamada de generate, sem precisa de passar argumentos, o generate() function gerador ira retornar um valor e sera atribuido a variavel gen
+        let gen = generate();
+
+        /**
+         * Quando você invoca o generate()gerador:
+
+            - Primeiro, você não vê nada no console. Se generate() fosse uma função normal, você esperaria ver algumas mensagens.
+
+            - Segundo, você recebe algo de volta generate() como um valor retornado.
+
+         * Vamos mostrar o valor retornado no console:
+        */
+
+        //mostra o valor retornado pela function generator chamada generate()
+        console.log(gen); //Object Generator{}
+
+        /**
+         * Assim, um gerador retorna um Generator objeto sem executar seu corpo quando é invocado.
+         * 
+         * O Generator objeto retorna outro objeto com duas propriedades: done e value. Em outras palavras, um Generator objeto é iterável.
+         * 
+         * O seguinte chama o next() método no Generator objeto:
+        */
+
+        //A function generator chamada generate retorna um Objeto gerador, esse objeto gerador anonimo é iteravel, pode ser usado em construções de um loop for of ou somente o loop for
+        //assim define um protocolo de iteração chamador iterator que define uma forma para que o objeto generator seja iteravel, esse protocolo e um objeto que possui propriedades e métodos, aqui acessaremos o método next que nos ira retornar um objeto anonimo com duas propriedades, chamada done e value
+        //uma function geradora não executa seu corpo quando e imediatamente invocada
+        let result = gen.next();
+        //mostra a instancia de objeto que o método next retorna ao ser invocada
+        console.log(result); //Object { value: 1, done: false }
+
+        /**
+         * Como você pode ver, o objeto Generator executa seu corpo que gera uma mensagem 'invoked 1st time' na linha 1 e retorna o valor 1 na linha 2.
+         *
+         * A yield instrução retorna 1 e pausa o gerador na linha 2.
+         *
+         * Da mesma forma, o código a seguir invoca o next() método do Generator pela segunda vez:
+        */
+
+        result = gen.next();
+        console.log(result); //Object { value: 2, done: false }
+
+        /**
+         * Desta vez, o Gerador retoma sua execução a partir da linha 3 que emite a mensagem 'invoked 2nd time' e retorna (ou rende) 2.
+         * 
+         * O seguinte invoca o next() método do objeto gerador pela terceira vez:
+        */
+
+        result = gen.next();
+        console.log(result); //Object { value: undefined, done: true }
+
+        /**
+         * Como um gerador é iterável, você pode usar o for...of loop:
+        */
+
+        //o objeto Generator{} retornado pela invocação a function* generator chamada de function generate
+        //e iteravel, esta definido de acordo com o protocolo de iteração iterator
+        //pode ser iterador pela construção for...of loop
+        for(const g of gen) {
+            console.log(g);
+        }        
+            
+    </script>
+
+</body>
+</html>

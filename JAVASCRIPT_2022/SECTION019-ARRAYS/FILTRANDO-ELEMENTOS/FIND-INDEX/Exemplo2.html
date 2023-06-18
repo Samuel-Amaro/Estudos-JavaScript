@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+        /**
+         * * 2) USANDO O MÉTODO ARRAY FINDINDEX() COM UMA CONDIÇÃO MAIS COMPLEXA 
+         * 
+         * Este exemplo usa o método findIndex() para obter o índice da primeira ocorrência do número 7 após o índice 2 no ranks array:
+        */
+
+        //declara um array dense literal inicializada com 6 elementos, a array e atribuida por referencia a variavel ranks, assim variavel ranks referencia o array literal
+        let ranks = [1, 5, 7, 8, 10, 7];
+
+        //usando o findIndex metodo com uma condição mais complexa
+        //O findIndex() método retorna o índice do elemento que satisfaz uma função de teste ou -1 se nenhum elemento passou no teste.
+        //O testFn é uma função a ser executada em cada elemento do array até que a função retorne true, indicando que o elemento foi encontrado.
+        //o primeiro argumento do findIndex e um arrow function que necessita de dois paramentros, ambos os paramentros são passados peloFind index a cada iteração no array, precisa do elemento atual do array e seu indice
+        //a callback so retornara true quando o elemento do array avaliado for 7 e seu index for maior que 2, assim a callback retorna true para findIndex e findIndex retorna o indice do elemento
+        //essa e uma forma de retorna o indice da segunda ocorrencia do elemento 7 no array, porque o array possui dois elmentos com valores igual a 7
+        let index = ranks.findIndex((rank, index) => rank === 7 && index > 2);
+        console.log(index); //5 indice do ultimo elemento do array
+
+    </script>
+</body>
+</html>

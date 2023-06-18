@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input id="elem" type="text" value="" placeholder="Mova o mouse sobre min" name="elem">
+
+    <script type="text/javascript">
+
+        /**
+         * * COORDENADAS: clientX, clientY, pageX, pageY
+         * 
+         * Todos os eventos do mouse fornecem coordenadas em dois tipos:
+         
+            1. Relativo à janela: clientX e clientY.
+
+            2. Relativo ao documento: pageX e pageY.
+
+         * 
+         * Em resumo, as coordenadas relativas ao documento pageX/Y são contadas a partir do canto superior esquerdo do documento e não mudam quando a página é rolada, enquanto clientX/Y são contadas a partir do canto superior esquerdo da janela atual. Quando a página é rolada, eles mudam.
+         * 
+         * Por exemplo, se temos uma janela do tamanho 500x500, e o mouse está no canto superior esquerdo, então clientX e clientY são 0, não importa como a página é rolada.
+         * 
+         * E se o mouse estiver no centro, então clientX e clientY são 250, não importa em que lugar no documento esteja. Eles são semelhantes a position:fixed esse aspecto.
+         * 
+         * Mova o mouse sobre o campo de entrada para ver clientX/clientY(o exemplo está no iframe, então as coordenadas são relativas a ele iframe):
+        */
+
+        let e = document.querySelector("#elem");
+
+        e.onmousemove = function(event) {
+            //coordenadas do clique do mouse
+            //valor da coordenada x em relação a janela do navegador
+            //valor da cordenada y em relação a janela do navegador
+            this.value = event.clientX + ":" + event.clientY;
+        };
+    </script>
+</body>
+</html>

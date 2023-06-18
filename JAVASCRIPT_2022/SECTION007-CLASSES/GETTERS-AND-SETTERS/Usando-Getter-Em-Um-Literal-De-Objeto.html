@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Getter Literal Objeto</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO GETTER EM UM LITEREAL DE OBJETO
+         * 
+         * O exemplo a seguir define um getter chamado latest para retornar o participante mais recente do meeting objeto:
+        */
+
+        //declara uma instancia de objeto literal anonimo, usando sintaxe de objeto literal, esse objeto e atribuido por referencia a variavel metting assim meeting variavel referencia a instancia de objeto literal
+        let meeting = {
+            //declara propriedade do objeto usando sintaxe chave : valor
+            attendees: [],
+            //declara um metodo do objeto literal usando a extensão de sintaxe de objeto literal que define metodo sem precisar usar a palavra chave function e o :
+            //define um metodo chamado add com um paramentro declarado chamado attendee
+            add(attendee) {
+                console.log(`${attendee} joined the meeting.`);
+                this.attendees.push(attendee);
+                //retornamos a referencia do this valor que e o objeto que esta chamando o metodo no momento
+                return this;
+            },
+            //usando a sintaxe especifica do ES6 para definir o getter método acessor da propriedade 
+            //usando a palavra chave get, para definir o metodo get latest que retorna um valor
+            get latest() {
+                //obtem o comprimento da propriedade attendees que e um array
+                let count = this.attendees.length;
+                //se o comprimento do array que e referencia pela propriedade attendees, for 0, não foi inicilizado retorna undefined, se o array tiver sido inicilizado o seu comprimento e diferente de 0, assim retorna o ultimo elemento adicionado nesse array referenciado pela propriedade attendees
+                return count == 0 ? undefined : this.attendees[count - 1];
+            }
+        };
+
+        //invocando o metodo add da instancia de objeto literal referenciado por meeting de forma encadeada, por causa que o metodo retorna a referencia do proprio instancia de objeto a cada chamada
+        meeting.add("John").add('Jane').add('Peter');
+        //ao tentar acessa propriedade latest usando notação de ponto o JS verifica se existe uma propriedade chamada latest, como não existe, procura uma vinculação de metodo chamado latest, neste caso temos o get latest método vinculado ao nome latest, quando tentamos acessar uma propriedade chamada latest o JS faz a vinculação e procura propriedade com o nome se existe retorna propriedade se não existe vincula método get, porque estamos acessado valor da propriedade lendo valor com o nome fornecido
+        //exemplo de como usar um get método por meio de uma intancia de objeto literal referenciado por meeting
+        console.log(`The latest attendee is ${meeting.latest}`);
+
+        /**
+         * * RESUMO
+         * 
+         * Use as palavras-chave get e set para definir os getters e setters de JavaScript para uma classe ou um objeto.
+         * 
+         * A get palavra-chave liga uma propriedade de objeto a um método que será invocado quando essa propriedade for pesquisada.
+         * 
+         * A set palavra-chave liga uma propriedade de objeto a um método que será invocado quando essa propriedade for atribuída.
+        */
+    </script>
+</body>
+</html>

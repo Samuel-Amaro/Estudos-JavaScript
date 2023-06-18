@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <img src="./url-object.svg" alt="ilustration"/>
+    
+    <script>
+
+        /**
+         * O URL objeto imediatamente nos permite acessar seus componentes, então é uma boa maneira de analisar a url, por exemplo:
+        */
+
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url = new URL('https://javascript.info/url');
+
+        //acessando componenetes da URL, por meio das propriedades do objeto URL
+        alert(url.protocol); //https:
+        alert(url.host); //javascript.info
+        alert(url.pathname); //url
+
+
+        /**
+         * href é o URL completo, o mesmo que url.toString()
+         * 
+         * protocol termina com o caractere de dois pontos:
+         * 
+         * search– uma sequência de parâmetros, começa com o ponto de interrogação ?
+         * 
+         * hash começa com o caractere hash #
+         * 
+         * também pode haver propriedades user e passwords e a autenticação HTTP estiver presente: http://login:password@site.com(não pintado acima, raramente usado).
+         * 
+         * * Podemos passar URL objetos para métodos de rede (e a maioria dos outros) em vez de uma string
+         * 
+         * Podemos usar um URL objeto em fetch ou XMLHttpRequest, em quase todos os lugares onde uma string de URL é esperada.
+         * 
+         * Geralmente, o URL objeto pode ser passado para qualquer método em vez de uma string, pois a maioria dos métodos realizará a conversão de string, que transforma um URL objeto em uma string com URL completo.
+        */
+    </script>
+
+</body>
+</html>

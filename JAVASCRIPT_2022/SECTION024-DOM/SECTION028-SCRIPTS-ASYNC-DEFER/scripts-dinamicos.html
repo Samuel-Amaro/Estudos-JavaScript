@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * SCRIPTS DINÂMICOS
+         * 
+         * Há mais uma maneira importante de adicionar um script à página.
+         * 
+         * Podemos criar um script e anexá-lo ao documento dinamicamente usando JavaScript:
+         */
+
+        //cria um script externo e anexa ao documento
+        //o script começa a ser carregado assim que e enexado ao ducumento
+        //scripts dinamicos se comportam como "assincronos" por padrão
+        let script = document.createElement('script');
+        script.src = "https://javascript.info/article/script-async-defer/long.js";
+        document.body.append(script); //(*)
+
+        /**
+         * O script começa a ser carregado assim que é anexado ao documento (*)
+         * 
+         * * Os scripts dinâmicos se comportam como “assíncronos” por padrão.
+         * 
+         * Aquilo é:
+         *         
+            * Eles não esperam por nada, nada espera por eles.
+            * 
+            * O script que carrega primeiro – é executado primeiro (ordem “carregar primeiro”).
+            * 
+            * Isso pode ser alterado se definirmos explicitamente script.async=false. Em seguida, os scripts serão executados na ordem do documento, assim como defer
+            * 
+         * Neste exemplo, loadScript(src) a função adiciona um script e também define async como false. 
+         * 
+         * Portanto, long.js sempre é executado primeiro (como é adicionado primeiro):
+        */
+    </script>
+    
+</body>
+</html

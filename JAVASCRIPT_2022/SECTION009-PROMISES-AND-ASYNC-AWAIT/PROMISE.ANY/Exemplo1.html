@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DE JS Promise.any()
+         * 
+         * Vamos dar alguns exemplos de uso do Promise.any() método.
+         * 
+         * * 1) EXEMPLO DE TODAS AS PROMESSAS CUMPRIDAS
+         * 
+         * O exemplo a seguir demonstra o Promise.any() método com todas as promessas cumpridas:
+        */
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('Promise 1 fulfilled');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 1
+                resolve(1);
+            }, 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 2
+                resolve(2);
+            }, 2000);
+        });
+
+        //usando o método Promise.any(), retorna uma única promessa que resolve para um valor que é o resultado da promessa cumprida(em menor tempo, a primeira promessa a ser cumprida com valor), o promise.any() ignora as promessas rejeitas, so olha para as promises cumpridas com valor:
+        //o método retorna uma nova promessa que resolve para o valor da primeira promessa de entrada que atingir o estado de cumprida com valor em menor tempo
+        //a promisse retornada por Promise.any() e atribuida por referencia a variavel p
+        //o método any recebe um array literal anonimo com as variaveis que referenciam as promises
+        //inicializa o array com 2 promises
+        const p = Promise.any([p1, p2]);
+        //usando o then método para obter o valor da promise referenciada por p, quando ela for cumprida(resolvida), o valor e o resultado da primeira promise de entrada resolvida em menor tempo
+        //a callbak passada para o then método e invocada quando a promise refrenciada por p for revolvida(cumprida com valor)
+        p.then((value) => {
+            //mostra o valor da primeira promise de entrada passada para Promise.any, tiver sido resolvida em menor tempo
+            console.log('Returned Promise');
+            console.log(value); //1
+        });
+
+        /**
+         * Como Funciona:
+
+            - Primeiro, crie uma nova promessa p1 que será resolvida em um valor 1 após um segundo.
+
+            - Segundo, crie uma nova promessa p2 que será resolvida em um valor 2 após dois segundos. 
+
+            - Terceiro, use o Promise.any()método que usa duas promessas p1 e p2. O Promise.any() retorna uma promessa p que resolverá o valor 1 da primeira promessa cumprida ( p1) após um segundo.
+        */
+    </script>
+</body>
+</html>

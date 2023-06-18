@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Finalmente, podemos dividir o código em funções reutilizáveis:
+        */      
+
+        //retorna promise, recebe o url para realizar uma solicitação de rede, e retorna uma promise resolvida com o objeto json analisado e carregado 
+        function loadJson(url) {
+            return fetch(url).then(response => response.json());
+        }
+
+        //retorna promise, realiza uma solicitação de rede e retorna uma promisse resolvida com o objeto json
+        function loadGithubUser(name) {
+            return loadJson(`https://api.github.com/users/${name}`);
+        }
+
+        //retorna promise, mostra img do user no documento, remove a mesma apos 3s e retorna uma nova promise resolvida com o objeto json 
+        function showAvatar(githubUser) {
+            return new Promise(function(resolve, reject) {
+                let img = document.createElement('img');
+                img.src = githubUser.avatar_url;
+                img.className = "promise-avatar-example";
+                document.body.append(img);
+
+                setTimeout(() => {
+                img.remove();
+                resolve(githubUser);
+                }, 3000);
+            });
+        }
+
+        //usando as function reutilizações nos manipuladores
+        loadJson('/article/promise-chaining/user.json')
+            .then(user => loadGithubUser(user.name))
+            .then(showAvatar)
+            .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+    </script>
+
+</body>
+</html>

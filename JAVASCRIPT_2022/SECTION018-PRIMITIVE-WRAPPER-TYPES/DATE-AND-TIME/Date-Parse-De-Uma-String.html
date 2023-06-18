@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * Date.parse de uma string
+         * 
+         * O método Date.parse(str) pode ler uma data de uma string.
+         * 
+         * O formato da string deve ser: YYYY-MM-DDTHH:mm:ss.sssZ, onde:
+         
+            - YYYY-MM-DD– é a data: ano-mês-dia.
+            - O caractere "T"é usado como delimitador.
+            - HH:mm:ss.sss– é a hora: horas, minutos, segundos e milissegundos.
+            - A parte opcional 'Z'denota o fuso horário no formato +-hh:mm. Uma única letra Z significaria UTC+0.
+
+         *
+         * Variantes mais curtas também são possíveis, como YYYY-MM-DD ou YYYY-MM ou até YYYY.
+         * 
+         * A chamada para Date.parse(str)analisa a string no formato fornecido e retorna o carimbo de data/hora (número de milissegundos de 1º de janeiro de 1970 UTC+0). Se o formato for inválido, retorna NaN.
+         * 
+         * Por exemplo:
+        */
+
+        //Usando o método Date.parse(str) para ler uma string que representa uma data completa, se a data for ok retorna o carimbo data/hora(timestanp), com o numero de milisegundos passados desde 1ª de janeira de 1970 ate a data passada por string
+        let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
+        
+        console.log(ms); //1327611110417(timestamp)
+
+        /**
+         * Podemos criar instantaneamente um new Date objeto a partir do timestamp:
+         * 
+        */
+
+        //criando uma instancia de objeto do tipo Date, que recebe como argumento um timestamp que e um representação numerica leve de uma data, o timestamp retornado por Date.parse(str) e o numero de milisegundos passados desde o inicio de 1970 até a string de data fornecida valida
+        let date = new Date(Date.parse('2012-01-26T13:51:50.417-07:00'));
+
+        console.log(date);
+    </script>
+</body>
+</html>

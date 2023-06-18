@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .error{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <label>Seu email por-favor:</label>
+    <input type="email" id="input"/>
+
+    <input type="text" style="width: 220px;" placeholder="tornar o email inválido e tentar focar aqui"/>
+
+    <script>
+        /**
+         * * MÉTODOS FOCUS(FOCO)/BLUR(DESFOQUE)
+         * 
+         * Methodos elem.focus() e elem.blur()definir/desativar o foco no elemento.
+         * 
+         * Por exemplo, vamos fazer com que o visitante não consiga sair da entrada se o valor for inválido:
+        */
+
+        //atribuindo uma manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento de desfoque, quando o elemento não possui mais o foco
+        input.onblur = function(event) {
+            //se o input elem não possui o @ incluido no seu valor
+            if(!this.value.includes('@')) { //não email
+                //mostra o error
+                this.classList.add("error");
+                //... e colocar o foco de volta
+                //usando o metodo elem.focus() para definir o foco novamente no input elem
+                input.focus();
+            }else{
+                this.classList.remove("error");
+            }
+        };
+
+        /**
+         * Funciona em todos os navegadores, exceto Firefox ( bug ).
+         * 
+         * Se inserirmos algo na entrada e tentarmos usar Tab ou clicar fora do <input>, onblur retornaremos o foco.
+         * 
+         * Observe que não podemos “evitar a perda de foco” chamando event.preventDefault(), onblur porque onblur funciona depois que o elemento perdeu o foco.
+         * 
+         * Na prática, porém, deve-se pensar bem, antes de implementar algo assim, pois geralmente devemos mostrar erros ao usuário, mas não devemos impedir seu progresso no preenchimento do nosso formulário. Eles podem querer preencher outros campos primeiro.
+         * 
+         * * Perda de foco iniciada por JavaScript
+         * 
+         * Uma perda de foco pode ocorrer por vários motivos.
+         * 
+         * Uma delas é quando o visitante clica em outro lugar. Mas também o próprio JavaScript pode causar isso, por exemplo:
+         * 
+            * Um alert move o foco para si mesmo, então causa a perda de foco no elemento (blur evento), e quando o alert é dispensado, o foco volta ( focus evento).
+            * 
+            * Se um elemento for removido do DOM, também causará a perda de foco. Se for reinserido posteriormente, o foco não retornará.
+            * 
+         * Esses recursos às vezes fazem com que focus/blur os manipuladores se comportem mal – sejam acionados quando não forem necessários. 
+         * 
+         * A melhor receita é ter cuidado ao usar esses eventos. Se quisermos rastrear a perda de foco iniciada pelo usuário, devemos evitar causá-la nós mesmos.
+        */
+    </script>
+</body>
+</html>

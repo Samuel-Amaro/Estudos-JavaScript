@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * EVENTOS DE STORAGE(ARMAZENAMENTO)
+         * 
+         * Quando os dados são atualizados em localStorage ou sessionStorage, o evento de armazenamento é acionado, com propriedades:
+         * 
+            * key– a chave que foi alterada ( null se .clear()for chamada).
+            * 
+            * oldValue– o valor antigo ( nullse a chave foi adicionada recentemente).
+            * 
+            * newValue– o novo valor ( null se a chave for removida).
+            * 
+            * url– a url do documento onde ocorreu a atualização.
+            * 
+            * storageArea– um localStorage ou sessionStorage objeto onde a atualização aconteceu. 
+            * 
+         * O importante é: o evento é acionado em todos os window objetos onde o armazenamento é acessível, exceto aquele que o causou.
+         * 
+         * Vamos elaborar.
+         * 
+         * Imagine, você tem duas janelas com o mesmo site em cada uma. Assim localStorage é compartilhado entre eles.
+         * 
+         * Você pode querer abrir esta página em duas janelas do navegador para testar o código abaixo.
+         * 
+         * Se ambas as janelas estiverem ouvindo window.onstorage, cada uma reagirá às atualizações que aconteceram na outra.
+        */
+
+        //aciona atualizações feitas no mesmo armazenamento de outros 
+        //atribui um manipulador de eventos, o evento e acionado Quando os dados são atualizados em localStorage ou sessionStorage
+        window.onstorage = event => { //também pode usar window.addEventListener('storage', event => {
+            //esta propriedade key, retorna a chave que foi alterada
+            if(event.key != 'now')
+                return;
+            //newValue -> o novo valor, se a chave for removida
+            //oldValue -> o valor antigo se a chave foi adicionada recentemente
+            //url - a url do documento onde ocorreu a atualização.
+            alert(event.key + ':' + event.newValue + " at " + event.url);
+        };
+
+        //o localStorage e um objeto de armazenamento da web, permitindo salvar pares de chave e valor no navegador
+        //o metodo localStorage.setItem(chave, valor), armazena o par chave/valor, no navegador
+        localStorage.setItem('now', Date.now());
+
+        /**
+         * Observe que o evento também contém: event.url – a url do documento onde os dados foram atualizados.
+         * 
+         * Além disso, event.storageArea contém o objeto de armazenamento – o evento é o mesmo para sessionStorage e localStorage, portanto, event.storageArea faz referência ao que foi modificado. Podemos até querer colocar algo de volta nele, para “responder” a uma mudança.
+         * 
+         * Isso permite que diferentes janelas da mesma origem troquem mensagens.
+         * 
+         * Os navegadores modernos também suportam a API de canal de transmissão , a API especial para comunicação entre janelas de mesma origem, é mais completa, mas menos suportada. Existem bibliotecas que preenchem essa API, com base em localStorage, que a disponibilizam em todos os lugares.
+        */
+    </script>
+
+</body>
+</html>

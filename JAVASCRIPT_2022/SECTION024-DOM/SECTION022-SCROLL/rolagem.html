@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body style="height: 2000px;">
+
+    <p>scroll Atual = <b id="showScroll">scroll na janela</b></p>
+    <script>
+        /**
+         * * ROLAGEM(SCROLL)
+         * 
+         * O scroll evento permite reagir à rolagem de uma página ou elemento. Há algumas coisas boas que podemos fazer aqui.
+         * 
+         * Por exemplo: 
+         * 
+            * Mostrar/ocultar controles ou informações adicionais dependendo de onde o usuário está no documento.
+            * 
+            * Carregue mais dados quando o usuário rolar para baixo até o final da página.
+            * 
+            * Aqui está uma pequena função para mostrar a rolagem atual:
+        */
+
+        window.addEventListener("scroll", function(event) {
+            document.getElementById('showScroll').innerHTML = window.pageYOffset +  'px';
+        });
+
+        /**
+         * O evento scroll funciona tanto na window quanto em elementos roláveis
+        */
+    </script>
+</body>
+</html>

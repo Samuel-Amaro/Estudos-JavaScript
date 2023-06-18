@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple fetch()</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * * ENCANDEANDO OS BLOCOS JUNTOS
+       * 
+       * Esta é uma maneira muito extensa de escrever isso; fizemos isso deliberadamente para ajudá-lo a entender o que está acontecendo com clareza. Conforme mostrado anteriormente neste artigo, você pode encadear .then()blocos (e também .catch()blocos).
+       * 
+       * Lembre-se de que o valor retornado por uma promessa cumprida passa a ser o parâmetro passado para a .then()função executora do próximo bloco.
+       * */
+
+      //chame o método fetch () para buscar a imagem e armazene-a em uma variável
+      fetch('coffee.jpg')
+        //Use um bloco then () para responder à conclusão bem-sucedida da promessa
+        // pegando a resposta retornada e executando blob () nela para transformá-la em um blob
+        // blob () também retorna uma promessa; quando é concluído com sucesso, ele retorna
+        // O objeto blob no retorno de chamada
+      .then(response => {
+        // A promessa fetch () NÃO rejeita erros de HTTP,
+        // então precisamos verificar o booleano Response.ok e lançar manualmente um novo Error ()
+        // para que a promessa2 seja rejeitada (por exemplo, quando ocorre um 404).
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+            return response.blob();
+        }
+      })
+      .then(myBlob => {
+        // Crie um URL de objeto que aponte para o objeto blob
+        let objectURL = URL.createObjectURL(myBlob);
+        // Crie um elemento <img> para exibir o blob (é uma imagem)
+        let image = document.createElement('img');
+        // Defina o src de <img> para o URL do objeto para que a imagem o exiba
+        image.src = objectURL;
+        // Anexe o elemento <img> ao DOM
+        document.body.appendChild(image);
+      })
+      // Se houver um problema, registre uma mensagem de erro útil no console
+      .catch(e => {
+        console.log('Ocorreu um problema com sua operação de busca: ' + e.message);
+      });
+    </script>
+  </body>
+</html>

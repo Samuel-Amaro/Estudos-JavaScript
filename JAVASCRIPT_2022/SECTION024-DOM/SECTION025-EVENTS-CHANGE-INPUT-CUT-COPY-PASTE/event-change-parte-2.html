@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        - atribuimos uma manipulador de evento por meio do atributo html
+        - o manipulador de evento, e para o evento change(mudanças, alterar), ele e acionado quando o elemento em elementos input como radio/checkbox ou selects, logo apos a seleção ter sido alterada.
+    -->
+    <select onchange="alert(this.value)">
+        <option value="">Selecione algo</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+    </select>
+
+    <script>
+        /**
+         * Para outros elementos: select, input type=checkbox/radio ele é acionado logo após a seleção ser alterada:
+        */
+    </script>
+</body>
+</html>

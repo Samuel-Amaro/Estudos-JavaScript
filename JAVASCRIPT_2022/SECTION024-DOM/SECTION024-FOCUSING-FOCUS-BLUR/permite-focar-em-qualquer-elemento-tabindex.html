@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        li{
+            cursor: pointer;
+        }
+
+        :focus{
+            outline: 1px dashed green;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Clique no primeiro item e pressione Tab. Acompanhe o pedido. Observe que muitas guias subsequentes podem mover o foco para fora do iframe no exemplo.</p>
+
+    <!--
+        - O atributo global tabindex indica se um elemento pode receber foco de entrada (se ele é focável), se e em qual posição ele deve fazer parte da navegação sequencial do teclado (geralmente com a tecla Tab, daí seu nome).
+        - elementos de formatação como <li> não suportam foco, porem com o atributo tabindex especificado o elemento se torna focalizavel por meio da nevegação do teclado usando tab tecla
+    -->
+    <ul>
+        <!--
+            - primeiro elemento na ordem a receber o foco pelo tabindex atributo.
+            - um valor positivo significa que o elemento deve ser focável e que pode ser localizado pela navegação sequencial do teclado, e a sua posição definida pelo valor do número.
+        -->
+        <li tabindex="1">Um</li>
+        <!--
+            - terceiro elemento na ordem a receber o foco pelo tabindex atributo.
+            - o valor 0 no tab index significa que o elemento deve ser focável e que pode ser localizado pela navegação sequencial do teclado, mas a sua posição será definida pela ordem no código-fonte do documento;
+        -->
+        <li tabindex="0">Zero</li>
+        <!--segundo elmento na ordem a receber o foco de acordo com a ordem do tabindex atributo-->
+        <li tabindex="2">Dois</li>
+        <!--
+            - o elemento com atributo tabindex de valor -1 significa que o elemento não ira receber o foco sequencial pelo teclado.
+        -->
+        <li tabindex="-1">Menos um</li>
+    </ul>
+
+    <script>
+        /**
+         * * PERMITE FOCAR EM QUALQUER ELEMENTO: tabindex
+         * 
+         * Por padrão, muitos elementos não suportam foco.
+         * 
+         * A lista varia um pouco entre os navegadores, mas uma coisa é sempre correta: o focus/blur suporte é garantido para elementos com os quais um visitante pode interagir: <button>, <input>, <select> e <a> assim por diante.
+         * 
+         * Por outro lado, os elementos que existem para formatar algo, como <div>, <span>, <table> – são desfocados por padrão. O método elem.focus() não funciona neles e os focus/blur eventos nunca são acionados.
+         * 
+         * Isso pode ser alterado usando o atributo HTML tabindex.
+         * 
+         * Qualquer elemento se torna focalizável se tiver tabindex. O valor do atributo é o número de ordem do elemento quando Tab(ou algo parecido) é usado para alternar entre eles.
+         * 
+         * Ou seja: se temos dois elementos, o primeiro tem tabindex="1", e o segundo tem tabindex="2", então pressionar Tab enquanto no primeiro elemento – move o foco para o segundo.
+         * 
+         * A ordem de troca é: elementos com tabindex de 1 e acima vão primeiro (na ordem tabindex) e, em seguida, elementos sem tabindex (por exemplo, um <input> regular).
+         * 
+         * Os elementos sem tabindex correspondentes são alternados na ordem de origem do documento (a ordem padrão).
+         * 
+         * Existem dois valores especiais:
+         * 
+            * tabindex="0" coloca um elemento entre aqueles sem tabindex. Ou seja, quando trocamos elementos, elementos com tabindex=0 vão atrás de elementos com tabindex ≥ 1. Normalmente é usado para tornar um elemento focalizável, mas mantém a ordem de comutação padrão. Para tornar um elemento uma parte do formulário a par com <input>.
+            * 
+            * tabindex="-1" permite apenas o foco programático em um elemento. A Tab chave ignora esses elementos, mas o método elem.focus() funciona.
+            * 
+         * Por exemplo, aqui está uma lista. Clique no primeiro item e pressione Tab: 
+         * 
+         * A ordem é assim: 1 - 2 - 0. Normalmente, <li> não suporta foco, mas tabindex full permite, junto com eventos e estilo com :focus.
+         * 
+         * * A propriedade elem.tabIndex também funciona
+         * 
+         * Podemos adicionar tabindex do JavaScript usando a elem.tabIndex propriedade. Isso tem o mesmo efeito.
+        */
+    </script>
+</body>
+</html>

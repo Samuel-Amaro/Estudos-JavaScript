@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script>
+        /**
+         * * PROMISE.RACE
+         * 
+         * Semelhante a Promise.all, mas aguarda apenas a primeira promessa estabelecida e obtém seu resultado (ou erro).
+         * 
+         * A sintaxe é:
+         
+            let promise = Promise.race(iterable);
+
+         * Por exemplo, aqui o resultado será 1:
+        */
+
+        //metodo estatico Promise.race da class Promise
+        //este metodo executa varias promises simultaneamente, mas agurda apenas a primeira promessa estabelecidade e obtem seu resultado(ou erro)
+        //passamos um array de promises
+        Promise.race([
+            new Promise((resolve, reject) => setTimeout(() => resolve(1), 1000)),
+            new Promise((resolve, reject) => setTimeout(() => reject(new Error("Whoops!")), 2000)),
+            new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000))
+        ])
+        //anexa um .then manipulador para consumir o resultado da promise estabelecida, obtem o resultado da promise resolvida ou rejeitada primeiro
+        .then(alert); //1
+
+        /**
+         * A primeira promessa aqui foi mais rápida, então se tornou o resultado. Após a primeira promessa estabelecida “ganhar a corrida”, todos os outros resultados/erros são ignorados.
+        */
+    </script>
+
+</body>
+</html>

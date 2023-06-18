@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body class="main page">
+
+    <script type="text/javascript">
+       
+       /**
+        * * className e classList
+        * 
+        * Alterar uma classe é uma das ações mais usadas em scripts.
+        * 
+        * Antigamente, havia uma limitação em JavaScript: uma palavra reservada como "class" não poderia ser uma propriedade de objeto. Essa limitação não existe agora, mas naquela época era impossível ter uma "class" propriedade, como elem.class.
+        * 
+        * Assim, para classes, a propriedade de aparência semelhante "className" foi introduzida: o elem.className corresponde ao "class" atributo.
+        * 
+        * Por exemplo:
+        */
+
+        //a propriedade elem.className correspode ao atributo html class no elemento html
+        //corresponde aos valores de class do atributo class no elemento html <body>
+        console.log(document.body.className); //main page
+
+        /**
+         * Se atribuirmos algo a elem.className, ele substituirá toda a cadeia de classes. Às vezes é disso que precisamos, mas muitas vezes queremos adicionar/remover uma única classe.
+         * 
+         * Há outra propriedade para isso: elem.classList.
+         * 
+         * O elem.classList é um objeto especial com métodos add/remove/toggle para uma única classe
+        */
+
+        //add uma class
+        //usando a propriedade elem.classList que retorna um objeto especial com metodos
+        //o metodo elem.classList.add(class) adiciona uma class no elemento html
+        //adiciona a class article no elemento html <body>
+        document.body.classList.add('article');
+
+        //usando a propriedade elem.className para obter os valores do atributo class do elmento html <body>
+        //obtem todas as class especificadas no elemento body
+        console.log(document.body.className); //main page article
+
+        /**
+         * Assim, podemos operar tanto na string de classe completa usando className ou em classes individuais usando classList. O que escolhemos depende de nossas necessidades.
+         * 
+         * Métodos de classList:
+         
+            elem.classList.add/remove("class")– adiciona/remove a classe.
+
+            elem.classList.toggle("class")– adiciona a classe se ela não existir, caso contrário a remove.
+
+            elem.classList.contains("class")– verifica a classe dada, retorna true/false.
+
+         * 
+         * Além disso, classList é iterável, então podemos listar todas as classes com for..of, assim:
+        */
+
+        //a propriedade elem.classList retorna um objeto especifical iteravel
+        //assim podemos iterar esse objeto e obter todas as classes especificadas em um elemento html
+        //no exemplo abaixo iremos obter todas as classes especificadas no elemento html <body>
+        for(let name of document.body.classList) {
+            console.log(name); //main, page, article
+        }
+        
+    </script>
+</body>
+</html>

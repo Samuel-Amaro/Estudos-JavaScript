@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Function start</title>
+    <style>
+      .msgBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 242px;
+        background: #eee;
+        padding-left: 82px;
+        background-position: 25px center;
+        background-repeat: no-repeat;
+      }
+
+      .msgBox p {
+        line-height: 1.5;
+        padding: 10px 20px;
+        color: #333;
+      }
+
+      .msgBox button {
+        background: none;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.1rem;
+        color: #aaa;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button>Display message box</button>
+
+    <!--java script local incorporado no documento HTML5-->
+    
+    <script>
+
+        //SELECIONA O ELEMENTO <button>
+        var btn = document.querySelector('button');
+
+        //<button> clicado chama a função exibirMensagem();
+        //chamando função sem parenteses: Isso ocorre porque não queremos chamar a função imediatamente — somente depois que o botão foi clicado.
+        //btn.onclick = exibirMensagem;
+
+        btn.onclick = function() {
+            
+            //exibirMensagem('Your inbox is almost full — delete some mails', 'warning');
+            exibirMensagem('Brian: Hi there, how are you today?','chat');
+        }
+
+        /**
+         * função que exibira uma mensagem
+         */
+        function exibirMensagem(textoMensagem, tipoMensagem) {
+
+            //ATRAVES DO DOM SELECIONA O ELEMENTO <html>            
+            var html = document.querySelector('html');
+
+            //ATRAVES DO DOM CRIA UM ELEMENTO <div>
+            var panel = document.createElement('div');
+            
+            //ATRAVES DO DOM seta o atributo class no panel(<div>) com o valor da classe de msgBox
+            panel.setAttribute('class','msgBox');
+            
+            //ATRAVES DO DOM ESPECIFICA QUE <html> tera um elemento filho que sera <div>
+            html.appendChild(panel);
+            
+            //atraves do DOM cria um elemento <p>
+            var msg = document.createElement('p');
+
+            //representa o conteudo de texto de um elemento, para inserir uma mensagem
+            msg.textContent = textoMensagem;
+
+            //ATRAVES DO DOM <div> tera um elemento filho <p>
+            panel.appendChild(msg);
+             
+            //atraves do DOM cria um elemento <button>
+            var closeBtn = document.createElement('button');
+            
+            //seta o conteudo no elemento
+            closeBtn.textContent = 'x';
+
+            //diz que o <div> tera um <button> como elemento filho
+            panel.appendChild(closeBtn);
+
+            /*função anonima que da um evento ação ao botão*/
+            closeBtn.onclick = function() {
+                //manipulador de eventos para fazer com que, quando o botão é clicado, algum codigo seja executado para exclur todo o painel da pagina - para fechar a caixa de mensagem
+
+                //remove o elemento <div> do elemento <html>
+                 panel.parentNode.removeChild(panel);
+            }
+
+            //codigo que vai manipular a exibição dos icones
+            if(tipoMensagem === 'warning') {
+                //se o tipo da mensagem for 
+                //aviso
+                //exibe icone com fundo vermelho
+                msg.style.backgroundImage = 'url(icons/warning.png)';
+                panel.style.backgroundColor = 'red';
+            }else if(tipoMensagem === 'chat') {
+                 //se o tipo da mensagem for
+                 //chat
+                 //exibe o icone com fundo azul
+                 msg.style.backgroundImage = 'url(icons/chat.png)';
+                 panel.style.backgroundColor = 'aqua';
+            }else{
+                //nenhum icone exibido e add espaço interno no elemento
+                msg.style.paddingLeft = '20px'
+            }
+        }        
+    </script>
+  </body>
+</html>

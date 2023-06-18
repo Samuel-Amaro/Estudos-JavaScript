@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * path(caminho)
+         * 
+         * path=/mypath
+         * 
+         * O prefixo do caminho do URL deve ser absoluto. Isso torna o cookie acessível para páginas nesse caminho. Por padrão, é o caminho atual.
+         * 
+         * Se um cookie for definido com path=/admin, ele ficará visível em páginas /admin e /admin/something, mas não em /home ou /adminpage.
+         * 
+         * Normalmente, devemos definir path a raiz: path=/para tornar o cookie acessível em todas as páginas do site.
+        */
+
+        //Os cookies têm várias opções, muitas delas são importantes e devem ser definidas
+        //As opções são listadas após key=value, delimitadas por ;, assim: 
+        //definimos um cookie com o name user e o value John
+        //e definimos uma serie de opções importantes
+        //a path opção com o valor /(caminho raiz, inicio, torna o cookie acessivel por todas as paginas), prefixo do caminho URL deve ser absoluto, isso torna o cookie acessivel a paginas nesse caminho
+        document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038  03:14:07 GMT";
+    </script>
+
+</body>
+</html>

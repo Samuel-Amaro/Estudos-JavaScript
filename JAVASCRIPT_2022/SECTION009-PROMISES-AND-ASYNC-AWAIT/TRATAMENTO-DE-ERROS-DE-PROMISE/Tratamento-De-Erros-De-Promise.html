@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tratamento De Erros de Promise</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * TRATAMENTO DE ERROS DE PROMISE
+         * 
+         * Resumo : neste tutorial, você aprenderá a lidar com o tratamento de erros em promessas.
+         * 
+         * Suponha que você tenha uma função chamada getUserById() que retorna uma Promise :
+        */
+
+        //declara uma function chamada getUserById, que declara um parametro chamado id
+        function getUserById(id) {
+            //a function ira retorna uma instancia de objeto anonima de uma promise, que o seu construtor recebe uma callback function com dois paramentros declarados conhecida como executor
+            return new Promise((resolve, reject) => {
+                //simula uma operação assicrona
+                //usando o resolve function callbakc para resolver a promise, o callbak muda o estado da promise de pendente para cumprida com valor
+                //o valor a ser resolvido e um objeto literal anonimo com duas propriedades
+                resolve({
+                    id: id,
+                    username: 'admin'
+                });
+            });
+        }
+
+    </script>
+
+</body>
+</html>

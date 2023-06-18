@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * DOMContentLoaded(Conteudo DOM carregado) é scripts
+         * 
+         * Quando o navegador processa um documento HTML e encontra uma <script> tag, ele precisa ser executado antes de continuar construindo o DOM. Isso é uma precaução, pois os scripts podem querer modificar o DOM, e até mesmo document.write nele, então DOMContentLoaded tem que esperar.
+         * 
+         * Então DOMContentLoaded definitivamente acontece após esses scripts:
+         * 
+        */
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            alert('DOM Lido');
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"></script>
+
+    <script>
+        alert('Biblioteca carregada, script embutido executado');
+
+        /**
+         *  No exemplo acima, vemos primeiro “Biblioteca carregada…” e depois “DOM pronto!” (todos os scripts são executados).
+         * 
+         * * Scripts que não bloqueiam DOMContentLoaded
+         * 
+         * Existem duas exceções a esta regra:
+         * 
+            * Scripts com o async atributo, que abordaremos um pouco mais tarde , não bloqueiam DOMContentLoaded.
+            * 
+            * Os scripts que são gerados dinamicamente document.createElement('script') e adicionados à página da Web também não bloqueiam esse evento.
+        */
+    </script>
+
+</body>
+</html>

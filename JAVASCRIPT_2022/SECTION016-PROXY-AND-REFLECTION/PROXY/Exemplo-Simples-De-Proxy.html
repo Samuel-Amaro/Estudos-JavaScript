@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <p>O proxyUser objeto usa o user objeto para armazenar dados. O proxyUser pode acessar todas as propriedades do user objeto.</p>
+
+    <img src="./JavaScript-Proxy.png" alt="imagen">
+
+    <script>
+
+        /**
+         * * UM EXEPLO SIMPLES DE PROXY
+         * 
+         * Primeiro, defina um objeto chamado user:
+        */
+
+        //declarando um objeto literal anonimo com 3 propriedades, esse objeto e atribuido por referencia a constanter user, assim user so pode referenciar esse unico objeto
+        const user = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@example.com'
+        };
+
+        /**
+         * Segundo, defina um handler objeto:
+        */
+
+        //definindo um objeto manipulador, que ira interceptar as operações fundamentais do objeto de destino(target) apontado pelo objeto proxy a ser criado 
+        //um manipulador(handler) é um objeto que contém métodos para controlar os comportamentos do alvo(target). Os métodos dentro do objeto manipulador são chamados de traps.
+        //declarando um objeto literal anonimo que e atribuido por referencia a constante handler
+        const handler = {
+            //definindo um metodo que ira controlar o comportamento do target objeto, esse método e chamado de trap(armadilhas)
+            //o metodo e definido usando a sintaxe de extensão de objetos literais do ES6, que torna o metodo do objeto mais suscinto removendo os dois pontos e a palavra-chave function
+            //esse método e usado, quando um objeto proxy tentar acessar as propriedades de outro objeto chamado target do proxy objeto
+            get(target, property) {
+                console.log(`Property ${property} has been read.`);
+                return target[property];
+            }
+        };
+
+        /**
+         * Terceiro, crie um proxy objeto:
+        */
+
+        //declarando uma instancia de objeto proxy, invocando o construtor da class Proxy, passando dois argumentos, um objeto alvo - target, e um manipulador do objeto alvo
+        //um proxy objeto é um objeto que envolve outro objeto (destino) - TARGET e intercepta as operações fundamentais do objeto de destino.
+        //o target paramentro e o objto de destino(o target a ser embrulhado pelo proxy)
+        //o handler argumento e o objeto controlador dos argumentos
+        //o proxyUser objeto usa o user objeto para armazenar dados
+        //o objeto proxyUser pode acessar todas as propriedades do user objeto
+        const proxyUser = new Proxy(user, handler);
+
+        /**
+         * O proxyUser objeto usa o user objeto para armazenar dados. O proxyUser pode acessar todas as propriedades do user objeto.
+         * 
+         * Quarto, acesse as propriedades firstName e lastName do objeto user por meio do objeto: proxyUser
+        */
+
+        //acessando as propriedades do user objeto por meio do objeto proxyUser que embrulhou o objeto user
+        //ao acessar uma propriedade do user objeto por meio do proxyUser objeto o método get do objeto manipulador e chamado
+        console.log(proxyUser.firstName);
+        console.log(proxyUser.lastName);
+
+        /**
+         * Quando você acessa uma propriedade do user objeto por meio do proxyUser objeto, o get()método no handler objeto é chamado.
+         * 
+         * Quinto, se você modificar o objeto original user, a alteração será refletida no proxyUser:
+        */
+
+        //se modifircamos o objeto literal referenciado por user, a alteração e refletida no proxy objeto que esta embrulhando o objeto target
+        //no exemplo abaixo modificaremos a propriedade firstName, adicionando um novo valor para ela, essa alteração sera refletida no proxy objeto que o embrulha
+        user.firstName = 'Jane';
+        console.log(proxyUser.firstName);
+        
+        /**
+         * Da mesma forma, uma mudança no proxyUser objeto será refletida no objeto original (user):
+        */
+
+        //se alterarmos o objeto proxy também, sera refletida a alteração no objeto target que o proxy o embrulha, nesse caso o user objeto
+        //aqui alteraremos o valor da propriedade lastName do user objeto, mas vamos alterar por meio do objeto proxy, invocando os método traps do objeto manipulador, assim alteraremos a propriedade por meio do proxyu objeto, mas a alteração sera refletida no objeto user original
+        proxyUser.lastName = 'William';
+        console.log(user.lastName);
+
+    </script>
+
+</body>
+</html>

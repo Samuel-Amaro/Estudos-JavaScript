@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliasing - Apelidos</title>
+</head>
+<body>
+
+    <script type="module" src="./app.js">
+
+        /**
+         * * ALIAS - ALIASING - APELIDOS 
+         * 
+         * JavaScript permite criar aliases para variáveis, funções ou classes ao exportar e importar. Veja o seguinte math.js módulo:
+         
+            // math.js  
+            function add( a, b ) {
+                return a + b;
+            }
+
+            export{add as sum };
+
+         *
+         * Neste exemplo, em vez de exportar a add() função, usamos a as palavra-chave para atribuir sum() um alias à função.
+         * 
+         * Então, quando você importa a add()função do math.js módulo, você deve usar sum:
+         
+            import{sum} from './math.js';
+
+         * Se você quiser usar um nome diferente ao importar, poderá usar a palavra- chave as da seguinte maneira:
+
+            import{sum as total} from './math.js';
+        */
+    </script>
+
+</body>
+</html>

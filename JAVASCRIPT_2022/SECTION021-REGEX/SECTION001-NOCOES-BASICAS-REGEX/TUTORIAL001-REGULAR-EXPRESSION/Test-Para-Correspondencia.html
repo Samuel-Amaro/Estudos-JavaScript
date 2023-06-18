@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        /**
+         * * TESTE PARA CORRESPONDÊNCIA(MATCHING)
+         * 
+         * O RegExp objeto tem muitos métodos úteis. Um deles é o test() método que permite testar se uma string contém uma correspondência do padrão na expressão regular.
+         * 
+         * O test() método retorna true se o argumento de string contiver uma correspondência.
+         * 
+         * O exemplo a seguir usa o test() método para testar se a string 'hi John 'corresponde ao padrão hi:
+        */
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo /hi/ e um padrão
+        //essa expressão regular e uma instancia de objeto literal do tipo RegExp, assim podemos invocar métodos e propriedades
+        let re = /hi/; 
+
+        //usando o método RegExp.test(string) que permite testar se uma string contem uma correspondencia do padrão na expressão regular
+        //o método retorna true se o argumento de string contiver uma correspondecia do padrão
+        //exemplo abaixo verifica se a string 'hi John' corresponde ao padrão hi
+        //usando expressão regular para pesquisar se uma string corresponde a um padrão(expressão regular)
+        //exemplo de padrão de correspondecia
+        let result = re.test('hi John'); //true
+
+        console.log(`'${'/hi/'}' matching '${'hi John'}' = ${result}`);
+    </script>
+</body>
+</html>
+
+
+

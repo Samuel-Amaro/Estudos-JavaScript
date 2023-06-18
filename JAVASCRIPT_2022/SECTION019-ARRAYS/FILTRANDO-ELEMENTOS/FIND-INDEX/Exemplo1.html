@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DE JS ARRAY FINDINDEX()
+         * 
+         * Vejamos alguns exemplos de uso do método JavaScript Array findIndex().
+         * 
+         * * 1) USANDO O MÉTODO ARRAY FINDINDEX() COM UM EXEMPLO SIMPLES DE ARRAY
+         * 
+         * O exemplo a seguir retorna o índice da primeira ocorrência do número 7 na ranks array:
+        */
+
+        //declara um array dense literal inicializada com 6 elementos, a array e atribuida por referencia a variavel ranks, assim variavel ranks referencia o array literal
+        let ranks = [1, 5, 7, 8, 10, 7];
+        //usando o metodo findIndex para achar o indice de um primeiro elemento que seja igual a 7
+        //O findIndex() método retorna o índice do elemento que satisfaz uma função de teste ou -1 se nenhum elemento passou no teste.
+        //O testFn é uma função a ser executada em cada elemento do array até que a função retorne true, indicando que o elemento foi encontrado.
+        //a callback function argumento que e passado para o findIndex e uma arrow function que possui um paramentro que e o elemento do array que esta sendo avaliado no momento pelo findIndex, se esse paramentro for igual a 7 a callback retorna true para o findIndex e o find Index retorna o indice desse elemento
+        let index = ranks.findIndex(rank => rank === 7);
+        //indice do elemento 7
+        console.log(index); //2
+        
+    </script>
+</body>
+</html>

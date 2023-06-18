@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO: loadscript
+         * 
+         * A seguir, vamos ver exemplos mais práticos de como as promessas podem nos ajudar a escrever código assíncrono.
+         * 
+         * Temos a loadScript função para carregar um script do capítulo anterior.
+         * 
+         * Aqui está a variante baseada em retorno de chamada(callback), apenas para nos lembrar disso:
+         
+            function loadScript(src, callback) {
+                let script = document.createElement('script');
+                script.src = src;
+
+                script.onload = () => callback(null, script);
+                script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+                document.head.append(script);
+            }
+
+         * 
+         * Vamos reescrevê-lo usando Promises.
+         * 
+         * A nova função loadScript não exigirá um retorno de chamada(callback). Em vez disso, ele criará e retornará um objeto Promise que será resolvido quando o carregamento for concluído. O código externo pode adicionar manipuladores (funções de assinatura) usando .then:
+        */
+
+        function loadScript(src) {
+            //retorna um objeto promise
+            return new Promise(function(resolve, reject) {
+                //trabalho da promisse e carregar um script externo e add no documento
+                let script = document.createElement('script');
+                script.src = src;
+
+                //atribui uma manipulador de evento por meio da propriedade dom
+                //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+                //quando o script estiver carregado e ja executado o manipulador e acionado
+                script.onload = (event) => {
+                    //dentro do manipulador do evento chamamos o resolve callback passando script como valor para mudar o estado da promisse para resolvida com valor
+                    //a promisse e resolvida quando o script estiver carregado e ja ter sido executado
+                    resolve(script)
+                };
+
+                //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+                //quando manipulador for acionado por um error no carregamento do script
+                script.onerror = (event) => {
+                    //dentro do manipulador do evento chamamos reject para rejeitar a promisse passando o objeto error como error para informar o motivo do erro da promisse ter sido rejeitada
+                    //a promisse e rejeitada quando houver um erro no carregamento do script
+                    reject(new Error(`Erro de carregamento de script para ${src}`));
+                };
+
+                //add script no final da section head do documento
+                document.head.append(script);
+            });
+        }
+
+        //consumindo/usando a promisse
+        let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
+
+        //registrando uma function consumindora, que recebe o valor ou erro da promisse
+        promise.then(
+            //promisse resolvida com value
+            script => alert(`${script.src} esta carregado!`),
+            //promisse rejeitada com error
+            error => alert(`Error: ${error.message}`)
+        ); 
+
+        //registrando outra function consumidora, outro manipulador
+        promise.then(script => alert('Mais um manipulador...'));        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - exemplo de comunicação entre servidores, diferentes, quando não existia metodos para solicitação de rede
+    -->
+
+    <!--alvo form-->
+    <iframe src="" frameborder="0" name="iframe"></iframe>
+
+    <!-- um formulário pode ser gerado dinamicamente e enviado por JavaScript -->
+    <form action="http://another.com/..." target="iframe" method="POST"></form>
+
+    <script>
+
+        /**
+         * * USANDO FORMULÁRIOS
+         * 
+         * Uma maneira de se comunicar com outro servidor era enviar um <form> lá. As pessoas enviaram para <iframe>, apenas para permanecer na página atual, assim:
+         * 
+         * Assim, foi possível fazer uma solicitação(request) GET/POST para outro site, mesmo sem métodos de rede, pois os formulários podem enviar dados para qualquer lugar. Mas como é proibido acessar o conteúdo de um <iframe> outro site, não foi possível ler a resposta.
+         * 
+         * Para ser preciso, havia truques para isso, eles exigiam scripts especiais tanto no iframe quanto na página. Assim, a comunicação com o iframe era tecnicamente possível. No momento não adianta entrar em detalhes, deixe esses dinossauros descansarem em paz.
+        */
+        
+    </script>
+
+</body>
+</html>

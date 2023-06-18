@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * JSON.parse
+         * 
+         * Para decodificar uma string JSON, precisamos de outro método chamado JSON.parse.
+         * 
+         * A sintaxe:
+         
+            let value = JSON.parse(str, [reviver]);
+
+         * str
+        
+            Cadeia JSON para analisar.
+
+         * reviver
+
+            Opcional function(key, value) que será chamada para cada (key, value) par e pode transformar o valor.
+
+         * Por exemplo:
+        */
+
+        //um array, ja stringficado em formato JSON, ja codificado para string JSON, esta em formato string JSON literal
+        let numbers = "[0, 1, 2, 3]";
+        
+        //usando o método JSON.parse, para decodificar a string JSON referenciado pela variavel numbers, ira decodificar a string JSON, para seu formato antigo, um array literal dense 
+        numbers = JSON.parse(numbers);
+        //acessando elemento individual do array, apos o método ter decodificado a string JSON, em um array literal
+        console.log(numbers[1]);
+
+        /**
+         * Ou para objetos aninhados:
+        */
+
+        //declara uma outra string literal ja codificada em formato JSON, uma string JSON, ja codificada, codificou um objeto literal anonimo em string JSON
+        let userData = '{ "name": "John", "age" : 35, "isAdmin": false, "friends": [0,1,2,3]}';
+
+        //usando o método JSON.parse, para decodificar a string JSON referenciado pela variavel user, ira decodificar a string JSON, para seu formato antigo, um objeto literal anonimo
+        //passamos como argumento a cadeia JSON a ser analisa para decodificação
+        let user  = JSON.parse(userData);
+
+        //acesando propriedades do array literal anonimo referenciado pela variavel user, apos o método JSON.parse ter decodificado a string JSON
+        console.log(user.friends[1]); //1
+
+        /**
+         * O JSON pode ser tão complexo quanto necessário, objetos e arrays podem incluir outros objetos e arrays. Mas eles devem obedecer ao mesmo formato JSON.
+         * 
+         * Aqui estão os erros típicos em JSON escrito à mão (às vezes temos que escrevê-lo para fins de depuração):
+        */
+
+        //Os erros tipicos que acontecem em JSON escritos a mão de forma literal, JSON em formas literais são usados para depuração.
+
+        let json = `{
+            name: "John",                       // erro: nome da propriedade sem aspas
+            "surname": 'Smith',                 //erro: aspas simples no valor (devem ser duplas)
+            'isAdmin': false,                   //erro: aspas simples na chave (deve ser dupla)
+            "birthday": new Date(2000, 2, 3),   // erro: nenhum "novo" é permitido, apenas valores nus
+            "friends": [0,1,2,3]                //aqui tudo bem
+        }`;
+
+        /**
+         * Além disso, JSON não suporta comentários. Adicionar um comentário ao JSON o torna inválido.
+         * 
+         * Existe outro formato chamado JSON5 , que permite chaves sem aspas, comentários etc. Mas esta é uma biblioteca independente, não na especificação da linguagem.
+         * 
+         * O JSON regular é tão rigoroso não porque seus desenvolvedores são preguiçosos, mas para permitir implementações fáceis, confiáveis ​​e muito rápidas do algoritmo de análise.
+        */
+    </script>
+</body>
+</html>

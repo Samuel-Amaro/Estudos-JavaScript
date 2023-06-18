@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limitação de Declarações Import e Export</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * LIMITAÇÃO DE DECLARAÇÕES IMPORT E EXPORT
+         * 
+         * Observe que você deve usar a instrução de importação(IMPORT) ou exportação(EXPORT) fora de outras instruções e funções. O exemplo a seguir causa um SyntaxError:
+         * 
+        */
+
+        if(requiredSum) {
+            //isso abaixa causa um erro de sintax, pois estamos usando uma instrução de exportar uma function dentro de uma declaração de condicional if
+            export sum;
+        }
+
+        /**
+         * Porque usamos a export declaração dentro da if declaração. Da mesma forma, a seguinte import declaração também causa um SyntaxError:
+        */
+
+        function importSum() {
+            //isso também causa um erro pois estamos usando uma instrução de importaçao dentro de uma declaração if, isso causa um erro de sintax
+            import {sum} from './cal.js';
+        }
+
+        /**
+         * Porque usamos a import instrução dentro de uma função.
+         * 
+         * O motivo do erro é que o JavaScript deve determinar estaticamente o que será exportado(export) e importado(import).
+         * 
+         * Observe que o ES2020 introduziu o import() de objeto semelhante a uma função que permite importar dinamicamente um módulo.
+         * */
+        
+    </script>
+
+</body>
+</html>

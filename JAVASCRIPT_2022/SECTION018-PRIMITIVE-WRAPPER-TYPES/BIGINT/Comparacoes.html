@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * COMPARAÇÕES
+         * 
+         * A BigInt não é estritamente igual (===) a a Number:
+        */
+
+        //o operador estritamente igual so retorna true quando os operados são iguais e do mesmo tipo, neste caso não sao do mesmo tipo e nem iguais
+        console.log(1n === 1); //false
+
+        /**
+         * No entanto, a BigInt é vagamente igual a um número quando você usa o == operador:
+        */
+
+        //o operador de igualdade, retorna true, quando os operandos são iguais
+        //o operando do tipo bigInt e igual a number
+        //usando o operador igual(==) e uma comparação fraca
+        console.log(1n == 1); //true
+
+        /**
+         * Você pode usar o <, <=, >, >= para comparar a BigInt com a Number:
+        */
+
+        //o valor 1n do tipo bigInt e menor que 2
+        console.log(1n < 2); //true
+        //o valor 2n do tipo bigInt e maior que 1
+        console.log(2n > 1); //true
+        //o valor 2n do tipo bigInt e maior ou igual que 2
+        console.log(2n >= 2); //true
+    </script>
+
+</body>
+</html>

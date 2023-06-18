@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * CLOSURES DE JAVASCRIPT
+         * 
+         * Vamos modificar a greeting() função:
+        */
+
+        //declara uma function regular chamada greeting que não possui paramentro declarado
+        //Obs: lembrando que toda function em JS e uma instancia de objeto do tipo function
+        function greeting() {
+            //declara uma variavel local acessivel somente no escopo da function chamada message inicializada com uma valor 
+            let message = 'Hi';
+            //declara uma function interna local chamada sayHi que não possui paramentro declarado
+            //so e acessivel essa função dentro do escopo da function greeting e uma função local
+            function sayHi() {
+                //a função interna acessa a variavel que esta no escopo da function externa, isso e aninhamento de escopo
+                //acessa a variavel declarada no escopo da function externa
+                console.log(message);
+            }
+
+            //function externa retorna a function local sayHi como um valor
+            //por uma função ser um cidadão de primeira classe poder se retorna uma função de outra função
+            //uma funcão e uma instancia de objeto do tipo function isso e um valor, assim podem ser retornadas como valores
+            return sayHi; 
+        }
+
+        //invoca a function greeting ela retorna uma function local como um valor
+        //a hi variavel recebera a function local declarada em greeting function
+        //assim a variavel hi referencia a function local declarada dentro do escopo da function greeting
+        let hi = greeting();
+        //invoca a function local sayHi() por meio da variavel hi(), dentro do escopo global do script, sendo que a function sayHi() foi declarada no escopo local da function greeting
+        //mesmo assim a variavel declarada no escopo de greeting e acessivel pela function local sayHi referencida pela variavel Hi. mas como isso pode?
+        //devido aos fechamentos pois enquanto a greeting função estiver sendo executada que aqui e por causa da sayHi function local que esta dentro dela as variavels decladas no escopo ainda estão acessiveis, mas quando terminar de executar a function sayHi, que logo em seguida tera concluido a execução de greeting também ai as variaveis não sraão mais acessiveis
+        //a magica e o fechamento. a function sayHi e o fechamento para conlcuir a execução de greeting function
+        //enquanto sayHi estiver sendo executa o escopo de greeting esta sendo executado e ainda existe, assim que encerrar sayHi encerra a greeting function o fechamento, encerramento das duas functions
+        //a closure e uma função que preserva o escopo externo em seu escopo interno.
+        //isso que dizer que devido ao uso do escopo externo no escopo interno, mantém o escopo externo preservado e ativo por causa do uso até sua conclusão
+        hi(); //ainda pode acessar a variável de mensagem
+
+        /**
+         * Agora, em vez de executar a sayHi() função dentro da greeting()função, a greeting() função retorna o sayHi() objeto da função.
+         * 
+         * Observe que as funções são os cidadãos de primeira classe em JavaScript , portanto, você pode retornar uma função de outra função.
+         * 
+         * Fora da greeting() função, atribuímos à hi variável o valor retornado pela greeting() função, que é uma referência da sayHi()função.
+         * 
+         * Em seguida, executamos a sayHi()função usando a referência dessa função: hi(). Se você executar o código, obterá o mesmo efeito que o acima.
+         * 
+         * No entanto, o ponto interessante aqui é que, normalmente, uma variável local só existe durante a execução da função.
+         * 
+         * Isso significa que quando a greeting() função tiver concluído a execução, a message variável não estará mais acessível.
+         * 
+         * Neste caso, executamos a hi()função que referencia a sayHi()função, a message variável ainda existe.
+         * 
+         * A mágica disso é o fechamento. Em outras palavras, a sayHi() função é um fechamento.
+         * 
+         * Uma closure é uma função que preserva o escopo externo em seu escopo interno.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global This</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * JAVASCRIPT THIS GLOBAL
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o global This objeto JavaScript.
+         * 
+         * O ES2020 introduziu o global This objeto que fornece uma maneira padrão de acessar o objeto global nos ambientes.
+         * 
+         * Historicamente, JavaScript tinha um objeto global com nomes diferentes em ambientes diferentes.
+         * 
+         * Nos navegadores da Web, o objeto global é window ou frames.
+         * 
+         * A API Web Workers, no entanto, não possui o window objeto porque não possui contexto de navegação. Portanto, a API Web Workers é usada self como um objeto global.
+         * 
+         * Node.js, por outro lado, usa a global palavra-chave para fazer referência ao objeto global.
+         * 
+         * Se você escrever código JavaScript que precisa acessar o objeto global, precisará usar sintaxes diferentes como window, frames, self ou global.
+         * 
+         * Para padronizar isso, o ES2020 introduziu o globalThis que está disponível em todos os ambientes.
+        */
+
+        console.log(globalThis);
+    </script>
+</body>
+</html>

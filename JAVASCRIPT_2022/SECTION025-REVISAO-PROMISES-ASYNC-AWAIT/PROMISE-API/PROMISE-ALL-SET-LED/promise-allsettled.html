@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * Promise.allSettled
+         * 
+         * * Uma adição 
+         * 
+         * Esta é uma adição recente à linguagem. Navegadores antigos podem precisar de polyfills .
+         * 
+         * Promise.all rejeita como um todo se alguma promessa for rejeitada. Isso é bom para casos de “tudo ou nada”, quando precisamos de todos os resultados bem-sucedidos para prosseguir:
+        */
+
+        //Promise.all([
+        //    fetch('/template.html'),
+        //    fetch('/style.css'),
+        //    fetch('/data.json')
+        //]).then(render); // o método render precisa dos resultados de todas as buscas
+        
+        /**
+         * Promise.allSettled apenas espera que todas as promessas sejam resolvidas, independentemente do resultado. A array resultante tem:
+         
+            {status:"fulfilled", value:result}para respostas bem sucedidas,
+
+            {status:"rejected", reason:error}para erros.
+
+         * 
+         * Por exemplo, gostaríamos de buscar as informações sobre vários usuários. Mesmo que uma solicitação falhe, ainda estamos interessados ​​nas outras.
+         * 
+         * Vamos usar Promise.allSettled:
+        */
+
+        let urls = [
+            'https://api.github.com/users/iliakan',
+            'https://api.github.com/users/remy',
+            'https://no-such-url'
+        ];
+
+        //chamando metodo estatido Promise.allSettled da class Promise
+        //este metodo executa varias promesas simultaneamente(ao mesmo tempo), espera que todas as promessas sejam resolvidas, independentemente do resultado.
+        //retorna uma nova promisse que e resolvida quando todas as promises passadas por argumento tiverem sido resolvidas
+        //a promise e resolvida com um array resultante com o resultado de todas as promises
+        //ou um objeto error quando alguma promise for rejeitada
+        Promise.allSettled(urls.map(url => {
+            //para cada elemento do array urls, executa uma solicitação de rede e retorna um promise
+            return fetch(url);
+        }))
+            //anexa um manipulador .then para consumir o array resultante quando a promise for resolvida
+            .then(results => { // (*)
+                //itera sobre o array de resultados das promises resolvidas
+                //cada resultado e um objeto que possui propriedades como status, value, reason
+                results.forEach((result, num) => {
+                    //promise foi resolvida com o seguinte result, resposta bem sucedida
+                    if(result.status == "fulfilled") {
+                        alert(`${urls[num]}: ${result.value.status}`);
+                    }
+                    //promise foi rejeitada com o seguinte result
+                    if(result.status == "rejected") {
+                        alert(`${urls[num]}: ${result.reason}`);
+                    }
+                });
+            });
+
+        /**
+         * O results na linha (*) acima será:
+         
+            [
+                {status: 'fulfilled', value: ...response...},
+                {status: 'fulfilled', value: ...response...},
+                {status: 'rejected', reason: ...error object...}
+            ]
+
+         * 
+         * Assim, para cada promessa, obtemos seu status e value/error
+        */
+    </script>
+
+</body>
+</html>

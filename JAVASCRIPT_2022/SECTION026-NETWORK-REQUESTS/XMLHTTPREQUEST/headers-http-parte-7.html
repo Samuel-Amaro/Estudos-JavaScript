@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * HEADERS HTTP(CABEÇALHOS HTTP)
+         * 
+         * XMLHttpRequest permite enviar cabeçalhos personalizados e ler cabeçalhos da resposta.
+         * 
+         * Existem 3 métodos para cabeçalhos HTTP:
+         * 
+            * setRequestHeader(name, value)
+            * 
+                * Define o cabeçalho da solicitação com o dado name e value.
+                * 
+            * Por exemplo: 
+        */
+
+        xhr.setRequestHeader('Content-Type', 'apllication/json');
+
+        /**
+         * * Limitações de cabeçalhos
+         * 
+         * Vários cabeçalhos são gerenciados exclusivamente pelo navegador, por exemplo Referer e Host. A lista completa está na especificação .
+         * 
+         * XMLHttpRequest não é permitido alterá-los, para segurança do usuário e correção da solicitação.
+         * 
+         * * Não é possível remover um cabeçalho
+         * 
+         * Outra peculiaridade XMLHttpRequest é que não se pode desfazer setRequestHeader.
+         * 
+         * Uma vez que o cabeçalho está definido, ele está definido. Chamadas adicionais adicionam informações ao cabeçalho, não as sobrescrevam.
+         * 
+         * Por exemplo:
+        */
+
+        //ao inves de sobrescrever o header a chamada adiona informações adicionais ao header
+        xhr.setRequestHeader('X-Auth', '123');
+        xhr.setRequestHeader('X-Auth', '456');
+
+        // the header will be:
+        // X-Auth: 123, 456
+
+        /**
+         * getResponseHeader(name) : Obtém o cabeçalho de resposta com o dado name(exceto Set-Cookie e Set-Cookie2).
+         * 
+         * Por exemplo:
+        */
+
+        xhr.getResponseHeader('Content-Type');
+
+        /**
+         * getAllResponseHeaders() : Retorna todos os cabeçalhos de resposta, exceto Set-Cookiee Set-Cookie2.
+         * 
+         * Os cabeçalhos são retornados como uma única linha, por exemplo:
+        */
+
+        //Cache-Control: max-age=31536000
+        //Content-Length: 4260
+        //Content-Type: image/png
+        //Date: Sat, 08 Sep 2012 16:53:16 GMT
+
+        /**
+         * A quebra de linha entre os cabeçalhos é sempre "\r\n"(não depende do sistema operacional), então podemos dividi-la facilmente em cabeçalhos individuais. O separador entre o nome e o valor é sempre dois-pontos seguido de um espaço ": ". Isso está fixado na especificação.
+         * 
+         * Então, se quisermos obter um objeto com pares nome/valor, precisamos lançar um pouco de JS.
+         * 
+         * Assim (supondo que, se dois cabeçalhos tiverem o mesmo nome, o último substituirá o anterior):
+        */
+
+        let headers = xhr.getAllResponseHeaders().split('\r\n')
+        .reduce((result, current) => {
+            let [name, value] = current.split(': ');
+            result[name] = value;
+            return result;
+        }, {});
+
+        //headers['Content-Type'] = 'image/png'
+    </script>
+
+</body>
+</html>

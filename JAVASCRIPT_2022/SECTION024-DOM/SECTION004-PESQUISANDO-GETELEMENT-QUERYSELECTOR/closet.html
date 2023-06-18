@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Contents</h1>
+
+    <div class="contents">
+        <ul class="book">
+            <li class="chapter">Chapter 1</li>
+            <li class="chapter">Chapter 2</li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+
+        /**
+         * * closest(mais próximo)
+         * 
+         * Os ancestrais de um elemento são: pai, pai do pai, pai dele e assim por diante. Os ancestrais juntos formam a cadeia de pais do elemento ao topo.
+         * 
+         * O método elem.closest(css)procura o ancestral mais próximo que corresponda ao seletor CSS. O elem próprio também está incluído na pesquisa.
+         * 
+         * Em outras palavras, o método closest sobe do elemento e verifica cada um dos pais. Se corresponder ao seletor, a pesquisa será interrompida e o ancestral será retornado.
+         * 
+        */
+
+        //obtem o primeiro elemento da pagina que corresponde ao seletor de classe css fornecido abaixo
+        let chapter = document.querySelector('.chapter');
+
+        //o método closest abaixo ira procurar o ancestral mais proximo do elemento chapter que corresponde ao seletor css fornecido
+        console.log(chapter.closest('.book')); //<ul>
+        console.log(chapter.closest('.contents')); //<div>
+        //null (porque h1 não é um ancestral)
+        console.log(chapter.closest('h1')); 
+        
+    </script>
+</body>
+</html>

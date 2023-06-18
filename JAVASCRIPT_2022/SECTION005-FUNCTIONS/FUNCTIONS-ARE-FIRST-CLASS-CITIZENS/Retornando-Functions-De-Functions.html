@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retornando Functions de Functions</title>
+</head>
+<body>
+    <script>
+        /**
+         * * RETORNANDO FUNCTIONS DE FUNCTIONS
+         * 
+         * Como as funções são valores, você pode retornar uma função de outra função.
+         * 
+         * A compareBy() função a seguir retorna uma função que compara dois objetos por uma propriedade fornecida:
+        * */
+
+        //declara uma function chamada compareBy que possui um paramentro chamado propName
+        function compareBy(propName) {
+            //a function compareBy retorna um valor, esse valor e uma função
+            //declara um function anonima que possui dois paramentros
+            //essa function e o valor a ser retornado pela compareBy function
+            return function(a, b) {
+                //corpo da função
+                //implementação da logica
+                let x = a[propName], y = b[propName];
+                //a function anonima possui varias instruções de retorno,
+                //isso e permitido quando os return instruções são baseados em condições
+                if(x > y) {
+                    //y e menor que x
+                    //y vira primeiro que x na classificação
+                    return 1;
+                }else if(x < y) {
+                    //x e menor que y
+                    //e vem primeiro que y 
+                    //na classificação
+                    return -1;
+                }else {
+                    //x e y são elementos iguais
+                    return 0;
+                }
+            }
+        }
+
+        /**
+         * Suponha que você tenha uma array de objetos de produto em que cada objeto de produto tenha duas propriedades:  name e  price
+        * */
+
+        //declara um array literal inicializado com 3 elementos 
+        //um array dense
+        let products = [
+            {name: 'Iphone', price: 900}, {name: 'Samsung Galaxy', price: 850}, 
+            {name: 'Sony Xperia', price: 700}
+        ];
+
+        /**
+         * Você pode classificar uma array chamando o  sort() método. O  sort() método aceita uma função que compara dois elementos da array como um argumento.
+         * 
+         * Por exemplo, você pode classificar a lista de produtos com base no nome, passando uma função retornada da  compareBy() função da seguinte maneira:
+         * */
+
+        console.log('Produtos sorteados por nome: ');
+
+        //utilizando o metodo sort da Array tipo
+        //este metodo classificara os elementos da array pela propriedade de nome de cada elemento
+        //o metodo sort, precisa de um argumento, uma callback function que sera responsavel por definir a forma de classificação dos elementos
+        //forma padrão e em ordem crescente 
+        //classificação de strings alfabeticamente
+        //classificado como strings, elementos são classificados em ordem crescente de caracteres ASCII.
+        //a callback function argument para o sort metodo e retornada como um function value da invocação(chamada) da função compareBy, retorna um function anonima que define como a classificação deve ser feita pelo sort metodo
+        //sendo a callbakc argument de sort
+        products.sort(compareBy('name'));
+
+        console.table(products);
+
+        /**
+         * Da mesma forma, você pode classificar a lista de produtos por preço:
+        * */
+        //mesma logica do exemplo acima, agora classificando pelo preco do produto
+        console.log('Produtos sorteados por preço: ');
+
+        products.sort(compareBy('price'));
+
+        console.table(products);
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprimento do array JavaScript</title>
+</head>
+<body>
+    
+    <h1>Length do array JavaScript</h1>
+
+    <p><strong>Resumo:</strong> neste tutorial, você aprenderá sobre a length propriedade JavaScript Array e como manipulá-la corretamente.</p>
+
+    <script>
+        /***
+         * * O QUE EXTAMENTE É A PROPRIEDADE JAVASCRIPT ARRAY LENGTH
+         * 
+         * Por definição, a length propriedade de uma array é um inteiro não assinado de 32 bits que é sempre numericamente maior que o índice mais alto da array.
+         * 
+         * O valor do length é 2 32 . Isso significa que uma array pode conter até 4294967296(2 32) elementos.
+         * 
+         * A length propriedade se comporta de maneira diferente dependendo dos tipos de array, incluindo densa(arrays dense) e esparsa(arrays sparse).
+         * 
+         * *  1) Arrays Dense(arrays densas)
+         * 
+         * Uma matriz(Array) densa é uma matriz(array) em que seus elementos têm índices contíguos começando em zero.
+         * 
+         * Para matrizes(arrays) densas, você pode usar a length propriedade para obter o número de elementos na matriz(arrays). Por exemplo:
+         * 
+         * */
+
+         let colors = ['red', 'green', 'blue'];
+         console.log("colors[] = " + colors.length); //3 elementos no array
+
+         /**
+          * Neste exemplo, a length propriedade retorna três, que é igual ao número de elementos na colors matriz(Array).
+          * 
+          * O seguinte adiciona mais um elemento à colors matriz(array):
+          * */
+
+          colors.push('yellow'); //add 'yellow' no final do array como o ultimo elemento, fzendo assim aumenta o numero de eleementos no array
+          console.log("colors[] = " + colors.length); //4 elementos no array
+
+          /**
+           * Agora, a length propriedade da colors matriz(array) é quatro.
+           * 
+           * Quando você esvazia a colors matriz(Array), seu comprimento é zero:
+           * */
+           colors = []; //esvazia o array
+           console.log("colors[] = " + colors.length); //0
+
+           /**
+            * * 2) Arrays Esparsas(matrizes espasadas)
+            * 
+            * Uma matriz(Array) esparsa é uma matriz(Array) cujos elementos não têm índices contíguos começando em zero.
+            * 
+            * Por exemplo, o [10,, 20, 30] é uma matriz(array) esparsa porque os índices de seus elementos são 0, 2 e 3.
+            * 
+            * Em uma matriz(array) esparsa, a propriedade length não indica o número real de elementos. É um número maior que o índice mais alto. Por exemplo:
+            * */
+
+            let numeros = [10, , 20, 30];
+            console.log("numeros[] = " + numeros.length); //4 elementos no array esparsadas
+
+            /**
+             * Neste exemplo, o número de elementos na numbers matriz(array) é três: 10, 20 e 30. O índice mais alto é três. Portanto, a length propriedade retorna quatro.
+             * 
+             * O seguinte adiciona um elemento à numbers matriz(Array) no índice 10:
+             * 
+             * */
+
+            numeros[10] = 100;
+            console.log("numeros[] = " + numeros.length); //11 elementos no array porque usamos até a posição 11, mas não temos todas preenchidas
+
+            /**
+             * Neste exemplo, a length propriedade retorna 11.
+             * */
+    </script>
+</body>
+</html>

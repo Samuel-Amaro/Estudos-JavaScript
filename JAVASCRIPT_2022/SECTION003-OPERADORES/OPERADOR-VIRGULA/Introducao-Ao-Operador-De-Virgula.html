@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador de Virgula</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OPERADOR DE VIRGULA JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o operador de vírgula JavaScript e seus usos.
+         * 
+         * * INTRODUÇÃO AO OPERADOR DE VÍRGULA JS
+         * 
+         * JavaScript usa uma vírgula (,) para representar o operador de vírgula. Um operador de vírgula pega duas expressões, avalia-as da esquerda para a direita e retorna o valor da expressão certa.
+         * 
+         * Uma expressão consiste em qualquer unidade válida de código que é resolvida como um valor
+         *
+         * Conceitualmente, existem dois tipos de expressões: aquelas que atribuem um valor a uma variável e aquelas que simplesmente possuem um valor.
+         * 
+         * A expressão x = 7 é um exemplo do primeiro tipo. Esta expressão utiliza o operador = para atribuir o valor sete à variável x. A expressão em si é avaliada como sete.
+         * 
+         * O código 3 + 4 é um exemplo do segundo tipo de expressão. Esta expressão utiliza o operador + para somar três e quatro sem atribuir o resultado, sete, a uma variável.
+         * 
+         * Aqui está a sintaxe do operador de vírgula:
+
+         leftExpression, rightExpression
+
+         * Por exemplo:
+        */
+
+        //declara uma variavel e a inicializa de acordo com a avaliação da expressão pelo operador virgula
+        //o operador virgula avalia as expressões da esquerda para direita e retorna o valor da expressão correta
+        //aqui temos uma expressão antes do operador virgula expressão da esquerda que e uma expressão do tipo que simplesmente possue o valor
+        //e apos o operador a expressão do tipo que simplementes possue o valor mais utiliza o operador de soma para somar o valor 10 + 20 e o resultado final da expressão avaliada pelo operador ser atribuido a varaivel, aqui a expressão correta e o da direita, a soma de 10 + 20 resulta em um valor que e atribuido a result variavel
+        let result = (10, 10 + 20);
+        console.log(result);
+
+        /**
+         * Neste exemplo, 10, 10+20 retorna o valor da expressão correta, que é 10+20. Portanto, o valor do resultado é 30.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        let x = 10;
+        //aqui temos duas expressões para serem avaliadas pelo operador virgula
+        //a expressão da esquerda e uma expressão que resulta e um valor o x e incrementado usando o operador de pos incremento
+        //a expressão da direita e uma soma de o valor de x + 1
+        //o y recebera no final a atribuição do valor 11 de qualquer uma das expressões
+        //aqui o y sera 12 
+        //e o x possuira o valor 11
+        let y = (x++, x + 1);
+        console.log(x, y);
+
+
+        /**
+         * Neste exemplo, aumentamos o valor de x em um ( x++), adicionamos um a x(x+1) e atribuímos x a y. Portanto, x é 11, e y é 12 após a instrução
+         * 
+         * No entanto, para tornar o código mais explícito, você pode usar duas instruções em vez de uma instrução com um operador de vírgula como este:
+        */
+
+        x = 10;
+        x++; // 11
+        y = x + 1; // 12
+
+        /**
+         * Este código é mais explícito.
+         * 
+         * Na prática, você pode querer usar o operador vírgula dentro de um forloop para atualizar várias variáveis ​​a cada vez que passar pelo loop.
+         * 
+         * O exemplo a seguir usa o operador de vírgula em um loop for para exibir uma array de nove elementos como uma array de 3 linhas e três colunas:
+        */
+
+        //declara uma array densa com 9 elementos inicializados
+        let board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        let s = '';
+        for(let i = 0, j = 1; i < board.length; i++, j++) {
+            s += board[i] + '';
+            if(j % 3 === 0) {
+                console.log(s);
+                s = '';
+            }
+        }
+
+    </script>
+</body>
+</html>

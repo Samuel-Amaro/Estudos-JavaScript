@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * GRUPOS DE CAPTURA NOMEADOS
+         * 
+         * Para acessar um subgrupo em uma correspondência, você usa um índice. No entanto, você pode querer acessar um subgrupo por um nome significativo para torná-lo mais conveniente.
+         * 
+         * Para fazer isso, você usa o grupo de captura nomeado(named capturing group) para atribuir um nome a um grupo. Veja a seguir a sintaxe para atribuir um nome a um grupo de captura:
+         
+            (?<nome>regra) -> sintaxe para atribuit um nome a um grupo de captura.
+                
+         
+         * Nesta Sintaxe:
+
+            () -> indica o grupo de captura
+
+            ?<nome> -> especifica o nome do grupo de captura
+
+            regra(rule) -> e uma regra no padrão
+
+         *
+         * Por exemplo, o seguinte cria os nomes:
+         
+            /(?<resource>\w+)\/(?<id>\d+)/
+
+            - resource: especifica o nome do primeiro grupo de captura que possui o padrão \w+ como regra para captura
+
+            - id: especifica o nome do segundo grupo de captura que possui o padrão \d+ como regra para captura;
+
+         * 
+         * Nesta sintaxe:
+         
+            - O resource e o nome do primeiro grupo de captura
+
+            - o id e o nome do segundo grupo de captura
+        */
+       
+        //declara uma string literal para pesquisa
+        const path = 'posts/10';
+        //criando uma expressão regular que o seu padrão possui o seguinte significado:
+        //possui dois grupos de captura nomeados
+        //o padrão inicia como, o primeiro grupo de captura, que possui como regra de captura um padrão que corresponda a um ou mais caracteres de palavra, esse grupo de captura e nomeado e possui o seguinte nome <resource> para poder acessar as suas correspondecias.
+        //seguido por um barra,
+        //o segundo grupo de captura que tem como regra o padrão que corresponda a um ou mais digitos, esse grupo de captura e nomeado de <id> para poder acessar as suas correspondecias.
+        //cada parenteses cria um grupo de captura para uma regra
+        //usamos os quantificadores gananciosos de abreviação como o + -> {n,} que combina varias vezes o seu caractere anterior.
+        //e usamos a (\) contra barra para escapar a barra(/)
+        let pattern = /(?<resource>\w+)\/(?<id>\d+)/;
+        //usando o método String.match(regexp) para retornar todas as correspondecias do regexp na string
+        //se definirmos a flag g(global) na expressão regular o String.metch(regexp) método não retorna os grupos
+        //o método retorna uma array com as correspondecias, primeiro elemento são as correspondecias inteiras, depois os valores dos grupos de captura, definidos
+        const match = path.match(pattern);
+        console.log(match);
+
+        /**
+         * A match tem uma groups propriedade que é um objeto. O match.groups objeto possui propriedades cujos nomes são o nome do grupo de captura e os valores são os valores de captura. Por exemplo:
+        */
+
+        //o array retornado do método match possui uma propriedade chamada groups que referencia um objeto anonimo literal que possui como propriedade os nomes definidos nos grupos de captura na expressão regular
+        //acessamos os valores dos grupos de captura pelo seus nomes, acessamos o grupo de captura na correspodencia pelos seus nomes
+        //usando a construção for...in para iterar sobre as prorpeidades do objeto anonimo literal referenciado pela propriedade groups
+        for(const name in match.groups) {
+            console.log(`name: ${name} | value: ${match.groups[name]}`);
+        }
+    </script>
+</body>
+</html>
+
+
+

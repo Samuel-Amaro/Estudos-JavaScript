@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iteradores Assincronos</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ITERADORES ASSÍNCRONOS(ITERATORS ASYNCHRONOUS) DE JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os iteradores assíncronos de JavaScript que permitem acessar dados assíncronos sequencialmente.
+         *
+         * * INTRODUÇÃO AOS ITERADORES ASSÍNCRONOS DE JS
+         *
+         * O ES6 introduziu a interface do iterador que permite acessar dados sequencialmente. O iterador é adequado para acessar as fontes de dados síncronas, como arrays , sets e maps.
+         * 
+         * O principal método de uma interface iteradora é o next() que retorna o {value, done} objeto, onde done é um booleano que indica se o fim da sequência foi alcançado e value é o valor gerado na sequência.
+         * 
+         * Os dados síncronos(synchronous) significam que o próximo value na sequência e o done estado são conhecidos no momento em que o next() método retorna.
+         * 
+         * Além das fontes de dados síncronas( asynchronous), o JavaScript geralmente precisa acessar fontes de dados assíncronas, como acesso de E/S. Para as fontes de dados assíncronas, o estado value(valor) e done(conclúido) do iterador geralmente é desconhecido no momento em que o next() método retorna.
+         * 
+         * Para lidar com as fontes de dados assíncronas, o ES2018 introduziu a interface do iterador assíncrono (async iterator interface).
+         *
+         * Um iterador assíncrono é como um iterador, exceto que seu método next() retorna uma promessa(promise) que resolve para o objeto {value, done}.
+         *
+         * O seguinte ilustra a classe Sequence que implementa a interface do iterador. (Confira o tutorial do iterador para obter mais informações sobre como implementar a classe Sequence.)
+        */
+
+        //definindo um tipo personalizado de class
+        //define um class chamada Sequence com uma palavra-chave class
+        class Sequence{
+            //construtor da class Sequence, define três paramentros com valores padrões
+            constructor(start = 0, end = Infinity, interval = 1) {
+                //define propriedades e as inicializa com os argumentos
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+            }
+            //define um método de instancia da classe
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformidade com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            [Symbol.iterator]() {
+                let counter = 0;
+                let nextIndex = this.start;
+                //retorna uma instancia de objeto anonima literal, uma instancia de objeto que esteja em conformidade com o protolo de iteração iterator
+                return {
+                    //define um método chamado next, sem paramentro
+                    next: () => {
+                        //verifica se ha mais elementos a serem iterados
+                        if(nextIndex <= this.end) {
+                            //define uma instancia de objeto anonima com duas propriedades value e done, value(o elemento atual),
+                            //done(um valor booleano que indica se há ou não mais elementos que podem ser iterados. - false, ha elementos para ser iterados, true não ha mais elementos)
+                            let result = {value: nextIndex, done: false};
+                            nextIndex += this.interval;
+                            counter++;
+                            return result;
+                        }
+                        //retorna uma instancia de objeto anonima, com uma propriedade value que indica o valor, e a done propriedade que indica que não ha mais elementos ha iterar
+                        return {value: counter, done: true};
+                    }
+                }
+            }
+        };
+
+        /**
+         * Para tornar essa Sequence classe de forma assíncrona, você precisa modificá-la da seguinte maneira:
+
+            - Use o Symbol.asyncIterator em vez do Symbol.iterator
+
+            - Retorne uma Promise do next()método.
+
+         * O código a seguir transforma a Sequence classe na AsyncSequence classe:
+        */
+
+        //modifica a class Sequence para AsyncSequence para tornala uma classe personalizada que itere as fontes de dados assincronas
+        class AsyncSequence{
+            constructor(start = 0, end = Infinity, interval = 1) {
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+            }
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.asyncIterator, para permitir usar o método next, para identificar que esse tipo personalizado de class itera fonte de dados assincronas
+            [Symbol.asyncIterator]() {
+                let counter = 0;
+                let nextIndex = this.start;
+                return {
+                    //define um método assincrono que trata operações assincronas, e retorna um promisse
+                    next: async () => {
+                        if(nextIndex <= this.end) {
+                            let result = {value: nextIndex, done: false};
+                            nextIndex += this.interval;
+                            counter++;
+                            //o método assincrono ira retornar uma instancia de objeto anonima de uma promise, que recebe como argumento uma callback conhecida como executor
+                            return new Promise((resolve, reject) => {
+                                //simula operação assincrona
+                                //espera cerca de 1 segundo de atraso para resolver a promise com valor
+                                setTimeout(() => {
+                                    //usando a callback function argumento, para mudar o estado da promise de pendente para resolvida com valor, isso e a promise e resolvida com o result objeto literal que retorna um objeto que contém elemento da fonte de dados assincrona
+                                    resolve(result);
+                                }, 1000);
+                            });
+                        }
+                        //retorna uma promise, encapsulando uma operação assincrona
+                        return new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    resolve(result);
+                                }, 1000);
+                        });
+                    }
+                }
+            }
+        }
+
+        /**
+         * O AsyncSequence retorna o próximo número na sequência após cada 1 segundo.
+         * 
+         * * A DECLARAÇÃO FOR AWAIT...OF
+         *
+         * Para iterar sobre um objeto iterável assíncrono, o ES2018 introduziu a for await...of instrução:
+
+            for await(variable of iterable) {
+
+            }
+
+         *
+         * Como podemos usar a palavra-chave await apenas em uma async função, podemos criar um IIFE assíncrono, pois usa a AsyncSequence classe da seguinte maneira:
+        */
+
+        //usando um IIFE(Imediated Invoked Function Express), que declara uma function  assicrona por causa que so podemos usar a await for of instrução em funções assincronas ,neste caso e a invoca imediatamente logo em seguida após declaração, so pode ser invocada uma unica vez.
+        (async() => {
+            //corpo da IIFE assincrona
+
+            //declara uma instancia de objeto, invocando o constructor da class AsyncSequence, passando três argumentos, o primeiro o start argumento, o segundo o end argumento, o terceiro o interval
+            //a instancia e atribuida por referencia a variavel seq
+            let seq = new AsyncSequence(1, 10, 1);
+
+            //usando a nova construção do ES8-2018 for await..of, para iterar objetos iteraveis assincronos, iterar fonte de dados assincronas
+            //implicitamente o mecanismo JS, por meio das instruções em conjunto abaixo o for await...of, 
+            //invoca a next function do objeto literal que o método definido pela proriedade computada que identifica que o objeto e um iteravel assincrono retorna, assim a cada iteração a promisse e retornada a await espera a promise definir o estado e resolve com o resultado e a value recebe o resultado resolvido como elemento da seq e mostra logo depois
+            //cada numero da sequencia e retorna apos a simulação de atraso de 1 segundo de uma operação assincrona
+            for await(let value of seq) {
+                console.log(value);
+            }
+        })();
+        
+        /**
+         * A tabela a seguir ilustra as diferenças entre os iteradores e os iteradores assíncronos:
+
+            #: Símbolo conhecido(Well-known Symbol) 
+            ITERATOR: Symbol.iterator
+            ITERATOR ASYNC: Symbol.asyncIterator;
+            ---------------------------------
+            #: next() valor de retorno é
+            ITERATOR: {value, done}
+            ITERATOR ASYNC: Promise  que resolve para {value, done}
+            ---------------------------------
+            #: Instrução de loop
+            ITERATOR: for...of
+            ITERATOR ASYNC: for await...of
+
+        */
+    </script>
+
+</body>
+</html>

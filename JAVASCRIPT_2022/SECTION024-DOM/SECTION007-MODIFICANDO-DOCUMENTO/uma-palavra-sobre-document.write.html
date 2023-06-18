@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Somerwhere in the page...</p>
+
+    <p>After one second the contents of this page will be replaced...</p>
+
+    <script type="text/javascript">
+       
+       /**
+        * * UMA PALAVRA SOBRE "document.write" 
+        * 
+        * Há mais um método muito antigo de adicionar algo a uma página da web: document.write.
+        * 
+        * A sintaxe:
+        */
+
+        document.write('<b>Hello from JS</b>');
+
+        /**
+         *  A chamada para document.write(html) escreve o html página “bem aqui e agora”. A html string pode ser gerada dinamicamente, então é meio flexível. Podemos usar JavaScript para criar uma página da Web completa e escrevê-la.
+         * 
+         * O método vem de tempos em que não havia DOM, nem padrões... Realmente velhos tempos. Ele ainda vive, porque existem scripts usando-o.
+         * 
+         * Nos scripts modernos, raramente podemos vê-lo, devido à seguinte limitação importante:
+         
+            - A chamada para document.write só funciona enquanto a página está carregando.
+
+         * 
+         * Se o chamarmos posteriormente, o conteúdo do documento existente será apagado.
+         * 
+        */
+
+        //document.write após 1 segundo
+        //que é após o carregamento da página, por isso apaga o conteúdo existente
+
+        //apos 1 segundo a callback sera executa e escrevera o seguinte html na pagina
+
+        setTimeout(() => {
+            //metodo document.write() escreve o html bem aqui e agora na pagina
+            document.write('<b>...By this.</b>') 
+        }, 1000);
+
+        /**
+         * Portanto, é meio inutilizável no estágio “após o carregamento”, ao contrário de outros métodos DOM que abordamos acima.
+         * 
+         * Essa é a desvantagem.
+         * 
+         * Há uma vantagem também. Tecnicamente, quando document.write é chamado enquanto o navegador está lendo (“parsing”) o HTML de entrada e escreve algo, o navegador o consome como se estivesse inicialmente lá, no texto HTML.
+         * 
+         * Portanto, funciona incrivelmente rápido, porque não há modificação do DOM envolvida. Ele grava diretamente no texto da página, enquanto o DOM ainda não está construído.
+         * 
+         * Portanto, se precisarmos adicionar muito texto ao HTML dinamicamente, e estivermos na fase de carregamento da página, e a velocidade for importante, isso pode ajudar. Mas, na prática, esses requisitos raramente vêm juntos. E geralmente podemos ver esse método em scripts apenas porque eles são antigos.
+         * */
+    </script>
+</body>
+</html>

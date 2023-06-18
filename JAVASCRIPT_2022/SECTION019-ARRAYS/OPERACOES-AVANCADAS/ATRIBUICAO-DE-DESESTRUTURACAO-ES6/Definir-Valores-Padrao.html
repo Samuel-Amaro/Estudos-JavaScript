@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valores Padrão</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * DEFINIR VALORES PADRÃO
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function chamada getItems, essa function não possui paramentros declarados
+        //essa function e uma instancia de objeto do tipo function
+        function getItems() {
+            //a function retorna um array literal denso de 2 elementos
+            return [10, 20];
+        }
+
+        //invocando a function getItems sem precisar fornecer argumentos e a function retorna um array com 2 elementos que sera referenciado por items  variavel
+        let items = getItems();
+        //aqui usando o operador ternario verificamos se o 3 elemento da array referenciado por items e diferente de undefined se sim e porque o elemento existe se não e porque não tem 3 elemento na array 
+        let thirdItem = items[2] != undefined ? items[2] : 0;
+
+        console.log(thirdItem); //0
+
+        /**
+         * Como funciona:
+         
+            - Primeiro, declare a getItems()função que retorna uma array de dois números.
+
+            - Em seguida, atribua a variável items ao array retornado da função getItems().
+
+            - Finalmente, verifique se o terceiro elemento existe no array. Caso contrário, atribua o valor 0 à thirdItem variável.
+
+         * 
+         * Será mais simples com a atribuição de desestruturação com um valor padrão:
+        */
+
+        //aqui iremos desestruturar o array retornado por getItens function que retorna um array com 2 elementos
+        //aqui declaramos três variaveis individuais para receber as atribuições dos elementos do array
+        //neste caso o array desestruturado so possui 2 elementos, mas na desestruturação declaramos 3 variaveis, mas a terceira variavel não recebera a atribuição de um elemento do array porque o elemento no array não existe, assim definimos a variavel do terceiro elemento e adicionamos um valor padrão a ele de 0, se caso ela não receber atribuição de um terceiro elemento, ela foi inicializada pela valor padrão
+        //no caso se o valor obtido da array para o 3 elemento for undefined o valor padrão sera atribuido a varaivel do 3 elemento
+        let[, , thirdItem2 = 0] = getItems();
+
+        console.log(thirdItem2); //0
+
+        /**
+         * Se o valor obtido da array for undefined, você pode atribuir à variável um valor padrão, como este:
+        */
+
+        //declara variaveis individuais
+        let a, b;
+        //declara um array de um unico elemento, e declara duas variaveis individuas para a desestruturação do array literal declarado, assim como o array so possui um unico elemento somente um elemento sera atribuido a desestruturação neste caso o elemento 10 sera atribuido a variavel a que até definiu um valor padrão 1 caso o array ou elemento fosse undefined, no segundo variavel permanecera o valor padrão pois não exsite segundo elemento na array e undefined
+        [a = 1, b = 2] = [10];
+
+        console.log(a); //10
+        console.log(b); //2
+
+        /**
+         * Se a getItems() função não retornar uma array e você esperar uma array, a atribuição de destruição resultará em um erro. Por exemplo:
+        */
+
+        //declara uma function chamada getItems, essa function não possui paramentros declarados
+        //essa function e uma instancia de objeto do tipo function
+        function getItems2() {
+            //a function retorna um valor do tipo null
+            return null;
+        }
+
+        //chama invoca a function sem precisar fornecer argumento
+        //aqui sera lançado um erro pois espera-se um array para ser desestruturado e a function retorna o valor null
+        let[x = 1, y = 2] = getItems2();
+
+        //Uncaught TypeError: getItems is not a function or its return value is not iterable
+
+        /**
+         * Uma maneira típica de resolver isso é fazer fallback do valor retornado da getItems() função para um array vazio como este:
+        */
+
+        //aqui iremos desestruturar o array retornado por getItems3() function, se a function retorna null, temos que encontrar um meio de evitar que o erro seja lançado para que não desestruture um arrya que não exista, para isso usamos o fallback
+        //aqui verificamos se o valor retorna por function for null usamos o array vazio do operador do lado direito do || (OU) OR - o array vazio sera definido como undefined, assim a desestruturação do arrya não acontecera pois vera que o array esta vazio
+        //declara duas variaiveis individuais que iam receber atribuições dos elementos do array caso ele existisse, mas as variavaeis irão recebcer o valor padrão declarados para não ficarem sem se inicializar
+        let[a1 = 10, b1 = 20] = getItems2() || [];
+
+        //mostra os valores das variaveis individuais
+        console.log(a); //10
+        console.log(b); //20
+
+
+
+    </script>
+</body>
+</html>

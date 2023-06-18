@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /**
+         * * MANIPULAÇÃO DE ERROS(HANDLING ERRORS)
+         * 
+         * Nos exemplos acima não consideramos erros. E se o carregamento do script falhar? Nosso retorno de chamada(callback) deve ser capaz de reagir a isso.
+         * 
+         * Aqui está uma versão aprimorada loadScript que rastreia erros de carregamento:
+        */
+
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(null, script);
+
+            //atribui um manipulador de evento por meio da propriedad dom
+            //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+            //assim o callback e executado, tratando o erro, lançando um erro
+            script.onerror = () => callback(new Error(`Erro de carregamento de script para ${src}`));
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+        
+
+        /**
+         * Ele exige callback(null, script)carregamento bem-sucedido e de callback(error) outra forma.
+         * 
+         * o uso
+        */
+
+        loadScript('/my/script.js', function(error, script) {
+            if(error) {
+                //manipulador do erro
+            }else{
+                //script carregado com sucesso
+            }
+        });
+
+        /**
+         * Mais uma vez, a receita que usamos loadScript é bastante comum. É chamado de estilo “erro-primeiro retorno de chamada - callback”.
+         * 
+         * A convenção é:
+         * 
+            * O primeiro argumento do callback é reservado para um erro se ocorrer. Então callback(err) é chamado.
+            * 
+            * O segundo argumento (e os próximos, se necessário) são para o resultado bem-sucedido. Então callback(null, result1, result2…) é chamado.
+            * 
+         * Portanto, a callback função única é usada para relatar erros e retornar resultados. 
+        */
+    </script>
+</body>
+</html>

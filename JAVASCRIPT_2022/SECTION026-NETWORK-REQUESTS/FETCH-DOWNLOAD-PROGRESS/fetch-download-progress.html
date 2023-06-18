@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * FETCH: DOWNLOAD PROGRESS(BUSCAR PROGRESSO DO DOWNLOAD)
+         * 
+         * O fetch método permite acompanhar o progresso do download.
+         * 
+         * Observação: atualmente não há como fetch acompanhar o progresso do upload. Para isso, use XMLHttpRequest , abordaremos isso mais tarde.
+         * 
+         * Para acompanhar o progresso do download, podemos usar a response.body propriedade. É um ReadableStream – um objeto especial que fornece o corpo pedaço por pedaço, como vem. Os fluxos legíveis(Readable Stream) são descritos na especificação da API de fluxos(Stream).
+         * 
+         * Ao contrário do response.text(), response.json() e de outros métodos, response.body dá total controle sobre o processo de leitura, e podemos contar o quanto é consumido a qualquer momento.
+         * 
+         * Aqui está o esboço do código que lê a resposta de response.body:
+        */
+
+        //em vez de response.json() e outros métodos
+        const reader = response.body.getReader();
+
+        // loop infinito enquanto o corpo está baixando
+        while(true) {
+            //done(feito) é verdadeiro para o último pedaço
+            //value(valor) é Uint8Array dos bytes do pedaço
+            const {done, value} = await reader.read();
+
+            if(done) {
+                break;
+            }
+        }
+
+        console.log(`Recebido: ${value.length} bytes`);
+
+        /**
+         * O resultado da await reader.read()chamada é um objeto com duas propriedades:
+         * 
+            * done – true quando a leitura estiver completa, caso contrário false.
+            * 
+            * value – uma array digitada de bytes: Uint8Array.
+            * 
+         * * Observe:
+         * 
+         *  A API Streams também descreve a iteração assíncrona ReadableStream com for await..of loop, mas ainda não é amplamente suportada (consulte os problemas do navegador ), então usamos while loop.
+         * 
+         * Recebemos pedaços de resposta no loop, até que o carregamento termine, ou seja: until done torna -se true.
+         * 
+         * Para registrar o progresso, precisamos apenas que cada fragmento recebido value adicione seu comprimento ao contador.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This palavra chave</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * INVOCAÇÃO DE CONSTRUTOR
+         *  
+         * Ao usar a new palavra-chave para criar uma instância de um objeto de função, você usa a função como um construtor.
+         * 
+         * O exemplo a seguir declara uma Car função e a invoca como um construtor:
+        */
+
+        //declara um Function regular construtora chamada Car que declara um paramentro chamado brand e retorna uma instancia de objeto referenciado por this no contexto da chamada da Function, ao usar a new palavra chave
+        function Car(brand) {
+            //delara um propriedade para ser add no objeto this
+            this.brand = brand;
+        }
+
+        //add um metodo no objeto prototipo para que instancias compartilhem o mesmo metodo, o metodo e add no prototipo de objeto anonimo que e referenciado por Car.prototype
+        //add um propriedade primeiro chamada getBrand, essa propriedade recebe como valor uma function anonima que não declara parametro
+        Car.prototype.getBrand = function() {
+            //O this objeto referencia o Car objeto que sera uma instancia de objeto criada usando a new palavra-chave, assim retornara o valor da propriedade brand definido na instancia recem criada
+            return this.brand;
+        }
+
+        //console.log(Car.prototype);
+
+        //cria uma nova instancia de objeto chamada car, utilizando a function construtura Car, passando um argumento e usando a new Palavra-chave que vai fazer o this objeto receber o valor da instancia do objeto recem criada
+        //Aqui o JS automaticamente fara a ligação de prototipo, assim o car objeto instancia estara ligado a objeto anonimo de prototipo referenciado por Car.prototype assim podera usar todas propriedades do objeto anonimo
+        //exemplo de como invocar o construtor
+        var car = new Car('Honda');
+
+        //acessando o metodo definido no objeto de prototipo anonimo
+        console.log(`car.getBrand() = ${car.getBrand()}`);
+
+        /**
+         * A expressão new Car('Honda') é uma invocação do construtor da Car função.
+         * 
+         * JavaScript cria um novo objeto e define this o objeto recém-criado. Esse padrão funciona muito bem com apenas um problema potencial.
+         * 
+         * Agora, você pode invocar o Car()como uma função ou como um construtor. Se você omitir a new palavra - chave da seguinte forma:
+        */
+
+        //cria uma nova intancia de objeto chamda bmw invocando a function construtora passando argumento, mas usar a new palavra chave, assim o this objeto não tera referencia do objeto recem criado pois omitiu a this palavra chave, assimo this no contexto global sem estar no modo estrito referencia o objeto global window, pois omitimos a new palavra chave, assim não referenciamos o objeto recem criado no this objeto
+        var bmw = Car('BMW');
+
+        //assim não podemos acessar a propriedade brand na instancia de objeto recem criado, pois ela não esta referenciada por this, o this esta referenciando o objeto global window, mas que não possui a propriedade brand definida
+        console.log(bmw.brand); //undefined
+        // => TypeError: Cannot read property 'brand' of undefined
+
+        /**
+         * Uma vez que o this valor nos Car()conjuntos para o objeto global, o bmw.brand retorna undefined.
+         * 
+         * Para garantir que a Car() função seja sempre chamada usando a invocação do construtor, você adiciona uma verificação no início da Car() função da seguinte maneira:
+        */
+
+        //declara uma function construtora chamada Car2 com uma parametro declarado chamado brand e retorna uma instancia de objeto referenciado por this no contexto da chamada da Function, ao usar a new palavra chave
+        function Car2(brand) {
+            //se usar a new palavra chave ao invocar a function construtora Car não lançara um erro, mas se não usar lançaremos um erro
+            if(!(this instanceof Car)) {
+                throw Error('Must use the new operator to call the function');
+            }
+            //declara uma propriedade a ser add no this objeto da instancia a ser criada
+            this.brand = brand;
+        }
+
+        /**
+         * ES6 introduziu uma meta-propriedade chamada new.target que permite detectar se uma função é chamada como uma chamada simples ou como um construtor.
+         * 
+         * Você pode modificar a Car() função que usa a new.target metapropriedade da seguinte maneira:
+        */
+
+        //declara uma function construtora chamada Car3 com uma parametro declarado chamado brand e retorna uma instancia de objeto referenciado por this no contexto da chamada da Function, ao usar a new palavra chave
+        function Car3(brand) {
+            //se a meta propriedade new.target tiver com o valor definido por padrão como undefined e ao entrar no condicional se avaliado para true e porque a function contrutora foi invocada como uma chamda simples, sem usar a new palavra chave, lançara um erro e não instanciara o this objeto
+            //mas se possui um valor definindo como identificado como uma chamada de contrutor usando a new palavra chave não lancara erro, e instanciara o this objeto
+            if(!new.target) {
+                throw Error('Must use the new operator to call the function');
+            }
+            //propriedade a ser add no this objeto instancia a ser criada
+            this.brand = brand;
+        }
+
+    </script>
+
+</body>
+</html>

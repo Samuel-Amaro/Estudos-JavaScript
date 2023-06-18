@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de evento no JS</title>
+    <style>
+        button{
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Exemplo simples de Eventos no JS</h1>
+
+    <h2>Experimento de propriedades diferentes de manipulador de eventos disponiveis</h2>
+
+    <p><strong>Exemplo:</strong>  No exemplo a seguir, nós temos um simples &lt;button&gt; que quando pressionado, irá fazer com que o fundo mude para uma cor aleatória:</p>
+
+    <button>Alterar de Cor!</button>
+
+    <!--java script incorporado no documento-->
+    <script>
+
+        //seleciona o elemento <button> do documento HTML5
+        var btn = document.querySelector('button');
+
+        //função JS que retorna um valor aleatorio
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+        //função nomeada que manipula o evento, a função que responde ao evento quando e acionado
+        function respondeEvento() {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            document.body.style.backgroundColor = rndCol;
+        }
+
+        //a cor muda quando o botão estiver focado
+        //btn.onfocus = respondeEvento();
+
+        //a cor muda quando o botão esta fora de foco
+        //btn.onblur = respondeEvento();
+
+        //a cor so sera alterado quando for clicado duas vezes
+
+        //propriedade do elemento: elemento.onclick = manipuladorEvento();
+        //aqui esta se registrando um manipulador de eventos a propriedade de evento de mouse, do elemento <button>
+        btn.ondblclick = respondeEvento();
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaração De Classe ES6</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * DECLARAÇÃO DE CLASSE ES6
+         * 
+         * O ES6 introduziu uma nova sintaxe para declarar uma classe conforme mostrado neste exemplo:
+        */
+
+        //declara uma classe Chamada Person
+        class Person{
+            //inicializa propriedade da instancia de objeto a ser criada
+            constructor(name) {
+                //propriedade
+                this.name = name;
+            }
+            //metodo da classe
+            getName() {
+                return this.name;
+            }
+        }
+
+        /**
+         * Esta Person classe se comporta como o Person tipo no exemplo anterior. No entanto, em vez de usar um padrão construtor/protótipo, ele usa a palavra-chave class.
+         * 
+         * Na Person classe, constructor()é onde você pode inicializar as propriedades de uma instância. JavaScript chama automaticamente o constructor() método quando você instancia um objeto da classe.
+         * 
+         * O seguinte cria um novo Person objeto, que chamará automaticamente o constructor() da Person classe:
+        */
+
+        //declara uma instancia de objeto por meio do construtor da Person classe
+        //e atribui o objeto a variavel john
+        let john = new Person("John Doe");
+
+        /**
+         * O getName() é chamado de método da Person classe. Como uma função construtora, você pode chamar os métodos de uma classe usando a seguinte sintaxe:
+
+            objectName.methodName(args);
+
+        */
+
+        //chamando o metodo da class Person
+        let name = john.getName();
+        console.log(name); //"John Doe"
+
+        /**
+         * Para verificar o fato de que as classes são funções especiais, você pode usar o typeof operador de para verificar o tipo da Person classe.
+        */
+
+        //verificando o tipo da Person classe
+        //no caso uma class e uma função especial
+        //usando o operador typeof um operador unario retorna uma string indicando o tipo do operando sem avaliação.
+        console.log(typeof Person); //function
+
+        /**
+         * Ele retorna function conforme o esperado.
+         * 
+         * O john objeto também é uma instância dos tipos Person e : Object
+        */
+
+        //utilizando o operador instanceof
+        //Um operador relacional compara seus operando e retorna um valor booleano baseado em se a comparação é verdadeira.
+        //O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado.
+        //verifica se a instancia de objeto referenciado por john variavel e do tipo Person class
+        console.log(`john instanceof Person = ${john instanceof Person}`); //true
+        //verifica se a instancia de objeto referenciado por john e do tipo Object
+        console.log(`john instanceof Object = ${john instanceof Object}`); //true
+
+        
+    </script>
+</body>
+</html>

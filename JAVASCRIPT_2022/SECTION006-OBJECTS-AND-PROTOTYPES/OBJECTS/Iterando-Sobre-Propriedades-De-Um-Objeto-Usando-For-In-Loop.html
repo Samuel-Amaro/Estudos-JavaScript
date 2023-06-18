@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ITERANDO SOBRE PROPRIEDADES DE UM OBJETO USANDO FOR..IN LOOP
+         * 
+         * Para iterar sobre todas as propriedades de um objeto sem saber os nomes das propriedades, você usa o for...in loop:
+         
+            for(let key in object) {
+                //...
+            }
+
+         * loop for e um laço de repetição condicional
+         * 
+         * o in e um operador relacional de comparação de operandos, e retorna um valor booleano dependendo do resultado da comparação
+         * 
+         * Por exemplo, a instrução a seguir cria um website objeto e itera sobre suas propriedades usando o for...in loop:
+        */
+        
+        //declara um objeto chamado website usando a sintaxe literal de objeto
+        let website = {
+            //declara propriedades do array como chave-valor, e as separa por (,)
+            title: 'JavaScript Tutorial',
+            url: 'https://www.javascripttutorial.net',
+            tags: ['es6', 'javascript', 'node.js', 'react.js', 'react native']
+        };
+
+        //itera sobre as propriedades do objeto literal website, usando o for loop e o operador in
+        //isso e muito usado quando  não se sabe o nome das propriedades do objeto
+        for(const key in website) {
+            console.log(`key = '${key}' | value = ${website[key]}`);
+        }
+
+    </script>
+
+</body>
+</html>

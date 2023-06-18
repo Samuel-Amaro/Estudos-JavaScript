@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script>
+        /**
+         * * Promise.any
+         * 
+         * Semelhante a Promise.race, mas aguarda apenas a primeira promessa cumprida e obtém seu resultado. Se todas as promessas fornecidas forem rejeitadas, a promessa retornada será rejeitada com AggregateError– um objeto de erro especial que armazena todos os erros de promessa em sua errors propriedade.
+         * 
+         * A sintaxe é:
+         
+            let promise = Promise.any(iterable);
+
+         * Por exemplo, aqui o resultado será 1:
+        */
+
+        //metodo estatico Promise.any da class Promise
+        //esse metodo executa varias promises simultaneamente mas agurda apenas a primeira promisse cumprida(Resolvida) e obtem seu resultado
+        //Se todas as promessas fornecidas forem rejeitadas, a promessa retornada será rejeitada com AggregateError– um objeto de erro especial que armazena todos os erros de promessa em sua errors propriedade.
+        //passamos um array de promises como arguumento
+        Promise.any([
+            new Promise((resolve, reject) => setTimeout(() => reject(new Error("Whoops!")), 1000)),
+            new Promise((resolve, reject) => setTimeout(() => resolve(1), 1000)),
+            new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000))
+        ])
+        //anexa um .then manipulador para consumir o resultado da promise estabelecida, obtem o resultado da primeira promise resolvida
+        //a primeira promessa foi a mais rapida, mas foi rejeitada então a segunda promessa se tornou o resultado
+        .then(alert); //1
+
+        /**
+         * A primeira promessa aqui foi mais rápida, mas foi rejeitada, então a segunda promessa se tornou o resultado. Após a primeira promessa cumprida “ganhar a corrida”, todos os outros resultados são ignorados.
+         * 
+         * Aqui está um exemplo quando todas as promessas falham:
+        */
+
+
+        //passa um array de promessas, todas promessas rejeitadas, a promise retornada sera rejeitada com um AggregateObjet error
+        Promise.any([
+            new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ouch!")), 1000)),
+            new Promise((resolve, reject) => setTimeout(() => reject(new Error("Error!")), 2000))
+        ])
+        //anexa um .catch manipulador para capturar os erros de promesas rejeitadas
+        //consome o objeto error de promiese rejeitada
+        .catch(error => {
+            //consome o AgregateError objeto error resulta da promisse rejeitada
+            console.log(error.constructor.name); // AggregateError
+            //propriedade erros armazena todos os erros das promessas rejeitdas
+            console.log(error.errors[0]); // Error: Ouch!
+            console.log(error.errors[1]); // Error: Error!
+        });
+
+        /**
+         * Como você pode ver, objetos de erro para promessas com falha estão disponíveis na errors propriedade do AggregateError objeto.
+        */
+    </script>
+
+</body>
+</html>

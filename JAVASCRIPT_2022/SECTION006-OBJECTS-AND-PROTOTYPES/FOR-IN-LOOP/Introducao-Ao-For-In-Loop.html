@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For In Loop</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FOR .. IN LOOP
+         *
+         * Resumo : neste tutorial, você aprenderá como usar o for...in loop JavaScript para iterar nas propriedades enumeráveis ​​de um objeto.
+         *
+         * * INTRODUÇÃO AO FOR ... IN LOOP
+         *
+         * O for...in loop sobre as propriedades enumeráveis que são codificadas por strings de um objeto . Observe que uma propriedade pode ser codificada por uma string ou um símbolo .
+         * 
+         * Uma propriedade é enumerável quando seu enumerable sinalizador interno [[enumerable]] é definido como true.
+         * 
+         * O enumerable padrão da sinalização é true quando uma propriedade é criada por meio de uma atribuição simples ou de um inicializador de propriedade:
+         *  
+            object.propertyName = value;
+
+         * OU
+
+            let obj = {
+                propertyName: value,
+                ...
+            };
+
+         * 
+         * O seguinte mostra a sintaxe do for...in loop:
+         * 
+
+            for(const propertyName in object) {
+                //...
+            }
+
+         * 
+         * O for...in  permite acessar cada propriedade e valor de um objeto sem saber o nome específico da propriedade. Por exemplo:
+        */
+
+        //declara um objeto literal chamado person usando a sintaxe de objeto literal
+        var person = {
+            //propriedades do objeto literal person
+            firstName : 'John',
+            lastName : 'Doe',
+            ssn: '299-24-2351'
+        };
+
+        //usando o loop for in poderemos iterar sobre as propriedades enumeraveis do objeto literal sem precisar saber o nome especifico da propriedade, so itera sobre as propriedades enumeraveis que possui o sinalizar interno [[enumerable]] de cada propriedade definido como true
+        for(var prop in person) {
+            //acessamos cada valor de propriedade usando a sintaxe literal similiar a de array
+            console.log(`${prop} : ${person[prop]}`);
+        }
+
+        /**
+         * Neste exemplo, usamos o for...in loop para iterar sobre as propriedades do objeto pessoa. Acessamos o valor de cada propriedade usando a seguinte sintaxe: 
+         
+            object[property];
+        */
+
+    </script>
+</body>
+</html>

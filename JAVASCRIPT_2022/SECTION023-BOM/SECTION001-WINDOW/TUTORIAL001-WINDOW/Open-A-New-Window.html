@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * O WINDOW OBJETO EXPÕE A FUNCIONALIDADE DO NAVEGADOR
+         * 
+         * O window objeto expõe a funcionalidade do navegador da Web à página da Web.
+         *  
+         * * 2) OPEN A NEW WINDOW(ABRA UMA NOVA JANELA)
+         * 
+         * Para abrir uma nova janela ou guia, você usa o window.open() método:
+         
+            window.open(url, windowName, [windowFeatures]);
+
+         * 
+         * O window.open() método aceita três argumentos: a URL a ser carregada, o destino da janela e uma sequência de recursos da janela.
+         * 
+         * O terceiro argumento é uma sequência de configurações delimitada por comando que especifica a exibição de informações para a nova janela, como largura, altura, barra de menus e redimensionável.
+         * 
+         * O método window.open() retorna um objeto WindowProxy, que é um wrapper fino do objeto window. Caso a nova janela não possa ser aberta, ela retorna null.
+         * 
+         * Por exemplo, para abrir uma nova janela que carrega a página about.html em localhost, você usa o seguinte código:
+        */
+
+        //url a ser carregada pela nova janela ou guia
+        let url = 'file://c:/Users/SAMUE/Documents/PROGRAMACAO_CURSOS_PROJETOS_2020_2021/JAVASCRIPT_2022/SECTION023-BOM/SECTION001-WINDOW/TUTORIAL001-WINDOW/About.html';
+        //usando o método window.open() para abrir uma nova guia pois não pasamos paramentros de configuração para janela
+        //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina about.html em uma nova guia
+        //o método window.open retorna um objeto do tipo WindowProxy
+        //let jsWindow = window.open(url, 'about');
+
+        /**
+         * O código abre a página about.html em uma nova guia. Se você especificar o height(altura) e widthd(largura) a janela, ele abrirá a URL em uma nova janela separada em vez de uma nova guia:
+         * 
+        */
+
+        //uma string literal que contém informações de configuração para a nova guia que vai ser aberta para carregar a pagina about.html
+        let features = 'height=600,width=800';
+        //usando o método window.open() para abrir uma nova janela
+        //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina about.html em uma nova guia
+        //como segundo argumento passamos o nome da janela, o nome que a janela recebera ao ser criada
+        //o terceiro argumento é uma sequência de configurações delimitada por comando que especifica a exibição de informações para a nova janela, como largura, altura, e redimensional, barra de menus etc...
+        //o método window.open retorna um objeto do tipo WindowProxy
+        //let jsWindow = window.open(url, 'about', features);
+
+        /**
+         * Para carregar outro URL em uma janela existente, você passa um nome de janela existente para o window.open() método. O exemplo a seguir carrega a contact.html página da Web na contact janela:
+        */
+
+        //usando o método window.open() para abrir uma pagina chamada contact.html em uma janela ja existente, referenciado a janela existente pelo nome
+        //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina Contact.html em uma janela ja existente
+        //como segundo argumento passamos o nome da janela, o nome que referncia uma janela anterior ja exisitente
+        //window.open('file://c:/Users/SAMUE/Documents/PROGRAMACAO_CURSOS_PROJETOS_2020_2021/JAVASCRIPT_2022/SECTION023-BOM/SECTION001-WINDOW/TUTORIAL001-WINDOW/Contact.html', 'about');
+
+
+        /**
+         * Coloque tudo junto. O código a seguir abre uma nova janela que carrega a página da Web about.html e, após 3 segundos, carrega a página da Web contact.html na mesma janela:
+         * 
+        */
+
+        //usando o método window.open() para abrir uma nova janela
+        //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina about.html em uma nova janela
+        //como segundo argumento passamos o nome da janela, o nome que a janela recebera ao ser criada
+        //o terceiro argumento é uma sequência de configurações delimitada por comando que especifica a exibição de informações para a nova janela, como largura, altura, e redimensional, barra de menus etc...
+        //o método window.open retorna um objeto do tipo WindowProxy
+        let jsWindow = window.open(url, 'about', features);
+
+        setTimeout(() => {
+            //o codigo abaixo carrega uma nova pagina contact.html em uma janela existente apos o atraso de 3 segundos
+            //usando o método window.open() para abrir uma pagina chamada contact.html em uma janela ja existente, referenciado a janela existente pelo nome
+            //como primeiro argumento passamos uma URL a ser carregada, e o destino da janela, aqui o destino e carregar a pagina Contact.html em uma janela ja existente
+            //como segundo argumento passamos o nome da janela, o nome que referncia uma janela anterior ja exisitente
+            window.open('file://c:/Users/SAMUE/Documents/PROGRAMACAO_CURSOS_PROJETOS_2020_2021/JAVASCRIPT_2022/SECTION023-BOM/SECTION001-WINDOW/TUTORIAL001-WINDOW/Contact.html', 'about');
+        }, 3000);
+    </script>
+</body>
+</html>

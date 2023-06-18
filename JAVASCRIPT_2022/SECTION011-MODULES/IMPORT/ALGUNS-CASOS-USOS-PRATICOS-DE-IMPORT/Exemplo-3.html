@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * ALGUNS CASOS DE USO PRÁTICOS DE JS import()
+         * 
+         * O import() tem os seguintes casos de uso práticos:
+         * 
+         * * EXEMPLO 3) ESPECIFICADORES DE MÓDULO COMPUTADO
+         * 
+         * O especificador de módulo é uma expressão que permite decidir qual módulo carregar em tempo de execução.
+         * 
+         * Por exemplo, você pode carregar um módulo com base na localidade do usuário para mostrar a mensagem no idioma específico do usuário:
+         * */
+
+        let lang = `message_${getUserLocale().js}`;
+
+        import(lang).then(...);
+    </script>
+</body>
+</html>

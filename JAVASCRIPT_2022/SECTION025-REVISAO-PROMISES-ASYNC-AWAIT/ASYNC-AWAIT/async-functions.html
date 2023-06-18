@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * ASYNC FUNCTIONS(FUNÇÕES ASSÍNCRONAS)
+         * 
+         * Vamos começar com a palavra-chave async. Ele pode ser colocado antes de uma função, assim:
+        */
+
+        //add palavra chave async antes de uma function
+        async function f() {
+            return 1;
+        }
+
+        /**
+         * A palavra “async” antes de uma função significa uma coisa simples: uma função sempre retorna uma promessa. Outros valores são agrupados em uma promessa resolvida automaticamente.
+         * 
+         * Por exemplo, esta função retorna uma promessa resolvida com o resultado de 1; vamos testar:
+        */
+
+        //add palavra chave async antes de uma function
+        //significa que a function retorna um promise
+        //o exemplo abaixo, a function assincrona retorna um promise resolvida com o valor 1
+        async function f2() {
+            return 1;
+        }
+
+        //anexa um manipulador .then para obter o resultado da promise resolvida, retornada por function async f2
+        f2().then(alert); //1
+
+        /**
+         * …Poderíamos retornar explicitamente uma promessa, que seria a mesma:
+        */
+
+        //exemplo function async que retorna uma promise explicitamente resolvida com o valor 1
+        async function f3() {
+            return Promise.resolve(1);
+        }        
+
+        //alert e o manipulador do result
+        f3().then(alert); //1
+
+        /**
+         * Portanto, async garante que a função retorne uma promessa e envolva não promessas nela. Bastante simples, certo? Mas não só isso. Há outra palavra-chave, await, que funciona apenas dentro de funções async, e é bem legal.
+        */
+    </script>
+
+</body>
+</html>

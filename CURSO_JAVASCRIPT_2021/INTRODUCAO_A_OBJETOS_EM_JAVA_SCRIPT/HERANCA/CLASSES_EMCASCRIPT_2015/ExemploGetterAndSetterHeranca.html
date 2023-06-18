@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Exemplo Orientação Objetos JavaScript Herança</title>
+</head>
+<body>
+
+  <h1>Exemplo de Orientação a objetos em JavaScript</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eum fugit, deleniti vel quaerat earum incidunt quam expedita quibusdam ipsum quo commodi nam culpa modi. Quidem nam neque eius blanditiis.</p>
+  <h2>Orientação a objetos usando a sintaxe de EcmaScript classes 2015 utilizando getter and setter</h2>
+
+  <script>
+
+        //EXEMPLOS USANDOS
+        //SUPER CLASSE (CLASSE PAI)
+        class Pessoa{
+            //construtor da classe, que define propriedades(atributos) que precisam ser inicializados
+            constructor(primeiroNome, ultimoNome, idade, sexo, interesses) {
+                //propriedades da classe
+
+                //a propriedades nome, e um outra classe
+                this.nome = {
+                    primeiroNome,
+                    ultimoNome
+                };
+                this.idade = idade;
+                this.sexo = sexo;
+                this.interesses = interesses;
+            }
+
+            //metodos da classe
+            saudacao() {
+                console.log(`Ei! Eu 'sou ${this.nome.primeiroNome}`);
+            };
+
+            adeus() {
+                console.log(`${this.nome.primeiroNome} deixou o prédio. Tchau agora! `)
+            };
+        }
+
+        //a classe Professor herda propriedades e metodos da classe Pessoa, atraves da herança
+
+        class Professor extends Pessoa{
+            //construtor de Professor, definindo propriedades de um professor, que são as propriedades de um Pessoa genericas, so que add as suas especializações
+            constructor(primeiroNome, ultimoNome, idadeP, sexoP, interessesP, AssuntoP, grauP) {
+                //chamando o metodo construtor da classe pai(super classe, ou classe base), e passando os paramentros que ja são definidos la, e essas propriedades vão ser herdadas por essa classe(classe filha, ou subClasse)
+                super(primeiroNome, ultimoNome,  idadeP, sexoP, interessesP);
+            //especialização de propriedade de um professor
+            //o underline antes do nome da propriedade e uma convenção para que se crie um vlaor separado no qual armazenar essa propriedade
+            this._assunto = AssuntoP;
+            this.grau = grauP;
+            }
+
+            //metodos da classe que são acessores 
+            //de atributos da classe
+            //os getters e setters da propriedade assunto 
+
+            get assunto() {
+                return this._assunto;
+            }
+
+            set assunto(novoAssunto) {
+                this._assunto = novoAssunto;
+            }
+        }
+
+        //instanciando instancia de objetos da classe Professor
+
+        let snape = new Professor('Seerus', 'Snape', 58, 'masculino', ['Potions', 'Dark arts'], 5);
+        snape.saudacao(); //return 'Ei eu sou Severus'
+        snape.adeus(); //return 'Severus deixou o prédio. Tchau agora!';
+
+        //vendo os getter e setter funcionando
+
+        //Verifique o valor padrão
+        console.log(snape.assunto); //returns dark arts
+
+        //alterar o valor
+        snape.assunto = "Balloon animals"; //Set _assunto para "Animais de balão"
+
+        //Verifique novamente e veja se ele corresponde ao novo valor
+        console.log(snape.assunto); // get return "Balloon animals";
+  </script>
+
+</body>
+</html>

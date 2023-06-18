@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Instanceof</title>
+</head>
+<body>
+    <img src="JavaScript-instanceof.svg">
+    <script>
+
+        /**
+         * * EXEMPLO DO OPERADOR INSTANCEOF JS
+         * 
+         *  O exemplo a seguir define o Person tipo e usa o instanceof operador para verificar se um objeto é uma instância desse tipo:
+        */
+
+        //define uma function construtora chamada Person que declara uma paramentro chamado name
+        //essa function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //declara uma propriedade chamada name que e inicializada com a name argumento
+            this.name = name;
+        }
+
+        //declara uma instancia de objeto invocando a function construtora Person fornecendo o argumento 'John' com o operador new, o new operador cria um objeto anonimo vazio e atribui ao this valor a function construrtora define propriedades nesse objeto e o new operador retorna o this
+        //assim a p1 varaivel referencia o objeto instanciado por new
+        let p1 = new Person('John');
+
+        //O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado.
+        //O instanceof operador retorna true se um protótipo de um construtor ( constructor.prototype) aparece na cadeia de protótipos de umo bject
+        //aqui verificamos se o objeto prototipo anonimo de um construtor que e referenciado por Person.prototype, aparece na cadeia de prototipos de um object, aqui neste caso o object e referencia por p1 que contem a refrencia de um objeto instancia por Person functionc construtora, neste caso aqui p1 e uma instancia de Person
+        console.log(p1 instanceof Person); //true
+        //console.log(Person.prototype); //propriedade de acessar o prototipo e enumeravel na fucntion construtora
+        //console.log(p1.prototype); //mas no objeto não e
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina um Person tipo usando o padrão de função construtor:
+         * 
+         * Segundo, crie um novo objeto do Person tipo:
+         * 
+         * Terceiro, verifique se o person é uma instância do Person tipo:
+         * 
+         * Ele retorna true porque Person.prototype aparece na cadeia de protótipos do p1 objeto. A cadeia de protótipos do p1 é o link entre p1, Person.prototype e Object.prototype:
+         * 
+         * O seguinte também retorna true porque Object.prototype aparece na cadeia de protótipos do p1 objeto:
+        */
+
+        console.log(p1 instanceof Object); //true
+    </script>
+</body>
+</html>

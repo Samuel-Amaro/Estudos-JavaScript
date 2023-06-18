@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * PROPRIEDADES DO OBJETO JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre as propriedades do objeto JavaScript e seus atributos, como configurável(configurable), enumerável(enumerable), gravável(writable), obter(get), definir(set) e valor(value).
+         * 
+         * * ACESSOR PROPRIEDADES(PROPRIEDADES DE ACESSOR)
+         * 
+         * Semelhante às propriedades de dados, as propriedades do acessador também têm atributos [[Configurable]]e [[Enumerable]].
+         * 
+         * Mas as propriedades do acessador têm os atributos [[Get]] e em [[Set]]vez de [[Value]] e [[Writable]].
+         * 
+         * Quando você lê dados de uma propriedade do acessador, a [[Get]]função é chamada automaticamente para retornar um valor. O valor de retorno padrão da [[Get]] função é undefined.
+         * 
+         * Se você atribuir um valor a uma propriedade do acessador, a [[Set]]função será chamada automaticamente.
+         * 
+         * Para definir uma propriedade do acessador, você deve usar o Object.defineProperty() método. Por exemplo:
+        */
+
+        //declara um objeto literal chamado person
+        let person = {
+            //propriedades do objeto person
+            //são definidas como pares chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //define propriedade de forma indereta, usando o metodo
+        //definindo atributos do acessador de propriedade 
+        //definindo seus atributos
+        //o metodo defineProperty precisa de 3 argumentos
+        //o objeto literal
+        //a propriedade acessadora, fornecer um identificado para ela
+        //o objeto descritor da propriedade acesssora, que definira os atributos da propriedade
+        Object.defineProperty(person, 'fullName', {
+            //atributo [[get]] da propriedade acessora  'fullName'
+            //quando 'fullName' tiver seus dados lidos o atributo get ira retorna seus dados
+            //aqui a function anonima sera atribuida a get atributo da propriedade acessor 'fullName'
+            get: function() {
+                return this.firstName + ' ' + this.lastName;    
+            },
+            //o atributo [[set]] da propriedade acessora 'fullName',
+            //quando for atribuido um valor a 'fullName' esse atributo e chamado
+            //a function anonima que declara um paramentro value, o valor a ser recebido, que foi atribuido a propriedade acessora 'fullName' sera atribuida a set atributo 
+            set: function(value) {
+                //recebe um string que representa o nome completo, corta a string em partes para separar os nomes atribui a parte de cada nome a um propriedade do obejto
+                let parts = value.split(' ');
+                if(parts.length == 2) {
+                    this.firstName = parts[0];
+                    this.lastName = parts[1];
+                }else{
+                    throw 'Invalid name format';
+                }
+            } 
+        });
+
+        //acessando a proriedade acessora 'fullName' do obejto person
+        //a propriedade acessora invocara o atributo get para obter seu valor
+        //e o set dividira o valor passado para fullName e atribuira as propriedades do objeto
+        console.log(person.fullName);
+
+        /**
+         * Neste exemplo:
+         
+            - Primeiro, defina o person objeto que contém duas propriedades: firstName e lastName.
+        
+            - Em seguida, adicione a fullName propriedade ao person objeto como uma propriedade do acessador.
+         
+         * Na fullname propriedade do acessador:
+
+            - O [[Get]] retorna o nome completo que é o resultado da concatenação de firstName, space e lastName.
+
+            - O [[Set]] método divide o argumento pelo espaço e atribui às propriedades firstName e lastName as partes correspondentes do nome.
+
+            - Se o nome completo não estiver no formato correto, ou seja, nome, espaço e sobrenome, ocorrerá um erro .
+         * */
+    </script>
+
+</body>
+</html>

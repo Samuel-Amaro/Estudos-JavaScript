@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function e this valor</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTION E THIS VALOR
+         * 
+         * Em JavaScript, uma nova função define seu próprio this valor. No entanto, arrow function. Veja o seguinte exemplo:
+        **/ 
+
+        //declara um function regular chamada de Car não possui parametro e nenhum valor de retorno personalizado
+        function Car() {
+            //declara um propriedade
+            this.speed = 0;
+
+            //declara um metodo da function construtora
+            //declara uma expressão de function. uma function anonima que possui um paramentro chamado speed e essa function atribui seu valor a this.speedUp
+            this.speedUp = function(speed) {
+                //a propriedade da function construtora recebe um novo valor
+                this.speed = speed;
+                //logica do metodo da function construtora
+                //o setTimeout recebe como argumento uma function anonima
+                setTimeout(function() {
+                    console.log(this.speed); //undefined
+                }, 1000);
+            };
+        }
+
+        //cria um nova intancia da Car() function construtora
+        let car = new Car();
+        //chama o metodo da function construtora
+        car.speedUp(50);
+
+        /**
+         * Dentro da função anônima da setTimeout() função, o this.speed é undefined. A razão é que o this da função anônima sombreia o this do speedUp() método.
+         * 
+         * Para corrigir isso, você atribui o this valor a uma variável que não oculta dentro da função anônima da seguinte maneira:
+         * */
+
+        //declara um function regular construtora que não possui paramentro
+        function Car2() {
+            //declara um propriedade da function construtora
+            this.speed = 0;
+            //declara uma expressão de function;
+            //essa expressão de função e um metodo da function construtora
+            //declara uma function anonima que declara um parametro
+            this.speedUp = function(speed) {
+                this.speed = speed;
+                let self = this;
+                //declara uma function anonima como argumento para o setTimeout function
+                setTimeout(function() {
+                    console.log(self.speed);
+                }, 1000);
+            };
+        }
+
+        //cria um nova intancia da Car() function construtora
+        let car2 = new Car2();
+        //chama o metodo da function construtora
+        car2.speedUp(50); //50
+
+        /**
+         * Ao contrário de uma função anônima, uma arrow function captura o this valor do contexto envolvente em vez de criar seu próprio this contexto. O código a seguir deve funcionar conforme o esperado:
+         * */
+
+        //declara uma function Contrutora que não possui paramentro 
+        function Car3() {
+            //declara uma propriedade da function construtora
+            this.speed = 0;
+            //declara uma expressão de function
+            //declara um metodo da function construtora e essa function possui um paramentro
+            this.speedUp = function(speed) {
+               this.speed = speed;
+               //a function setTimeout recebe um arrow function como argument, a arrow function anonima não possui nenhum paramentro necessario e não retorna nada, so executa uma expressão
+               setTimeout(() => console.log(this.speed), 1000); 
+            }
+        }
+
+        //cria um nova intancia da Car3() function construtora
+        let car3 = new Car3();
+        //chama o metodo da function construtora
+        car3.speedUp(50); //50
+    </script>
+</body>
+</html>

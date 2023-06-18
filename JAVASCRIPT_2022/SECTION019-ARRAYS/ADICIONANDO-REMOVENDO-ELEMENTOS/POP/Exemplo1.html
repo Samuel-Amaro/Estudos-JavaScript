@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1 Pop Método</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO DO MÉTODO JAVASCRIPT POP()
+         * 
+         * Vamos dar alguns exemplos de uso do pop() método.
+         * 
+         * * EXEMPLO 1) - USANDO O MÉTODO POP() DE ARRAY JS PARA REMOVER O ÚLTIMO ELEMENTO DE UM ARRAY
+         * 
+         * O exemplo a seguir usa o pop()método para remover o último elemento da numbers array:
+        */
+
+        //declara um array literal chamado numbers que foi inicializado com 3 elementos
+        const numbers = [10, 20, 30];
+        //usando o metodo pop da instancia de objeto do tipo array numbers para remover o ultimo elemento do array numbers, que no caso e o elemento 30 no indice 2, o metodo ira retornar o elemento removido do array
+        let last = numbers.pop();
+        console.log(`elemento removido = ${last}`); //30
+        //mostra o novo valor do comprimento do array apos ter removido o ultimo elemento
+        console.log(`comprimento do array numbers = ${numbers.length}`);
+
+        /**
+         * Neste exemplo, o pop() método remove o número 30 da numbers array. Além disso, diminui o valor da length propriedade da numbers array para 2
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reexportando Uma Vinculação</title>
+</head>
+<body>
+
+    <script type="module" src="./app.js">
+
+        /**
+         * * REEXPORTANDO UMA VINCULAÇÃO
+         * 
+         * É possível exportar ligações que você importou. Isso é chamado de reexportação. Por exemplo:
+        
+            import { sum } from './math.js';
+            export { sum };
+
+         * 
+         * Neste exemplo, importamos sumdo math.js módulo e o exportamos novamente. A afirmação a seguir é equivalente às afirmações acima:
+         
+            export {sum} from './math.js';
+
+         * 
+         * Caso você queira renomear as ligações antes de reexportar, use a palavra- chave as. O exemplo a seguir importa sum do math.js módulo e o exporta novamente como add.
+         * 
+         * Se você deseja exportar todas as ligações de outro módulo, pode usar o asterisco (*):
+         
+            export * from './cal.js';
+
+         * */
+
+    </script>
+
+</body>
+</html>

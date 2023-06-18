@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        um elemento form no documento 
+    -->
+    <form action="#" method="post" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on" name="my">
+        <!--elementos do formulario, entradas para o formulario-->
+        <input type="text" name="one" value="1"/>
+        <input type="text" name="two" value="2"/>
+    </form>
+
+    <script>
+        /**
+         * * NAVEGAÇÃO DO FORM É ELEMENTOS
+         *
+         * Os formulários de documentos são membros da coleção(COLLECTION) especial document.forms
+         * 
+         * Essa é a chamada “coleção nomeada”(NAMED COLLECTION) : ela é nomeada e ordenada. Podemos usar o nome ou o número no documento para obter o formulário.
+         
+            document.forms.my; //o formulário com nome="meu" -> acessa o formulario por meio do nome, acessando a collection forms
+
+            document.forms[0]; //o primeiro formulário no documento -> acessa o formulario por meio da indexação ordenada, atraves da collection forms, acessando o indice onde pode estar o form
+
+         *
+         * Quando temos um formulário, qualquer elemento está disponível na collection nomeada form.elements
+         * 
+         * Por exemplo:
+        */    
+       
+        //obtem o formulario
+        //obtendo o formulario por meio da collection document.forms, atraves do nome por meio da nomeação, o mesmo nome atribuido no atributo name no form elemento html
+        let form = document.forms.my; //elemento <form name="my">
+
+        //obtem o elemento do form
+        //acessando a collection form.elements podemos obter os elementos(entradas) do formulario por meio do nome ou por indice indexado
+        let elem = form.elements.one; //<input name="one"> element
+
+        //obtem o valor do elemento(input) do formulario form
+        console.log(elem.value); //1
+    </script>
+</body>
+</html>

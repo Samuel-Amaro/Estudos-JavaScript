@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2 Apply</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EMPRESTIMO DE FUNÇÃO
+         * 
+         *  O apply() método permite que um objeto tome emprestado o método de outro objeto sem duplicar o código.
+         * 
+         * Suponha que você tenha o seguinte computer objeto:
+        */
+
+        //declara um objeto anonimo literal que sera atribuido por referencia ao computer variavel, assim a variavel referenciara o objeto
+        //o objeto e declarado usando a sintaxe literal de objeto
+        const computer = {
+            //propriedades do objeto literal usando a sintaxe chave valor
+            name: 'MackBook',
+            isOn: false,
+            //declaras metodos sem paramentro do objeto  literal
+            turnOn() {
+                this.isOn = true;
+                return `The ${this.name} is On`;
+            },
+            turnOff() {
+                this.isOn = false;
+                return `The ${this.name} is off`;
+            }
+        };
+
+        /**
+         * … e o seguinte server objeto:
+        */
+
+        //declara uma objeto anonimo literal que sera atribuido a server variavel por referencia, assim a variavel server referenciara o objeto
+        //objeto criado usando a sintaxe literal de objeto
+        const server = {
+            //propriedades do objeto usando a sintaxe chave valor
+            name: 'Dell PowerEdge T30',
+            isOn: false
+        };
+
+        /**
+         * O server objeto não tem os métodos turnOn() e .turnOff()
+         * 
+         * Para executar o turnOn() método do computer objeto no server objeto, você pode usar o apply() método da seguinte forma:
+        */
+
+        //usando o metodo apply da instancia de objeto turnOn do tipo funcion para executar o turnOn function no server objeto literal
+        //o this valor sera o server objeto e não precisara passar argumentos para apply para serem passados para o turnOn function
+        //aqui o server objeto this invocara o turnOn metodo do computer objeto literal por meio de apply
+        //o computer objeto emprestara o seu turnOn metodo para server objeto
+        let result = computer.turnOn.apply(server);
+        //mostra o resultado do turnOn metodo executado e retornado valor
+        console.log(`server.turnOn = ${result}`); //The Dell PowerEdge T30 is On
+
+        /**
+         * Neste exemplo, o server objeto empresta o turnOn() método do computer objeto.
+         * 
+         * Da mesma forma, você pode chamar o turnOff() método do objeto de computador no objeto de servidor:
+        */
+
+        //aqui a mesma logica do exemplo de cima so que com o metodo turnOff
+        //o computer emprestara seu turnOf metodo para o server objeto
+        let result2 = computer.turnOff.apply(server); 
+        console.log(`server.turnOff = ${result2}`); //The Dell PowerEdge T30 is Off
+
+    </script>
+</body>
+</html>

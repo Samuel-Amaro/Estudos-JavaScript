@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - elemento dom visivel pelo script
+    -->
+    <p>...o conteúdo antes do script...</p>
+
+    <script type="text/javascript">
+        //atribundo um manipulador de evento 
+        //o manipulador de evento e para o evento DOMContentLoaded(conteudo dom carregado) o navegador HTML totalmente carregado e a árvore DOM é construída, mas recursos externos como imagens <img> e folhas de estilo podem ainda não ter sido carregados.
+        //o evento e acionado quando a arvore dom esta contruida e o navegador HTML totaltemente carregado, mas sem recursos externos carregados
+        //este evento aguarda o script com o atributo defer especificado. ele so e acionado quando o script com defer e baixado e executado. 
+        //pois o script com defer so e executado quando o dom esta construido. então este evento espera o dom ser construido, logo apos espera o script com defer atributo ser executado
+        document.addEventListener("DOMContentLoaded", (event) => alert("DOM pronto após defer!"));
+    </script>
+
+    <!-- 
+        - o atributo defer especificado na tag script diz ao navegador para não esperar pelo script. o script e carregado em segundo plano, enquanto isso o dom e compilado e construido e renderizado, apos isso o script e executado quando o DOM esta totalmente construido.
+    -->
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js?speed=1" defer>
+        /**
+         * Em outras palavras:
+         * 
+            *  Scripts com defer nunca bloqueiam a página.
+            * 
+            * Scripts defer sempre são executados quando o DOM está pronto (mas antes do DOMContentLoaded evento).
+            * 
+         * O exemplo a seguir demonstra a segunda parte: 
+         * 
+            *  O conteúdo da página aparece imediatamente.
+            * 
+            * DOMContentLoaded manipulador de eventos aguarda o script adiado. Ele só é acionado quando o script é baixado e executado.
+        */
+    </script>
+
+    <!--
+        - imediatamente visivel.
+        - com o script tag com o atributo defer especificado este elemento dom não espera o script ser baixado -> processado, ele e mostrado normalmente sem precisar esperar o script.
+    -->
+    <p>...conteúdo após script...</p>
+</body>
+</html

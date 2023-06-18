@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeros Ponto Flutuante</title>
+</head>
+<body>
+    <script>
+        /**
+         * * NÚMEROS DE PONTO FLUTUANTE
+         * 
+         *  Para definir um número literal de ponto flutuante, inclua um ponto decimal e pelo menos um número depois disso. Por exemplo:
+        */
+
+        //declara variaveis e as inicializa com numeros de ponto flutuante
+        let price = 9.99;
+        let tax = 0.08;
+        let discount = .05; //valido mas não e recomendado
+
+        /**
+         * Quando você tem um número muito grande, você pode usar a notação eletrônica. A notação E indica que um número deve ser multiplicado por 10 elevado a uma determinada potência. Por exemplo:
+        */
+
+        //um numero muito grande represenrado por notação eletronica E
+        let amount = 3.14e7;
+        console.log(amount);
+
+        /**
+         * A notação 3.14e7 significa que pegue 3.14 e multiplique por .10 elevado a 7
+         * 
+         * Da mesma forma, você pode usar a notação E para representar um número muito pequeno. Por exemplo:
+        */
+
+        let amount2 = 5e-7;
+        console.log(amount2);
+
+        /**
+         * A notação 5e-7 significa que pegue 5 e divida por 10.000.000.
+         * 
+         * Além disso, o JavaScript converte automaticamente qualquer número de ponto flutuante com pelo menos seis zeros após o ponto decimal em e-notação. Por exemplo:
+        */
+
+        let amount3 = 0.0000005;
+        console.log(amount3);
+
+        /**
+         * Números de ponto flutuante são precisos até 17 casas decimais. Quando você executa operações aritméticas em números de ponto flutuante, geralmente obtém o resultado aproximado. Por exemplo:
+        */
+
+        let amount4 = 0.2 + 0.1;
+        console.log(amount4);
+        
+    </script>
+</body>
+</html>

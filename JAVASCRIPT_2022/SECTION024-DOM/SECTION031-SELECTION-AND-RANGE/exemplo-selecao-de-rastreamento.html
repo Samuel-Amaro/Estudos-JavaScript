@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <textarea id="area" style="width: 80%; height: 60px;">
+        A seleção neste texto atualiza os valores abaixo.
+    </textarea>
+
+    <br/>
+
+    <label for="from">De</label>
+    <input type="text" id="from" name="from" disabled/>
+    <label for="to">Para</label>
+    <input type="text" id="to" name="to" disabled/>
+
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO: SELEÇÃO DE RASTREAMENTO
+         * 
+         * Por exemplo, este código usa onselect o evento para rastrear a seleção:
+        */
+
+        //atribuindo um manipulador de evento por maio da propriedade dom
+        //o manipulador e para o evento select que e acionado quando algo e selecionado no elmento textarea
+        area.onselect = function(event) {
+            //area.selectionStart -> propriedade que retorna o inicio da seleção, posição de onde a seleção se inicio, no texto
+            from.value = area.selectionStart;
+            //area.selectionEnd -> propriedade que retorna a posição final da seleção, onde a seleção terminou em qual posição do texto
+            to.value = area.selectionEnd;
+        }
+
+        /**
+         * Observe:
+         * 
+            *  onselect dispara quando algo é selecionado, mas não quando a seleção é removida.
+            * 
+            * document.onselectionchange O evento não deve ser acionado para seleções dentro de um controle de formulário, de acordo com a especificação , pois não está relacionado a document seleção e intervalos. Alguns navegadores o geram, mas não devemos confiar nele.
+        */
+    </script>
+</body>
+</html>

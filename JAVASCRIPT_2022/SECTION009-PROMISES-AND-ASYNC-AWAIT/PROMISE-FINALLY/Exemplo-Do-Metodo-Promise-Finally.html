@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Finally()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O EXEMPLO DO MÉTODO JS PROMISE FINALLY()
+         * 
+         * O seguinte define uma Connection classe:
+        */
+
+        //define uma class chamada Connection usando palavra-chave class
+        class Connection{
+            //define um método de instancia chamado execute que declara um paramentro chamado query
+            execute(query) {
+                if(query != 'Insert' && query != 'Update' && query != 'Delete') {
+                    //lança execeção
+                    throw new Error(`The ${query} is not supported`);
+                }
+                console.log(`Execute the ${query}`);
+                return this;
+            }
+            //define outro método de instancia chamado close que não declara nenhum paramentro
+            close() {
+                console.log(`Close the connection`);
+            }
+        }
+
+        /**
+         * A Connection classe tem dois métodos: execute() e close():
+
+            - O execute() método só executará a consulta de inserção, atualização ou exclusão. Ele emitirá um erro se você passar para outra consulta que não esteja na lista.
+
+            - O close() método fecha a conexão, meio que limpando o recurso.
+
+         * 
+         * A connect() função a seguir retorna uma promessa que resolve para um novo Connection se o sinalizador de sucesso estiver definido como verdadeiro:
+        */
+
+        //declara uma constante chamada sucess inicializada com o valor booleano true
+        const sucess = true;
+
+        //declara uma function chamada connect que não declara paramentro
+        function connect() {
+            //a function ira retornar uma nova istancia anonima de uma promise, a promise recebe como argumento uma callback functino anonima com dois paramentros declarados, essa callbak e conhecida como executor
+            return new Promise((resolve, reject) => {
+                //simula uma operação assincrona a ser executada
+                
+                if(sucess) {
+                    //invoca o resolve function callback argumento para resolver a promise com um valor, mudando seu estado de pendente para cumprida com valor, o valor a ser resolvido e uma instancia anonima de objeto da class connection
+                    resolve(new Connection());
+                }else{
+                    //invoca a reject function callbak argumento para rejeitar a promise com um motivo, mudando seu estado de pendente para rejeitada com um motivo
+                    reject('Could not open the database connection');
+                }
+
+            });
+        }
+
+        /**
+         * O exemplo a seguir usa o finally()método para fechar a conexão:
+        */
+
+        //declara uma variavel e não ha inicializa
+        let globalConnection;
+
+        //invocando a function connect que ira retorna uma promise
+        //o primeiro then método e chamado para obter o valor resolvido pela promise quando ela sair de pendente para cumprida com valor, a callback do then executada para obter o valor da promisse resolvida
+        //logo em seguida encademaento de promessas, para realizar tarefas em sequencia
+        connect().then((connection) => {
+            //resultado da promisse resolvida
+            globalConnection = connection;
+            //retorna um valor para o proximo mpetodo then encadeado poder capturalo e executar alguma operação em sequencia
+            return globalConnection.execute('Insert');
+        }).then((connection) => {
+            //resultado do retorno do método then encadeado logo acima, e recebido com argumento aqui por esse then
+            globalConnection = connection;
+            //retorna um valor para o proximo mpetodo then encadeado poder capturalo e executar alguma operação em sequencia
+            return globalConnection.execute('Select');
+        }).catch(console.log) //obtem o valor de quando uma promise for rejeitada o motivo do erro
+        //o finally método e sempre executado, independente do resultado da promisse, rejeitada ou cumprida ele e executado
+        .finally(() => {
+            if(globalConnection) {
+                globalConnection + `close()`;
+            }
+        });
+
+        /**
+         * Neste exemplo
+
+            - A connect() função resolve para um novo Connection  objeto porque o success sinalizador está definido como true.
+
+            - O primeiro then() método executa a Insert consulta e retorna um Connection objeto. O globalConnection é usado para salvar a conexão.
+
+            - O segundo then() método executa a Select consulta e emite um erro. O catch() método mostra a mensagem de erro e o finally() método fecha a conexão.
+
+         * 
+         * * RESUMO
+
+            - O finally() método agenda uma função para ser executada quando a promessa for liquidada, seja cumprida ou rejeitada.
+
+            - É uma boa prática colocar o código que limpa os recursos no finally()método assim que a promessa for estabelecida, independentemente de seu resultado.
+
+        */
+        
+    </script>
+</body>
+</html>

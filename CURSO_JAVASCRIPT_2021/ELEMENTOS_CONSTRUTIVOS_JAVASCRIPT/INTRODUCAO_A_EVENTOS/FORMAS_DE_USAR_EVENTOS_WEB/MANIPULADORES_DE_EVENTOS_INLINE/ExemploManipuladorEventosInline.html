@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler attribute</title>
+    <style>
+      button {
+        margin: 10px
+      };
+    </style>
+  </head>
+  <body>
+    <!--elemento button com um atributo de evento de mouse especificado-->
+    <button onclick="bgChange()">Change color</button>
+    
+    <!--java script local incorporado ao elemento-->
+    <script>
+
+      //função java scritp que retorna um valor aleatorio 
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      //manipulador de evento nomeado, para o atributo do elemento <button>
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+      
+    </script>
+  </body>
+</html>

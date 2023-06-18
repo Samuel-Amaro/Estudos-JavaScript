@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de evento no JS</title>
+</head>
+<body>
+    
+    <h1>Exemplo simples de Eventos no JS</h1>
+
+    <p><strong>Exemplo:</strong>  No exemplo a seguir, nós temos um simples &lt;button&gt; que quando pressionado, irá fazer com que o fundo mude para uma cor aleatória:</p>
+
+    <button>Alterar de Cor!</button>
+
+    <!--java script incorporado no documento-->
+    <script>
+
+        //SELECIONA O ELEMENTO <button>
+        var btn = document.querySelector('button');
+
+        //função java scritp que retorna um numero aleatorio    
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+        //registrando um manipulador de eventos, no elemento <button>, sempre que o evento de clique for disparado pelo elemento, sempre que usuario clicar nele
+        btn.onclick = function() {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            document.body.style.backgroundColor = rndCol;
+        }
+    </script>
+</body>
+</html>

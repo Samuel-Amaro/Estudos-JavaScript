@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador De Coalescencia Nulo ??</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OPERADOR DE COALESCENCIA NULO JS
+         * 
+         *  Resumo : neste tutorial, você aprenderá sobre o operador de coalescência nula do JavaScript ( ??) que aceita dois valores e retorna o segundo valor se o primeiro for null ou undefined.
+         * 
+         * * INTRODUÇÃO AO OPERADOR DE COALESCENCIA NULO DO JS
+         * 
+         * O ES2020 introduziu o operador de coalescência nulo indicado pelos pontos de interrogação duplos ( ??). O operador de coalescência nulo é um operador lógico que aceita dois valores:
+         * 
+         * operador logico permite fazer comparações de variaveis e permite fazer algo com o resultado da comparação
+
+            value1 ?? value2
+
+         * 
+         * O operador de coalescência nulo retorna o primeiro valor (value1) se o segundo ( value2) for null ou undefined. Tecnicamente, o operador de coalescência de alta é equivalente ao seguinte bloco:
+         
+            const result = value1;
+            if(result === null || result || undefined) {
+                result = value2;
+            }
+
+         * 
+         * Um valor nulo é um valor que é  null ou  undefined.
+         * 
+         * O exemplo a seguir usa o operador de coalescência nulo (??) para retornar a string 'John' porque o primeiro valor é null:
+        */
+        
+        //usando o operador de coalescencia nullo para retornar a string
+        //como o primeiro valor e null o operador ira retorna o segundo valor  e atribui a constante
+        const name = null ?? 'John';
+        console.log(`name=${name}`); //'John'
+
+        /**
+         * E este exemplo retorna 28 porque o primeiro valor é undefined:
+        */
+
+        //usando o operador de coalescencia ele fara o retornar o segundo valor o 28, porque o primeiro valor e undefined
+        const age = undefined ?? 28;
+        console.log(`age=${age}`);
+        
+    </script>
+</body>
+</html>

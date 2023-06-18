@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes Anteriores Revisitadas</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CLASSES ANTERIORES AO ES6 REVISITADAS
+         * 
+         * Antes do ES6, JavaScript não tinha conceitos de classes. Para imitar uma classe, você geralmente usa o padrão construtor/protótipo conforme mostrado no exemplo a seguir:
+        */
+
+        //declara uma function construtura de objetos
+        //declara uma function chamada Person que declara um paramentro chamado name
+        //obs: uma function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //o responsavel por fazer tudo isso e o new operador
+            //declara um objeto anonimo literal e o atribui ao this valor para ser referenciado por meio de uma variavel
+            //this = {}
+            //add uma propriedade ao this valor chamada name a propriedade name e inicalizada pelo argumento name
+            this.name = name;
+            //return o this;
+        }
+
+        //o codigo abaixo define um método no objeto de prototipo anonimo
+        //esse metodo e compartilhado por todas as intancias de objetos criadas por meio do operador new invocando a function construtora
+        //referenciado por Person.prototype
+        //Adiciona uma propriedade chamada getName ao objeto de prototipo anonimo literal referenciado por Person.prototype
+        //esse objeto recebe como valor uma function anonima sem parametro declarado
+        Person.prototype.getName = function() {
+            //a function ira retorna o valor da propriedade referenciada pelo objeto anonimo que esta armazenado em prototype
+            return this.name;
+        };
+
+        //criando uma instancia de objeto por meio da function construtura a invocando juntamente com o operador new
+        //o new operador cria o objeto por meio da function construtora e retorna a referecencia desse objeto e atribui a variavel john, assim john referencia a intancia de objeto
+        var john = new Person("John Doe");
+        //invocando o metodo de prototipo
+        console.log(john.getName());
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, crie a Person função como construtora que tem um nome de propriedade chamado name. A getName() função é atribuída a prototype para que possa ser compartilhada por todas as instâncias do Person tipo.
+         * 
+         * Em seguida, crie uma nova instância do tipo Person usando o new operador. O objeto john, portanto, é uma instância da Person e do Object por meio de herança prototípica.
+         * 
+         * As instruções a seguir usam o instanceof operador para verificar se john é uma instância do tipo Person and Object:
+        */
+
+        //usando o operador instanceof para verificar se a instancia de objeto referenciada pela variavel john e do tipo Person
+        console.log(`john instanceof Person = ${john instanceof Person}`); //true
+        //e se a instancia de obejto john e do tipo Object
+        console.log(`john instanceof Object = ${john instanceof Object}`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturação De Arrays</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ATRIBUIÇÃO DE DESESTRUTURAÇÃO ES6
+         *
+         * Resumo : neste tutorial, você aprenderá a usar a atribuição de desestruturação ES6 que permite desestruturar um array em variáveis ​​individuais.
+         * 
+         * O ES6 fornece um novo recurso chamado atribuição destrutiva que permite desestruturar propriedades de um objeto ou elementos de uma array em variáveis ​​individuais.
+         * 
+         * Vamos começar com a desestruturação do array.
+         * 
+         * * INTRODUÇÃO À DESESTRUTURAÇÃO DE ARRAYS JS
+         * 
+         * Supondo que você tenha uma função que retorna uma array de números da seguinte forma:
+        */
+
+        //declara uma function chamada getScores que não possui paramentro declarado
+        //uma function e uma instancia de objeto do tipo function
+        function getScores() {
+            //a function retorna um array literal densa anonimo com 3 elementos
+            return [70, 80, 90];
+        }
+
+        /**
+         * O seguinte chama a getScores()função e atribui o valor retornado a uma variável:
+        */
+
+        //chama a function sem precisar informar argumento pois não precisa, a function retorna um array, a variavel scores ira referencia o array retornando
+        let scores = getScores();
+
+        /**
+         * Para obter a pontuação individual, você precisa fazer assim:
+        */
+
+        //acessa os elementos do array de forma individual, usando notação de colchetes, por meio de seus indices, lembrando que o array e indexado
+        let x = scores[0], y = scores[1], z = scores[2];
+
+        /**
+         * Antes do ES6, não havia uma maneira direta de atribuir os elementos da array retornada a várias variáveis, como x, y e z.
+         * 
+         * Felizmente, a partir do ES6, você pode usar a atribuição de desestruturação da seguinte forma:
+        */
+
+        //usando a sintaxe de atribuição de desestruturação do ES6 podemos atribuir de forma direta os elemtnos de uma array a variaveis individuais especificadas
+        //aqui neste caso desestruturaremos o array retornado pela function getScores, onde sera atribuido seus elementos as variaveis individuais x, y, z
+        //os [] não tem nada a ver com a sintaxe de array são sintaxes diferentes
+        let[x4, y4, z4] = getScores();
+
+        //mostrando as variaveis individuais obtidas pelas atribuição de desestruturação do array
+        console.log(x4); //70
+        console.log(y4); //80
+        console.log(z4); //90
+
+        /**
+         * As variáveis x, y e z tomarão os valores do primeiro, segundo e terceiro elementos do array retornado.
+         * 
+         * Observe que os colchetes [] se parecem com a sintaxe da array, mas não são.
+         * 
+         * Se a getScores() função retornar um array de dois elementos, a terceira variável será undefined, assim:
+        */
+
+        //declara uma function chamada getScores que não possui paramentro declarado
+        //uma function e uma instancia de objeto do tipo function
+        function getScores2() {
+            //a function retorna um array literal densa anonimo com 2 elementos
+            return [70, 80];
+        }
+
+        //usando a sintaxe de atribuição de desestruturação do ES6 podemos atribuir de forma direta os elemtnos de uma array a variaveis individuais especificadas
+        //aqui neste caso desestruturaremos o array retornado pela function getScores, onde sera atribuido seus elementos as variaveis individuais x, y, z
+        //os [] não tem nada a ver com a sintaxe de array são sintaxes diferentes
+        //como o array so possui dois elementos a varaivel z especificada tera o valor undefind pois não existe o terceriro elemento no array para ser atribuido a z
+        //assim o proprio JS atribui undefined a z variavel
+        let[x2, y2, z2] = getScores2();
+
+        console.log(x2); //70
+        console.log(y2); //80
+        console.log(z2); //undefined
+
+        /**
+         * Caso a getScores3() função retorne um array com mais de três elementos, os elementos restantes são descartados. Por exemplo:
+        */
+
+        //declara uma function chamada getScores3 que não possui paramentro declarado
+        //uma function e uma instancia de objeto do tipo function
+        function getScores3() {
+            //a function retorna um array literal densa anonimo com 4 elementos
+            return [70, 80, 90, 100];
+        }
+
+        //usando a sintaxe de atribuição de desestruturação do ES6 podemos atribuir de forma direta os elemtnos de uma array a variaveis individuais especificadas
+        //aqui neste caso desestruturaremos o array retornado pela function getScores, onde sera atribuido seus elementos as variaveis individuais x, y, z
+        //os [] não tem nada a ver com a sintaxe de array são sintaxes diferentes
+        //como o array retornado por getScores3() retorna um array com mais de 3 elementos, não tem variaveis suficientes para receber todos os elementos, aqui especificamos so 3 varaiveis assim so sera atribuido 3 elementos, os elemetos restantes do array sera descartado
+        let[x3, y3, z3] = getScores3();
+
+        //acessando as variaveis que receberam os valores dos elementos do array
+        console.log(x3); //70
+        console.log(y3); //80
+        console.log(z3); //90
+    </script>
+</body>
+</html>

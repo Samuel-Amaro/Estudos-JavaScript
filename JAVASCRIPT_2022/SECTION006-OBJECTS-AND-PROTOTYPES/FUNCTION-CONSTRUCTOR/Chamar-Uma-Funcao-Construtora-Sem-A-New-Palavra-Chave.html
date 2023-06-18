@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções construtoras</title>
+</head>
+<body>
+    
+    <script>
+
+        //declara um function regular construtora chamada Person, que declara dois paramentros, que vão ser propriedades do objeto
+        function Person(firstName, lastName) {
+            //propriedades do objeto, aqui cria as propriedades, da um nome a propriedade e atribui o valor
+            this.firstName = firstName;
+            this.lastName = lastName;
+
+            //cria um metodo para o objeto, 
+            //o metodo e uma propriedade chamada getFullName que recebe um function anonima
+            //a function anonima e atribuida a propriedade getFullName, assim getFullName e uma propriedade que referencia a function anonima
+            //porem isso e prejudicial pois esse metodo e duplicado a cada instancia criada assim consome mais memoria
+            this.getFullName = function() {
+                return `${this.firstName} ${this.lastName}`;
+            };
+        }
+
+        /**
+         * * CHAMAR UMA FUNÇÃO CONSTRUTORA SEM A NEW PALAVRA CHAVE
+         * 
+         * É possível chamar uma função construtora sem a new palavra - chave como esta:
+        */
+
+        //cria uma instancia(objeto) do tipo personalizado Person, invocando a function e passando os argumentos, mas sem usar a new palavra chave, assim a function construtora se comporta como uma function regular, e não retorna o this valor referenciando o objeto interno criado pela function construtora, ele vai apontar para o this valor global
+        let person = Person('John', 'Doe');
+
+        /**
+         * Neste caso, o Person apenas executa como uma função normal. Portanto, o this interior da Person função não se limita à person variável, mas ao objeto global.
+         * 
+         * Se você tentar acessar a propriedade firstName ou lastName, receberá um erro:
+        */
+
+        //tenta acessa um propriedade do person objeto usando o this valor mas gera um erro
+        //gera um erro o this valor aponta para o objeto global window que não possui a propriedade firstName e gera um erro porqeu não aponta para o objeto do tipo Person
+        console.log(person.firstName);
+
+        /**
+         * Da mesma forma, você não pode acessar o getFullName() método, pois ele está vinculado ao objeto global. 
+        */
+
+        //tenta acessar o getFullName metodo do person objeto usando o this valor mas gera um erro
+        //o this valor esta apontando para o objeto global window, e esse objeto não possui o metodo getFullName
+        person.getFullName(); 
+
+        /**
+         * Para evitar que uma função de construtor seja chamada sem a new palavra - chave, o ES6 introduziu a new.target propriedade.
+         * 
+         * Se uma função construtora for chamada com a new palavra - chave, o new.target retorna uma referência à função. Caso contrário, ele retorna undefined
+        */
+
+        
+        //declara um function regular construtora chamada Person, que declara dois paramentros, que vão ser propriedades do objeto
+        function PersonTarget(firstName, lastName) {
+            
+            //retorna um refencia a função construtora PersonTarget
+            //mostra a referencia da fuction PersonTarget construtora
+            console.log(new.target);
+
+            //propriedades do objeto, aqui cria as propriedades, da um nome a propriedade e atribui o valor
+            this.firstName = firstName;
+            this.lastName = lastName;
+
+            //cria um metodo para o objeto, 
+            //o metodo e uma propriedade chamada getFullName que recebe um function anonima
+            //a function anonima e atribuida a propriedade getFullName, assim getFullName e uma propriedade que referencia a function anonima
+            //porem isso e prejudicial pois esse metodo e duplicado a cada instancia criada assim consome mais memoria
+            this.getFullName = function() {
+                return `${this.firstName} ${this.lastName}`;
+            };
+        }
+
+        /**
+         * O seguinte retorna undefined porque a Person função construtora é chamada como uma função regular:
+        */
+
+        //cria uma instancia(objeto) do tipo personalizado Person, invocando a function e passando os argumentos, mas sem usar a new palavra chave, assim a function construtora se comporta como uma function regular, e não retorna o this valor referenciando o objeto interno criado pela function construtora, ele vai apontar para o this valor global
+        //mas o new.target ira retorna undefined para person2 por não usar o new palavra chave ao invocar function construtora
+        let person2 = PersonTarget('John', 'Doe');
+
+        /**
+         * No entanto, o seguinte retorna uma referência à PersonTarget função porque ela é chamada com a new palavra-chave:
+        */
+
+        //cria uma instancia(objeto) do tipo PersonTarget invocando a function construtora e passando os argumentos
+        //ira retornar a referncia a function construtora e o this valor apontando para o objeto do tipo PersonTarget instancia criado aqui
+        let person3 = new PersonTarget('John', 'Doe');
+
+        /**
+         * Aproveitando o new.target, você pode forçar os usuários da função construtora a chamá-la com a new palavra - chave. E você pode lançar um erro se eles não fizerem assim:
+        */ 
+
+        //declara uma function construtora regular chamada PersonNewTarget que declara dois paramentros que serão propriedades do objeto
+        function PersonNewTarget(firstName, lastName) {
+            //se o new.target estiver apontando a referencia para undefined e porque invocou a function construtora sem usar a new palavra chave- se isso aconter inverta o valor de undefined que e true para que possa lançar um erro  e não criar um instancia
+            if(!new.target) {
+                throw Error("Cannot be called without the new keyword");
+            }
+
+            //se usar o new palavra chave ao invocar function o new.target estara com a referencia da PersonNewTarget function construtora
+
+            //declara propriedades do objeto a ser retornado
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        /**
+         * Como alternativa, você pode tornar a sintaxe mais flexível criando um novo Person objeto se os usuários da função de construtor não usarem a new palavra-chave:
+        */
+
+        //declara uma function construtora regular chamada PersonNewTargetFlexivel que declara dois paramentros que serão propriedades do objeto
+        function PersonNewTargetFlexivel(firstName, lastName) {
+            //se o new.target estiver apontando a referencia para undefined e porque invocou a function construtora sem usar a new palavra chave- se isso aconter inverta o valor de undefined que e true para que possa retorna uma instancia de objeto do Tipo PersonNewTargetFlexivel usando a new palavra chave
+            if(!new.target) {
+                //retorna uma instancia usando o new palavra chave para referncia a instancia
+                return new PersonNewTargetFlexivel(firstName, lastName);
+            }
+
+            //se usar o new palavra chave ao invocar function o new.target estara com a referencia da PersonNewTarget function construtora
+
+            //declara propriedades do objeto a ser retornado
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        //declara uma instancia(objeto) da PersonNewTargetFlexivel fuction construtora a invocando e passando argumentos, sem usar a new palavra chave, mas mesmo assim a function construtora retorna uma instancia normal podendo referenciala
+        let person = PersonNewTargetFlexivel("John", "Doe");
+
+        //acessando uma propriedade do objeto person
+        console.log(person.firstName);
+
+        /**
+         * Esse padrão é frequentemente usado em bibliotecas e estruturas JavaScript para tornar a sintaxe mais flexível.
+        */
+    </script>
+
+</body>
+</html>

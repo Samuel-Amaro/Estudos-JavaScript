@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="EN-US">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sobre Alces</title>
+</head>
+<body>
+
+    The truth about elk.
+    <ol>
+        <li>An elk is a smart</li>
+        <!-- comment -->
+        <li>...and cunning animal!</li>
+    </ol>
+
+    <script type="text/javascript">
+       
+       /**
+        * * OUTROS TIPOS DE NÓS
+        * 
+        * Existem alguns outros tipos de nós além de elementos e nós de texto.
+        
+            <!DOCTYPE HTML>
+            <html>
+            <body>
+            The truth about elk.
+            <ol>
+                <li>An elk is a smart</li>
+                <!-- comment -->
+                <li>...and cunning animal!</li>
+            </ol>
+            </body>
+            </html>
+
+        * Podemos ver aqui um novo tipo de nó de árvore – nó de comentário , rotulado como #comment, entre dois nós de texto.
+        * 
+        * Podemos pensar – por que um comentário é adicionado ao DOM? Não afeta a representação visual de forma alguma. Mas há uma regra – se algo está em HTML, então também deve estar na árvore DOM.
+        * 
+        * Tudo em HTML, até mesmo comentários, torna-se parte do DOM.
+        * 
+        * Mesmo a <!DOCTYPE...> diretiva no início do HTML também é um nó DOM. Está na árvore DOM logo antes de <html>. Poucas pessoas sabem disso. Não vamos tocar nesse nó, nem o desenhamos em diagramas, mas está lá.
+        * 
+        * O document objeto que representa todo o documento também é, formalmente, um nó DOM.
+        * 
+        * Existem 12 tipos de nós . Na prática costumamos trabalhar com 4 deles:
+        
+            1. document– o “ponto de entrada - entry point” no DOM.
+            2. nós de elemento – tags HTML, os blocos de construção da árvore.
+            3. nós de texto – contêm texto.
+            4. comentários – às vezes podemos colocar informações lá, não serão mostradas, mas o JS pode lê-las do DOM.
+
+        * Os nós DOM têm propriedades e métodos que nos permitem viajar entre eles, modificá-los, mover-se pela página e muito mais. Vamos a eles nos próximos capítulos.
+        * */
+    </script>
+</body>
+</html>

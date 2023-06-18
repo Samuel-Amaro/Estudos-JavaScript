@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - atribui um manipulador de evento usando o atributo html;
+    -->
+    <button id="elem" onclick="alert('Click!');">Autoclick</button>
+
+    <script type="text/javascript">
+        /**
+         * * Evento de despacho(dispatchEvent)
+         * 
+         * Após a criação de um objeto de evento, devemos “executá-lo” em um elemento usando a chamada elem.dispatchEvent(event).
+         * 
+         * Em seguida, os manipuladores reagem a ele como se fosse um evento normal do navegador. Se o evento foi criado com o bubbles sinalizador, ele borbulha.
+         * 
+         * No exemplo abaixo o click evento é iniciado em JavaScript. O manipulador funciona da mesma maneira como se o botão fosse clicado:
+        */
+
+        //criando um objeto de evento personalizado, criando um evento personalizado.
+        //gerando o nosso proprio evento, para nossos proprias necessidades
+        //gera um novo objeto de evento personalizado
+        //o argumento type para o construtor informa o tipo do evento. aqui vamos criar um evento de click
+        let event = new Event("click");
+        //o metodo elem.dispatchElement(event);
+        //o metodo permite executar o evento em um elemento.
+        //aqui iremos executar o objeto de evento personalizado criado por nos mesmos no elemento elem
+        //assim que chamado o metodo executa o evento no elemento.
+        elem.dispatchEvent(event);
+
+        /**
+         * * event.isTrusted
+         * 
+         * Existe uma maneira de diferenciar um evento de usuário “real” de um gerado por script.
+         * 
+         * A propriedade event.isTrusted é true para eventos que vêm de ações reais do usuário e false para eventos gerados por script.
+        */
+    </script>
+</body>
+</html>

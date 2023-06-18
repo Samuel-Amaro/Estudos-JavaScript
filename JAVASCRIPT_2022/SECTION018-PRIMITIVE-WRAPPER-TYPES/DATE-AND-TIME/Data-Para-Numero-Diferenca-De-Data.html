@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * DATA PARA NÚMERO, DIFERENÇA DE DATA - DATE TO NUMBER, DATE DIFF
+         * 
+         * Quando um Date objeto é convertido em número, ele se torna o timestamp igual a date.getTime():
+        */
+
+        //declara uma instancia de objeto do tipo date, sem passar argumentos para o construtor Date, cria um objeto date com data e hora atuais
+        let date = new Date();
+        //o operar unario, +, converte o date para number
+        console.log(+date); //o número de milissegundos, o mesmo que date.getTime()
+        
+        /**
+         * O efeito colateral importante: as datas podem ser subtraídas, o resultado é a diferença em ms.
+         * 
+         *  Isso pode ser usado para medições de tempo:
+        */
+
+        //declara uma instancia de objeto do tipo date, sem passar argumentos para o construtor Date, cria um objeto date com data e hora atuais
+        //marca um carimbo de data/hora inicial para medir tempo de execução do loop abaixo
+        let start = new Date(); //comece a medir o tempo
+
+        //faça o trabalho
+        for(let i = 0; i < 100000; i++) {
+            let doSomething = i * i * i;
+        }
+
+        //marca um carimbo de data/hora final para apos medir tempo de execução do loop abaixo
+        let end = new Date(); //termina a medir o tempo
+
+        //tempo gasto para executar o loop no script
+        console.log(`The loop took ${end-start} ms`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * MANIPULAÇÃO DE ERROS
+         * 
+         * A download() função pressupõe que tudo funciona bem e não considera nenhuma exceção. O código a seguir apresenta dois callbacks: success e failure para lidar com os casos de sucesso e falha, respectivamente:
+         * 
+        */
+
+        function download(url, sucess, failure) {
+            //function setTimeout recebe uma callback implementada com arrow function como argument para setTimeout funciton
+            setTimeout(() => {
+                //script para baixar a imagem aqui
+                console.log(`Downloading ${url} ...`);
+                //sobre simplificação
+                let error = url.length === 0 || !url;
+                //ligue para a falha ou retorno de sucesso
+                error ? failure(url) : sucess(url);    
+            }, 3000);
+        }
+
+        //a download function recebe 3 argumentos
+        //os 2 ultimos são callback functions anonimas regular que possui paramentro
+        download('', 
+            function(picture) {
+                console.log(`Processing the picture ${picture}`);
+            },
+            function(picture) {
+                console.log(`Handling error...`);
+            }
+        );
+
+    </script>
+
+</body>
+</html>

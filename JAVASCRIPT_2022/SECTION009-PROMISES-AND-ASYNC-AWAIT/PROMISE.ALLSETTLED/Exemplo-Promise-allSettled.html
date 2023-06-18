@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Promise.allSettled()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO DE JS Promise.allSettled()
+         * 
+         * O exemplo a seguir usa o Promise.allSettled() para aguardar que todas as promessas de entrada sejam resolvidas:
+        **/
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor resolvido pela promise e o 10
+                resolve(10);
+            }, 1 * 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para rejeitar a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function reject, para mudar o estado da promise de pendente para rejeita por um motivo
+                //o motivo do erro da promise ter sido rejeitada e o argumento passado para o reject function callback argumento
+                reject(20);
+            }, 2 * 1000);
+        });
+
+        //usando o método Promise.allSettled, método que aceita uma lista de Promises e retorna uma nova promessa que é resolvida após todas as promessas de entrada serem resolvidas, resolvidas ou rejeitadas.
+        //resolve para uma array de objetos em que cada um descreve o resultado da promessa de entrada. status e value(ou reason) são propriedades do objeto que descreve o resulta das promises de entrada.
+        //o metodo recebe um array literal anonimo inicializado com a referncia de duas promises
+        //o then método e usado para obter o valor de resultado da promise retornada por Promise.allSettled, a callback do then método e chamada pelo then quando a promise retornada e resolvida mudada de pendente para cumprida com valor
+        Promise.allSettled([p1, p2]).then((result) => {
+            //mostra o array resolvido pela promise retornada pelo método allSettled o array contém objetos individuais com propriedades que descrem as promises resolvidas ou rejeitdas
+            console.log(result);
+        });
+
+        /**
+         * Como Funciona;
+
+            - A primeira promessa p1 resolve para o valor 10 após um segundo
+
+            - A segunda promessa p2 é rejeitada por um motivo com um valor 20 após dois segundos.
+
+            - O Promise.allSettled() retorna uma promessa que resolve para a result array que possui dois elementos. O primeiro elemento é um objeto resolvido pela p1 promessa e o segundo é outro objeto que é rejeitado pela p2 promessa.
+
+         * 
+         * * RESUMO
+
+            * O Promise.allSettled() método aceita um iterável de promessas e retorna uma nova promessa que resolve quando cada promessa de entrada é resolvida com uma array de objetos que descreve o resultado de cada promessa no objeto iterável.
+        */
+    </script>
+</body>
+</html>

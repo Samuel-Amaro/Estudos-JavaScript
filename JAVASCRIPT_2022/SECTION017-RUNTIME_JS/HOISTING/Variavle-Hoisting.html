@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * VARIABLE HOISTING(IÇAMENTO VARIAVEL)
+         * 
+         * A elevação de variáveis ​​significa que o mecanismo JavaScript move as declarações de variáveis ​​para o início do script. Por exemplo, o exemplo a seguir declara a counter variável e inicializa seu valor como 1:
+        */
+       
+        //quando esses script e executado pela primeira vez pelo mecanismo JS, ele cria o contexto de execução global, que possui duas fases a de criação e execução, na fase de criação o mecanismo js move as declarações de variaveis e funções para topo do codigo inicio do script(isso e conhecido como içamento - hosting)
+        //tentar acessar o conteudo que uma variavel armazena antes de ser declarada
+        //essa linha de codigo abaixo não causa erro
+        //o mecanismo javascript move a declaração da variavel acessada para o inicio do script(içamento - hoisting)
+        console.log(counter);
+
+        //declara uma varaivel de escopo global chamada counter que e inicializada com o valor 1
+        var counter = 1;
+
+        /**
+         * Neste exemplo, referenciamos a variável counter antes da declaração. 
+         * 
+         * No entanto, a primeira linha de código não causa um erro. A razão é que o mecanismo JavaScript move a declaração da variável para o início do script.
+         * 
+         * Tecnicamente, o código se parece com o seguinte na fase de execução:
+
+            //coloca variavel na memoria e inicializa com o valor undefined
+            var counter;
+
+            console.log(counter); //undefined
+
+            counter = 1;
+
+         * 
+         * Durante a fase de criação do contexto de execução global, o mecanismo JavaScript coloca a variável counter na memória e inicializa seu valor para undefined.
+        */
+
+        </script>
+
+</body>
+</html>

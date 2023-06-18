@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herdar Menbros Estáticos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * HERDAR MENBROS ESTÁTICOS
+         * 
+         *  Além das propriedades e métodos, a classe filha também herda todas as propriedades e métodos estáticos da classe pai. Por exemplo:
+        */
+
+        //define uma class chamada Animal, usando a palavra chave class
+        class Animal{
+            //define um construtor com paramentros declarados, como legs, esses paramentros inicializam propriedades
+            constructor(legs) {
+                //declara uma propriedade chamada legs e a inicializa com o argumento legs
+                this.legs = legs;
+            }
+            //declara um método da classe, chamado walk, sem paramentros declarados
+            walk() {
+                console.log(`Walking on ${this.legs} legs`);
+            }
+            //declara um método estatico, um método estatico esta associado a classe e não a instancia, isso e posso invocar o metodo estatico sem precisar de uma instancia, so por meio da classe consigo invocar o método estatico
+            static helloWorld() {
+                console.log('Hello World');
+            }
+        }
+
+        //define uma class chamada Bird, essa class e definida usando a palavra chave class, essa class e uma class Derivada, class filha da class Animal
+        //a Bird class estende(herda) tudo de Animal class
+        class Bird extends Animal{
+            //declara um metodo chamado fly sem paramentro para a Bird class
+            fly() {
+                console.log('flying');
+            }
+        }
+
+        /**
+         * Neste exemplo, a Animal classe tem o helloWorld() método estático e este método está disponível como Bird.helloWorld() e se comporta da mesma forma que o  Animal.helloWorld() método:
+        */
+
+        //verificando a herança de métodos estaticos
+        //acessando o método estatico definida na class Animal, por meio da subClasse Bird
+        //o método estatico não precisa de instancia para ser acessado
+        Bird.helloWorld(); //Hello World
+
+    </script>
+</body>
+</html>

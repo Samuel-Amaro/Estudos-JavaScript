@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * Unhandled rejection(Rejeição não tratada)
+         * 
+         * Lembre-se do unhandled rejection evento do artigo Tratamento de erros com promessas ?
+         * 
+         * Agora podemos ver exatamente como o JavaScript descobre que houve uma rejeição não tratada.
+         * 
+         * Uma “rejeição não tratada” ocorre quando um erro de promessa não é tratado no final da fila de microtarefas.
+         * 
+         * Normalmente, se esperamos um erro, adicionamos .catch à cadeia de promessas para tratá-lo:
+        */
+
+        //usa o metodo estatico reject para rejeitar uma promise com um objeto error
+        let promise = Promise.reject(new Error("Falha promise!"));
+        //atribuindo um manipulador .catch para capturar o erro na promise
+        promise.catch(err => alert('caught'));
+
+        //não é executado: erro tratado
+        window.addEventListener('unhandledrejection', event => alert(event.reason));
+
+
+    </script>
+
+</body>
+</html>

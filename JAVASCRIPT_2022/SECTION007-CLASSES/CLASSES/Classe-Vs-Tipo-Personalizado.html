@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classe Versus Tipo Personalizado</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CLASSE x TIPO PERSONALIZADO
+         * 
+         * Apesar das semelhanças entre uma classe e um tipo personalizado definido por meio de uma função construtora, existem algumas diferenças importantes.
+         * 
+         * Primeiro, as declarações de classe não são içadas como declarações de função.
+         * 
+         * Por exemplo, se você colocar o código a seguir acima da Person seção de declaração de classe, obterá um arquivo ReferenceError.
+
+            let john = new Person("John Doe");
+
+            Erro:
+
+            Uncaught ReferenceError: Person is not defined
+
+         * 
+         * Segundo, todo o código dentro de uma classe é executado automaticamente no modo estrito. E você não pode mudar esse comportamento.
+         * 
+         * Terceiro, os métodos de classe não são enumeráveis. Se você usar um padrão de construtor/protótipo, precisará usar o Object.defineProperty() método para tornar uma propriedade não enumerável.
+         * 
+         * Por fim, chamar o construtor de classe sem o new operador resultará em um erro, conforme mostrado no exemplo a seguir.
+
+            Erro: Uncaught TypeError: Class constructor Person cannot be invoked without 'new'
+
+         * Observe que é possível chamar a função construtora sem o new operador. Nesse caso, a função construtora se comporta como uma função regular.
+         * 
+         * * RESUMO
+         * 
+         * Use a palavra-chave JavaScript class declara uma nova classe.
+         * 
+         * Uma class declaração é açúcar sintático sobre herança prototípica com aprimoramentos adicionais.
+        */
+
+
+    </script>
+</body>
+</html>

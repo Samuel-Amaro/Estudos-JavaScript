@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <script>
+        /**
+         * * CASO DE USO 3: FAZER ALGO APÓS O EVENTO
+         * 
+         * Em um manipulador de eventos, podemos decidir adiar algumas ações até que o evento borbulhe e seja tratado em todos os níveis. Podemos fazer isso envolvendo o código em zero delay setTimeout.
+         * 
+         * No capítulo Despachando eventos personalizados vimos um exemplo: o evento personalizado menu-open é despachado em setTimeout, para que ocorra após o evento “click” ser totalmente tratado.
+        */
+
+        menu.onclick = function(event) {
+            //...
+
+            //crie um evento personalizado com os dados do item de menu clicado
+            let customEvent = new CustomEvent("menu-open", {
+                bubbles: true
+            });
+
+            //despachar o evento personalizado de forma assíncrona
+            //apos 0s despacha o evento
+            setTimeout(() => menu.dispatchEvent(customEvent));
+        }
+
+    </script>
+</body>
+</html>

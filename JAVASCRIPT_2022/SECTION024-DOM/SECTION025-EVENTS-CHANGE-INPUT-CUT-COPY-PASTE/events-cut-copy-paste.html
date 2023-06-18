@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <input type="text" id="input"/>
+
+    <script>
+        /**
+         * * EVENTOS: CUT(cortar), COPY(copiar), PASTE(colar)
+         * 
+         * Esses eventos ocorrem ao cortar/copiar/colar um valor.
+         * 
+         * Eles pertencem à classe ClipboardEvent e fornecem acesso aos dados que são recortados/copiados/colados.
+         * 
+         * Também podemos usar event.preventDefault() para abortar a ação, então nada é copiado/colado.
+         * 
+         * Por exemplo, o código abaixo previne todos os cut/copy/paste eventos e mostra o texto que estamos tentando recortar/copiar/colar:
+        */
+
+        //atribui um manipulador de evento  por meio da propriedade dom
+        //o manipulador de evento e atribuido, para manipular o evento paste(colar), o evento e acionado toda vez que um valor e colado no input.
+        input.onpaste = function(event) {
+            //o evento paste pertence a classe ClipboarEvent que fornece acesso aos dados que são colados no input, por meio do metodo da classe podemos acessar o valor que foi colado no input
+            //porem retorna uma string vazia pois estamos cancelando a ação padrão de colar o valor no input logo abaixo
+            alert("paste: " + event.clipboardData.getData('text/plain'));
+            //aqui impedimos a ação padrão, e abortamos a ação, então oque ia ser colado no inpurt não e mais, a ação foi impedida
+            event.preventDefault();
+        };
+
+        //atribui um manipuador de evento por meio da propriedade dom
+        //o manipulador e para o evento de cuty/copy(eventos de corta e copiar) algum valor em um input elemento
+        //atribuimos o mesmo manipulador para diferentes eventos
+        input.oncut = input.oncopy = function(event) {
+            alert(event.type + '-' + document.getSelection());
+            //impedindo a ação padrão de cortar/copiar o valor dentro de um input
+            event.preventDefault();
+        };
+
+        /**
+         * Observe: dentro cut e copy manipuladores de eventos uma chamada para event.clipboardData.getData(...) retorna uma string vazia. Isso porque tecnicamente os dados ainda não estão na área de transferência. Se usarmos event.preventDefault(), não será copiado.
+         * 
+         * Portanto, o exemplo acima usa document.getSelection() para obter o texto selecionado. Você pode encontrar mais detalhes sobre a seleção de documentos no artigo Seleção e intervalo.
+         * 
+         * É possível copiar/colar não apenas texto, mas tudo. Por exemplo, podemos copiar um arquivo no gerenciador de arquivos do SO e colá-lo.
+         * 
+         * Isso porque clipboardDataimplementa a DataTransferinterface, comumente usada para arrastar e soltar e copiar/colar. Está um pouco além do nosso escopo agora, mas você pode encontrar seus métodos na especificação DataTransfer .
+         * 
+         * Além disso, há uma API assíncrona adicional de acesso à área de transferência: navigator.clipboard. Mais sobre isso na especificação Clipboard API e eventos , não suportados pelo Firefox.
+         * 
+         * * RESTRIÇÕES DE SEGURANÇA
+         * 
+         * A área de transferência é uma coisa “global” no nível do sistema operacional. Um usuário pode alternar entre vários aplicativos, copiar/colar coisas diferentes e uma página do navegador não deve ver tudo isso.
+         * 
+         * Portanto, a maioria dos navegadores permite acesso contínuo de leitura/gravação à área de transferência apenas no escopo de determinadas ações do usuário, como copiar/colar etc.
+         * 
+         * É proibido gerar eventos “personalizados” da área de transferência dispatchEvent em todos os navegadores, exceto Firefox. E mesmo que consigamos despachar tal evento, a especificação afirma claramente que tais eventos “sintéticos” não devem fornecer acesso à área de transferência.
+         * 
+         * Mesmo que alguém decida salvar event.clipboardData em um manipulador de eventos e depois acessá-lo, não funcionará.
+         * 
+         * Para reiterar, event.clipboardData funciona apenas no contexto de manipuladores de eventos iniciados pelo usuário.
+         * 
+         * Por outro lado, navigator.clipboard é a API mais recente, destinada a ser usada em qualquer contexto. Ele pede permissão do usuário, se necessário.
+        */
+
+    </script>
+</body>
+</html>

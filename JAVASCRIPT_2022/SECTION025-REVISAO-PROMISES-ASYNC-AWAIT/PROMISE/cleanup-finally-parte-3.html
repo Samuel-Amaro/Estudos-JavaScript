@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * PODEMOS ANEXAR MANIPULADORES A PROMESSAS ESTABELECIDAS
+         * 
+         * Se uma promessa estiver pendente, os .then/catch/finally manipuladores aguardam seu resultado.
+         * 
+         * Às vezes, pode ser que uma promessa já esteja definida quando adicionamos um manipulador a ela.
+         * 
+         * Nesse caso, esses manipuladores são executados imediatamente:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        //aqui omitimos o executor e passamos somente o resolve callback argumento
+        //a promisse e criada e logo em seguida e resolvida com um valor
+        ///a promessa é resolvida imediatamente após a criação
+        let promise = new Promise(resolve => resolve("feito!"));
+
+        //registrando uma função consumidora com metodo then, ela recebera somente o resultado, ja consome o resultado no mesmo estante pois a promisse ja esta resolvido com valor, não precisa esperar o trabalho
+        //quando estamos apenas interessados em apenas conclusões bem-sucedidas podemos fornecer apenas um argumento de função para .then
+        //fornecemos apenas o argumento result, que e o resultado do trabalha ja finalizado pela promisse, estamos consumindo o valor resolvido pela promisse
+        promise.then(alert); //done! (aparece agora)
+
+        /**
+         * Observe que isso torna as promessas mais poderosas do que o cenário da “lista de assinaturas” da vida real. Se o cantor já lançou sua música e então uma pessoa se inscreve na lista de assinaturas, provavelmente não receberá essa música. Assinaturas na vida real devem ser feitas antes do evento.
+         * 
+         * As promessas são mais flexíveis. Podemos adicionar manipuladores a qualquer momento: se o resultado já estiver lá, eles apenas executam.
+        */
+    </script>
+
+</body>
+</html>

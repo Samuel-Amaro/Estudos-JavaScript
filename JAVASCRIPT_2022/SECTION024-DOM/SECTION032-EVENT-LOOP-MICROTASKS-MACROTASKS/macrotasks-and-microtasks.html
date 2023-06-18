@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <img src="./eventLoop.svg" alt="image" />
+
+    <script>
+        /**
+         * * MACROTASKS(MACROTAREFAS) AND MICROTASKS(MICROTAREFAS)
+         * 
+         * Junto com as macrotarefas , descritas neste capítulo, existem as microtarefas , mencionadas no capítulo Microtarefas .
+         * 
+         * As microtarefas vêm exclusivamente do nosso código. Eles geralmente são criados por promessas: uma execução de .then/catch/finally handler se torna uma microtarefa. As microtarefas também são usadas “às escondidas” await, pois é outra forma de manipulação de promessas.
+         * 
+         * Há também uma função especial queueMicrotask(func) que enfileira func para execução na fila de microtarefas.
+         * 
+         * Imediatamente após cada macrotarefa , o mecanismo executa todas as tarefas da fila de microtarefas , antes de executar qualquer outra macrotarefa ou renderização ou qualquer outra coisa.
+         * 
+         * Por exemplo, dê uma olhada:
+        */
+
+        //executa apos 0s
+        //executa por ultimo a macrotarefa, uma tarefa
+        setTimeout(() => alert("timeout"));
+
+        //obter o valor da promisse, quando seu estado for cumprida, chamar esse método
+        //exemplo de microtarefa que parte do codigo, exclusivamente do codigo, apos uma macrotarefa o mecanismo executa todas as microtarefas da fila, antes de executar outra macrotarefa
+        Promise.resolve().then(() => alert("promisse"));
+
+        //chamada sincrona regular não espera nada
+        alert("code");
+
+        /**
+         * Qual vai ser a ordem aqui?
+         *
+         * code mostra primeiro, porque é uma chamada síncrona regular. 
+         * 
+         * promise mostra o segundo, porque .then passa pela fila de microtarefas e é executado após o código atual.
+         * 
+         * timeout mostra por último, porque é uma macrotarefa.
+         * 
+         * A imagem de loop de eventos mais rica se parece com isso (a ordem é de cima para baixo, ou seja: o script primeiro, depois as microtarefas, renderização e assim por diante):
+         * 
+         * Todas as microtarefas são concluídas antes que qualquer outra manipulação ou renderização de eventos ou qualquer outra macrotarefa ocorra.
+         * 
+         * Isso é importante, pois garante que o ambiente do aplicativo seja basicamente o mesmo (sem alterações de coordenadas do mouse, sem novos dados de rede etc.) entre as microtarefas.
+         * 
+         * Se quisermos executar uma função de forma assíncrona (após o código atual), mas antes que as alterações sejam renderizadas ou novos eventos sejam tratados, podemos agendá-la com queueMicrotask.
+         * 
+         * Aqui está um exemplo com “barra de progresso de contagem”, semelhante à mostrada anteriormente, mas queueMicrotaské usada em vez de setTimeout. Você pode ver que ele renderiza no final. Assim como o código síncrono:
+        */
+    </script>
+</body>
+</html>

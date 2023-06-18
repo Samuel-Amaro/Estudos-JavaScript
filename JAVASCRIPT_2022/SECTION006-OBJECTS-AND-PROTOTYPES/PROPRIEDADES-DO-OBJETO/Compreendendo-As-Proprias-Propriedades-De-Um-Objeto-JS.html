@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos JS</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * COMPREENDENDO AS PRÓPRIAS PROPRIEDADES DE UM OBJETO EM JS
+         * 
+         *  Resumo : neste tutorial, você aprenderá sobre as próprias propriedades de um objeto em JavaScript.
+         * 
+         * Em JavaScript, um objeto é uma coleção de propriedades , onde cada propriedade é um par de valores-chave.
+         * 
+         * Este exemplo cria um novo objeto chamado person usando um inicializador de objeto:
+        */
+
+        //declara um objeto literal chamado person que possui propriedades
+        //o objeto foi criado usando um inicializador de objetos e usando a sintaxe de objeto literal
+        const person = {
+            //declara propriedades proprias do objeto person usando sintaxe chave : valor
+            firstName : 'John',
+            lastName : 'Doe'
+        };
+
+        /**
+         * O person objeto possui duas propriedades: firstName e lastName.
+         * 
+         * JavaScript usa herança prototípica . Portanto, uma propriedade de um objeto pode ser própria ou herdada.
+         * 
+         * Uma propriedade que é definida diretamente em um objeto é própria, enquanto uma propriedade que o objeto recebe de seu protótipo é herdada.
+         * 
+         * O seguinte cria um objeto chamado employee que herda do person objeto:
+        */
+
+        //o objeto employe tera como seu prototipo de objeto o person objeto literal, para exemplificar propriedades herdadas por meio da herança prototipica
+        //o employe objeto por padrão o JS define uma function constrututora como Object.function e um prototipo padrão como Object.prototype
+        //aqui definimos um prototipo de objeto para o objeto employe, o objeto prototipo sera o person objeto literal que possui duas propriedades proprias
+        //usando o metodo Object.create define o prototipo de employe e define propriedades para o employe objeto
+        //o segundo argumeto do create metodo define uma objeto anonimo que descreve as propriedades e seus atributos 
+        const employe = Object.create(person, { 
+            //propriedade propria do employe
+            job: {
+                //valor da propriedade
+                value : 'JS Developer',
+                //atributo que permite a propriedade ser enumerada iterada por lopp for in
+                enumerable : true
+            }
+        });
+
+        /**
+         * O employee objeto tem sua própria propriedade job e herda firstName e lastName propriedades de seu protótipo person.
+         * 
+         *  O hasOwnProperty() método retorna true se uma propriedade for própria. Por exemplo:
+        */
+
+        //verifica se as propriedades são proprias ou herdadas do proprio objeto
+        console.log(`Propriedade 'job' e propria de employe object ? ${employe.hasOwnProperty('job')} ${employe.hasOwnProperty('job') === true ? 'propriedade propria' : 'propriedade herdada'}`); //true
+        console.log(`Propriedade 'firstName' e propria de employe object ? ${employe.hasOwnProperty('firstName')} ${employe.hasOwnProperty('firstName') === true ? 'propriedade propria' : 'propriedade herdada'}`); //false
+        console.log(`Propriedade 'lastName' e propria de employe object ? ${employe.hasOwnProperty('lastName')} ${employe.hasOwnProperty('lastName') === true ? 'propriedade propria' : 'propriedade herdada'}`); //false
+        console.log(`Propriedade 'ssn' e propria de employe object ? ${employe.hasOwnProperty('ssn')} ${employe.hasOwnProperty('ssn') === true ? 'propriedade propria' : 'propriedade herdada'}`); //false
+
+        /**
+         * * RESUMO
+         * 
+         * Uma propriedade que é definida diretamente em um objeto é uma propriedade própria.
+         * 
+         * O obj.hasOwnProperty() método determina se uma propriedade é ou não própria.
+        */
+    </script>
+
+</body>
+</html>

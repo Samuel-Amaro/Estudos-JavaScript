@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * AUTOCOMMIT DE TRANSACTIONS(AUTOCOMMIT DE TRANSAÇÕES)
+         * 
+         * No exemplo acima iniciamos a transação e fizemos a add requisição(request). Mas, como afirmamos anteriormente, uma transação pode ter várias solicitações(requests) associadas, que devem ser todas bem-sucedidas ou todas falharem. Como marcamos a transação como concluída, sem mais solicitações(requests)?
+         * 
+         * A resposta curta é: nós não.
+         * 
+         * Na próxima versão 3.0 da especificação, provavelmente haverá uma forma manual de finalizar a transação, mas agora na 2.0 não existe.
+         * 
+         * Quando todas as solicitações(requests) de transação forem concluídas e a fila de microtarefas(microtasks) estiver vazia, ela será confirmada automaticamente.
+         * 
+         * Normalmente, podemos supor que uma transação é confirmada quando todas as solicitações são concluídas e o código atual é concluído.
+         * 
+         * Portanto, no exemplo acima, nenhuma chamada especial é necessária para finalizar a transação.
+         * 
+         * O princípio de autocommit de transações tem um efeito colateral importante. Não podemos inserir uma operação assíncrona como fetch, setTimeout no meio de uma transação. IndexedDB não manterá a transação esperando até que isso seja feito.
+         * 
+         * No código abaixo, request2 na linha (*) falha, pois a transação já está confirmada, e não pode fazer nenhuma requisição nela:
+        */
+
+        //adiciona o objeto anonimo referenciado por book, ao store, o objeto book e adicionado ao store com a chave sendo o valor da propriedade id do mesmo book, isso salva o book objeto no store objeto
+        //envia uma request ao store objeto para armazenar book
+        //store objeto oferece suporte a metodo para armazenar um valor, metodo add(value, [key]);
+        //adicionar o value a store. o key so e fornecido apenas se o store objeto não tiver uma keyPath option autoIncrement, se ja houver um valor com a mesma chave ele sera susbtituido, se ja houver um valor com a mesma chave armazenado em store a request falaha e sera gerado um erro com o nome "ConstraintError"
+        //adiciona o book a store 
+        let request1 = books.add(book);
+
+        //SEMELHANTE A BANCO DE DADOS PODEMOS ENVIAR UMA REQUEST E AGURDAR OS SUCESS/ERROR EVENTOS
+        //transação realizada com suceso
+        //este evento e acionado quando banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+        //se este evento for acionado o book foi adicionar ao store com suceso
+        request1.onsucess = function() {
+            //operação assincrona inserida durante uma transaction, o indexDB não manterá a transação esperando até que isso seja feito.
+            fetch('/').then(response => {
+                //request para add anotherBook in store, o index db não manteira a transaction esperando até que isso seja feito, não espera o fetch
+                let request2 = books.add(anotherBook); //(*)
+                request2.onerror = function() {
+                    console.log(request2.error.name); //TransactionInactiveError
+                }
+            })
+        };
+
+        /**
+         * Isso porque fetch é uma operação assíncrona, uma macrotarefa(macrotask). As transações são fechadas antes que o navegador comece a fazer macrotarefas.
+         * 
+         * Os autores da especificação IndexedDB acreditam que as transações devem ser de curta duração. Principalmente por razões de desempenho.
+         * 
+         * Notavelmente, readwrite as transações “bloqueiam” as lojas(stores) para gravação. Portanto, se uma parte do aplicativo foi iniciada readwrite no books armazenamento de objetos(store objeto), outra parte que deseja fazer o mesmo terá que esperar: a nova transação “trava” até que a primeira seja concluída. Isso pode levar a atrasos estranhos se as transações demorarem muito.
+         * 
+         * Então o que fazer?
+         * 
+         * No exemplo acima poderíamos fazer uma nova db.transaction logo antes da nova requisição (*).
+         * 
+         * Mas será ainda melhor, se quisermos manter as operações juntas, em uma transação, para separar transações IndexedDB e “outras” coisas assíncronas.
+         * 
+         * Primeiro faça o make fetch, prepare os dados se necessário, depois crie uma transação e execute todas as requisições do banco de dados, então vai funcionar.
+         * 
+         * Para detectar o momento de conclusão bem-sucedida, podemos ouvir o transaction.oncomplete evento:
+        */
+
+        //Todas as operações de dados devem ser feitas dentro de uma transação(transaction) no IndexedDB.
+        //para iniciar a transação usamos db.transaction(store, typeTransaction);
+        //o argumento store e um nome de store que a transaction vai acessar. pode ser um array de nome de stores se formos acessar varias stores
+        //o type argumento um tipo de transação, o valor readwrite e uma transação que pode apenas ler e gravar dados, mas não criar, remove, alterar store objetos
+        let transaction = db.transaction("books", "readwrite");
+
+        // ...operações performance...
+
+        //o evento e acionado quando uma transação foi concluida bem-sucedida, e o autocommit da transação, a transaction foi salva. todas as requests foram realizadas
+        transaction.oncomplete = function() {
+            console.log("Transaction is complete");
+        };
+
+        /**
+         * Apenas complete garante que a transação seja salva como um todo. As solicitações individuais podem ser bem-sucedidas, mas a operação de gravação final pode dar errado (por exemplo, erro de E/S ou algo assim).
+         * 
+         * Para abortar manualmente a transação, chame:
+         * 
+            * transaction.abort(); 
+            * 
+        * Isso cancela todas as modificações feitas pelas requisições nele e aciona o transaction.onabort evento. 
+        */
+    </script>
+
+</body>
+</html>

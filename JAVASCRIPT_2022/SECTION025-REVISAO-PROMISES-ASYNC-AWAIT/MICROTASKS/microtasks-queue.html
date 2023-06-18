@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * MISCROTASKS QUEUE(FILA DE MICROTAREFAS)
+         * 
+         * As tarefas assíncronas precisam de gerenciamento adequado. Para isso, o padrão ECMA especifica uma fila interna PromiseJobs, mais frequentemente chamada de “fila de microtarefas” (termo V8).
+         * 
+         * Conforme informado na especificação :
+         * 
+            *  A fila é primeiro a entrar, primeiro a sair: as tarefas enfileiradas primeiro são executadas primeiro.
+            * 
+            * A execução de uma tarefa é iniciada somente quando nada mais está sendo executado.
+            * 
+         *  Ou, para simplificar, quando uma promessa está pronta, seus .then/catch/finally manipuladores são colocados na fila; eles ainda não foram executados. Quando o mecanismo JavaScript fica livre do código atual, ele pega uma tarefa da fila e a executa.
+         * 
+         * É por isso que o “código finalizado” no exemplo acima é exibido primeiro.
+         * 
+         * Os manipuladores de promessa sempre passam por essa fila interna.
+         * 
+         * Se houver uma cadeia com multiple .then/catch/finally, cada uma delas será executada de forma assíncrona. Ou seja, ele primeiro é enfileirado e, em seguida, executado quando o código atual é concluído e os manipuladores anteriormente enfileirados são concluídos.
+         * 
+         * E se a ordem for importante para nós? Como podemos fazer code finished aparecer depois promise done?
+        */
+
+        //chama o metodo estatico resolve para resolver uma promise
+        Promise.resolve()
+            //anexa manipulador para consumir o resultado da promisse
+            .then(() => alert("promise done!"))
+            //anexa outro manipulador para ser executado somente quando o manipulador acima estiver sido executado
+            //pode anexar um .then ou um finally
+            .then(() => alert("code finished"));
+
+        /**
+         * Agora a ordem é como pretendido.
+        */
+    </script>
+
+</body>
+</html>

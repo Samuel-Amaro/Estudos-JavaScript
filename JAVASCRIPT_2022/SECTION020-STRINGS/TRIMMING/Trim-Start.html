@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método trimStart() String</title>
+</head>
+<body>
+    <script>
+        /**
+         * * STRING JS trimStart() - aparar Iniciar
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o trimStart()método JavaScript String para remover espaços em branco do início de uma string.
+         * 
+         * Para remover os caracteres de espaço em branco do início de uma string, você usa o trimStart()método:
+         
+            let newString = originalString.trimStart();
+
+         * 
+         * O trimStart() método retorna uma nova string da string original com os caracteres de espaço em branco à esquerda removidos. O trimStart()método não altera a string original.
+         * 
+         * Os seguintes caracteres são os caracteres de espaço em branco em JavaScript:
+         
+            - Um caractere de espaço
+
+            - Um caractere de tabulação
+
+            - Um caractere de retorno de carro.
+
+            - Um novo caractere de linha
+
+            - Um caractere de tabulação vertical
+
+            - Um caractere de feed de formulário
+
+         *
+         * O exemplo a seguir mostra como usar o trimStart() para remover caracteres de espaço em branco do início de uma string:
+        */
+
+        //declara uma variavel que foi inicializada com um valor uma string literal, essa string literal possui um espaço em branco a esquerda da string, no inicio da string
+        const str = ' JavaScript';
+        //usando o metodo String.trimStart(); para retirar todos os espaços em branco do inicio da string, remover todos os espaços em branco a esquerda da string, o metodo não modifica a string original, retorna um nova string modificada
+        const result = str.trimStart();
+
+        //mostra a string como um objeto com a propriedade str e o valor da variavel str, e uma abreviação da extensão de sintaxe literal de objeto do ES6
+        console.log({str});
+        //mesma coisa
+        console.log({result});
+
+        /**
+         * O trimLeft() método é um alias do trimStart() método. O trimLeft()tem a mesma funcionalidade que o trimStart() método. É recomendável que você use o trimStart() método.
+         * 
+         * * RESUMO
+         * 
+         * O trimStart() retorna uma nova string da string original com os caracteres de espaço em branco à esquerda removidos.
+         * 
+         * O trimLeft() método é um alias do trimStart() método.
+        */
+
+    </script>
+</body>
+</html>

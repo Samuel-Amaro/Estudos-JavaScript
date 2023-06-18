@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ÂNCORAS(ANCHORS)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre âncoras de expressão regular que permitem que você corresponda a uma posição antes ou depois de caracteres.
+         * 
+         * As âncoras têm um significado especial em expressões regulares . Eles não correspondem a nenhum caractere. Em vez disso, eles correspondem a uma posição antes ou depois dos caracteres:
+         
+            ^ – A âncora de acento circunflexo corresponde ao início do texto.
+
+            $– A âncora do dólar corresponde ao final do texto.
+
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada str, que e inicilizada com uma string literal
+        let str = 'JavaScript';
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo o padrão e ^J -> qualquer texto que inicie com o caractere regular J maiusculo. o ^ : e a ancora de acentro circunflexo, que corresponde ao inicio do texto.
+        //o padrão e qualquer texto que inicie com o caracter  de texto regular J maiusculo
+        //essa expressão regular e do tipo RegExp, então podemos chamar métodos de instancia a partir do mesmo
+        //o método RegExp.test(string); e o método que permite testar se uma string contém uma correspondência do padrão na expressão regular.
+        //método retorna true se o argumento de string contiver uma correspondência.
+        console.log(/^J/.test(str)); //true
+        
+        /**
+         * O /^J/ corresponde a qualquer texto que comece com a letra J. Retorna verdadeiro.
+         * 
+         * O exemplo a seguir retorna false porque a string JavaScript não começa com a letra S:
+        */
+        
+        //na expressão regular abaixo o padrão e modificado para que corresponda a qualquer texto que inicie com um caracter regular S maiusculo
+        //o método RegExp.test(string), retorna false pois o teste na string, não ha nehuma correspondecia do padrão na expressão regular
+        console.log(/^S/.test(str)); //false
+
+        /**
+         * Da mesma forma, o exemplo a seguir retorna true porque a string JavaScript termina com a letra t:
+        */
+
+        //a expressão regular abaixo possui o seguinte padrão: corresponda a qualquer texto que termine com o caractere t minusculo, a ancora do dolar($) corresponde ao final do texto
+        //o método RegExp.test(string) retorna true pois o seu test na string contem uma correspondecia do padrão na expressão regular
+        console.log(/t$/.test(str)); //true
+
+        /**
+         * Muitas vezes, você precisará usar âncoras ^ e $ para verificar se uma string corresponde totalmente a um padrão.
+         * 
+         * O exemplo a seguir verifica se uma string de entrada corresponde a um formato de hora hh:mm como 12:05:
+        */
+
+        //a expressão regular abaixo usa as duas ancoras no padrão, o padrão tem que corresponder a dois digitos no inicio do texto e dois digitos no final do texto
+        //o método RegExp.test(string) testa se a string contém uma correspondecia do padrão na expressão regular.
+        //retorna true se houver correspondecia
+        let isValid = /^\d\d:\d\d$/.test('12:05'); //true
+        console.log(isValid);
+
+        /**
+         * O exemplo a seguir retorna false:
+        */
+
+        //o padrão e o mesmo do acima, porem a string de entrada não possui nenhuma correspondecia do padrão, asssim o método RegExp.test(string) ira testar e retornar false, pois não contem nenhuma correspondecia do padrão na expressão regular
+        let valid = /^\d\d:\d\d$/.test('12:105');
+        console.log(valid); //false
+
+    </script>
+</body>
+</html>
+
+
+

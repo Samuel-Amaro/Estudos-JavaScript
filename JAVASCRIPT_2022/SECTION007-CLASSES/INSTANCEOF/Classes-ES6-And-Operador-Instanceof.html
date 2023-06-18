@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes ES6 e operador instanceof</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CLASSE ES6 AND OPERADOR INSTANCEOF
+         * 
+         * O exemplo a seguir define a Person classe e usa o instanceof operador para verificar se um objeto é uma instância da classe:
+        */
+
+        //define uma class chamada Person, usando a palavra-chave class
+        class Person{
+            //define um construtor para a class Person e declara um paramentro chamado name
+            constructor(name) {
+                //declara uma propriedade chamada name e a inicializa com o argumento name
+                this.name = name;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da class Person fornecendo o argumento 'John' e usando o new operador
+        //a instancia de referencia declarada e atribuida por referencia a variavel p1
+        let p1 = new Person('John');
+        //O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado.
+        //O instanceof operador retorna true se um protótipo de um construtor ( constructor.prototype) aparece na cadeia de protótipos de um object
+        //operador instanceof verifica se o objeto referenciado por p1 variavel e uma instancia da class Person
+        console.log(p1 instanceof Person);//true
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina a Person classe:
+         *
+         * Segundo, crie uma nova instância da Person classe:
+         * 
+         * Terceiro, verifique se p1 é uma instância da Person classe:
+        */
+        
+    </script>
+</body>
+</html>

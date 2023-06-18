@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * PROSMISIFICATION(PROMISIFICAÇÃO)
+         * 
+         * “Promisificação” é uma palavra longa para uma simples transformação. É a conversão de uma função que aceita um callback em uma função que retorna uma promessa.
+         * 
+         * Essas transformações geralmente são necessárias na vida real, pois muitas funções e bibliotecas são baseadas em retorno de chamada(callback). Mas as promessas são mais convenientes, então faz sentido prometê-las.
+         * 
+         * Para melhor compreensão, vejamos um exemplo.
+         * 
+         * Por exemplo, temos loadScript(src, callback)do capítulo Introdução: callbacks .
+        */
+
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(null, script);
+
+            //atribui um manipulador de evento por meio da propriedad dom
+            //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+            //assim o callback e executado, tratando o erro, lançando um erro
+            script.onerror = () => callback(new Error(`Erro de carregamento de script para ${src}`));
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+
+        //uso:
+        // loadScript('path/script.js', (err, script) => {...})
+
+        /**
+         *  função carrega um script com o dado src e, em seguida, chama callback(err)em caso de erro ou callback(null, script) em caso de carregamento bem-sucedido. Esse é um acordo generalizado para o uso de retornos de chamada(callback), já vimos isso antes.
+         * 
+        */
+
+    </script>
+
+</body>
+</html>

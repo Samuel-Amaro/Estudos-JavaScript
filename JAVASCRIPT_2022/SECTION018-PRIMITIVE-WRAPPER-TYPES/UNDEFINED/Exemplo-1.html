@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * JavaScript usa o undefined valor nas seguintes situações.
+         * 
+         * * 1) ACESSANDO UMA VARIÁVEL NÃO INICIALIZADA
+         * 
+         * Quando você declara uma variável e não a inicializa com um valor, a variável terá um valor de undefined. Por exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada counter que não e inicializada, ela possuira o valor undefined
+        let counter;
+        //se tentarmos acessar o conteudo da variavel veremos o valor undefined, pois ha variavel não foi inicializada e o mecanismo JS atribui o undefined a ela
+        console.log(counter); //undefined
+
+        /**
+         * É uma boa prática sempre inicializar uma variável sempre que possível. Neste exemplo, você pode inicializar a counter variável para zero, assim:
+        */
+
+        //declara uma varaivel de escopo de bloco chamada counter2 que e inicializada com o valor 0
+        let counter2 = 0;
+        //mostra o conteudo da variavel counter2
+        console.log(counter2); //0
+
+    </script>
+
+</body>
+</html>

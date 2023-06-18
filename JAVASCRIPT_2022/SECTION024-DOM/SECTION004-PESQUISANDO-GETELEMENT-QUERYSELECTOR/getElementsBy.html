@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <table id="table">
+        <tr>
+            <td>Your age:</td> 
+
+            <td>
+                <label>
+                    <input type="radio" name="age" value="young" checked> less than 18
+                </label>
+                <label>
+                    <input type="radio" name="age" value="mature"> from 18 to 50 
+                </label>
+                <label>
+                    <input type="radio" name="age" value="senior">  more than 60
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <form name="my-form">
+        <div class="article">Article</div>
+        <div class="long article">Long article</div>
+    </form>
+
+    <script type="text/javascript">
+
+        /**
+         * * getElementsBy*
+         * 
+         * Existem também outros métodos para procurar nós por uma tag, classe, etc.
+         * 
+         * Hoje, eles são principalmente história, pois querySelector é mais poderoso e mais curto para escrever.
+         * 
+         * Então, aqui nós os cobrimos principalmente para completar, enquanto você ainda pode encontrá-los nos scripts antigos.
+         
+            - elem.getElementsByTagName(tag)procura por elementos com a tag fornecida e retorna a collection deles. O tag parâmetro também pode ser uma estrela "*" para “qualquer tag”.
+
+            - elem.getElementsByClassName(className) retorna elementos que possuem a classe CSS fornecida.
+
+            - document.getElementsByName(name) retorna elementos com o name atributo fornecido, em todo o documento. Muito raramente usado.
+        */
+
+        //obter todas as divs no documento
+        let divs = document.getElementsByTagName('div');
+
+        //retorna todas tags input encontradas dentro do table elemento, retorna uma collection
+        let inputs = table.getElementsByTagName('input');  
+
+        //itera sobre a collection coms elementos inputs encontrados dentro da table elemento
+        for(let input of inputs) {
+            console.log(input.value + ': ' + input.checked);
+        }
+
+        /**
+         * * Não esqueça a "s" carta!
+         * 
+         * Desenvolvedores iniciantes às vezes esquecem a letra "s". Ou seja, eles tentam chamar getElementByTagName em vez de .getElementsByTagName
+         * 
+         * A "s" letra está ausente em getElementById, porque retorna um único elemento. Mas getElementsByTagName retorna uma coleção de elementos, então está "s" dentro.
+         * 
+         * * Ele retorna uma collection, não um elemento!
+         * 
+         * Outro erro comum para iniciantes é escrever:
+         
+            //não funciona
+            document.getElementsByTagName('input').value = 5;
+
+         * Isso não funcionará, porque ele pega uma collection de inputs e atribui o valor a ela em vez de a elementos dentro dela.
+         * 
+         * Devemos iterar sobre a coleção ou obter um elemento por seu índice e, em seguida, atribuir, assim:
+         
+            //deve funcionar (se houver uma input)
+            document.getElementByTagName('input')[0].value = 5;
+
+         * 
+         * 
+         * */
+
+        //encontrar pelo atributo de nome
+        //o metodo ira procurar no documento todos os elementos que tenha o atributo de nome my-form como valor
+        //retorna uma collection com os elementos obtidos
+        let form = document.getElementsByName('my-form')[0];
+
+        //encontrar por classe dentro do formulário
+        //obtem elementos que sejam filhos do elemento <form> que tenha o atributo de classe especificado com o valor fornecido abaixo
+        let articles = form.getElementsByClassName('article');
+        console.log(articles.length); //2, encontrou dois elementos com a classe "artigo"
+
+    </script>
+</body>
+</html>

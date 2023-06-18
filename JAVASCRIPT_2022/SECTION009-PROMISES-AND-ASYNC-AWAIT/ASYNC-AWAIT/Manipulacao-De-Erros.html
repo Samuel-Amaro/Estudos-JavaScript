@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação De Erros</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MANIPULAÇÃO DE ERROS
+         * 
+         * Se uma promessa for resolvida, o await promise retorna o resultado. No entanto, quando a promessa for rejeitada, await promise lançará um erro como se houvesse uma throw instrução.
+         * 
+         * O seguinte código:
+        */
+
+        //declara uma function chamada de getUser que declara um paramentro chamado userId, essa function e definida com a palavra chave async, que define uma função que trata de operações assincronas, essa function ira retornar uma Promise rejeita com um motivo explicitamente
+        async function getUser(userId) {
+            //define a promise explicitamente e invocando o método reject, muda o estado da promise de pendente para rejeitda com um motivo, rejeita a promise com um motivo, e o await operador aguarda a promise estabelecer o estado de rejeitada e retorna o motivod do erro/rejeição
+            await Promise.reject(new Error('Invalid User Id'));
+        }
+
+        /**
+         * ... é igual a isto:
+        */
+
+        //o exemplo de logo abaixo e igual ao exemplo de cima, exceto que a promise a ser retornada pela function assincrona não e definida explicitamente o proprio mecanismo define a mesma e seu estado implicitamente
+        async function getUser2(userId) {
+            //lança um erro, no qual demostra o motivo da promise ter sido rejeitada
+            throw new Error('Invalid User Id');
+        }
+
+        /**
+         * No cenário real, levará um tempo para que a promessa gere um erro.
+         * 
+         * Você pode detectar o erro usando a try...catch instrução, da mesma forma que uma throw instrução regular:
+        */
+
+        //usando o try..catch instrução para capturar o motivo do erro no qual a promise de retorno da function assincrona foi rejeitada
+        async function getUser3(userId) {
+            //instrução para detectar erro retornado pela promise
+            try {
+                const user = await Promise.reject(new Error('Invalid User Id'));
+            } catch (error) {
+                //mostra motivo pelo qual a promise foi rejeitada
+                console.log(error);
+            }
+        }
+
+        /**
+         * É possível capturar erros causados ​​por um ou mais await promise's:
+        */
+
+        //declara uma function async(assicrona), função que trata operação assincrona, chamada de showServiceCost que não declara paramentro, e retorna uma promise definida implicitamente pelo mecanismo JS
+        async function showServiceCost() {
+            try {
+                //usando o await palavra chave na frente de functions que retorna promises, a await vai esperar o retorno da promise por meio da function para ser resolvida
+                //as functions que retornam promises são functions que simulam operações assicronas
+
+                //aqui a user varaivel recebera por referencia uma objeto literal anonimo com duas propriedades que a await aguarda a definiçaõ do estado da promise 
+                let user = await getUser2(100);
+                let services = await getServices2(user);
+                let cost = await getServicesCost2(services);
+                console.log(`The service cost is ${cost}`);
+            } catch (error) {
+                //mostra o erro, motivo caso alguma promise seja rejeitada
+                console.log(error);
+            }
+        }
+
+
+        /*
+         * Neste tutorial, você aprendeu como usar a palavra-chave JavaScript async/ await para escrever código assíncrono parecido com código síncrono.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./promise-then-many.svg" alt="image"/>
+
+    <script type="text/javascript">
+        /**
+         * Um erro clássico de novato: tecnicamente também podemos adicionar muitos .then a uma única promessa. Isso não é encadeamento.
+         * 
+         * Por exemplo:
+        */
+
+        let promise = new Promise(function(resolve, reject) {
+            //executa um trabalho assincrono
+            //apos 1s promisse e resolvida com valor 1
+            setTimeout(() => resolve(1), 1000); //(*)
+        });
+
+        //adicionar varios manipuladores .then a uma promisse não e um encadeamento
+        //todos manipuladores abaixo fazem a mesma coisa, cada um processa o resultado de forma independente(não passam um para o outro)
+
+        //o then function manipulador abaixo consome o valor resolvido da promisse, e retorna uma nova promisse
+        promise.then(function(result) {
+
+                alert(result); //1
+                //o valor retornado aqui e o valor resolvido pela promisse retornado por esse manipulador .then
+                return result * 2;
+
+        });
+
+        promise.then(function(result) {//(***)
+
+                alert(result); //1
+                return result * 2;
+
+        });
+
+        promise.then(function(result) {
+
+                alert(result); //1
+                return result * 2;
+
+        });
+
+        /**
+         * O que fizemos aqui são apenas vários manipuladores para uma promessa. Eles não passam o resultado um para o outro; em vez disso, eles o processam de forma independente.
+         * 
+         * Todos .then na mesma promessa obtêm o mesmo resultado – o resultado dessa promessa. Então no código acima todos alertmostram o mesmo: 1.
+         * 
+         * Na prática, raramente precisamos de vários manipuladores para uma promessa. O encadeamento é usado com muito mais frequência.
+        */
+    </script>
+</body>
+</html>

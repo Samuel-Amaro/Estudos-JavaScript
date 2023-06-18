@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+   
+    <script>
+
+        /**
+         * * CONVERTENDO UMA NÃO STRING EM UMA STRING
+         * 
+         * O toUpperCase() método converterá um valor não string em uma string se você definir seu this valor como um valor não string. Por exemplo:
+         * 
+        */
+
+        //declara uma constante de bloco chamada completed, que e inicializada com um valor literal booleano
+        const completed = true;
+        //functionName.call(thisArg, arg1, arg2, ...);
+        //O call() método chama uma função functionName com um determinado this valor e argumentos.
+        //aqui o método toUpperCase sera chamado a partir de uma valor primitivo não string, sera chamado a partir de um booleano
+        //o método toUpperCase sera invocado a partir da constante completed, que e um valor boooleano
+        //o método convertera o valor não string que o invoca para uma string
+        const result = String.prototype.toUpperCase.call(completed);
+
+        console.log(result);
+
+        /**
+         * Neste exemplo, o completed is true, que é um valor booleano. Quando chamamos o toUpperCase()método na completed variável e definimos o this de toUpperCase() como completed, o método converte o valor booleano true na string 'TRUE'.
+         * 
+         * * RESUMO
+         * 
+         * Use o toUpperCase() método para retornar uma string com todos os caracteres convertidos em maiúsculas.
+        */
+    </script>
+
+</body>
+</html>

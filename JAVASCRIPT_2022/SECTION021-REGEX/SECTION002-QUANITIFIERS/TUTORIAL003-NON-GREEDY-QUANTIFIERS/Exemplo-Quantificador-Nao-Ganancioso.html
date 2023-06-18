@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+
+    <script>
+
+        /**
+         * * EXEMPLO DE QUANTIFICADORES NÃO GANANCIOSOS DE JS
+         * 
+         * O programa a seguir usa o quantificador não guloso ( +?) para corresponder ao texto entre aspas ( "") de um elemento de botão:
+         * 
+        */
+
+        //declara uma constante de escopo de bloco chamada button que e inicializada com uma string literal que representa um elemento HTML button
+        const button = '<button type="submit" class="btn">Send</button>';
+
+        /**
+         * E você quer combinar os textos entre aspas ("") como submit e btn.
+         * 
+         * Para fazer isso, você usa aspas duplas (“), a classe de caractere ponto (.) e o quantificador (+) para construir o seguinte padrão:
+         
+            /".+"/g
+
+         * Este padrão significa que:
+
+            - "começa com"
+            - . corresponde a qualquer caractere exceto a nova linha
+            - +? corresponde ao caractere anterior uma ou mais vezes usando quantificador não ganancioso( correspondem aos elementos anteriores o mínimo possível e retornam as menores correspondências.).
+            - "termina com"
+            - g flag retorna todas as correspondências
+
+         * 
+         * O seguinte usa o match() método para corresponder a string s com o padrão:
+        */
+
+        //criando uma expressão regular que possui um padrão que significa o seguinte, quer combinar os textos entre aspas (""): começa com aspas duplas " o conteudo corresponde a qualquer caractere exceto nova linha uma ou mais vezes termina com " fecha aspas duplas, a g flag retorna todas as correspondecias.
+        //usamos a classe de caracteres .
+        //usamos o quantificador de abreviação (+) -> corresponde o caractere anterior uma ou mais veses {1,}, porem esse quantificador e ganancioso por padrão, o mecanismo regex combina o (.) mais do que deve, assim faz o padrão ter correspondecias inesperadas, assim temos que usar o modo não ganacioso(preguiçoso), usando o quantificador ?, que e uma abreviação para {0, 1}, corresponde a zero ou uma vez
+        //correspondem aos elementos anteriores o mínimo possível e retornam as menores correspondências.).
+        //usamos a flag g para retorna todas as correspondecias do padrão
+        const pattern = /".+?"/g;
+        //usando o método String.match(regexp) para retorna todoas as correspondecias do regexp na string str usando o padrão especificado na expressão regular.
+        const result = button.match(pattern);
+        console.log(result);
+
+        /**
+         * * RESUMO
+         * 
+         * Quantificadores preguiçosos combinam seus elementos anteriores o mínimo possível para retornar as menores correspondências possíveis.
+         * 
+         * Use um ponto de interrogação (?) para transformar um quantificador ganancioso em um quantificador preguiçoso.
+        */
+    </script>
+</body>
+</html>
+
+
+

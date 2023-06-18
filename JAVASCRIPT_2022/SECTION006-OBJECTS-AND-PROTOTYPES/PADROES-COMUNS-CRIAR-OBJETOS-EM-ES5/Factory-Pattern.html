@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Pattern</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FACTORY PATTERN(PADRÃO DE FÁBRICA)
+         * 
+         *  O padrão de fábrica usa uma função para abstrair o processo de criação de objetos específicos .
+         * 
+         * Por exemplo, a createAnimal()função a seguir encapsula a lógica de criação do animal objeto.
+        */
+
+        //factory pattern
+
+        //declara uma function regular chamada createAnimal, que declara um paramentro chamado name
+        function createAnimal(name) {
+            //cria uma instancia de objeto do tipo Object do JS usando o new palavra chave e invocando a function construtora Object
+            //Por padrão o JS fornece uma function construtora chamada Object, e fornece um prototipo de objeto anonimo que pode ser acessado por Object.prototype onde contem propriedades para ser compartilhadas por todas as intancias de Object
+            var o = new Object();
+            //adiciona uma propriedade chamada name ao o objeto uma propriedade propria, que recebe o argumento name como valor para inicialziar a propriedade
+            o.name = name;
+            //adiciona uma nova propriedade chamada identify que recebe como valor uma function anonima que não possui paramentro e nem retorna valor, essa function e atribuida a propriedade notify tornando um metodo
+            //adiciona uma propriedaed propria ao objeto
+            o.identify = function() {
+                console.log(`I'm ${o.name}`);
+            }
+            //retorna a instancia de objeto recem criada
+            return o;
+        }
+
+        /**
+         * A createAnimal() função aceita um argumento que será usado para inicializar a name propriedade do animal objeto.
+         * 
+         * Para criar um novo objeto, você só precisa chamar esta função e passar o name argumento da seguinte maneira:
+        */
+
+        //cria uma instancia de objeto chamada tom invocando a função de padrão de fabrica, e passando um argumento para inicializar uma propriedade
+        var tom = createAnimal('Tom');
+        var jerry = createAnimal('Jerry');
+
+        //acessando as propriedades das instancias de objetos recem criadas
+        tom.identify(); //I'm Tom
+        jerry.identify(); //I'm Jerry
+        
+        /**
+         * Embora o padrão de fábrica possa criar vários objetos semelhantes, ele não permite que você identifique o tipo de objeto que ele cria.
+        */
+    </script>
+</body>
+</html>

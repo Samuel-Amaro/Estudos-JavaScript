@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * LocalStorage(Armazenamento local), sessionStorage(armazenamento de sessão)
+         * 
+         * Objetos de armazenamento da Web localStorage e sessionStorage permitem salvar pares de chave/valor no navegador.
+         * 
+         *O que é interessante sobre eles é que os dados sobrevivem a uma atualização de página (para sessionStorage) e até mesmo a uma reinicialização completa do navegador (para localStorage). Veremos isso muito em breve.
+
+         Já temos biscoitos(cookies). Por que objetos adicionais?
+         * 
+            *  Ao contrário dos cookies, os objetos de armazenamento da Web não são enviados ao servidor com cada solicitação(request). Por isso, podemos armazenar muito mais. A maioria dos navegadores modernos permite pelo menos 5 megabytes de dados (ou mais) e tem configurações para configurar isso.
+            * 
+            * Também diferentemente dos cookies, o servidor não pode manipular objetos de armazenamento por meio de cabeçalhos(headers) HTTP. Tudo é feito em JavaScript.
+            * 
+            * O armazenamento está vinculado à origem triplo(tripe)(dominio(domain)/protocolo(protocol)/porta(port)). Ou seja, diferentes protocolos ou subdomínios inferem diferentes objetos de armazenamento, eles não podem acessar dados uns dos outros.
+            * 
+            * Ambos os objetos de armazenamento fornecem os mesmos métodos e propriedades:
+            * 
+                * setItem(key, value)– armazena o par chave/valor.
+                * 
+                * getItem(key)– obter o valor por chave.
+                * 
+                * removeItem(key)– remova a chave com seu valor.
+                * 
+                * clear()– apagar tudo.
+                * 
+                * key(index)– obter a chave em uma determinada posição.
+                * 
+                * length– o número de itens armazenados.
+                * 
+             * Como você pode ver, é como uma Map coleção ( setItem/getItem/removeItem), mas também permite acesso por índice com key(index). 
+             * 
+             * Vamos ver como isso funciona.
+        */
+
+    </script>
+
+</body>
+</html>

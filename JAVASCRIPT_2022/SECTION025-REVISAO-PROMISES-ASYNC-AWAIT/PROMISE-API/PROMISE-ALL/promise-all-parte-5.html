@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * EM CASO DE ERRO, OUTRAS PROMESSAS SÃO IGNORADAS
+         * 
+         * Se uma promessa rejeita, Promise.all rejeita imediatamente, esquecendo completamente as outras da lista. Seus resultados são ignorados.
+         * 
+         * Por exemplo, se houver várias fetch chamadas, como no exemplo acima, e uma falhar, as outras continuarão a ser executadas, mas Promise.all não as assistirão mais. Eles provavelmente vão resolver, mas seus resultados serão ignorados.
+         * 
+         * Promise.all não faz nada para cancelá-los, pois não há conceito de “cancelamento” nas promessas. Em outro capítulo , abordaremos AbortController que pode ajudar com isso, mas não faz parte da API Promise.
+         * 
+         * * Promise.all(iterable) PERMITE VALORES "regulares" não prometidos em iterable
+         * 
+         * Normalmente, Promise.all(...) aceita um iterável (na maioria dos casos um array) de promessas. Mas se algum desses objetos não for uma promessa, ele será passado para o array resultante “como está”.  
+         * 
+         * Por exemplo, aqui estão os resultados [1, 2, 3]:
+        */
+
+        Promise.all([
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(1), 1000)
+            }),
+            //e passado para o array result como esta 
+            2,
+            3
+        ]).then(alert); //1, 2, 3
+
+
+        /**
+         * Assim, podemos passar valores prontos para Promise.all onde for conveniente.
+        */
+    </script>
+</body>
+</html>

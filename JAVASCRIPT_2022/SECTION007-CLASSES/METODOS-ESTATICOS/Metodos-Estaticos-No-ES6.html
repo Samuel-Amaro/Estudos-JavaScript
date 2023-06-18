@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Estáticos No ES6</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODOS ESTÁTICOS NO ES6
+         * 
+         * No ES6, você define métodos estáticos usando a palavra - static chave. O exemplo a seguir define um método estático chamado createAnonymous() para a Person classe:
+        */
+
+        //define uma class chamada Person usando a palavra chave class
+        class Person{
+            //define um construtor para a class Person, declara um paramentro chamado name
+            constructor(name) {
+                //define uma propriedade chamada name e a inicializa com o name argumento
+                this.name = name;
+            }
+
+            //declara uma metodo chamado getName
+            getName() {
+                return this.name;
+            }
+
+            //declara um metodo estatico chamado createAnonymous que possui um paramentro chamado gender
+            //o metodo estatico e vinculado a classe e não a instancia da mesma
+            //metodos estaticos no ES6 são definidos usando a palavra chave static antes da definição do método
+            static createAnonymous(gender) {
+                let name = gender == "male" ? "John Doe" : "Jane Doe";
+                //retorna uma instancia de objeto anonimo 
+                return new Person(name);
+            }
+        }
+
+        /**
+         * Para invocar o método estático, você usa a seguinte sintaxe:
+        */
+
+        //para invocar o metodo estatico não precisa de instancia de objeto
+        //Basta Chamar a classe e o metodo por meio dela, o metodo e vinculado a classe e não a instancias
+        //o metodo e estatico pois não depende de instancia para valores de propriedade so depende da classe
+        //o metodo estatico retorna uma instancia de objeto anonimo que e atribuida por referencia a variavel anonymous
+        let anonymous = Person.createAnonymous("male");
+        
+        //Se você tentar chamar o método estático de uma instância da classe, receberá um erro. Por exemplo:
+
+        //instancia um objeto invocnado construtor da Person e usando o operador new
+        //objeto e atribuid por refencia a variavel person
+        let person = new Person('James Doe');
+        //tentando invocar um metodo estatico por meio de uma instancia de objeto
+        let anonymous2 = person.createAnonymous("male"); //gera erro, isso não e permitido
+
+        /**
+         * * CHAMANDO UM MÉTODO ESTÁTICO DO CONSTRUTOR DE CLASSE OU UM MÉTODO DE INSTÂNCIA
+         * 
+         * Para chamar um método estático de um construtor de classe ou um método de instância, você usa o nome da classe, seguido pelo .método e estático:
+
+            //sintaxe para chamar um método estatico dentro da propria classe ou fora dela
+            
+            className.staticMethodName();
+
+         * 
+         * Como alternativa, você pode usar a seguinte sintaxe:
+
+
+            //chama um metodo statico de dentro da classe ou de um método de instancia ou de um construtor
+
+            this.constructor.staticMethodName();
+
+         *
+         * * RESUMO
+         * 
+         *  Os métodos estáticos JavaScript são compartilhados entre instâncias de uma classe. Portanto, eles estão vinculados à classe.
+         * 
+         * Chame os métodos estáticos por meio do nome da classe, não das instâncias dessa classe.
+         * 
+         * Use o className.staticMethodName()ou this.constructor.staticMethodName() para chamar um método estático em um construtor de classe ou um método de instância.
+        */
+    </script>
+</body>
+</html>

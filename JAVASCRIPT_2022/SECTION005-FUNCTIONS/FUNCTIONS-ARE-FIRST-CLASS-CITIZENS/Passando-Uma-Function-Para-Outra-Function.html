@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passando uma function para outra function</title>
+</head>
+<body>
+    <script>
+
+        //declara uma function chamada add
+        //essa function possui dois parametros a e b
+        function add(a, b) {
+            //o valor de retorno dessa função, e o paramentro a + b
+            return a + b;
+        }
+
+        //atribui o nome add que refere a function add(a, b), a variavel sum
+        //aqui não ha execução(invocação) da function, e nem incluimos os parenteses da mesma pois não queremos chamala e nem executala, mas sim referenciala, passado a sua referencia para uma variavel 
+        let sum = add;
+
+        /**
+         * * PASSANDO UMA FUNCTION PARA OUTRA FUNCTION
+         * 
+         * Como funções são valores, você pode passar uma função como um argumento para outra função.
+         * 
+         * O seguinte declara a average()função que leva três argumentos. O terceiro argumento é uma função:
+         * */
+
+        //declara uma function chamada average, que possui três paramentros declarados, o terceiro paramentro e um function que possui dois paramentros 
+        function average(a, b, fn) {
+            //retorna um valor que e retornado pela function argument value fn, que recebe dois arguments e retorna um valor, esse valor e dividido por 2 e retorna pela average function
+            return fn(a, b) / 2;
+        }
+
+        /**
+         * Agora, você pode passar a sum função para a average() função da seguinte maneira:
+         * */
+
+        //invoca a function average e fornece 3 argumentos
+        //dois argumentos são valores numericos
+        //o terceiro argumento e uma variavel que contem a referencia de uma função 
+        let result = average(10, 20, sum);
+
+        console.log(`Average = ${result}`);
+    </script>
+</body>
+</html>

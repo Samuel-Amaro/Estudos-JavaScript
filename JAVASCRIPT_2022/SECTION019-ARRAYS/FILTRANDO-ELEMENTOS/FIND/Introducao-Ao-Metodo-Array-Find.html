@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método JS Array find()</title>
+</head>
+<body>
+    <script>
+        /**
+         * * MÉTODO JS ARRAY FIND() - ACHAR
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o find() método JavaScript para pesquisar o primeiro elemento em uma array, que satisfaça um teste.
+         *
+         * * INTRODUÇÃO AO MÉTODO ARRAY FIND() - ACHAR
+         * 
+         * No ES5, para localizar um elemento em uma array, você usa os métodos indexOf() ou . lastIndexOf() No entanto, esses métodos são bastante limitados porque retornam apenas o índice do primeiro elemento correspondente.
+         * 
+         * ES6 introduziu um novo método chamado find() adicionado ao Array.prototype objeto.
+         * 
+         * O find() método retorna o primeiro elemento em uma array que satisfaça uma função fornecida.
+         * 
+         * Veja a seguir a sintaxe do find()método:
+
+            find(callback(element[, index[, array]])[, thisArg]);
+
+         * * ARGUMENTOS
+         * 
+         * O find() aceita dois argumentos: uma função de retorno de chamada(callback) e um valor opcional para usar this dentro da callback função.
+         * 
+         * * 1) CALLBACK
+         * 
+         * The callback é uma função que é executada em cada elemento do array. São necessários três argumentos:
+
+          - element é o elemento atual.
+          - index o índice do elemento atual.
+          - array a array que o find() foi chamado.
+
+         * 
+         * * 2) thisArg
+         * 
+         * O thisArg é o objeto usado como this dentro do callback.
+         * 
+         * * VALOR DE RETORNO
+         * 
+         * O find() executa a callback função para cada elemento na array até callback retornar um valor verdadeiro. 
+         * 
+         * Se o retorno de chamada(callback) retornar um valor verdadeiro, find() imediatamente retornará o elemento e interromperá a pesquisa. Caso contrário, ele retorna undefined
+         * 
+         * Se você deseja encontrar o índice do elemento encontrado, pode usar o findIndex() método.
+        */
+    </script>
+</body>
+</html>

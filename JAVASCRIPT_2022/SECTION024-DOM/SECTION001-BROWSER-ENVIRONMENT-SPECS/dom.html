@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * DOM(MODELO DE OBJETO DE DOCUMENTO - DOCUMENT OBJECT MODEL)
+         * 
+         *  O Document Object Model, ou DOM abreviado, representa todo o conteúdo da página como objetos que podem ser modificados.
+         * 
+         * O document objeto é o principal “ponto de entrada - entrey point” para a página. Podemos alterar ou criar qualquer coisa na página usando-o.
+         * 
+         * 
+         * */
+
+        //mude a cor de fundo para vermelho
+        document.body.style.background = "red";
+
+        //troque de volta após 1 segundo
+        setTimeout(() => document.body.style.background = "", 1000);
+
+        /**
+         * Aqui usamos document.body.style, mas há muito, muito mais. Propriedades e métodos são descritos na especificação: DOM Living Standard.
+         * 
+         * DOM não é apenas para navegadores
+         * 
+         * A especificação DOM explica a estrutura de um documento e fornece objetos para manipulá-lo. Existem instrumentos não-browser que também usam DOM.
+         * 
+         * Por exemplo, scripts do lado do servidor que baixam páginas HTML e as processam também podem usar DOM. Eles podem suportar apenas uma parte da especificação.
+         *
+         * CSSOM para estilo
+         * 
+         * Há também uma especificação separada, CSS Object Model (CSSOM) para regras CSS e folhas de estilo, que explica como eles são representados como objetos e como lê-los e escrevê-los
+         * 
+         * O CSSOM é usado junto com o DOM quando modificamos as regras de estilo do documento. Na prática, porém, o CSSOM raramente é necessário, porque raramente precisamos modificar as regras CSS do JavaScript (geralmente apenas adicionamos/removemos classes CSS, não modificamos suas regras CSS), mas isso também é possível.
+         * */
+    </script>
+</body>
+</html>

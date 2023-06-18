@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <form action="" name="person">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" value="John"/>
+        </div>
+        <div>
+            <label for="surname">Surname</label>
+            <input type="text" name="surname" value="Smith"/>
+        </div>
+    </form>
+
+    <script>
+        /**
+         * * POST, FormData
+         * 
+         * Para fazer uma solicitação POST, podemos usar o objeto FormData interno.
+         * 
+         * A sintaxe:
+        */
+
+        //let formData = new FormData([form]); //cria um objeto, opcionalmente preencha de <form>
+        //formData.append(name, value); // acrescenta um fieldlet
+
+        /**
+         * Nós o criamos, opcionalmente preenchemos a partir de um formulário, append mais campos se necessário e depois:
+         * 
+            *  xhr.open('POST', ...)– usar POSTo método.
+            * 
+            * xhr.send(formData) para enviar o formulário ao servidor
+        */
+
+        //objeto para representar os dados do formulario
+        //como argumento fornecemos o form com name person, o objeto captura seus campos automaticamente
+        let formData = new FormData(document.forms.person);
+
+        //adiciona um campo no formulario com nome middle e valor lee
+        formData.append("middle", "Lee");
+
+        // envie-o
+
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+        //2. passo para fazer request
+        //2. Configure-o: POST-request para a URL
+        //configurando o request, informando metodo http, e o url a fazer o request
+        xhr.open('POST', 'https://javascript.info/article/xmlhttprequest/post/user');
+
+        //3. passo para fazer request, 
+        //enviando o request, informando o body, no caso de method HTTP POST precisamos informar o body, os dados a serem enviados pela request para o servidor
+        //os dados são um objeto formData representado os dados de um formulario
+        //metodos de rede aceitam enviar objeto formData como um body, É codificado e enviado com um header Content-Type: multipart/form-data.
+        //aqui a request e enviada pela rede, o metodo abre conexão e envia a request ao servidor.
+        xhr.send();
+
+        //eventos para response
+        //4. Isso será chamado após o recebimento da resposta
+        //acionado quando a request for concluida, e a response for totalmente baixada
+        xhr.onload = function() {
+            //obtem o response objeto
+            alert(xhr.response);
+        };
+
+        /**
+         * O formulário é enviado com multipart/form-data codificação.
+         * 
+        */
+    </script>
+
+</body>
+</html>

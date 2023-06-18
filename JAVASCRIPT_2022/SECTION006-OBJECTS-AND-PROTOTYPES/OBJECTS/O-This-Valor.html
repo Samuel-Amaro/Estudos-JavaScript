@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * O THIS(ESTE) VALOR
+         * 
+         * Normalmente, os métodos precisam acessar os dados armazenados no objeto.
+         * 
+         * Por exemplo, você pode desenvolver um método que retorne o nome completo do objeto de pessoa, concatenando o nome e o sobrenome.
+         * 
+         * Dentro do método, o this valor faz referência ao objeto usado para invocar o método. Portanto, você pode acessar uma propriedade de objeto usando o this valor da seguinte maneira:
+         
+            this.propertyName;
+
+         * 
+         * O exemplo a seguir usa o this valor no getFullName() método:
+        */
+
+        //declara um objeto literal chamado person
+        let person = {
+            //declara propriedades(atributos) do objeto usando o par chave : valor
+            firstName: 'John', 
+            lastName: 'Doe',
+            //um metodo e uma function que e uma propriedade de objeto
+            //aqui declara se um metodo do objeto por meio da sintaxe literal, uma function anonima sem paramentro e atribuida a greet propriedade como um valor
+            greet: function() {
+                console.log('Hello, World!');
+            },
+            getFullName: function() {
+                //utilizando o this valor
+                //o this dentro do metodo faz referncia ao objeto usado para invocar(chamar) o metodo avaliado no momento
+                //assim pode-se acessar um propriedade do objeto que esta invocando o metodo usando o this valor dentro do metodo
+                return this.firstName + ' ' + this.lastName;
+            }
+        };
+
+        //acessa o metodo do objeto usando a notação de ponto, acessando a propriedade getFullName() que possui uma funciton como valor represntando um metodo que utliza o this valor
+        console.log(`person.getFullName() = ${person.getFullName()}`);
+
+        /**
+         * * RESUMO
+         * 
+         * Um objeto é uma coleção de pares de valores-chave.
+         * 
+         * Use a notação de ponto ( .) ou notação semelhante [] a uma matriz ( ) para acessar uma propriedade de um objeto.
+         * 
+         * O delete operador remove uma propriedade de um objeto.
+         * 
+         * O in operador verifica se uma propriedade existe em um objeto.
+         * 
+         * O for...in itera sobre as propriedades de um objeto.
+         * 
+         * Quando as funções são propriedades de um objeto, são chamadas de métodos.
+         * 
+         * Use o thismétodo dentro do método para acessar as propriedades do objeto.
+         * */
+    </script>
+
+</body>
+</html>

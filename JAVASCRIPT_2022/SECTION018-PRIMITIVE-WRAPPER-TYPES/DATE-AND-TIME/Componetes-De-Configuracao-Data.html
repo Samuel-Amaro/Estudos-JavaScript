@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * CONFIGURANDO COMPONENTES DE DATA(SETTING DATE COMPONENTS)
+         * 
+         * Os seguintes métodos permitem definir componentes de data/hora:
+         
+            - setFullYear(year, [month], [date])
+            - setMonth(month, [date])
+            - setDate(date)
+            - setHours(hour, [min], [sec], [ms])
+            - setMinutes(min, [sec], [ms])
+            - setSeconds(sec, [ms])
+            - setMilliseconds(ms)
+            - setTime(milliseconds)(configura a data inteira por milissegundos desde 01.01.1970 UTC)
+
+         * Cada um deles, exceto setTime() tem uma variante UTC, por exemplo: setUTCHours().
+         * 
+         * Como podemos ver, alguns métodos podem definir vários componentes de uma só vez, por exemplo setHours. Os componentes que não são mencionados não são modificados.
+         * 
+         * Por exemplo:
+        */
+
+        //declara uma instancia de objeto do tipo date, que e invoca o construtor date sem informar argumentos, cria um objeto com data e hora atuais
+        let today = new Date();
+
+        //usando um metodo de configuração para data
+        //vamos configurar a hora
+        //ainda hoje, mas a hora é alterada para 0
+        //define a hora como 0
+        today.setHours(0);
+        console.log(today);
+
+        //define a hora como 0, passando todos argumentos, definindo horas, minutos, segundos, e milisegundos como 0
+        today.setHours(0, 0, 0, 0);
+        console.log(today); //ainda hoje, agora 00:00:00 em ponto.
+    </script>
+</body>
+</html>

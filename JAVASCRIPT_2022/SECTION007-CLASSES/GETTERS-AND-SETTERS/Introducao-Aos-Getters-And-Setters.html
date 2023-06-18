@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Aos Getters And Setters</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * GETTERS() - obter E SETTERS() - setar JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre getters e setters JavaScript e como usá-los efetivamente.
+         * 
+         * * INTRODUÇÃO AOS GETTERS AND SETTERS JS
+         * 
+         * O exemplo a seguir define uma classe chamada Person:
+        */
+
+        //define uma classe Chamada Person
+        class Person{
+            //inicializando propriedades da instancia de objeto a ser criada, por meio do construtor
+            constructor(name) {
+                //propriedade name e inicializada pelo name argumento
+                this.name = name;
+            }
+        }
+
+        //declara uma instancia de objeto do tipo da class Person
+        //o objeto criado e atribuido por referencia a variavel person assim person referencia o objeto
+        //o argumento passado para Person construtor inicializa a propriedade name
+        let person = new Person("John");
+        //acessando a propriedade name
+        console.log(person.name); //John
+
+        /**
+         * A Person classe tem uma propriedade name e um construtor. O construtor inicializa a name propriedade para uma string.
+         * 
+         * Às vezes, você não quer que a name propriedade seja acessada diretamente assim:
+
+            person.name;
+
+         * 
+         * Para fazer isso, você pode criar um par de métodos que manipulam a name propriedade. Por exemplo:
+        */
+
+        //define uma classe chamada Person2 usando a class palavra-chave
+        class Person2{
+            //inicializando propriedades da instancia de objeto a ser criada, por meio do construtor
+            constructor(name) {
+                //inicialziando a name propriedade por meio do metodo setName metodo acessor de atributo passando o name argumento como valor para a propriedade name
+                this.setName(name);
+            }
+            //getter método
+            //declara um metodo de classe chamado getName que e manipulador da propriedade name
+            getName() {
+                //acessa o valor da propriedade e retorna
+                return this.name;
+            }
+            //setter método
+            //declara um metodo de classe chamado setName que e manipulador da propriedade name, define um novo valor na propriedade name, declara um paramentro chamado newName
+            setName(newName) {
+                //o metodo String.trim();
+                //retira os espaços em branco no inicio e no final da string
+                newName = newName.trim();
+                //se o argumento name for uma string vazia
+                if(newName === '') {
+                    //lança uma exceção
+                    throw 'The name cannot be empty';
+                }
+                //define o argumento newName como valor da propriedade name
+                this.name = newName;
+            }
+        }
+
+        /**
+         * Neste exemplo, a Person classe tem a name propriedade. Além disso, tem dois métodos adicionais getName() e setName().
+         * 
+         * O getName() método retorna o valor da name propriedade.
+         * 
+         * O setName() método atribui um argumento à name propriedade. O setName() remove os espaços em branco de ambas as extremidades do newName argumento e lança uma exceção se newName estiver vazio
+         * 
+         * A constructor() chama o setName()método para inicializar a name propriedade:
+         * 
+         * Os métodos getName() e setName()são conhecidos como getter e setter em outras linguagens de programação, como Java e C++.
+         * 
+         * O ES6 fornece uma sintaxe específica para definir o getter e o setter usando as palavras-chave get e set. Por exemplo:
+        */
+
+        //define uma classe chamada Person3 usando a palavra chave class
+        class Person3{
+            //inicializando propriedades da instancia de objeto a ser criada, por meio do construtor
+            constructor(name) {
+                //declara uma propriedade chamada name, a propriedade e inicializada com o name argumento do construtor
+                this.name = name;
+            }
+            //usando a sintaxe especifica do ES6 para definir o getter método acessor da propriedade name
+            //usando a palavra chave get, para definir o metodo get name que acessa o valor da propriedade name
+            get name() {
+                //a name propriedade tem seu nome alterado(identificador alterado) para evitar colisão de nomes com o gettter e o setter metodos
+                //acessa o valor da propriedade _name(identificador ja alterado) e retorna
+                return this._name;
+            }
+            //usando a sintaxe especifica do ES6 para definir o setter método inicializador do atributo name
+            //usando a palavra chave set, para definir o metodo set name que inicializa o valor da propriedade name
+            //declara um paramentro normal regular chamado newName que possui valor padrão atribuido pelo mecaniscmo JS como 'undefined'
+            set name(newName) {
+                //o metodo String.trim();
+                //retira os espaços em branco no inicio e no final da string
+                newName = newName.trim();
+                //se o argumento name for uma string vazia
+                if(newName === '') {
+                    //lança uma exceção
+                    throw 'The name cannot be empty';
+                }
+                //acessa a propriedade pelo seu identificar(nome ja alterado) para evitar colisão de nomes dos set e get metodos
+                //define o argumento newName como valor da propriedade name
+                this._name = newName;
+            }
+        }
+        
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, a name propriedade é alterada para _name evitar a colisão de nomes com o getter e o setter.
+         *
+         * Segundo, o getter usa a palavra- get chave seguida pelo nome do método:
+         * 
+         * Para chamar o getter, você usa a seguinte sintaxe:
+        */
+
+        //para chamar o get name metodo da class Person3, basta acessar a propriedade usando a notação de ponto
+        //o mecanismo JS quado ve a propriedade name sendo acessa pela class Person3 ele verifica se a Person3 classe tem alguma name propriedade definida, se sim acessa ela diretamente
+        //se não tiver ele verifica se a classe Person3 tem algum método que se vincule á propriedade name. Aqui temos o método name() que e vinculado á propriedade name por meio da palavra-chave get
+        //encontrado o método getter ele executa o método e retorna um valor
+        let name = Person3.name;
+
+        /**
+         * Quando o JavaScript vê o acesso à propriedade name da classe Person, ele verifica se a classe Person tem alguma propriedade name.* 
+         * Caso contrário, o JavaScript verifica se a classe Person tem algum método que se vincule à propriedade name. Neste exemplo, o método name() é vinculado à propriedade name por meio da palavra-chave get. Uma vez que o JavaScript encontra o método getter, ele executa o método getter e retorna um valor.
+         * 
+         * Terceiro, o setter usa a palavra- chave set seguida pelo nome do método:
+         * 
+         * O JavaScript chamará o name()setter quando você atribuir um valor à name propriedade assim:
+        */
+
+        //o set name método e chamado quando o atribuir um valor á name propriedade assim
+        Person3.name = 'Jane Smith';
+
+        /**
+         * Se uma classe tiver apenas getter, mas não setter, e você tentar usar o setter, a alteração não terá nenhum efeito. Veja o seguinte exemplo:
+        */
+
+        //define uma classe chamada Person4
+        //usando a palavra chave class
+        class Person4{
+            //usando o construtor para inicializar propriedades da classe
+            //neste caso usando o construtor para inicializar a _name propriedade
+            //define um construtor com um paramentro chamado name
+            constructor(name) {
+                //define uma propriedade chamada _name que e inicializada pelo argumento name
+                this._name = name;
+            }
+            //usando a sintaxe especifica do ES6 para definir o getter método acessor da propriedade name
+            //usando a palavra chave get, para definir o metodo get name que acessa o valor da propriedade name
+            get name() {
+                //acessa o valor da propriedade name e retorna por meio do metodo get name
+                return this._name;
+            }
+        }
+
+        //instancia um objeto por meio da class Person4 inicializando a propriedade name com o argumento "Jane Doe"
+        //o objeto instanciado e atribuido por referencia a variavel person, assim person variavel referencia a instancia de objeto criada
+        let person2 = new Person4("Jane Doe");
+        //ao tentar acessa propriedade usando notação de ponto o JS verifica se existe uma propriedade chamada name, como não existe, procura um metodo chamado name, neste caso temos o get name método vinculado a propriedade _name, quando tentamos acessar uma propriedade chamada name o JS faz a vinculação e procura propriedade com o nome se existe retorna propriedade se não existe vincula método get, porque estamos acessado valor da propriedade lendo valor com o nome fornecido
+        console.log(person2.name);
+
+        //tentar alterar o nome, mas não pode
+        //ao tentar atribuir um valor a uma propriedade chamada name, o mecaniscmo JS verifica se existe uma propriedade chamada name existe, neste caso não
+        //no proximo passo tenta vincula o nome da propriedade name ao um set metodo, pois estamos definindo um novo valor, também não existe, neste caso não conseguimos alterar o nome pois não definimos um set metodo com o name como nome e nem uma propriedade chamada name
+        person2.name = 'Jane Smith';
+
+        /**
+         * Neste exemplo, a Person classe tem o name getter, mas não o name setter. Ele tenta chamar o setter. No entanto, a alteração não entra em vigor, pois a classe Person não possui o definidor de nomes.
+        */
+    </script>
+</body>
+</html>

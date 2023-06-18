@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT CONST: DECLARANDO CONSTANTES NO ES6
+         * 
+         * Resumo : neste tutorial, você aprenderá a definir constantes usando a palavra-chave const JavaScript.
+         * 
+         * * INTRODUÇÃO À PALAVRA-CHAVE JS CONST
+         * 
+         * O ES6 fornece uma nova maneira de declarar uma constante usando a palavra-chave const. A const palavra-chave cria uma referência somente leitura para um valor.
+         
+            const CONSTANT_NAME = value;
+
+         * 
+         * Por convenção, os identificadores constantes estão em maiúsculas.
+         * 
+         * Assim como a palavra-chave let , a const palavra-chave declara variáveis ​​de escopo bloqueado. No entanto, as variáveis ​​de escopo de bloco declaradas pela palavra-chave const não podem ser reatribuídas.
+         * 
+         * As variáveis ​​declaradas pela palavra-chave let são mutáveis. Isso significa que você pode alterar seus valores a qualquer momento, conforme mostrado no exemplo a seguir:
+        */
+
+        //declara uma variavel de escopo de bloco usando let palavra chave, variavel nomeada de a e inicializada com valor 10
+        let a = 10;
+        //variaveis declaradas com palavra-chave let pode se alteradas receberem novos valores a qualquer momento
+        a = 20;
+        a = a + 5;
+        console.log(a); //25
+
+        /**
+         * No entanto, as variáveis ​​criadas pela palavra-chave const são “imutáveis”. Em outras palavras, você não pode reatribuí-los a valores diferentes.
+         * 
+         * Se você tentar reatribuir uma variável declarada pela palavra- chave const, obterá algo TypeError assim:
+        */
+
+        try {
+            //declara uma constante uma variavel de escopo de bloco, que e imutavel, esse variavel não pode receber novos valores, essa variavel não pode ter reatribuição de valor a ela, quando ela e declarada ela cria uma referencia de somente leitura para um valor
+            //constante chamada RATE inicializada com um valor
+            const RATE = 0.1;
+            //se tentarmos atribuir um novo valor a constante, tentarmos mudar o valor atual para um novo valor, dara um erro do tipo assim TypeError
+            RATE = 0.2; //TypeError
+        } catch (error) {
+            console.log(`Erro: ${error.name}, description: ${error.message}`);
+            console.log(`Não pode reatribuir valor a uma constante ja declarada.`);
+        }
+
+        /**
+         * Ao contrário da palavra-chave let, você precisa inicializar o valor para a variável declarada pela palavra-chave const.
+         * 
+         * O exemplo a seguir causa um erro SyntaxError devido à falta do inicializador na const declaração da variável:
+        */
+
+        try {
+            //declara uma constante uma variavel de escopo de bloco, que e imutavel, esse variavel não pode receber novos valores, essa variavel não pode ter reatribuição de valor a ela, quando ela e declarada ela cria uma referencia de somente leitura para um valor
+            //constante chamada RED que não e inicializada com um valor
+            //toda constante em sua declaração tem que ser inicialziada com um valor,
+            //aqui declaramos uma constante mas não a inicializaremos 
+            //const RED; //SyntaxError
+        } catch (error) {
+            console.log(`Erro: ${error.name}, description: ${error.message}`);
+            console.log(`Não pode declarar uma constante sem inicializar seu valor`);
+        }
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devolvendo Uma Promise</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * DEVOLVENDO UMA PROMISE
+         * 
+         * Quando você retorna um valor no then() método, o then() método retorna um novo Promise que resolve imediatamente para o valor de retorno.
+         * 
+         * Além disso, você pode retornar uma nova promessa no then() método, assim:
+        */
+
+        //declarando uma nova instancia de objeto de promise que recebe como argumento em seu construtor uma callback function anonima conhecida como executora, que declara dois paramentros chamados resolve e reject que são callbakcs que mudam o estado da promisse
+        //a promisse e atribuida a variavel p por referencia
+        //cria uma nova instancia de objeto promise invocando o construtor da class Promise e usando o new operador
+        let p = new Promise((resolve, reject) => {
+            //o codigo abaixo e uma operação assincrona ou simula uma operação a ser executa(encapsulada) pela promisse
+            //a setTimeout espera cerca de 3 segundos antes de executar sua callbakc
+            setTimeout(() =>{
+                //a resolve function callbak resolve a promise, mudando seu estado de pendente para comprida com um valor, no caso resolve a promisse para o numero 10
+                //o argumento 10 e o valor
+                resolve(10);
+            }, 3 * 100);
+        });
+
+        //retornando uma nova promise no método then
+        //usando o método then 
+        //Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //a callbak argumento passado para o the método e executado assim que a promise e resolvida - mudar seu estado
+        p.then((result) => {
+            //mostra resultado da promisse ja resolvida(cumprida com valor)
+            console.log(result);
+            //o then método retornara uma instancia de uma promisse anonima
+            return new Promise((resolve, reject) => {
+                //operação assincrona(tenta simular)
+                //a setTimeout espera cerca de 3 segundos
+                setTimeout(() =>{
+                    //a resolve function callbak resolve a promise, pendente -> cumprida com valor
+                    //o argumento do resolve callbak e e o valor
+                    resolve(result * 2);
+                }, 3 * 1000);
+            });
+            //o then metodo abaixo obtem o valor de quando a promise do then método acima for cumprida e tiver seu estado de resolvido
+        }).then((result) => {
+            //mostra resultado da promise cumrpida com valor
+            console.log(result);
+            //retorna uma nova promise para um método then
+            return new Promise((resolve, reject) => {
+                setTimeout(() =>{
+                    resolve(result * 3);
+                }, 3 * 1000);
+            });
+        }).then((result) => {
+            //mostra resultado da promise ja resolvida pendente -> cumprida com valor
+            console.log(result);
+        });
+
+        /**
+         * Este exemplo mostra 10, 20 e 60 após cada 3 segundos. Esse padrão de código permite que você execute algumas tarefas em sequência.
+         * 
+         * O seguinte modificou o exemplo acima:
+        */
+
+        //exemplo demostrando como executar algumas tarefas em sequencia usando o encademaneto de promises
+
+        //declara uma function chamada generateNumber que declara um paramentro chamado num
+        function generateNumber(num) {
+            //a function ira retornar uma instancia de um promise anonima
+            return new Promise((resolve, reject) => {
+                //o codigo abaixo e uma operação assincrona ou simula
+                //a setTimeout espera cerca de 3 segundos antes de executar sua callbakc
+                setTimeout(() =>{
+                    //a resolve function callbak resolve a promise, mudando seu estado de pendente para comprida com um valor, no caso resolve a promisse para o numero 10
+                    //o argumento num e o valor
+                    resolve(num);
+                }, 3 * 100);
+            });
+        }
+
+        //invocando o método que retorna uma promise
+        //usando o método then para obter o valor quando a promise atingir o estado de cumprida com valor
+        generateNumber(10).then((result) => {
+            //mostra resultada da primeira  promise resolvida
+            console.log(result);
+            //chama o método novamente para retornar uma nova promise para o proximo método then
+            return generateNumber(result * 2);
+        }).then((result) => {
+            //mostra resultado segunda da promise resolvida
+            console.log(result);
+            //chama o método novamente para retornar uma nova promise para o proximo método then
+            return generateNumber(result * 3);
+            //mostra resultado da ultima promise que foi resolvida
+        }).then((result) => console.log(result));
+        
+    </script>
+
+</body>
+</html>

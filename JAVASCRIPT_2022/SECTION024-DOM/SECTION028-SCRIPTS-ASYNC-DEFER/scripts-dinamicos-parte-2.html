@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        
+        function loadScript(src) {
+            //cria um scritp externo não assincrono, e um script dinamico bloqueante, e anexa ao documento
+            let script = document.createElement('script');
+            //todo script criado dinamicamente e assyn, para tornalo não assincrono usar a alinha abaixo
+            script.src = src;
+            script.async = false;
+            document.body.append(script);
+        }
+
+        //long.js é executado primeiro por causa de async=false
+
+        //os scripts criados dinamicamente abaixo são executados na ordem do documento como se estiveseem usando defer, mesmo que o segundo seja carregado primeiro, o segundo so e executaado depois do primeiro
+
+        //cria uma script externo não assincrono bloqueante, que e o primeiro a ser executado
+        loadScript("https://javascript.info/article/script-async-defer/long.js");
+        //cria uma script externo não assincrono bloqueante, o segundo a ser executado
+        loadScript("https://javascript.info/article/script-async-defer/small.js");
+
+        /**
+         * Sem script.async=false, os scripts seriam executados na ordem padrão, carregar primeiro ( small.js provavelmente a primeira).
+         * 
+         * Novamente, como com o defer, a ordem importa se quisermos carregar uma biblioteca e, em seguida, outro script que dependa dela.
+        */
+    </script>
+    
+</body>
+</html

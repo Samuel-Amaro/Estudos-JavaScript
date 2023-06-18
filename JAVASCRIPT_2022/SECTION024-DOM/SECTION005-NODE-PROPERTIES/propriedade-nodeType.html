@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * A PROPRIEDADE "nodeType"
+         * 
+         *  A nodeType propriedade fornece mais uma maneira “antiquada” de obter o “tipo” de um nó DOM.
+         * 
+         * Tem um valor numérico:
+           
+            -  elem.nodeType == 1 para nós de elemento,
+
+            - elem.nodeType == 3 para nós de texto,
+
+            - elem.nodeType == 9 para o objeto de documento,
+        */
+
+        //obtem o no de elemento correspondente a tag <body>
+        let elem = document.body;
+
+        //vamos examinar o que e
+        //a propriedade elem.nodeType e uma maneira de obter o tipo de um nó DOM
+        //a propriedade retorna 1 representa um no de element
+        console.log(elem.nodeType); //1 => element
+
+        //obtendo o tipo do no do primeiro filho de body
+        //a propriedadee retorna 3 representa que o primeiro elemento filho do body e um no de texto
+        console.log(elem.firstChild.nodeType); //3 => Text
+
+        //para o objeto de documento, o tipo é 9
+        //obtem o tipo de no que e o objeto documento que também e um no dom na arvore
+        //a propriedade retorna o valor 9 que representa um no de tipo objeto de documento o proprio document
+        console.log(document.nodeType); //9
+
+        /**
+         * Em scripts modernos, podemos usar instanceof e outros testes baseados em classe para ver o tipo de nó, mas às vezes nodeType pode ser mais simples. Nós só podemos ler nodeType, não mudá-lo.
+         * */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Agora vamos fazer algo com o usuário carregado.
+         * 
+         * Por exemplo, podemos fazer mais uma solicitação ao GitHub, carregar o perfil do usuário e mostrar o avatar:
+        */      
+
+        //usando metodo fetch para realizar uma solicitação de rede para o url passado por argumento e retorna um promese
+        //a promise retornada e resolvida com um response objeto quando o servidor remoto responde com headers, mas antes que a resposta completa seja baixada
+        fetch("https://javascript.info/article/promise-chaining/user.json")
+        //registrando um function .then manipulador para consumir a response objeto resolvido da promise
+        //.then abaixo é executado quando o servidor remoto responde com um header
+        .then((response) => {
+            //response.json() retorna uma nova promessa que e resolvida quando a promisse ja leu os dados remotos e os analise e retorna como JSON
+            //a promisse so e resolvida quando o dados foram analisados e carregados
+            //quando carrega
+            return response.json();
+        })
+        //registrando outro .then manipulador para consumir o objeto json do resolve metodo da promisse retornada pelo .then manipulador anterior
+        .then((user) => {
+            //logo em seguida faremos outra solicitação de rede para buscar um user do gitHub, isso retorna outra promisse com o fecth
+            return fetch(`https://api.github.com/users/${user.name}`);
+        })
+        //registra outro function .then manipulador para consumir outro response objeto, retornado por resolve quando promise e resolvida
+        .then((response) => {
+            //retorna outra promisse que so e resolvida quando dados estiverem carregados analisados em formato json
+            return response.json();
+        })
+        //Mostre a imagem do avatar (githubUser.avatar_url) por 3 segundos (talvez animar)
+        //registra outro manipualdor para consumir um objeto json como resultado da promisse anterior resolvida
+        .then((gitHubUser) => {
+            let img = document.createElement('img');
+            img.src = gitHubUser.avatar_url;
+            img.className = "promise-avatar-example";
+            document.body.prepend(img);
+
+            //apos 3s remove o img do documento
+            setTimeout(() => img.remove(), 3000); //(*)
+        });
+
+        /**
+         * O código funciona; veja os comentários sobre os detalhes. No entanto, há um problema potencial nisso, um erro típico de quem começa a usar promessas.
+         * 
+         * Veja a linha (*): como podemos fazer algo depois que o avatar termina de ser exibido e é removido? Por exemplo, gostaríamos de mostrar um formulário para editar esse usuário ou outra coisa. A partir de agora não tem como.
+         * 
+         * 
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - nosso script na nossa origem
+    -->
+    <script type="text/javascript">
+        //o manipulador e para o evento error, esse evento e acionado depois que o recurso externo houve um erro no carregamento do mesmo. e acionado quando ha erros no carregamento do recurso. 
+        //quando ha erros de carregamento no janela
+        window.onerror = function(event, message, url, line, col, errorObj) {
+            alert(`${message}\n${url}, ${line}:${col}`);
+        };
+
+    </script>
+
+    <!--
+        - script externo. de outra origem
+        - o script externo possui um erro, mas esta em outro origem domonio/porta/protocol, e nos queremos obter mais detalhes sobre o erro no script, so que estamos em outra origem, assim por meio do nosso script não temos acessmo a mais detahles do erro, de outro script que e externo de origem diferente.
+        - para podermos obter mais detalhes sobre erro que vem de outra origem diferente da nossa e podemos manipula-lo, temos que ter permissão para a origem.
+        - para isso usamos o atributo crossorigim, para permite o acesso entre origens. o atributo com o valor anonymous. crossorigin="anonymous" – acesso permitido se o servidor responder com o cabeçalho Access-Control-Allow-Origin com * ou nossa origem. O navegador não envia informações de autorização e cookies para o servidor remoto.
+    -->
+    <script type="text/javascript" src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js" crossorigin="anonymous">
+        /**
+         * * OBSERVE: 
+         * 
+         * Você pode ler mais sobre acesso de origem cruzada no capítulo Buscar: solicitações de origem cruzada . Ele descreve o fetch método para solicitações de rede, mas a política é exatamente a mesma.
+         * 
+         * Coisas como “cookies” estão fora do nosso escopo atual, mas você pode ler sobre eles no capítulo Cookies, document.cookie .
+         * 
+         * No nosso caso, não tínhamos nenhum atributo crossorigin. Portanto, o acesso entre origens foi proibido. Vamos adicioná-lo.
+         * 
+         * Podemos escolher entre "anonymous"(nenhum cookie enviado, um cabeçalho do lado do servidor necessário) e "use-credentials"(envia cookies também, dois cabeçalhos do lado do servidor necessários).
+         * 
+         * Se não nos importamos com cookies, então "anonymous"é o caminho a seguir:
+         * 
+         * Agora, supondo que o servidor forneça um Access-Control-Allow-Origin cabeçalho, está tudo bem. Temos o relatório de erro completo.
+        */
+    </script>
+
+</body>
+</html>

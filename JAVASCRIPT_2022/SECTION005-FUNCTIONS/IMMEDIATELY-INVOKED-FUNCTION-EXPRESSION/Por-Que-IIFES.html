@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressão de função</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * POR QUE IIFES(Imediatanly invoked function expressions)
+         * 
+         * Quando você define uma função , o mecanismo JavaScript adiciona a função ao objeto global. Veja o seguinte exemplo:
+         * */
+
+        //define uma function chamada add que possui dois paramentros 
+        //ao criar uma function ela e adicionada ao objeto global 
+        function add(a, b) {
+            //e retorna a soma desses paramentros
+            return a + b;
+        } 
+
+        /**
+         * Nos navegadores da Web, a add()função é adicionada ao window objeto:
+        * */
+
+        //a function recem criada e add no window objeto global
+        console.log(window.add);
+
+        /**
+         * Da mesma forma, se você declarar uma variável fora de uma função, o mecanismo JavaScript também adiciona a variável ao objeto global:
+         **/
+
+        //declara uma variavel no escopo global fora de uma function
+        //essa varaivel e add a objeto global window
+        var counter = 10; 
+        console.log(window.counter); //10
+
+        /**
+         * Se você tiver muitas variáveis ​​e funções globais, o mecanismo JavaScript só liberará a memória alocada para elas até que o objeto global perca o escopo.
+         * 
+         * Como resultado, o script pode usar a memória de maneira ineficiente. Além disso, ter variáveis ​​e funções globais provavelmente causará colisões de nomes.
+         * 
+         * Uma maneira de evitar que as funções e variáveis ​​poluam o objeto global é usar expressões de função imediatamente chamadas.
+         * 
+         * Em JavaScript, você pode ter as seguintes expressões:
+        */
+
+        'This is a string';
+        (10+20);
+
+        /**
+         * Essa sintaxe está correta, embora as expressões não tenham efeito. Uma função também pode ser declarada como uma expressão que é chamada de expressão de função:
+         * */
+
+        //declarando uma expressão de função
+        //atribui a function anonima a add variavel
+        //declara uma function anonima que possui dois paramentros 
+        let add2 = function(a, b) {
+            //retorna a soma dos paramentros
+            return a + b;
+        }
+
+        /**
+         * Nesta sintaxe, a parte do lado direito do operador de atribuição ( =) é uma expressão de função. Como uma função é uma expressão, você pode colocá-la entre parênteses:
+         * */
+
+        //declara uma expressão de função
+        //a parte do lado direito do operador de atribuição e uma expressão de função. 
+        //a função e uma expressão, sendo assim pode colocar a função anonima declarada entre parenteses
+        //a expressão e uma function anonima que possui dois paramentros e retorna a soma dos parametros
+        //a add variavel e refernciada como uma função anonima que adiciona dois argumentos 
+        add2 = (function(a, b) {
+            return a + b;
+        }); 
+
+        /**
+         * Neste exemplo, a add variável é referenciada como a função anônima que adiciona dois argumentos.
+         * 
+         * Além disso, você pode executar a função imediatamente após criá-la:
+        */
+
+        //no exemplo abaixo
+        //a add variavel contem o resultado da chamada da function
+        add2 = (function(a, b) {
+            return a + b;
+        })(10, 20);
+
+        /**
+         * Neste exemplo, a add variável contém o resultado da chamada de função. 
+         * 
+         * A seguinte expressão é chamada de expressão de função imediatamente invocada (IIFE) porque a função é criada como uma expressão e executada imediatamente:
+        */
+
+        //expressão de função imediatamente invocada(IIFE)
+        //cria uma expressão de função e executada imediatamente.
+        (function(a, b) {
+            return a + b;
+        })(10, 20);
+
+        /**
+         * Esta é a sintaxe geral para definir um IIFE:
+         * */
+
+        //sintaxe para definir uma expressão de função imediatamente invocada
+        (function() {
+            //...
+        })(); 
+
+        /**
+         * Observe que você pode usar uma arrow function para definir um IIFE:
+         * */
+
+        //sintaxe para definir uma expressão de função imediatamente invocada com arrow function
+        (() => {
+            //...
+        })(); 
+
+        /**
+         * Ao colocar funções e variáveis dentro de uma expressão de função imediatamente invocada, você pode evitar poluí-las no objeto global:
+        */
+
+        //declara uma expressão de function que sera imediatamente invocada apos sua declaração, evitando de poluir o objeto global com functions e variaveis
+        //logo apos sua declaração sera executada
+
+        (function() {
+            var counter = 0;
+
+            function add(a, b) {
+                return a + b;
+            }
+
+            console.log(add(10, 20)); //30
+        }());
+
+        
+    </script>
+</body>
+</html>

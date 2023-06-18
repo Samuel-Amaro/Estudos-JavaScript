@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Usando Objetos de eventos propriedade target</title>
+    <style>
+      div {
+        background-color: red;
+        height: 100px;
+        width: 25%;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script>
+
+      //laço de repetição que cria 16 elementos <div> e os adiciona com filhos do documento, na tag <body>
+      for(let i = 1; i <= 16; i++) {
+        const myDiv = document.createElement('div');
+        document.body.appendChild(myDiv);
+      }
+
+      //função que retorna um numero aleatorio
+      function random(number) {
+        return Math.floor(Math.random() * number);
+      }
+
+      //função nomeada de manipulador de evento, que retorna uma propriedade css em formato de string
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        return rndCol;
+      }
+
+      //seleciona todos os elementos <div> do docuento HTML5
+      const divs = document.querySelectorAll('div');
+
+      //percorrendo a constante de elementos <div>
+      for(let i = 0; i < divs.length; i++) {
+        //para cada elemento <div> percorrido, registra um manipulador de eventos usando, um objeto de evento e, que a sua propriedade target, define o evento diretamente em cada elemento <div>, e não na pagina   
+        divs[i].onclick = function(e) {
+          e.target.style.backgroundColor = bgChange();
+        }
+        
+      }
+    </script>
+  </body>
+</html>

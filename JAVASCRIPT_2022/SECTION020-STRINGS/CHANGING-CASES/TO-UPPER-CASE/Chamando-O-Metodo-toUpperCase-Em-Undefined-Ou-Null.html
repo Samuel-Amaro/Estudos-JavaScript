@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+   
+    <script>
+
+        /**
+         * * CHAMANDO O MÉTODO toUpperCase() em undefined ou null
+         * 
+         * Se você chamar o toUpperCase()método em null ou undefined, o método lançará uma TypeError exceção. Por exemplo, a getUserRanking() função a seguir retorna uma string se id for maior que zero ou undefined caso contrário:
+         * 
+        */
+
+        //declara uma arrow function anonima que declara um paramentro chamado id, esse arrow function e atribuida por referencia a variavel getUserRanking
+        const getUserRanking = (id) => {
+            if(id > 0) {
+                //a arrow function so retorna um valor explicitamente quando o argumento for maior que 0
+                return 'Standard';
+            }
+        };
+
+        /**
+         * Observe que uma função retorna undefined por padrão quando você não retorna explicitamente um valor dela.
+         * 
+         * Se você chamar o toUpperCase()método no resultado da getUserRanking()função, você obterá TypeErrorquando o id for zero ou negativo:
+        */
+        
+        //invocando a function getUserRanking(), passando um argumento numerico menor que 0, a function não retorna nada explicitamente, mas implicitamente a function retorna undefined, por não retornar nada explicitamente
+        //chamando o método toUpperCase no resultado da invocacao da function getUserRanking
+        //chamar o método str.toUpperCase em um valor undefined, o método lançara um typeError
+        try {
+            console.log(getUserRanking(-1).toUpperCase());
+        } catch (error) {
+            console.log(`Não pode chamar um método de string em undefined`);
+            console.log(`${error.name} : ${error.message}`);
+        }
+
+        /**
+         * Para evitar o erro, você pode usar o operador de encadeamento opcional ?. assim:
+        */
+
+        //O operador de encadeamento opcional verifica implicitamente se o resultado retornado por getUserRanking não é null ou undefined antes de tentar invocar o toUpperCase no resultado:
+        //se o resultado devolvido pela function getUserRanking for null ou undefined o operador causa um curto circuito e retorna undefined
+        console.log(getUserRanking(-1)?.toUpperCase());
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures exemplo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * CLOSURES EM UM LOOP
+         * 
+         *  Considere o seguinte exemplo:
+        */
+
+        for(var index = 1; index <= 3; index++) {
+            setTimeout(function() {
+                console.log(`After ${index} seconds(s): ${index}`);
+            }, index * 1000);
+        }
+
+        /**
+         * O código mostra a mesma mensagem.
+         * 
+         * O que queríamos fazer no loop é copiar o valor de   i em cada iteração no momento da iteração para exibir uma mensagem após 1, 2 e 3 segundos. 
+         * 
+         * A razão pela qual você vê a mesma mensagem após 4 segundos é que o retorno de chamada foi passado para o setTimeout() encerramento. Ele lembra o valor de i da última iteração do loop, que é 4.
+         * 
+         * Além disso, todos os três closures criados pelo for-loop compartilham o mesmo escopo global acessam o mesmo valor de i.
+         * 
+         * Para corrigir esse problema, você precisa criar um novo escopo de fechamento em cada iteração do loop.
+         * 
+         * Existem duas soluções populares: IIFE e palavra- letchave.
+         * 
+         * * 1) USANDO A SOLUÇÃO IIFE
+         * 
+         *  Nesta solução, você usa uma expressão de função invocada imediatamente (também conhecida como IIFE) porque um IIFE cria um novo escopo declarando uma função e a executa imediatamente.
+        */
+
+        for(var index = 1; index <= 3; index++) {
+            //declara a function e a executa logo em seguida
+            //usando a expressão de funções imediatamente invocadas
+            (function(index) {
+                setTimeout(function() {
+                    console.log(`After ${index} seconds(s): ${index}`);
+                }, index * 1000);
+            })(index);
+        }
+
+        /**
+         * * 2) USANDO A LET PALAVRA CHAVE NO ES6
+         * 
+         *  No ES6, você pode usar a let palavra-chave para declarar uma variável com escopo de bloco.
+         * 
+         * Se você usar a palavra- let chave no for-loop , ele criará um novo escopo léxico em cada iteração. Em outras palavras, você terá uma nova index variável em cada iteração.
+         * 
+         * Além disso, o novo escopo léxico é encadeado ao escopo anterior para que o valor anterior de index seja copiado do escopo anterior para o novo.
+        */
+
+        for(let index = 1; index <= 3; index++) {
+            setTimeout(function() {
+                console.log(`After ${index} seconds(s): ${index}`);
+            }, index * 1000);
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * O escopo léxico descreve como o mecanismo JavaScript usa a localização da variável no código para determinar onde essa variável está disponível.
+         * 
+         * Um encerramento é uma combinação de uma função e sua capacidade de lembrar variáveis ​​no escopo externo.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * DIFERENÇA ENTRE VAR E LET
+         *
+         * Resumo : neste tutorial, você aprenderá sobre as diferenças entre as palavras-chave var e let.
+         * 
+         * * Nº 1: ESCOPOS VARIÁVEIS
+         * 
+         * As var variáveis ​​pertencem ao escopo global quando você as define fora de uma função. Por exemplo:
+         
+            var counter;
+
+         * 
+         * Neste exemplo, o counter é uma variável global. Isso significa que a counter variável é acessível por qualquer função.
+         * 
+         * Quando você declara uma variável dentro de uma função usando a palavra-chave var, o escopo da variável é local. Por exemplo:
+         * 
+        */
+        
+        function increase() {
+            //declara uma varaivel chaamda counter inicalizada com valor 10, variavel declarada usando palavra-chave var e dentro de um escopo de função e uma varaivelo local, pertencente somente ao escopo da function
+            //varaivel acessivel somente dentro do escopo da function increase
+            var counter = 10;
+        }
+
+        //não pode acessar a variável do contador aqui
+        
+        /**
+         * Neste exemplo, a counter variável é local para a increase() função. Não pode ser acessível fora da função.
+         * 
+         * O exemplo a seguir exibe quatro números de 0 a 4 dentro do loop e o número 5 fora do loop.
+        */
+
+        //declara um loop for que sera incrementada 5 vezes, a sua variavel controladora e definida usando a var palavra chave, isso e uma variavel de escopo global, então posso acessar a variavel controlado fora do escopo do loop for
+        for(var i = 0; i < 5; i++) {
+            console.log(`Inside the loop: ${i}`);
+        }
+
+        //acessa varaivel controladora do loop for fora do escopo do loop, quando o loop for termina a iteração
+        console.log(`Outside the loop: ${i}`);
+
+        /**
+         * Neste exemplo, a i variável é uma variável global. Portanto, ele pode ser acessado de dentro e depois do for loop.
+         * 
+         * O exemplo a seguir usa a palavra-chave let em vez da var palavra-chave:
+        */
+
+        //declara um loop for que sera incrementada 5 vezes, a sua variavel controladora e definida usando a let palavra chave, isso e uma variavel de escopo de bloco, então posso acessar a variavel somente dentro do loop do escopo do loop
+        for(let j = 0; j < 5; j++) {
+            console.log(`Inside the loop: ${j}`);
+        }
+
+        try {
+            //tenta acessar a variavel controladora do loop acima, mas não e possivel pois a variavel foi declarada como let uma variavel de escopo de bloco que so e acessivel dentro do loop
+            console.log(`Outside the loop: ${j}`); //ReferenceError
+        } catch (error) {
+            console.log(`Error: ${error.name} | ${error.message}`);
+        }
+
+        /**
+         * Nesse caso, o código mostra quatro números de 0 a 4 dentro de um loop e um erro de referência:
+         * 
+         * Como este exemplo usa a palavra-chave let, a variável i tem escopo bloqueado. Isso significa que a variável i só existe e pode ser acessada dentro do for bloco de loop.
+         * 
+         * Em JavaScript, um bloco é delimitado por um par de chaves {} como nas instruções if...else and for:
+         
+            //declara um bloco que e delimitado por par de chaves
+            if(condition) {
+                //dentro de um bloco
+            }
+
+            for(...) {
+                //dentro de um bloco
+            }
+        */
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body class="main page">
+
+    <script type="text/javascript">
+       
+       /**
+        * * Element style
+        * 
+        * A propriedade elem.style é um objeto que corresponde ao que está escrito no "style" atributo. A configuração elem.style.width="100px" funciona da mesma forma como se tivéssemos no atributo style uma string width:100px.
+        * 
+        * Para propriedade de várias palavras, o camelCase é usado:
+        */
+
+        //background-color  => elem.style.backgroundColor
+        //z-index           => elem.style.zIndex
+        //border-left-width => elem.style.borderLeftWidth
+
+        /**
+         * Por exemplo
+        */
+
+        //propriedade elem.style e objeto que corresponde ao que está escrito no "style" atributo
+        //o document.body.style.backgroundColor e o mesmo que 
+        //<body style="backgroundColor=prompt();">
+        document.body.style.backgroundColor = prompt('background color?', 'green');
+        
+        /**
+         * * Propriedades prefixadas
+         * 
+         * Propriedades com prefixo de navegador como -moz-border-radius, -webkit-border-radius também seguem a mesma regra: um hífen significa maiúscula.
+        */
+
+            //button.style.MozBorderRadius = '5px';
+            //button.style.WebkitBorderRadius = '5px';
+
+            
+    </script>
+</body>
+</html>

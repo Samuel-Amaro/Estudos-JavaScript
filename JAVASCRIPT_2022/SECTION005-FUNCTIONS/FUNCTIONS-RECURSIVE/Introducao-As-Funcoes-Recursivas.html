@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções recursivas</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FUNÇÃO RECURSIVA JS
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar a técnica de recursão para desenvolver uma função recursiva JavaScript, que é uma função que chama a si mesma.
+         * 
+         * * INTRODUÇÃO ÁS FUNÇÕES RECURSIVAS DO JS
+         * 
+         * Uma função recursiva é uma função que chama a si mesma até que não o faça. E essa técnica é chamada de recursão.
+         * 
+         * Suponha que você tenha uma função chamada recurse(). O recurse() é uma função recursiva se chamar a si mesmo dentro de seu corpo, assim:
+        */
+
+        //declara uma function regular chamada recurse, que não possui paramentro
+        function recurse() {
+            //...
+            //a function recurse chama a si mesmo dentro do seu corpo
+            //se tornando uma function recursiva
+            recurse();
+            //...
+        }
+
+        /**
+         * Uma função recursiva sempre tem uma condição para parar de chamar a si mesma. Caso contrário, ele se chamará indefinidamente. Portanto, uma função recursiva normalmente se parece com o seguinte:
+        */
+
+        //declara uma function regular chamada recurse que não possui parametro declarado
+        function recurse() {
+            //essa e uma condição  para que a função recurse tenha que parar de chamar a si mesma
+            if(condition) {
+                //pare de se chamar
+                //...
+            }else{
+                //a function recurse() chama a si mesma dentro do seu proprio corpo
+                recurse();
+            }
+        }
+
+        /**
+         * Geralmente, você usa funções recursivas para dividir um grande problema em menores. Normalmente, você encontrará as funções recursivas em estruturas de dados como árvores binárias e gráficos e algoritmos como busca binária e classificação rápida.
+        */
+    </script>
+</body>
+</html>

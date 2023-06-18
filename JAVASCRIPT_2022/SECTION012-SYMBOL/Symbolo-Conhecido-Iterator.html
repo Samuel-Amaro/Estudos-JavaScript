@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbolos Conhecidos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * SÍMBOLOS CONHECIDOS
+         * 
+         * O ES6 fornece símbolos predefinidos que são chamados de símbolos conhecidos. Os símbolos conhecidos representam os comportamentos comuns em JavaScript. Cada símbolo conhecido é uma propriedade estática do Symbol objeto.
+         *
+         * * Symbol.iterator(iterador)
+         *
+         * O Symbol.iterator especifica se uma função retornará um iterador para um objeto.
+         *
+         * Os objetos que possuem Symbol.iterator propriedade são chamados de objetos iteráveis.
+         *
+         * No ES6, todos os objetos de coleção (Array , Set e Map) e strings são objetos iteráveis.
+         *
+         * O ES6 fornece o loop for…of que funciona com o objeto iterável como no exemplo a seguir.
+        */
+
+        //declara um array literal dense inicializado com 3 elementos, o array e atribuido por referencia a variavel numbers
+        let numbers = [1, 2, 3];
+        //iterando sobre a coleção array, um objeto iteravel, iterara sobre cada elemento do array, usando a construção for..of
+        for(let num of numbers) {
+            console.log(num);
+        }
+
+        /**
+         * Internamente, o mecanismo JavaScript primeiro chama o Symbol.iterator método do numbers array para obter o objeto iterador. Em seguida, ele chama o iterator.next() método e copia a propriedade value do objeto iterador na num variável. Após três iterações, a done propriedade do objeto de resultado é true, o loop é encerrado.
+         * 
+         * Você pode acessar o objeto iterador padrão por meio do System.iterator símbolo da seguinte forma:
+        */
+        
+        //o numbers variavel que referencia o array literal dense e uma instancia de objeto do tipo array
+        //usando a expressão de colchetes para acessar o método definido por meio de uma propriedade computada, iremos acessa o objeto anonimo que define o protocolo de iteração na coleçaõ array, definindo se e um iterator ou não
+        let iterator = numbers[Symbol.iterator]();
+
+        //o método next(), tecnicamente falando qualifica o array como um iterator porque possui o next método, esse método retorna um objeto anonimo literal com duas propriedades
+        console.log(iterator.next()); // Object {value: 1, done: false}
+        console.log(iterator.next());// Object {value: 2, done: false}
+        console.log(iterator.next());// Object {value: 3, done: false}
+        console.log(iterator.next()); // Object {value: undefined, done: true}
+
+        /**
+         * Por padrão, uma coleção não é iterável. No entanto, você pode torná-lo iterável usando o Symbol.iterator conforme mostrado no exemplo a seguir:
+        */
+
+        //defindo um tipo personalizado, que por padrão não e iteravel, mas com o Symbol.iterator iremos definir como iteravel
+
+        //define um class chamada List usando palavra-chave clas
+        class List{
+            //define um construtor para class List sem paramentros
+            constructor() {
+                //define uma propriedade e a inicializa com um array literal dense anonimo
+                this.elements = [];
+            }
+            //define um método de instancia chamado add que declara um paramentro chamado element
+            add(element) {
+                //cada argumento recebeido e add no final do array
+                this.elements.push(element);
+                //retorna a referencia ao this valor, this = {};
+                return this;
+            }
+            //define um método de instancia da classe
+            //o metodo definido e diferente dos métodos normais, e um método do tipo generator
+            //o * o classifica como um método generator
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformida com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            //a função geradora pode ser executada por pedaços, pode pausar no meio do caminho e continuar de onde parou
+            //usamos o Symbol.iterator para definir que essa classe sera iteral, suas instancias serão iteraveis
+            //esse método de instancia ira retorna um iterador para as instancia de objeto criadas
+            *[Symbol.iterator]() {
+                for(let element of this.elements) {
+                    //a yield instrução retorna o valor element, e logo em seguida para a execução da fuction generator
+                    //na proxima iteraçaõ no objeto a yield retoma a execução, retorna o valor element, e pausa sua execução novamente.
+                    yield element;
+                }
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da class List, sem passar argumentos
+        let chars = new List();
+        //chamando o método de isntancia add, de forma encadeada
+        chars.add('A').add('B').add('C');
+
+        //por causa do Symbol.iterator
+        //como definimos um tipo personalizado chamado List, definimos que esse tipo seria iteravel, definimos um método chamado Symbol.iterador que define um protocolo de iteração no tipo personalizado fazendo assim, pode o tipo personalizado ser iteravel por construções de for...of loop
+        //implicitamente, iternamento o mecanismo JS chama o método Symbol.iterator da instancia de objeto list, assim retorna um objeto anonimo iterador.
+        //em seguida chama o next() método a partir do objeto iterator obtido, copia a propriedade value do objeto obtido por next, e a atribui a variavel c
+        //faça isso repetidamente até que a propridade done seja true, informando que não ha mais elementos na coleção do oobjeto iterator a ser iterado
+        for(let c of chars) {
+            console.log(c);
+        }
+        
+    </script>
+</body>
+</html>

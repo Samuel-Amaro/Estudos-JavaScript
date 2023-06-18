@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /**
+         * Naturalmente, o navegador provavelmente não teve tempo de carregar o script. A partir de agora, a loadScript função não fornece uma maneira de rastrear a conclusão do carregamento. O script é carregado e, eventualmente, executado, isso é tudo. Mas gostaríamos de saber quando isso acontece, para usar novas funções e variáveis ​​desse script.
+         * 
+         * Vamos adicionar uma callback função como segundo argumento loadScript que deve ser executada quando o script for carregado:
+        */
+
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(script);
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+        
+        /**
+         * O onloadevento está descrito no artigo Carregamento de recursos: onload e onerror , ele basicamente executa uma função após o script ser carregado e executado.
+         * 
+         * Agora, se quisermos chamar novas funções do script, devemos escrever isso no retorno de chamada(callback):
+        */
+
+        loadScript('/my/script.js', function() {
+            //o retorno de chamada é executado após o script ser carregado
+            newFunction(); // então agora funciona
+        });
+
+        /**
+         * Essa é a ideia: o segundo argumento é uma função (geralmente anônima) que é executada quando a ação é concluída.
+        */
+    </script>
+</body>
+</html>

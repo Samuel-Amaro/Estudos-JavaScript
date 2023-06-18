@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador ?? em Curto-Circuito</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O OPERADOR DE COALESCENCIA NULO ESTÁ EM CURTO-CIRCUITO
+         * 
+         *  Semelhante aos operadores lógicos OR e AND, o operador de coalescência nulo não avalia o segundo valor se o primeiro operando não for nem undefined nem null.
+         * 
+         * Por exemplo:
+        */
+
+        //aqui o operador ?? não avaliara o segundo valor pois o primeiro e verdadeiro
+        let result = 1 ?? console.log('Hi');
+
+        /**
+         * Neste exemplo, o operador ?? não avalia a expressão 1/0 porque o primeiro valor é 1, que não é null e undefined.
+         * 
+         * O exemplo a seguir avalia a segunda expressão porque a primeira é undefined:
+        */
+
+        //aqui o operador ira analisar o segundo valor pois o primeiro valor e undefined a condição e satisfeita
+        let result2 = undefined ?? console.log('Hi');
+
+        
+    </script>
+</body>
+</html>

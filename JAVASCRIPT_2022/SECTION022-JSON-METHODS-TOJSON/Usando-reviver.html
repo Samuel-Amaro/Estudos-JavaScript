@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * USANDO reviver
+         * 
+         * Imagine, temos um meetup objeto stringificado do servidor.
+         * 
+         * Se parece com isso:
+        */
+
+        //string JSON, stringificado do servidor, codificou um objeto literal anonimo em string JSON
+        let str = '{"title":"Conference", "date":"2017-11-30T12:00:00.000Z"}';
+
+        /**
+         * …E agora precisamos desserializá -lo, para voltar ao objeto JavaScript.
+         * 
+         * Vamos fazer isso chamando JSON.parse:
+        */
+
+        try {
+            //Usando o método JSON.parse(cadeia json), iremos decodificar, desserializaar a string JSON referenciado por str no seu formato antigo, um objeto literal anonimo
+            //passamos como argumento para o método a cadeia json a ser decodificada(desserializada)
+            let meetup = JSON.parse(str);
+            console.log(meetup.date.getDate()); //Error!
+        } catch (error) {
+            console.error(`${error.name} : ${error.message}`);
+        }
+        
+
+        /**
+         * Opa! Um erro!
+         * 
+         * O valor de meetup.date é uma string, não um Date objeto. Como poderia JSON.parse saber que deveria transformar essa string em um Date?
+         * 
+         * Vamos passar para JSON.parse a função reviving como segundo argumento, que retorna todos os valores “como estão”, mas date se tornará um Date:
+        */
+
+        //Usando o método JSON.parse(cadeia json), iremos decodificar, desserializaar a string JSON referenciado por str no seu formato antigo, um objeto literal anonimo
+        //passamos como argumento para o método a cadeia json a ser decodificada(desserializada), e como segundo argumento passamos uma function chamada reviving que declara dois paramentros chamados key, value, essa function e usada para transformar cada par de key value
+        let meetup2 = JSON.parse(str, function(key, value) {
+            //aqui não iremos transformar os valores, deixaremos os valores das prorpiedades como estão, so queremos transformar o valor da propriedade date de string para o objeto date
+            if(key == 'date')
+                return new Date(value);
+            return value;
+        });
+
+        //apos o método retorna o objeto literal novamente decodificado em seu formato original de objeto anonimo literal
+        //agora podemos acessar a propriedade date e usar seu valor como um objeto date, podendo invocar métodos no valor
+        console.log(meetup2.date.getDate()); //agora funciona
+
+        /**
+         * A propósito, isso também funciona para objetos aninhados:
+        */
+
+        //string JSON codificada, codificou um objeto literal anonimo aninhado em string JSON 
+        let shedule = `{
+            "meetups": [
+                {"title":"Conference","date":"2017-11-30T12:00:00.000Z"},
+                {"title":"Birthday","date":"2017-04-18T12:00:00.000Z"}
+            ]
+        }`;
+
+        //Usando o método JSON.parse(cadeia json), iremos decodificar, desserializaar a string JSON referenciado por str no seu formato antigo, um objeto literal anonimo
+        //passamos como argumento para o método a cadeia json a ser decodificada(desserializada), e como segundo argumento passamos uma function chamada reviving que declara dois paramentros chamados key, value, essa function e usada para transformar cada par de key value
+        shedule = JSON.parse(shedule, function(key, value) {
+            //aqui não iremos transformar os valores, deixaremos os valores das prorpiedades como estão, so queremos transformar o valor da propriedade date de string para o objeto date
+            if(key == 'date')
+                return new Date(value);
+            return value;
+        });
+
+        //apos o método retorna o objeto literal novamente decodificado em seu formato original de objeto anonimo literal aninhado
+        //podemos acessar as propriedades do objeto, aqui acessaremos o primeiro elemento do array value da propriedade meetups, acessando a propriedade date do elemento que e um objeto literal, invocando o método getDate no valor da propriedade date porque o reviver transformou esse valor de string para objeto date para ser usado como objeto
+        console.log(shedule.meetups[1].date.getDate()); //funciona(works);
+
+
+        /**
+         * * RESUMO
+         * 
+         *  JSON é um formato de dados que possui seu próprio padrão independente e bibliotecas para a maioria das linguagens de programação.
+         * 
+         * JSON suporta objetos simples, arrays, strings, números, booleanos e null.
+         * 
+         * JavaScript fornece métodos JSON.stringify para serializar em JSON e JSON.parse para ler de JSON.
+         * 
+         * Ambos os métodos suportam funções de transformador para leitura/escrita inteligente.
+         * 
+         * Se um objeto tem toJSON, então ele é chamado por JSON.stringify.
+        */
+    </script>
+</body>
+</html>

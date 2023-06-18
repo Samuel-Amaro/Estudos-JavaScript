@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        /**
+         * * AMBIENTE DO NAVEGADOR, ESPECIFICAÇÕES
+         * 
+         * A linguagem JavaScript foi inicialmente criada para navegadores web. Desde então, evoluiu e se tornou uma linguagem com muitos usos e plataformas.
+         * 
+         * Uma plataforma pode ser um navegador, um servidor web ou outro host , até mesmo uma máquina de café “inteligente”, se puder executar JavaScript. Cada um deles fornece funcionalidade específica da plataforma. A especificação JavaScript chama isso de ambiente host.
+         * 
+         * Um ambiente host fornece objetos próprios e funções adicionais ao núcleo da linguagem. Os navegadores da Web fornecem um meio de controlar as páginas da Web. O Node.js fornece recursos do lado do servidor e assim por diante.
+         * 
+         * Aqui está uma visão geral do que temos quando o JavaScript é executado em um navegador da web:
+         * 
+         * Existe um objeto “raiz” chamado window. Tem dois papéis:
+         
+            - Primeiro, é um objeto global para código JavaScript, conforme descrito no capítulo Objeto global .
+
+            - Em segundo lugar, representa a “janela do navegador” e fornece métodos para controlá-la.
+
+         * Por exemplo, aqui nós o usamos como um objeto global:
+        */
+
+        //declara uma function regular que não declara paramentro
+        function sayHi() {
+            console.log("Hello");
+        }
+
+        //funções globais são métodos do objeto global:
+        //o mecanismo JS adiciona a function sayHi como uma propriedade de window
+        window.sayHi();
+
+        /**
+         * E aqui nós a usamos como uma janela do navegador, para ver a altura da janela:
+        */
+
+        console.log(window.innerHeight); ////altura da janela interna
+
+        /**
+         * Existem mais métodos e propriedades específicos de janela, nós os abordaremos mais tarde.
+         * 
+         * * DOM(MODELO DE OBJETO DE DOCUMENTO - DOCUMENTO OBJECT MODEL)
+         * 
+         * O Document Object Model, ou DOM abreviado, representa todo o conteúdo da página como objetos que podem ser modificados.
+         * 
+         * O document objeto é o principal “ponto de entrada” para a página. Podemos alterar ou criar qualquer coisa na página usando-o.
+         * 
+         * Por exemplo:
+        */
+
+        //mude a cor de fundo para vermelho
+        document.body.style.background = "red";
+        //troque de volta após 1 segundo
+        setTimeout(() => document.body.style.background = "", 1000);
+
+        /**
+         * Aqui usamos document.body.style, mas há muito, muito mais. Propriedades e métodos são descritos na especificação: DOM Living Standard .
+         * 
+         * DOM não é apenas para navegadores
+         * 
+         * A especificação DOM explica a estrutura de um documento e fornece objetos para manipulá-lo. Existem instrumentos não-browser que também usam DOM.
+         * 
+         * CSSOM para estilo
+         * 
+         * Há também uma especificação separada, CSS Object Model (CSSOM) para regras CSS e folhas de estilo, que explica como eles são representados como objetos e como lê-los e escrevê-los.
+         * 
+         * O CSSOM é usado junto com o DOM quando modificamos as regras de estilo do documento. Na prática, porém, o CSSOM raramente é necessário, porque raramente precisamos modificar as regras CSS do JavaScript (geralmente apenas adicionamos/removemos classes CSS, não modificamos suas regras CSS), mas isso também é possível.
+         * 
+         * * BOM(MODELO DE OBJETO DO NAVEGADOR)
+         * 
+         * O Browser Object Model (BOM) representa objetos adicionais fornecidos pelo navegador (ambiente host) para trabalhar com tudo, exceto o documento.
+         * 
+         * Por exemplo:
+         
+            - O objeto navigator fornece informações básicas sobre o navegador e o sistema operacional. Existem muitas propriedades, mas as duas mais conhecidas são: navigator.userAgent– sobre o navegador atual, e navigator.platform– sobre a plataforma (pode ajudar a diferenciar entre Windows/Linux/Mac etc).
+            - O objeto de localização nos permite ler o URL atual e pode redirecionar o navegador para um novo.
+
+         * 
+         * Veja como podemos usar o location objeto:
+        */
+
+        alert(location.href);
+        if(confirm("Go to Wikipedia?")) {
+            location.href = "https://wikipedia.org";
+        }
+
+        /**
+         *  As funções alert/confirm/prompt também fazem parte do BOM: elas não estão diretamente relacionadas ao documento, mas representam métodos puros do navegador de comunicação com o usuário.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Palavra-Chave</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * 4) INVOCAÇÃO INDIRETA
+         *  
+         * Em JavaScript, as funções são cidadãos de primeira classe. Em outras palavras, funções são objetos, que são instâncias do tipo Function.
+         * 
+         * O Function tipo possui dois métodos: call() e apply(). Esses métodos permitem definir o this valor ao chamar uma função. Por exemplo:
+        */
+
+        //define uma function regular chamada getBrand que possui um paramentro chamado prefix
+        function getBrand(prefix) {
+            //o this objeto referencia o objeto chamador da function propriedade
+            console.log(`${prefix} ${this.brand}`);
+        }
+
+        //cria um objeto literal chamado honda, usando a sintaxe de objeto literal. o JS por padrão forcene uma Object.function construtora para esse objeto literal e faz esse objeto ser ligado ao prototipo de objeto anoninomo referenciado por Object.prototype para compartilhar metodos e propriedades definidos nele
+        let honda = {
+            //propriedade
+            brand : 'Honda'
+        };
+        let audi = {
+            brand : 'Audi'
+        };
+
+        //o metodo call chamado pelo getBrand function ira definir o this valor ao chamar uma função, aqui neste exemplo definimos que o this valor sera o objeto literal honda, ele sera o objeto responsavel por chamar a function getBrand, passando o especificado em call, para o getBrand function
+        //exemplo de como chamar a função indiretamente neste caso a function getBrand usando o metodo call 
+        getBrand.call(honda, "It's a ");
+        //aqui e a mesma logica porem usamos o objeto literal audi passando outro argumento
+        getBrand.call(audi, "It's an ");
+
+
+        /**
+         * Neste exemplo, chamamos a getBrand() função indiretamente usando o call() método da getBrand função. Passamos honda e audi object como o primeiro argumento do call()método, portanto, obtemos a marca correspondente em cada chamada.
+         * 
+         * O apply() método é semelhante ao call() método, exceto que seu segundo argumento é uma array de argumentos.
+        */
+
+        //exemplo de como chamar(invocar) uma function indiretamente usando o apply metodo
+        //aqui definiremos o valor do this objeto, usando o apply
+        //aqui o this objeto sera definido como o objeto literal honda, que sera o objeto chamador do getBrand function
+        //e passamos um array de argumentos para o getBrand function
+        getBrand.apply(honda, ["It's a "]);
+        //mesma coisa porem definindo o this objeto como o audi objeto literal e passando o array de argumeto ["It's an "]
+        getBrand.apply(audi, ["It's an "]);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nossos super-heróis</title>
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+  <script>
+
+    //OBTENDO REFERENCIA DOS ELEMENTOS <header>, <section>, e OS ARMAZENAN EM VARIÁVEIS  
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+
+    //OBTENDO JSON
+    //Para obter o JSON, vamos usar uma API chamada XMLHttpRequest(chamada geralmente de XHR)
+    //Solicitação de rede para recuperar recursos de um servidor via JavaScript (por exemplo, imagens, texto, JSON e até trechos de código HTML)
+    var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+
+    request.onload = function() {
+        var superHerois = request.response;
+        populateHeader(superHerois);
+        showHeroes(superHerois);
+    }
+
+    //função java script que preenche o <header>
+    function populateHeader(obj) {
+        var meuH1 = document.createElement('h1');
+        meuH1.textContent = obj['squadName'];
+        header.appendChild(meuH1);
+
+        const meuParag = document.createElement('p');
+        meuParag.textContent = 'Hometown: ' + obj['homeTown'] + ' // Formed: ' + obj['formed'];
+        header.appendChild(meuParag);
+    }
+
+    //criando os cartões de informação do heroi
+    function showHeroes(jsonObj) {
+        var herois = jsonObj['members'];
+
+        for(let i = 0; i < herois.length; i++) {
+            var meuArtigo = document.createElement('article');
+            var meuH2 = document.createElement('h2');
+            var meuPara1 = document.createElement('p');
+            var meuPara2 = document.createElement('p');
+            var meuPara3 = document.createElement('p');
+            var minhaList = document.createElement('ul');
+
+            meuH2.textContent = herois[i].name;
+            meuPara1.textContent = 'Identidade Secreta: ' + herois[i].secretIdentity;
+            meuPara2.textContent = 'Idade: ' + herois[i].age;
+            meuPara3.textContent = 'Super Poderes:';
+
+            var superPoderes = herois[i].powers;
+            for(let j = 0; j < superPoderes.length; j++) {
+                var listaItem = document.createElement('li');
+                listaItem.textContent = superPoderes[j];
+                minhaList.appendChild(listaItem);
+            }
+
+            meuArtigo.appendChild(meuH2);
+            meuArtigo.appendChild(meuPara1);
+            meuArtigo.appendChild(meuPara2);
+            meuArtigo.appendChild(meuPara3);
+            meuArtigo.appendChild(minhaList);
+
+            section.appendChild(meuArtigo);
+        }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Exemplo Orientação Objetos JavaScript Herança</title>
+</head>
+<body>
+
+  <h1>Exemplo de Orientação a objetos em JavaScript</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eum fugit, deleniti vel quaerat earum incidunt quam expedita quibusdam ipsum quo commodi nam culpa modi. Quidem nam neque eius blanditiis.</p>
+  <h2>Orientação a objetos usando a sintaxe de EcmaScript classes 2015 exemplo de herança e instancia de classes</h2>
+   
+
+  <script>
+        //definindo uma classe usando a sintaxe ECMASCRIPT 2015
+
+        class Pessoa{
+            //construtor da classe, que define propriedades(atributos) que precisam ser inicializados
+            constructor(primeiroNome, ultimoNome, idade, sexo, interesses) {
+                //propriedades da classe
+
+                //a propriedades nome, e um outra classe
+                this.nome = {
+                    primeiroNome,
+                    ultimoNome
+                };
+                this.idade = idade;
+                this.sexo = sexo;
+                this.interesses = interesses;
+            }
+
+            //metodos da classe
+            saudacao() {
+                console.log(`Ei! Eu 'sou ${this.nome.primeiroNome}`);
+            };
+
+            adeus() {
+                console.log(`${this.nome.primeiroNome} deixou o prédio. Tchau agora! `)
+            };
+        }
+
+        //intanciando estancias de objetos da classe Pessoa, usando o operador new
+
+        let han = new Pessoa('Han', 'Solo', 25, 'masculino', ['Smuggling']);
+        han.saudacao(); //return 'Ei eu sou han';
+
+        let leia = new Pessoa('Leia', 'Organa', 19, 'feminino', ['Government']);
+        leia.adeus(); // return 'Leia deixou o predio tchau agora';
+
+        //FAZENDO HERANÇA USANDO A SINTAXE ECMASCRIPT 2015 E USANDO A PALAVRA-CHAVE EXTENDS E SUPER(), fazendo a classe Professor herda tudo de Pessoa
+        //A classe Professor e a subClasse e Pessoa a superClasse generica
+
+        class Professor extends Pessoa{
+            //construtor de Professor, definindo propriedades de um professor, que são as propriedades de um Pessoa genericas, so que add as suas especializações
+            constructor(primeiroNome, ultimoNome, idadeP, sexoP, interessesP, AssuntoP, grauP) {
+                //chamando o metodo construtor da classe pai(super classe, ou classe base), e passando os paramentros que ja são definidos la, e essas propriedades vão ser herdadas por essa classe(classe filha, ou subClasse)
+                super(primeiroNome, ultimoNome,  idadeP, sexoP, interessesP);
+            //especialização de propriedade de um professor
+            this.assunto = AssuntoP;
+            this.grau = grauP;
+            }
+        }
+
+        //instanciando instancia de objetos da classe Professor
+
+        let snape = new Professor('Seerus', 'Snape', 58, 'masculino', ['Potions', 'Dark arts'], 5);
+        snape.saudacao(); //return 'Ei eu sou Severus'
+        snape.adeus(); //return 'Severus deixou o prédio. Tchau agora!';
+        console.log(snape.idade); //58
+        console.log(snape.assunto); //Dark arts
+  </script>
+</body>
+</html>

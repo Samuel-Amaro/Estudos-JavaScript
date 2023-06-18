@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolos de iteração</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * PROTOCOLOS DE ITERAÇÃO
+         *
+         * Existem dois protocolos de iteração: protocolo iterável(ITERABLE) e protocolo iterator(ITERATOR).      
+         *
+         * * PROTOCOLO DO ITERATOR(ITERATOR)  
+         * 
+         * Um objeto é um iterator quando implementa uma interface (ou API) que responde a duas perguntas:
+
+            - Sobrou algum elemento?
+            - Se houver, qual é o elemento?
+
+         * 
+         * Tecnicamente falando, um objeto é qualificado como iterator quando possui um next() método que retorna um objeto com duas propriedades:
+
+            -  done(feito): um valor booleano que indica se há ou não mais elementos que podem ser iterados.
+
+            - value: o elemento atual.
+
+         * Cada vez que você chama o next(), ele retorna o próximo valor na coleção:
+
+            {value: 'next value', done: false}
+
+         * 
+         * Se você chamar o next() método depois que o último valor for retornado, o next() objeto de resultado será retornado da seguinte maneira:
+
+            {done: true, value: undefined}
+
+         * 
+         * O valor da done propriedade indica que não há mais valor a ser retornado e o valor value da propriedade está definido como undefined.
+         *
+         * * PROTOCOLO ITERÁVEL(ITERABLE)
+         * 
+         * Um objeto é iterável quando contém um método chamado [Symbol.iterator] que não recebe nenhum argumento e retorna um objeto que está em conformidade com o protocolo do iterator.
+         * 
+         * O [Symbol.iterator] é um dos símbolos(symbols) bem conhecidos embutidos no ES6.
+        */
+
+    </script>
+
+</body>
+</html>

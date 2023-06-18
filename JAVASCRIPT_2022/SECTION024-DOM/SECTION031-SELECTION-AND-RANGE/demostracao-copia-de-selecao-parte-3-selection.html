@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p id="p">Exemplo: <i>itálico</i> e <b>negrito</b></p>
+
+    <!--
+    no de elemento como um todo
+    <p id="p">       no de elemento completo <p>
+        Exemplo:     no de texto com indice 0 como numero filho <p>
+        <i>          no de elemento com indice 1 como numero filho <p>
+            itálico  no de texto como numero filho 0 de <i>
+        </i>    
+        e            no de texto com indice 2 como numero filho <p>
+        <b>          no de elemento com indice 3 como numero filho <p>
+            negrito  no de texto como numero filho 0 de <b>
+        </b>
+    </p>
+    -->
+
+    <label for="cloned">Clonado:</label>
+    <span id="cloned"></span>
+    <label for="astext">Como texto:</label>
+    <span id="astext"></span>
+
+    <script type="text/javascript">
+        /**
+         * * DEMOSTRAÇÃO DE COPIA DE SELEÇÃO
+         * 
+         * Existem duas abordagens para copiar o conteúdo selecionado:
+         * 
+            * Podemos usar document.getSelection().toString() para obtê-lo como texto.
+            * 
+            * Caso contrário, para copiar o DOM completo, por exemplo, se precisarmos manter a formatação, podemos obter os intervalos subjacentes com getRangesAt(...). Um Range objeto, por sua vez, possui um cloneContents() método que clona seu conteúdo e retorna como DocumentFragment objeto, que podemos inserir em outro lugar.
+            * 
+         * Aqui está a demonstração de como copiar o conteúdo selecionado tanto como texto quanto como nós DOM:
+        */
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //o manipulador de evento e para o evento de seleção, ele e acionado sempre que uma seleção e iniciada ou alterada no documento, rastrea todas as seleções do documento.
+        document.onselectionchange = function(event) {
+            //obtem o objeto selection
+            let selection = document.getSelection();
+
+            cloned.innerHTML = astext.innerHTML = "";
+
+            // Clonar nós DOM de intervalos (suportamos multisseleção aqui)
+            //propriedade selection.rangeCount conta o numero de range no selection objeto, cada range e um intervalo de seleção
+            //cada range e clonado e inserido no cloned elem
+            for(let i = 0; i < selection.rangeCount; i++) {
+                //selection.getRangeAt(index) -> obtem o range(intervalo) a partir de 0
+                //o metodo selection.getRangeAt(i).cloneContents() -> clonar o conteudo do intervalo e retornar como um DocumentFragment
+                cloned.append(selection.getRangeAt(i).cloneContents());
+            }
+
+            //Obter como texto
+            astext.innerHTML = astext.innerHTML + selection;
+        };
+
+    </script>
+</body>
+</html>

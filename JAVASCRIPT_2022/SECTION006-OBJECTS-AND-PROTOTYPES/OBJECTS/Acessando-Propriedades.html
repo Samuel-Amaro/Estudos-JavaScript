@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * ACESSANDO PROPRIEDADES
+         * 
+         *  Para acessar uma propriedade de um objeto, você usa uma das duas notações: a notação de ponto e a notação tipo array.
+         * 
+         * * 1) A NOTAÇÃO DE PONTO (.)
+         * 
+         * O seguinte ilustra como usar a notação de ponto para acessar uma propriedade de um objeto:
+         
+            objectName.propertyName
+
+         * 
+         * Por exemplo, para acessar a firstName propriedade do person objeto, você usa a seguinte expressão:
+         
+            person.firstName;
+
+         * 
+         * Este exemplo cria um person objeto e mostra o nome e o sobrenome ao console:
+        */
+
+        //declara um objeto chamado person, usando a sintaxe literal de objeto
+        let person =  { 
+            //declara um propriedades, usando o par de chave:valor, quando o objeto literal possui varias propriedades usa-se a virgula para separar
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //acessando as propriedades do objeto literal usando a notação de ponto
+        console.log(`person.firstName = ${person.firstName}`);
+        console.log(`person.lastName = ${person.lastName}`);
+
+        /**
+         * * 2) NOTAÇÃO SEMELHANTE A ARRAY([])
+         * 
+         * O seguinte ilustra como acessar o valor da propriedade de um objeto por meio da notação semelhante a uma array:
+         
+            objectName['propertyName'];
+
+         * 
+         * Por exemplo:
+        */
+
+        //acessando propriedades do objeto literal person, usando a notação de colchetes notação semelhante a de array
+        console.log(`person['firstName'] = ${person['firstName']}`);
+        console.log(`person['lastName'] = ${person['lastName']}`);
+
+        /**
+         * Quando o nome de uma propriedade contém espaços, você precisa colocá-lo entre aspas. Por exemplo, o seguinte address objeto tem o 'building no' as a propriedade:
+        */
+
+        //declara um objeto literal chamado address
+        let address = {
+            //declara uma propriedade que possui sua chave como um valor que possui espaços, assim tem que colocar a chave entre aspas
+            //propriedade e um par de chave-valor
+            'building no' : 3960,
+            street: 'North 1st street',
+            state: 'CA',
+            country : 'USA'
+        };
+
+        /**
+         * Para acessar a 'building no' propriedade, você precisa usar a notação semelhante a uma array: 
+        */
+
+        //para acessar um propriedade do objeto addres que possui uma chave com espaços em branco tem que utilizar a notação de semelhante a de array object['chave'] na outra tipo de anotação para essa propriedade especifica obtera um erro
+        console.log(`address['building no'] = ${address['building no']}`);
+
+        /**
+         * Observe que não é uma boa prática usar espaços nos nomes das propriedades de um objeto.
+         * 
+         * Ler de uma propriedade que não existe resultará em um undefined. Por exemplo:
+        */
+
+        //tentando acessar um propriedade do objeto addres, utilizando a notação de ponto, a propriedade não foi declarada no objeto
+        console.log(`addres.district = ${address.district}`); //undefined
+
+
+    </script>
+
+</body>
+</html>

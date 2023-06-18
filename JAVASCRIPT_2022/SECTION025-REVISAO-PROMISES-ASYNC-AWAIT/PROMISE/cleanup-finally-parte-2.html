@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * E aqui está um exemplo de erro, para vermos como ele é passado finally para catch:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        let promise = new Promise(function(resolve, reject) {
+            //aqui o trabalho do executor e lançar um error
+            //trabalho da promisse e lançar um erro
+            throw new Error("error");
+        })
+          //configurando um manipulador finnaly apos a conclusão do trabalho realizado pela promisse, ele sera executado indenpendente se a promisse foi resolvida ou rejeitada ele sempre executa
+          //finally manipulador não tem argumentos, mas a promisse anterior passa o seu primeiro value retorno para o finally, finnaly não processa resultado de promisse 
+          //aqui apos termino da tentativa de trabalho da promisse executaresmo um alert no finally, como algo que deve ser executado independente de resolvida ou rejeitada
+          .finally(() => alert("Promise ready")) //aciona primeiro
+          //registrando uma função consumidora com metodo then, ela recebera somente o resultado
+          //registrando função consumidora que recebe o erro da promessa rejeitada, consome a promessa rejeitada, obtemo erro
+          //a function consumidora do erro e o .catch que aceita como argumento uma callback function manipuladora
+          //aqui passamos alert para mostrar o erro
+          // .catch(f) e o mesmo que promise.then(null, f);
+          //o primeiro retorno da primeira promisse e passado para finally e finally passa para o catch
+          .catch(err => alert(err)); //mostra: "Error: Whoops!" depois de 1 segundo
+
+        /**
+         * Um finally manipulador também não deve retornar nada. Se isso acontecer, o valor retornado será ignorado silenciosamente.
+         * 
+         * A única exceção a essa regra é quando um finallymanipulador lança um erro. Em seguida, esse erro vai para o próximo manipulador, em vez de qualquer resultado anterior.
+         * 
+         * * PARA RESUMIR
+         * 
+         * Um finally manipulador não obtém o resultado do manipulador anterior (não possui argumentos). Esse resultado é passado para o próximo manipulador adequado.
+         * 
+         * Se um finally manipulador retornar algo, ele será ignorado.
+         * 
+         * Quando finally lança um erro, a execução vai para o manipulador de erros mais próximo.
+         * 
+         * Esses recursos são úteis e fazem com que as coisas funcionem da maneira certa, se formos finallycomo deve ser usado: para procedimentos de limpeza genéricos.
+        */
+    </script>
+
+</body>
+</html>

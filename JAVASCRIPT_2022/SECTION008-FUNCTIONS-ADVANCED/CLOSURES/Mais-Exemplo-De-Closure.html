@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de closure</title>
+</head>
+<body>
+    <script>
+        /**
+         * * MAIS EXEMPLOS DE CLOSURE JS
+         * 
+         *  O exemplo a seguir ilustra um exemplo mais prático de fechamento.
+         * 
+        */
+
+        //declara uma function regular chamada saudacao que possui um paramentro declarado chamado message
+        //essa function e uma instancia de objeto do tipo function
+        function saudacao(message) {
+            // a function saudacao retorna a function anonima local que possui um paramentro chamado name, a function anonima local e acessivel somente no escopo da function saudacao, function local.
+            //a function saudacao retorna a function anonima declarada como um valor pois, uma função e uma instancia de objeto do tipo function
+            //assim e retornada como um valor, uma function retorna outra function como valor
+            return function(name) {
+                return message + ' ' + name;
+            }
+        }
+
+        //aqui invocamos a function saudacao passando o argumento 'Hi', a function saudaca retorna a function anonima local como uma valor para ser atribuido a sayHi variavel assim a sayHi variavel referencia a function anonima local declarada dentro do escopo local da function saudacao
+        //a variavel sayHi que referencia a fuction anonima retornada pela function saudacao e um fechamento da function saudacao
+        //possui seu proprio escopo, mas compartilha mesmo corpo de função
+        let sayHi = saudacao('Hi');
+        //mesma logica acima so que passando um argumento diferente para a function saudacao no caso o argumento e 'Hello'
+        //a variavel sayHello que referencia a fuction anonima retornada pela function saudacao e um fechamento da function saudacao
+        //possui seu proprio escopo, mas compartilha mesmo corpo de função anonima local retornado por saudacao
+        //os fechamentos sayHi e sayHello são referencia a mesma function mas com escopos diferentes
+        let sayHello = saudacao('Hello');
+
+        //invoca os fechamentos passando os argumento necessarios para os mesmo.
+        console.log(`sayHi() = ${sayHi('John')}`); //Hi John
+        console.log(`sayHello() = ${sayHello('John')}`); //Hello John
+
+        /**
+         * A greeting() função recebe um argumento chamado message e retorna uma função que aceita um único argumento chamado name.
+         * 
+         * A função return retorna uma mensagem de saudação que é a combinação das variáveis messagee .name
+         * 
+         * A greeting() função se comporta como uma fábrica de funções. Ele cria sayHi() e sayHello() funciona com as respectivas mensagens Hi e arquivos Hello.
+         * 
+         * O sayHi() e sayHello() são encerramentos. Eles compartilham o mesmo corpo de função, mas armazenam escopos diferentes.
+         * 
+         * No sayHi() fechamento, o message é Hi, enquanto no sayHello()fechamento o messageé Hello.
+        */
+    </script>
+</body>
+</html>

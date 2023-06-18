@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ASYNCHRONOUS CALLBACK FUNCTIONS
+         * 
+         * Assincronicidade significa que se o JavaScript tiver que esperar a conclusão de uma operação, ele executará o resto do código enquanto espera.
+         * 
+         * Observe que o JavaScript é uma linguagem de programação de thread único. Ele carrega operações assíncronas por meio da fila de retorno de chamada e do loop de eventos.
+         * 
+         * Suponha que você precise desenvolver um script que baixe uma imagem de um servidor remoto e a processe após a conclusão do download:
+        */
+
+        /*
+        function download(url) {
+            //...
+        }
+
+        function process(picture) {
+            //...
+        }
+
+        download(url);
+        process(picture);
+        */
+
+        /**
+         * No entanto, o download de uma imagem de um servidor remoto leva tempo, dependendo da velocidade da rede e do tamanho da imagem.
+         * 
+         * O código a seguir usa a setTimeout() função para simular a download() função:
+        */
+
+        function download(url) {
+            setTimeout(() => {
+                //script para baixar a imagem aqui
+                console.log(`Downloading ${url} ...`);
+            }, 3 * 1000);
+        }
+
+        /**
+         * E este código emula a process()função:
+         * */
+
+        function process(picture) {
+            console.log(`Processing ${picture}`);
+        }
+
+        /**
+         * Quando você executa o seguinte código:
+        */
+
+        //let url = 'https://www.javascripttutorial.net/foo.jpg';
+
+        //download(url);
+        //process(url);
+
+        /**
+         * Isso não é o que você esperava porque a process() função é executada antes da download()função. A sequência correta deve ser:
+         
+            - Baixe a foto, aguarde até que ela seja concluída.
+
+            - Processe a imagem.
+
+         * 
+         * Para corrigir o problema acima, você pode passar a process() função para a download() função e executar a process() função dentro da download() função assim que o download for concluído, como este:
+        */
+
+        //a function download2 recebera como argumento um callback function
+        function download2(url, callback) {
+            setTimeout(() => {
+                //script para baixar a imagem aqui
+                console.log(`Downloading ${url} ...`);
+
+                //processar a imagem assim que estiver concluída
+                callback(url);
+            }, 3000);
+        }
+        
+        let url2 = 'https://www.javascripttutorial.net/pic.jpg';
+        //download2(url2, process);
+
+        /**
+         * Agora, funciona conforme o esperado.
+         * 
+         * Neste exemplo, process() é um retorno de chamada(callback) passado para uma função assíncrona.
+         * 
+         * Quando você usa callbacks para continuar a execução do código após operações assíncronas, esses callbacks são chamados de callbacks assíncronos.
+         * 
+         * Usando callbacks assíncronos, você pode registrar uma ação com antecedência sem bloquear toda a operação.
+         * 
+         * Para tornar o código mais limpo, você pode definir a process()função como uma função anônima:
+         * */
+
+        //passa uma function anonima, como uma callback function para a function download2 
+        download2(url2, function(picture) {
+            console.log(`Processing ${picture}`);
+        });
+        
+    </script>
+
+</body>
+</html>

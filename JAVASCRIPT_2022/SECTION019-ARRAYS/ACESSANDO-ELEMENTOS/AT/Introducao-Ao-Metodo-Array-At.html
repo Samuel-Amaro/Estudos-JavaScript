@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método At</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODO ARRAY AT() - EM
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o at() método JavaScript Array para retornar um elemento por um índice.
+         * 
+         * * INTRODUÇÃO AO MÉTODO JS ARRAY AT()
+         * 
+         * Em JavaScript, você pode usar o colchete [] para acessar um elemento de uma array. Por exemplo, o arr[0] retorna o primeiro elemento na array arr, arr[1] retorna o segundo elemento e assim por diante.
+         * 
+         * Para obter o último elemento em uma array, você usa a length propriedade assim:
+         
+            arr[length-1]
+
+         * 
+         * JavaScript não permite que você use um índice negativo para acessar o último elemento como outras linguagens, por exemplo, Python. Por exemplo, o seguinte retorna indefinido:
+         
+            arr[-1]
+
+         *
+         * A razão é que o JavaScript também usa colchetes [] para acessar uma propriedade de um objeto.
+         * 
+         * Por exemplo, o obj[1] retorna uma propriedade do objeto obj com a chave "1". Portanto, o obj[-1] retorna a propriedade de um objeto com a chave "-1".
+         * 
+         * No exemplo acima, o arr[-1] retorna a propriedade do arr objeto com a chave "-1". Observe que o tipo de uma array é object. Como a "-1" propriedade não existe no arr objeto, ela retorna undefined.
+         * 
+         * Por esse motivo, o ES2022 introduziu um novo método at() adicionado ao prototype de Array, String e Type Array. Este tutorial se concentra no at() método do Array.prototype.
+         * 
+         * O at() método aceita um índice e retorna um elemento nesse índice. Segue a sintaxe do at() método:
+         
+            arr.at(index);
+
+         * 
+         * Nessa sintaxe, o index especifica um elemento de array a ser retornado. Pode ser zero, positivo ou negativo.
+         * 
+         * Se o índice for zero ou positivo, o at()método funciona como o [].
+         * 
+         * No entanto, se você usar um índice negativo, o método retornará um elemento do final da array. Por exemplo, o arr.at(-1) retorna o último elemento, arr.at(-2)retorna o penúltimo elemento e assim por diante.
+         * 
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./promise-resolve-reject.svg" alt="image"/>
+
+    <img src="./promise-resolve-1.svg"/>
+    
+    <script type="text/javascript">
+        /**
+         * * PROMISE(PROMESSA)
+         * 
+         * Imagine que você é um grande cantor e os fãs perguntam dia e noite pela sua próxima música.
+         * 
+         * Para obter algum alívio, você promete enviá-lo a eles quando for publicado. Você dá a seus fãs uma lista. Eles podem preencher seus endereços de e-mail para que, quando a música estiver disponível, todos os inscritos a recebam instantaneamente. E mesmo que algo dê muito errado, digamos, um incêndio no estúdio, para que você não possa publicar a música, eles ainda serão notificados.
+         * 
+         * Todo mundo está feliz: você, porque as pessoas não te enchem mais, e os fãs, porque não vão sentir falta da música.
+         * 
+         * Esta é uma analogia da vida real para coisas que geralmente temos na programação:
+         * 
+            *  Um “código de produção - producing code” que faz algo e leva tempo. Por exemplo, algum código que carrega os dados em uma rede. Isso é um "cantor".
+            * 
+            * Um “código consumidor - consuming code” que quer o resultado do “código produtor - producing code” assim que estiver pronto. Muitas funções podem precisar desse resultado. Esses são os “fãs”.
+            * 
+            * Uma promessa(promisse) é um objeto JavaScript especial que vincula o “código produtor - producing code” e o “código consumidor - consuming code” juntos. Em termos de nossa analogia: esta é a “lista de assinaturas”. O “código de produção” leva o tempo necessário para produzir o resultado prometido, e a “promessa” torna esse resultado disponível para todo o código assinado quando estiver pronto.
+            * 
+         * A analogia não é muito precisa, porque as promessas do JavaScript são mais complexas do que uma simples lista de assinaturas: elas têm recursos e limitações adicionais. Mas é bom para começar.
+         * 
+         *  A sintaxe do construtor para um objeto de promessa é:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        //let promise = new Promise(function(resolve, reject) {
+            //executor(producing code, "singer");
+        //});
+
+        /**
+         * A função passada para new Promise é chamada de executor . Quando uma new Promise é criado, o executor é executado automaticamente. Ele contém o código de produção que deve eventualmente produzir o resultado. Em termos da analogia acima: o executor é o “cantor”.
+         * 
+         * Seus argumentos resolve e reject são callbacks fornecidos pelo próprio JavaScript. Nosso código está apenas dentro do executor.
+         * 
+         * Quando o executor obtiver o resultado, seja cedo ou tarde, não importa, ele deve chamar um destes callbacks:
+         * 
+            * resolve(value)— se o trabalho for concluído com sucesso, com result value.
+            * 
+            * reject(error) — se ocorreu um erro, error é o objeto de erro.
+            * 
+         * Então, para resumir: o executor é executado automaticamente e tenta realizar um trabalho. Ao finalizar a tentativa, chama resolve se foi bem sucedida ou reject se houve erro. 
+         * 
+         * O promise objeto retornado pelo new Promise construtor tem essas propriedades internas:
+         * 
+            *  state — inicialmente "pending - pendente", depois muda para "fulfilled - realizado" quando resolve é chamado ou "rejected - rejeitado" quando reject é chamado.
+            * 
+            * result— inicialmente undefined, depois muda para value quando resolve(value) chamado ou error quando reject(error) é chamado.
+            * 
+         * Assim, o executor eventualmente move a promessa para um desses estados:
+         * 
+         * Mais tarde veremos como os “fãs” podem se inscrever para essas mudanças.
+         * 
+         * Aqui está um exemplo de um construtor de promessa e uma função executora simples com “produção de código” que leva tempo (via setTimeout):
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        //exemplop abaixo de uma promisse cumprida - promisse fulfilled
+        let promise = new Promise(function(resolve, reject) {
+            //executor realizando tentativa de executar trabalho
+            //a função executor é executada automaticamente quando a promessa é construída
+            //a function callback executor e chamada automaticamente e imediatamente por new Promisse
+            // após 1 segundo sinaliza que o trabalho está concluído com o result "done"
+            //apos passar 1 segundo o trabalho foi realizado e chamamos resolve("feito"), passando string "feito" como valor para sinalizar que trabalho foi bem sucedido
+            //assim a promisse muda seu state propriedade para "fulfilled" e seu result propriedade para "done"
+            //apos 1 segundo altera o estado da promisse para resolvido
+            setTimeout(() => resolve("feito"), 1000);
+        });
+
+        /**
+         *  Podemos ver duas coisas executando o código acima:
+         * 
+            *  O executor é chamado automaticamente e imediatamente (por new Promise).
+            * 
+            * O executor recebe dois argumentos: resolvee reject. Essas funções são predefinidas pelo mecanismo JavaScript, portanto, não precisamos criá-las. Só devemos chamar um deles quando estiver pronto.
+            * 
+            * Após um segundo de “processamento”, o executor chama resolve("done") para produzir o resultado. Isso altera o estado do promise objeto:
+            * 
+         *  Esse foi um exemplo de conclusão de trabalho bem-sucedida, uma “promessa cumprida - fulfilled promise”.
+        */
+    </script>
+</body>
+</html>

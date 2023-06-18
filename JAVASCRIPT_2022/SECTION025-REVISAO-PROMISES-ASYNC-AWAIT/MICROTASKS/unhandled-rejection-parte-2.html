@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Mas se esquecermos de adicionar .catch, depois que a fila de microtarefas estiver vazia, o mecanismo acionará o evento:
+        */
+
+        //usa o metodo estatico reject para rejeitar uma promise com um objeto error
+        //essa promessa rejeitada não e tratada por nenhum manipulador
+        let promise = Promise.reject(new Error("Falha promise!"));
+
+        //a rejeição não tratada ocorre quando um erro de promessa não e tratado no final da fila de microtarefas
+        //o manipulador aqui e acionado porque um erro em uma promise que esta na fila de microtarefas não foi tratado
+        window.addEventListener('unhandledrejection', event => alert(event.reason));
+
+
+    </script>
+
+</body>
+</html>

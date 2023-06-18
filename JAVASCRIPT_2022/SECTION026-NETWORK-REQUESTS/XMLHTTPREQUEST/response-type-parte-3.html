@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * TIPO DE RESPONSE
+         * 
+         * Podemos usar xhr.responseType a propriedade para definir o formato de resposta:
+         * 
+            * ""(padrão) – obter como string,
+            * 
+            * "text"– obter como string,
+            * 
+            * "arraybuffer"– obter como ArrayBuffer(para dados binários, veja o capítulo ArrayBuffer, arrays binários ),
+            * 
+            * "blob"– obter como Blob(para dados binários, veja o capítulo Blob ),
+            * 
+            * "document"– obter como documento XML (pode usar XPath e outros métodos XML) ou documento HTML (com base no tipo MIME dos dados recebidos),
+            * 
+            * "json"– obter como JSON (analisado automaticamente).
+            * 
+         * Por exemplo, vamos obter a resposta como JSON:
+        */
+
+        //MODO DE OPERAÇÃO ASSINCRONO
+
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+
+        //2. passo para fazer request
+        //2. Configure-o: GET-request para a URL /article/.../load
+        //configurando o request, informando metodo http, e o url a fazer o request
+        xhr.open('GET', 'https://javascript.info/article/xmlhttprequest/example/json');
+
+        //usando a propriedade xhr.responseType para definir o formato de response
+        //queremos obter o response como um objeto JSON
+        xhr.responseType = 'json';
+
+        //3. passo para fazer request, 
+        //enviando o request, não informando o body, no caso de method HTTP get não precisa de informar body
+        //aqui a request e enviada pela rede, o metodo abre conexão e envia a request ao servidor.
+        xhr.send();
+
+        //eventos para response
+        //4. Isso será chamado após o recebimento da resposta
+        //acionado quando a request for concluida, e a response for totalmente baixada
+        xhr.onload = function() {
+            //obtem o response objeto
+            let responseObj = xhr.response;
+            alert(responseObj.message);
+        };
+
+        /**
+         * * Observer:
+         * 
+         * Nos scripts antigos, você também pode encontrar xhr.responseText e até xhr.responseXML propriedades.
+         * 
+         * Eles existem por razões históricas, para obter uma string ou um documento XML. Hoje em dia, devemos definir o formato xhr.responseType e obter xhr.response como demonstrado acima.
+         * 
+         * 
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Simples de uso de callback assicrona em xhr</title>
+</head>
+<body>
+    
+    <h1>Exemplo simples de uso de callback assicrono em um API xhr</h1>
+
+    <script>
+        /**
+         * Função JavaScript com 3 parametros
+         * 
+         * */
+        function loadAsset(url, type, callback) {
+            //XMLHttpRequest é um objeto que fornece funcionalidade ao cliente para transferir dados entre um cliente e um servidor. Ele fornece uma maneira fácil de recuperar dados de um URL sem ter que fazer uma atualização de página inteira.
+            //cria uma instancia de XMLHttpRequest
+            let xhr = new XMLHttpRequest();
+            //Inicializa um pedido(request). Este método é para ser usado a partir do código JavaScript; 
+            //void open(DOMString method, DOMString url, optional boolean async, optional DOMString user, optional DOMString password);
+            //Get e metodo HTTP para usar
+            //o URL para o qual enviar a solicitação
+            xhr.open('GET', url);
+            //especifa o tipo da resposta que espera do pedido. o padrão e uma string("")
+            xhr.responseType = type;
+            //XMLHttpRequestEventTarget é a interface que descreve os manipuladores de eventos que você pode implementar em um objeto que manipulará eventos para um XMLHttpRequest.
+            //XMLHttpRequestEventTarget.onload
+            //Contém a função a ser chamada quando uma solicitação HTTP retorna após obter o conteúdo com sucesso e o load evento é recebido por este objeto.
+            //O atributo onload dispara quando um objeto é carregado.
+            //O XMLHttpRequestEventTarget.onloadé a função chamada quando uma XMLHttpRequesttransação é concluída com sucesso.
+            //XMLHttpRequest.onload = callback;
+            //callback é a função a ser executada quando a solicitação for concluída com êxito
+            xhr.onload = function() {
+                //registra uma função anonima
+                //que cria uma callback assicrona para processar a resposta da request
+                //Retorna um objeto JavaScript de tipo ArrayBuffer, Blob ou Document, de acordo com  o que estiver contido no responseType. Retorna null se a request não esteja completa ou não obteve sucesso.
+                //a callback vai ser usada somente quando a imagen tiver totalmente carregada
+                callback(xhr.response);
+            };
+
+            //Envia a solicitação(request). Se o pedido é assíncrono (que é o padrão), este método retorna assim que o pedido for enviado. Se o pedido é síncrono, este método não retorna até a resposta chegar.
+            xhr.send();
+        }
+
+        function displayImage(blob) {
+            //Metodo estatico
+            //A interface representa um objeto que fornece métodos estáticos usados ​​para criar URLs de objetos.URL
+            // URL.createObjectURL()
+            //Retorna um DOMStringcontendo um URL de blob exclusivo, que é um URL com blob:esquema, seguido por uma string opaca que identifica exclusivamente o objeto no navegador.
+            let objectURL = URL.createObjectURL(blob);
+
+            //cria um elemento HTML <img>
+            let image = document.createElement('img');
+            //seta o caminho para a imagen uma URL
+            image.src = objectURL;
+            //seta o elemento img com um elemento filho do corpo da pagina
+            document.body.appendChild(image);
+        }
+
+        //chamando a função que vai buscar uma imagen da internet
+        //o tipo de resposta da request e um blob. Um objeto Blob representa um objeto do tipo arquivo, com  dados brutos imutáveis. Blobs representam dados que não estão necessariamente em um formato JavaScript nativo. A interface File é baseada no Blob, herdando funcionalidade blob e expandindo-o para suportar arquivos no sistema do usuário.
+        //a url vai ser uma imagen da internet qualquer
+        //a callback vai ser a função de mostra a imagen na pagina. a funçaõ de mostra a imagen na pagina precisa de um paramentro que a resposta da request, respostas do tipo blob que nessecita, a callback vai ser substituida pela funçaõ displayImage
+        loadAsset('https://i0.wp.com/gamelogia.com.br/wp-content/uploads/2016/11/gamer.jpg?resize=1280%2C640&ssl=1', 'blob', displayImage);
+
+    </script>
+</body>
+</html>

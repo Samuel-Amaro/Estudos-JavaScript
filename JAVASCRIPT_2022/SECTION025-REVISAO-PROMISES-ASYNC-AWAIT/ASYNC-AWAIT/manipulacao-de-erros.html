@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * MANIPULAÇÃO DE ERROS(error handling)
+         * 
+         * Se uma promessa for resolvida normalmente, await promise retornará o resultado. Mas no caso de uma rejeição, ele lança o erro, como se houvesse uma throw declaração nessa linha.
+         * 
+         * Este código:
+        */
+
+        //add palavra chave async antes de uma function
+        //significa que a function retorna um promise
+        async function f() {
+            //palavra-chave await so funciona dentro de functions async
+            //o await faz o JS esperar até que a promise seja resolvida e retorna seu resultado
+            //aqui o JS suspende a execução da function async até que a promise seja resolvida, e então a retoma a execução com o resultado da promise
+            //isso não trava o mecanismo JS, enquanto isso pode fazer outras coisas
+            //rejeita uma promise imediatamente com o objeto error, uma promise rejeitada o await lança o error
+            await Promise.reject(new Error("Whoops!"));
+        }
+
+        /**
+         * … é igual a isto:
+        */
+
+        //retorna um promise rejeitada com o objeto error
+        async function f2() {
+            //lança uma exeception, uma function assincrona que e rejeitada  com o objeto error
+            throw new Error("Whoops!");
+        }
+
+        /**
+         * Em situações reais, a promessa pode levar algum tempo antes de ser rejeitada. Nesse caso, haverá um atraso antes de await lançar um erro.
+         * 
+         * Podemos pegar esse erro usando try..catch, da mesma forma que um regular throw:
+        */
+
+        //function assincrona que retorna uma promise 
+        async function f3() {
+            try {
+                //aguardar fazer uma solicitação de rede e retorna uma promise resolvida com o objeto response
+                //se a solicitação falhar a await lança um erro, como se tivesse um throw instrução
+                let response = await fetch('http://no-such-url');
+                //o catch manipulador captura o erro lançado pelo await
+            } catch(err) {
+                alert(err); //TypeError: failed to fetch
+            }
+        }
+
+        //chama function assincrona que retorna uma promise resolvida com objeto response
+        f3();
+
+        /*
+         * Em caso de erro, o controle salta para o catch bloco. Também podemos envolver várias linhas:
+        */
+
+        //retorna uma promise
+        async function f4() {
+            try{
+                //em caso de uma promise rejeitada no await ele lança o erro, como se houvesse uma throw declaração nessa linha.
+                //agurda fazer solicitação de rede e resolver promise com objeto renponse
+                let response = await fetch('/no-user-here');
+                //agurdar ler dados e retornar uma promise resolvida com objeto json
+                let user = await response.json();
+            }catch(err) {
+                //em caso de promises rejeitadas enquanto await aguarda, trata os erros aqui
+                //detecta erros tanto na busca quanto na resposta.json
+                alert(err); 
+            }
+        }
+
+        //chama function async que retorna um promise
+        f4();
+
+        /**
+         * Se não tivermos try..catch, a promessa gerada pela chamada da função assíncrona f() será rejeitada. Podemos anexar .catch para lidar com isso:
+        */
+
+        //function async que retorna um promise
+        async function f5() {
+            //em caso de uma promise rejeitada no await ele lança o erro, como se houvesse uma throw declaração nessa linha.
+            //agurda fazer solicitação de rede e resolver promise com objeto renponse
+            let response = await fetch('/no-user-here');
+        }
+
+        //anexando manipulador a .catch para capturar erro da promise retornada pela function assincrona
+        //f() se torna uma promessa rejeitada
+        f5().catch(alert); // TypeError: falha ao buscar // (*)
+
+        /**
+         * Se esquecermos de adicionar .catch lá, obteremos um erro de promessa não tratado (visível no console). Podemos capturar esses erros usando um unhandledrejection manipulador de eventos global conforme descrito no capítulo Tratamento de erros com promessas.
+         * 
+         * * ASYNC/AWAIT E PROMISE.THEN/CATCH
+         * 
+         * Quando usamos async/await, raramente precisamos .then, pois await lida com a espera por nós. E podemos usar um regular try..catch em vez de .catch. Isso é geralmente (mas nem sempre) mais conveniente.
+         * 
+         * Mas no nível superior do código, quando estamos fora de qualquer asyncfunção, somos sintaticamente incapazes de usar await, então é uma prática normal adicionar .then/catchpara lidar com o resultado final ou erro de falha, como na linha (*) do exemplo acima de.
+         * 
+         * * Async/await funciona bem com Promise.all
+         * 
+         * Quando precisamos esperar por várias promessas, podemos envolvê-las Promise.all e depois await:
+         
+            let results = await Promise.all([
+                fetch(url1),
+                fetch(url2),
+                ...
+            ]);
+
+         * 
+         * No caso de um erro, ele se propaga como de costume, da promessa com falha para Promise.all, e então se torna uma exceção que podemos capturar usando try..catch em torno da chamada.
+        */
+
+    </script>
+
+</body>
+</html>

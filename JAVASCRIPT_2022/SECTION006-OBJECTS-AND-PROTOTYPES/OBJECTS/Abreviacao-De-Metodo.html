@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * ABREVIAÇÃO DE MÉTODO
+         * 
+         * É possível definir métodos de um objeto usando a sintaxe literal do objeto, conforme mostrado no exemplo a seguir:
+         * 
+        */
+
+        //declara um objeto literal chamado person
+        let person = {
+            //declara propriedades(atributos) do objeto usando o par chave : valor
+            firstName: 'John', 
+            lastName: 'Doe',
+            //aqui declara se um metodo do objeto por meio da sintaxe literal, uma function anonima sem paramentro e atribuida a greet propriedade como um valor
+            greet: function() {
+                console.log('Hello, World!');
+            }
+        };
+
+        /**
+         * ES6 fornece a sintaxe de método concisa que permite torná-la mais curta para definir um método para um objeto:
+        */
+
+        //declara um objeto literal chamado person
+        let person = {
+            //declara propriedades(atributos) do objeto usando o par chave : valor
+            firstName: 'John', 
+            lastName: 'Doe',
+            //aqui declara se um metodo do objeto por meio da sintaxe de método concisa adicionada no ES6, uma function anonima sem paramentro e atribuida a greet propriedade como um valor
+            greet: function() {
+                console.log('Hello, World!');
+            }
+        };
+
+        /**
+         * Essa sintaxe parece muito mais limpa e menos prolixa.
+        */
+       
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * *  CLASSES INVERSAS
+         * 
+         * Uma classe de caracteres tem uma classe inversa com a mesma letra mas em maiúscula, por exemplo, \D é o inverso de \d.
+         * 
+         * A classe inversa corresponde a todos os outros caracteres. Por exemplo, a \D correspondência com qualquer caractere, exceto um dígito (ou \d). Seguem as classes inversas:
+         
+            - \D– corresponde a qualquer caractere, exceto um dígito, por exemplo, uma letra.
+
+            - \S– corresponde a qualquer caractere, exceto um espaço em branco, por exemplo, uma letra
+
+            - \W– corresponde a qualquer caractere, exceto um caractere de palavra, por exemplo, letra ou espaço não latino
+
+         * 
+         * De volta ao exemplo do número de telefone, você pode usar o \d com o sinalizador global ( g):
+        */
+
+        //declara uma variavel chamada phone que e inicaliza com uma string literal que sera usada para pesquisa
+        let phone = '+1-(408)-555-0105';
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo \d e o padrão o \d(e uma classe de caracteres que corresponde a qualquer digito)
+        //no exemplo abaixo criamos uma expressão regular que o padrão e qualquer digito
+        //quando adiconamos a flag (g) global na expressão regular, configuramos uma novo comportamento a expressão regular, o alterando e intruindo o objeto RegExp a pesquisar todas ocorrencias de digitos(numeros)
+        //essa expressão regular e do tipo RegExp 
+        let re = /\d/g;
+        
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todas as ocorrencias de numeros na string phone, retorna um array com todas as ocorrencias do padrão
+        let numbers = phone.match(re);
+        //utilizando o metodo join, ira concatenar todos os elementos de uma array e retorna uma nova string
+        //o paramentro de join e separator que é uma string que separa cada par de elementos adjacentes da array na string de resultado.
+        //aqui cada par de elemento não sera separado vão ficar juntos
+        let phoneNo = numbers.join('');
+
+        /**
+         * Ou você pode remover o não dígito usando a \Dclasse inversa e substituir todos os caracteres não dígitos por branco, assim:
+        */
+
+        //a expressão regular recebra um novo padrão
+        //o padrão sera /\D/g -> \D -> classe inversa de \d, ira corresponder a qualquer caractere exceto um digito
+        //assim o novo padrão e procurar todoas ocorrencias de caracteres não digitos
+        re = /\D/g;
+
+        //usando o método 
+        //aqui o String.replace(regexp, newSubstr); ira susbstituir todas as correspondecias de regexp(que e uma padrão que corresponda a caracteres não digitos) na string phone por um espaço
+        let newStr = phone.replace(re, '');
+
+        console.log(newStr);
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REQUEST CROSS-ORIGIN  
+         * 
+         * XMLHttpRequest pode fazer solicitações de origem cruzada, usando a mesma política CORS que fetch.
+         * 
+         * Assim como fetch, ele não envia cookies e autorização HTTP para outra origem por padrão. Para habilitá-los, defina xhr.withCredentials como true:
+        */
+
+        
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+        xhr.withCredentials = true;
+
+        //2. passo para fazer request
+        //2. Configure-o: POST-request para a URL
+        //configurando o request, informando metodo http, e o url a fazer o request
+        xhr.open('POST', 'http://anywhere.com/request');
+
+        //...
+        
+
+    </script>
+
+</body>
+</html>

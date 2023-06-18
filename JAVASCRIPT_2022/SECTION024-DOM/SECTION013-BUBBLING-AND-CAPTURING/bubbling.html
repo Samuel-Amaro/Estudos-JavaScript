@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        - atribuindo manipuladores de eventos por meio de atributo html on<event>
+        - atribuindo um manipulador que ira reagir a um evento de click no form elemento
+        - cada elemento abaixo tem seu proprio manipulador.
+        - aqui abaixo temos um exemplo de borbulhamento, quando o evento acontece no elemento form, ele primeiro executa os manipuladores no proprio form, depois no elemento que e seu pai, e depois nos proximos elementos da arvore que são seus ancestrais
+    -->
+    <form onclick="alert('form')">FORM
+        <div onclick="alert('div')">DIV
+            <p onclick="alert('p')">P</p>
+        </div>
+    </form>
+
+    <img src="./event-order-bubbling.svg" alt="icone"/>
+
+    <script type="text/javascript">
+        /**
+         * * BUBBLING(BORBULHAMENTO)
+         * 
+         * O princípio de borbulhamento é simples.
+         * 
+         * Quando um evento acontece em um elemento, ele primeiro executa os manipuladores nele, depois em seu pai e depois em outros ancestrais.
+         * 
+         * Digamos que temos 3 elementos aninhados FORM > DIV > P com um manipulador em cada um deles:
+         * 
+         * Um clique nas <p> primeiras corridas internas onclick:
+         
+            1. Sobre isso <p>.
+            2. Depois no exterior <div>.
+            3. Depois no exterior <form>.
+            4. E assim sucessivamente até o document objeto.
+
+         * Então, se clicarmos em <p>, veremos 3 alertas: p→ div→ form.
+         * 
+         * O processo é chamado de “borbulhamento”, porque os eventos “borbulham” do elemento interno para os pais como uma bolha na água.
+         * 
+         * * Quase todos os eventos borbulham.
+         * 
+         * A palavra-chave nesta frase é “quase”.
+         * 
+         * Por exemplo, um focus evento não borbulha. Existem outros exemplos também, vamos conhecê-los. Mas ainda é uma exceção, e não uma regra, a maioria dos eventos borbulha.
+        */
+
+    </script>
+</body>
+</html>

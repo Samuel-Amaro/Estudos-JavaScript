@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <form action="" name="person">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" value="John"/>
+        </div>
+        <div>
+            <label for="surname">Surname</label>
+            <input type="text" name="surname" value="Smith"/>
+        </div>
+    </form>
+
+    <script>
+
+        /**
+         * Ou, se gostamos mais de JSON, então JSON.stringify
+         * e envie como uma string.
+         * 
+         * Só não se esqueça de definir o header Content-Type: application/json, muitos frameworks do lado do servidor decodificam automaticamente o JSON com ele:
+        */
+
+        //1. passo para fazer request
+        //cria um objeto XMLHttpRequest que permite fazer requests HTTP, o construtor não tem argumentos
+        let xhr = new XMLHttpRequest();
+
+        //cria um objeto json como string
+        let json = JSON.stringify({
+            name: "John",
+            surname: "Smith"
+        });
+
+        //2. passo para fazer request
+        //2. Configure-o: POST-request para a URL
+        //configurando o request, informando metodo http, e o url a fazer o request
+        xhr.open('POST', 'https://javascript.info/submit');
+
+        //especificando na request um header personalizado, o tipo de conteudo especificado no body
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+
+        //3. passo para fazer request, 
+        //enviando o request, informando o body, no caso de method HTTP POST precisamos informar o body, os dados a serem enviados pela request para o servidor
+        //os dados são uma string json
+        //aqui a request e enviada pela rede, o metodo abre conexão e envia a request ao servidor.
+        xhr.send(json);
+        
+
+        //eventos para response
+        //4. Isso será chamado após o recebimento da resposta
+        //acionado quando a request for concluida, e a response for totalmente baixada
+        xhr.onload = function() {
+            //obtem o response objeto
+            alert(xhr.response);
+        };
+
+        /**
+         * O .send(body) método é bastante onívoro. Ele pode enviar quase qualquer body, incluindo Blob e BufferSource objetos.
+        */
+    </script>
+
+</body>
+</html>

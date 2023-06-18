@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * SINTAXE
+         * 
+         * MutationObserver é fácil de usar.
+         * 
+         * Primeiro, criamos um observador com uma função de retorno de chamada:
+        */
+
+        //cria uma instancia de objeto observador com uma callback
+        //
+
+        /**
+         * E, em seguida, anexe-o a um nó DOM:
+        */
+
+        //anexa o observer objeto ao no dom node
+        //observer.observe(node, config);
+
+        /**
+         * observer.observe(node, config);
+         * 
+            *  childList– mudanças nos filhos diretos de node
+            * 
+            * subtree – em todos os descendentes de node,
+            * 
+            * attributes– atributos de node,
+            * 
+            * attributeFilter– uma array de nomes de atributos, para observar apenas os selecionados.
+            * 
+            * characterData – se observar node.data(conteúdo do texto),
+            * 
+         * Algumas outras opções:
+         * 
+            *  attributeOldValue – if true, passa tanto o valor antigo quanto o novo do atributo para callback (veja abaixo), caso contrário apenas o novo ( attributes opção necessária),
+            * 
+            * characterDataOldValue – if true, passe o valor antigo e o novo node.data para o callback (veja abaixo), caso contrário apenas o novo (necessita da characterData opção).
+            * 
+         * Então, após qualquer alteração, o callback é executado: as alterações são passadas no primeiro argumento como uma lista de objetos MutationRecord e o próprio observador como o segundo argumento.
+         * 
+         * Os objetos MutationRecord têm propriedades:
+         * 
+            *  type– tipo de mutação, um dos
+            * 
+                *  "attributes": atributo modificado
+                * 
+                * "characterData": dados modificados, usados ​​para nós de texto,
+                * 
+                * "childList": elementos filhos adicionados/removidos,
+                *
+            * target– onde ocorreu a alteração: um elemento para "attributes", ou nó de texto para "characterData", ou um elemento para uma "childList" mutação,  
+            * 
+            * addedNodes/removedNodes – nós que foram adicionados/removidos,
+            * 
+            * previousSibling/nextSibling– o irmão anterior e o próximo para nós adicionados/removidos,
+            * 
+            * attributeName/attributeNamespace– o nome/espaço de nomes (para XML) do atributo alterado,
+            * 
+            * oldValue– o valor anterior, apenas para alterações de atributo ou texto, se a opção correspondente estiver definida attributeOldValue/ characterDataOldValue.
+        */
+    </script>
+
+</body>
+</html>

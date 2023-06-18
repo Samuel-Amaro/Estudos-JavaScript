@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Vamos pegar o showAvatar() exemplo do capítulo Promises chaining(Encadeamento de promises) e reescrevê-lo usando async/await:
+         * 
+            * Precisaremos substituir .then as chamadas por await. 
+            * 
+            * Também devemos fazer a função async para que eles funcionem.
+        */
+
+        //add palavra chave async antes de uma function
+        //significa que a function retorna um promise
+        async function showAvatar() {
+            //palavra-chave await so funciona dentro de functions async
+            //faz uma solicitação de rede ao url fornecido e retorna um promise resolvida com objeto response
+            //o await faz o JS esperar até que a promise seja resolvida e retorna seu resultado com o objeto response
+            //aqui o JS suspende a execução da function async até que a promise seja resolvida, e então a retoma a execução com o resultado da promise
+            //isso não trava o mecanismo JS, enquanto isso pode fazer outras coisas
+            let response = await fetch('https://javascript.info/article/promise-chaining/user.json');
+            //espera ler os dados em formato json e retornar uma promise resolvida com um objeto json
+            let user = await response.json();
+
+            //leia o usuário do github
+            //faz solicitação de rede e retorna promis resolvida com objeto response
+            let gitHubResponse = await fetch(`https://api.github.com/users/${user.name}`);
+            //espera ler os dados e formatalos em json e retorna um objeto json, promise resolvida com objeto json
+            let gitHubUser = await gitHubResponse.json();
+
+            //mostre o avatar
+            let img = document.createElement('img');
+            //carrega um img externo
+            img.src = gitHubUser.avatar_url;
+            img.className = "promise-avatar-example";
+            document.body.append(img);
+
+            //espera 3 segundos, trava execução da function async até que a promise seja resolvida, retoma execução com o resultado da promise
+            await new Promise(function executor(resolve, reject) {
+                //resolve a promise apos 3s
+                setTimeout(resolve, 3000);
+            });
+
+            img.remove();
+
+            //promise e resolvida com o objeto gitHubUser
+            return gitHubUser;
+        }
+
+        //chama func asyncrona que retorna um promise resolvida com o objeto json
+        showAvatar().then(console.log);
+
+        /*
+         * Muito limpo e fácil de ler, certo? Muito melhor do que antes.
+        */
+
+    </script>
+
+</body>
+</html>

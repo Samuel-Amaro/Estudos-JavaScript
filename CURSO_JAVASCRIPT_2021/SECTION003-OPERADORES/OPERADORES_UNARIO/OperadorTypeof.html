@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador</title>
+</head>
+<body>
+    
+    <h2>Operadores Unarios</h2>
+
+    <script>
+        /**
+         * * OPERADORES UNÁRIO
+         * 
+         * Um operador unário é uma operação com apenas um operando.
+         * 
+         * * OPERADOR typeof 
+         * 
+         * O operador typeof é utilizado em qualquer uma das seguintes formas:
+         * 
+
+            typeof operando;
+            typeof (operando);
+
+         * 
+         * O operador typeof retorna uma string indicando o tipo do operando sem avaliação. operando é uma string, variável, palavra-chave ou objeto cujo tipo deve ser retornado. Os parênteses são opcionais.
+         * 
+         * Suponha que você defina as seguintes variáveis:
+         * 
+         * */
+
+        var meuLazer = new Function("5 + 2");
+        var forma = "redondo";
+        var tamanho = 1;
+        var hoje = new Date();
+
+        /**
+         * O operador typeof retornaria o seguinte resultado para aquelas variáveis:
+         * 
+         * */
+
+         console.log("TIPO DA VARIAVEL var meuLazer: ", typeof(meuLazer)); //retorna "function"
+         console.log("TIPO DA VARIAVEL var forma: ", typeof(forma)); //retorna "string"
+         console.log("TIPO DA VARIAVEL var tamanho: ", typeof(tamanho)); //retorna "number"
+         console.log("TIPO VARIAVEL var hoje: ", typeof(hoje)); //retorna "object"
+         console.log("TIPO VARIAVEL não declarada: ", typeof(naoExiste)); //retorna "undefined"
+
+         /**
+          * Para as palavras-chave true e null, o typeof retorna os seguintes resultados:
+          * 
+          * */
+
+          console.log("PARA A PALAVRA-CHAVE true,  O typeof(true) retorna: ", typeof(true)); //retorna "boolean"
+          console.log("PARA A PALAVRA-CHAVE null O typeof(null) retorna: ", typeof(null)); //retorna "Object"
+
+          /**
+           * Para um número ou uma string, o typeof retorna os seguintes resultados:
+           * **/
+
+           console.log("PARA UM NUMERO typeof(62) retorna: ", typeof(62)); //retorna "number"
+           console.log("PARA UMA STRING \'olá mundo\' retorna: ", typeof('ola mundo'));
+
+           /**
+            * Para valores de propriedades, o typeof retorna o tipo do valor que a propriedade possui:
+            * 
+            * */
+
+            console.log("PARA PROPRIEDADE document.lastModified typeof retorna: ", typeof(document.lastModified)); //retorna "string"
+            console.log("PARA PROPRIEDADE window.length typeof retorna: ", typeof(window.length)); //retorna "number"
+            console.log("PARA PROPRIEDADE Math.LN2 typeof retorna: ", typeof(Math.LN2)); //retorna "number"
+
+            /**
+             * Para métodos e funções, o typeof retorna os seguintes resultados:
+             */
+
+            console.log("PARA METODO E FUNÇÃO COMO blur typeof retorna: ", typeof(blur)); //retorna "function"
+            console.log("PARA METODO E FUNÇÃO COMO eval typeof retorna: ", typeof(eval)); //retorna "function"
+            console.log("PARA METODO E FUNÇÃO COMO parseInt typeof retorna: ", typeof(parseInt)); //retorna "function"
+            console.log("PARA METODO E FUNÇÃO COMO forma.split typeof retorna: ", typeof(forma.split)); //retorna "function"
+
+            /**
+             * Para objetos predefinidos, o typeof retorna os seguintes resultados:
+             * */
+
+            console.log("PARA OBJETOS PREDEFINIDOS COMO  Date typeof retorna: ", typeof(Date)); //retorna "function"
+            console.log("PARA OBJETOS PREDEFINIDOS COMO  Function typeof retorna: ", typeof(Function)); //retorna "function"
+            console.log("PARA OBJETOS PREDEFINIDOS COMO  Math typeof retorna: ", typeof(Math)); //retorna "Object"
+            console.log("PARA OBJETOS PREDEFINIDOS COMO  option typeof retorna: ", typeof(Option)); //retorna "function"
+            console.log("PARA OBJETOS PREDEFINIDOS COMO  String typeof retorna: ", typeof(String)); //retorna "function"
+
+            
+
+    </script>
+
+</body>
+</html>

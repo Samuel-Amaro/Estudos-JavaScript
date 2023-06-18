@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * LOOP SOBRE AS TECLAS(CHAVES)
+         * 
+         * Como vimos, os métodos fornecem a funcionalidade “get/set/remove by key”. Mas como obter todos os valores ou chaves salvos?
+         * 
+         * Infelizmente, os objetos de armazenamento não são iteráveis.
+         * 
+         * Uma maneira é fazer um loop sobre eles como em uma array:
+        */
+
+        //a propriedade localStorage.lenght retorna o numero de itens armazenados
+        for(let i = 0; i < localStorage.length; i++) {
+            //o localStorage.key(i) obtem uma key em um determinada posição
+            let key = localStorage.key(i);
+            //obtendo o valor armazenado por meio do metodo, informando a chave do par, para recuperar o valor
+            alert(`${key} : ${localStorage.getItem(key)}`);
+        }
+
+        /**
+         * Outra maneira é usar for key in localStorage loop, assim como fazemos com objetos regulares.
+         * 
+         * Ele itera sobre as chaves(keys), mas também gera alguns campos internos que não precisamos:
+        */
+
+        // tentativa ruim
+        //iterando sobre as propriedades e metodos do objeto
+        //localStorage objeto e como um Collection Map com chaves e valores
+        for(let key in localStorage) {
+            alert(key); //mostra getItem, setItem e outras coisas internas
+        }
+
+        /**
+         * …Então, precisamos filtrar os campos do protótipo com hasOwnProperty check:
+        */
+
+        //itera sobre as keys do objeto localStorage
+        for(let key in localStorage) {
+            //as propriedades pre-definidas no objeto localStorage são puladas, e so  mostrarão as propriedades herdadas do objeto prototipico
+            if(!localStorage.hasOwnProperty(key)) {
+                continue; //pula chaves como "setItem", "getItem" etc
+            }
+            //mostra as keys defindas pelo usuario
+            alert(`${key} : ${localStorage.getItem(key)}`);
+        }
+
+        /**
+         * …Ou apenas pegue as chaves “próprias” Object.keys e, em seguida, faça um loop sobre elas, se necessário:
+        */
+
+        //Retorna uma array contendo os nomes de todas as propriedades de string enumeráveis ​​do objeto localStorage.
+        let keys = Object.keys(localStorage);
+        //itera sobre as propriedades definidas no objeto local storage
+        for(let key of keys) {
+            //mostra as keys defindas pelo usuario
+            alert(`${key}: ${localStorage.getItem(key)}`);
+        }
+
+        /**
+         * O último funciona, pois Object.keys apenas retorna as chaves que pertencem ao objeto, ignorando o protótipo.
+        */
+    </script>
+
+</body>
+</html>

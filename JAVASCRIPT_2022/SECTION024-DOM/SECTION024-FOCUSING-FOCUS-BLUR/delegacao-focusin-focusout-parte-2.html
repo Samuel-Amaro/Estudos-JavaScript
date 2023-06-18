@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .focused{
+            outline: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" id="form">
+        <label for="name">Nome</label>
+        <input type="text" name="name" value="Name"/>
+        <label for="seunome">Seu nome</label>
+        <input type="text" name="seunome" value="Seu nome"/>
+    </form>
+
+    <script>
+        /**
+         * Primeiro, há uma característica histórica engraçada: focus/blur não borbulhar, mas propagar para baixo na fase de captura.
+         * 
+         * Isso funcionará:
+        */
+
+        //coloque o manipulador na fase de captura (último argumento verdadeiro)
+
+        //para acionar o manipulador na fase de captura tem que focar em um elemento de controle do form para que o focus evento possa captura até o form
+
+        //atribuindo uma manipulador de evento por meio do metodo elem.addEventListener(event, handler, options); o valor true como terceiro argumento ativa a fase de captura para o manipulador
+        // a fase de captura o evento desce até o elemento, passa pela cadeia de ancestrais até o elemento
+        //o manipulador e para o evento de foco, quando o <form> elemento receber o foco
+        form.addEventListener("focus", (event) => form.classList.add("focused"), {capture: true});
+        //manipulador para o evento de desfoque, quando o <form> elemento receber o desfoque
+        form.addEventListener("blur", (event) => form.classList.remove("focused"), {capture: true});
+
+        /**
+         * 
+         * */
+    </script>
+</body>
+</html>

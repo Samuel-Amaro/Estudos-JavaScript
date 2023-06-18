@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - elemento dom visivel pelo script
+    -->
+    <p>...o conteúdo antes do script...</p>
+
+    <!-- 
+        - o atributo defer especificado na tag script diz ao navegador para não esperar pelo script. o script e carregado em segundo plano, enquanto isso o dom e compilado e construido e renderizado, apos isso o script e executado quando o DOM esta totalmente construido.
+    -->
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js?speed=1" defer>
+        /**
+         * * ATRIBUTO DA TAG SCRIPT O DEFER(adiar)
+         * 
+         * O defer atributo diz ao navegador para não esperar pelo script. Em vez disso, o navegador continuará processando o HTML, compilando o DOM. O script é carregado “em segundo plano” e, em seguida, é executado quando o DOM está totalmente construído.
+         * 
+         * Aqui está o mesmo exemplo acima, mas com defer:
+        */
+    </script>
+
+    <!--
+        - imediatamente visivel.
+        - com o script tag com o atributo defer especificado este elemento dom não espera o script ser baixado -> processado, ele e mostrado normalmente sem precisar esperar o script.
+    -->
+    <p>...conteúdo após script...</p>
+</body>
+</html

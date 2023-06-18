@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        /**
+         * *Segundo, para obter o corpo(body) da resposta, precisamos usar uma chamada de método adicional.
+         * 
+         * Response fornece vários métodos baseados em promessas para acessar o corpo em vários formatos:
+         * 
+            *  response.text()– leia a resposta e retorne como texto,
+            * 
+            * response.json()– analisa a resposta como JSON,
+            * 
+            * response.formData()– retorna a resposta como FormData objeto (explicado no próximo capítulo ),
+            * 
+            * response.blob()– retorna a resposta como Blob (dados binários com tipo),
+            * 
+            * response.arrayBuffer() – retorna a resposta como ArrayBuffer (representação de baixo nível de dados binários),
+            * 
+            * além disso, response.body é um objeto ReadableStream , ele permite que você leia o corpo pedaço por pedaço, veremos um exemplo mais adiante.
+            * 
+         * Por exemplo, vamos obter um objeto JSON com os commits mais recentes do GitHub: 
+        */
+       
+        let u = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
+
+        async function getCommits(url) {
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            let response = await fetch(url);
+
+            //o metodo reponse.json() obtem corpo do response objeto, retorna uma promise que resolve e analisa a reposta como JSON
+            let commits = await response.json(); //leia o corpo da resposta e analise como JSON
+
+            return commits[0].author.login;
+        }
+        
+        //retorna uma promise resolvida com nome do user
+        getCommits(u).then((user) => {
+            alert(user);
+        });
+
+        /**
+         * Ou, o mesmo sem await, usando a sintaxe de promessas puras:
+        */
+
+        //mesma coisa do exemplo, mas usando sintaxe de promises pura
+        fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits')
+            .then(response => response.json())
+            .then(commits => alert(commits[0].author.login));
+
+        /**
+         *Para obter o texto de resposta, await response.text() em vez de .json():
+        */
+
+        async function getTextReponse(url) {
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            let response = await fetch(url);
+
+            //o metodo reponse.text() obtem corpo do response objeto, retorna uma promise que resolve com leia a resposta e retorne como texto,
+            let text = await response.text(); //leia o corpo da resposta e leia como texto
+
+            return text.slice(0, 80) + '...';
+        }
+
+        //retorna uma promise resolvida com nome do user
+        getTextReponse(u).then((user) => {
+            alert(user);
+        });
+    </script>
+
+</body>
+</html>

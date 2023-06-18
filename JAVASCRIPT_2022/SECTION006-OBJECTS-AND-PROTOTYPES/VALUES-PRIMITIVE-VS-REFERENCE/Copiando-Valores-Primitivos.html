@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiando Valores Primitivos</title>
+</head>
+<body>
+    <script>
+        /**
+         * * COPIANDO VALORES PRIMITIVOS
+         * 
+         *  Quando você atribui uma variável que armazena um valor primitivo a outra, o valor armazenado na variável é criado e copiado na nova variável.
+         * 
+         * Vamos dar uma olhada no exemplo a seguir.
+         * 
+         * Primeiro, declare uma variável a e inicialize seu valor como 10.
+        */
+
+        //declara uma variavel chamada a no escopo global que foi inicializada com valor 10 esse valor e do tipo primitivo number
+        var a = 10;
+
+        /**
+         * Segundo, declare outra variável b e atribua a ela um valor da variável a. Internamente, o mecanismo JavaScript copia o valor armazenado no a local de b.
+        */
+
+        //declara outra variavel no escopo global chamada b que vai ser inicializada com o valor de outra variavel por meio da atribuição, atribuimos a variavel a a variavel b assim o JS internamente copia o valor primitivo de a para b, o atribuindo a b, lembrnado o a atribui a copia de seu valor para b
+        var b = a;
+
+        /**
+         * Terceiro, atribua à variável b novo valor 20.
+        */
+
+        //atribuimos um novo valor para a variavel b esse valor e 20 um valor primitivo do tipo number
+        //isso mostra que e variavel (a) não tem relacionamento com (b) pois o a so forneceu uma copia de seu valor para ser atribuido a (b) variavel
+        b = 20;
+
+        /**
+         * Como a e b não tem relacionamento, quando você altera o valor armazenado na b variável, o valor da a variável não muda.
+        */
+
+        console.log(`a = ${a}`); //10;
+        console.log(`b = ${b}`); //20;
+    </script>
+</body>
+</html>

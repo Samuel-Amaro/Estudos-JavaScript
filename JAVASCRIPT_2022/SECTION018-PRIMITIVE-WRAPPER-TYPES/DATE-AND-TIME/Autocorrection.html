@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * AUTOCORRECTION(AUTO CORREÇÃO)
+         * 
+         * A autocorreção é um recurso muito útil dos Date objetos. Podemos definir valores fora do intervalo e ele se ajustará automaticamente.
+         * 
+         * Por exemplo:
+        */
+
+        //declara uma instancia de objeto do tipo date fornecendo os argumetos para o construtor Date formar uma data de valor invalido uma data fora do intervalo
+        let date = new Date(2013, 0, 32); //32 Jan 2013?!?
+        console.log(date); //... é 1º de fevereiro de 2013! //aqui o autocorretion entra em ação para ajustar a data que esta fora do intervalo, ajusta para 1 de feveiro pois o valor passado ja não esta dentro de janeiro e ja foi 1 dia de fevereiro
+
+        /**
+         * Os componentes de data fora do intervalo são distribuídos automaticamente.
+         * 
+         * Digamos que precisamos aumentar a data “28 de fevereiro de 2016” em 2 dias. Pode ser “2 Mar” ou “1 Mar” no caso de um ano bissexto. Não precisamos pensar nisso. Basta adicionar 2 dias. O Date objeto fará o resto:
+        */
+
+        //declara uma instancia de objeto do tipo date fornecendo os argumetos para o construtor Date formar uma data, cria uma data com os argumentos fornecidos
+        let date2 = new Date(2016, 1, 28);
+        //configura uma nova data usando o método date.setDate, a nova data a ser configurada e a data inicial criada com o objeto mais dois dias adicionados
+        date2.setDate(date.getDate() + 2);
+
+        console.log(date2); //1 Mar 2016
+
+        /**
+         * Esse recurso é frequentemente usado para obter a data após o período de tempo determinado. Por exemplo, vamos obter a data para “70 segundos depois de agora”:
+        */
+
+        //configura novos segundos para o objeto date, para isso usa o metodo date.setDate(seconds), usando o método date.getSeconds() para obter os segundos, mais 70
+        date.setSeconds(date.getSeconds() + 70);
+
+        console.log(date); //mostra a data correta
+
+        /**
+         * Também podemos definir valores zero ou até mesmo negativos. Por exemplo:
+        */
+
+        //cria um nova instancia de objeto do tipo date, com uma data, fornecida para o construtor Date
+        let date3 = new Date(2016, 0, 2); //2 Jan 2016
+        
+        //usando o método date.setDate(1) para setar um novo dia do mes na data
+        date3.setDate(1); //set dia 1 do mês
+        console.log(date3);
+
+        //não podemos seta como dia do mes o valor 0, e invalido, assim o método assume o dia do mes definir anteriormente acima
+        date3.setDate(0); // min day é 1, então o último dia do mês anterior é assumido
+        console.log(date3); //31 Dec 2015
+        
+    </script>
+</body>
+</html>

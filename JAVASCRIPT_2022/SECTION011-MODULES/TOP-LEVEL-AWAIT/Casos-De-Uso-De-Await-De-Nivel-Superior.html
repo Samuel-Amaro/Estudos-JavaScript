@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de uso de await</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CASOS DE USO DE AWAIT DE ESPERA DE NÍVEL SUPERIOR DO JS
+         * 
+         * Quando você usa o await de nível superior? Aqui estão alguns casos de uso.
+         * 
+         * * CAMINHOS DE DEPENDÊNCIA DINÂMICA(Dynamic dependency pathing)
+        */
+
+        const words = await import(`/i18n/${navigator.language}`);
+
+        /**
+         *
+         * Neste exemplo, o await de nível superior permite que os módulos usem valores de tempo de execução para decidir as dependências, o que é útil para os seguintes cenários:
+         
+            - Internacionalização (i18n);
+
+            - Divisões do ambiente de desenvolvimento/produção.
+
+         *
+         * * SUBSTITUIÇÃO DE DEPENDÊNCIA(Dependency fallback)
+         * 
+         * Nesse caso, você pode usar o await de nível superior para carregar um módulo de um servidor (cdn1). E se falhar, você pode carregá-lo de um servidor de backup (cdn2)
+         * */
+
+        let module;
+        try {
+            module = await import('https://cdn1.com/module');
+        } catch {
+            module = await import('https://cdn2.com/module');
+        }
+
+        /**
+         * 
+         * * RESUMO
+         * 
+         * Um módulo await de nível superior age como uma async função.
+         * 
+         * Quando um módulo importa um módulo await de nível superior, ele aguarda a conclusão do módulo await de nível superior antes de avaliar seu corpo.
+         * */
+    </script>
+</body>
+</html>

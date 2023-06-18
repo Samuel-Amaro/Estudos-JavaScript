@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Execução de function imediatamente invocada</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXECUCAÇÃO DE FUNCTION IMEDIATAMENTE INVOCADA
+         * 
+         * Se quiser criar uma função e executá-la imediatamente após a declaração, você pode usar a função anônima desta forma:
+         * */
+
+        (function() {
+            console.log('IIFE');
+        })();
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, o seguinte define uma expressão de função:
+         * */
+
+        //define um expressão de função 
+        (function() {
+            console.log('Immediately invoked function execution');
+        });
+
+        /**
+         * Em segundo lugar, os parênteses finais ( )permitem que você chame a função:
+        * */
+
+        //define um expressão de função 
+        (function() {
+            console.log('Immediately invoked function execution');
+        });
+
+        /**
+         * e às vezes, você pode querer passar argumentos para ele, como este:
+         * */
+
+        //declara um obj literal com duas propriedades
+        let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //define uma expressão de função
+        (function() {
+           console.log(`${person.firstName} ${person.lastName}`); 
+        })(person);
+
+    </script>
+</body>
+</html>

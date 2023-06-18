@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Generator</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * USANDO UM GENERATOR PARA IMPLEMENTAR A ESTRUTURA DE DADOS BAG
+         * 
+         * Um Bag é uma estrutura de dados que tem a capacidade de coletar elementos e iterar por meio de elementos. Não suporta a remoção de itens.
+         * 
+         * O script a seguir implementa a Bag estrutura de dados:
+        */
+
+        //define uma class chamada Bag, usando palavra-chave class
+        class Bag{
+            //define o construtor para a class Bag
+            constructor() {
+                //declara uma propriedade chamada elements, e a inicializa com um array literal dense anonimo
+                this.elements = [];
+            }
+            //declara um método de instancia chamado de isEmpty que não declara paramentros
+            isEmpty() {
+                return this.elements.length === 0;
+            }
+            //declara outro método de instancia chamado add que não declara paramentros
+            add(element) {
+                this.elements.push(element);
+            }
+            //define um método de instancia da classe
+            //o metodo definido e diferente dos métodos normais, e um método do tipo generator
+            //o * o classifica como um método generator
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformidade com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            //a função geradora pode ser executada por pedaços, pode pausar no meio do caminho e continuar de onde parou
+            *[Symbol.iterator]() {
+                //itera sobre a propriedade elements que referencia uma coleção array iteravel
+                for(let element of this.elements) {
+                    //a yield instrução retorna o valor element e logo depois para a execução do método gerador.
+                    yield element;
+                }
+            }
+        }
+
+
+        //declara uma nova instancia de class invocando o construtor da class Bag sem precisar fornecer argumentos
+        let bag = new Bag();
+
+        //invocando o método de instancia add para adicionar elementos na estrutura de dados, coletando elementos, fornecendo o argumento o elemento a ser adicionado
+        bag.add(1);
+        bag.add(2);
+        bag.add(3);
+
+        //iterando sobre a estrura de dados bag por meio da instancia de objeto referenciado pela variavel bag, sera iterado usando a construção do loop for ... of
+        //essa coleção so podera ser iterada por causa que foi definida um método de acordo com o protocolo de iteração  o iterator, também e uma função geradora que podera ser executada em pausas
+        for(let e of bag) {
+            console.log(e);
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * Os geradores são criados pela função generator function* f(){}.
+         * 
+         * Os geradores não executam seu corpo imediatamente quando são invocados.
+         * 
+         * Os geradores podem pausar no meio do caminho e retomar suas execuções onde foram pausadas. A yield instrução pausa a execução de um gerador e retorna um valor.
+         * 
+         * Os geradores são iteráveis ​​para que você possa usá-los com o for...of loop.
+        */
+
+    </script>
+
+</body>
+</html>

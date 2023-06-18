@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * httpOnly(HTTP SOMENTE)
+         * 
+         * Esta opção não tem nada a ver com JavaScript, mas temos que mencioná-la para completar.
+         * 
+         * O servidor web usa o Set-Cookie cabeçalho(header) para definir um cookie. Além disso, pode definir a httpOnly opção.
+         * 
+         * Esta opção proíbe qualquer acesso JavaScript ao cookie. Não podemos ver esse cookie ou manipulá-lo usando document.cookie.
+         * 
+         * Isso é usado como medida de precaução, para proteger de certos ataques quando um hacker injeta seu próprio código JavaScript em uma página e espera que um usuário visite essa página. Isso não deveria ser possível, os hackers não deveriam ser capazes de injetar seu código em nosso site, mas pode haver bugs que os deixem fazer isso.
+         * 
+         * Normalmente, se isso acontecer e um usuário visitar uma página da Web com o código JavaScript do hacker, esse código será executado e terá acesso aos document.cookie cookies do usuário contendo informações de autenticação. Isso é ruim.
+         * 
+         * Mas se um cookie é httpOnly, então document.cookie não o vê, então está protegido.
+        */
+
+
+    </script>
+
+</body>
+</html>

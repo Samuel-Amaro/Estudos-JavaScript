@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        /**
+         * * PROXY TRAPS - ARMADILHAS DE PROXY
+         * 
+         * * A SET() TRAP - ARMADILHA
+         * 
+         * A set() armadilha controla o comportamento quando uma propriedade do target objeto é definida.
+         * 
+         * Suponha que o age de usuário deva ser maior que 18. Para impor essa restrição, você desenvolve uma set() armadilha da seguinte forma:
+        */
+
+        //declarando um objeto literal anonimo com 3 propriedades, esse objeto e atribuido por referencia a constante user, assim user so pode referenciar esse unico objeto
+        const user = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            age: 20
+        };
+
+        //definindo um objeto manipulador, que ira interceptar as operações fundamentais do objeto de destino(target) apontado pelo objeto proxy a ser criado 
+        //um manipulador(handler) é um objeto que contém métodos para controlar os comportamentos do alvo(target). Os métodos dentro do objeto manipulador são chamados de traps.
+        //declarando um objeto literal anonimo que e atribuido por referencia a constante handler
+        const handler = {
+            //definindo um metodo que ira controlar o comportamento do target objeto, esse método e chamado de trap(armadilhas)
+            //o metodo e definido usando a sintaxe de extensão de objetos literais do ES6, que torna o metodo do objeto mais suscinto removendo os dois pontos e a palavra-chave function
+            //o metodo define tres paramentros o target e o objeto embrulhado pelo proxy objeto
+            //o property e a propriedade a ser definida no objeto target objeto
+            //o value e o valor a ser atribuido a propriedade do target objeto
+            //o método a seguir define que  controla o comportamento quando uma propriedade do target objeto é definida.
+            //quando o proxy objeto for definir uma propriedade ou atribuir um novo valor a uma exisitente no target objeto esse metodo do manipulador e invocado
+            set(target, property, value) {
+                //desenvolvendo uma logica personalizada para quando o objeto proxy estiver tentando acessar definir ou atribuir valor a alguma  proprieade do target objeto
+                if(property === 'age') {
+                    if(typeof value !== 'number') {
+                       //lança uma instancia de exceção com o seguinte valor
+                        throw new Error('Age must be a number.');
+                    }
+                    if(value < 18) {
+                        //lança uma instancia de exceção com o seguinte valor
+                        throw new Error('The user must be 18 or older');
+                    }
+                }
+                target[property] = value;
+            }
+        };
+        
+        //declarando uma instancia de objeto proxy, invocando o construtor da class Proxy, passando dois argumentos, um objeto alvo - target, e um manipulador do objeto alvo
+        //um proxy objeto é um objeto que envolve outro objeto (destino) - TARGET e intercepta as operações fundamentais do objeto de destino.
+        //o target paramentro e o objto de destino(o target a ser embrulhado pelo proxy)
+        //o handler argumento e o objeto controlador dos argumentos
+        //o proxyUser objeto usa o user objeto para armazenar dados
+        //o objeto proxyUser pode acessar todas as propriedades do user objeto
+        const proxyUser = new Proxy(user, handler);
+
+        /**
+         * Primeiro, defina o age usuário como uma string:
+        */
+
+        
+        try {
+            //por meio do objeto proxyUser vamos atribuir um novo valor na propriedade age do objeto user que e o target embrulhado pelo proxy
+            //atribuido um novo valor na propriedade age do objeto user por meio do objeto proxyUser, o mecanismo JS invoca o método trap set do objeto manipulador de comportamento do target objeto para definir o valor na propriedade por meio do proxy
+            proxyUser.age = 'foo'; //lança exceção
+        } catch (error) {
+           console.log(`Error ao atribuir um novo valor a propriedade age do target objeto por meio de proxy`);
+           console.log(error.message); 
+        }
+
+        /**
+         * Segundo, defina a idade do usuário para 16 anos:
+         *  
+        */
+
+        try {
+
+            //tentando atribuir um novo valor a propriedade age do objeto user por meio do proxy objeto, que invocara o set metodo trap do objeto manipulador de comportamento do target objeto
+            proxyUser.age = '16'; //lança exceção
+        } catch (error) {
+            console.log(`Error ao atribuir um novo valor a propriedade age do target objeto por meio de proxy`);
+           console.log(error.message); 
+        }
+
+        /**
+         * Terceiro, defina a idade do usuário para 21:
+        */
+        
+        //tentando atribuir um novo valor a propriedade age do objeto user por meio do proxy objeto, que invocara o set metodo trap do objeto manipulador de comportamento do target objeto
+        proxyUser.age = 21; //nehuma exceção e lançada
+    </script>
+
+</body>
+</html>

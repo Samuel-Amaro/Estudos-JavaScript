@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind Metodo</title>
+</head>
+<body>
+    <script>
+        /**
+        * * USANDO O JAVASCRIPT BIND() PARA VINCULAÇÃO DE FUNÇÃO
+        * 
+        * Quando você passa um método que um objeto é para outra função como um callback , o this é perdido. Por exemplo:
+        */ 
+
+        //declara um objeto anonimo literal que sera atribuido por referencia a person variavel, person referenciara o objeto
+        let person = {
+            //propriedade, usando sintaxe chave valor
+            name: 'John Doe',
+            //declara uma function anonima sem parametro declarado, essa function e atribuida a propriedade getName
+            getName : function() {
+                console.log(this.name);
+            }
+        };
+
+        //quando se passa um metodo que e uma instancia de objeto do tipo function para uma função como uma callback argumento o this e perdido
+        //o person.getName metodo retorna undefined ao inves de 'John Doe'
+        //por causa que passa o metodo como um argumento de callback so que esse metodo e uma instancia de objeto do tipo function
+        setTimeout(person.getName, 1000); //undefined
+
+        /**
+         * Como você pode ver claramente na saída, os person.getName() retornos undefined em vez de 'John Doe'.
+         * 
+         * Isso porque setTimeout() recebeu a função person.getName separadamente do person objeto.
+         * 
+         * A declaração:
+         
+            setTimeout(person.getName, 1000);
+
+         * 
+         * pode ser reescrita como:
+        */
+
+        //a variavel f ira possuir a referencia ao metodo getName
+        //o metodo getName e atribuido a variavel f
+        let f = person.getName;
+        setTimeout(f, 1000); //contexto de person perdida
+
+        /**
+         * O this interior da setTimeout()função é definido para o objeto global no modo não estrito e undefined no modo estrito.
+         * 
+         * Portanto, quando o retorno de chamada person.getName é invocado, o name não existe no objeto global, ele é definido como undefined.
+         * 
+         * Para corrigir o problema, você pode envolver a chamada para o person.getName método em uma função anônima , assim:
+        */
+
+        //a callback argumento para o setTimeout function e passado como uma função anonima
+        setTimeout(function() {
+            person.getName();
+        }, 1000);
+
+        /**
+         * Isso funciona porque obtém o person do escopo externo e, em seguida, chama o método getName().
+         * 
+         * Ou você pode usar o bind() método:
+        */
+
+        //usando bind para vincular a function getName a setTimeout
+        //o metodo bind pertence a uma instancia de objeto do tipo function que aqui no caso e getName
+        //o bind metodo retorna uma nova função quando invocada
+        //o bind retorna uma nova função getName com o novo this valor especifico e seus argumentos
+        //aqui no caso retorna uma nova  function person.getName e sera atribuida a f
+        let f1 = person.getName.bind(person);
+        setTimeout(f1, 1000);
+
+        /**
+         * Neste código:
+          
+            - Primeiro, vincule o person.getName método ao person objeto.
+
+            - Segundo, passe a função vinculada f com o this valor definido para o person objeto para a setTimeout() função.
+        */
+    </script>
+</body>
+</html>

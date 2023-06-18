@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Palavra-Chave</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * * CONTEXTO GLOBAL
+         *  
+         * No contexto global, o this referencia o objeto global , que é o window objeto no navegador da web ou global objeto no Node.js.
+         * 
+         * Este comportamento é consistente quer o modo estrito seja aplicado ou não, assim:
+        */
+
+        //verifica se o this referencia o objeto global window no contexto global fora de function, fora de objetos
+        console.log(`this === window = ${this === window}`); //true
+
+        /**
+         * Se você atribuir uma propriedade a um this objeto no contexto global, o JavaScript adicionará a propriedade ao objeto global, conforme mostrado no exemplo a seguir:
+        */
+
+        //se atribuir uma propriedade ao this objeto no contexto global o JS por padrão adiciona a propriedade ao objeto global window que e referenciado por this no contexto global
+        //add uma propriedade chamada color com uma string como valor no window objeto referenciado por this no contexto global
+        this.color = 'Red';
+        console.log(`this.color = ${this.color}`);
+
+    </script>
+
+</body>
+</html>

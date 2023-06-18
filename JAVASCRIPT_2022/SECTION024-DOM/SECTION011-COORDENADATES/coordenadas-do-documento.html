@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button type="button" id="coords-show-mark">Clique Aqui!</button>
+
+    <script type="text/javascript">
+       /**
+        * * COORDENADAS DO DOCUMENTO
+        * 
+        * As coordenadas relativas ao documento começam no canto superior esquerdo do documento, não na janela.
+        * 
+        * Em CSS, as coordenadas da janela correspondem a position:fixed, enquanto as coordenadas do documento são semelhantes às position:absolute do topo.
+        * 
+        * Podemos usar position:absolutee top/left para colocar algo em um determinado local do documento, para que permaneça lá durante a rolagem da página. Mas primeiro precisamos das coordenadas certas.
+        * 
+        * Não existe um método padrão para obter as coordenadas do documento de um elemento. Mas é fácil escrevê-lo.
+        * 
+        * Os dois sistemas de coordenadas são conectados pela fórmula:
+        
+            pageY = clientY + altura da parte vertical rolada do documento.
+
+            pageX= clientX + largura da parte horizontal rolada do documento.
+
+         
+         * 
+         * A função getCoords(elem) obterá as coordenadas da janela elem.getBoundingClientRect() e adicionará a rolagem atual a elas:
+        */
+
+        //declara uma instancia de objeto do tipo Function que e uma function regular com um paramentro chamado elem
+        //obtém as coordenadas do documento do elemento
+        function getCoords(elem) {
+            //O método elem.getBoundingClientRect() retorna as coordenadas da janela(window) para um retângulo mínimo que inclui elem um objeto da classe DOMRect integrada.
+            //retorna um objeto DOMRect
+            //as cordenadas obtidas são relativas a janela, calculada a partir da borda top/left da janela.
+            //o retangulo minimo retornado como um objeto representa essas cooordenadas 
+            let box = elem.getBoundingClientRect();
+
+            //obtem coordenadas relativas ao documento, cordenadas relativas a janela + mais a rolagem da página atual, retorna as coordenadas relativas ao documento
+            return {
+                //box.top e o mesmo que a cordenada y relativa a window + altura da parte vertical rolada do documento a partir da janela window.pageYOffset
+                //coordenada Y + rolagem no sentido vertical
+                top: box.top + window.pageYOffset,
+                //coordenada X + rolagem no sentido horizontal
+                right: box.right + window.pageXOffset,
+                //coordenada Y + rolagem no sentido vertical
+                bottom: box.bottom + window.pageYOffset,
+                //coordenada X + rolagem no sentido horizontal
+                left: box.left + window.pageXOffset
+            };
+        }
+
+        /**
+         * Se no exemplo acima nós usamos com position:absolute, então a mensagem ficaria perto do elemento na rolagem.
+         * 
+         * A função modificada createMessageUnder:
+        */
+
+        //obtem o no de elemento <button> a partir de seu id
+        let elem = document.getElementById("coords-show-mark");
+
+        //declara uma function regular chamada createMessadeUnder com dois paramentros elem, html, uma function e uma instancia de objeto do tipo Function
+        function createMessadeUnder(elem, html) {
+            //cria um elemento message
+            //cria um elemento no de elemento  html div
+            let message = document.createElement('div');
+
+            //melhor usar uma classe css para o estilo aqui
+            //define um estilo completo como uma string por meio da propriedade elem.style.cssText
+            message.style.cssText = "position: absolute; color: red";
+
+            //obtem as coordenadas relativas ao documento do elem no dom
+            let coords = getCoords(elem);
+
+            //posicionando o elemento a partir das cordenadas obtidas
+            //coords.left e uma propriedade que retorna a cordenada x + largura da rolagem horizontal
+            message.style.left = coords.left + "px";
+            //coords.bottom e uma propriedade que retorna a coordenada y + a altura da rolagem vertical
+            message.style.bottom = coords.bottom + "px";
+
+            //atribui codigo html para o elemento message
+            message.innerHTML = html;
+
+            return message;
+        }
+
+        //Uso:
+        //adiciona por 5 segundos no documento
+        let message = createMessadeUnder(elem, 'Hello, World!');
+        document.body.append(message);
+        //apos um intervalo de tempo de 5 segundos ter passado execute a callback
+        setTimeout(() => message.remove(), 5000);
+    </script>
+</body>
+</html>

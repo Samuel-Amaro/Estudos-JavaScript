@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For in Loop</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * O FOR ... IN LOOP E HERANÇA
+         * 
+         * Quando você faz um loop sobre as propriedades de um objeto que herda de outro objeto, a for...in instrução sobe na cadeia de protótipos e enumera as propriedades herdadas. Considere o seguinte exemplo: 
+        */
+
+        //declara um objeto literal chamado decoration usando a sintaxe literal de objeto
+        //Por padrão o JS fornece uma Object.function construtora para o objeto literal decoration, e um objeto prototipo, que pode ser acessado por meio da Object.prototype, o decoration object esta ligado a esse objeto anonimo por padrão por meio da ligação de prototipo
+        var decoration = {
+            //propriedade definida usando a sintaxe chave : valor
+            color : 'red'
+        };
+
+        //o circle objeto tera como o seu prototipo o objeto decoration, assim o circle podera acessar todas propriedades de decoration por meio de circle
+        //estão ligados por meio da ligação de prototipo, e cadeia de prototipos
+        var circle = Object.create(decoration);
+
+        //adiciona uma nova propriedade no circle objeto
+        circle.radius = 10;
+
+        //itera sobre as propriedades enumeraveis no objeto circle, as propriedades enumeraveis são acessives por meio do sinalizador interno [[enumerable]]
+        for(const prop in circle) {
+            console.log(`${prop} : ${circle[prop]}`);
+        }
+
+        /**
+         * O circle objeto tem seu próprio protótipo que faz referência ao decoration objeto. Portanto, o for...in loop exibe as propriedades do circle objeto e seu protótipo.
+         * 
+         * Se você quiser enumerar apenas as próprias propriedades de um objeto, use o hasOwnProperty() método:
+        */
+
+        //itera sobre as propriedades enumeraveis no objeto circle, as propriedades enumeraveis são acessives por meio do sinalizador interno [[enumerable]]
+        for(const prop in circle) {
+            //O método hasOwnProperty()retorna um booleano indicando se o objeto possui a propriedade prima como uma propriedade definida no próprio objeto em questão (ao contrário de uma propriedade herdada).
+            if(circle.hasOwnProperty(prop)) {
+                console.log(prop); //somente a radius propriedade pertence ao objeto circle o color propriedade e herdada
+            }
+        }
+    </script>
+
+</body>
+</html>

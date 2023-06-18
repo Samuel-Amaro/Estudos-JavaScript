@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REFLECTION JS - REFLEXÃO
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre a reflexão JavaScript e a API Reflect no ES6.
+         * 
+         * * O QUE É REFLECTION(REFLEXÃO)
+         * 
+         * Na programação de computadores, reflexão é a capacidade de um programa de manipular variáveis, propriedades e métodos de objetos em tempo de execução.
+         * 
+         * Antes do ES6, o JavaScript já tinha recursos de reflexão, embora não fossem oficialmente chamados assim pela comunidade ou pela especificação. Por exemplo, métodos como Object.keys(), Object.getOwnPropertyDescriptor()e Array.isArray() são os recursos clássicos de reflexão.
+         * 
+         * O ES6 introduz um novo objeto global chamado Reflect que permite chamar métodos, construir objetos, obter e definir propriedades, manipular e estender propriedades.
+         * 
+         * A ReflectAPI é importante porque permite desenvolver programas e estruturas capazes de lidar com código dinâmico.
+         * 
+         * * API DE REFLECTION(REFLEXÃO)
+         * 
+         * Ao contrário da maioria dos objetos globais, o Reflect não é um construtor. Isso significa que você não pode usar Reflect com o new operador ou invocar o Reflect como uma função. É semelhante aos objetos Math e . JSON Todos os métodos do Reflect objeto são estáticos.
+         
+            - Reflect.apply() – chama uma função com argumentos especificados.
+
+            - Reflect.construct() – age como o new operador, mas como uma função. É equivalente a chamar new target(...args).
+
+            - Reflect.defineProperty() – é semelhante a Object.defineProperty(), mas retorna um valor booleano indicando se a propriedade foi ou não definida com sucesso no objeto.
+
+            - Reflect.deleteProperty() – comportam-se como o delete operador, mas como uma função. É equivalente a chamar o  delete objectName[propertyName].
+
+            - Reflect.get() – devolver o valor de um property
+
+            - Reflect.getOwnPropertyDescriptor() – é semelhante a Object.getOwnPropertyDescriptor(). Ele retorna um descritor de propriedade de uma propriedade se a propriedade existir no objeto ou de undefined caso contrario.
+
+            - Reflect.getPrototypeOf() – é o mesmo que Object.getPrototypeOf()
+
+            - Reflect.has() – funciona como o operador in, mas como uma função. Ele retorna um booleano indicando se existe uma propriedade (de propriedade ou herdada).
+
+            - Reflect.isExtensible()– é o mesmo que Object.isExtensible().
+
+            - Reflect.ownKeys() – retorna uma array das chaves de propriedade de propriedade (não herdadas) de um objeto.
+
+            - Reflect.preventExtensions()– é semelhante a Object.preventExtensions(). Ele retorna um booleano.
+
+            - Reflect.set()– atribuir um valor a uma propriedade e retornar um valor booleano que é verdadeiro se a propriedade for definida com sucesso.
+
+            - Reflect.setPrototypeOf()– definir o protótipo de um objeto.
+
+         * 
+         * Vejamos alguns exemplos de uso da API REFLECT: 
+        */
+
+    </script>
+
+</body>
+</html>

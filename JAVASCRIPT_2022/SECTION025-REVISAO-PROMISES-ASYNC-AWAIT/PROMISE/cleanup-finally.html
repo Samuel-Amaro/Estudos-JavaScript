@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * CLEANUP FINALLY(LIMPEZA FINALMENTE)
+         * 
+         * Assim como há uma finally cláusula em um regular try {...} catch {...}, há finally em promessas.
+         * 
+         * A chamada .finally(f) é semelhante .then(f, f) no sentido que f executa sempre, quando a promessa é resolvida: seja ela resolve ou reject.
+         * 
+         * A ideia finally é configurar um manipulador para realizar a limpeza/finalização após a conclusão das operações anteriores.
+         * 
+         * Por exemplo, parando os indicadores de carga, fechando conexões que não são mais necessárias, etc.
+         * 
+         * Pense nisso como um finalizador de festa. Não importa se uma festa foi boa ou ruim, quantos amigos estavam nela, ainda precisamos (ou pelo menos deveríamos) fazer uma limpeza depois dela.
+         * 
+         * O código pode ficar assim:
+        */
+
+        /*
+        new Promise((resolve, reject) => {
+            //fazer algo que leva tempo e depois chamar resolver ou talvez rejeitar
+        })
+          // é executado quando a promessa é liquidada, não importa com sucesso ou não
+          //finally manipulador não tem argumentos
+          .finally(() => stop loading indicator)
+          //então o indicador de carregamento é sempre parado antes de continuarmos
+          .then(result => show result, err => show error);
+        */
+
+        /**
+         * Por favor, note que finally(f) não é exatamente um alias de then(f,f) embora.
+         * 
+         * Existem diferenças importantes:
+         * 
+            * Um finally manipulador não tem argumentos. Em finally não sabemos se a promessa é bem sucedida ou não. Tudo bem, pois nossa tarefa geralmente é realizar procedimentos de finalização “gerais”. 
+            * 
+            * Por favor, dê uma olhada no exemplo acima: como você pode ver, o finally manipulador não tem argumentos, e o resultado da promessa é tratado pelo próximo manipulador
+            * 
+            * Um finally manipulador “passa” o resultado ou erro para o próximo manipulador adequado
+            * 
+            * Por exemplo, aqui o resultado é passado finally para then:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        let promise = new Promise(function(resolve, reject) {
+            //executor realizando tentativa de executar trabalho
+            //a função executor é executada automaticamente quando a promessa é construída
+            //a function callback executor e chamada automaticamente e imediatamente por new Promisse
+            // após 2 segundo sinaliza que o trabalho está concluído com o result "value"
+            //apos passar 2 segundo o trabalho foi realizado e chamamos resolve("value"), passando string "value" como valor para sinalizar que trabalho foi bem sucedido
+            //assim a promisse muda seu state propriedade para "fulfilled" e seu result propriedade para "value"
+            //apos 2 segundo altera o estado da promisse para resolvido
+            setTimeout(() => resolve("value"), 2000);
+        })
+          //configurando um manipulador finnaly apos a conclusão do trabalho realizado pela promisse, ele sera executado indenpendente se a promisse foi resolvida ou rejeitada ele sempre executa
+          //finally manipulador não tem argumentos, mas a promisse anterior passa o seu primeiro value retorno para o finally, finnaly não processa resultado de promisse 
+          //aqui apos termino da tentativa de trabalho da promisse executaresmo um alert no finally, como algo que deve ser executado independente de resolvida ou rejeitada
+          .finally(() => alert("Promise ready")) //aciona primeiro
+          //registrando uma função consumidora com metodo then, ela recebera somente o resultado
+          //quando estamos apenas interessados em apenas conclusões bem-sucedidas podemos fornecer apenas um argumento de função para .then
+          //fornecemos apenas o argumento result, que e o resultado do trabalha ja finalizado pela promisse, estamos consumindo o valor resolvido pela promisse
+          .then(result => alert('result')); //<-- .then mostra "valor"
+
+        /**
+           * Como você pode ver, o value retorno da primeira promessa é passado finally para a próxima then.
+           * 
+           * Isso é muito conveniente, porque finally não se destina a processar um resultado de promessa. Como dito, é um lugar para fazer uma limpeza genérica, não importa qual foi o resultado.
+           * 
+           * 
+           * 
+        */
+    </script>
+
+</body>
+</html>

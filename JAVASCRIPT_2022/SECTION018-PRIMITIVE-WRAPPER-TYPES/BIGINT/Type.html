@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * TYPE
+         * 
+         * O tipo de a BigInt é bigint. Por exemplo:
+         * 
+        */
+
+        //declara uma variavel de escopo de bloco chamada bigInt, que e inicializada com um valor literal numerico do tipo primitivo bigInt, que tem um n anexado ao final do literal numerico
+        //o bigInt tipo permite representar valores numericos inteiros maiores que 2 elevado a 53 - 1
+        let bigInt = 9007199254740991n;
+        
+        //O operador typeof retorna uma string indicando o tipo do operando sem avaliação.
+        //verificando o tipo de dado do bigInt
+        console.log(typeof bigInt); //bigint
+        console.log(typeof BigInt(100) === 'bigint'); //true
+    </script>
+
+</body>
+</html>

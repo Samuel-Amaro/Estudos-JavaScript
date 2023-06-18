@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <ol id="ol">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+    </ol>
+
+    <div id="div"></div>
+
+    <script type="text/javascript">
+        /**
+         * Vamos vê-los em ação.
+         * 
+         * Aqui está um exemplo de como usar esses métodos para adicionar itens a uma lista e o texto antes/depois dela:
+        */
+        
+        //ol e uma variavel global que e nomeada por id que referencia um elemento dom
+        
+        //o metodo de inserção elem.before(node or string) inseri um no ou string antes de elem
+        //aqui neste exemplo antes do lo ol inserimos o texto before
+        ol.before('before'); //insira a string "antes" antes de <ol>
+        //metodo de inserção elem.after(node ou string) inseri um no ou string depois de elem
+        //aqui neste exemplo inserimos o texto after depois do no de elemento ol
+        ol.after('after'); //inserir string "depois" após <ol>
+
+        //usando metodo de criação de no dom
+        //usando o metodo document.createElement(tag) para criar um no dom com a tag fornecida
+        //criamos um no dom li
+        let liFirst = document.createElement('li');
+        //usando a propriedade innerHTML para inserir conteudo html dentro do no dom li
+        liFirst.innerHTML = 'prepend';
+        //usando o metodo de inserção de nos elem.prepend(node ou string) para inserir um no no inicio de elem
+        //neste exemplo inserirmos o no liFirst no inicio do no ol
+        ol.prepend(liFirst); //insira liFirst no início de <ol>
+
+        //cria um novo no de elemento li usando metodo de criação
+        let liLast = document.createElement('li');
+        //inseri conteudo html dentro do no li
+        liLast.innerHTML = 'append';
+        //inseri o no li no final de ol
+        ol.append(liLast); //insira liLast no final de <ol>
+
+        /**
+         * Como dito, esses métodos podem inserir vários nós e partes de texto em uma única chamada.
+         * 
+         * Por exemplo, aqui uma string e um elemento são inseridos:
+         * 
+        */
+
+        //usando metodo de inserção para inserir uma string e um no de elemento antes do no
+        //elem.before(node ou string...)
+        //inserindo uma string como texto e um no de elemento antes de div
+        //inserimos primeiro o texto <p>Olá</p>, depois inseri um no de elemento hr
+        div.before('<p>Olá</p>', document.createElement('hr'));
+
+        /**
+         * Observação: o texto é inserido “como texto”, não “como HTML”, com o escape adequado de caracteres como <, >.
+         * 
+         * Em outras palavras, as strings são inseridas de maneira segura, como elem.textContent acontece.
+         * 
+         * Portanto, esses métodos só podem ser usados ​​para inserir nós DOM ou partes de texto.
+         * 
+         * Mas e se quisermos inserir uma string HTML “como html”, com todas as tags e outras coisas funcionando, da mesma maneira que elem.innerHTML funciona?
+         * */
+    </script>
+</body>
+</html>

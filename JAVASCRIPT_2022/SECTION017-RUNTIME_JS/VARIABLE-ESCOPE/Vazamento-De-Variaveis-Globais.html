@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * VAZAMENTOS DE VARIÁVEIS GLOBAIS: A PARTE ESTRANHA DO JS 
+         *
+         * Veja o seguinte exemplo:
+        */
+        
+        //declara uma function chamada getCounter que não declara paramentro 
+        function getCounter() {
+            //declara uma variavel implicita sem usar a let, var ou const palavra-chave, declara uma varaivel que não sabemos o escopo se e local ou global pois não usamos palavra-chave na sua declaração, e indefinida
+            //counter inicializada com vlaor 10
+            //o mecanismo JS primeiro procura a counter variavel no escopo local da function, o escopo do contexto de execução da função, e não encontrada nada do tipo var, let ou const, ai procura no escopo externo no escopo global onde o script e executado e não encontrada nada também, a partir disso o mecanismo JS cria a counter variavel no escopo global para que exista
+            //esse problema e conhecido como vazamento das variaveis globais
+            counter = 10;
+            return counter;
+        }
+
+        //chama a function que retorna o conteudo da variavel
+        console.log(getCounter());
+
+        /**
+         * Neste exemplo, atribuímos 10 à counter variável sem a palavra-chave var, let ou const e a retornamos.
+         * 
+         * Fora da função, chamamos a getCounter() função e mostramos o resultado no console.
+         * 
+         * Esse problema é conhecido como vazamentos das variáveis ​​globais.
+         * 
+         * Sob o capô, o mecanismo JavaScript primeiro procura a counter variável no escopo local da getCounter() função. Como não há var, let ou const palavra- chave, a counter variável não está disponível no escopo local. Não foi criado.
+         * 
+         * Em seguida, o mecanismo JavaScript segue a cadeia de escopo e procura a counter variável no escopo global. O escopo global também não possui a counter variável, portanto, o mecanismo JavaScript cria a counter variável no escopo global.
+         * 
+         * Para corrigir esse comportamento “estranho”, você usa o 'use strict' na parte superior do script ou na parte superior da função:
+        */
+
+        //declara uma function chamada getCounter que não declara paramentro 
+        function getCounter2() {
+            //para evitar o problema do vazamento do escopo de variaveis globais de definir variaveis sem usar palavras-chave como let, const ou var, temos que usar a declaração 'use strict' no inicio do scrit se for declarada no contexto de execução global no script ou se for declarada em contexto de execuçaõ de função dentro de functions, igual nesse caso
+            'use strict';
+            counter2 = 10; //isso gera erro, a declaração use strict não permite isso, declara variavel sem uso de palavra-chave
+            return counter2;  
+        }
+
+        //chama a function que tentar contornar o problema do vazamento do escopo de variaveis globais, usando o modo estrito
+
+        console.log(getCounter2());
+
+        /**
+         * Agora, o código lança um erro:
+         
+            ReferenceError: counter is not defined
+        */
+    </script>
+
+</body>
+</html>

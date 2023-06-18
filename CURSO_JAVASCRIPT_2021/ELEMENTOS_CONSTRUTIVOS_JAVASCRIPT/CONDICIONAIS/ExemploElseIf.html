@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Else if JS</title>
+</head>
+<body>
+    <h1>Exemplo da Estrutura condicional Else...If</h1>
+    <label for="tempo">Selecione o tipo de tempo hoje:</label>
+    <select name="tempo" id="tempo">
+        <option value="">--Faça uma escolha--</option>
+        <option value="ensolarado">Ensolarado</option>
+        <option value="chuvoso">Chuvoso</option>
+        <option value="nevado">Nevado</option>
+        <option value="nublado">Nublado</option>
+    </select>
+    <p></p>
+    <script>
+        var select = document.querySelector('select');
+        var paragrafo = document.querySelector('p');
+
+        select.addEventListener('change',setTempo);
+
+        function setTempo() {
+
+            var escolha = select.value;
+
+            if(escolha === 'ensolarado') {
+                paragrafo.textContent = 'Está bom e ensolarado lá fora hoje. Use shorts! Vá para a praia, ou para o parque, e pegue um sorvete.';
+            }else if(escolha === 'chuvoso') {
+                paragrafo.textContent = 'A chuva está caindo lá fora; pegue um casaco de chuva e um brolly, e não fique fora por muito tempo.';
+            }else if(escolha === 'nevado') {
+                paragrafo.textContent = 'A neve está descendo - está congelando! Melhor ficar com uma xícara de chocolate quente, ou ir construir um boneco de neve.';
+            }else if(escolha === 'nublado') {
+                paragrafo.textContent = 'Não está chovendo, mas o céu é cinza e sombrio; ele pode virar a qualquer minuto, então pegue um casaco de chuva por precaução.';
+            }else{
+                paragrafo.textContent = ' ';
+            }
+        }
+    </script>
+</body>
+</html>

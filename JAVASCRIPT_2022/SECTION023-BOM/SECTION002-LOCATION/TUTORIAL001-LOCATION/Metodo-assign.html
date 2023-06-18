@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+       /**
+        * * * Manipulando a Location
+         * 
+         * O Location objeto tem vários métodos úteis: assign(), reload() e replace().
+         * 
+         * * assign() - ATRIBUIR
+         * 
+         * O assign() método aceita uma URL, navega para a URL imediatamente e faz uma entrada na pilha de histórico do navegador.
+        */
+
+        //o método assign navega para a url fornecida por argumento e faz uma entrada na pilha de historico do naveagador
+        location.assign('https://www.javascripttutorial.net');
+
+        /**
+         * Quando o window.location ou location.href é definido como um URL, o assign() método é chamado implicitamente:
+        */
+
+        //adicionando um endereço(URL) atual para o location, para ter uma localização atual de um documento, chama internament, implicitamento o método location.assing(URL) para navegar até a URL fornecida
+        window.location = 'https://www.javascripttutorial.net';
+        location.href = 'https://www.javascripttutorial.net';
+
+        /**
+         * Se você alterar hostname, pathname, ou port propriedade, a página será recarregada com o novo valor. Observe que alterar a hash propriedade não recarrega a página, mas registra uma nova entrada na pilha de histórico do navegador.
+         * 
+         * Quando uma nova entrada é criada na pilha de histórico do navegador, você pode clicar no botão Voltar do navegador para navegar para a página anterior.
+         */
+    </script>
+</body>
+</html>

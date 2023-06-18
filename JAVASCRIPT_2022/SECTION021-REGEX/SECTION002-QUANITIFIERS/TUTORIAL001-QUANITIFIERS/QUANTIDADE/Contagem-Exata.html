@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * QUANTIDADE
+         * 
+         * * EXACT COUNT {n} - CONTAGEM EXATA
+         * 
+         * Um número entre chaves {n} é o quantificador mais simples. Ao anexá-lo a um caractere ou classe de caracteres, ele especifica quantos caracteres ou classes de caracteres você deseja corresponder.
+         * 
+         * Por exemplo, a expressão regular /\d{4}/ corresponde a um número de quatro dígitos. É o mesmo que /\d\d\d\d/:
+        */
+
+        //declara uma varaivel de escopo de bloco chamada str que e inicilizada com uma string literal para pesquisa
+        let str = 'ECMAScript 2020';
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //no exemplo abaixo o padrão entre os caracteres de /padrão/
+        // /\d{4}/
+        //corresponde ao seguinte, um quantificador {n} que especifica quantos caracteres ou classe de caracteres desejamos corresponder, neste caso queremos corresponder 4 digitos, o \d -> e uma classe de caractere que correponde a qualquer digito ou caractere, o padrão aqui e corresponder a 4 digitos
+        let re = /\d{4}/;
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        let result = str.match(re);
+
+        console.log(result);
+        
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma introdução ás funções de seta do JS</title>
+</head>
+<body>
+    <script>
+        /**
+         * * UMA INTRODUÇÃO ÁS ARROW FUNCTIONS DO JS
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar a função de seta(arrow function) do JavaScript para escrever um código mais conciso para expressões de função.
+         * 
+         * * INTRODUÇÃO ÁS ARROW FUNCTIONS 
+         * 
+         * As funções de seta ES6 fornecem uma maneira alternativa de escrever uma sintaxe mais curta em comparação com a expressão da função.
+         * 
+         * O exemplo a seguir define uma expressão de função que retorna a soma de dois números:
+         **/
+
+        //declara uma function anonima que possui dois paramentros e retorna um valor que e a soma dos paramentros
+        //declara uma expressão de função
+        //atribui a variavel add a function anonima 
+        let add = function(x, y) {
+            return x + y;
+        };
+
+        //chama-invoca a expressão de function passando os 2 arguments
+        console.log(add(10, 20)); //30
+
+        /**
+         * O exemplo a seguir é equivalente à add() expressão de função acima , mas use uma arrow function:
+        * */
+
+        //usando a arrow function, ao inves de expressão de função
+        //a arrow function possui uma expressão x + y retorna o resultado dessa expressão
+        let add = (x, y) => x + y;
+
+        console.log(add(10, 20)); //30
+
+        /**
+         * Neste exemplo, a arrow function tem uma expressão, x + y portanto, retorna o resultado da expressão.
+         * 
+         * No entanto, se você usar a sintaxe de bloco, precisará especificar a return palavra-chave:
+         * */
+
+        add = (x, y) => {return x + y};
+
+        /**
+         * O typeof operador retorna function indicando o tipo a arrow function
+         * */
+
+        console.log(`Tipo da function add: ${typeof add}`); //function
+
+        /**
+         * arrow function também é uma instância do tipo Function, conforme mostrado no exemplo a seguir:
+        * */
+
+        console.log(`add instanceof Function ${add instanceof Function}`);
+
+    </script>
+</body>
+</html>

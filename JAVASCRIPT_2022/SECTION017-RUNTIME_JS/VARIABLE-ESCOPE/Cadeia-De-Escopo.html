@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <img src="./image/JavaScript-Scope-Chain.png" alt="imagen">
+
+    <script>
+
+        /**
+         * * CADEIA DE ESCOPO(SCOPE CHAIN) 
+         *
+         * Considere o seguinte exemplo:
+        */
+         
+        //o mecanismo JS quando executa um script pela primeira vez cria um contexto de execução global que possui duas fases a fase de criação e fase de execução, a variavel e criada no escopo da fase de criação no contexto global
+        //o escopo de uma variavel determina a visibilidade e acessibilidade na variavel
+        //declara uma varaivel de escopo global, chamada message que e incializada com o valor 'Hi'
+        //essa variavel pode ser acessada em qualquer lugar no script
+        var message = 'Hi';
+
+        //declara uma function chamada say que não declara paramentro, essa function e uma instancia de objeto do tipo Function
+        function say() {
+            //mostra o conteudo armazenado na variavel global message
+            console.log(message);
+        }
+
+        //invoca a function, say(), o mecanismo JS quando executa a function o contexto de execução global criado dentro da fase de execução cria um contexto de execução de função
+        //o mecanismo JavaScript quando executa a say function, procura a message variavel, no contexto de execução da função, da say function, no seu escopo local, não encontra nada a variavel não foi definida la.
+        //então procura no contexto de execução global, no contexto externo, e onde encontra a varaivel message
+        //isso e chamado de cadeia de escopo, pois procura no escopo atual depois parte para o escopo externo
+        say();
+
+        /**
+         * Neste exemplo, referenciamos a variável message dentro da say()função. Nos bastidores, o JavaScript executa o seguinte:
+         
+            - Procure a variável message no contexto atual (contexto de execução da função) da say() função. Não pode encontrar nenhum.
+
+            - Encontre a variável message no contexto de execução externo que é o contexto de execução global. Ele encontra a variável message.
+        
+         * A maneira como o JavaScript resolve uma variável é olhando para ela em seu escopo atual, se não conseguir encontrar a variável, ela vai para o escopo externo, que é chamado de cadeia de escopo.
+        */
+
+    </script>
+
+</body>
+</html>

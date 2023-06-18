@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retornando varios valores</title>
+</head>
+<body>
+    <script>
+        /**
+         * * RETORNANDO VÁRIOS VALORES DE UMA FUNÇÃO USANDO UM OBJETO
+         * 
+         *  Se você quiser atribuir um nome a cada valor retornado para torná-lo mais legível e fácil de manter, você pode usar um objeto:
+        */
+
+        //declara uma function regular chamada getNames que não possui paramentro e retorna um objeto
+        function getNames() {
+            //obtem nomes do banco de dados ou API
+            //declara duas variaveis e as inicializa com valores de texto, string do tipo primitivo
+            let firstName = 'John', lastName = 'Doe';
+
+            //retorna valores usando um objeto
+            //declara um objeto anonimo literal usando a sintaxe de objeto anonimo literal
+            return {
+                //declara propriedades usando a sintaxe par chave : valor
+                'firstName' : firstName,
+                'lastName' : lastName
+            };
+        }
+
+        /**
+         * Como os nomes das propriedades são os mesmos das variáveis, você pode encurtá-lo usando as extensões de sintaxe literal de objeto no ES6 da seguinte maneira:
+        */
+
+        //declara uma function regular chamada getNames que não possui paramentro e retorna um objeto
+        function getNames2() {
+            //obtem nomes do banco de dados ou API
+            //declara duas variaveis e as inicializa com valores de texto, string do tipo primitivo
+            let firstName = 'John', lastName = 'Doe';
+
+            //retorna valores usando um objeto
+            //declara um objeto anonimo literal usando a sintaxe de objeto anonimo literal
+            //declara propriedades usando a sintaxe par chave : valor, como o noma das propriedades são as mesmas das variaveis podemos encurtalos
+            return {firstName, lastName};
+        }
+
+        /**
+         * E você pode obter o valor de retorno como um objeto assim:
+        */
+
+        //invocando a function chamada getNames() para retorna um objeto com 2 propriedades proprias
+        //names sera uma variavel que recebera um objeto
+        //assim names referencia um objeto
+        let names = getNames();
+
+        //acessado as propriedades de names usando sintaxe de acesso de ponto
+        let firstName = names.firstName, lastName = names.lastName;
+
+        /**
+         * Se você deseja descompactar propriedades de um objeto, você pode usar a sintaxe de desestruturação de objetos da seguinte forma:
+        */
+
+        let {firstName2, lastName2} = getNames();
+
+        /**
+         * * RESUMO
+         * 
+         * JavaScript não oferece suporte a funções que retornam vários valores. No entanto, você pode agrupar vários valores em uma array ou objeto e retornar a array ou o objeto.
+         * 
+         * Use a sintaxe de atribuição de desestruturação para descompactar valores da array ou propriedades de objetos.
+        */
+    </script>
+</body>
+</html>

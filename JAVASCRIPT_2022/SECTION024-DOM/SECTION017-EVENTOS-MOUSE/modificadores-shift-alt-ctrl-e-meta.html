@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="button" type="button">Alt+Shift+Click em min!</button>
+
+    <script type="text/javascript">
+        /**
+         * * MODIFICADORES: shift, alt, ctrl e Meta(Cmd)
+         * 
+         * Todos os eventos do mouse incluem as informações sobre as teclas modificadoras pressionadas.
+         * 
+         * Propriedades do evento:
+
+            shiftKey: Shift
+            altKey: Alt(ou Opt para Mac)
+            ctrlKey: Ctrl
+            metaKey: Cmd para Mac
+
+         * 
+         * Eles são true se a tecla correspondente foi pressionada durante o evento.
+         * 
+         * Por exemplo, o botão abaixo só funciona com  Alt+Shift + clique: 
+        */
+
+        //manipulador do evento
+        button.onclick = function(event) {
+            //propriedades de evento event.altKey e event.shiftKey são informações sobre as teclas modificadores pressionadas. elas são true se a tecla correspondente foi pressionada durante o evento de clique
+            if(event.altKey && event.shiftKey) {
+                alert("Hooray!");
+            }
+        };
+
+        /**
+         * * Atenção: no Mac geralmente é Cmd em vez de Ctrl
+         * 
+         * No Windows e no Linux existem teclas modificadoras Alt Shift Ctrl. No Mac há mais um: Cmd , correspondente à propriedade metaKey
+         * 
+         * Na maioria dos aplicativos, quando o Windows/Linux usa Ctrl, no Mac Cmd é usado.
+         * 
+         * Ou seja: onde um usuário do Windows pressiona Ctrl+Enter ou Ctrl+A, um usuário do Mac pressiona Cmd+Enter ou Cmd+A, e assim por diante.
+         * 
+         * Portanto, se quisermos oferecer suporte a combinações como Ctrl+ clique, para Mac faz sentido usar Cmd+ clique. Isso é mais confortável para usuários de Mac.
+         * 
+         * Mesmo que queiramos forçar os usuários de Mac a Ctrl+clicar – isso é meio difícil. O problema é: um clique com o botão esquerdo Ctrl é interpretado como um clique com o botão direito no MacOS e gera o contextmenu evento, não click como Windows/Linux.
+         * 
+         * Portanto, se queremos que os usuários de todos os sistemas operacionais se sintam confortáveis, ctrlKey devemos verificar metaKey.
+         * 
+         * Para código JS, isso significa que devemos verificar if (event.ctrlKey || event.metaKey).
+         * 
+         * * Existem também dispositivos móveis
+         * 
+         * As combinações de teclado são boas como um complemento ao fluxo de trabalho. Assim, se o visitante usa um teclado – eles funcionam.
+         * 
+         * Mas se o dispositivo deles não o tiver - deve haver uma maneira de viver sem as teclas modificadoras.
+        */
+    </script>
+</body>
+</html>

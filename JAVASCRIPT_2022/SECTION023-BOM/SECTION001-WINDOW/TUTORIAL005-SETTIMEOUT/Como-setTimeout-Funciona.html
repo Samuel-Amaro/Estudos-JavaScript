@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <p>Primeiro, o setTimeout() é colocado na pilha de chamadas. Ele cria um temporizador na API da Web.</p>
+
+    <img src="./image/javascript-setTimeout-step-1.png" alt="images">
+
+    <p>Em segundo lugar, após aproximadamente 3 segundos, o cronômetro expira, taské enviado para a fila de retorno de chamada e aguarda a próxima oportunidade de execução.</p>
+
+    <img src="./image/javascript-setTimeout-step-2.png" alt="imagens">
+
+    <p>Terceiro, como a pilha de chamadas está vazia, o loop de eventos remove o task() da fila de retorno de chamada, o coloca na pilha de chamadas e o executa:</p>
+
+    <img src="./image/javascript-setTimeout-step-3.png" alt="imagens">
+
+    <p>Quarto, o console.log() no setTimeout() executa que cria um novo contexto de execução da função.</p>
+
+    <img src="./image/javascript-setTimeout-step-4.png"> 
+
+    <script type="text/javascript">
+        /**
+         * * COMO O setTimeout() JS funciona
+         * 
+         * JavaScript é single-thread(thread unica), portanto, só pode fazer uma tarefa por vez. Isso significa que ele só pode realizar uma única tarefa em um determinado momento. Além do mecanismo JavaScript, o navegador da Web possui outros componentes, como Event Loop, Call Stack e Web API.
+         * 
+         * Quando você chama o setTimeout(), o mecanismo JavaScript cria um novo contexto de execução de função e o coloca na pilha de chamadas.
+         * 
+         * O setTimeout() executa e cria um cronômetro no componente APIs da Web do navegador da Web. Quando o cronômetro expira, a função de retorno de chamada(callback) que foi passada no setTimeout() é colocada na fila de retorno de chamada.
+         * 
+         * O loop de eventos monitora a pilha de chamadas e a fila de retorno de chamada(stack callbacks). Ele remove a função de retorno de chamada(callback) da fila de retorno de chamada(stack callbacks) e a coloca na pilha de chamadas quando a pilha de chamadas está vazia.
+         * 
+         * Quando a função de retorno de chamada(callback) estiver na pilha de chamadas, ela será executada.
+         * 
+         * Veja o seguinte exemplo:
+         * */
+        
+        //declara uma function regular chamada task que não declara paramentros
+        function task() {
+            console.log('setTimeout Demo!');
+        }
+
+        //usando o setTimeout() para invocar a function task, apos se passar 3 segundos
+        //o setTimeout(cb, delay, arg1, arg2, ...) e um método do window objeto global, o setTimeout define um cronometro e executa uma callback passada por argumento apos o cronometro expirar
+        //como primeiro argumento passamos a callback, que e um referencia a function task, passamos uma referencia da function task para o método setTimeout
+        //o segundo argumento e o delay o tempo em milisegundos(1 milisegundo e igual a 0.001segundos) que o cronometro deve esperar antes de executar a callback
+        setTimeout(task, 3000);
+
+        /**
+         * Neste exemplo:
+         * 
+         * Primeiro, o setTimeout() é colocado na pilha de chamadas. Ele cria um temporizador na API da Web.
+         * 
+         * Em segundo lugar, após aproximadamente 3 segundos, o cronômetro expira, task é enviado para a fila de retorno de chamada e aguarda a próxima oportunidade de execução.
+         * 
+         * Terceiro, como a pilha de chamadas está vazia, o loop de eventos remove o task() da fila de retorno de chamada, o coloca na pilha de chamadas e o executa:
+         * 
+         * Quarto, o console.log() no setTimeout() executa que cria um novo contexto de execução da função.
+         * 
+         * Finalmente, os console.log() e task()são retirados da pilha de chamadas assim que são concluídos.
+         * 
+         * * RESUMO
+         * 
+         * setTimeout() é um método do objeto window.
+         * 
+         * setTimeout() define um temporizador e executa uma função de retorno de chamada quando o temporizador expira.
+        */
+    </script>
+
+</body>
+</html>

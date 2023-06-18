@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+
+        .alert{
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="div"></div>
+
+    <script type="text/javascript">
+        /**
+         * Mas e se quisermos inserir uma string HTML “como html”, com todas as tags e outras coisas funcionando, da mesma maneira que elem.innerHTML funciona?
+         * 
+         * * insertAdjacentHTML/Text/Element
+         * 
+         * Para isso podemos usar outro método bastante versátil: elem.insertAdjacentHTML(where, html).
+         * 
+         * O primeiro parâmetro é uma palavra de código, especificando onde inserir em relação a elem. Deve ser um dos seguintes:
+         
+            "beforebegin" – inserir html imediatamente antes de elem,
+
+            "afterbegin" – inserir html em elem, no início,
+
+            "beforeend"– inserir html em elem, no final,
+
+            "afterend" – insira html imediatamente após elem.
+
+            O segundo parâmetro é uma string HTML, que é inserida “como HTML”.
+
+         *
+         * */
+
+        //usando metodo de inserção de conteudo html dentro de um elemento
+        //elem.insertAdjacentHTML(where, html);
+        //esse metodo inseri conteudo html dentro do elem ou fora dele de acordo com o lugar especificado para onde inserir
+        //o primeiro paramentro e especificando onde inserir o codigo html em relação a elem.
+        //o valor beforebegin inseri o html imediatamente antes de div
+        //a string HTML <p>Hello</p> e o codigo html que e inserido como HTML que e a ser inserido antes do div
+        div.insertAdjacentHTML('beforebegin', '<p>Hello</p>');
+        //o paramentro afterend, instrui o metodo a inserir o codigo html imediatamente apos div
+        div.insertAdjacentHTML("afterend", "<p>Bye</p>");
+
+        /**
+         * É assim que podemos anexar HTML arbitrário à página.
+         * 
+         * Podemos facilmente notar semelhanças entre esta e a imagem anterior. Os pontos de inserção são realmente os mesmos, mas esse método insere HTML.
+         * 
+         * O método tem dois irmãos:
+         
+            elem.insertAdjacentText(where, text)– a mesma sintaxe, mas uma string de text é inserida “como texto” em vez de HTML,
+
+            elem.insertAdjacentElement(where, elem)– a mesma sintaxe, mas insere um elemento.
+
+         * 
+         * Eles existem principalmente para tornar a sintaxe “uniforme”. Na prática, só insertAdjacentHTML é usado na maioria das vezes. Porque para elementos e texto, temos métodos append/prepend/before/after – eles são mais curtos para escrever e podem inserir nós/peças de texto.
+         * 
+         * Então aqui está uma variante alternativa de mostrar uma mensagem:
+        */
+
+        //usando metodo de inserção de codigo html, que especifica locais de onde inserir o codigo html
+        //aqui vamos inserir o codigo html usando o metodo elem.insertAdjacenteHTML(where, html).
+        //o argumento afterbegin especifica onde inserir o codigo html em relação ao elemento body, aqui vamos inserir no inicio de body
+        // a string html e inserida como codigo html
+        document.body.insertAdjacentHTML('afterbegin', `<div class="alert"> <strong>Hi there!</strong> You've read an important message. </div>`);
+
+    </script>
+</body>
+</html>

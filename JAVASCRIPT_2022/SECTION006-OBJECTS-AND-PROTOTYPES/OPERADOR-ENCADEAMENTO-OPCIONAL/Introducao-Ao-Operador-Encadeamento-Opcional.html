@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Encadeamento Opcional</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OPERADOR DE ENCADEAMENTO OPCIONAL
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o operador de encadeamento opcional (?.) que simplifica a maneira de acessar valores por meio de objetos conectados.
+         * 
+         * * INTRODUÇÃO AO OPERADOR DE ENCADEAMENTO OPCIONAL JS
+         * 
+         * O operador de encadeamento opcional ( ?.) permite acessar o valor de uma propriedade localizada profundamente em uma cadeia de objetos sem verificar explicitamente se cada referência na cadeia é null ou undefined.
+         * 
+         * Se uma das referências na cadeia for null ou undefined, o operador de encadeamento opcional ( ?.) causará um curto-circuito e retornará undefined.
+         * 
+         * Suponha que você tenha uma função que retorna um user objeto:
+        */
+
+        //declara uma function regular chamada getUser que possui um paramentro declarado chamado id essa function e uma instancia de objeto do tipo function
+        //essa function retorna uma instancia de objeto anonima 
+        function getUser(id) {
+            if(id <= 0) {
+                return null;
+            }
+            // obtém o usuário do banco de dados
+            // e retorna null se o id não existir
+            // ...
+            // se o usuário foi encontrado, retorna o usuário
+            //retorna uma instancia de objeto anonimo literal com propriedades
+            return {
+                //propriedades do objeto usando sintaxe chave : valor
+                id: id,
+                username: 'admin',
+                //a propriedade profile refrencia um objeto literal com propriedades
+                profile: {
+                    avatar: '/avatar.png',
+                    language: 'English'
+                }
+            }
+        }
+
+        /**
+         * O seguinte usa a getUser() função para acessar o perfil do usuário:
+        */
+
+        //invocando a function getUser() passando um valor de argumento 1, a user variavel ira referenciar o objeto literal retornado pela function
+        let user = getUser(1);
+        //acessando a propriedade profile do objeto referenciado por user
+        //a propriedade profile referencia outro objeto, que sera referenciado pela variavel profile
+        let profile = user.profile;
+
+        /**
+         * No entanto, se você passar o id que for menor ou igual a zero ou o id não existir no banco de dados, a getUser() função retornará null.
+         * 
+         * Portanto, antes de acessar a avatar propriedade, você precisa verificar se o user não está null usando o operador lógico AND:
+        */
+
+        //invoca a function com o argumento 2 e retorna uma instancia de objeto literal que sera refrenciado por user2
+        let user2 = getUser(2);
+        //se o user2 variavel possui um valor diferente de null e undefined esta referenciado um objeto, assim podemos obter o objeto referenciado pela propriedade user2.profile
+        //assim profile2 referenciara o objeto que e referenciado por user2.profile
+        //antes de obter o objeto referenciado por profile e importante verificar se user2 não esta null ou undefined, por isso usamos o operador logico AND (E) &&
+        //isso evita o erro de acessar o user2.profile antes de verificar o user2 para ver se o objeto existe
+        let profile2 = user2 && user2.profile;
+
+        /**
+         * Neste exemplo, confirmamos que o user não é null ou undefined antes de acessar o valor da user.profile propriedade. Ele evita o erro que ocorreria se você simplesmente acessasse o user.profile diretamente sem verificar o usuário primeiro.
+         * 
+         * O ES2020 introduziu o operador de encadeamento opcional indicado pelo ponto de interrogação seguido por um ponto:
+         
+            ?.
+
+         * 
+         * Para acessar uma propriedade de um objeto usando o operador de encadeamento opcional, você usa um dos seguintes:
+         
+            objectName ?. propertName
+            objectName ?. [expression]
+
+         * 
+         * O operador de encadeamento opcional verifica implicitamente se o user não é null ou undefined antes de tentar acessar o user.profile:
+        */
+
+        //invocando a function getUser() passando o argumento 2, a function ira retornar um objeto literal anonimo que podera ser referenciado pela user3 variavel
+        let user3 = getUser(3);
+        //usando o operador de encadeamento opcional para verificar se o objeto user3 e diferente de null ou undefined implicitamente antes de acessar a propriedade profile que referencia outro objeto
+        //isso e bom para evitar de acessa um objeto não declarado e vazio, evitando erros,
+        //da a segurança de acessar a propriedade do objeto somente se o objeto exisitir
+        //aqui se o objeto referenciaod por user for null ou undefined o operador de encademaento opcional retornara undefine
+        let profile3 = user3 ?. profile;
+
+        /**
+         * Neste exemplo, se user for null ou undefined, o operador de encadeamento opcional ( ?.) retornará imediatamente undefined.
+         * 
+         * Tecnicamente, é equivalente ao seguinte:
+        */
+
+        //o operador de encademanto opcional e simplementes equivalente as seguintes comparações 
+        //se o o objeto referenciado pela variavel user for diferente de null e diferente de undefined poder retorna o objeto literal refrenciado pela propriedade user.profile se não for diferente e porque o objeto não existe ou e vazio ou nem foi declarado retorna undefined
+        let profile4 = (user !== null || user !== undefined) ? user.profile : undefined;
+    </script>
+</body>
+</html>

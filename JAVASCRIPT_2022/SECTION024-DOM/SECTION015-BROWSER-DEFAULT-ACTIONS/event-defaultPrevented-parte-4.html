@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Clique com o botão direito do mouse no menu do documento (adicionada uma verificação para event.defaultPrevented)</p>
+
+    <button type="button" id="elem">Clique com o botão direito do mouse para o menu de botões</button>
+    
+
+    <script type="text/javascript">
+        /**
+         * Agora, o menu de nível de botão funciona como pretendido. Mas o preço é alto. Negamos para sempre o acesso a informações sobre cliques com o botão direito para qualquer código externo, incluindo contadores que coletam estatísticas e assim por diante. Isso é bastante imprudente.
+         * 
+         * Uma solução alternativa seria verificar no document manipulador se a ação padrão foi impedida? Se for assim, então o evento foi tratado e não precisamos reagir a ele.
+        */
+
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        //o evento e o contextmenu(clique direito do botão do mouse sobre elem)
+        elem.oncontextmenu = function(event) {
+            //este metodo do objeto evento, evita a ação padrão do navegador, a ação padrão do navegador e interropida.
+            //a ação padrão de mostrar menu de contexto do navegador e interropida
+            event.preventDefault();
+            //nossa propria ação para o evento acionado
+            alert("Contexto Menu do botão");
+        }
+
+        //atribui outro manipulador de evento por meio de propriedade dom ao document
+        document.oncontextmenu = function(event) {
+            //a propriedade event.defaultPrevented é true se a ação padrão foi impedida e false caso contrário.
+            //se a ação padrão de mostrar o contexto de menu ao clicar com o botão direito do mouse no documento foi impedida anteriormente em outros manipuladores de elementos descendentes, usando o borbulhar no sentido para baixo
+            //não iremos precisar impedir a ação novamente
+            //então saia do manipualdor
+            if(event.defaultPrevented) {
+                return;
+            }
+
+            //este metodo do objeto de evento evita a ação padrão do navegador
+            event.preventDefault();
+            //ação padrão, nossa propriedade ação
+            alert("Contexto de menu do documento");
+        };
+
+        /**
+         * Agora tudo também funciona corretamente. Se tivermos elementos aninhados e cada um deles tiver um menu de contexto próprio, isso também funcionará. Apenas certifique-se de verificar event.defaultPrevented em cada contextmenu manipulador.
+         * 
+         * * event.stopPropagation() e event.preventDefault()
+         * 
+         * Como podemos ver claramente, event.stopPropagation() e event.preventDefault()(também conhecido como return false) são duas coisas diferentes. Eles não estão relacionados entre si.
+         * 
+         * * Arquitetura de menus de contexto aninhados
+         * 
+         * Há também formas alternativas de implementar menus de contexto aninhados. Uma delas é ter um único objeto global com um manipulador para document.oncontextmenu, e também métodos que nos permitem armazenar outros manipuladores nele.
+         * 
+         * O objeto pegará qualquer clique com o botão direito do mouse, examinará os manipuladores armazenados e executará o apropriado.
+         * 
+         * Mas então cada pedaço de código que deseja um menu de contexto deve saber sobre esse objeto e usar sua ajuda em vez do próprio contextmenu manipulador.
+        */
+
+
+    </script>
+</body>
+</html>

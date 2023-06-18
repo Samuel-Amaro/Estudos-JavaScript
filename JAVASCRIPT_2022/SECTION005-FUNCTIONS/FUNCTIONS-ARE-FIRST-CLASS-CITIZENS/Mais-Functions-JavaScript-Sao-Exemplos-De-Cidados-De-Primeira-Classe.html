@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions cidadãos de primeira classe</title>
+</head>
+<body>
+    <script>
+        /**
+         * * MAIS FUNÇÕES JAVASCRIPT SÃO EXEMPLOS DE CIDADÃOS DE PRIMEIRA CLASSE
+         * 
+         * * OQUE E SER UM CIDADÃO DE PRIMEIRA CLASSE(First-class Citizen) ? é uma entidade que suporta todas as operações geralmente disponíveis para outras entidades. Estas operações incluem, normalmente, ser passado como um argumento, retornado por uma função, modificado, e atribuído à variáveis.
+         * 
+         * O exemplo a seguir declara duas funções que convertem centímetros em polegadas e vice-versa:
+         * */
+
+        //declara um function chamada cmToIn, que possui um parametro declarado o length
+        function cmToIn(length) {
+            //corpo da função
+            //logica
+            //a cmToIn retorna um valor
+            return length / 2.54;
+        }
+
+        //declara um function chamada IntoCm
+        //que possui um paramentro obrigatorio chamado length
+        function IntoCm(length) {
+            //corpo da função
+            //logica
+            //a intoCm retorna um valor
+            return length * 2.54;
+        }
+
+        /**
+         * A convert() função a seguir possui dois parâmetros. O primeiro parâmetro é uma função e o segundo é o comprimento que será convertido com base no primeiro argumento:
+         * */
+
+        //declara uma function chamada convert que possui dois paramentros
+        //o primeiro paramentro e um function
+        //o segundo e o comprimento
+        function convert(fn, length) {
+            //corpo da function
+            //logica
+            //a convert retorna um valor que sera retorna pela function argument que precisa de um argument para pode ser invocada e retorna seu valor para convert e convert retorna o valor para quem  a chamou
+            return fn(length);
+        }
+
+        /**
+         * Para converter cm para in, você pode chamar a convert() função e passá-la cmToIn para a convert()função como o primeiro argumento:
+         * */
+
+
+        //invoca(chama) a function convert
+        //passando dois argumentos, o primeiro argument e uma function que referencia a cmToIn(length)
+        //o segundo e um valor
+        let inches = convert(cmToIn, 10);
+
+        console.log(`inches = ${inches}`);
+
+        /**
+         * Da mesma forma, para converter polegadas em centímetros, você pode passar a inToCm função para a convert() função, assim:
+        */
+
+        //invoca(chama) a function convert
+        //passando dois argumentos, o primeiro argument e uma function que referencia intoCm(length)
+        //o segundo e um valor
+        let cm = convert(IntoCm, 10);
+
+        console.log(`cm = ${cm}`);
+
+        /**
+         * Funções são cidadãos de primeira classe em JavaSript.
+         * 
+         * Você pode passar funções para outras funções como argumentos, retorná-los de outras funções como valores e armazená-los em variáveis.
+         * */
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Logico de Atribuição Or</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O OPERADOR DE ATRIBUIÇÃO LÓGICO OR(OU)
+         * 
+         * O operador de atribuição lógico OR (||=) aceita dois operandos e atribui o operando direito ao operando esquerdo se o operando esquerdo for falso:
+
+            x ||= y
+
+         * 
+         * Nesta sintaxe, o ||= operador só atribui y se x for x falso. Por exemplo:
+        */
+
+        //declara uma variavel no escopo global e não ha inicializa
+        let title;
+        //usando o operador de atribuição logica OR a variavel title recebera o valor untitled porque esta com o valor padrão do JS o undefined pois não foi inicializada e undefined e falso, assim o valor da direita e atribuido ao operando da esquerda por operando da esquerda ser  falso
+        title ||= 'untitled';
+        console.log(`title = ${title}`);
+
+        /**
+         * Neste exemplo, a title variável é undefined, portanto, é falsa. Como o title é falso, o operador ||= atribui o 'untitled'ao title. A saída mostra o untitled conforme o esperado.
+         *
+         * Veja outro exemplo:
+        */
+
+        //atribui um valor literal string a variavel title
+        title = 'JavaScript Awesome';
+
+        //usando o operador de atribuição logica OR na variavel title
+        //o title possui um valor literal de texto uma string primitiva assim possui valor esse valor e verdadeira assim o operando da esquerda e verdadeiro então passa a condicional OR e segue o restante do codigo aqui não ha nova atribuição de valor a variavel title
+        title ||= 'untitled';
+        console.log(`title = ${title}`);
+        
+        /**
+         * Neste exemplo, o title é 'JavaScript Awesome' assim que é verdadeiro. Portanto, o operador de atribuição OR lógico (||=) não atribui a string 'untitled' à title variável.
+         * 
+         * O operador lógico de atribuição OR:
+
+            x ||= y
+
+         * 
+         * é equivalente à seguinte instrução que usa o operador lógico OR :
+
+            x || (x = y)
+
+         * 
+         * Assim como o operador OR lógico, a atribuição OR lógica também causa curto-circuito. Isso significa que o operador de atribuição lógico OR só executa uma atribuição quando o x é falso.
+         * 
+         * O exemplo a seguir usa o operador de atribuição lógica para exibir uma mensagem padrão se o elemento do resultado da pesquisa estiver vazio:
+        */
+
+        //usando o operador de atribuição logica OR o elemento html selecionado se estiver vazio isso e falso o operador da direita sera atribuido ao elemento, se o operando da esquerda for verdadeiro não ha atribuição
+        document.querySelector('.search-result').textContent ||= 'Sorry! No result found';
+
+    </script>
+</body>
+</html>

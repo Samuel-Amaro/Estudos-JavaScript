@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturaçaõ de Arrays</title>
+</head>
+<body>
+    <script>
+        /**
+         * * APLICATIVOS DE ATRIBUIÇÃO DE DESESTRUTURAÇÃO DE ARRAY
+         * 
+         * Vamos ver alguns exemplos práticos de como usar a sintaxe de atribuição de desestruturação de array.
+         * 
+         * * 1) TROCA DE VARIÁVEIS
+         * 
+         * A desestruturação de array facilita a troca de valores de variáveis ​​sem usar uma variável temporária:
+        */
+
+        //declara variaveis 
+        let a = 10, b = 20;
+
+        //desestruturando o array literal declarado
+        //atribuindo os eleentos do array as variaveis individuais
+        //a variavel a recebe o elemento b
+        //a variavel b recebe o elemento a
+        //trocando os valores das varaiveis usando a desestruuração de arrays sem precisar de uma variavel temporaria
+        [a, b] = [b, a];
+
+        //acessando o valor das variaveis individuais
+        console.log(a); //20
+        console.log(b); //10
+
+        /**
+         * * 2) FUNÇÕES QUE RETORNAM VÁRIOS VALORES
+         * 
+         *  Em JavaScript, uma função pode retornar um valor. No entanto, você pode retornar uma array que contém vários valores, por exemplo:
+         * 
+         * 
+        */
+
+        //declara uma functio chamada stat que possui dois paramentros declarados, chamados a e b
+        //a function e uma instancia de objeto do tipo function
+        function stat(a, b) {
+            //a fucntion retorna um array literal densa
+            return [
+                a + b,
+                (a + b) / 2,
+                a - b
+            ]
+        }
+
+        /**
+         * E então você usa a sintaxe de atribuição de desestruturação de array para desestruturar os elementos do array de retorno em variáveis:
+        */
+
+        //desestruturando o array retornado pela function stat 
+        //invoca a function stat passando dois argumentos de valores como 20 e 10
+        //depois a function retorna um array, esse array sera desestruturado
+        //os elementos do array sera desestrutura para variaveis individuais
+        //as variaveis especificadas logo abaixo, a mesma quantidade de elementos no array tem que ter a mesm aquanidade de varaiveis, para desestruturar todos elemenots
+        let[sum, average, difference] = stat(20, 10);
+        console.log(sum, average, difference); //30, 15, 10
+
+        /**
+         * Neste tutorial, você aprendeu como usar a atribuição de desestruturação ES6 para desestruturar elementos em uma array em variáveis ​​individuais.
+        */
+    </script>
+</body>
+</html>

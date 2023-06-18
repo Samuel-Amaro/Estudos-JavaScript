@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+
+        .alert{
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="first">First</div>
+    <div id="second">Second</div>
+
+    <script type="text/javascript">
+       
+        /**
+         * Atenção: se quisermos mover um elemento para outro lugar – não há necessidade de removê-lo do antigo.
+         * 
+         * Todos os métodos de inserção removem automaticamente o nó do local antigo.
+         * 
+         * Por exemplo, vamos trocar elementos:
+        */
+
+        //não há necessidade de chamar remover
+        //usando metodo de inserção podemos mover um elemento sem precisar removelo do seu antigo lugar
+        //o metodo elem.after(node ou string) insere o first no de elemento apos o second no
+        second.after(first); //pegue #segundo e depois insira #primeiro
+
+    </script>
+</body>
+</html>

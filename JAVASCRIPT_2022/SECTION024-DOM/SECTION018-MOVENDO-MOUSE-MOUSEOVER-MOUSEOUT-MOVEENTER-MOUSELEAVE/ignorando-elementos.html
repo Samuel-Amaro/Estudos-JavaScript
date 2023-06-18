@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #parent {
+            background: #99C0C3;
+            width: 160px;
+            height: 120px;
+            position: relative;
+        }
+
+        #child {
+            background: #FFDE99;
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        textarea {
+            height: 140px;
+            width: 300px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="./mouseover-mouseout-over-elems.svg">
+
+    <img src="./mouseover-mouseout-from-outside.svg">
+
+    <div id="parent">parent
+        <div id="child">child</div>
+    </div>
+
+    <textarea id="text"></textarea>
+    <!--
+        - atribui um manipulador de evento por meio do atributo html.
+    -->
+    <input onclick="clearText()" value="Clear" type="button">
+
+    <script type="text/javascript">
+        /**
+         * * IGNORANDO ELEMENTOS
+         * 
+         * O mousemove evento é acionado quando o mouse se move. Mas isso não significa que cada pixel leva a um evento.
+         * 
+         * O navegador verifica a posição do mouse de tempos em tempos. E se notar mudanças, então aciona os eventos.
+         * 
+         * Isso significa que, se o visitante estiver movendo o mouse muito rápido, alguns elementos DOM podem ser ignorados:
+         * 
+         * Se o mouse se mover muito rápido de #FROM para #TO elementos conforme pintado acima, os elementos intermediários <div>(ou alguns deles) podem ser ignorados. O evento mouseout(mouse fora)  pode ser acionado em #FROM e logo em seguida mouseover(mouse sobre) em #TO.
+         * 
+         * Isso é bom para o desempenho, porque pode haver muitos elementos intermediários. Nós realmente não queremos processar dentro e fora de cada um.
+         * 
+         * Por outro lado, devemos ter em mente que o ponteiro do mouse não “visita” todos os elementos ao longo do caminho. Pode pular".
+         * 
+         * Em particular, é possível que o ponteiro salte para o meio da página de fora da janela. Nesse caso relatedTarget é null, porque veio do “nenhum lugar”:
+         * 
+         * Seu HTML tem dois elementos aninhados: o <div id="child"> está dentro do <div id="parent">. Se você mover o mouse rapidamente sobre eles, talvez apenas o div filho acione eventos, ou talvez o pai, ou talvez não haja nenhum evento.
+         * 
+         * Mova também o ponteiro para o filho div e, em seguida, mova-o rapidamente para baixo pelo pai. Se o movimento for rápido o suficiente, o elemento pai será ignorado. O mouse cruzará o elemento pai sem perceber.
+        */
+
+        let parent = document.getElementById('parent');
+        //atribui a mesma function manipuladora para três tipos de eventos diferentes, eventos de mouse sobre, mouse fora, e mouse mover possui o mesmo manipulador
+        parent.onmouseover = parent.onmouseout = parent.onmousemove = handler;
+
+        //function regular manipuladora que declara um paramentro chamado event, objeto de evento que contem informações sobre o evento
+        function handler(event) {
+            //tipos de eventos de mouse possui menos que 11 caracteres na string
+            let type = event.type;
+            //add espaço entre palavras
+            while (type.length < 11) 
+                type += ' ';
+            //
+            log(type + " target=" + event.target.id);
+            //a function manipuladora que retorna false e uma exceção, e para impedir a ação padrão do navegador para o evento correspondente.
+            return false;
+        }
+
+
+        function clearText() {
+            text.value = "";
+            lastMessage = "";
+        }
+
+        let lastMessageTime = 0;
+        let lastMessage = "";
+        let repeatCounter = 1;
+
+        function log(message) {
+            if (lastMessageTime == 0)               
+                //instancia um objeto date
+                lastMessageTime = new Date();
+
+            //instancia um objeto date
+            let time = new Date();
+
+            //verifica posição do mouse de tempos em tempos
+            if (time - lastMessageTime > 500) {
+                message = '------------------------------\n' + message;
+                console.log(time -lastMessageTime);
+            }
+
+            if (message === lastMessage) {
+                repeatCounter++;
+                if (repeatCounter == 2) {
+                    text.value = text.value.trim() + ' x 2\n';
+                } else {
+                    text.value = text.value.slice(0, text.value.lastIndexOf('x') + 1) + repeatCounter + "\n";
+                }
+
+            } else {
+                repeatCounter = 1;
+                text.value += message + "\n";
+            }
+
+            text.scrollTop = text.scrollHeight;
+
+            lastMessageTime = time;
+            lastMessage = message;
+        }
+
+        /**
+         * * Se mouseover acionado, deve haver mouseout
+         * 
+         * No caso de movimentos rápidos do mouse, os elementos intermediários podem ser ignorados, mas uma coisa sabemos com certeza: se o ponteiro “oficialmente” entrou em um elemento ( mouseover evento gerado), então ao sair sempre obtemos mouseout.
+        */
+    </script>
+</body>
+</html>

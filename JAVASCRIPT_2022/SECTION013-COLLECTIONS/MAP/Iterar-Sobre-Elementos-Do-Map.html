@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        //inicializa variaveis atribuindo a cada uma por referencia um objeto literal anonimo com somente uma unica propriedade
+        let john = {name: 'John Doe'}, lily = {name: 'Lily Bush'}, peter = {name: 'Peter Drucker'};
+
+        /**
+         * * ITERAR SOBRE ELEMENTOS DO MAP
+         * 
+         * Além disso, o entries() método retorna um objeto iterador que contém uma array [key,value] de cada elemento no Map objeto:
+        */
+
+        //cria uma nova instancia de objeto do Tipo Map() invocando o construtor Map, atribui a instancia por referencia a variavel userRoles, a instancia do tipo Map criada, e inicializa com o argumento passado para o construtor Map, que recebe um array multidimensional literal dense anonimo, inicializado com 3 elementos, cada elemento e um novo array, inicializado com dois elementos
+        //O map construtor aceita um objeto iteravel opcional, cujos elementos são pares de chave valor 
+
+        let userRoles = new Map([
+            [john, 'admin'],
+            [lily, 'editor'],
+            [peter, 'subscriber']
+        ]);
+
+        //usando o método Map.entries() para obter todas os pares de elementos definidos no map como [key,value]definidas no map objeto, o método retorna um iteravel como um array, como elemento um novo array com [key, value] obedecendo a mesma ordem de inserção do map objeto
+        //o iteravel retornado e usado pelo for...of construção para iterar sobre cada elemento do iteravel
+        for(const role of userRoles.entries()) {
+            console.log(`${role[0].name}: ${role[1]}`);
+        }
+
+        //para tornar a iteração mais natural, você pode usar a desestruturação da seguinte forma
+        //usando a desestruturação de array, para para pegar o obter de forma individual o par chave valor iterado de cada elemento do array, o array retornado por entries método e um array multidimensiona como [[key, value]....], assim a desestruturação pega cada elemento iterado e atribui a variaveis individuais
+        for(let [user, role] of userRoles.entries()) {
+            console.log(`${user.name}: ${role}`);
+        }
+
+        //Ou podemos usar o forEach método do objeto map
+        //usando o método Map.forEach(callback), o método invoca a callbak para cada par de key-value no map pedido de inserção
+        //a callbak e uma arrow function anonima com dois argumentos, esses argumetos são os pares de chave valor que o map tem com elemento
+        userRoles.forEach((role, user) => console.log(`${user.name} : ${role}`));
+        
+    </script>
+
+</body>
+</html>

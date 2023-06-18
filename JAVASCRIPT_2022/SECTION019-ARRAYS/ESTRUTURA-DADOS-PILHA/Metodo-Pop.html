@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método pop() - estrutura de dados pilha array JS</title>
+</head>
+<body>
+    <header>
+        <h1>Método pop() - estourar</h1>
+        <p>Estrutura de dados do tipo pilha, utilizando Arrays JS</p>
+    </header>
+    <main>
+        <p>A figura abaixo ilustra cada etapa do script.</p>
+        <img src="JavaScrippt-Stack-Pop.png" alt="imagen de operações no script atual, utilizando o metodo pop() em uma array JS que representa uma estrutura de dados do tipo pilha">
+    </main>
+    <script>
+        
+        console.log("Utilizando metodo push() empurrar elemento da pilha para o final");
+
+        let stack = []; //um array vazio
+
+        stack.push(1); //empurra o elemento com valor 1 mas com indice 0 para o final
+        console.log("stack[" + stack + "]"); //[1]
+
+        stack.push(2); //empurra o elemento com valor 2 mas com o indice 1 para o final
+        console.log("stack[" + stack + "]"); //[1,2]
+
+        stack.push(3); //empurra o elemento com valor 3 mas com o indice 2 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3]
+
+        stack.push(4); //empurra o elemento com valor 4 mas com o indice 3 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3,4]
+
+        stack.push(5); //empurra o elemento com valor 5 mas com o indice 4 para o final
+        console.log("stack[" + stack + "]"); //[1,2,3,4,5]'
+        
+        /**
+         * * MÉTODO POP()
+         * 
+         * O pop() método remove o elemento no final da array e retorna o elemento para o chamador. Se a array estiver vazia, o pop() método retorna indefinido(undefined).
+         * 
+         * O exemplo a seguir mostra como destacar elementos do topo da pilha usando o pop() método.
+         * */
+
+        console.log("Utilizando metodo pop() estourar - remover cada elemento do topo da pilha");
+        
+        //ultimo elemento inserido foi o valor 5 com o indice 4, ele e o topo da pilha
+        console.log(stack.pop()); //remove valor 5 com indice 4
+        console.log("stack[" + stack + "]");//[1, 2, 3, 4];
+
+        console.log(stack.pop()); //remove valor 4 com indice 3
+        console.log("stack[" + stack + "]");//[1, 2, 3];
+
+        console.log(stack.pop()); //remove valor 3 com indice 2
+        console.log("stack[" + stack + "]");//[1, 2];
+
+        console.log(stack.pop()); //remove valor 2 com indice 1
+        console.log("stack[" + stack + "]");//[1];
+
+        console.log(stack.pop()); //remove valor 1 com indice 0
+        console.log("stack[" + stack + "]");//[]; -> vazio
+
+        console.log("stack[" + stack.pop() + "]");
+
+        /**
+         * Inicialmente, a pilha possui 5 elementos. O pop() método remove o elemento no final da array, ou seja, no topo da pilha, um de cada vez. Após cinco operações, a pilha está vazia.
+         * */
+    </script>
+</body>
+</html>

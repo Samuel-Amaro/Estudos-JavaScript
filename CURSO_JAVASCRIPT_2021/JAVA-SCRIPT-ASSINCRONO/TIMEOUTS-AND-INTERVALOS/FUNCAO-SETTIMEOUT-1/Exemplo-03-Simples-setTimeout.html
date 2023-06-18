@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de saudação de pessoa</title>
+</head>
+<body>
+    
+    <h1>Exemplo Simples de setTimeout()</h1>
+
+    <script>
+        
+        // Quaisquer parâmetros que você quiser passar para a função sendo executada dentro do setTimeout() devem ser passados como parâmetros adicionais no final da lista.
+
+        //Por exemplo, você pode mudar a função anterior para que ela diga oi para qualquer nome que foi passada para ela:
+
+        //com a função definida separadamente
+        function dizOla(who) {
+            alert('Olá ${who}!');
+        }
+
+        //sintaxe da função setTimeout
+        //var timeoutID = setTimeout(function[, delay, arg1, arg2, ...]);
+
+        //Agora, você pode passar o nome da pessoa no setTimeout() como um terceiro parâmetro:
+        //vai esperar 2000 milissegundos(2 segundos) para mostra executar a função.
+        let minhaSaudacao = setTimeout(dizOla, 2000, 'Mr. Universe');
+        
+    </script>
+</body>
+</html>

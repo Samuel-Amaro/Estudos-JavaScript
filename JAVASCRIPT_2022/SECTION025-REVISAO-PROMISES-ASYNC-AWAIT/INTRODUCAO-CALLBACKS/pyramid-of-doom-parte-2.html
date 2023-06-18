@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <img src="../callback-hell.svg" alt="img"/>
+
+    <script type="text/javascript">
+        /*
+         * Podemos tentar aliviar o problema tornando cada ação uma função independente, assim:
+        */
+
+        loadScript('1.js', step1);
+
+        //script 1 ja carregado e executado step1 e acionado
+        function step1(error, script) {
+            if (error) {
+                handleError(error);
+            } else {
+                // ...
+                loadScript('2.js', step2);
+            }
+        }
+
+        //scrip 2 ja carregado e executado step2 e acionado
+        function step2(error, script) {
+            if (error) {
+                handleError(error);
+            } else {
+                // ...
+                loadScript('3.js', step3);
+            }
+        }
+
+        //script 3 ja carregado e executado step3 e acionado
+        function step3(error, script) {
+            if (error) {
+                handleError(error);
+            } else {
+                // ...continue after all scripts are loaded (*)
+            }
+        }
+
+        /**
+         * Ver? Ele faz a mesma coisa, e não há aninhamento profundo agora porque transformamos cada ação em uma função de nível superior separada.
+         * 
+         * Funciona, mas o código parece uma planilha rasgada. É difícil de ler, e você provavelmente notou que é preciso pular de olho entre as peças durante a leitura. Isso é inconveniente, especialmente se o leitor não estiver familiarizado com o código e não souber para onde pular.
+         * 
+         * Além disso, as funções nomeadas step*são todas de uso único, elas são criadas apenas para evitar a “pirâmide da destruição”. Ninguém vai reutilizá-los fora da cadeia de ação. Portanto, há um pouco de confusão de namespaces aqui.
+         * 
+         * Gostaríamos de ter algo melhor.
+         * 
+         * Felizmente, existem outras maneiras de evitar essas pirâmides. Uma das melhores maneiras é usar “promessas”, descritas no próximo capítulo.
+         */
+    </script>
+</body>
+</html>

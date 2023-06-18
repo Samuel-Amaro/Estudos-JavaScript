@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - o atributo contenteditable, e um atributo global que indica se o elemento deve ser editival pelo usuario. se sim o navegador o modifica para permite a edicação
+    -->
+    <div contenteditable="" id="elem">Clique e <b>edite</b>, por favor</div>
+
+    <script type="text/javascript">
+        /**
+         * Por exemplo, aqui está um <div>com um contentEditable atributo. Esse atributo nos permite focar nele e editar.
+        */
+
+        //cria um instancia de objeto observador com uma callback especificado
+        //apos qualquer alteração no no dom elem, o callback e executado.
+        //as alterações são passadas no primeiro arguumento do callback como uma lista de objetos MutationRecord(um array de objetos) e o segundo argumento passado e o proprio observador, esses argumentos são passados automaticamente apos qualquer alteração
+        let observer = new MutationObserver((mutationRecords, observer) => {
+            console.log(mutationRecords);
+            console.log(observer);
+        });
+
+        //anexamos o observador a um no dom
+        //anexamos o objeto observer ao no dom elem
+        //o primeiro argumento e o no dom a ser observado
+        //o segundo argumento e um config objeto com options booleanos que indica em que tipo de mudanças o observador deve reagir
+        //observar tudo, exceto atributos
+        observer.observe(elem, {
+            childList: true, //observa filhos diretos, observa mudança em nos firlhos diretos
+            subtree: true, // e descendentes inferiores também, observa mudanças em todos os nos descendentes de elem
+            characterDataOldValue: true // passa dados antigos para callback
+        });
+
+        /**
+         * Se executarmos este código no navegador, focar no dado <div>e alterar o texto dentro de <b>edit</b>, console.log mostrará uma mutação:
+         * 
+            mutationRecords = [{
+                type: "characterData",
+                oldValue: "edit",
+                target: <text node>,
+                // other properties empty
+            }]; 
+
+         * 
+         * Se fizermos operações de edição mais complexas, por exemplo, remover o <b>edit</b>, o evento de mutação pode conter vários registros de mutação:
+         * 
+             mutationRecords = [{
+                type: "childList",
+                target: <div#elem>,
+                removedNodes: [<b>],
+                nextSibling: <text node>,
+                previousSibling: <text node>
+                // other properties empty
+            }, {
+                type: "characterData"
+                target: <text node>
+                // ...os detalhes da mutação dependem de como o navegador lida com essa remoção
+                // pode unir dois nós de texto adjacentes "edit " e ", please" em um nó
+                // ou pode deixá-los em nós de texto separados
+            }];
+
+         * Assim, MutationObserver permite reagir a quaisquer alterações na subárvore DOM.
+        */
+    </script>
+
+</body>
+</html>

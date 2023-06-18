@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ABREVIATURAS(SHORTHANDS)
+         *
+         * * ABREVIAÇÃO \d{1,} para (+)
+         * 
+         * O quantificador {1,} significa um ou mais que tem a abreviação(shorthand) como +. Por exemplo, as \d+ pesquisas por números:
+        */
+
+        //declara uma string literal a ser usada na pesquisa
+        let phone = '+1(-(408)-555-0105';
+
+        //a expressão regular abaixo usa o seguinte padrão, uma padrão que corresponda a qualquer numero que tenha 1 ou mais digitos, a flag g, ira retornar todas as ocorrencias do padrão
+        //o padrão usa o quantifificador de intervalo sem especificar o limite superior {1,} e uma a classe de caracteres que possa corresponder a qualquer digito, o \d, e a flag g(global), intrui o objeto RegExp, para retornar todas as ocorrencias 
+        //o quantificador de intervalor sem especificar o limite superior {1,} possui a seguinte abreviação como (+), vamos usar abreviação abaixo para ser ver que o padrão possui as mesmas correspondecias com o quantificado explicitado explicitamente
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        let numbers = phone.match(/\d+/g);
+        console.log(numbers);
+        
+        /**
+         * * ABREVIAÇÃO {0,1} para (?) 
+         * 
+         * O quantificador ? significa zero ou um. É o mesmo que {0,1}. Por exemplo, /colou?r/ corresponderá a ambos color e colour:
+        */
+
+        //declara string literal a ser usada na pesquisa
+        let str2 = 'Is this color or colour?';
+        //declara a expressão regular com o seguinte padrão: /colou?r/g o abreviação ?, significa zero ou um. e um quantificador de intervalo que corresponde um caractere ou grupo de caracteres de n a m vezes. no exemplo abaixo o shorthand(?) significa um caractere qualquer de 1 digito, ou nenhum.
+        //o padrão e o seguinte um texto que corresponda a palavra colour com 6 ou 7 palavras, sendo que o 6 caractere pode existir ou não na palavra.
+        //o g global flag, instrui o RegExp objeto a retornar todoas as correspondecias 
+        //usando o metodo para retornar todas as intancias
+        let result = str2.match(/colou?r/g);
+
+        console.log(result);
+
+        /**
+         * * ABREVIAÇÃO {0,} para *
+         * 
+         * O quantificador * significa zero ou mais. É o mesmo que {0,}. O exemplo a seguir mostra como usar o quantificador * para corresponder à string Java seguida por qualquer caractere de palavra:
+        */
+
+        //string a ser pesquisada
+        let str3 = 'JavaScript is not Java';
+        //criando uma expressão regular, com o seguinte padrão: o padrão e um texto que corresponda a /Java\w*/g seguida por qualquer caractere ou palavra no final
+        //o padrão usa o quantificar de intervalo sem especificar o limite superio {0,} porem usamos a sua abreviação o *, a class de caracteres \w corresponde a qualquer caractere, a flag g(gloabal), instrui o objeto a retornar todoas as correspondecias
+        let re = /Java\w*/g;
+        //usa o método para obter todas as correspondecias
+        let results = str.match(re);
+
+        console.log(result);
+
+        /**
+         * Muitas vezes usamos os quantificadores para formar expressões regulares complexas. Veja a seguir alguns exemplos de expressões regulares que incluem quantificadores:
+         
+            - Números inteiros:/^\d+$/
+
+            - Números decimais:/^\d*.\d+$/
+
+            - Números inteiros e números decimais:/^\d*(.\d+)?$/
+
+            - Números inteiros negativos, positivos e números decimais:/^-?\d*(.\d+)?$/
+
+         * * RESUMO
+         * 
+         * A tabela a seguir lista os quantificadores:
+         
+            QUANTIFICADOR: *;
+            DESCRIÇÃO: CORRESPONDE ZERO OU MAIS VEZES;
+            -------------------------------
+            QUANTIFICADOR: +;
+            DESCRIÇÃO: COMBINE UMA OU MAIS VEZES;
+            -------------------------------
+            QUANTIFICADOR: ?;
+            DESCRIÇÃO: CORRESPONDER A ZERO OU UMA VEZ.
+            ------------------------------
+            QUANTIFICADOR: {n}
+            DESCRIÇÃO: CORRESPONDER EXATAMENTE N VEZES;
+            ------------------------------
+            QUANTIFICADOR: {n,}
+            DESCRIÇÃO: CORRESPONDER PELO MENOS N VEZES.
+            ------------------------------
+            QUANTIFICADOR: {n, m};
+            DESCRIÇÃO: CORRESPONDE DE N A M VEZES.
+        */
+    </script>
+</body>
+</html>
+
+
+

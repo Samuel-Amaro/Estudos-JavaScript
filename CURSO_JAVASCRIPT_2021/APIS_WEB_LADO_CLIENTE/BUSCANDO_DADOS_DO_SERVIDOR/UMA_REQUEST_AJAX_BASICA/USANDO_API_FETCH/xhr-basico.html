@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto de partida Ajax</title>
+    <style>
+        html, pre {
+          font-family: sans-serif;
+        }
+  
+        body {
+          width: 500px;
+          margin: 0 auto;
+          background-color: #ccc;
+        }
+  
+        pre{
+          line-height: 1.5;
+          letter-spacing: 0.05rem;
+          padding: 1rem;
+          background-color: white;
+        }
+  
+        label {
+          width: 200px;
+          margin-right: 33px;
+        }
+  
+        select {
+          width: 350px;
+          padding: 5px;
+        }
+      </style>
+</head>
+<body>
+
+    <h1>Exemplo usando a APIs cliente Fetch</h1>
+
+    <h1>Ponto de partida Ajax</h1>
+
+    <!--formulario simples sem uma ação de submissão-->
+    <form action="">
+        <label for="escolha-verso">Escolha um verso</label>
+        <select name="escolha-verso" id="escolha-verso">
+            <option>Verso 1</option>
+            <option>Verso 2</option>
+            <option>Verso 3</option>
+            <option>Verso 4</option>
+        </select>
+    </form>
+
+    <h2>O Verme conquistador <em>Edgar Allen Poe, 1843</em></h2>
+
+    <pre>
+
+    </pre>
+
+    <!--
+        - java script local incorporado ao documento HTML5
+        * APIs Fetch
+
+          - A API Fetch é basicamente uma substituição moderna do XHR; ele foi introduzido em navegadores recentemente para tornar as solicitações assíncronas de HTTP mais fáceis de fazer em JavaScript, tanto para desenvolvedores quanto para outras APIs que se baseiam no Fetch.
+    -->
+    <script>
+        //seleciona elementos HTML5 no documento e os armazena em constantes
+        //<select>
+            const escolhaVerso = document.querySelector('select');
+        //<pre>
+        const poemDisplay = document.querySelector('pre');
+
+        //registrando um manipulador de eventos, para o evento de onchange no elemento <select>, quando o valor do select for alterador o evento vai ser disparado e a função trata a o evento
+        escolhaVerso.onchange = function() {
+            //obtem o conteudo do elemento <select>
+            const verso = escolhaVerso.value;
+            atualizaExibimento(verso);
+        };
+
+        /**
+          * função JavaScript que recebe um parametro;
+        **/
+        function atualizaExibimento(verso) {
+            //Começaremos nossa função construindo uma URL relativa apontando para o arquivo de texto que queremos carregar, pois precisaremos dele mais tarde
+            // O valor do <select>elemento a qualquer momento é o mesmo que o texto dentro do selecionado <option>(a menos que você especifique um valor diferente em um atributo de valor) - por exemplo, "Verso 1". O arquivo de texto do versículo correspondente é "verse1.txt" e está no mesmo diretório do arquivo HTML, portanto, apenas o nome do arquivo será suficiente.
+            //No entanto, os servidores da web tendem a fazer distinção entre maiúsculas e minúsculas, e o nome do arquivo não tem um espaço nele. Para converter "Verso 1" em "verse1.txt", precisamos
+            verso = verso.replace(" ",""); //tirando os espaços em branco
+            verso = verso.toLowerCase(); //converte a string para minuscula
+            let url = verso + '.txt'; //concatena a extensão do arquivo
+            
+            /**
+             * 
+             * * Então, o que está acontecendo no código Fetch ?
+             * 
+             * A Fetch API oferece uma interface para buscar recursos (por exemplo, em toda a rede). Parecerá familiar para qualquer pessoa que tenha usado XMLHttpRequest, porém uma nova API oferece um conjunto de recursos mais poderoso e flexível.
+             *
+             * O Fetch cobre uma definição genérica de objetos de Requeste Response  (e outras coisas envolvidas com a solicitação de rede). Isso permitirá que eles sejam usados ​​onde quer que seja no futuro, seja para service workers, Cache API e outras coisas semelhantes que manipulam ou modifiquem pedidos e respostas ou qualquer tipo de caso de uso que possa exigir que você gere suas próprias respostas programaticamente.
+             * 
+             * 
+             * O WindowOrWorkerGlobalScope mixin descreve vários recursos comuns às interfaces Windowe WorkerGlobalScope.
+             * 
+             * Nota : WindowOrWorkerGlobalScopeé um mixin e não uma interface; você não pode realmente criar um objeto do tipo WindowOrWorkerGlobalScope.
+             * 
+             * WindowOrWorkerGlobalScope.fetch() Inicia o processo de busca de um recurso na rede.
+             * 
+             * Em primeiro lugar, invocamos o fetch()método, passando a URL do recurso que queremos buscar. Este é o equivalente moderno de request.open()em XHR, e você não precisa de nenhum equivalente a .send(). 
+             * 
+             * Depois disso, você pode ver o .then()método encadeado no final de fetch()- este método faz parte de Promisesum recurso JavaScript moderno para executar operações assíncronas. fetch() retorna uma promessa , que resolve para a resposta enviada de volta do servidor - usamos .then() para executar algum código de acompanhamento depois que a promessa é resolvida, que é a função que definimos dentro dela. Isso é o equivalente ao onload manipulador de eventos na versão XHR.
+             * 
+             * Esta função recebe automaticamente a resposta do servidor como um parâmetro quando a fetch() promessa é resolvida. Dentro da função, pegamos a resposta e executamos seu text() método, que basicamente retorna a resposta como texto bruto. Isso é o equivalente request.responseType = 'text'na versão XHR.
+             * 
+             * Você verá que text()também retorna uma promessa, então encadeamos outra .then()nela, dentro da qual definimos uma função para receber o texto bruto para o qual a text()promessa se resolve.
+             * 
+             * Dentro da função da promessa interna, fazemos quase o mesmo que fizemos na versão XHR - definimos o <pre>conteúdo do texto do elemento para o valor do texto.
+            */
+            fetch(url).then(function(response) {
+                    response.text().then(function(text) {
+                        poemDisplay.textContent = text;
+                    });
+            });
+        }
+
+        //Um problema com o exemplo tal como está é que ele não mostrará nenhum trecho do poema quando for carregado pela primeira vez.
+        //para carregar o versículo 1 por padrão e certifique-se de que o <select>elemento sempre mostra o valor correto.
+        atualizaExibimento('Verso 1');
+        escolhaVerso.value = 'Verso 1';
+    </script>
+</body>
+</html>

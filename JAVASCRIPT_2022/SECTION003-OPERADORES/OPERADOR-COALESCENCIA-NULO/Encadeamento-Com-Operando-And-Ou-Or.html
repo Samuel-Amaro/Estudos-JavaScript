@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encadeamento com o operador And ou Or</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ENCADEAMENTO COM O OPERADOR AND(E) OU OR(OU) 
+         * 
+         * A SyntaxError ocorrerá se você combinar o operador AND ou OR diretamente com o operador de coalescência nulo, assim:
+        */
+
+        //aqui a logica e o seguinte, da erro, da pau, erro de sintaxe
+        //não se pode combinar esse operadores todos juntos de uma so vez, pois a precedencia entre eles
+        const result = null || undefined ?? 'Ok'; //SyntaxError
+
+        /**
+         * No entanto, você pode evitar esse erro envolvendo a expressão à esquerda do ?? operador entre parênteses para especificar explicitamente as precedências do operador:
+        */
+
+        //aqui o operador de coalescencia avaliara o seguinte o primeiro valor e null ou undefined assim ele retornara o segundo valor para ser atribuido a result constante, pois qualquer um dos valores que representara o valor1 satisfaz a condição
+        const result = (null || undefined) ?? 'OK'; //'OK'
+
+        /**
+         * * RESUMO
+         * 
+         * O operador de coalescência nulo (??) é um operador lógico que aceita dois valores e retorna o segundo valor se o primeiro for null ou undefined.
+         * 
+         * O operador de coalescência nulo está em curto-circuito e não pode combinar diretamente com o operador lógico AND ou OR.
+         * 
+        */
+    </script>
+</body>
+</html>

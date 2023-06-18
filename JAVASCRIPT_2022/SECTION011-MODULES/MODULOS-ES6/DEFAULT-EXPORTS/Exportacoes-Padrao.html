@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exportações Padrão</title>
+</head>
+<body>
+
+    <script type="module" src="./app.js">
+
+        /**
+         * * EXPORTAÇÕES PADRÃO(DEFAULT EXPORTS)
+         * 
+         * Um módulo pode ter uma e apenas uma exportação padrão. A exportação padrão é mais fácil de importar. O padrão para um módulo pode ser uma variável, uma função ou uma classe.
+         * 
+         * Veja a seguir o módulo sort.js com uma exportação padrão.
+         
+            // sort.js
+            export default function(arr) {
+                // sorting here
+            } 
+
+         * 
+         * Observe que você não precisa especificar o nome da função porque o módulo representa o nome da função.
+         
+            import sort from sort.js;
+            sort([2,1,3]);
+         
+         * Como você vê, o sort identificador representa a função padrão do sort.js módulo. Observe que não usamos a chave em {} torno do sort identificador.
+         * 
+         * Vamos alterar o sort.js módulo para incluir a exportação padrão, bem como a não padrão:
+        
+            // sort.js
+            export default function(arr) {
+                // sorting here
+            }
+            export function heapSort(arr) {
+                // heapsort
+            }
+
+         * 
+         * Para importar associações padrão e não padrão, você usa especificar uma lista de associações após a import palavra-chave com as seguintes regras:
+         
+            - A ligação padrão deve vir primeiro.
+
+            - A associação não padrão deve ser cercada por chaves.
+
+         * 
+         * Veja o seguinte exemplo:
+         
+            import sort, {heapSort} from './sort.js';
+            sort([2,1,3]);
+            heapSort([3,1,2]);
+
+         * 
+         * Para renomear a exportação padrão, você também usa a palavra-  chave as da seguinte maneira:
+         
+            import { default as quicksort, heapSort} from './sort.js';
+
+         * 
+         * Neste tutorial, você aprendeu sobre os módulos ES6 e como exportar ligações de um módulo e importá-las para outro módulo.
+        */
+
+    </script>
+
+</body>
+</html>

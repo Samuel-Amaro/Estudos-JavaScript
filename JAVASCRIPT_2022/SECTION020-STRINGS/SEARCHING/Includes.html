@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Includes() Método String</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * STRING JAVASCRIPT INCLUDES() MÉTODO
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar o includes()método JavaScript String para verificar se uma string contém outra string.
+         * 
+         * * INCLUDES() - INCLUI - INTRODUÇÃO AO MÉTODO JS STRING
+         * 
+         * O includes() método determina se uma string contém outra string:
+         
+            string.includes(searchString[, position]);
+
+         * 
+         * O método includes() retorna true se o searchString encontrado no string; caso contrário false.
+         * 
+         * O parâmetro opcional position especifica a posição string na qual começar a procurar o arquivo searchString. O position padrão é 0.
+         * 
+         * A includes() string de correspondência faz distinção entre maiúsculas e minúsculas.
+         * 
+         * * INCLUDES() EXEMPLOS DE STRING JS
+         * 
+         * Este exemplo usa o includes()método para verificar se a string @está na string 'admin@example.com':
+         * 
+        */
+
+        //declara uma variavel chamada email essa variavel e inicializada com uma string literal
+        let email = 'admin@example.com';
+        //utilizando o metodo string.include() para verificar se a string literal email contem a string '@', se sim retorna true se não false
+        console.log(`'${'admin@example.com'}' possui '${'@'}' = ${email.includes('@')}`);//true
+
+        /**
+         * Como mencionado anteriormente, o includes() corresponde à string diferenciando maiúsculas de minúsculas, portanto, o exemplo a seguir retorna false:
+         *  
+        */
+
+        //declara uma variavel chamada str que e inicializada com uma string literal
+        let str = 'JavaScript String';
+        //utilizando o metodo string.include() para verificar se a string literal str contem a string 'script' //aqui neste caso retornara false pois o include diferencia maiusculas de minusculas, o que procuro e string 'script' e o que contem na str string literl e 'Script' com letra maiuscula
+        console.log(str.includes('script'));
+
+        /**
+         * O exemplo a seguir usa o includes() método com o segundo parâmetro:
+        */
+
+        //declara uma variavel chamada str3 que e inicializada com uma string literal
+        let str3 = 'JavaScript String';
+        //utilizando o metodo string.includes passando dois argumentos, o primeiro argumento e para verificar se a string literal str3 contem a string 'Script', lembrando que include diferencia maiusculas de minusculas, assim aqui retorna false, pois são diferentes oque procuro do que tenho, o segundo argumento e o valor 5 e indicando ao metodo a partir de qual posição deve procurar a string, aqui e a partir da 5 a partir do caractere c
+        console.log(str3.includes('Script', 5)); //false
+
+        /**
+         * Neste tutorial, você aprendeu como usar o includes() método JavaScript String para determinar se uma string contém outra string.
+        */
+    </script>
+</body>
+</html>

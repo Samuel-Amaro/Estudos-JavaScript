@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /*
+         * * CRIANDO UM URL
+         * 
+         * A sintaxe para criar um novo URL objeto:
+         
+            new URL(url, [base]);
+
+         * 
+         * url – o URL completo ou apenas o caminho (se a base estiver definida, veja abaixo),
+         * 
+         * base– uma URL base opcional: se set e url argumento tem apenas caminho, então a URL é gerada em relação a base.
+         * 
+         * Por exemplo:
+        */
+
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url = new URL('https://javascript.info/profile/admin');
+
+        /*
+         * Esses dois URLs são iguais:
+        */
+
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url1 = new URL('https://javascript.info/profile/admin');
+        //cria uma instancia de objeto URL, passando como primeiro argumento para a function construtor o caminho, e como segundo argumento passamos o url base opcional, se o primeiro argumento possuir somente o caminho, então a URL e gerada em relação a base.
+        let url2 = new URL('/profile/admin', 'https://javascript.info');
+
+        alert(url1); // https://javascript.info/profile/admin
+        alert(url2); // https://javascript.info/profile/admin
+
+    </script>
+
+</body>
+</html>

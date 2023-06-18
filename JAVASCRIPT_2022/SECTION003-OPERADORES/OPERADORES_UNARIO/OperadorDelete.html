@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores</title>
+</head>
+<body>
+    
+    <h2>Operadores Unário</h2>
+
+    <script>
+        /**
+         * * OPERADORES UNÁRIO
+         * 
+         * Um operador unário é uma operação com apenas um operando.
+         * 
+         * * OPERADOR delete
+         * 
+         * O operador delete apaga um objeto, uma propriedade de um objeto ou um elemento no índice especificado de uma matriz. A sintaxe é:
+         
+            delete nomeObjeto;
+            delete nomeObjeto.propriedade;
+            delete nomeObjeto[indice];
+            delete propriedade; // válido apenas dentro de declaração with
+
+         * 
+         * onde nomeObjeto é o nome de um objeto, propriedade é uma propriedade existente e indice é um inteiro que representa a localização de um elemento em uma matriz.
+         * 
+         * A quarta forma é permitida somente dentro de uma declaração with para apagar uma propriedade de um objeto.
+         * 
+         * Você pode utilizar o operador delete para apagar variáveis declaradas implicitamente mas não aquelas declaradas com var.
+         * 
+         * Se o operador delete for bem-sucedido, ele define a propriedade ou elemento para undefined. O operador delete retorna verdadeiro se a operação for possível; ele retorna falso se a operação não for possível.
+         * */
+
+        //omitindo a palavra chave de declaração de var, let, ou const
+        x = 42;
+        var y = 43;
+        meuObj = new Number(); //cria um objeto da class Numero, representando floats, doubles, integer
+        meuObj.h = 4; //cria a propriedade h
+
+        //USANDO OPERADOR DELETE
+
+        //retorna true (pode apagar se declarado implicitamente, sem usar palavras chave de declaração como var, let, const) 
+        console.log("APAGOU VARIAVEL IMPLICITA x, delete x = ", delete x);
+
+        //retorna false (não pode apagar se declarado com var)
+        console.log("APAGOU VARIAVEL DECLARADA CORRETAMENTE: y, delete y = ", delete y);
+        
+        //retorna false (não pode apagar propriedades predefinidas)
+        console.log("APAGOU A PROPRIEDADE DA CLASS Math com a propriedade PI, delete Math.PI = ", delete Math.PI);
+        
+        //retorna true (pode apagar propriedades definidas pelo usuário)
+        console.log("APAGOU A PROPRIEDADE DEFINADA PELO USUARIO NO OBJETO CRIADO IMPLICITAMENTE delete meuObj.h = ", delete meuObj.h);
+
+        //retorna true (pode apagar se declarado implicitamente, o objto foi criado de maneira implicita não tradicional, sem usar as formas normais de criação de objeto)
+        console.log("APAGOU O OBJETO CRIADO IMPLICITAMENTE delete meuObj = ", delete meuObj);
+
+        /**
+         * * APAGANDO ELEMENTOS DE ARRAY
+         * 
+         * Quando você apaga um elemento de um array, o tamanho do array não é afetado. Por exemplo, se você apaga a[3], o valor de a[4] ainda estará em a[4] e a[3] passa a ser undefined.
+         * 
+         * Quando o operador delete remove um elemento do array, aquele elemento não pertence mais ao array. No exemplo a seguir, arvores[3] é removido com delete. Entretanto, arvores[3] ainda é endereçável e retorna undefined.
+         * */
+
+        //cria um array, ja inicializavel com elementos
+        var arvores = new Array("pau-brasil", "loureiro", "cedro", "carvalho", "sicômoro");
+
+        console.log("ANTES DE USAR O OPERADOR DELETE NO ARRAY: ");
+        for (let index = 0; index < arvores.length; index++) {
+            console.log(arvores[index]);
+        }
+        
+        //apaga o elemento que esta no indice 3 do array
+        delete arvores[3]; //elemento "carvalho"
+
+        console.log("APOS USAR O OPERADOR DELETE NO ARRAY: ");
+        for (let index = 0; index < arvores.length; index++) {
+            console.log(arvores[index]);
+        }
+
+        if(3 in arvores) {
+            //isto não e executado
+        }else{
+            console.log("Elemento: \"carvalho\" no indice 3 foi deletado");
+        }
+
+        /***
+         * Se você quer que um elemento do array exista, mas tenha um valor indefinido, utilize a palavra-chave undefined em vez do operador delete. No exemplo a seguir, o valor undefined é atribuído a arvores[3], mas o elemento da matriz ainda existe:
+         * 
+         * */
+
+        arvores[3] = undefined;
+
+        if(3 in arvores) {
+            //isto e executado
+            console.log("Operador Delete não usado.");
+        }
+    </script>
+</body>
+</html>

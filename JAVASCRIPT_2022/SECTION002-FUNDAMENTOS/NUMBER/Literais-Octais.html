@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literais Octais</title>
+</head>
+<body>
+    <script>
+        /**
+         * * LITERAIS OCTAIS
+         * 
+         *  Para representar um literal octal no ES5, você usa o prefixo zero ( 0) seguido por uma sequência de dígitos octais (de 0 a 7). Por exemplo:
+        */
+
+        //declara uma variavel e a inicializa com um literal octal usando o prefixo 0
+        let a = 051;
+        console.log(a); //representa o valor octal me hexadecimal
+
+        /**
+         * Se o literal octal contiver um número fora do intervalo, o JavaScript ignorará o 0 inicial e tratará o literal octal como um decimal, conforme mostrado no exemplo a seguir:
+        */
+
+        //declara a variavel e a inicializa com um valor octal invalido fora do intervalo, assim o motor JS ira tratalo como um valor hexadecimal
+        let b = 058; //invalid octal
+        console.log(b);
+
+        /**
+         * Neste exemplo, como 8 é um dígito inválido para representar o número octal, o JavaScript ignora o 0 e trata o número inteiro como um decimal com um valor de 58.
+         * 
+         * Observe que você pode usar os literais octais no modo não estrito. Se você usá-los no modo estrito, o JavaScript gerará um erro.
+        */
+
+        //não pode usar os literais octais no modo estrito do JS
+        "use strict";
+
+        let c = 058; //invalid octal fora do intervalor sera represetando como um hexadecimal pelo JS
+        console.log(c);
+
+        /**
+         * O ES6 permite que você especifique o literal octal usando o prefixo 0o seguido por uma sequência de dígitos octais de 0 a 7. Aqui está um exemplo:
+         * */
+
+        //nova forma de represetar um literal octal usando o prefixo 0o do ES6
+        let d = 0o51;
+        console.log(d); //represetna valor octal em decimal
+
+        /**
+         * Se você usar um número inválido no literal octal, o JavaScript lançará um SyntaxError conforme mostrado no exemplo a seguir:
+        */
+       
+        //declara um literal octal invalido fora do intervalo
+        let e = 0o58;
+        console.log(e); //Sintax Error
+    </script>
+</body>
+</html>

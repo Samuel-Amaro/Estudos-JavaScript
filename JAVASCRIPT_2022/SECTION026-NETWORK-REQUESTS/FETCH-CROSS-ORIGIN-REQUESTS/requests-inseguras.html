@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./xhr-preflight.svg"/>
+
+    <script>
+
+        /**
+         * * REQUESTS UNSAFE(SOLICITAÇÕES INSEGURAS)
+         * 
+         * Podemos usar qualquer método HTTP: não apenas GET/POST, mas também PATCH, DELETE e outros.
+         * 
+         * Algum tempo atrás, ninguém poderia imaginar que uma página da web pudesse fazer tais solicitações. Portanto, ainda podem existir webservices que tratam um método fora do padrão como um sinal: “Isso não é um navegador”. Eles podem levar isso em consideração ao verificar os direitos de acesso.
+         * 
+         * Assim, para evitar mal-entendidos, qualquer solicitação “insegura” – que não podia ser feita antigamente, o navegador não faz tais solicitações imediatamente. Primeiro, ele envia uma solicitação preliminar, chamada de “preflight”, para pedir permissão.
+         * 
+         * Uma solicitação de comprovação(request preflight) usa o método OPTIONS, sem corpo(body) e três cabeçalhos(headers):
+         * 
+            * Access-Control-Request-Method header(cabeçalho) tem o método da solicitação insegura.
+            * 
+            * Access-Control-Request-Headers header(cabeçalho) fornece uma lista separada por vírgulas de seus cabeçalhos HTTP não seguros.
+            * 
+            * Origin header informa de onde veio a solicitação. (como https://javascript.info)
+            * 
+         * Se o servidor concordar em atender as solicitações(requests), ele deverá responder com corpo vazio, status 200 e cabeçalhos:
+         * 
+            * Access-Control-Allow-Origin deve ser * ou a origem solicitante, como https://javascript.info, para permitir.
+            * 
+            * Access-Control-Allow-Methods deve ter o método permitido.
+            * 
+            * Access-Control-Allow-Headers deve ter uma lista de cabeçalhos(headers) permitidos.
+            * 
+            * Além disso, o cabeçalho(header) Access-Control-Max-Age pode especificar um número de segundos para armazenar em cache as permissões. Assim, o navegador não precisará enviar uma simulação para solicitações subsequentes que satisfaçam as permissões fornecidas.
+            * 
+         * Vamos ver como funciona passo a passo no exemplo de uma PATCH solicitação de origem cruzada (esse método é frequentemente usado para atualizar dados): 
+        */
+
+        (async() => {
+            //uma request para outro site e um request cross-origin, politica CORS
+            //enviando uma request insegura(porque ela não satisfaz as condições de uma safe request segura) para o url de outro site
+            //UMA CORS
+            //passamos um objeto option para passar informações adicionais para a request
+            let response = await fetch('https://site.com/service.json', {
+                method: 'PATCH', //metodo HTTP 'PATCH', O método de requisição HTTP PATCH aplica modificações parciais a um recurso. e um metodo de requisição inseguro. esta fora da condições dos metodos permitidos para request segura em request-cross-origin
+                headers : { //header optional
+                    'Content-Type': 'application/json', //header seguro, mas com valor fora das condições de satisfação de segurança, de requisições seguras
+                    'API-Key' : 'secret' //header inseguro, não satisfaz a condição de uma requisão segura
+                }
+            });
+        })();
+
+        /**
+         * Existem três razões pelas quais a solicitação não é segura (uma é suficiente):
+         * 
+            * Método PATCH
+            *  
+            * Content-Type não é um de: application/x-www-form-urlencoded, multipart/form-data, text/plain.
+            * 
+            * API-Key Cabeçalho “inseguro”.
+            * 
+         * * ETAPA 1 (REQUEST preflight) 
+         * 
+         * Antes de enviar tal solicitação(request), o navegador, por conta própria, envia uma solicitação de comprovação(request prefling) semelhante a esta:
+         * 
+         
+            /request preflinght, e uma request preliminar enviada para o servidor para pedir permissão, para uma request insegura, que o navegador impediu de ser enviado imeditamente/
+
+            OPTIONS /service.json
+            Host: site.com
+            Origin: https://javascript.info
+            Access-Control-Request-Method: PATCH
+            Access-Control-Request-Headers: Content-Type,API-Key
+
+
+            * Método: OPTIONS.
+            * 
+            * O caminho(path) – exatamente o mesmo da solicitação principal: /service.json.
+            * 
+            * Cabeçalhos(headers) especiais de origem cruzada(cross-origin):
+            * 
+                * Origin– a origem da fonte.
+                * 
+                * Access-Control-Request-Method– método solicitado.
+                * 
+                * Access-Control-Request-Headers– uma lista separada por vírgulas de cabeçalhos “inseguros”.
+                * 
+         * * ETAPA 2(RESPOSTA DE COMPROVAÇÃO)
+         * 
+            * O servidor deve responder com o status 200 e os cabeçalhos:
+            * 
+                * Access-Control-Allow-Origin: https://javascript.info
+                * 
+                * Access-Control-Allow-Methods: PATCH
+                * 
+                * Access-Control-Allow-Headers: Content-Type,API-Key.
+                * 
+             * Isso permite a comunicação futura, caso contrário, um erro é acionado.
+             * 
+             *  Se o servidor espera outros métodos e cabeçalhos no futuro, faz sentido permiti-los antecipadamente adicionando-os à lista.
+             * 
+             * Por exemplo, esta resposta também permite PUT, DELETE e cabeçalhos adicionais:
+             
+                /Se o servidor concordar em atender as solicitações, ele deverá responder com corpo vazio, status 200 e cabeçalhos
+                /
+
+                200 OK
+                Access-Control-Allow-Origin: https://javascript.info
+                Access-Control-Allow-Methods: PUT,PATCH,DELETE
+                Access-Control-Allow-Headers: API-Key,Content-Type,If-Modified-Since,Cache-Control
+                Access-Control-Max-Age: 86400
+
+             * 
+             * Agora o navegador pode ver que PATCH está dentro Access-Control-Allow-Method se Content-Type, API-Key está na lista Access-Control-Allow-Headers, então ele envia a solicitação principal.
+             * 
+             * Se houver o cabeçalho Access-Control-Max-Age com vários segundos, as permissões de comprovação serão armazenadas em cache durante o tempo determinado. A resposta acima será armazenada em cache por 86.400 segundos (um dia). Dentro desse prazo, as solicitações subsequentes não causarão uma comprovação. Supondo que eles se encaixem nas permissões armazenadas em cache, eles serão enviados diretamente.
+             * 
+         * * ETAPA 3 (SOLICITAÇÃO REAL)
+         * 
+            * Quando a comprovação for bem-sucedida, o navegador agora faz a solicitação principal. O processo aqui é o mesmo que para solicitações seguras.
+            * 
+            * A solicitação principal tem o Origin cabeçalho (porque é de origem cruzada):
+            * 
+            
+                PATCH /service.json
+                Host: site.com
+                Content-Type: application/json
+                API-Key: secret
+                Origin: https://javascript.info
+
+            
+         * * etapa 4 (resposta real)
+         * 
+         * O servidor não deve esquecer de adicionar Access-Control-Allow-Origin à resposta principal. Um pré-voo bem-sucedido não dispensa isso:
+         * 
+        
+            Access-Control-Allow-Origin: https://javascript.info
+
+         *
+         * Então o JavaScript é capaz de ler a resposta do servidor principal.
+         * 
+         * Observe:
+         * 
+         * A solicitação de comprovação ocorre “nos bastidores”, é invisível para o JavaScript.
+         * 
+         * O JavaScript só obtém a resposta à solicitação principal ou um erro se não houver permissão do servidor.
+        */
+
+    </script>
+
+</body>
+</html>

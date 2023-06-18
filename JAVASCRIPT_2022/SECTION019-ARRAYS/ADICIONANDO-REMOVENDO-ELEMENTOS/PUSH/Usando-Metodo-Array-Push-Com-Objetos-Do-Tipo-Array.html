@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Push() com objetos</title>
+</head>
+<body>
+    <script> 
+
+        /**
+         * * USANDO O MÉTODO JS ARRAY PUSH() COM OBJETOS DO TIPO ARRAY
+         * 
+         * O Array.prototype.push() método é projetado para ser genérico de propósito. Portanto, você pode chamar o push() método com o call()ou apply() nos objetos do tipo array.
+         * 
+         * Sob o capô, o  push() método usa a  length propriedade para determinar a posição para inserir os elementos. Se o push() método não puder converter a length propriedade em um número, ele usará 0 como valor para o índice.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara um objeto literal com propriedades e metodos, este objeto literal e atribuido a variavel greetings por referencia, assim a variavel referencia greetings
+        //declara um objeto que seja parecido com um do tipo array
+        let greetings = {
+            //declara propriedades do objeto usando sintaxe chave : valor
+            0: 'Hi',
+            1 : 'Hello',
+            length: 2,
+            //declara um metodo do objeto usando a sintaxe ES6, ocultando palavra chave function e o :, o metodo declara um paramentro chamado message
+            append(message) {
+                //utilizando o metodo call da instancia de objeto do tipo function nomeada push, podemos acessar o push metodo por meio do call utilizando um novo this valor passando argumentos por meio de call
+                //aqui acessaremos o push metodo com o this valor dentro do escopo do objeto, aqui o this valor e o proprio  objeto literal, passando o argumento message passado para a o metodo append do obejto literal 
+                //assim o message argumento sera adicionado ao objeto literal por meio do push metodo
+                //em cada chamado do push metodo usa a propriedade lenght definida aqui no objeto para determinar a posição onde anexa o novo elemento e aumenta a length propriedade em um
+                //exemplo do push metodo funcionando com um objeto do tipo array
+                [].push.call(this, message);
+            }
+        }; 
+
+        //chamando o metodo do ojbeto literal referenciado por variavel greetings para adicionar novos elmenetos ao objeto
+        //como um array, isso so e possivel graças as ligações do call metodo, assim termos as propriedades 3 e 4 adiconados ao objeto 
+        greetings.append('Howdy');
+        greetings.append('Bonjour');
+
+        console.log(greetings);
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina o greetings objeto que tem três propriedades 1, 2 e length e um método append():
+         * 
+         * O append() método chama o push()método de um objeto de array para anexar o message ao greetings objeto.
+         * 
+         * Em cada chamada, o push() usa a length propriedade do greetings objeto para determinar a posição onde anexa o novo elemento e aumenta a length propriedade em um.
+         * 
+         * Como resultado, o greetings objeto tem mais dois elementos no índice 2 e 3. E a length propriedade fica 4 depois das ligações.
+         * 
+         * Terceiro, envie o greetings objeto para o console:
+         * 
+         * Para permitir que o método append() aceite várias mensagens, você pode modificar o método assim: 
+        */
+        
+        //rescrevendo o ojbeto para uma modificação no metodo append
+        let greetings2 = {
+            0: 'Hi',
+            1 : 'Hello',
+            length: 2,
+            //declara um metodo do objeto usando a sintaxe ES6, ocultando palavra chave function e o :
+            //metodo sem paramentro declarado
+            append() {
+                //aqui oque muda e que os argumentos a serem passados para o push metodo serão oriundos do arguments objeto 
+                //usando o operador spread descompactaremos o array argumentos em elementos individuais para o call metodo para serem passados para o push metodo com o novo this valor especificado
+                //os argumentos passados para o metodo append são adiconados ao array arguments que pertence a instancia de objeto do tipo function append aqui neste caso
+                [].push.call(this, ...arguments);
+            }
+        }; 
+
+        //chamando o metodo do objeto literal referenciado por greetings2 para anexar varios argumentos passados para o metodo ao final do objeto, enexa varios elementos ao objeto como um array graças as ligações do metodo call
+        //teremos novas propriedades como 3 e 4
+        greetings2.append('Howdy', 'Bonjour');
+
+        console.log(greetings2);
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, remova o parâmetro message do método append.
+         * 
+         * Em segundo lugar, espalhe os elementos do arguments objeto e empurre-os para o greetings objeto.
+         * 
+         * * RESUMO
+         * 
+         * Use o método de array JavaScript push() para anexar um ou mais elementos a uma array.
+         * 
+         * O push() método também funciona com um objeto do tipo array.
+        */
+    </script>
+</body>
+</html>

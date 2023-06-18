@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Exemplo de JavaScript orientado a objetos </title>
+  </head>
+
+  <body>
+
+    <h1>Exemplo de Orientação a Objetos em JavaScript</h1>
+    
+    <p>Este exemplo requer a inserção de comandos no console JavaScript do seu navegador (veja <a a  href = " https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools " > Quais são as ferramentas de desenvolvimento do navegador </a> para mais informações).</p>
+
+  </body>
+
+  <!--
+      script local que manipulara e demostrara exemplos de OOP em JS
+  -->
+  
+  <script>
+      //função que cria um objeto pessoa com uma propriedade nome e um metodo, e retorna o objeto criado
+      function createNewPerson(nome) {
+         //cria um objeto vazio
+         var obj = {};
+         //criando uma propriedade ao objeto
+         obj.name = nome;
+         //criando um metodo do objeto
+         obj.saudacao = function() {
+             alert("Ei! Eu sou " + obj.name + '.');
+         };
+         //retorna um objeto criado e prenchindo com infornmações
+         return obj;
+      }
+
+      //função costrutora(ou função do costrutor) de Pessoa
+      //essa função de construtor é a versão do JavaScript de uma classe. definindo metodos e propriedades como uma classe.
+      //e a maneira de definir uma classe em JavaScript
+      function Pessoa(nomeP) {
+          //propriedade do obj
+          this.nome = nomeP;
+          //metodo de objeto
+          this.saudacao = function() {
+            alert('Ei! eu sou' + this.nome + '.');
+          };
+      }
+
+      //criando instancias de objetos da classe Pessoa, atrave do metodo construtor
+      var pessoa1 = new Pessoa('Bob');
+      var pessoa2 = new Pessoa('Sarah');
+
+      //função construtora de classe com paramentros obrigatorios para a definição da classe, essa função construtora e a maneira de representar uma classe no JS
+      function PessoaCompleta(primeiro, ultimo, idade, sexo, interesses) {
+            //a propriedade nome do obj e um objeto
+            this.nome = {
+                'primeiro' : primeiro,
+                'ultimo' : ultimo
+            };
+            //propriedade do obj 
+            this.idade = idade;
+            //propriedade do obj
+            this.sexo = sexo,
+            //propriedade do obj
+            this.interesses = interesses;
+            //metodo do obj
+            this.bio = function() {
+                alert(this.nome.primeiro + ' ' + this.nome.ultimo + 'e ' + this.idade + 'anos. E gosto de ' + this.interesses[0] + ' e ' + this.interesses[1] + '.');
+            };
+            //metodo do obj
+            this.saudacao = function() {
+                alert('Ei! Eu sou ' + this.nome.primeiro + '.');
+            };
+      }
+
+      //criando uma istancia da classe PessoaCompleta() pelo seu construtor 
+      var pessoaTeste1 = new PessoaCompleta('Bob', 'Smith', 32, 'masculino', ['musica','skiar']);
+  </script>
+</html>

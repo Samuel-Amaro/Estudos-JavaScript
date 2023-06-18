@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Se alguma das promessas for rejeitada, a promessa retornada por Promise.all rejeitará imediatamente com esse erro.
+         * 
+         * Por exemplo:
+        */
+
+        //Promise.all espera até que todos os trabalhos sejam resolvidos
+        //chama metodo statico Promise.all(iterable), para executar varias promessas simultaneamente
+        //o argumento passado e um array de promises a serem executadas
+        //o metodo retorna uma nova promise, essa promise e resolvida com um array de resultados com todos os resultados das promises passados por argumento resolvidas
+        //se alguma das promises passadas por argumento for rejeitada, a  promise retorna por promise.All sera rejeitada também com o mesmo error, se tornando o resultado de todo o promise.All
+        Promise.all([
+            new Promise((resolve, reject) => setTimeout(() => resolve(1), 1000)),
+            new Promise((resolve, reject) => setTimeout(() => reject(new Error("Whoops!")), 2000)),
+            new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000)) 
+        ])
+        //anexa um manipulador .catch para capturar erros de promise rejeitada
+        .catch(alert); //Error: Whoops!
+        
+        /**
+         * Aqui a segunda promessa é rejeitada em dois segundos. Isso leva a uma rejeição imediata de Promise.all, então .catch executa: o erro de rejeição se torna o resultado de todo o Promise.all.
+         */
+    </script>
+</body>
+</html>

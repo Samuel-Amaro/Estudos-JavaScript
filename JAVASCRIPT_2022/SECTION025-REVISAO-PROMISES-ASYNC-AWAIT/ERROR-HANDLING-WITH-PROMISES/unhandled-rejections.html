@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * UNHANDLED REJECTIONS(REJEIÇÕES NÃO TRATADAS)
+         * 
+         * O que acontece quando um erro não é tratado? Por exemplo, esquecemos de anexar .catch ao final da cadeia, como aqui:
+        */
+
+        new Promise(function executor() {
+            //erro de programação, chamamos uma function que não esta definida e não existe, isso gera um erro, um erro dentro do executor, chama implicitamente o try...catch ao redor do executor, e logo em seguida rejeita a promise com o error
+            //e também não anexamos nenhum manipulador de erro no encadeamento
+            noSuchFunction();// Erro aqui (sem tal função)
+        })
+        //anexa um manipulador .then para obter resultado de promise resolvida
+        .then(() => {
+            ///manipuladores de promessa bem-sucedidos, um ou mais
+        }); // sem .catch no final!
+
+        /**
+         * Em caso de erro, a promessa é rejeitada e a execução deve pular para o manipulador de rejeição mais próximo. Mas não há nenhum. Assim, o erro fica “preso”. Não há código para lidar com isso.
+         * 
+         * Na prática, assim como com erros regulares não tratados no código, isso significa que algo deu terrivelmente errado.
+         * 
+         * O que acontece quando ocorre um erro regular e não é detectado pelo try..catch? O script morre com uma mensagem no console. Algo semelhante acontece com rejeições de promessas não tratadas.
+         * 
+         * O mecanismo JavaScript rastreia essas rejeições e gera um erro global nesse caso. Você pode vê-lo no console se executar o exemplo acima.
+         * 
+         * No navegador, podemos capturar esses erros usando o evento unhandledrejection
+         */
+
+        //atribuindo um manipulador de evento por meio do metodo addEventListener(event, handler, {...});
+        //o manipulador e para o evento unhandledrejection(rejeição não tratada) que captura os erros que não foram tratados por try...catch, uma promise rejeitada aciona esse evento
+        window.addEventListener('unhandledrejection', function(event) {
+            //o objeto de evento tem duas propriedades especiais:
+            alert(event.promise); //[object Promise] - a promessa que gerou o erro
+            alert(event.reason); //Erro: Opa! - o objeto de erro não tratado
+        });
+
+        /**
+         * O evento é parte do padrão HTML .
+         * 
+         *  erro e não houvSe ocorrer umer .catch, o unhandledrejection manipulador será acionado e obterá o event objeto com as informações sobre o erro, para que possamos fazer algo.
+         * 
+         * Normalmente tais erros são irrecuperáveis, então nossa melhor saída é informar o usuário sobre o problema e provavelmente reportar o incidente ao servidor.
+         * 
+         * Em ambientes sem navegador, como o Node.js, existem outras maneiras de rastrear erros não tratados.
+        */
+    </script>
+</body>
+</html>

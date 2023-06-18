@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button type="button" id="coords-show-mark">Clique Aqui!</button>
+
+    <script type="text/javascript">
+       /**
+        * * USANDO PARA POSICIONAMENTO "FIXED"
+        * 
+        * Na maioria das vezes, precisamos de coordenadas para posicionar algo.
+        * 
+        * Para mostrar algo próximo a um elemento, podemos usar getBoundingClientRect para obter suas coordenadas e então CSS position junto com left/top(ou right/bottom).
+        * 
+        * Por exemplo, a função createMessageUnder(elem, html) abaixo mostra a mensagem em elem:
+        */
+
+        //obtem o no de elemento <button> a partir de seu id
+        let elem = document.getElementById("coords-show-mark");
+
+        //declara uma function regular chamada createMessadeUnder com dois paramentros elem, html, uma function e uma instancia de objeto do tipo Function
+        function createMessadeUnder(elem, html) {
+            //cria um elemento message
+            //cria um elemento no de elemento  html div
+            let message = document.createElement('div');
+
+            //melhor usar uma classe css para o estilo aqui
+            //define um estilo completo como uma string por meio da propriedade elem.style.cssText
+            message.style.cssText = "position: fixed; color: red";
+
+            //atribua coordenadas, não se esqueça de "px"!
+            //O método elem.getBoundingClientRect() retorna as coordenadas da janela(window) para um retângulo mínimo que inclui elem um objeto da classe DOMRect integrada.
+            //retorna um objeto DOMRect
+            //as cordenadas obtidas são relativas a janela, calculada a partir da borda top/left da janela.
+            //o retangulo minimo retornado como um objeto representa essas cooordenadas 
+            let coords = elem.getBoundingClientRect();
+
+            //posicionando o elemento a partir das cordenadas obtidas
+            //coords.left e uma propriedade derivada que obtem o mesmo valor que a propriedade x, coordenada x
+            message.style.left = coords.left + "px";
+            //coords.bottom e uma propriedade derivada que obtem o mesmo valor que a propriedade y, coordenada y
+            message.style.bottom = coords.bottom + "px";
+
+            //atribui codigo html para o elemento message
+            message.innerHTML = html;
+
+            return message;
+        }
+
+        //Uso:
+        //adiciona por 5 segundos no documento
+        let message = createMessadeUnder(elem, 'Hello, World!');
+        document.body.append(message);
+        //apos um intervalo de tempo de 5 segundos ter passado execute a callback
+        setTimeout(() => message.remove(), 5000);
+
+        /**
+         * O código pode ser modificado para mostrar a mensagem à esquerda, direita, abaixo, aplicar animações CSS para “fade it in” e assim por diante. Isso é fácil, pois temos todas as coordenadas e tamanhos do elemento.
+         * 
+         * Mas observe o detalhe importante: quando a página é rolada, a mensagem flui para longe do botão.
+         * 
+         * A razão é óbvia: o elemento de mensagem depende de position:fixed, portanto, permanece no mesmo local da janela enquanto a página rola.
+         * 
+         * Para mudar isso, precisamos usar coordenadas baseadas em documentos e position:absolute.
+         * */
+    </script>
+</body>
+</html>

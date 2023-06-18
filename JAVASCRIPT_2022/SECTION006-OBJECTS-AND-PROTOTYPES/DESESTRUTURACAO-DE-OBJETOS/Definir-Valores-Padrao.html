@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definir Valores Padrão</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * DEFINIR VALORES PADRÃO
+         * 
+         * Você pode atribuir um valor padrão à variável quando a propriedade de um objeto não existir. Por exemplo:
+        */
+
+        //declara uma objeto anonimo literal com propriedades, esse objeto e atribuido por referencia a variavel person, assim person referencia o ojbeto
+        let person = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            currentAge: 28
+        };
+
+        //desestruturando o objeto referenciado pela variavel person
+        //atribuindo as propriedades a variaveis individuais
+        //aqui, como as variaveis possui o mesmo nome da propriedade omitimos o nome da propriedade
+        //quando uma propriedade não existe no objeto pode-se atribuir um valor padrão a ela para que não gere um erro e fique sem inicializala
+        //neste caso as variavel middleName não possui propriedade, mas ela possui um valor padrão para que ela se inicialize sosinha sem precisar da atribuição da propriedade correspondente
+        //aqui as variaveis firstName, lastName recebem atribuições de propriedades com o mesmo nome das propriedades
+        //a variavel age recebe o valor padrão 18, so que essa variavel e quem recebera o valor da propriedade currentAge que existe, assim a age tera um novo valor apos a desestruturação
+        //let {firstName, lastName, middleName = '', currentAge: age = 18} = person;
+
+        //console.log(middleName); //mostra o valor padrão atribuido na desestruturação
+        //console.log(age); //mostra valor atribuido pela desestruturação
+
+        /**
+         * Neste exemplo, atribuímos uma string vazia à middleName variável quando o objeto person não possui a middleName propriedade.
+         * 
+         * Além disso, atribuímos a currentAge propriedade à age variável com o valor padrão de 18.
+         * 
+         * No entanto, quando o objeto pessoa tem a middleName propriedade, a atribuição funciona normalmente:
+        */
+
+        //objeto literal atribuido a person variavel
+        let person2 = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            middleName: 'C.',
+            currentAge: 28
+        };
+
+        //nessa desestrututação a propriedade middleName existe, assim ira atribuit seu valor a varaivel middleName substituindo o valor padrão caso a propriedade não existisse
+        let {firstName, lastName, middleName = '', currentAge: age2 = 18} = person2;
+
+        console.log(middleName); //mostra o valor atribuido pela propriedade na desestruturação
+        console.log(age2); //mostra valor atribuido pela desestruturação com a propriedade correspondente
+    </script>
+</body>
+</html>

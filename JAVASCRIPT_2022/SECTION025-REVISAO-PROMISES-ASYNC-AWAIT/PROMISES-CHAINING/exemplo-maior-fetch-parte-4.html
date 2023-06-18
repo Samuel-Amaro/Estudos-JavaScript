@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Para tornar a cadeia extensível, precisamos retornar uma promessa que resolve quando o avatar termina de ser exibido.
+        */      
+
+        //usando metodo fetch para realizar uma solicitação de rede para o url passado por argumento e retorna um promese
+        //a promise retornada e resolvida com um response objeto quando o servidor remoto responde com headers, mas antes que a resposta completa seja baixada
+        fetch("https://javascript.info/article/promise-chaining/user.json")
+        //registrando um function .then manipulador para consumir a response objeto resolvido da promise
+        //.then abaixo é executado quando o servidor remoto responde com um header
+        .then((response) => {
+            //response.json() retorna uma nova promessa que e resolvida quando a promisse ja leu os dados remotos e os analise e retorna como JSON
+            //a promisse so e resolvida quando o dados foram analisados e carregados
+            //quando carrega
+            return response.json();
+        })
+        //registrando outro .then manipulador para consumir o objeto json do resolve metodo da promisse retornada pelo .then manipulador anterior
+        .then((user) => {
+            //logo em seguida faremos outra solicitação de rede para buscar um user do gitHub, isso retorna outra promisse com o fecth
+            return fetch(`https://api.github.com/users/${user.name}`);
+        })
+        //registra outro function .then manipulador para consumir outro response objeto, retornado por resolve quando promise e resolvida
+        .then((response) => {
+            //retorna outra promisse que so e resolvida quando dados estiverem carregados analisados em formato json
+            return response.json();
+        })
+        //Mostre a imagem do avatar (githubUser.avatar_url) por 3 segundos (talvez animar)
+        //registra outro manipualdor para consumir um objeto json como resultado da promisse anterior resolvida
+        .then((gitHubUser) => {
+            //retorna um nova promise que tem como trabalho assincrono carrega uma imagem externa e anexa ao documento
+            return new Promise(function executor(resolve, reject) {
+                let img = document.createElement('img');
+                img.src = gitHubUser.avatar_url;
+                img.className = "promise-avatar-example";
+                document.body.prepend(img);
+
+                //apos 3s remove o img do documento
+                setTimeout(() => { 
+                    img.remove();
+                    //a promise e resolvida com o objeto gitHubUser apos 3s
+                    resolve(gitHubUser); //(**)
+                }, 3000); 
+            })
+        })
+        //anexa outra .then manipulador para receber o objeto gitHubUser do resultado da promise resolvida anterior
+        .then((gitHubUser) => {
+            //espera 3s para receber o resultado da promise resolvida
+            alert('Mostragem finalizada: ' + gitHubUser.name);
+        });
+
+        /**
+         * Ou seja, o .then manipulador em linha (*) agora retorna new Promise, que se torna liquidado somente após a chamada de resolve(githubUser) in setTimeout (**). O próximo .then na cadeia vai esperar por isso.
+         * 
+         * Como boa prática, uma ação assíncrona deve sempre retornar uma promessa. Isso possibilita planejar ações a partir dele; mesmo que não planejemos estender a cadeia agora, podemos precisar dela mais tarde.
+         * 
+         * Finalmente, podemos dividir o código em funções reutilizáveis:
+        */
+    </script>
+
+</body>
+</html>

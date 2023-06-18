@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* estilos dependem do atributo personalizado "order-state" */
+        .order[order-state="new"] {
+            color: green;
+        }
+
+        .order[order-state="pending"] {
+            color: blue;
+        }
+
+        .order[order-state="canceled"] {
+            color: red;
+        }
+
+    </style>
+</head>
+<!--
+    - atributos não padrão personalizado data-*
+    - atributos que começam com data- são reservadors para uso dos programadores
+-->
+<body data-about="Elephants">
+
+    <!--
+        - o elemento html abaixo possui um atributo html não padrão personalizado chamado order-state com o valor new, esse atributo e para marcar o elemento html para o JS
+    -->
+    <div class="order" order-state="new">
+        A new order.
+    </div>
+    <div class="order" order-state="pending">
+        A pending order.
+    </div>
+    <div class="order" order-state="canceled">
+        A canceled order.
+    </div>
+
+
+    <script type="text/javascript">
+
+        /**
+         *  Também podem ser usados ​​para estilizar um elemento.
+         * 
+         * Por exemplo, aqui para o estado do pedido, o atributo order-state é usado:
+         * 
+         * Por que usar um atributo é preferível a ter classes como .order-state-new, .order-state-pending, .order-state-canceled?
+         * 
+         * Porque um atributo é mais conveniente para gerenciar. O estado pode ser alterado tão facilmente quanto:
+        */
+
+        //um pouco mais simples do que remover o antigo/adicionar uma nova classe
+        //div.setAttribute('order-state', 'canceled');
+
+        /**
+         * Mas pode haver um possível problema com atributos personalizados. E se usarmos um atributo não padrão para nossos propósitos e depois o padrão o introduzir e fizer algo? A linguagem HTML está viva, cresce e mais atributos aparecem para atender às necessidades dos desenvolvedores. Pode haver efeitos inesperados nesse caso.
+         * 
+         * Para evitar conflitos, existem atributos data-* .
+         * 
+         * Todos os atributos que começam com “data-” são reservados para uso dos programadores. Eles estão disponíveis na dataset propriedade.
+         * 
+         * Por exemplo, se um elem tiver um atributo chamado "data-about", ele estará disponível como elem.dataset.about.
+        */
+
+        //para acessar atributos html não padrão personalizados que começa com data-  no elemento html, os acessamos por meio da propriedade elem.dataset.nameAttribute, assim obtemos o valor do atributo
+        console.log(document.body.dataset.about); //Elephants
+
+</script>
+
+</body>
+</html>

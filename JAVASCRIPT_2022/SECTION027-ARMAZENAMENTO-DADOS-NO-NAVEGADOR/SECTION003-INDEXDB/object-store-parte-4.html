@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ARMAZENAMENTO DE OBJETOS
+         * 
+         * Para armazenar algo no IndexedDB, precisamos de um objeto store.
+         * 
+         * Um armazenamento de objetos(objeto store) é um conceito central do IndexedDB. As contrapartes em outros bancos de dados são chamadas de “tabelas” ou “coleções”. É onde os dados são armazenados. Um banco de dados pode ter várias lojas(stores): uma para usuários, outra para mercadorias, etc.
+         * 
+         * Apesar de ser chamado de “armazenamento de objetos - storage store”, as primitivas também podem ser armazenadas.
+         * 
+         * Podemos armazenar quase qualquer valor, incluindo objetos complexos.
+         * 
+         * IndexedDB usa o algoritmo de serialização padrão para clonar e armazenar um objeto. É como JSON.stringify, mas mais poderoso, capaz de armazenar muito mais tipos de dados.
+         * 
+         * Um exemplo de objeto que não pode ser armazenado: um objeto com referências circulares. Esses objetos não são serializáveis. JSON.stringify também falha para tais objetos.
+         * 
+         * Deve haver um exclusivo key para cada valor na loja(store).
+         * 
+         * Uma chave deve ser um desses tipos – número, data, string, binário ou array. É um identificador único, então podemos pesquisar/remover/atualizar valores pela chave.
+         * 
+         * Como veremos em breve, podemos fornecer uma chave quando adicionamos um valor à loja(store), semelhante a localStorage. Mas quando armazenamos objetos, IndexedDB permite configurar uma propriedade de objeto como chave, o que é muito mais conveniente. Ou podemos gerar chaves automaticamente.
+         * 
+         * Mas precisamos criar um armazenamento(store) de objetos primeiro.
+         * 
+         * A sintaxe para criar um armazenamento(store) de objetos:
+        */
+
+        //db.createObjectStore(name[, keyOptions]);
+
+        /*
+         * Observe que a operação é síncrona, não é await necessária.
+         * 
+            * name é o nome da loja(store), por exemplo, "books" para livros,
+            * 
+            * keyOptions é um objeto opcional com uma das duas propriedades:
+            * 
+                * keyPath– um caminho para uma propriedade de objeto que IndexedDB usará como chave, por exemplo id.
+                * 
+                * autoIncrement– if true, então a chave para um objeto recém-armazenado é gerada automaticamente, como um número sempre crescente.
+                * 
+            * Se não fornecermos keyOptions, precisaremos fornecer uma chave explicitamente mais tarde, ao armazenar um objeto. 
+         * 
+         * Por exemplo, este armazenamento de objetos usa ida propriedade como chave:
+        */
+
+        //db.createObjectStore('books', {keyPath: 'id'});
+
+        /**
+         * Um armazenamento de objetos só pode ser criado/modificado durante a atualização da versão do banco de dados, no upgradeneeded handler.
+         * 
+         * Isso é uma limitação técnica. Fora do manipulador, poderemos adicionar/remover/atualizar os dados, mas os armazenamentos de objetos só podem ser criados/removidos/alterados durante uma atualização de versão.
+         * 
+         * Para realizar uma atualização de versão do banco de dados, existem duas abordagens principais:
+         * 
+            * Podemos implementar funções de atualização por versão: de 1 a 2, de 2 a 3, de 3 a 4 etc. Então, upgradeneeded podemos comparar versões (por exemplo, antiga 2, agora 4) e executar atualizações por versão passo a passo, para cada versão intermediária (2 a 3, depois 3 a 4). 
+            * 
+            * Ou podemos apenas examinar o banco de dados: obtenha uma lista de armazenamentos de objetos existentes como arquivos db.objectStoreNames. Esse objeto é um DOMStringList que fornece um contains(name) método para verificar a existência. E então podemos fazer atualizações dependendo do que existe e do que não existe.
+            * 
+         * Para bancos de dados pequenos, a segunda variante pode ser mais simples.
+         * 
+         * Aqui está a demonstração da segunda abordagem:
+        */
+
+        //conectando,a uma banco de dados.
+        //abrindo uma conexão
+        //o primeiro argumento passado para o metodo open e uma string, informando o nome do banco de dados
+        //o segundo argumento e um numero inteiro positivo, informando a versão
+        let openRequest = indexedDB.open("db", 2);
+
+        //criar/atualizar o banco de dados sem verificações de versão
+        //Um store objetct só pode ser criado/modificado durante a atualização da versão do banco de dados, no upgradeneeded handler
+        //Para realizar uma atualização de versão do banco de dados, existem duas abordagens principais:
+        //atribuindo um manipulador para o evento 
+        //este evento e acionado quando  o banco de dados está pronto, mas sua versão está desatualizada
+        //Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado
+        //O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+        openRequest.onupgradeneeded = function(event) {
+            //obtem o objeto databse
+            let db = openRequest.result;
+            //o bd.objectStoreNames obtem uma lista de stores objetos existententes, usando o metodo contains(name) para verificar se existe algum store objeto 
+            //se existir não faz nada
+            //se não existir criamos um store objeto
+            if(!db.objectStoreNames.contains('books')) {
+                //cria um objeto store para armazenar algo no indexDB
+                //o primeiro argumento passado e o nome do store objeto
+                //o segundo argumento e um objeto opcional com uma propriedade
+                //a propriedade keyPath e um caminho para um propriedade de objeto que indexDb usara como key
+                db.createObjectStore('books', {keyPath: 'id'});
+            }
+        };
+
+        /**
+         *  Para excluir um armazenamento de objetos:
+         * 
+        */
+
+        //db.deleteObjectStore('books');
+
+    </script>
+
+</body>
+</html>

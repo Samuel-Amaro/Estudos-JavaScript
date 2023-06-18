@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faltou o catch() método</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * FALTOU O CATCH() MÉTODO
+         * 
+         * O exemplo a seguir não fornece o catch() método para lidar com o erro dentro da promessa. Isso causará um erro de tempo de execução e encerrará o programa:
+        */
+
+        //declara uma variavel chamada authorized e a inicializa com o valor booleano false
+        let authorized = false;
+
+        //declara uma function chamada getUserById, que declara um parametro chamado id
+        function getUserById(id) {
+            //a function ira retorna uma instancia de objeto anonima de uma promise, que o seu construtor recebe uma callback function com dois paramentros declarados conhecida como executor
+            return new Promise((resolve, reject) => {
+                //simula uma operação assicrona
+                
+                //se não possui autorização
+                if(!authorized) {
+                    //invoca a reject function callbakc argumento para mudar estado da promise de pendente para rejeitada por um motivo
+                    //o motivo e o argumento do reject function callbak argumento do callbak executor
+                    reject('Unauthorized acess to the user data');
+                }
+
+                //se possuir autorização
+                //usando o resolve function callbakc para resolver a promise, o callbak muda o estado da promise de pendente para cumprida com valor
+                //o valor a ser resolvido e um objeto literal anonimo com duas propriedades
+                resolve({
+                    id: id,
+                    username: 'admin'
+                });
+            });
+        }
+
+        /**
+         * E consuma a promessa:
+        */
+
+        //chamando o método getUserById passando o argumento 10 ele retorna uma promise.
+        //Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //aqui o then método ira invocar a sua callbakc recebida por argumento, quando a promise for cumprida com valor, a callbak obtem esse valor e o manipula, mostra o resultado.
+        //o catch método e para obter o erro apenas quando o estado da promessa for rejeitado, a catch método ira chamar sua callbakc argumento quando a promisse for rejeitada, assim a callback obtera o motivo da rejeição da promisse. e usando este método demostrara que quando se lança um erro de dentro de um promise tem o mesmo efeito que rejeitar a mesma por um motivo, todos tratados pelo cath método encadeado
+        //usando o try/catch para capturar a exceção que e lançada pela propria promise de dentro dela mesmo, lança um erro sem modificar o estado da promise.
+        //o catch método trata os erros lançados pela promise retornada pelo getUserById mas o cathc tem que estar encadeada na mesma promise, para ter o relacionamento
+        //aqui neste caso omitimos o cathc método para não ter oque lidar com o erro lançado quando a promise e rejeitafda, isso ira causar um erro em tempo de execução
+        try {
+            getUserById(10)
+                        .then(user => console.log(user.username));
+                        // o código a seguir não será executado
+        } catch (error) {
+            console.log(`Caught by try/catch ${error}`);
+        }
+
+        /**
+         * Se a promessa for resolvida, você poderá omitir o catch() método. No futuro, um possível erro pode fazer com que o programa pare inesperadamente.
+         * 
+         * * RESUMO
+         * 
+         * Dentro da promessa, o catch()método pegará o erro causado pela throw instrução e reject().
+         *
+         * Se ocorrer um erro e você não tiver o catch() método, o mecanismo JavaScript emitirá um erro de tempo de execução e interromperá o programa.
+        */
+    </script>
+
+</body>
+</html>

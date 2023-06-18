@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Operador</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O IN(dentro) OPERADOR: verifique se existem campos privados
+         * 
+         * Para verificar se um objeto possui um campo privado dentro de uma classe, você usa o in operador:
+
+            fieldName in objectName
+
+         * 
+         * Por exemplo, o seguinte adiciona o hasRadius() método estático à Circle classe que usa o in operador para verificar se o circle objeto tem o #radius campo privado:
+        */
+
+        //define uma class chamada Circle que utiliza a palavra-chave class
+        class Circle{
+            //define uma propriedade chamada radius privada no corpo da classe
+            //essa propriedade e uma propriedade privada o # sinal define que a propriedade e privada, so pode ser acessada dentro do escopo da classe
+            //iniciliaza a propriedade com o valor 0 
+            #radius = 0;
+            //define um construtor para a class Circle e declara um parametro chamado value
+            constructor(radius) {
+                //declara uma propriedade chamada radius e a inicializa com o radius argumento
+                this.radius = radius;
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade
+            //usando a palavra chave get, para definir o metodo get area 
+            //calcula a area do circulo o método
+            get area() {
+                //retorna o produto de uma multiplicação
+                return Math.PI * Math.pow(this.radius, 2);
+            }
+            //define um metodo setter da classe Circle chamado de radius e declara um paramentro chamado value
+            //usando a sintaxe especifica do ES6 para definir o setter método inicializador de propriedade privada #radius
+            set radius(value) {
+                if(typeof value === 'number' && value > 0) {
+                    //inicializa a propriedade privada #radius com o value argumento
+                    this.#radius = value;
+                }else{
+                    //lança exceção
+                    throw 'The radius must be a positive number';
+                }
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade #radius privada para obter o valor da mesma
+            get radius() {
+                return this.#radius;
+            }
+
+            //declara um método estatico chamado hasRadius que declara um paramentro chamado circle
+            //o metodo estatico e vinculado a classe e não a instancia da mesma
+            //metodos estaticos no ES6 são definidos usando a palavra chave static antes da definição do método
+            //um metodo estatico esta vinculado a classe e não a instancias da classe
+            static hasRadius(circle) {
+                //utilizando o in operador
+                //O operador in retorna verdadeiro se a propriedade especificada estiver no objeto especificado.
+                //verifica se a propriedade privada #radius esta no circle instancia de objeto por meio do operador in
+                //se sim retorna true se não false
+                return #radius in circle;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da class Circle e fornecendo um argumento e usando o new operador
+        //o objeto e atribuido por referencia a variavel circle
+        let circle = new Circle(10);
+
+        //invoca o método estatico pela class sem precisar invocar uma instancia de objeto
+        //o metodo estatico invocado ira verificar se na instancia de objeto referenciada por circle possui alguma propriedade privada chamada radius
+        //passa a referencia do objeto referenciado por circle variavel como argumento para o metodo estatico
+        console.log(Circle.hasRadius(circle)); //true
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * LOADING A SCRIPT(CARREGANDO UM SCRIPT)
+         * 
+         * Digamos que precisamos carregar um script de terceiros e chamar uma função que reside lá.
+         * 
+         * Podemos carregá-lo dinamicamente, assim:
+        */
+
+        //cria uma tag script que carrega um script de terceiros e anexa ao final da head section no documento
+        let script = document.createElement('script');
+        script.src = "my.js";
+        document.head.append(script);
+
+        /**
+         * …Mas como executar a função que está declarada dentro desse script? Precisamos esperar até que o script seja carregado, e só então podemos chamá-lo.
+         * 
+         * * OBSERVE: 
+         * 
+         * Para nossos próprios scripts, poderíamos usar módulos JavaScript aqui, mas eles não são amplamente adotados por bibliotecas de terceiros.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedades Estáticas</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * PROPRIEDADES ESTÁTICAS DO JS
+         *
+         * Resumo : neste tutorial, você aprenderá sobre as propriedades estáticas do JavaScript de uma classe e como acessar as propriedades estáticas em um método estático, construtor de classe e outros métodos de instância.
+         * 
+         * * INTRODUÇÃO ÁS PROPRIEDADES ESTÁTICAS DO JS
+         * 
+         * Como um método estático, uma propriedade estática é compartilhada por todas as instâncias de uma classe . Para definir a propriedade estática, você usa a palavra- static chave seguida pelo nome da propriedade assim:
+        */
+
+        //definir uma class Chamada Item, usando a palavra-chave class
+        class Item{
+            //para definir uma propriedade estática usa-se a palavra-chave static seguida pelo nome da propriedade
+            //uma propiedade stati e compartilhada por todas as instancias da classe
+            static count = 0;
+        }
+
+        /**
+         * Para acessar uma propriedade estática, você usa o nome da classe seguido pelo . operador e o nome da propriedade estática. Por exemplo:
+        */
+
+        //acessando uma propriedade estatica, não precisa de instancias, proprieddae esta vinculada a class
+        //para acessa propriedade estatica chama o Nome da classe . nome da propriedade estatica
+        //ClassName.staticProperty;
+        console.log(Item.count);
+
+        /**
+         * Para acessar a propriedade estática em um método estático, você usa o nome da classe seguido pelo . operador e o nome da propriedade estática. Por exemplo:
+        */
+
+        //definir uma class Chamada Item, usando a palavra-chave class
+        class Item2{
+            //para definir uma propriedade estática usa-se a palavra-chave static seguida pelo nome da propriedade
+            //uma propiedade stati e compartilhada por todas as instancias da classe
+            static count = 0;
+            //define um metodo estatico, usando a palavra chave static antes da definição do metodo
+            //define um metodo statico chamado getCount
+            static getCount() {
+                //o metodo estatico retorna o valor da propriedade estatica
+                //metodo estatico acessa propriedade estatica
+                //mesma sintaxe:
+                //ClassName.staticProperty;
+
+                return Item.count;
+            }
+        }   
+
+        //invoca o metodo statico sem precisar instanciar um objeto
+        //metodo ou propriedade estatica estão vinculados a classe
+        console.log(Item2.getCount()); //0
+
+        /**
+         * Para acessar uma propriedade estática em um construtor de classe ou métodos de instância, você usa a seguinte sintaxe:
+
+            className.staticPropertyName;
+
+         * 
+         * Ou
+
+            this.constructor.staticPropertyName;
+
+         * 
+         * O exemplo a seguir aumenta a count propriedade estática no construtor da classe:
+        */
+
+        //definir uma class Chamada Item, usando a palavra-chave class
+        class Item3{
+            //define um construtor para a class Item3 esse construtor declara dois paramentros chamado name e quantity
+            constructor(name, quantity) {
+                //declara uma propriedade chamada name que e inicializa com o argumento name
+                this.name = name;
+                this.quantity = quantity;
+                //acessando a propriedade static count dentro do construtor
+                //usar essa sintaxe
+                //incrementa mais um na propriedade estatica
+                this.constructor.count++;
+            }
+            //para definir uma propriedade estática usa-se a palavra-chave static seguida pelo nome da propriedade
+            //uma propiedade stati e compartilhada por todas as instancias da classe
+            static count = 0;
+            //define um metodo estatico, usando a palavra chave static antes da definição do metodo
+            //define um metodo statico chamado getCount
+            static getCount() {
+                //o metodo estatico retorna o valor da propriedade estatica pos incrementada, isso a propriedade e incrementada antes de ser retornado seu valor
+                //metodo estatico acessa propriedade estatica
+                //mesma sintaxe:
+                //ClassName.staticProperty;
+                return Item3.count++;
+            }
+        }   
+
+        /**
+         * Quando você cria uma nova instância da Itemclasse, a instrução a seguir aumenta a count propriedade estática em um:
+
+            this.constructor.count++;
+
+         * 
+         * Por exemplo:
+        */
+
+        //declara uma nova instancia de objeto do tipo Item, invocando o construtor e usando o operador new
+        //passando dois argumentos para o construtor
+        //a instancia de objeto criada e atribuida por referencia a variavel pen
+        //ao declara uma nova instancia de objeto a propriedade estatica count e incrementada em 1 pelo proprio construtor
+        let pen = new Item3("Pen", 5);
+        let notebook = new Item3("notebook", 10);
+
+        console.log(Item3.getCount()); //2
+
+        /**
+         * Este exemplo cria duas instâncias da Item classe, que chama o construtor de classe. Como o construtor da classe aumenta a count propriedade em um cada vez que é chamado, o valor de count é dois.
+         * 
+         * Coloque tudo junto.
+         * 
+         * * RESUMO
+         * 
+         * Uma propriedade estática de uma classe é compartilhada por todas as instâncias dessa classe.
+         * 
+         * Use a static palavra-chave para definir uma propriedade estática.
+         * 
+         * Use o className.staticPropertyName para acessar a propriedade estática em um método estático.
+         * 
+         * Use o this.constructor.staticPropertyName ou className.staticPropertyName para acessar a propriedade estática em um construtor.
+        */
+    </script>
+</body>
+</html>

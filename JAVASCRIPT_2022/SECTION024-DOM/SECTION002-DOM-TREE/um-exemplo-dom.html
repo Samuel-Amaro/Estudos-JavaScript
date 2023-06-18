@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sobre Alces</title>
+</head>
+<body>
+
+    A verdade sobre o alce.
+
+    <script type="text/javascript">
+       
+       /**
+        * * UM EXEMPLO DE DOM
+        * 
+        *  Vamos começar com o seguinte documento simples:
+        * 
+        * O DOM representa o HTML como uma estrutura em árvore de tags.
+        * 
+        * Cada nó da árvore é um objeto.
+        * 
+        * Tags são nós de elementos (ou apenas elementos) e formam a estrutura em árvore: <html> está na raiz, então <head> e <body> são seus filhos, etc.
+        * 
+        * O texto dentro dos elementos forma nós de texto , rotulados como #text. Um nó de texto contém apenas uma string. Pode não ter filhos e é sempre uma folha da árvore.
+        * 
+        * Por exemplo, a <title> tag tem o texto "About elk"
+        * 
+        * Observe os caracteres especiais nos nós de texto:
+        
+            - uma nova linha: ↵ (em JavaScript conhecido como \n)
+            - um espaço: ␣
+
+        * Espaços e novas linhas são caracteres totalmente válidos, como letras e dígitos. Eles formam nós de texto e se tornam parte do DOM. Assim, por exemplo, no exemplo acima, a tag <head> contém alguns espaços antes de <title>, e esse texto se torna um #text nó (contém uma nova linha e apenas alguns espaços).
+        *
+        * Existem apenas duas exclusões de nível superior:
+        
+            1. Espaços e novas linhas anteriores <head> são ignorados por motivos históricos.
+            2. Se colocarmos algo depois de </body>, isso será automaticamente movido para dentro de body, no final, pois a especificação HTML exige que todo o conteúdo esteja dentro de <body>. Portanto, não pode haver espaços após </body>.
+
+        * Em outros casos, tudo é simples – se houver espaços (como qualquer caractere) no documento, eles se tornarão nós de texto no DOM e, se os removermos, não haverá mais nenhum.
+        * 
+        * Aqui não há nós de texto somente de espaço:
+        
+                <!DOCTYPE HTML>
+                <html><head><title>About elk</title></head><body>The truth about elk.</body></html>
+
+
+        * Espaços no início/fim da string e nós de texto apenas com espaço geralmente estão ocultos nas ferramentas.
+        * 
+        * As ferramentas do navegador (a serem abordadas em breve) que funcionam com DOM geralmente não mostram espaços no início/fim do texto e nós de texto vazios (quebras de linha) entre as tags.
+        * 
+        * As ferramentas do desenvolvedor economizam espaço na tela dessa maneira.
+        * 
+        * Em outras imagens DOM, às vezes as omitimos quando são irrelevantes. Esses espaços geralmente não afetam como o documento é exibido.
+        * */
+
+    </script>
+</body>
+</html>

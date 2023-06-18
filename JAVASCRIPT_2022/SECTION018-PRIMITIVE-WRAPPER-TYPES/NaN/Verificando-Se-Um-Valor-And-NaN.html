@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * VERIFICANDO SE UM VALOR É NAN
+         * 
+         * JavaScript fornece a função global isNaN() que retorna true se seu argumento for NaN:
+        
+            isNaN(valueToCheck);
+        */
+
+        //declara uma constante de escopo de bloco chamada result que e inicializada com o valor de operação aritmetica
+        const result = 100 + 0 / 0;
+        //usando a função global isNaN, verificamos se o argumento passado para a function isNaN e um valor especial chamado de NaN que o do tipo number, retorna true se sim
+        console.log(isNaN(result)); //true
+    </script>
+
+</body>
+</html>

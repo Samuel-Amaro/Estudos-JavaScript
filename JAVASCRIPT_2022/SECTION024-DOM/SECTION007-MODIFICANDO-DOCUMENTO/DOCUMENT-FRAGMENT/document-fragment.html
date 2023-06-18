@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <ul id="ul"></ul>
+
+    <script type="text/javascript">
+       
+        /**
+         * * DocumentFragment
+         * 
+         * DocumentFragment é um nó DOM especial que serve como um wrapper para passar listas de nós.
+         * 
+         * Podemos anexar outros nós a ele, mas quando o inserimos em algum lugar, seu conteúdo é inserido.
+         * 
+         * Por exemplo, getListContent abaixo gera um fragmento com <li> itens, que posteriormente são inseridos em <ul>:
+        */
+
+        //Em linguagens de programação, como o JavaScript, um wrapper é uma função destinada a chamar uma ou mais funções, às vezes diretamente por conveniência, e às vezes adaptá-las para fazer uma tarefa ligeiramente diferente no processo.
+
+        function getListContent() {
+            //um instancia de objeto, de um no dom que serve como um wrapper
+            let fragment = new DocumentFragment();
+
+            for(let i = 1; i<=3; i++) {
+                //cria um no de elemento <li>
+                let li = document.createElement('li');
+                //anexa o valor i no final do li no
+                li.append(i);
+                //anexa no final do no wrapper o li
+                fragment.append(li);
+            }
+
+            return fragment;
+        }
+
+        //anexa o no wrapper de fragment no final do no ul
+        ul.append(getListContent()); //(*)
+
+        /***
+         * Observe que, na última linha (*), anexamos DocumentFragment, mas ele “se mistura”, então a estrutura resultante será:
+        */
+    </script>
+</body>
+</html>

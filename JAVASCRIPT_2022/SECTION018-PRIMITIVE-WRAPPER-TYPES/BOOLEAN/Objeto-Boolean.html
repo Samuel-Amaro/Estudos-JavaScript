@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OBJETO BOOLEAN JS
+         * 
+         * Além do boolean tipo primitivo, o JavaScript também fornece a Boolean() função global, com a letra B maiúscula, para converter um valor de outro tipo para boolean.
+         * 
+         * O exemplo a seguir mostra como usar a Boolean() função para converter uma string em um valor booleano. Como a string não está vazia, ela retorna true.
+        */
+
+        //usando a fucntion global Boolean() para converter um valor de outro tipo para o tipo primitivo boolean
+        //declara uma varaivel de escopo de bloco chamda a, que e inicializada com o resultado da conversão da string literal 'hi' passado como argumento para a function global Boolean() para ser convertida em um valor booleano(true ou false), se string de entrada não tiver vazia e convertida para true, string vazia e false.
+        let a = Boolean('Hi');
+        console.log(a); //true
+        //usando o operador typeof para saber qual o tipo de dado do conteudo armazenado na variavel a
+        console.log(typeof(a)); //true
+
+        /**
+         * O Boolean também é um objeto wrapper do boolean tipo primitivo. Isso significa que quando você passar true ou false para o Boolean construtor, ele criará um Boolean objeto. Por exemplo:
+        */
+
+        //criando uma instancia de objeto usando o Boolean construtor, que e um wrraper do tipo primitivo boolean
+        //declarando uma nova instancia de objeto do tipo Boolean usando o construtor Boolean, fornecendo um valor booleano como argumento, cria um objeto booleano com o valor false
+        let b = new Boolean(false);
+
+        /**
+         * Para obter o valor primitivo de volta, você chama o valueOf()método do Boolean objeto da seguinte forma:
+        */
+
+        //chamando o método b.valueOf() para ober o valor primitivo passado para o construtor boolean
+        console.log(b.valueOf()); //false
+
+        /**
+         * No entanto, se você chamar o toString() método de um Boolean objeto, obterá um valor de string  "true" ou "false". Por exemplo:
+        */
+
+        //chamando o método b.toString() retorna o valor primitivo passado para a construção do objeto, so que retorna como uma string
+        console.log(b.toString()); //"false"
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operações básicas em matrizes</title>
+</head>
+<body>
+    
+    <h1>Operações básicas em arrays</h1>
+
+    <script>
+
+        /**
+         * * OPERAÇÕES BÁSICAS EM ARRAY 
+         * 
+         * A seguir, uma explicação de algumas operações básicas em arrays. E você vai aprender as operações avançadas, tais como map(), filter() e reduce() nos próximos tutoriais.
+         * 
+         * * 1) Adicionar um elemento ao final de uma array
+         * 
+         * Para adicionar um elemento ao final de uma array, você usa o push() método:
+         * */
+        
+        console.log("------------------------------------------");
+        console.log("1) Adicionar um elemento ao final de um array");
+        let mares = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+        console.log("mares[" + mares + "]");
+        //add o 'Red Sea', como um ultimo elemento do array
+        mares.push('Red Sea');
+        console.log("mares[" + mares + "]"); //mares[Black Sea,Caribbean Sea,North Sea,Baltic Sea,Red Sea]
+
+        /**
+         * * 2) Adicionar um elemento ao inicio de uma array
+         * 
+         * Para adicionar um elemento ao início de uma array, você usa o unshift() método:
+         * */
+
+        console.log("------------------------------------------");
+        console.log("2) Adicionar um elemento ao inicio de um array");
+        let mares2 = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+        console.log("mares2[" + mares2 + "]");
+        //add o 'Red Sea' elemeneto no inicio do array
+        mares2.unshift('Red Sea');
+        console.log("mares2[" + mares2 + "]");
+
+        /**
+         * * 3) Remover um elemento do final de um array
+         * 
+         * Para remover um elemento do final de uma array, você usa o pop() método:
+         * 
+         * */
+        console.log("------------------------------------------");
+        console.log("3) Remover um elemento do final de um array");
+        let mares3 = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+        console.log("mares3[" + mares3 + "]");
+        //remove o elemento 'Baltic Sea' do array e retorna ele
+        const ultimoElemento = mares3.pop();
+        console.log("mares3[" + mares3 + "]");
+        console.log("Elemento Removido: " + ultimoElemento); //Baltic Sea
+
+        /**
+         * * 4) Removendo um elemento do início de um array
+         * 
+         * Para remover um elemento do início de uma array, você usa o shift() método:
+         * */
+
+        console.log("------------------------------------------");
+        console.log("4) Removendo um elemento do inicio de um array"); 
+        let mares4 = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+        console.log("mares4[" + mares4 + "]");
+        //remove o primeiro elemento do array 'Black Sea'
+        const primeiroElementoRemovido = mares4.shift();
+        console.log("mares4[" + mares4 + "]");
+        console.log("Elemento removido: " + primeiroElementoRemovido); //'Black Sea'
+
+        /**
+         * * 5) Encontrar um índice de um elemento na array
+         * 
+         * Para encontrar o índice de um elemento, você usa o indexOf() método:
+         * */
+        console.log("------------------------------------------");
+        console.log("5) Encontrar um índice de um elemento na array"); 
+        let mares5 = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+        console.log("mares5[" + mares5 + "]");
+        let indiceElementoEncontrado = mares5.indexOf('North Sea');
+        console.log("Indice do elemento 'North Sea' = " + indiceElementoEncontrado); //2
+
+        /**
+         * * 6) Verifique se um valor é uma array
+         * 
+         * Para verificar se um valor é uma array, você usa o Array.isArray() método:
+         * */
+
+        console.log("------------------------------------------");
+        console.log("6) Verifique se um valor é um array"); 
+        console.log("mares[] e um array? " + Array.isArray(mares)); //true
+
+    </script>
+</body>
+</html>

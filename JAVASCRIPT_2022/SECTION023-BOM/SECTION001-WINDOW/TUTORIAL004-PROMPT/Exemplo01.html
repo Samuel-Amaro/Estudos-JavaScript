@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+        
+        /**
+         * * PROMPT() EXEMPLOS DE JS
+         * 
+         * Vamos dar alguns exemplos para ver como prompt() funciona.
+         * 
+         * * 1) EXIBA UMA CAIXA DE DIÁLOGO DE PROMPT
+         * 
+         * O exemplo a seguir usa o prompt()para exibir uma caixa de diálogo que solicita aos usuários suas linguagens de programação favoritas:
+        */
+
+        //Usando o método prompt() do window objeto global em ambiente de navegador,  para exibir uma caixa de dialogo com uma mensagem solicitando a entrada do usuario e dois botões OK  e Cancel
+        //a caixa de dialog solicita que o usuario insira alguma texto e espera ate que o usuario o envie ou cancele, a entrada fornceida na caixa de dialogo
+        //o argumento passado para a functino prompt e a string a ser exibida se omitir e não sera exibido nada na caixa de dialogo
+        //o prompt retorna o texto inserido pelo usuario ou null
+        let lang = prompt('Qual é a sua linguagem de programação favorita?');
+
+        //obtem uma mensagem dinamica de acordo com o texto fornecido no input pelo usuario
+        let feedback = lang.toLowerCase() === 'javascript' ? `É ótimo!` : `Isso é ${lang}`;
+        //o método alert(message) invoca uma caixa de dialogo de alerta do sistema
+        //a caixa de dialogo depende do navegador e do sistema operacional
+        //passamos como argumento para o método alert(message) uma string, que contem informações que desejamos mostrar para os usuarios
+        alert(feedback);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #area{
+            border: 1px solid black;
+            width: 90%;
+            height: 180px;
+            cursor: pointer;
+            overflow: scroll;
+            user-select: none;  
+        }
+    </style>
+</head>
+<body>
+
+    <div id="area">
+        Multi-toque aqui
+    </div>
+
+    <script type="text/javascript">
+
+      /**
+       * * MULTITOQUE(MULTI-TOUCH)
+       * 
+       * Uma das coisas que os eventos de mouse não suportam totalmente é multitoque: um usuário pode tocar em vários lugares ao mesmo tempo em seu telefone ou tablet, ou realizar gestos especiais.
+       * 
+       * Os eventos de ponteiro permitem o manuseio multitoque com a ajuda das propriedades pointerId e isPrimary.
+       * 
+       * Veja o que acontece quando um usuário toca uma tela sensível ao toque em um lugar e coloca outro dedo em outro lugar:
+       
+            1. Ao primeiro toque do dedo:
+
+                pointerdown com isPrimary=true e alguns pointerId.
+
+            2. Para o segundo dedo e mais dedos (assumindo que o primeiro ainda está tocando):
+
+                pointerdown com isPrimary=false e um diferente pointerId para cada dedo.
+
+        * Observe: o pointerId é atribuído não a todo o dispositivo, mas a cada dedo em contato. Se usarmos 5 dedos para tocar simultaneamente na tela, teremos 5 pointerdown eventos, cada um com suas respectivas coordenadas e um pointerId.
+        * 
+        * Os eventos associados ao primeiro dedo sempre têm isPrimary=true.
+        * 
+        * Podemos rastrear vários dedos tocando usando seus arquivos pointerId. Quando o usuário move e depois remove um dedo, obtemos pointermove e pointerup eventos com o mesmo pointerId que tínhamos em pointerdown.
+        * 
+        * Aqui está a demonstração que registra pointerdown e pointerup eventos:
+        * 
+        * Observação: você deve estar usando um dispositivo com tela sensível ao toque, como um telefone ou tablet, para realmente ver a diferença em pointerId/isPrimary. Para dispositivos de toque único, como um mouse, sempre haverá o mesmo pointerId com isPrimary=true, para todos os eventos de ponteiro.
+      */
+
+        document.onpointerdown = document.onpointerup = log;
+
+        function log(event) {
+            area.insertAdjacentHTML("beforeend", `<div>${event.type} isPrimary=${event.isPrimary} pointerId=${event.pointerId}</div>`);
+            area.scrollTop = 1e9;
+        }
+    </script>
+</body>
+</html>

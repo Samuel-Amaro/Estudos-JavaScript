@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiando valores</title>
+</head>
+<body>
+
+    <p>A figura a seguir ilustra a memória da pilha após a atribuição:</p>
+
+    <img src="imagens/JavaScript-copy-a-primitive-value.svg" alt="imagen">
+    
+    <img src="imagens/JavaScript-change-a-primitive-value.svg" alt="imagen">
+    <script>
+        /**
+         * * COPIANDO VALORES
+         * 
+         *  Quando você atribui um valor primitivo de uma variável a outra, o mecanismo JavaScript cria uma cópia desse valor e o atribui à variável. Por exemplo:
+        */
+
+        //declara uma variavel chamada age com o valor literal numerico
+        let age = 25;
+        //declara uma nova variavel chamada newAge que recebe uma copia do valor da varaivel age, e atribui a nova variavel newAge
+        let newAge = age;
+
+        /**
+         * Neste exemplo:
+         * 
+         
+            - Primeiro, declare uma nova variável age e inicialize seu valor com 25.
+         
+            - Segundo, declare outra variável newAge e atribua o age à newAge variável.
+         * 
+         * Nos bastidores, o mecanismo JavaScript cria uma cópia do valor primitivo 25 e o atribui à newAge variável.
+         * 
+         * Na memória da pilha, newAge e age são variáveis ​​separadas. Se você alterar o valor de uma variável, isso não afetará a outra.
+         * 
+         * Por exemplo:
+         * 
+         * 
+        */
+
+        //as variaveis age e newAge são variaveis diferentes modificar uma não afeta a outra pois uma so pegou a copia do valor da outra mas são variaveis diferentes na memoria
+        //modifica age e new Age e so modifica a que foi modificada
+        newAge = newAge + 1;
+        console.log(`${age}, ${newAge}`);
+
+        /**
+         * Quando você atribui um valor de referência de uma variável a outra, o mecanismo JavaScript cria uma referência para que ambas as variáveis ​​se refiram ao mesmo objeto na memória heap. 
+         * 
+         * Isso significa que, se você alterar uma variável, afetará a outra.
+         * 
+         * Por exemplo:
+        */
+
+        //declara um objeto literal anonimo, e atribui esse objeto a variavel person, variavel person referencia o o objeto anonimo
+        let person = {
+            //declara propriedade usando sintaxe, chave valor
+            name : 'John',
+            age: 25
+        };
+
+        //criando uma nova variavel que ira referencia o mesmo objeto declarado e atribuido a varaivel person
+        //as duas variaveis irão referenciar o mesmo objeto
+        //o person variavel atribui seu valor a menver varaivel por referencia
+        let menber = person;
+
+        //por meio da variavel menber modificare a propriedad age do objeto adicionand um novo valor
+        menber.age = 26;
+
+        console.log(person);
+        console.log(menber);
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, declare uma person variável e inicialize seu valor com um objeto com duas propriedades name e age.
+         * 
+         * Segundo, atribua a person variável à member variável. Na memória, ambas as variáveis ​​referenciam o mesmo objeto, como mostra a figura a seguir:
+         * 
+         * Terceiro, altere a age propriedade do objeto por meio da member variável:
+         * 
+         * Como as variáveis person e member fazem referência ao mesmo objeto, a alteração do objeto por meio da member variável também é refletida na person variável.
+        */
+    </script>
+</body>
+</html>

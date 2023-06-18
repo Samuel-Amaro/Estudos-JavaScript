@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO 3 DE FUNÇÕES COM PARÂMETROS PADRÃO
+         * 
+         * * 3) USANDO OUTROS PARÂMETROS EM VALORES PADRÃO 
+         * 
+         * Você pode atribuir a um parâmetro um valor padrão que faça referência a outros parâmetros padrão, conforme mostrado no exemplo a seguir:
+         * 
+         * 
+        */
+
+        //declara uma function regular chamada add, essa function possui 3 parametros declarados, cada parametro possui um valor padrão definido
+        //o JS permite usar os proprios paramentros como valores padrões de outros paramentros
+        //o valor padrão do paramentro x e o valor 1
+        //o valor padrão do paramentro y e o proprio paramentro x
+        //o valor padrão do paramentro z e soma dos paramentros x + y
+        //uma function e uma instancia de objeto do tipo function
+        function add(x = 1, y = x, z = x + y) {
+            //retorna a soma dos paramentros
+            return x + y + z;
+        }
+
+        //invoca a function add, sem fornecer nenhum argumento, usando os valores padrões definidos nos paramentros pela propria function
+        console.log(add()); //4
+        
+        /**
+         * Na add() função:
+         
+            - O valor padrão do y é definido como x parâmetro.
+
+            - O valor padrão de z é a soma de x e y
+
+            - A add() função retorna a soma de x, y e z.
+
+         * 
+         * A lista de parâmetros parece ter seu próprio escopo. Se você referenciar o parâmetro que ainda não foi inicializado, receberá um erro. Por exemplo:
+         * */
+
+        //declara uma function regular chamada substract que possui 2 paramentros declarados, os dois paramentros possuem valor padrão
+        //o paramentro x possue como valor padrão o paramentro y, que na hora da chamada da function não foi declarado isso vai gerar uma erro na avaliação dos paramentros
+        //e o paramentro y recebe como valor padrão o valor 1
+        function substract(x = y, y = 1) {
+            //retorna a subtração dos paramentros
+            return x - y;
+        } 
+
+
+        //invoca a function fornecendo somente um argumento
+        //a function lançara um erro pois um paramentro referencia o outro como valor padrão sem ter inicializado  o paramentro ainda
+        //substract(10);
+        console.log(substract());
+    </script>
+</body>
+</html>

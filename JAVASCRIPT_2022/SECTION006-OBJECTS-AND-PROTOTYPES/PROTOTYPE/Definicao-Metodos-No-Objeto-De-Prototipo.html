@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objeto</title>
+</head>
+<body>
+    
+    <p>Nesse caso, o JavaScript adiciona o greet() método ao Person.prototype objeto:</p>
+
+    <img src="JavaScript-Prototype-Adding-a-function-to-the-prototype.png" alt="imagen">
+
+    <p>Internamente, o mecanismo JavaScript cria um novo objeto denominado p1 e vincula o p1 objeto ao Person.prototype objeto por meio da vinculação do protótipo:</p>
+
+    <img src="JavaScript-Prototype-Create-New-Person-Object.png" alt="imagen">
+
+    <p>Por p1 não ter o greet() método, o JavaScript segue a ligação do protótipo e o encontra no Person.prototype objeto. Como o JavaScript pode encontrar o greet() método no Person.prototype objeto, ele executa o greet() método e retorna o resultado:</p>
+
+    <img src="JavaScript-Prototype-Call-a-method-in-the-prototype-object.png" alt="imagen">
+
+    <p>Nesse caso, o JavaScript segue a cadeia de protótipos para procurar o toString() método no Person.prototype. Como o Person.prototype não possui o toString() método, o JavaScript segue a cadeia de protótipo e procura o toString() método no Object.prototype objeto. Como o JavaScript pode encontrar o toString() método no Object.prototype, ele executa o toString()método.</p>
+
+    <img src="JavaScript-Prototype-Call-a-method-in-the-Object.Prototype.png" alt="imagen">
+
+    <p>O seguinte cria outra instância da Person propriedade cujo nome é 'Jane':</p>
+
+    <img src="JavaScript-Prototype-Create-another-Person-Object.png" alt="imagen">
+
+    <script>
+
+        //declara um fuction construtora chamada Person que possui um parametro, que e um argumento para se tornar valor de uma propriedade do objeto this
+        //essa function retorna uma instancia de um objeto this com as propriedades e metodos definidas dentro da function
+        function Person(name) {
+            //add uma propriedade ao Person objeto this instancia que sera retornado
+            this.name = name;
+        }
+
+        /**
+         * * DEFINIÇÃO DE MÉTODOS NO OBJETO DE PROTÓTIPO JS
+         * 
+         * O seguinte define um novo método chamado greet() no Person.prototype objeto:
+        */
+
+        //adiciona um nova propriedade no objeto anonimo que Person.prototype referencia, essa nova propriedade e um metodo, porque e atribuida a ela uma function anonima 
+        Person.prototype.greet = function() {
+            return `Hi, I'm ${this.name}!`;
+        }
+
+        /**
+         * Nesse caso, o JavaScript adiciona o greet() método ao Person.prototype objeto:
+         * 
+         * O seguinte cria uma nova instância de Person:
+        */
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o paramentro
+        //o p1 objeto e vinculado ao objeto anonimo refernciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim p1 aponta para esse objeto anonimo também
+        let p1 = new Person('John');
+
+        /**
+         * Internamente, o mecanismo JavaScript cria um novo objeto denominado p1 e vincula o p1 objeto ao Person.prototype objeto por meio da vinculação do protótipo:
+         * 
+         * O elo de p1, Person.prototype e Object.protoype é chamado de cadeia de protótipo(prototype chain)
+         * 
+         * O seguinte chama o greet() método no p1 objeto:
+        */
+
+        //invocando o metodo greet(), adicionando ao objeto anonimo que e referenciado Pela Person.prototype propriedade por meio do p1 objeto mostrando a ligação entre o objeto anonimo e p1 objeto
+        //lembrando que p1 não possui o metodo greet declarado, aqui e uma demostração da ligação do prototipo
+        let saudacao = p1.greet();
+        console.log("Utilizando a ligação de prototipo(linked prototype)");
+        console.log(`p1.greet() = ${saudacao}`);
+
+        /**
+         * Por p1 não ter o greet() método, o JavaScript segue a ligação do protótipo e o encontra no Person.prototype objeto.
+         * 
+         * Como o JavaScript pode encontrar o greet() método no Person.prototype objeto, ele executa o greet() método e retorna o resultado:
+         * 
+         * O seguinte chama o toString()método no objeto p1:
+        */
+
+        //por meio da cadeia de prototipos(chain prototype) o JS ira procurar o metodo toString()
+        //utiliza a cadeia de prototipo por causa que o Person.prototype object reference não possui este metodo definido e nem declarado
+        //assim parte para utilizar a cadeia para verificar se existe na Object.prototype que referencia um objeto anonimo, vem verificar se nesse objeto anonimo possui este metodo, e ele esta definido neste metodo
+        let s = p1.toString();
+        console.log("Utilizando a cadeia de prototipo(chain prototype)");
+        console.log(`p1.toString() = ${s}`);
+
+        /**
+         * Nesse caso, o JavaScript segue a cadeia de protótipos para procurar o toString() método no Person.prototype.
+         * 
+         * Como o Person.prototype não possui o toString() método, o JavaScript segue a cadeia de protótipo e procura o toString() método no Object.prototype objeto.
+         * 
+         * Como o JavaScript pode encontrar o toString() método no Object.prototype, ele executa o toString()método.
+         * 
+         * Se você chamar um método que não existe no objeto Person.prototype e Object.prototype, o JavaScript seguirá a cadeia de protótipo e lançará um erro se não puder encontrar o método. Por exemplo:
+        */
+
+        //se invocar(chamar) um metodo que não existe em Person.prototype object reference e Object.prototype reference  o JavaScritp seguira a cadeia de prototipo e se não encontra lançara um erro
+        p1.fly();
+
+        /**
+         * Como o fly() método não existe em nenhum objeto na cadeia de protótipo, o JavaScript emite o seguinte erro:
+         
+            TypeError: p1.fly is not a function
+        
+         * 
+         * O seguinte cria outra instância da Person propriedade cujo nome é 'Jane':
+        */
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o paramentro
+        //o jane objeto e vinculado ao objeto anonimo que e referenciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim Jane aponta para esse objeto anonimo também
+        //com esse tipo de ligação acaba o erro de duplicação de metodos definidos na function construtora, asssim exsite somente um objeto anonino de referencia, que ira ter as instancias vinculadas para ele
+        let p2 = new Person('Jane');
+
+        /**
+         * O p2 objeto possui as propriedades e métodos como o p1 objeto.
+         * 
+         * Em conclusão, quando você define um método no objeto de protótipo, esse método é compartilhado por todas as instâncias.
+        */
+    </script>
+
+</body>
+</html>

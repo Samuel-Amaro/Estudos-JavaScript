@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="module">
+        /**
+         * * AWAIT aceita "thenables"
+         * 
+         * Como promise.then, await nos permite usar objetos que podem ser chamados (aqueles com um then método que pode ser chamado). A ideia é que um objeto de terceiros pode não ser uma promessa, mas compatível com promessas: se ele suporta .then, é suficiente usá-lo com await.
+        */
+
+        //objeto de terceiro compativel com promises
+        //declara uma class personalizada
+        class Thenable{
+            constructor(num) {
+                this.num = num;
+            }
+
+            //class e compativel com promises se possui um then metodo que pode ser chamado
+            then(resolve, reject) {
+                alert(resolve);
+                //resolve a promise com this.num * 2 apos 1s
+                setTimeout(() => resolve(this.num * 2), 1000); //(*)
+            }
+        }
+
+        //add palavra chave async antes de uma function
+        //significa que a function retorna um promise
+        async function showAvatar() {
+            //palavra-chave await so funciona dentro de functions async
+            //o await faz o JS esperar até que a promise seja resolvida e retorna seu resultado com o objeto response
+            //aqui o JS suspende a execução da function async até que a promise seja resolvida, e então a retoma a execução com o resultado da promise
+            //isso não trava o mecanismo JS, enquanto isso pode fazer outras coisas
+            //usando objeto de terceiros compativel com promises aqueles que possum um metodo .then que possa ser chamado
+            let result = await new Thenable(1);
+            alert(result);
+        }
+
+        f(); //chama func async que retorna uma promise resolvida com um vlaor
+        
+
+        /**
+         * Se await obtém um objeto sem promessa com .then, ele chama esse método fornecendo as funções internas resolve e reject como argumentos (assim como faz para um Promise executor regular). Então await espera até que um deles seja chamado (no exemplo acima isso acontece na linha (*)) e então segue com o resultado.
+         * 
+         * * Métodos de classe assíncrona
+         * 
+         * Para declarar um método de classe assíncrono, basta prendê-lo com async:
+        */
+
+        //declara uma class personaliza
+        class Waiter{
+            //declarando um metodo de class assincrono
+            async wait() {
+                //retorna um promise resolvida com valor 1
+                return await Promise.resolve(1);
+            }
+        }
+
+        //cria objeto anonimo, chama metodo async e captura resultado da promise com manipulador .then
+        new Waiter().wait().then(alert); // (isso é o mesmo que (resultado => alerta(resultado)))
+
+        /**
+         * O significado é o mesmo: garante que o valor retornado seja uma promessa e habilita o await.
+        */
+    </script>
+
+</body>
+</html>

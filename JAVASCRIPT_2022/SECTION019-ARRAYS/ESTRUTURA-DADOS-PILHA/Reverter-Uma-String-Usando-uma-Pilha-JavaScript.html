@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays JS - Data Estructure Stack</title>
+</head>
+<body>
+    <header>
+        <h2>Reverter uma striing usando uma pilha JavaScript</h2>
+    </header>
+
+    <script>
+        /**
+         * * REVERTER UMA STRING USANDO UMA PILHA JavaScript
+         * 
+         * O exemplo a seguir mostra como reverter uma string usando uma pilha.
+         * */
+
+        function reverse(str) {
+            let pilha = [];
+            //push() - empurre a letra para a pilha
+            for(let i = 0; i < str.length; i++) {
+                pilha.push(str[i]);
+            }
+            //pop() - estoura, remove a letra da pilha
+            let stringReverssa = '';
+            while(pilha.length > 0) {
+                stringReverssa = stringReverssa + pilha.pop(); //remove cada letra da pilha na forma de uma pilha
+            }
+            return stringReverssa;
+        }
+
+        console.log(reverse('JavaScript Pilha')); //ahliP tpircSavaJ
+
+        /**
+         * Como funciona o script.
+         * 
+         * A reverse() função aceita um argumento de string e retorna sua versão reversa com a seguinte lógica:
+         
+            1. Primeiro, faça um loop stre empurre cada letra para o stackarray
+
+            2. Em segundo lugar, retire cada letra da pilha e construa a string invertida.
+
+         * 
+         * Neste tutorial, mostramos como usar um array como uma estrutura de dados de pilha JavaScript que possui duas operações principais: push e pop.
+         * */
+    </script>
+</body>
+</html>

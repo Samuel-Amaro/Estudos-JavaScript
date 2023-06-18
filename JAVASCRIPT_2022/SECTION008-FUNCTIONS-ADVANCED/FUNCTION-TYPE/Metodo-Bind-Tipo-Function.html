@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind metodo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O BIND() MÉTODO
+         * 
+         * O bind() método cria uma nova instância de função cujo this valor está vinculado ao objeto que você fornece. Considere o seguinte exemplo:
+         * 
+         * Primeiro, defina um objeto chamado car:
+        */
+
+        //declara um objeto literal anonimo que e atribuido por referencia a variavel car usando a sintaxe literal de objeto, car referncia o objeto anonimo
+        
+        let car = {
+            //propriedade, usando sintaxe chave valor
+            speed: 5,
+            //declara uma propriedade start, que possui como valor uma função
+            //uma function anonima sem paramentro e declarada e atribuida a propriedade start
+            start: function() {
+                console.log('Start with ' + this.speed + ' km/h');
+            }
+        };
+
+        /**
+         * Em seguida, defina outro objeto chamado aircraft:
+        */
+
+        //declara um objeto literal anonimo que e atribuido por referencia a variavel aicraft, aircraft referencia objeto anonimo
+        let aircraft = {
+            //propriedade, usando sintaxe chave valor
+            speed: 10,
+            //a propriedade fly recebe um valor, esse valor e uma function
+            //a function anonima e declarada sem paramentro e atribuida a fly propriedade
+            fly: function() {
+                console.log('Flying');
+            }
+        };
+
+        /**
+         * A aeronave não tem start() método. Para iniciar uma aeronave, você pode usar o bind() método do start()método do car objeto:
+         * 
+        */
+
+        //o bind metodo chamado pela start propriedade do objeto literal car, tem a responsabilidade de criar uma instancia da function type com uma propriedade chamada start no objeto passado por argumento para bind metodo
+        //cria um função que e atribuida a taxiing variavel mas que tem por referncia seu valor como aircraft.start();
+        //vincula a taxxing variavel a function atribuida a aircraft.start();
+        let taxiing = car.start.bind(aircraft);
+
+        /**
+         * Nesta declaração, alteramos o this valor dentro do start() método do car objeto para o  aircraft objeto. O bind() método retorna uma nova função que é atribuída à taxiing variável.
+         * 
+         * Agora, você pode chamar o start()método através da taxiing variável:
+        */
+
+        taxiing();
+
+        /**
+         * O seguinte usa o call() método para chamar o start() método no aircraft objeto: 
+        */
+
+        //um objeto de função possui o metodo call
+        //o call e um metodo do objeto de função prototipo criado pelo JS na function start
+        //toda function em JS e objeto, são instancia do tipo function
+        //nesse caso a start propriedade que referencia uma function que e um objeto possui um metodo chamado call, que e reponsavel por chamar um função com um determinado this valor e argumento
+        //nesse caso o aicraft objeto que sera o this valor podera estara chamando o start function do car objeto por meio de call metodo
+        //o call executa a ligação no momento declado em tempo de execução.
+        //substitui o car objeto pelo aircraft para chamar o start metodo a partir do novo this objeto 
+        car.start.call(aircraft);
+
+        /**
+         * Como você pode ver, o bind() método cria uma nova função que você pode executar mais tarde enquanto o call() método executa a função imediatamente. Esta é a principal diferença entre os métodos bind() e .call().
+         * 
+         * Tecnicamente, o objeto da aeronave empresta o start() método do car objeto por meio do método bind(), call() ou apply().
+         * 
+         * Por esse motivo, os métodos , e também são conhecidos como funções de empréstimo bind() call(). apply()
+         * 
+         * * RESUMO
+         * 
+         * Todas as funções são instâncias do Function tipo, que são os objetos. Eles têm propriedades e métodos.
+         * 
+         * Uma função tem duas propriedades importantes: name e prototype
+         * 
+         * Uma função também tem três métodos importantes: call(), apply(), e bind().
+        */
+
+
+    </script>
+</body>
+</html>

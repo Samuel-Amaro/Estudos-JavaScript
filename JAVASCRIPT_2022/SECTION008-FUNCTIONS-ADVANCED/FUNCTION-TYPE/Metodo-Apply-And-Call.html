@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Os Métodos Apply() and call()</title>
+</head>
+<body>
+    <script>
+        /**
+         * * MÉTODOS DE FUNÇÃO: APPLY(), CALL(), E BIND()
+         * 
+         * Um objeto de função tem três métodos: apply(), call() e bind().
+         * 
+         * * OS MÉTODOS APPLY() - APLIQUE AND CALL - LIGAR()
+         * 
+         *  Os métodos apply() e call()chamam uma função com um determinado this valor e argumentos.
+         * 
+         * A diferença entre apply() e call()é que você precisa passar os argumentos para o apply() método como um objeto do tipo array, enquanto você passa os argumentos para a call() função individualmente. Por exemplo:
+        */
+
+        //declara um objeto literal usando a sintaxe de objeto literal
+        //o cat variavel recebe um objeto com duas propriedades
+        //o cat variavel referencia um objeto declarado
+        let cat = {
+                //declara duas propriedades usando a sintaxe par chave : valor
+                type : 'Cat', 
+                sound: 'Meow'
+        };
+        //mesma logica
+        let dog = {
+            type : 'Dog',
+            sound : 'Woof'
+        };
+
+        //declara uma function anonima regular, que possui um parametro declarado chamado greeting
+        //essa function e atribuida como valor a say variavel, assim say variavel pode referenciar a function anonima
+        let say = function(greeting) {
+            //mostra o argumento greeting
+            console.log(`greeting = ${greeting}`);
+            //acessa o this atual
+            console.log(`this.type = ${this.type} says ${this.sound}`);
+        }
+
+        /**
+         * Primeiro, declaramos dois objetos cat e dog com duas propriedades. Então, declaramos a say() função que aceita um argumento.
+         * 
+         * Podemos chamar a say() função através do apply() método da seguinte forma:
+        */
+
+        //chama a say function a partir do objeto cat passando um argumento para a say function 'Hi'
+        //o cat objeto e o this objeto na say function e o 'Hi' e o argumento da say function
+        //o metodo apply e recebe dois argumentos o primeiro e objeto que sera o this valor e o segundo e um array que sera os argumentos solicitados pelo say metodo
+        say.apply(cat, ['Hi']);
+        //Hi
+        //Cat says Meow
+
+        /**
+         *  O primeiro argumento do apply()método é o cat objeto, portanto, o this objeto na say() função é definido como o cat objeto. O segundo argumento é um argumento do tipo array, conforme indicado pelos colchetes [].
+         * 
+         * Se passarmos o dog objeto, o this  na say() função será definido dog como , assim:
+         */
+
+        //o dog function sera o novo this objeto
+        //mesma logica do exemplo acima
+        //chama o say function no dog objeto passando o argumento 'Hi'
+        say.apply(dog, ['Hi']);
+
+        //Hi
+        //Dog says woof
+
+        /**
+         * A saída é diferente porque type e sound são as propriedades do dog objeto dentro da say() função.
+         * 
+         * O call() método é semelhante ao apply() método, exceto pela maneira como você passa os argumentos:
+        */
+
+        //chama a function say no objeto cat usando o call metodo
+        //sendo o cat objeto argumento representando o this valor do objeto para chamar o say e o 'Hi' argumento da say function
+        say.call(cat, 'Hi');
+        //Hi
+        //Cat says Meow
+
+        //chama a function say no objeto dog usando o cal metodo
+        //sendo o dog objeto argumento representando o this valor do objeto para chamar o say e o 'Hi' argumento da say function
+        say.call(dog, 'Hi');
+        //Hi
+        //Dog says Woof
+
+    </script>
+</body>
+</html>

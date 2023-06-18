@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * 2) EXEMPLO DE ADIÇÃO E REMOÇÃO DE ELEMENTOS DURANTE O MAPEAMENTO 
+         * 
+         * O flatMap() método permite adicionar ou remover elementos durante o mapeamento. Considere o seguinte exemplo:
+         * 
+         * Suponha que você tenha o seguinte carrinho de compras:
+        */
+
+        //declara um array literal de objetos chamado cart inicializado por dois objetos literais
+        let cart = [
+            //declara um objeto literal com propriedades
+            {
+                //declara propriedades usando sintaxe chave : valor
+                name : 'Smartphone',
+                qty: 2,
+                price: 500,
+                freeOfCharge: false
+            }, //declara uma objeto literal com propriedades
+            {
+                //declara propriedades usando sintaxe chave : valor
+                name : 'Tablet',
+                qty: 1,
+                price: 800,
+                freeOfCharge: false
+            }
+        ];
+
+        /**
+         * Se os clientes comprarem um smartphone, você deseja oferecer a eles um protetor de tela gratuito.
+         * 
+         * Quando o cliente adiciona um smartphone ao carrinho, você pode adicionar um protetor de tela ao carrinho usando o flatMap() método a seguir:
+        */
+
+        //usando o metodo flatMap para mapear cada elemento do em um array usando a função callbakc de mapeamento, e em seguida usar o flat() metodo para nivelar o array de resultado deixando todos elementos no mesmo nivel
+        //aqui passamos um argumento para o flatMap, passamos uma arrow function anonima que declara uma paramentro chamado item e return um valor
+        //o paramentro e passado pela flatMap a cada iteração passa um item do array como argumento para a callback 
+        //a callback function e a funçaõ resposanvel pelo mapeamento do elemento do array avaliado para ver se vai ser incluido no novo array de resultado retornado pelo metodo flatMap
+        let newCart = cart.flatMap((item) => {
+            //se o objeto literal(item) avalido no momento for o que possui o valor da propriedade name como 'Smartphone'
+            if(item.name === 'Smartphone') {
+                //retornamos esse item para o map metodo como o item a ser add no array de resultado mapeados, mas retornamos um array, multidimensional um array aninhado de um nivel de profundidade, pois o clinte ao comprar smatphone e add o protetor de tela gratuito a ele, os dois objetos vão em um unico array aninhado para o array de resultado, para que o metodo flat possa nivelar depois
+                return [item, {
+                    name: 'Screen Protector',
+                    qty: item.qty,
+                    price: 5,
+                    freeOfCharge: true
+                }]
+            }else{
+                //retornamos esse item para o map metodo como o item a ser add no array de resultado mapeados, mas retornamos um array, multidimensional um array aninhado de um nivel de profundidade para o flat metodo nivelar
+                return [item];
+            }
+        });   
+        
+        
+        //mostra o array de resultados mapeados e nivelado pelo flatMap metodo
+        console.log(newCart);
+
+        /**
+         * O seguinte usa o reduce() método para calcular o valor total dos itens no carrinho. Ele ignora os itens gratuitos, como protetores de tela:
+        */
+
+        //usando o metodo reduce() da instancia de objeto do array tipo para calcular o valor total dos itens no carrinho
+        //A  reducer() função retorna um valor que é um resultado acumulado e esse resultado é fornecido como um argumento na próxima chamada da reducer() função.
+        //O  reduce() método chama a reducer() função para cada elemento da array.
+        //a reducer função e a callback que deve ser passada para o reduce metodo como paramentro
+        //aqui passamos uma arrow function anonima com dois paramentros declarados que são o accumulator valor que armazena os valores acumulados e o curretValue o item atual do array que esta sendo avaliado
+        //o argumento 0 do reduce metodo inicializa o argumento acumulator da callback function
+        const total = newCart.reduce((sum, item) => {
+            //se o valor atual da propriedade for false a negação o invertera para true 
+            if(!item.freeOfCharge) {
+                //a soma dos valores total dos itens
+                sum += item.price * item.qty;
+            }
+            //a sum e retornado para a reduce metodo
+            return sum;
+        }, 0);
+
+        //mostra o total como um objeto que possui uma propriedade chamada totoal e o valor e o valor da variavel total
+        console.log({total});
+
+        /**
+         * * RESUMO 
+         * 
+         * Use o flatMap() método para criar uma array nivelada de elementos executando cada elemento na coleção por meio de uma função de mapeamento e nivelando os resultados mapeados.
+        */
+    </script>
+</body>
+</html>

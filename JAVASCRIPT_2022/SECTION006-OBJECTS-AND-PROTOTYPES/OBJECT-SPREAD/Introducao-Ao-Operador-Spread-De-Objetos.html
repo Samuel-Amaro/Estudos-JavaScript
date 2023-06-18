@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Ao Operador Spread Objetos</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * SPREAD(PROPRAGACAO) DE OBJETOS JS
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar a propagação(SPREAD) de objetos JavaScript ( ...) no ES2018 para clonar um objeto ou mesclar objetos em um.
+         *
+         * * INTRODUÇÃO AO OPERADOR DE SPREAD(PROPRAGACAO) DE OBJETOS JS
+         * 
+         * No ES6, você usa o operador spread ( ...) para descompactar elementos de um array. O operador spread pode ser muito útil para clonar um array. Por exemplo:
+        */
+
+        //declara um array literal dense inicializado com 3 elementos, array e atribuido a variavel colors
+        let colors = ['red', 'green', 'blue'];
+        //usando o operador spread(...) para descompactar o array referenciado por colors, na inicializacação do array, referenciado por rgb, descompacta o array em elementos individuais, assim, cada elemento do array descompactado, inicializa o array refereciado por rgb
+        //os ... na frente do array referenciado por colors e o operador spread(propragação), descompactando o iteralvel, e os colocando em um novo array
+        let rgb = [...colors];
+        console.log(rgb);
+
+        /**
+         * Neste exemplo, o operador spread ( ...) desempacota os elementos do colors array e os coloca em um novo array rgb. O operador spread ( ...) pode ser usado para mesclar dois ou mais arrays em um, conforme mostrado no exemplo a seguir:
+        */
+
+        //declara um novo array, literal dense, o inicializa com 3 elementos e o atribui por referencia a variavel
+        let rgb2 = ['red', 'green', 'blue'];
+        let cmyk = ['cyan', 'magenta', 'yellow', 'black'];
+        //usando o operador spread(...) para mesclar dois arrays em um
+        //primeiro descompactamos o array referenciado por rgb, e adiciona os elementos descompactados no array referenciado por merge, depois descompacta o array referenciado por cmyk, e adiciona os elementos descompactados no array referenciado por merge também
+        //no final os dois arrays são descompactados e adicionados no mesmo array
+        let merge = [...rgb2, ...cmyk];
+        console.log(merge);
+
+        /**
+         * O ES2018 expande o operador spread ( ...) para fazê-lo funcionar com propriedades enumeráveis ​​próprias de um objeto. Suponha que você tenha um objeto circle com uma propriedade radius :
+        */
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e o atribui a variavel circle por referencia
+        const circle = {
+            //declara propriedade usando sintaxe chave : valor
+            radius: 10
+        };
+
+        /**
+         * O exemplo a seguir usa o operador spread( ...) para criar um coloredCircle objeto que tem todas as propriedades do circle objeto e uma propriedade adicional color:
+        */
+
+        //define um objeto literal anonimo, e o atribui por referncia a variavel coloredCircle
+        const coloredCircle = {
+            //usando o operador spread, para descompactar as propriedades enumeraveis proprias do objeto literal referenciado por circle, aqui nesse novo objeto, o ... e o operador spread, descompactando o objeto literal referenciado por circle
+            ...circle,
+            //define uma propriedade propria do objeto usando sintaxe chave : valor
+            color: 'black'
+        };
+
+        console.log(coloredCircle);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <script>
+        /**
+         * * Promise.resolve
+         * 
+         * Promise.resolve(value) cria uma promessa resolvida com o resultado value.
+         * 
+         * Igual a:
+         
+            let promise = new Promise(resolve => resolve(value));
+
+         * 
+         * O método é usado para compatibilidade, quando se espera que uma função retorne uma promessa.
+         * 
+         * Por exemplo, a loadCached função abaixo busca uma URL e lembra (armazena em cache) seu conteúdo. Para chamadas futuras com a mesma URL, ele obtém imediatamente o conteúdo anterior do cache, mas usa Promise.resolve para fazer uma promessa, então o valor retornado é sempre uma promessa:
+        */
+
+        //cria uma collection map, que mapeia chave para um valor
+        let cache = new Map();
+
+        function loadCached(url) {
+            //se possui um valor associado a chave url
+            if(cache.has(url)) {
+                //retorna uma promise resolvida com o value passado por argumento para o metodo estatico resolve
+                return Promise.resolve(cache.get(url)); //(*)
+            }
+
+            return fetch(url) //faz uma solicitação de rede para o url e retorna um promise
+                //anexamos um manipulador .then para consumir o resultado da promise quando for resolvida
+                .then(response => response.text())
+                //anexa outro manipulador .then para consumir o resultado da promise retorna pelo manipulador acima quando for resolvida
+                .then(text => {
+                    //mapea a chave url para o valor text
+                    cache.set(url, text);
+                    return text;
+                });
+        }
+
+        /**
+         * Por exemplo, a loadCached função abaixo busca uma URL e lembra (armazena em cache) seu conteúdo. Para chamadas futuras com a mesma URL, ele obtém imediatamente o conteúdo anterior do cache, mas usa Promise.resolve para fazer uma promessa, então o valor retornado é sempre uma promessa:
+        */
+    </script>
+
+</body>
+</html>

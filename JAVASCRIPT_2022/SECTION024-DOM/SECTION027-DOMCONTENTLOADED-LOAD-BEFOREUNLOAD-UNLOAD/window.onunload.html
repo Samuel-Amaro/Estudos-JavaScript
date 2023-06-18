@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * window.onunload(janela ao descarregar)
+         * 
+         * Quando um visitante sai da página, o unload evento é acionado em window. Podemos fazer algo lá que não envolva um atraso, como fechar janelas pop-up relacionadas.
+         * 
+         * A exceção notável é o envio de análises.
+         * 
+         * Digamos que coletamos dados sobre como a página é usada: cliques do mouse, rolagem, áreas de página visualizadas e assim por diante.
+         * 
+         * Naturalmente, unload evento é quando o usuário nos deixa e gostaríamos de salvar os dados em nosso servidor.
+         * 
+         * Existe um navigator.sendBeacon(url, data) método especial para tais necessidades, descrito na especificação https://w3c.github.io/beacon/.
+         * 
+         * Ele envia os dados em segundo plano. A transição para outra página não é atrasada: o navegador sai da página, mas ainda executa sendBeacon.
+         * 
+         * Veja como usá-lo:
+        */
+
+        let analyticsData = { /*objeto com dados coletados*/ };
+        
+        //atribuindo um manipulador de evento por meio da propriedade dom ao objeto window
+        //atribuimos um manipulador de evento para o evento unload no objeto window, este evento e acionado quando um visitante sai da pagina
+        window.addEventListener("unload", function(event) {
+            //o metodo abaixo envia um objeto de dados em segundo plano quando o usuario sai da pagina
+            //e um metodo especial, o navegador sai da pagina mais ainda continua executando o metodo abaixo
+            navigator.sendBeacon("/analytics", JSON.stringify(analyticsData));
+        });
+
+        /**
+            * A solicitação é enviada como POST.
+            * 
+            * Podemos enviar não apenas uma string, mas também formulários e outros formatos, conforme descrito no capítulo Fetch, mas geralmente é um objeto stringificado.
+            * 
+            * Os dados são limitados por 64kb.
+            * 
+         * Quando a sendBeacon solicitação é finalizada, o navegador provavelmente já saiu do documento, então não há como obter a resposta do servidor (que geralmente está vazio para análise). 
+         * 
+         * Há também um keepalive sinalizador para fazer solicitações “depois da página esquerda” no método fetch para solicitações de rede genéricas. Você pode encontrar mais informações no capítulo FETCH API.
+         * 
+         * Se quisermos cancelar a transição para outra página, não podemos fazê-lo aqui. Mas podemos usar outro evento – onbeforeunload.
+        */
+    </script>
+
+</body>
+</html>

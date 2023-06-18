@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        //inicializa variaveis atribuindo a cada uma por referencia um objeto literal anonimo com somente uma unica propriedade
+        let john = {name: 'John Doe'}, lily = {name: 'Lily Bush'}, peter = {name: 'Peter Drucker'};
+
+        /**
+         * * ITERAR SOBRE AS CHAVES DO MAP
+         * 
+         * Para obter as chaves de um Map objeto, você usa o keys() método. O keys() retorna um novo objeto iterador que contém as chaves dos elementos no mapa.
+         * 
+         * O exemplo a seguir exibe o nome de usuário dos usuários no userRoles objeto de mapa.
+        */
+
+        //cria uma nova instancia de objeto do Tipo Map() invocando o construtor Map, atribui a instancia por referencia a variavel userRoles, a instancia do tipo Map criada, e inicializa com o argumento passado para o construtor Map, que recebe um array multidimensional literal dense anonimo, inicializado com 3 elementos, cada elemento e um novo array, inicializado com dois elementos
+        //O map construtor aceita um objeto iteravel opcional, cujos elementos são pares de chave valor 
+
+        let userRoles = new Map([
+            [john, 'admin'],
+            [lily, 'editor'],
+            [peter, 'subscriber']
+        ]);
+
+        //usando o método Map.keys() para obter todas as chaves definidas no map objeto, o método retorna um iteravel como um array, como as chaves como elementos, obedecendo a mesma ordem de inserção do map objeto
+        //o iteravel retornado e usado pelo for...of construção para iterar sobre cada elemento do iteravel
+        for(const user of userRoles.keys()) {
+            console.log(user.name);
+        }
+        
+    </script>
+
+</body>
+</html>

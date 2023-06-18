@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        /**
+         * * THENABLES(então habilita)
+         * 
+         * Para ser preciso, um handler pode retornar não exatamente uma promessa, mas um objeto chamado “thenable” – um objeto arbitrário(aleatorio) que possui um método .then. Será tratado da mesma forma que uma promessa.
+         * 
+         * A ideia é que bibliotecas de terceiros possam implementar seus próprios objetos “compatíveis com promessas”. Eles podem ter um conjunto estendido de métodos, mas também ser compatíveis com promessas nativas, porque implementam .then.
+         * 
+         * Aqui está um exemplo de um objeto thenable:
+        */
+
+        //declara uma class personalizada
+        class Thenable{
+            constructor(num) {
+                //declara propriedade e a inicializa com o argumento
+                this.num = num;
+            }
+            //metodo da class, aceita dois argumento resolve e reject
+            then(resolve, reject) {
+                alert(resolve); //function() {codigo nativo}
+                //apos 1s resolve a promisse com o valor this.num * 2
+                setTimeout(() => resolve(this.num * 2), 1000); //(**)
+            }
+        }
+
+        //cria um objeto promisse, este promise não tem trabalho ja e resolvida instantaneamente para o valor 1
+        new Promise(resolve => resolve(1))
+            //consumindo o valor da promisse
+            .then(result => {
+                //a promisse aqui pode retorna um promisse, mas de forma diferente vamos retorna um objeto chamado Thenable que possui um metodo .then, isso e tratado da mesma forma que uma promisse retornado pelo manipualador
+                return new Thenable(result); //(*)
+            })
+            //consumindo o valor do objeto aleatorio retornado pelo manipulador acima, passamos alert para mostra o valor resolvido por esse promise aleatorio
+            .then(alert); //mostra 2 apos 1s
+
+        /**
+         * JavaScript verifica o objeto retornado pelo .then manipulador na linha (*): se ele tiver um método que pode ser chamado chamado then, ele chama esse método fornecendo funções nativas resolve, reject como argumentos (semelhante a um executor) e espera até que um deles seja chamado. No exemplo acima resolve(2) é chamado após 1 segundo (**). Em seguida, o resultado é passado mais abaixo na cadeia.
+         * 
+         * Esse recurso nos permite integrar objetos personalizados com cadeias de promessas sem precisar herdar de arquivos Promise.
+        */
+
+
+
+    </script>
+</body>
+</html>

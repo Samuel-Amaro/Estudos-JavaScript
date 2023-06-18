@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input id="elem" type="button" value="Click me"/>
+
+    <script type="text/javascript">
+        /**
+         * * addEventListener
+         * 
+         * O problema fundamental das maneiras acima mencionadas de atribuir manipuladores – não podemos atribuir vários manipuladores a um evento.
+         * 
+         * Digamos que uma parte do nosso código queira destacar um botão ao clicar, e outra quer mostrar uma mensagem no mesmo clique.
+         * 
+         * Gostaríamos de atribuir dois manipuladores de eventos para isso. Mas uma nova propriedade DOM substituirá a existente:
+        */
+
+        //input.onclick = function() { alert(1); }
+        //...
+        //input.onclick = function() { alert(2); } //substitui o manipulador anterior
+
+        /**
+         * Os desenvolvedores de padrões da web entenderam isso há muito tempo e sugeriram uma maneira alternativa de gerenciar manipuladores usando métodos especiais addEventListener e removeEventListener. Eles estão livres de tal problema.
+         * 
+         * A sintaxe para adicionar um manipulador:
+         
+            elem.addEventListener(event, handler, [options]);
+
+            event: Nome do evento, por exemplo "click".
+
+            handler: A função do manipulador.
+
+            options: Um objeto opcional adicional com propriedades:
+
+                uma vez(once): se verdadeiro(true), o ouvinte(listener) é removido automaticamente após ser acionado.
+
+                capture(capturar): a fase em que lidar com o evento, a ser abordada posteriormente no capítulo Borbulhando e capturando. Por motivos históricos, as opções também podem ser false/true, que é o mesmo que {capture: false/true}.
+
+                passive(passiva): se verdadeiro(true), então o manipulador não chamará preventDefault(), explicaremos isso mais tarde nas ações padrão do navegador.
+
+         * Para remover o manipulador, use removeEventListener:
+
+            element.removeEventListener(event, handler, [options]);
+
+         *  
+         * * A remoção requer a mesma function
+         * 
+         * Para remover um handler(manipulador) devemos passar exatamente a mesma função que foi atribuída.
+         * 
+         * Isso não funciona:
+        */
+
+        //elem.addEventListener("click", () => alert('Thanks!'));
+        //...
+        //elem.removeEventListener("click", () => alert('Thanks!'));
+
+        /**
+         * O manipulador não será removido, pois removeEventListener recebe outra função – com o mesmo código, mas isso não importa, pois é um objeto de função diferente.
+         * 
+         * Aqui está o caminho certo:
+        */
+
+        /*
+        //function manipuladora do evento, 
+        function handler() {
+            alert('Thanks!');
+        }
+        */
+
+        //input.addEventListener("click", handler); 
+        //...
+        //input.removeEventListener("click", handler);
+
+        /**
+         * Observe – se não armazenarmos a função em uma variável, não poderemos removê-la. Não há como "ler" manipuladores atribuídos por addEventListener.
+         * 
+         * Várias chamadas para addEventListener permitir adicionar vários manipuladores, como este:
+        */
+
+        //EXEMPLO DE COMO ATRIBUIR VARIOS MANIPULADORES DE EVENTO A UM ELEMENTO DOM
+
+        //declara uma function regular sem paramentro que e uma instancia de objeto do tipo function
+        function handler1() {
+            alert('Thanks!');
+        };
+
+        function handler2() {
+            alert('Thanks again!');
+        }
+
+        //atribui um manipulador de evento por meio de propriedade dom
+        //atribuimos uma manipulador de evento para o evento de click no elem
+        //atribuimos uma arrow function como manipulador do evento
+        elem.onclick = () => alert("Hello");
+        
+        //adicionando um manipulador de evento ao elem por meio de elem.addEventListener(event, handler, options);
+        //adicioraremos uma manipulador de evento para o evento de click no elem, a function manipuladora sera o handler1 passamos sua referencia como argumento para o metodo
+        //elem neste ponto ja possui duas functions manipuladores de evento uma arrow function anonima e handler1
+        elem.addEventListener("click", handler1); //Thanks!
+
+        //atribuindo outro manipulador de evento a alem a function handler2 o elem tera duas functions manipuladores para o evento de click em elem
+        //elem neste ponto ja possui três functions manipuladores de evento uma arrow function anonima e handler1 e handler2
+        elem.addEventListener("click", handler2); //Thanks again!
+
+        /**
+         * Como podemos ver no exemplo acima, podemos definir manipuladores usando uma propriedade DOM e addEventListener. Mas geralmente usamos apenas uma dessas maneiras.
+         * 
+         * * Para alguns eventos, os manipuladores trabalham apenas com addEventListener
+         * 
+         * Existem eventos que não podem ser atribuídos por meio de uma propriedade DOM. Somente com addEventListener.
+         * 
+         * Por exemplo, o DOMContentLoaded evento que é acionado quando o documento é carregado e o DOM é construído.
+        */
+
+        //nunca vai correr
+        //exemplo de um evento que não aceita atribuir o manipulador do evento por meio de uma propriedade dom
+        document.onDOMContentLoaded = function() {
+            alert("Dom construido");
+        };
+
+        //desta forma funciona
+        //atribuindo um manipulador de evento para o evento DOMContentLoaded que so aceita que os manipuladores desse evento sejam atribuidos somente por elem.addEventListener(event, handler, options);
+        //atribuimos uma function anonima como manipulador do evento
+        document.addEventListener("DOMContentLoaded", function() {
+            alert("Dom construido");
+        });
+
+        /**
+         * Então addEventListener é mais universal. Embora, tais eventos são uma exceção e não a regra.
+        */
+    </script>
+</body>
+</html>

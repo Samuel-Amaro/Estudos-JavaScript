@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador de Encadeamento Opcional</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO O OPERADOR DE ENCADEAMENTO OPCIONAL COM CHAMADAS DE FUNÇÃO
+         * 
+         * Suponha que você tenha uma API de arquivo da seguinte forma:
+        */
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e atribui o objeto literal a variavel file por referencia, assim file referencia o objeto
+        let file = {
+            //metodo do objeto literal, sem paramentro
+            read() {
+                return 'File Content';
+            },
+            //metodo do objeto com um paramentro definido chamado content
+            write(content) {
+                console.log(`Writing ${content} to file...`);
+                return true;
+            }
+        };
+
+        /**
+         * Este exemplo chama o read()método do fileo bjeto:
+         * 
+        */
+
+        //chama o metodo read do objeto literal referenciado por file
+        let data = file.read();
+        console.log(data);
+
+        /**
+         * Se você chamar um método que não existe no file objeto, você obterá um TypeError:
+        */
+
+        //chamando um metodo que não foi declarado no ojbeto literal e não existe no objeto
+        //por meio da variavel file
+        //obteremos um erro
+        let compressedData = file.compress();
+
+        /**
+         * No entanto, se você usar o operador de encadeamento opcional com a chamada do método, a expressão retornará undefined em vez de gerar um erro:
+        */
+
+        //chamando um metodo que não exisite no oobjeto referenciado por file variavel, mas usando o operador de encademaneto opcional para contornar o erro caso o metodo não exista
+        //aqui usaremos o metodo de encadeamento opcional para verificar se o metodo compreess possui o valor undefined ou null, verificamos como uma propriedade por que um metodo em um objeto e uma propriedade com  o valor de função
+        //se comprees tiver o valor undefined ou null o operador de encademaneto opcional ira retornar undefined
+        let compressedData = file.compress?.();
+
+        /**
+         * O compressedData é agora undefined.
+         * 
+         * Isso é útil quando você usa uma API na qual um método pode não estar disponível por alguns motivos, por exemplo, um navegador ou dispositivo específico.
+         * 
+         * O seguinte ilustra a sintaxe para usar o operador de encadeamento opcional com uma função ou chamada de método:
+         
+            functionName ?. (args);
+
+         * 
+         * O operador de encadeamento opcional ( ?.) também é útil se você tiver uma função com retorno de chamada(callback) opcional:
+        */  
+
+        //declara uma function chamada getUser que possui dois paramentros declarados, um paramentro chamado id, o outro chamado callback
+        function getUser(id, callback) {
+            //obter usuarios
+            //...
+
+            //declara uma objeto literal anonimo e atribui este objeto a varaivel user por referencia
+            let user = {
+                //propriedaes usando sintaxe chave: valor
+                id: id,
+                username: 'admin'
+            };
+
+            //verifica se o argumento callbak exisite, sendo que tem que psosui um valor diferente de undefined e null
+            if(callback) {
+                //se o argumento callback exsiter, invoca a callback passada por meio do argumento callback passando o objeto literal refeerencido por user variavel como argumento
+                callback(user);
+            }
+
+            //retorna o objeto literal
+            return user;
+        }
+
+        /**
+         * Ao usar o operador de encadeamento opcional, você pode pular o teste se o callback existir:
+        */
+
+        //declara uma function chamada getUser que possui dois paramentros declarados, um paramentro chamado id, o outro chamado callback
+        function getUser(id, callback) {
+            //obter usuarios
+            //...
+
+            //declara uma objeto literal anonimo e atribui este objeto a varaivel user por referencia
+            let user = {
+                //propriedaes usando sintaxe chave: valor
+                id: id,
+                username: 'admin'
+            };
+
+            //verifica se o argumento callbak exisite, sendo que tem que psosui um valor diferente de undefined e null, se o callback argumento possui um valor igual a null ou undefine o ooperador de encademaneto opcional ira retorna undefined assim nao podera invocar a caalback function
+            //ao invocar callbback function passa o argumento user que referencia um objeto literal
+            //o callback function e verificado pelo operador de encadeamento opcional como um argumento mesmo verificando se posui o valor undefined ou null
+            callback ?. (user);
+            
+
+            //retorna o objeto literal
+            return user;
+        }    
+
+        /**
+         * * RESUMO
+         * 
+         * O operador de encadeamento opcional ( ?.) retorna undefined em vez de gerar um erro se você tentar acessar uma propriedade de um objeto null ou : .undefined obj ?. property
+         * 
+         * Combine o operador de encadeamento opcional ( ?.) com o operador de coalescência nulo ( ??) para atribuir um valor padrão.
+         * 
+         * Use functionName ?. (args) para evitar verificar explicitamente se o functionName não é undefined ou null antes de invocá-lo.
+         * 
+        */
+
+    </script>
+</body>
+</html>

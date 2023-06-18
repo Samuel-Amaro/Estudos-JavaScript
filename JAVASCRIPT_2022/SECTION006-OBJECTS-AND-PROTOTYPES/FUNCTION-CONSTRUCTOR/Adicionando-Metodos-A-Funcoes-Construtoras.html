@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções construtoras</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ADICIONANDO MÉTODOS A FUNÇÕES DE CONSTRUTOR 
+         * 
+         * Um objeto pode ter métodos que manipulam seus dados. Para adicionar um método a um objeto criado por meio da função construtora, você pode usar a this palavra - chave. Por exemplo:
+        */
+
+        //declara um function regular construtora chamada Person, que declara dois paramentros, que vão ser propriedades do objeto
+        function Person(firstName, lastName) {
+            //propriedades do objeto, aqui cria as propriedades, da um nome a propriedade e atribui o valor
+            this.firstName = firstName;
+            this.lastName = lastName;
+
+            //cria um metodo para o objeto, 
+            //o metodo e uma propriedade chamada getFullName que recebe um function anonima
+            //a function anonima e atribuida a propriedade getFullName, assim getFullName e uma propriedade que referencia a function anonima
+            //porem isso e prejudicial pois esse metodo e duplicado a cada instancia criada assim consome mais memoria
+            this.getFullName = function() {
+                return `${this.firstName} ${this.lastName}`;
+            };
+        }
+
+        /**
+         * Agora, você pode criar um novo Person objeto e invocar o getFullName() método:
+        */
+
+        //cria uma instancia(objeto) do tipo Person
+        //invocando a function construtora e usando o operador new e passando os argumentos
+        let person = new Person("John", "Doe");
+        //invocando o metodo do objeto do tipo Person
+        console.log(person.getFullName());
+
+        /**
+         * O problema com a função construtora é que, quando você cria várias instâncias de Person, o this.getFullName() é duplicado em todas as instâncias. Isso não é eficiente em termos de memória.
+         * 
+         * Para resolver isso, você pode usar o protótipo(prototype) para que todas as instâncias de um tipo personalizado possam compartilhar o mesmo método
+        */
+       
+    </script>
+
+</body>
+</html>

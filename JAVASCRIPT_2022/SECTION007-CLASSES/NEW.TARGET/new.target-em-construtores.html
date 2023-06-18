@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new.target construtores</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * JS new.target em construtores
+         * 
+         * Em um construtor de classe, o new.target se refere ao construtor que foi invocado diretamente pelo operador new. É true se o construtor está na classe pai e foi delegado do construtor da classe filha:
+        */
+
+        //define uma class chamada Person usando a palavra-chave class
+        class Person{
+            //define um construtor para a Person classe, e declara um paramentro chamado name
+            constructor(name) {
+                //declara uma propriedade chamada name e a inicializa com a name argumento
+                this.name = name;
+                //o new.target e uma metapropriedade, que permite detectar se uma função ou construtor foi chamado usando o new operador.
+                //retorna o nome do construtor que foi invocado diretamente usando o new operador
+                console.log(new.target.name);
+                console.log(new.target);
+            }
+        }
+
+        //declara uma class chamada Employee usando a palavra-chave class, essa class e uma subClasse, uma class derivada, uma class-filha, da class Person, porque a Employee class estende(herda) tudo de Person
+        class Employee extends Person{
+            //define um construtor com dois paramentros name e title, o construtor definido pertence a Employee class
+            constructor(name, title) {
+                //invocando(chamando) o construtror da classe Base, classe Pai, super classe Person, fornecendo o argumento name
+                //o super inicializa o this valor da Employee classe e necessario chamalo antes de tentar acessar o this valor
+                super(name);
+                //declara uma propriedade chamada title e a inicializa com a title argumento
+                this.title = title;
+            }
+        }
+
+        //declara uma nova instancia de objeto usando o new operador e invocando o construtor da Person Class, fornecendo um argumento
+        let john = new Person('John Doe'); //Person -> nome do construtor usado junto com o operador new para instancia objeto, aqui fornecer dois argumentos para o construtor de Employee classe
+        let lily = new Employee('Lily Bush', 'Programmer'); //Employee
+
+        /**
+         * Neste exemplo, new.target.name é o nome amigável da referência do construtor de new.target.
+         * 
+         * Neste tutorial, você aprendeu como usar a new.target metapropriedade JavaScript para detectar se uma função ou construtor foi chamado usando o new operador.
+        */
+
+    </script>
+</body>
+</html>

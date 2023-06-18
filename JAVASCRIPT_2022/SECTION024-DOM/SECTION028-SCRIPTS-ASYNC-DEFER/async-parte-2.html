@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        - script js externo com atributo async especificado
+        - o atributo async torna o script não bloqueante(não trava a renderização de elemtnos dom), o script e independente. o script async e carregado em segundo plano executado quando estiver pronto. - O DOM e outros scripts não esperam por eles e não esperam por nada. Um script totalmente independente que é executado quando carregado.
+        - abaixo temos dois script async que não esperam um pelo outro, o que quer que seja carregado primeiro e executado.
+    -->
+    <!-- O Google Analytics geralmente é adicionado assim -->
+    <script async type="text/javascript" src="https://google-analytics.com/analytics.js" >
+        /**
+         * Os scripts assíncronos são ótimos quando integramos um script independente de terceiros na página: contadores, anúncios e assim por diante, pois eles não dependem de nossos scripts, e nossos scripts não devem esperar por eles:
+         * 
+         * * O async atributo é apenas para scripts externos
+         * 
+         * Assim como defer, o async atributo é ignorado se a <script> tag não tiver src.
+         */
+    </script>
+    
+</body>
+</html

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * CASOS DE USO DO OPERADOR DE SPREAD DE OBJETOS JS
+         * 
+         * * EXEMPLO 1) CLONAR UM OBJETO
+         * 
+         * Você pode usar o operador spread para clonar as próprias propriedades enumeráveis ​​de um objeto:
+        */
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e o atribui a variavel circle por referencia
+        const circle = {
+            //declara propriedade usando sintaxe chave : valor
+            radius: 10
+        };
+
+        //usando o operador spread(...) para clonar as propriedades proprias enumeraveis do objeto
+
+        //aqui declaramos um novo objeto literal anonimo, que e atribuido por referencia a variavel clonedCircle
+        //o objeto criado sera um clone do objeto literal referenciado por circle
+        //o ... operador spread, ira descompactar todoas propriedades proprias enumeraveis do objeto literal referenciado por circle no novo objeto literal que esta sendo criado
+        const clonedCircle = {...circle};
+
+        console.log(clonedCircle);
+
+        /**
+         * Observe que a clonagem é sempre superficial. Por exemplo:
+        */
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e o atribui a variavel circle2 por referencia
+        const circle2 = {
+            //declara propriedade usando sintaxe chave : valor
+            radius: 10,
+            style: {
+                color: 'blue'
+            }
+        };
+
+        //aqui declaramos um novo objeto literal anonimo, que e atribuido por referencia a variavel clonedCircle2
+        //o objeto criado sera um clone do objeto literal referenciado por circle2
+        //o ... operador spread, ira descompactar todas propriedades proprias enumeraveis do objeto literal referenciado por circle2 no novo objeto literal que esta sendo criado
+        const clonedCircle2 = {...circle2};
+
+        //acessando a propriedade style do objeto liteal referenciado por clonedCircle2, adiconado um novo valor a propriedade
+        clonedCircle2.style = 'red';
+
+        //mostra o objeto literal recem criado
+        console.log(clonedCircle2);
+    </script>
+</body>
+</html>

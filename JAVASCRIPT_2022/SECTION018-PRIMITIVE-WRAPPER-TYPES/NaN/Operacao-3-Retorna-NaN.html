@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * AS OPERAÇÕES RETORNA NAN
+         * 
+         * * 3) USANDO NAN COMO OPERANDO
+         * 
+         * Quando uma expressão tem o NaN, ela sempre retorna NaN. Por exemplo:
+        */
+
+        //EXEMPLO ABAIXO QUE O JS RETORNA O VALOR ESPECIAL NAN COMO RESULTADO DE UMA OPERAÇÃO COM FALHA EM NÚMEROS
+        //NESTE CASO RETORNA NAN POR USAR O VALOR ESPECIAL NAN COMO OPERANDO
+
+        //declara uma constante chamada result que e inicializada com o resultado de uma operação aritmetica, que tem NaN como operando
+        const result = 10 + 1 / NaN;
+        
+        //uma expressão de calculo que utiliza NaN como operando retorna NaN
+        console.log(result); //NaN
+
+    </script>
+
+</body>
+</html>

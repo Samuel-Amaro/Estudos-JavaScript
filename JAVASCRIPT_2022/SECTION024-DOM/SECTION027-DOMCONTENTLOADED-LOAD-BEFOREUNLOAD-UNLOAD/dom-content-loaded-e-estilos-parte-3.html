@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * DOMContentLoaded e estilos(styles)
+         * 
+         * As folhas de estilo externas não afetam o DOM, portanto DOMContentLoaded, não espere por elas.
+         * 
+         * Mas há uma armadilha. Se tivermos um script após o estilo, esse script deverá aguardar até que a folha de estilo seja carregada:
+        */
+
+        //o script não é executado até que a folha de estilo seja carregada
+        alert(getComputedStyle(document.body).marginTop);
+
+        /**
+         * A razão para isso é que o script pode querer obter coordenadas e outras propriedades de elementos dependentes de estilo, como no exemplo acima. Naturalmente, ele precisa aguardar o carregamento dos estilos.
+         * 
+         * Como DOMContentLoaded espera por scripts, agora também espera por estilos antes deles.
+        */
+    </script>
+
+</body>
+</html>

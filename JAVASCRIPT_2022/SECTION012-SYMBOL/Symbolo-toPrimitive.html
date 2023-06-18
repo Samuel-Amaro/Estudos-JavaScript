@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbolos Conhecidos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * 
+         * * SÍMBOLOS CONHECIDOS
+         * 
+         * O ES6 fornece símbolos predefinidos que são chamados de símbolos conhecidos. Os símbolos conhecidos representam os comportamentos comuns em JavaScript. Cada símbolo conhecido é uma propriedade estática do Symbol objeto.
+         *
+         * * Symbol.toPrimitivo(Para Primitivo)
+         *
+         * O Symbol.toPrimitive método determina o que deve acontecer quando um objeto é convertido em um valor primitivo.
+         * 
+         * O mecanismo JavaScript define o Symbol.toPrimitive método no protótipo de cada tipo padrão.
+         * 
+         * O Symbol.toPrimitive método recebe um hint argumento que tem um dos três valores: “number”, “string” e “default”. O hint argumento especifica o tipo do valor de retorno. O hint parâmetro é preenchido pelo mecanismo JavaScript com base no contexto em que o objeto é usado.
+         * 
+         * Aqui está um exemplo de uso do Symbol.toPrimitive método.
+        */
+
+        //declara uma function Construtora chamada Money que declara dois paramentros amount e currency
+        function Money(amount, currency) {
+            //declara propriedades, e as inicialzia com os argumentos
+            this.amount = amount;
+            this.currency = currency;
+        }
+
+        //definindo um método no objeto de prototipico, o objeto de prototipico e referenciado por Money.prototype e um objeto anonimo em que define propriedades e métodos para as instancias de objeto criadas por fucntion construtora Money compartilhar
+        //o nome do método e definido por meio de uma propriedade computdada, usando a expressão de colchetes que o resultado sera o nome do método
+        //o nome do metodo e oriundo de um symbol conhecido como o Symbol.toPrimitive que 
+        //O Symbol.toPrimitive método determina o que deve acontecer quando um objeto é convertido em um valor primitivo.
+        //o método recebe como valor uuma function anonima que declara um paramentro chamado hint
+        Money.prototype[Symbol.toPrimitive] = function(hint) {
+            var result;
+            switch(hint) {
+                case 'string':
+                    result = this.amount + this.currency;
+                    break;
+                case 'number':
+                    result = this.amount;
+                    break;
+                case 'default':
+                    result = this.amount + this.currency;
+                    break;
+            }
+            return result;
+        }
+
+        //declara uma instancia de objeto invocando a function construtora Money, usando o new operador e passando dois argumentos, um do tipo number 799, e o outro argumento uma string  literal
+        let price = new Money(799, 'USD');
+
+        //quando tratamos a instancia de objeto referenciado por price com um tipo primitivo string, o Symbol.toPrimitive método no prototipo define que retorna uma string concatenada
+        console.log('Price is ' + price); //Price is 799USD
+        //quando tratamos como um inteiro retorna um valor inteiro
+        console.log(+price + 1); //800
+        //quando tratamos como string novamente
+        console.log(String(price)); //799USD
+
+        /**
+         * Neste tutorial, você aprendeu sobre símbolos JavaScript e como usar símbolos para valores exclusivos e propriedades de objetos. Além disso, você aprendeu a usar símbolos conhecidos para modificar comportamentos de objetos.
+        */
+    </script>
+</body>
+</html>

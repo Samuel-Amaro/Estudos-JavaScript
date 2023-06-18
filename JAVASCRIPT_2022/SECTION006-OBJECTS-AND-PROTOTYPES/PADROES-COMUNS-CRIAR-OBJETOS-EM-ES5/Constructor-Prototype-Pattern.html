@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor / Prototype pattern</title>
+</head>
+<body>
+
+    <p>A figura a seguir ilustra os relacionamentos entre objetos no padrão construtor/protótipo.</p>
+    <img src="Create-Objects-in-JavaScript-Constructor-Prototype-Pattern.png" alt="imagen">
+
+    <script>
+        /**
+         * * CONSTRUCTOR/PROTOTYPE PATTERN(PADRÃO CONSTRUTOR/PROTÓTIPO)
+         * 
+         * A combinação dos padrões de construtor e protótipo é a maneira mais comum de definir tipos personalizados.
+         * 
+         * O padrão construtor define as propriedades do objeto, enquanto o padrão protótipo define métodos e propriedades compartilhadas.
+         * 
+         * Ao usar esse padrão, todos os objetos do tipo personalizado compartilham o método e cada um deles possui suas próprias propriedades. Este construtor/protótipo pega as melhores partes dos padrões de construtor e protótipo.
+        */
+
+        //declara uma function regular Construtora chamada Animal que possui uma paramentro chamado name essa function retorna uma referencia de uma instancia de objeto criado pelo this objeto
+        //por padrão o JS fornecera um objeto prototipo anonimo que pode ser referenciado por Animal.prototype, esse objeto contem propriedades que podem ser herdadas por Qualquer instancia criada por animal
+        //E o objeto anonimo referencia a Function construtora Animal por meio da contructor propriedade que pode ser acessada por meio de
+        //Animal.prototype.constructor
+        //O objeto anonimo e ligado a Object.prototype objeto anonimo de referencia por meio do Mecanismo do JS por padrão, para herdar os metodos como toString, valueOf e outros la
+        function Animal(name) {
+            //adiciona propriedades ao this objeto, propriedades proprias
+            //adiciona uma propriedade chamada name que recebe o name argumento como valor
+            this.name = name;
+        }
+
+        //definindo propriedades herdadas por meio do objeto prototipico De Animal
+        //assim  propriedades ficam disponíveis e compartilhadas entre todas as instâncias.
+        //define uma propriedade chamada identify que recebe como valor uma function anonima que não declara paramentro e não retorna valor
+        //a function anonima e atribuida a identify propriedade tornando a metodo
+        Animal.prototype.identify = function() {
+            //aqui o this objeto value sera o valor usando por new palavra chave ao ser usada  na invocação da function construtora
+            console.log(`I'm ${this.name}`);
+        }
+
+        //cria uma instancia de objeto invocando a function construtora Animal usando a new palavra chave e passando um argumento
+        //a new palavra chave e substituida pelo this valor da funciton contrutora retornando a referncia a instancia recem criada
+        //por padrão o mecanismo JS liga a instancia de objeto donald ao objeto anonimo de prototipo
+        var donald = new Animal('Donald');
+        //acessa a propriedade herdada definida no objeto prototipo anonimo
+        //invoca a propriedade como metodo
+        donald.identify(); //I'M Donald
+
+        //cria uma nova instancia de objeto invocando a function construtora Animal usando a new palavra chave e pssando o argumento para ela 
+        //a new palavra chave e substituirda pelo this valor da function construtora retornando a referencia a instancia recem criada
+        //por padrão o mecanismo JS liga a instancia de objeto boa ao objeto anonimo de prototipo
+        var bob = new Animal('Bob');
+        //acessa a propriedade herdada definida no objeto prototipo anonimo
+        //invoca a propriedade como metodo
+        bob.identify(); //I'm Bob
+
+    </script>
+</body>
+</html>

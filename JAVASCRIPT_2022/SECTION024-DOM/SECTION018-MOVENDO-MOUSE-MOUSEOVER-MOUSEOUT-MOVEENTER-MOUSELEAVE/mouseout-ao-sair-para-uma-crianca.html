@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #parent {
+            background: #99C0C3;
+            width: 160px;
+            height: 120px;
+            position: relative;
+        }
+
+        #child {
+            background: #FFDE99;
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        textarea {
+            height: 140px;
+            width: 300px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="./mouseover-to-child.svg"/>
+
+    <img src="./mouseover-bubble-nested.svg"/>
+
+    <!--
+        - atribuimos um manipulador de eventos por meio do atributo html, para dois tipos de eventos diferentes
+    -->
+    <div id="parent" onmouseover="mouselog(event)" onmouseout="mouselog(event)">
+        parent
+        <div id="child">child</div>
+    </div>
+
+    <textarea id="text"></textarea>
+    
+    <input type="button" onclick="text.value=''" value="Clear"/>
+
+    <script type="text/javascript">
+        /**
+         * * Mouseout ao sair para uma filho
+         * 
+         * Uma característica importante de mouseout(mouse fora) – ele é acionado, quando o ponteiro se move de um elemento para seu descendente, por exemplo, de #parent para #child neste HTML:
+         * 
+         * Se estivermos em #parent e movermos o ponteiro mais para dentro de #child, teremos o mouseout(mouse fora) em #parent!
+         * 
+         * Isso pode parecer estranho, mas pode ser facilmente explicado.
+         * 
+         * De acordo com a lógica do navegador, o cursor do mouse pode estar apenas sobre um único elemento a qualquer momento – o mais aninhado e o topo pelo z-index.
+         * 
+         * Então, se for para outro elemento (mesmo um descendente), sairá do anterior.
+         * 
+         * Observe outro detalhe importante do processamento de eventos.
+         * 
+         * O mouseover(mouse sobre) evento em um descendente borbulha. Então, se #parent tiver mouseover(mouse sobre) manipulador, ele aciona:
+         * 
+         * Você pode ver isso muito bem no exemplo abaixo: <div id="child"> está dentro do arquivo <div id="parent">. Existem mouseover/out manipuladores no #parent elemento que geram detalhes do evento.
+         * 
+         * Se você mover o mouse de #parent para #child, verá dois eventos em #parent:
+         
+            1. mouseout [target: parent](deixou o pai), então
+            2. mouseover [target: child](veio para a filho, borbulhava).
+
+        */
+
+        function mouselog(event) {
+            let d = new Date();
+            text.value += `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} | ${event.type} [target: ${event.target.id}]\n`.replace(/(:|^)(\d\D)/, '$10$2');
+            //enquanto conteudo e inserido o scroll e movimentado para mostrar o conteudo
+            text.scrollTop = text.scrollHeight;
+        }
+
+        /**
+         * Conforme mostrado, quando o ponteiro se move do #parent elemento para #child, dois manipuladores são acionados no elemento pai: mouseout e mouseover:
+        */
+
+        /*
+        parent.onmouseout = function(event) {
+            //event.target: parent element  
+        };*/
+
+        /*
+        parent.onmouseover = function(event) {
+            //event.target: child element (borbulha) 
+        };*/
+
+        /**
+         * Se não examinarmos event.target dentro dos manipuladores, pode parecer que o ponteiro do mouse deixou o #parent elemento e imediatamente voltou sobre ele.
+         * 
+         * Mas esse não é o caso! O ponteiro ainda está sobre o pai, apenas se aprofundou no elemento filho.
+         * 
+         * Se houver algumas ações ao sair do elemento pai, por exemplo, uma animação é executada em parent.onmouseout, geralmente não queremos quando o ponteiro se aprofunda em #parent.
+         * 
+         * Para evitar isso, podemos verificar relatedTarget no manipulador e, se o mouse ainda estiver dentro do elemento, ignorar tal evento.
+         * 
+         * Alternativamente, podemos usar outros eventos: mouseenter e mouseleave, que abordaremos agora, pois eles não têm esses problemas.
+        */
+
+    </script>
+</body>
+</html>

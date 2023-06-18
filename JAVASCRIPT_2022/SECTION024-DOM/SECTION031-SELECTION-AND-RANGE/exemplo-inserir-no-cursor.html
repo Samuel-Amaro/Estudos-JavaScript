@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <label for="one">Substitua ISTO no texto</label>
+    <input id="input" type="text" style="width: 200px;" value="Texto Texto Texto Texto Texto"/>
+    <br/>
+    <button id="button">Inserir "HELLO" no cursor</button>
+
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO: inserir no cursor
+         * 
+         * Se nada for selecionado, ou usarmos início e fim iguais em setRangeText, então o novo texto é apenas inserido, nada é removido.
+         * 
+         * Também podemos inserir algo “no cursor” usando setRangeText.
+         * 
+         * Aqui está um botão que insere "HELLO" na posição do cursor e coloca o cursor imediatamente depois dele. Se a seleção não estiver vazia, ela será substituída (podemos detectá-la comparando selectionStart != selectionEnd e fazendo outra coisa):
+        */
+
+        //atribuindo uma manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento de click, que e acionado quando o elemento button recebe um click do mouse
+        button.onclick = () => {
+            //input.setRangeText(replacement, [start], [end], [selectionMode]) – substitui um intervalo de texto pelo novo texto.
+            //primeiro argumento - o texto que vai substituir o intervalo
+            //input.selectionStart informa o inicio do intervalo
+            //input.selectionEnd informa o final do intervalo
+            //selectionMode - valor end  o intervalo de seleção é recolhido logo após o texto inserido (o cursor estará logo após ele).
+            //obse: se selectionStart e selectionEnd forem iguais, o novo texto e inserido e nada e removido
+            input.setRangeText("HELLO ", input.selectionStart, input.selectionEnd, "end");
+            //elemento input, recebe o foco
+            input.focus();
+        };
+
+    </script>
+</body>
+</html>

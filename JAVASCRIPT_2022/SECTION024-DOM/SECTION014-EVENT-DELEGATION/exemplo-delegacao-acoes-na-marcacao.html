@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="menu">
+        <!--atributo data-action e um atributo não padrão personalizavel de dados-->
+        <button type="button" data-action="save">Salvar</button>
+        <button type="button" data-action="load">Carregar</button>
+        <button type="button" data-action="search">Pesquisar</button>
+    </div>
+    
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO DE DELEGAÇÃO: AÇÕES NA MARCAÇÃO
+         * 
+         * Existem outros usos para delegação de eventos.
+         * 
+         * Digamos que queremos fazer um menu com os botões “Salvar”, “Carregar”, “Pesquisar” e assim por diante. E há um objeto com métodos save, load, search… Como combiná-los?
+         * 
+         * A primeira ideia pode ser atribuir um manipulador separado para cada botão. Mas há uma solução mais elegante. Podemos adicionar um handler para todo o menu e data-action atributos para botões que tem o método a chamar:
+        */
+
+        //declara uma classe chamada Menu
+        class Menu{
+            //define um construtor
+            //inicializa propriedade da instancia de objeto a ser criada, define paramentro elem
+            constructor(elem) {
+                //propriedade com visibilidade protected não pode ser acessada
+                this._elem = elem;
+                //atribuindo uma manipulador de evento por meio de uma propriedade dom
+                //o this referencia a class Menu
+                //o fn.bind(thisArg[arg1, ...]);
+                //retorna uma nova function com um novo this valor especificado
+                //retorna uma function como this.onClick, sendo que aqui o this passado e o proprio class Menu, sem fornecer argumentos para onClick
+                //Menu.onclick() sera o manipulador de elem
+                elem.onclick = this.onClick.bind(this); //(*)
+            }
+
+            //metodo da classe
+            save() {
+                alert('saving');
+            }
+
+            //metodo da classe
+            load() {
+                alert('loading');
+            }
+
+            //metodo da classe
+            search() {
+                alert('searching');
+            }
+
+            //metodo da classe
+            onClick(event) {
+                //a event.target.dataset.action retorna o valor do atributo não padrão personalizavel do elemento que iniciou o evento onde foi acionado
+                let action = event.target.dataset.action;
+                console.log(action);
+                //se possui o valor do atributo
+                if(action) {
+                    //chama um dos metodos da classe de acordo com o atributo de dados não padrão personalizavel retornado, de acordo com o elemento que inicio o evento, acionou o evento
+                    this[action](); //Menu.metodo();
+                }
+            };
+        }
+
+        //cria uma instancia de classe anonima passando o no dom menu
+        new Menu(menu);
+        /**
+         * Observe que this.onClick está vinculado a this em (*). Isso é importante, porque senão this dentro dele referenciaria o elemento DOM (elem), não o objeto Menu, e this[action] não seria o que precisamos.
+         * 
+         * Então, que vantagens a delegação nos dá aqui?
+         
+            - Não precisamos escrever o código para atribuir um manipulador a cada botão. Basta fazer um método e colocá-lo na marcação.
+
+            - A estrutura HTML é flexível, podemos adicionar/remover botões a qualquer momento.
+
+         * Também poderíamos usar classes .action-save, .action-load, mas um atributo data-action é melhor semanticamente. E podemos usá-lo em regras CSS também.
+        */
+    </script>
+</body>
+</html>

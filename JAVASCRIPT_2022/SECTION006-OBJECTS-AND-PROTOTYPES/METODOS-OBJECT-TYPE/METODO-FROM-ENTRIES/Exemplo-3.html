@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO 3) CONVERTENDO UMA STRING DE PARÂMETRO DE URL EM UM OBJETO
+         * 
+         * O exemplo a seguir mostra como usar o Object.fromEntries() para converter uma string de consulta de uma URL em um objeto cuja cada propriedade é um parâmetro:
+        */
+        
+        //declara uma constante que armazena uma url
+        const params = 'type=listing&page=2&rowCount=10';
+        const searchParams = new URLSearchParams(params);
+
+        //transforma o iteravel referenciado por searchParams em um objeto, sendo que as propriedades do objeto são os elementos do iteravel
+        console.log(Object.fromEntries(searchParams));
+
+        /**
+         * * RESUMO
+         * 
+         * A Object.fromEntries()transformar um iterável em um objeto.
+         * 
+         * O Object.fromEntries()executa o inverso de Object.entries().
+        */
+        
+    </script>
+</body>
+</html>

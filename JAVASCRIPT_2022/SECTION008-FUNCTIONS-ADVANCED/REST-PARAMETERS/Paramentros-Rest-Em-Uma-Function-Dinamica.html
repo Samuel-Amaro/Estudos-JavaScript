@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Parametros</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PARÂMETRO REST JAVASCRITP EM UMA FUNÇÃO DINÂMICA
+         * 
+         * JavaScript permite que você crie funções dinâmicas por meio do construtor Function . E é possível usar o parâmetro rest em uma função dinâmica. Aqui está um exemplo:
+        */
+
+        //cria um nova function dinamica que e uma instancia de objeto do tipo function, a function e criada usando a função construtora de objetos e usando o operador new
+        //a function a ser criada tera somente um paramentro esse paramentro sera do tipo rest aceitara um numero indefinido de argumentos como um array
+        //o corpo da função sera o segundo argumento da passado para a function construtora Function
+        //a function criada e atribuida por referencia a variavel showNumber que referenciara a function
+        var showNumbers = new Function('...numbers', 'console.log(numbers)');
+        //invocando a function recem criada dinamicamente por meio da variavel showNumbers
+        showNumbers(1, 2, 3);
+
+        /**
+         * Neste tutorial, você aprendeu como usar o parâmetro rest do JavaScript para representar um número indefinido de argumentos como uma array.
+        */
+
+        
+    </script>
+</body>
+</html>

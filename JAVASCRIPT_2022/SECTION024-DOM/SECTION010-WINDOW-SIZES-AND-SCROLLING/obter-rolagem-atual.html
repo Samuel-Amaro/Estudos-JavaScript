@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * Obter a rolagem(scroll) atual
+        * 
+        * Os elementos DOM têm seu estado de rolagem atual em suas scrollLeft/scrollTop propriedades.
+        * 
+        * Para rolagem de documentos, document.documentElement.scrollLeft/scrollTop funciona na maioria dos navegadores, exceto os mais antigos baseados em WebKit, como Safari (bug 5991 ), onde devemos usar document.body em vez de document.documentElement.
+        * 
+        * Felizmente, não precisamos nos lembrar dessas peculiaridades, porque o scroll está disponível nas propriedades especiais, window.pageXOffset/pageYOffset:
+        */
+
+        console.log('Rolagem atual do topo: ' + window.pageYOffset);
+        console.log('Rolagem atual da esquerda: ' + window.pageXOffset);
+
+        /**
+         * Essas propriedades são somente leitura.
+         * 
+         * * Também disponível como window propriedades scrollX e scrollY
+         * 
+         * Por razões históricas, ambas as propriedades existem, mas são as mesmas:
+         
+            - window.pageXOffset é um alias de window.scrollX.
+
+            - window.pageYOffset é um alias de window.scrollY.
+
+         * 
+         * */
+
+
+    </script>
+</body>
+</html>

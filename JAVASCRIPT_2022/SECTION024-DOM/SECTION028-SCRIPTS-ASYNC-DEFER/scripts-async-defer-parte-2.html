@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - elemento dom visivel pelo script
+        - o dom e processado renderizado até aqui
+    -->
+    <p>...todo o conteúdo está acima do script...</p>
+
+    <!-- 
+        - aqui a renderização do dom para a contrução do dom, e começar baixar processar e executar o script, apos isso continua a construição do dom e renderização.
+        - colocar um script na parte inferior da pagina para que possar ver os elementos dom acima dele e não bloquear a exibição do conteudo da pagina. Obs: solução não e perfeita a pros contra.-->
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js?speed=1">
+        /**
+         * Existem algumas soluções para isso. Por exemplo, podemos colocar um script na parte inferior da página. Em seguida, ele pode ver os elementos acima dele e não bloqueia a exibição do conteúdo da página:
+         * 
+         * Mas esta solução está longe de ser perfeita. Por exemplo, o navegador percebe o script (e pode começar a baixá-lo) somente depois de baixar o documento HTML completo. Para documentos HTML longos, isso pode ser um atraso perceptível.
+         * 
+         * Essas coisas são invisíveis para pessoas que usam conexões muito rápidas, mas muitas pessoas no mundo ainda têm velocidades de internet lentas e usam uma conexão de internet móvel longe de ser perfeita.
+         * 
+         * Felizmente, existem dois atributos de <script> que resolvem o problema para nós: defer e async.
+        */
+    </script>
+
+</body>
+</html>

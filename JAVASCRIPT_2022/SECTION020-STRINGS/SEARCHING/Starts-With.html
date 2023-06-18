@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método startsWith() String</title>
+</head>
+<body>
+    <script>
+        /**
+         * * A STRING JS startsWith() - Começa Com
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar o startsWith()método JavaScript String para verificar se uma string começa com os caracteres de outra string.
+         * 
+         * O startsWith() retorna true se uma string começa com os caracteres de uma string especificada; caso contrário false.
+         * 
+         * Veja a seguir a sintaxe do startsWith() método:
+
+            String.startsWith(searchString[, position]);
+
+         * 
+         * ARGUMENTOS
+         
+            - searchString são os caracteres a serem procurados no início desta string.
+
+            - position é um parâmetro opcional que determina a posição inicial para procurar o arquivo searchString. O padrão é 0.
+
+         * 
+         * * EXEMPLOS DE STRING JS startsWith()
+         * 
+         * Suponha que você tenha uma string chamada title da seguinte forma:
+        */
+
+        //declara uma constante chamda title que e inicializada com uma string literal
+        const title = 'Jack and Jill Went Up the Hill';
+
+        /**
+         * O exemplo a seguir usa o startsWith() método para verificar se o título começa com a string 'Jack':
+        */
+
+        //usando o metodo String.startsWith() para verificar se a string literal title começa com a string 'Jack'
+        //o metodo precisa de um argumento o searchString são os caracteres a serem procurados no início desta string.
+        //nesse caso procuramos no inicio da string os caracteres 'Jack' que a constante literal title começa com esses caracteres, assim o metodo retorna true se não e false
+        console.log(title.startsWith('Jack')); //true
+
+        /**
+         * O startsWith() método faz a correspondência dos caracteres diferenciando maiúsculas de minúsculas, portanto, a instrução a seguir retorna false:
+        */
+
+        //procurando os caracteres no inicio de uma string usando o metodo startsWith, mas vendo que ele diferencia maiusculas de minusculas, assim oque procuro esta diferente do que existe
+        title.startsWith('jack');
+
+        /**
+         * Este exemplo usa o método startsWith com o segundo parâmetro que determina a posição inicial para iniciar a pesquisa:
+        */
+
+        //usando o metodo String.startsWith() para verificar se a string literal title começa com a string 'Jill' a partir do indice 9 do array string
+        //o metodo precisa de um argumento o searchString são os caracteres a serem procurados no início desta string.
+        //position é um parâmetro opcional que determina a posição inicial para procurar o arquivo searchString. O padrão é 0.
+        //aqui queremos verificar se a constante literal title no inicio da sua string possui a string 'Jill' a partir do caractere de indice 9
+        console.log(title.startsWith('Jill', 9)); //true
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - exemplo de ações padrão do navegador. o evento de click no elemento <a> leva automaticamento o navegador a executar uma ação.
+        - exemplo de como impedir uma ação padrão do navegador.
+        - o manipulador atribuido por on<event> se retorna false, impede o navegador de executar sua ação padrão para o evento de click em um elemento <a>
+        - atribui um manipualdor de evento por meio de atributo html.
+        - o manipulador retorna false ao <a> receber um click.
+    -->
+    <a href="/" onclick="return false">Clique Aqui</a>
+
+    <p>ou</p>
+
+    <!--
+        - atribui um manipulador de evento.
+        - outra forma de impedir ação do navegador.
+        - usar o event.preventDefault(); no manipulador.
+        - isso impede o navegador de fazer a navegação do link.
+        - aqui o navegador não faz nada.
+        - o click no elemento <a> não e para navegação a ação padrão do navegador aqui e impedida
+    -->
+    <a href="/" onclick="event.preventDefault()">Aqui</a>
+
+    <script type="text/javascript">
+        /**
+         * * IMPEDINDO AÇÕES DO NAVEGADOR
+         * 
+         * Existem duas maneiras de dizer ao navegador que não queremos que ele aja:
+         
+            - A principal maneira é usar o event objeto. Existe um método event.preventDefault().
+
+            - Se o manipulador for atribuído usando on<event>(não por addEventListener), retornar false também funcionará da mesma forma.
+
+         * Neste HTML, um clique em um link não leva à navegação; o navegador não faz nada:
+         * 
+         * No próximo exemplo, usaremos essa técnica para criar um menu com JavaScript.
+         * 
+         * * Retornar false de um manipulador é uma exceção
+         * 
+         * O valor retornado por um manipulador de eventos geralmente é ignorado.
+         * 
+         * A única exceção é return false de um manipulador atribuído usando on<event>.
+         * 
+         * Em todos os outros casos, o return valor é ignorado. Em particular, não faz sentido retornar true.
+        */
+    </script>
+</body>
+</html>

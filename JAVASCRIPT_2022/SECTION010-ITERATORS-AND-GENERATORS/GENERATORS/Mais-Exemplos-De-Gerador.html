@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais Exemplos de Gerador</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MAIS EXEMPLOS DE GERADOR(GENERATOR)
+         * 
+         * O exemplo a seguir ilustra como usar um gerador para gerar uma sequência sem fim:
+         * 
+        */
+
+        //define um novo tipo de função no ES6
+        //define uma function generator chamado forever que não declara paramentros
+        //uma função diferente de uma função normal regular, uma função geradora
+        //o * apos a palavra chave function indica que a function chamada forever(e uma função geradora) não e uma função normal
+        //a função geradora pode ser executada por pedaços, pode pausar no meio do caminho e continuar de onde parou
+        function* forever() {
+            let index = 0;
+            while(true) {
+                //a instrução yeild retorna o valor da index, apos o incremento(pos-incremento de 1 em 1), retorna o valor atual primeiro e depois, incrementa o valor para a proxima execução, e pausa a execução da function generator forever
+                yield index++;
+            }
+        }
+
+        //invoca a function geradora para obter o objeto anonimo Generator{} que e atribuido por refencia a variavel f, a function generator chamada forever não e executada como uma function normal
+        let f = forever();
+        console.log(f);
+        //O objeto Generator{} referenciado por f e um objeto iteravel, que permite iterar seus elementos, aqui os elementos desse objeto e as execuções em pedaçõs da function geradora forever
+        //um objeto e classificado como iterator quando possui um next método
+        //o next método Cada vez que você chama o next(), ele retorna o próximo valor na coleção:
+        //a cada invocação ao método next do generator objeto e retornado um valor especificado no yeield instrução na function geradora forever
+        //a cada chamada do next o e yield instrução executado retorna o valor e pausa a execução da function geradorada no meio, na proxima chaamda do next, retoma a execução da function de onde parou
+
+        //console.log(f.next()); //0
+        //console.log(f.next()); //1
+        //console.log(f.next()); //2
+
+        /**
+         * Cada vez que você chama o next()método do forever gerador, ele retorna o próximo número na sequência começando em 0.
+        */
+    </script>
+
+</body>
+</html>

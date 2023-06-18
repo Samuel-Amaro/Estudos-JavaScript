@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo D</title>
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * EXEMPLO D) USANDO yield EM UM ARRAY 
+         * 
+         * O exemplo a seguir usa a palavra-chave yield como elementos de uma array:
+        */
+
+        //define uma function generator com o * apos a palavra chave function, a fucntion e chamada de baz.
+        //define um novo tipo de função no ES6
+        //define uma function generator chamado baz que não declara paramentros
+        //e uma função diferente de uma função normal regular, e uma função geradora, a sua execução e em pedações, não e com uma function normal que e executada por completo, e executada em pedaçõs
+        function* baz() {
+            //yield palavra-chave permite pausar e retomar uma função geradora(function*).
+            //a yield especifica o valor a ser retornado de uma função geradora chamada baz por meio do protocolo de iteração.
+            //a yield retorna undefined(um valor padrão do JS, por não temos especificado uma expression valor a ser retornado pela yield) e pausa a execução da função
+            //aqui usamos a yield palavra-chave como elementos de um array, aqui a yield estão como undefineds por ter omitido o expression valor a ser retornado por elas.
+            let arr = [yield, yield];
+            console.log(arr);
+        }
+
+        //invocando a function generator* baz, ao ser invoca esse tipo de function não executa seu corpo logo em seguida, ela so retorna um objeto literal Generator com o corpo da function generator baz
+        //o objeto retornado pela invocação da function generator baz e atribuido a variavel z por referencia
+        let z = baz(); //Generator{}
+
+        //o objeto Generator {} referenciado por z e um iteravel, pois ele esta definido de acordo com o protocolo de iteração iterator, e porque também possui o método next
+        //Tecnicamente falando, um objeto é qualificado como iterator quando possui um next(), método que retorna um objeto anonimo literal com duas propriedades chamadas done e value, isso e o padrão de conformidade definido pelo protocolo iterator para tornar tipos iteraveis
+        //a propriedade value do objeto retornado e o proprio valor retornado pelo yield na function geradora
+        //assim o next também serve Cada vez que você chama o next(), ele retorna o próximo valor na coleção:
+        console.log(z.next()); //{value: undefined, done: false}
+
+        //realiza uma segunda invocação ao next método do Generator Objeto anonimo, passando um argumento de valor 1, ele retorna o próximo valor na coleção:
+        //como passamos um argumento para o next método e ele não definiu paramentro o seguinte acontece:
+        //avalia a yield para 1, como o primeiro elemento do array
+        console.log(z.next(1));
+
+        //mesma coisa acontece nessa terceira invocação do next método passando o argumento 2, avalia a yield para 2 como o segundo elemento do array,
+        //atribui o array a variavel arr, mostra a mensagem e retorna o objeto
+        console.log(z.next(2));
+
+        /**
+         * A primeira chamada z.next() define o primeiro elemento da arr array como 1 e retorna o seguinte objeto:
+
+            {value: undefined, done: false}
+
+         * A segunda chamada z.next() define o segundo da arr array como 2 e retorna o seguinte objeto:
+
+            {value: undefined, done: true}
+
+         * A terceira chamada z.next() mostra o conteúdo do arr array e retorna o seguinte objeto:
+
+            [1, 2]
+            { value: undefined, done: true }
+        */
+
+    </script>
+
+</body>
+</html>

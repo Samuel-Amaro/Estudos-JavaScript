@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * No exemplo abaixo vemos a outra situação com .catch. O manipulador (*)pega o erro e simplesmente não consegue lidar com ele (por exemplo, ele só sabe como manipular URIError), então ele o lança novamente:
+        */
+
+        //a execução: catch -> catch
+        new Promise((resolve, reject) => {
+            //trabalho da promise e lançar uma exceção
+            //a function executora da promise tem um invisivel try...catch ao seu redor
+            //se ocorrer uma exceção ela sera dectada e tratada como uma promise rejeitada
+            throw new Error("Whoops!");
+
+        })
+        //anexa um .catch manipulador com objetivo de so capturar o objeto error da promisse rejeitada
+        .catch(function(error) {
+
+            //aqui verificamos o tipo do error, se for conhecido tratamos se não o relançammos para que outro proximo .catch manipulador possa tratalo
+            if(error instanceof URIError) {
+                //manipula aqui
+            }else{
+
+                alert("Não é possível lidar com esse erro");
+
+                //relança uma exceção existente, Se lançarmos dentro de .catch, o controle irá para o próximo manipulador de erros mais próximo, ele salta para o proximo manipulador de error  mais proximo
+                throw error; //jogando este ou outro erro pula para a próxima captura
+            }
+
+        })
+        //anexamos outro manipulador para consmuir algo apos o tratamento de algum error
+        .then(
+            /* não roda aqui, pois aqui não temos manipulador de erros, mas sim uma function manipulador de resultado*/
+        )
+        //anexamos outro manipulador de erro aqui .catch para capturar erros de promises rejeitadas
+        .catch(error => { //(**)
+
+            alert(`Ocorreu um erro desconhecido: ${error}`);
+            //não retorne nada => a execução segue o caminho normal
+
+        });
+
+        /**
+         * A execução salta do primeiro .catch (*) para o próximo (**) na cadeia.
+        */
+
+    </script>
+</body>
+</html>

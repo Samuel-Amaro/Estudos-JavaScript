@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind metodo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO BIND() PARA EMPRESTAR MÉTODOS DE UM OBJETO DIFERENTE
+         * 
+         * Suponha que você tenha um runner objeto que tenha o run método ():
+        */
+
+        //declara um objeto anonimo literal, que e atribuido a runner variavel por referencia, assim runner variavel referencia o objeto anonimo literal
+        let runner = {
+            //propriedade usando sintaxe chave valor
+            name: 'Runner',
+            //declara uma function anonima que possui um paramentro nomeado speed, essa function e atribuida a propriedade run
+            run: function(speed) {
+                console.log(`${this.name} run at ${speed} mph.`);
+            }
+        };
+
+        //declara uma objeto literal anonimo que e atribuido a variavel flyer por referencia, essa variavel ira referenciar o objeto
+        let flyer = {
+            //propriedade usando sintaxe chave valor
+            name: 'Flyer',
+            //declara uma function anonima que possui um paramentro chamado speed, essa function e atribuida a propriedade fly
+            //metodo do objeto literal
+            fly: function(speed) {
+                console.log(`${this.name} flies at ${speed} mph.`);
+            }
+        };
+
+        /**
+         * Se você quiser que o flyer objeto possa ser executado, você pode usar o bind() método para criar a run()função com os this  conjuntos para o flyer objeto:
+        */
+
+        //usando o metodo bind da instancia de objeto de tipo function run
+        //esse metodo ira criar uma nova function do metodo run com um novo valor this especifico e argumentos passados para bind
+        //aqui sera o seguinte o bind metodo criara uma nova function de rum metodo com o flyer objeto sendo seu novo this valor recebendo o argumento 20
+        //a nova função criada com o novo this valor e argumento esta atribuido a run variavel
+        let run = runner.run.bind(flyer, 20);
+        console.log(`flyer.run(20)`);
+        run(); //Flyer runs at 20 mph.
+
+        /**
+         * Nesta declaração:
+         
+            - Chame o bind() método do runner.run() método e passe o objeto flyer como primeiro argumento e 20 como segundo argumento
+
+            - Invoque a run() função.
+
+         * 
+         * A capacidade de emprestar um método de um objeto sem fazer uma cópia desse método e mantê-lo em dois locais separados é muito poderosa em JavaScript.
+         * 
+         * * RESUMO
+         * 
+         * O bind() método cria uma nova função, quando invocada, tem os this conjuntos para um valor fornecido.
+         * 
+         * O bind() método permite que um objeto tome emprestado um método de outro objeto sem fazer uma cópia desse método. Isso é conhecido como empréstimo de função em JavaScript.
+        */
+    </script>
+</body>
+</html>

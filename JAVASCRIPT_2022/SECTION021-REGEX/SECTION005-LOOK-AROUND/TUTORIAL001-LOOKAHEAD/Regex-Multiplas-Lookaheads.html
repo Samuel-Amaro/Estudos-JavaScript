@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * REGEX MULTIPLE LOOKAHEADS(REGEX VÁRIAS ANTECIPAÇÕES)
+         * 
+         * É possível ter várias antecipações em uma expressão regular com a seguinte sintaxe:
+         
+            X(?=Y)(?=Z)
+
+         *
+         * Nesta sintaxe, o mecanismo regex segue as seguintes etapas:
+         
+            1. Procure por X
+            2. Verifique se Y está imediatamente após X, pule se não estiver.
+            3. Verifique se Z também está imediatamente após Y; pule se não for.
+            4. Se ambos os testes passarem, retorne X como uma correspondência; caso contrário, procure a próxima correspondência.
+
+         *
+         * Portanto, as X(?=Y)(?=Z)corresponde X seguidas Y e Z simultaneamente.
+        */
+    </script>
+</body>
+</html>
+
+
+

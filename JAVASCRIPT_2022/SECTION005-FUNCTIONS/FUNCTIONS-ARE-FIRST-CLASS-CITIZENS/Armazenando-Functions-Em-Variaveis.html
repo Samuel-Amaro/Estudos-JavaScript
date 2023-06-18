@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armazenando Functions em variaveis</title>
+</head>
+<body>
+    <script>
+        /**
+         * * Funções JavaScript são cidadãos de primeira classe 
+         * 
+         * Resumo : neste tutorial, você verá que as funções em JavaScript são objetos de primeira classe, o que significa que você pode armazenar funções em variáveis, passá-las para outras funções como argumentos e retorná-las de outras funções como valores.
+         * 
+         * * OQUE E SER UM CIDADÃO DE PRIMEIRA CLASSE(First-class Citizen) ? é uma entidade que suporta todas as operações geralmente disponíveis para outras entidades. Estas operações incluem, normalmente, ser passado como um argumento, retornado por uma função, modificado, e atribuído à variáveis.
+         * 
+         * * ARMAZENAMENTO DE FUNÇÕES EM VARIÁVEIS
+         * 
+         * As funções são os cidadãos de primeira classe em JavaScript. Em outras palavras, você pode tratar funções como valores de outros tipos.
+         * 
+         * O seguinte declara a add() função e atribui o nome da função à variável sum:
+         *
+        */
+
+        //declara uma function chamada add
+        //essa function possui dois parametros a e b
+        function add(a, b) {
+            //o valor de retorno dessa função, e o paramentro a + b
+            return a + b;
+        }
+
+        //atribui o nome add que refere a function add(a, b), a variavel sum
+        //aqui não ha execução(invocação) da function, e nem incluimos os parenteses da mesma pois não queremos chamala e nem executala, mas sim referenciala, passado a sua referencia para uma variavel 
+        let sum = add;
+
+        /**
+         * Na instrução de atribuição, não incluímos os parênteses de abertura e fechamento no final do add identificador. Também não executamos a função, mas referenciamos a própria função.
+         * 
+         * Isso significa que temos duas maneiras de executar a mesma função. Podemos chamá-lo normalmente da seguinte maneira:
+         * 
+        */
+
+        //primeira forma de chamar uma function
+        //forma tradicional normal
+        let result = add(10, 20);
+
+        console.log(`Sum de 10 + 20 = ${result}`);
+
+        //segunda forma, chamando a refencia da função passada para um variavel, chamamos a variavel que referencia a função
+        result = sum(10, 20);
+
+        console.log(`Sum de 10 + 20 = ${result}`);
+        
+    </script>
+</body>
+</html>

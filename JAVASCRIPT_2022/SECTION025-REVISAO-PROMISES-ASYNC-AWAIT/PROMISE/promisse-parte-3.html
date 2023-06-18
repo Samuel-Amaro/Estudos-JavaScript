@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * PODE HAVER APENAS UM ÚNICO RESULTADO OU UM ERRO
+         * 
+         * O executor deve chamar apenas um resolve ou um reject. Qualquer mudança de estado é final.
+         * 
+         Todas as outras chamadas de resolve e reject são ignoradas:
+        */
+
+        //sintaxe do construtor para um objeto promisse
+        //o argumento passado para o construtor promisse e uma callback chamada de executor, que e executado automaticamente, o excutor tenta executar algum trabalho
+        //os argumentos do callback executor são outros callbacks chamados de resolve e reject, fornecidos pelo proprio javascript
+        //se ao terminar a tentativa de realizar o trabalho o excutor pode chamar resolve(value) se o trabalho for concluido com sucesso
+        //ou reject(error) se ocorreu um erro
+        //o nosso codigo esta apenas dentro do executor
+        let promise = new Promise(function(resolve, reject) {
+            //executor realizando tentativa de executar trabalho
+            //a função executor é executada automaticamente quando a promessa é construída
+            //a function callback executor e chamada automaticamente e imediatamente por new Promisse
+            //muda o estado da promisse de pendente para resolvida passando "done" como value
+            resolve("done");
+
+            //so pode chamar resolve ou reject uma unica vez, so pode mudar o estado da promise uma unica vez
+            //os chamados abaixo não funcionarão, são ignorados
+            reject(new Error("...")); //ignorado
+            setTimeout(() => resolve("...")); //ignorado
+        });
+
+        /**
+         * A ideia é que um trabalho feito pelo executor pode ter apenas um resultado ou um erro.
+         * 
+         Além disso, resolve/reject espera apenas um argumento (ou nenhum) e ignorará argumentos adicionais.
+         * 
+         * * REJEITAR(REJECT) COM ERROS OBJETOS
+         * 
+         * Caso algo dê errado, o executor deve chamar reject. Isso pode ser feito com qualquer tipo de argumento (assim como resolve). Mas é recomendado usar Error objetos (ou objetos que herdam de Error). O raciocínio para isso logo se tornará aparente.
+         * 
+         * * IMEDIATAMENTE LIGANDO RESOLVE/REJECT
+         * 
+         * Na prática, um executor geralmente faz algo de forma assíncrona e chama resolve/reject depois de algum tempo, mas não precisa. Também podemos ligar resolve ou reject imediatamente, assim:
+        */
+
+        let promise2 = new Promise(function(resolve, reject) {
+            //chamando resolve ou reject sem precisar tentar executar algum trabalho, chamando sem executar trabalho, chamando imediatamente
+            resolve(123);
+        });
+
+        /**
+         * Por exemplo, isso pode acontecer quando começamos a fazer um trabalho, mas vemos que tudo já foi concluído e armazenado em cache.
+         * 
+         * Isso é bom. Temos imediatamente uma promessa resolvida.
+         * 
+         * * O state e result são internos
+         * 
+         * As propriedades state e result do objeto Promise são internas. Não podemos acessá-los diretamente. Podemos usar os métodos .then/ .catch/ .finally para isso. Eles são descritos abaixo.
+        */
+
+    </script>
+
+</body>
+</html>

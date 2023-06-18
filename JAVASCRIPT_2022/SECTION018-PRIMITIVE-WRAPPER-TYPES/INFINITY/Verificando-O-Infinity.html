@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * VERIFICANDO O INFINITY
+         * 
+         * JavaScript fornece o Number.isFinite() que verifica se um valor é finito:
+         
+            Number.isFinite(value);
+
+         * Retorna true se value for finito; Caso o value seja infinito, o Number.isFinite()retorno false.
+        */
+
+        //Usando o método Number.isFinite() para verificar se o valor 100 e finito, se sim retorna true, se e infinito retorna false
+        console.log(Number.isFinite(100)); //true
+        console.log(Number.isFinite(Infinity)); //false - > a variavel Global Infinity represeta um valor maior que outros numeros finitos, então e infinito
+        console.log(Number.isFinite(-Infinity)); //false - > a variavel Global -Infinity represeta um valor menor que outros numeros finitos, então e infinito negativo
+
+        /**
+         * Além disso, você pode comparar um valor com Infinity assim:
+        */
+        
+        //declara uma variavel de escopo de bloco chamada counter inicializada com o valor 100
+        let counter = 100;
+        //verificando se o valor armazenado na varaivel counter e igual ao infinity(infinity e uma variavel global que possui um valor maior que outros finitos)
+        console.log(`${counter}====${Infinity} = ${counter === Infinity}`); //false
+
+        /**
+         * E um número infinito é igual a outro número infinito:
+        */
+
+        //verificando se um numero infinito e igual a outro numero infinito
+        console.log(`${Infinity}====${Infinity} = ${Infinity === Infinity}`); //true
+
+    </script>
+
+</body>
+</html>

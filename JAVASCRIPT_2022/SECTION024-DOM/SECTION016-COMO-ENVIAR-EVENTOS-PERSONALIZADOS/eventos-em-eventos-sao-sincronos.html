@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="menu" type="button">Menu (clique aqui!)</button>
+
+    <script type="text/javascript">
+        /**
+         * * EVENTOS EM EVENTOS SÃO SÍNCRONOS
+         * 
+         * Normalmente os eventos são processados ​​em uma fila. Ou seja: se o navegador estiver processando onclick e um novo evento ocorrer, por exemplo, mousedown, então seu manuseio é enfileirado, os mousemove manipuladores correspondentes serão chamados após o término do onclick processamento.
+         * 
+         * A exceção notável é quando um evento é iniciado de dentro de outro, por exemplo, usando dispatchEvent. Esses eventos são processados ​​imediatamente: os novos manipuladores de eventos são chamados e, em seguida, o tratamento de eventos atual é retomado.
+         * 
+         * Por exemplo, no código abaixo o menu-open evento é acionado durante o onclick.
+         * 
+         * É processado imediatamente, sem esperar que o onclick manipulador termine:
+        */
+
+        //execução de eventos em eventos de forma sincrona, executa um evento ao mesmo tempo que o outro esta sendo executado
+
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        menu.onclick = function(event) {
+            alert(1);
+
+            //cria um novo objeto de evento do tipo de evento personalizado do tipo "menu-open"
+            //o metodo elem.dispatchEvent(event) ira executar o evento novo e personalizado no menu permitindo borbulhamento
+            //este evento abaixo personalizado e executado durante a execução do evento de click no menu, um evento sincrono.
+            menu.dispatchEvent(new CustomEvent("menu-open", {
+                bubbles: true //permite que o evento borbulhe
+            }));
+
+            alert(2);
+        }
+
+        //atribuindo uma manipulador de evento por meio do metodo elem.addEventListener(event, handler, options)
+        //o manipulador e para o evento personalizado novo do tipo "menu-open"
+        document.addEventListener("menu-open", () => alert('aninhado'));
+
+        /**
+         * A ordem de saída é: 1 → aninhado → 2.
+         * 
+         * Observe que o evento aninhado menu-opené capturado no arquivo document. A propagação e o tratamento do evento aninhado são concluídos antes que o processamento retorne ao código externo ( onclick).
+         * 
+         * Não se trata apenas de dispatchEvent, existem outros casos. Se um manipulador de eventos chama métodos que acionam outros eventos – eles também são processados ​​de forma síncrona, de forma aninhada.
+         * 
+         * Digamos que não gostamos. Queremos onclick ser totalmente processados ​​primeiro, independentemente de menu-open qualquer outro evento aninhado.
+         * 
+         * Em seguida, podemos colocar a dispatchEvent(ou outra chamada de acionamento de evento) no final onclick ou, talvez melhor, envolvê-la no atraso zero setTimeout:
+        */
+    </script>
+</body>
+</html>

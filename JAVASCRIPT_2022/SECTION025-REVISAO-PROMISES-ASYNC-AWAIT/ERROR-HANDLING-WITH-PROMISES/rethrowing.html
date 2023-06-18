@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * RETHROWING(Relançamento)
+         * 
+         *  Como já notamos, .catch no final da cadeia é semelhante a try..catch. Podemos ter quantos .then manipuladores quisermos e, em seguida, usar um único .catch no final para tratar os erros em todos eles.
+         * 
+         * Em um regular try..catch podemos analisar o erro e talvez relançá-lo se não puder ser tratado. A mesma coisa é possível para promessas.
+         * 
+         * Se lançarmos dentro de .catch, o controle irá para o próximo manipulador de erros mais próximo. E se tratarmos o erro e terminarmos normalmente, ele continuará para o próximo manipulador .then bem-sucedido mais próximo.
+         * 
+         * No exemplo abaixo o .catch manipula com sucesso o erro:
+        */
+
+        //a execução: catch -> then
+        new Promise((resolve, reject) => {
+            //trabalho da promise e lançar uma exceção
+            //a function executora da promise tem um invisivel try...catch ao seu redor
+            //se ocorrer uma exceção ela sera dectada e trada como uma promise rejeitada
+            throw new Error("Whoops!");
+
+        })
+        //anexa um .catch manipulador com objetivo de so capturar o objeto error da promisse rejeitada
+        .catch(function(error) {
+
+            //aqui consumimos o objeto error apos promise ter sido rejeitada e seguimos normalmente, e podemos proseguir para o proximo .then manipulador mais proximo
+            alert("O erro é tratado, continue normalmente")
+
+        })
+        //anexamos outro manipulador para consmuir algo apos o tratamento de algum error
+        .then(() => alert("Próximas execuções bem-sucedidas do gerenciador"));
+
+        /**
+         * Aqui o .catch bloco termina normalmente. Assim, o próximo .then manipulador bem-sucedido é chamado.
+         * */
+    </script>
+</body>
+</html>

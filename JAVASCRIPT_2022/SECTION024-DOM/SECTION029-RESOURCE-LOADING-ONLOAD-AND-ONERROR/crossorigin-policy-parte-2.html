@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--
+        - nosso script na nossa origem
+    -->
+    <script type="text/javascript">
+        /**
+         * Agora vamos carregar o mesmo script de outro domínio:
+        */
+
+        //error.js
+        //noSuchFunction();
+
+        //Agora carregue-o do mesmo site onde está localizado:
+
+        //o manipulador e para o evento error, esse evento e acionado depois que o recurso externo houve um erro no carregamento do mesmo. e acionado quando ha erros no carregamento do recurso. 
+        //quando ha erros de carregamento no janela
+        window.onerror = function(event, message, url, line, col, errorObj) {
+            alert(`${message}\n${url}, ${line}:${col}`);
+        };
+    </script>
+
+    <!--
+        - script externo. de outra origem
+        - o script externo possui um erro, mas esta em outro origem domonio/porta/protocol, e nos estamos em outra origem, assim por meio do nosso script não temos acessmo a mais detahles do erro.
+        - aqui o acesso entre origens esta proibido, scripts de origes diferentes não acessa um ao outro. para isso precisa do atributo crossorigin com um valor
+    -->
+    <script type="text/javascript" src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js">
+        /**
+         * Os detalhes podem variar dependendo do navegador, mas a ideia é a mesma: qualquer informação sobre os componentes internos de um script, incluindo rastreamentos de pilha de erros, é ocultada. Exatamente porque é de outro domínio.
+         * 
+         * Por que precisamos de detalhes do erro?
+         * 
+         * Existem muitos serviços (e podemos construir nossos próprios) que escutam erros globais usando window.onerror, salvam erros e fornecem uma interface para acessá-los e analisá-los. Isso é ótimo, pois podemos ver erros reais, acionados por nossos usuários. Mas se um script vem de outra origem, não há muita informação sobre erros nele, como acabamos de ver.
+         * 
+         * Uma política de origem cruzada semelhante (CORS) também é aplicada para outros tipos de recursos.
+         * 
+         * * Para permitir o acesso entre origens, a <script> tag precisa ter o crossorigin atributo, e o servidor remoto deve fornecer cabeçalhos especiais.
+         * 
+         * Existem três níveis de acesso entre origens:
+         * 
+            * Nenhum crossorigin atributo – acesso proibido.
+            * 
+            * crossorigin="anonymous" – acesso permitido se o servidor responder com o cabeçalho Access-Control-Allow-Origin com * ou nossa origem. O navegador não envia informações de autorização e cookies para o servidor remoto.
+            * 
+            * crossorigin="use-credentials"– acesso permitido se o servidor enviar de volta o cabeçalho Access-Control-Allow-Origin com nossa origem e Access-Control-Allow-Credentials: true. O navegador envia informações de autorização e cookies para o servidor remoto.
+            * 
+         * 
+        */
+    </script>
+
+</body>
+</html>

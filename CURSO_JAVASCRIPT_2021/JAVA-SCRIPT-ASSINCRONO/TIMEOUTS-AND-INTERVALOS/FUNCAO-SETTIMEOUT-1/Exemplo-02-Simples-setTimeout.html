@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de saudação de pessoa</title>
+</head>
+<body>
+    
+    <h1>Exemplo Simples de setTimeout()</h1>
+
+    <script>
+        
+        //a função não precisa ser anonima, pode ser declarada explicitamente em outro lugar e ser ferenciada na função do timeout
+
+        //com a função nomeada
+        /*
+        let minhaSaudacao = setTimeout(function dizOla() {
+            alert("Olá, Mr. Universo!");
+        }, 2000); 
+        */
+
+        //com a função definida separadamente
+        function dizOla() {
+            alert('Olá, Mr. Universe!');
+        }
+
+        //vai esperar 2000 milissegundos(2 segundos) para mostra executar a função.
+        let minhaSaudacao = setTimeout(dizOla, 2000);
+        
+    </script>
+</body>
+</html>

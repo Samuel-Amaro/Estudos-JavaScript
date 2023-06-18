@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo C</title>
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * EXEMPLO C) PASSANDO UM VALOR PARA O next() MÉTODO 
+         * 
+         * No exemplo a seguir, a yield palavra-chave é uma expressão que avalia o argumento passado para o next() método:
+        */
+
+        //define uma function generator com o * apos a palavra chave function, a fucntion e chamada de generate.
+        //define um novo tipo de função no ES6
+        //define uma function generator chamado generate que não declara paramentros
+        //e uma função diferente de uma função normal regular, e uma função geradora, a sua execução e em pedações, não e com uma function normal que e executada por completo, e executada em pedaçõs
+        function* generate() {
+            //yield palavra-chave permite pausar e retomar uma função geradora(function*).
+            //a yield especifica o valor a ser retornado de uma função geradora chamada bar por meio do protocolo de iteração.
+            //a yield retorna undefined(um valor padrão do JS, por não temos especificado uma expression valor a ser retornado pela yield) e pausa a execução da função
+            let result = yield;
+            console.log(`result is ${result}`);
+        }
+
+        //invocando a function generator* generate, ao ser invoca esse tipo de function não executa seu corpo logo em seguida, ela so retorna um objeto literal Generator com o corpo da function generator generate
+        //o objeto retornado pela invocação da function generator generate e atribuido a variavel g por referencia
+        let g = generate(); //Generator{}
+
+        //o objeto Generator {} referenciado por g e um iteravel, pois ele esta definido de acordo com o protocolo de iteração iterator, e porque também possui o método next
+        //Tecnicamente falando, um objeto é qualificado como iterator quando possui um next(), método que retorna um objeto anonimo literal com duas propriedades chamadas done e value, isso e o padrão de conformidade definido pelo protocolo iterator para tornar tipos iteraveis
+        //a propriedade value do objeto retornado e o proprio valor retornado pelo yield na function geradora
+        //assim o next também serve Cada vez que você chama o next(), ele retorna o próximo valor na coleção:
+        console.log(g.next()); //{value: undefined, done: false}
+
+        //realiza uma segunda invocação ao next método do Generator Objeto anonimo, passando um argumento 1000, ele retorna o próximo valor na coleção:
+        //como passamos um argumento para o next método e ele não definiu paramentro o seguinte acontece:
+        //avalia a yield para 1000
+        //atribuir a result variavel o valor do yield que e 1000
+        //emitir mensagem e retornar o objeto Generator{}
+        console.log(g.next(1000));
+        /**
+         * A primeira chamada g.next() retorna o seguinte objeto:
+
+            {value: undefined, done: false}
+
+         * A segunda chamada g.next() carrega as seguintes tarefas:
+
+            - Avalie yield até 1000.
+
+            - Atribua result o valor de yield, que é 1000.
+
+            - Emita a mensagem e retorne o objeto
+
+            - Saída:
+
+                {value: undefined, done: true}
+        */
+
+    </script>
+
+</body>
+</html>

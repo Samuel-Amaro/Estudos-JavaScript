@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FUNÇÕES QUE USAM O OBJETO ARGUMENTOS
+         * 
+         * As arrow functions não têm o arguments objeto. Portanto, se você tem uma função que usa arguments objeto, não pode usar a arrow function.
+         * 
+         * Por exemplo, a seguinte concat()função não funcionará:
+        * */
+
+        //declara uma expressão de função
+        //declara uma arrow function que possui um parametro, e tem o corpo da function com varias instruções
+        //não se deve usar arrow functions em functions que usam o object arguments
+        /*const concat = (separator) => {
+           let args = Array.prototype.slice.call(arguments, 1);
+           return args.join(separator); 
+        };*/
+
+        /**
+         * Em vez disso, você usa uma função regular como esta:
+         * */
+
+        //forma correta de usar com uma function regular
+        function concat(separator) {
+            let args = Array.prototype.slice.call(arguments, 1);
+            return args.join(separator);
+        } 
+
+        /**
+         * Uma função de seta não tem seu próprio thisvalor. Em vez disso, ele usa o this valor do escopo léxico delimitador. Uma função de seta também não possui o arguments objeto.
+         * 
+         * Evite usar a função de seta para manipuladores de eventos, métodos de objeto, métodos de protótipo e funções que usam o arguments objeto.
+         * */
+    </script>
+</body>
+</html>

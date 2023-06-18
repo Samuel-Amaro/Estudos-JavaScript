@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessando Valor Por Referencia</title>
+</head>
+<body>
+    <script>
+        /**
+         * * VALORES PRIMITIVOS DE JAVASCRITP VERSUS VALORES DE REFENCIA
+         * 
+         * Resumo : neste tutorial, você aprenderá as diferenças entre valores primitivos e de referência.
+         * 
+         * * ACESSANDO VALOR POR REFERÊNCIA
+         *
+         * Em JavaScript, uma variável pode armazenar dois tipos de valores : primitivo e referência.
+         * 
+         * JavaScript fornece seis tipos primitivos como undefined, null, boolean, number, string, e symbol , e um tipo de referência object.
+         *
+         * O tamanho de um valor primitivo é fixo, portanto, o JavaScript armazena o valor primitivo na pilha.
+         *
+         * Por outro lado, o tamanho de um valor de referência é dinâmico, portanto, o JavaScript armazena o valor de referência no heap.
+         *
+         * Quando você atribui um valor a uma variável, o mecanismo JavaScript determinará se o valor é um valor primitivo ou de referência.
+         * 
+         * Se o valor for um valor primitivo, ao acessar a variável, você manipula o valor real armazenado nessa variável. Em outras palavras, a variável que armazena um valor primitivo é acessada por value.
+         * 
+         * Ao contrário de um valor primitivo, quando você manipula um objeto, você trabalha na referência desse objeto, em vez do objeto real. Isso significa que uma variável que armazena um objeto é acessada por referência.
+         * 
+         * Para determinar o tipo de um valor primitivo, você usa o typeof operador. Por exemplo:
+        */
+
+        //declara uma variavel x com um valor 10 que e um number valor primitivo, essa variavel pode ser acessada por valor, manipula o valor armazenado na variavel diretamente
+        let x = 10;
+        //verificando o tipo de valor que a variavel x armazena
+        //usando o operador unarion o typeof
+        //typeof operador unario é uma operação com apenas um operando.
+        // O operador typeof retorna uma string indicando o tipo do operando sem avaliação. operando é uma string, variável, palavra-chave ou objeto cujo tipo deve ser retornado. Os parênteses são opcionais.
+
+        console.log(`typeof(x) = ${typeof(x)}`); //number
+        //declara uma variavel str com um valor de texto que e uma string valor primitivo, pode ser acessada por valor essa variavel, manipula o valor diretamente na variavel
+        let str = 'JS';
+        //verificando o tipo de valor que a variavel str armazena
+        console.log(`typeof(str) = ${typeof(str)}`); //string
+
+        /**
+         * para encontrar o tipo de um valor de refencia, você usa o instanceof operador
+        */
+
+        //o instanceof operador relacional compara seus operandos e retorna um valor booleano baseado em se a comparação e verdadeira
+        //instanceof retorna verdadeiro se o objeto especificado for do tipo especificado
+
+       // let refType = variable instanceof constructor;
+
+        /**
+         * Por exemplo, a rgb variável a seguir é uma instância do Array objeto:
+        */
+
+        //declara um array literal chamado rgb que foi inicializado com 3 elementos esse array e do tipo Array objeto Referencia do JS
+        //essa variavel armazena o tipo de valor de referncia de objeto, assim ela e manipulada por referencia do objeto
+        //variavel rgb e acessada por referencia
+        let rgb = ['red', 'green', 'blue'];
+
+        //verifica se o rgb array e uma instancia de objeto do tipo Array objeto
+        //verifica se o rgb e instancia do tipo Array Objeto referencia do JS
+        console.log(`rgb instanceof Array = ${rgb instanceof Array}`); //true 
+
+    </script>
+</body>
+</html>

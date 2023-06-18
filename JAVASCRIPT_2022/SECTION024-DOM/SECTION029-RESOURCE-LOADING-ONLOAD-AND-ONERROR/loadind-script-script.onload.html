@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * script.onload
+         * 
+         * O principal ajudante é o load evento. Ele é acionado depois que o script foi carregado e executado.
+         * 
+         * Por exemplo:
+        */
+
+        //cria uma script dinamico
+        let script = document.createElement('script');
+
+        // pode carregar qualquer script, de qualquer domínio
+        //carrega um script externo
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js";
+        //anexa ao final da section head no documento
+        document.head.append(script);
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento load, esse evento e acionado depois que o recurso externo o script no caso foi carregado e executado
+        script.onload = function(event) {
+            //o script cria uma variável "_"
+            alert(_.VERSION); // mostra a versão da biblioteca
+        };
+
+        /**
+         * Então onload, podemos usar variáveis ​​de script, executar funções etc.
+         * 
+         * …E se o carregamento falhar? Por exemplo, não existe esse script (erro 404) ou o servidor está inativo (indisponível).
+        */
+    </script>
+
+</body>
+</html>

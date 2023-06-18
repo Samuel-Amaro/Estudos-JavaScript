@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions Construtoras</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * *  FUNÇÃO DE CONSTRUTOR JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre a função construtora do JavaScript e como usar a new palavra-chave para criar um objeto.
+         * 
+         * * INTRODUÇÃO ÀS FUNÇÕES CONSTRUTORAS
+         * 
+         * No tutorial de objetos JavaScript, você aprendeu como usar a sintaxe literal do objeto para criar um novo objeto:
+         * 
+        */
+
+        //declara um objeto chamado person, usando a sintaxe liberal
+        let person = {
+            //declara propriedades do objeto, usando o par chave:valor
+            firstName: 'John',
+            lastName: 'Doe'
+        }
+
+        /**
+         * Na prática, você geralmente precisa criar muitos objetos semelhantes, como uma lista de pessoas.
+         * 
+         * Para fazer isso, você pode usar uma função de construtor(function construtor) para definir um tipo personalizado e o new operador para criar vários objetos desse tipo.
+         * 
+         * Tecnicamente falando, uma função construtora é uma função regular com a seguinte convenção:
+         
+            - O nome de uma função de construtor começa com uma letra maiúscula, como Person, Document, etc.
+
+            - Uma função construtora deve ser chamada apenas com o new operador.
+
+         * 
+         * Observe que o ES6 introduz a class palavra - chave que permite definir um tipo personalizado. E as classes são apenas açúcar sintático sobre as funções do construtor com alguns aprimoramentos.
+         * 
+         * O exemplo a seguir define uma função construtora chamada Person:
+        */
+
+        //declarando um Function regular construtora de objeto personalizado chamada Person, que utiliza a sintaxe de construção de function construtora,
+        //a function declara dois paramentros que vão ser propriedades para o objeto
+        function Person(firstName, lastName) {
+            //propriedadades do objeto personalizado person
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        /**
+         * Como você pode ver, Person é o mesmo que uma função regular, exceto que seu nome começa com a letra maiúscula P. 
+         * 
+         * Para criar uma nova instância de Person, você usa o new operador:
+        */
+
+        //para criar um objeto(instancia) tipo personalizado Person, utiliza-se o operador new invocando a function construtora e passando argumentos
+        let objPerson = new Person('John', 'Doe');
+
+        /**
+         * Basicamente, o new operador faz o seguinte: 
+         
+            - Crie um novo objeto vazio e atribua-o a this.
+
+            - Atribua os argumentos 'John'e 'Doe' às propriedades firstName e lastName.
+
+            - Retorne o this valor.
+
+         * 
+         * É funcionalmente equivalente ao seguinte:
+         
+            function Person(firstName, lastName) {
+
+                //this = {};
+
+                //add propriedades para this
+                this.firstName = firstName;
+                this.lastName = lastName;
+
+                //return this;
+
+            }
+
+         * 
+         * Portanto, a seguinte afirmação: 
+         
+            let person = new Person('John','Doe');
+
+         * … Retorna o mesmo resultado da seguinte instrução:
+
+                let person = {
+                    firstName: 'John',
+                    lastName: 'Doe'
+                };
+
+         * No entanto, a função construtora Person permite criar vários objetos semelhantes. Por exemplo: 
+        */
+
+        //cria uma instancia(objeto) do tipo person, invocando a function construtura junto com o new operador, passando argumentos
+        let person1 = new Person('Jane', 'Doe');
+        let person2 = new Person('James', 'Smith');
+
+    </script>
+
+</body>
+</html>

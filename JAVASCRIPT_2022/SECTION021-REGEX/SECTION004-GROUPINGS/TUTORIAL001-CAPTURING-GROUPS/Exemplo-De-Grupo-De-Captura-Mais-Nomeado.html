@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLO DE GRUPO DE CAPTURA MAIS NOMEADO
+         * 
+         * A seguinte expressão regular corresponde ao caminho posts/2022/02/18
+         
+            /\w+\/d{4}\/d{2}\/d{2}/
+
+         *
+         * Para capturar o recurso (post), ano (2022), mês (02) e dia (18), você usa os grupos de captura nomeados assim:
+         
+            /(?<resource>\w+)\/(?<year>\d{4})\/(?<month>\d{2})\/(?<day>\d{2})/
+
+         *
+         * Este programa usa os padrões para corresponder ao caminho e mostra todos os subgrupos:
+        */
+       
+        //declara uma string literal para pesquisa
+        const path = 'posts/2022/02/18';
+        //criando uma expressão regular que o seu padrão possui o seguinte significado:
+        //possui 4 grupos de captura nomeados
+        //o padrão inicia como, o primeiro grupo de captura, que possui como regra de captura um padrão que corresponda a um ou mais caracteres de palavra, esse grupo de captura e nomeado e possui o seguinte nome <resource> para poder acessar as suas correspondecias.
+        //seguido por um barra,
+        //o segundo grupo de captura que tem como regra o padrão que corresponda a exatamente a 4 digitos, esse grupo de captura e nomeado de <year>.
+        //seguido por um barra,
+        //o terceiro grupo de captura que tem como regra uma pdrão que corresponda a exatamente 2 digitos, esse grupo de captura e nomeado de <month>.
+        //seguido por um barra,
+        //o quartp grupo de captura que tem como regra uma padrão que corresponda a exatamente 2 digitos, esse grupo de captura e nomeado de <day>.
+        //termina o pdrão da expressão regular
+        //cada parenteses cria um grupo de captura para uma regra
+        //usamos os quantificadores gananciosos de quantidade exata, o {n}.
+        //e usamos a (\) contra barra para escapar a barra(/)
+        let pattern = /(?<resource>\w+)\/(?<year>\d{4})\/(?<month>\d{2})\/(?<day>\d{2})/;
+        //usando o método String.match(regexp) para retornar todas as correspondecias do regexp na string
+        //se definirmos a flag g(global) na expressão regular o String.metch(regexp) método não retorna os grupos
+        //o método retorna uma array com as correspondecias, primeiro elemento são as correspondecias inteiras, depois os valores dos grupos de captura, definidos
+        const match = path.match(pattern);
+        console.log(match);
+        //o array retornado do método match possui uma propriedade chamada groups que referencia um objeto anonimo literal que possui como propriedade os nomes definidos nos grupos de captura na expressão regular
+        //acessamos os valores dos grupos de captura pelo seus nomes, acessamos o grupo de captura na correspodencia pelos seus nomes
+        console.log(match.groups);
+
+        /**
+         * * RESUMO
+         * 
+         * Coloque uma regra entre parênteses ()para criar um grupo de captura. Uma expressão regular pode ter vários grupos de captura.
+         * 
+         * Use o (?<capturingGroupName>rule) para criar um grupo de captura nomeado para a regra em um padrão.
+        */
+    </script>
+</body>
+</html>
+
+
+

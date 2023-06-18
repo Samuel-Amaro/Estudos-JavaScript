@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1 id="elem">Olá! de John!</h1>
+
+    <script type="text/javascript">
+        /**
+         * * EVENTOS PERSONALIZADOS
+         * 
+         * Para nossos próprios tipos de eventos completamente novos, como "hello" devemos usar new CustomEvent. Tecnicamente , CustomEvent é o mesmo que Event, com uma exceção.
+         * 
+         * No segundo argumento (objeto) podemos adicionar uma propriedade adicional detail para qualquer informação customizada que queremos passar com o evento.
+         * 
+         * Por exemplo
+        */
+
+        //detalhes adicionais vêm com o evento para o manipulador
+        //atribuindo um manipulador de evento por meio do metodo elem.addEventListener(event, handler, options);
+        //atribui um manipulador para o evento personalizado novo do tipo "hello"
+        elem.addEventListener("hello", function(event) {
+            //a propriedade name do objeto detail e informação adicional customizada que veio junto do evento acessivel por meio do objeto de evento personalizado novo
+            alert(event.detail.name);
+        });
+
+        //para nossos próprios tipos de eventos novos devemos usar a new CustomEvent class que e o mesmo que a class Event porem com uma exceção
+        //o segundo argumento objeto pode-se adicioanr uma propriedade adicional detail para qualquer informação customizada que queremos passar com o evento.
+        // aqui iremos criar um novo evento personalizado de nosso proprio tipo "hello" que e passado para o manipulador com uma informação customizada por meio do segundo argumento com o objeto anonimo referenciado na propriedade detail
+        //o metodo elem.dispatchEvent(event) dispacha um evento para ser executado no elem, o evento e executado em elem assim que o metodo e chamado
+        elem.dispatchEvent(new CustomEvent("hello", {detail: {name: "John"}}));
+
+        /**
+         * A detail propriedade pode ter qualquer dado. Tecnicamente, poderíamos viver sem, porque podemos atribuir quaisquer propriedades a um new Event objeto regular após sua criação. Mas CustomEvent fornece o detail campo especial para evitar conflitos com outras propriedades do evento.
+         * 
+         * Além disso, a classe event descreve “que tipo de evento” é, e se o evento for personalizado, devemos usar CustomEvent apenas para esclarecer o que é.
+        */
+    </script>
+</body>
+</html>

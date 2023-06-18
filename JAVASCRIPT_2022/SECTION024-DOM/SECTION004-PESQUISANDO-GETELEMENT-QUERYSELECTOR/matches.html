@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <a href="http://example.com/file.zip">Download zip</a>
+    <a href="http://ya.ru">Já ru</a>
+
+    <script type="text/javascript">
+
+        /**
+         * * matches
+         * 
+         * Os métodos anteriores estavam pesquisando o DOM.
+         * 
+         * O elem.matches(css) não procura nada, apenas verifica se elem corresponde ao seletor CSS fornecido. Ele retorna true ou false.
+         * 
+         * O método é útil quando estamos iterando sobre elementos (como em um array ou algo assim) e tentando filtrar aqueles que nos interessam.
+         * */
+
+        //pode ser qualquer collection em vez de document.body.children
+        //seleciona todos os nos do tipo elemento que sejam filhos diretors do elemento <body>
+        //itera sobre a collection com os elementos filhos de <body>
+        for(let elem of document.body.children) {
+            //verifica se o elemento elem corresponde ao seletor css fornecido, se sim retorna true
+            if(elem.matches('a[href$="zip"]')) {
+                console.log("A referência do arquivo: " + elem.href);
+            }
+        }
+    </script>
+</body>
+</html>

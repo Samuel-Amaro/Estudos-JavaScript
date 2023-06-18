@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * boolean VS Boolean
+         * 
+         * Considere este exemplo:
+        */
+
+        //declara uma variavel de escopo de bloco chamada completed, inicializada com um valor true que e do tipo primitivo boolean
+        let completed = true;
+        //criando uma instancia de objeto usando o Boolean construtor, que e um wrraper do tipo primitivo Boolean
+        //declarando uma nova instancia de objeto do tipo Boolean usando o construtor Boolean, fornecendo um valor booleano como argumento, cria um objeto booleano com o valor false
+        let active = new Boolean(false);
+       
+        /**
+         * Primeiro, active é um objeto para que você possa adicionar uma propriedade a ele:
+        */
+
+        //adicionando uma propriedade chamada primiteValue a instancia de objeto referenciada por active, e a inicializa com o proprio valor primitivo armazenado nessa intancia de objeto
+        active.primitiveValue = active.valueOf(); 
+        //acessando o conteudo armazenado na propriedade recem declara na instancia de objeto referenciada por active
+        console.log(active.primitiveValue); //false
+
+        /**
+         * No entanto, você não pode fazer isso com a variável booleana primitiva como a completed variável:
+        */
+
+        //tentando adicionar uma proprieadade a varaivel completed que armazena um valor primitivo boolean, tentamos adiconar a propriedade chamada name a variavel e inicializar a propriedade com o valor 'primitive'
+        //nos bastidores oque acontece e que o codigo a seguir cria uma Boolean objeto instancia implicitamente e atribui um valor a propriedade name
+        //porem este obejto com esta propriedade so existe durante a execução desta linha abaixo
+        //um wrapper primitivo so existe para uma linha de codigo, enquanto o tipo referencia, existe em todo o tempo de duração do escopo
+        completed.name = 'primitive';
+        //tentando acessar a propriedade name na variavel completed, ja fora do escopo de execução
+        console.log(completed.name); //undefined
+
+        /**
+         * Em segundo lugar, o typeof de objeto booleano retorna object, enquanto o  typeof de um valor booleano primitivo retorna boolean.
+        */
+
+        //usando o operador typeof para saber qual o tipo de dado primitivo que as variaves estão armazenando
+        console.log(typeof completed); //boolean
+        console.log(typeof active); //object
+
+        /**
+         * Terceiro, ao aplicar o   instanceof operador a um Boolean objeto, ele retorna true. No entanto, ele retorna false se você aplicar o instanceof operador a um valor booleano.
+        */
+
+        //O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado.
+        //usando o operador instanceof para verificar se a variavel completed e uma instancia do tipo De Objeto Boolean
+        console.log(completed instanceof Boolean); //false
+        //usando o operador instanceof para verificar se o a objeto active e uma instancia do tipo De Objeto Boolean
+        console.log(active instanceof Boolean); //true
+
+        /**
+         * É uma boa prática nunca usar o Boolean objeto, pois isso criará muitas confusões, principalmente ao usar em uma expressão. Por exemplo:
+        */
+
+        //criando uma instancia de objeto usando o Boolean construtor, que e um wrraper do tipo primitivo Boolean
+        //declarando uma nova instancia de objeto do tipo Boolean usando o construtor Boolean, fornecendo um valor booleano como argumento, cria um objeto booleano com o valor false
+        let falseObj = new Boolean(false);
+        //o mecanismo JS quando ve o objeto em uma expressão força o objeto a um valor booleano de true
+        //assim a instrução dentro do if bloco e executada
+        if(falseObj) {
+            console.log('weird part of the Boolean object');
+        }
+
+        /**
+         * Como o roteiro funciona.
+         
+            - Primeiro, crie falseObj como um Boolean wrapper de objeto para o false valor.
+
+            - Em segundo lugar, use falseObj na   if declaração. Porque falseObj é um objeto, e o mecanismo JavaScript o força a um valor booleano de true. Como resultado, a instrução dentro do if bloco é executada.
+
+         * 
+         * A tabela a seguir resume as diferenças entre o JavaScript Boolean e o boolean:
+         
+            Operador: typeof;
+            boolean: boolean;
+            Boolean: object;
+            -----------------
+            Operador: instanceof Boolean;
+            boolean: false;
+            Boolean: true;
+
+         * 
+         * É recomendado que você use a Boolean() função para converter um valor de um tipo diferente para um tipo booleano, mas você nunca deve usar Boolean como um objeto wrapper de um valor booleano primitivo.
+         * 
+         * Neste tutorial, você aprendeu sobre o Boolean objeto JavaScript e as diferenças entre o Boolean objeto e booleano tipo primitivo.
+        */
+    </script>
+
+</body>
+</html>

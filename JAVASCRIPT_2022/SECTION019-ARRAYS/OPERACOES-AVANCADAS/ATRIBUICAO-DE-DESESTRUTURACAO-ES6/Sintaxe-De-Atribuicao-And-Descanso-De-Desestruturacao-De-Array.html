@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintaxe de Desestruturação e Rest</title>
+</head>
+<body>
+    <script>
+        /**
+         * * SINTAXE DE ATRIBUIÇÃO E DESCANSO DE DESESTRUTURAÇÃO DE ARRAY
+         * 
+         * É possível pegar todos os elementos restantes de um array e colocá-los em um novo array usando a sintaxe rest (...):
+        */
+
+        //declara uma function chamada getScores3 que não possui paramentro declarado
+        //uma function e uma instancia de objeto do tipo function
+        function getScores3() {
+            //a function retorna um array literal densa anonimo com 4 elementos
+            return [70, 80, 90, 100];
+        }
+
+        //usando a sintaxe de atribuição de desestruturação do ES6 podemos atribuir de forma direta os elemtnos de uma array a variaveis individuais especificadas
+        //aqui neste caso desestruturaremos o array retornado pela function getScores, onde sera atribuido seus elementos as variaveis individuais x, y, z
+        //os [] não tem nada a ver com a sintaxe de array são sintaxes diferentes
+        //como o array retornado por getScores3() retorna um array com mais de 3 elementos, não tem variaveis suficientes para receber todos os elementos, aqui especificamos so 3 varaiveis assim so sera atribuido 3 elementos, os elemetos restantes do array sera descartado
+        //para solucionar esse problema usaremos a sintaxe rest(...)
+        //o restante de elementos que iam ser descartados por não ter variaveis individuais especificadas na desestruturação para a atribuição dos elementos serão atribuidas ao rest paramenters que e um array que recebe um numero indefinido de argumentos no caso variaveis
+        let[x, y, ...args] = getScores3();
+
+        //acessando as variaveis individuais atribuidos pelos elementos
+        console.log(x); //70
+        console.log(y); //80
+        console.log(args); //[90, 100]
+
+        /**
+         * As variáveis xe yrecebem valores dos dois primeiros elementos do array retornado. E a argsvariável recebe todos os argumentos restantes, que são os dois últimos elementos do array retornado.
+         * 
+         * Observe que é possível desestruturar um array na atribuição que se separa da declaração da variável. Por exemplo:
+        */
+
+        //exemplo de desestruturação de array diretamente na atribuição, logicamente em momementos diferentes, as variaveis individuais tem que estar declaradas antes:
+        //declara as variaveis individuais
+        let a, b;
+        //aqui desestruturaremos o array literal denso criado com 2 elementos para as variaveis individuais a, b logo apos de ter sido criado ja e desestruturado
+        [a, b] = [10, 20];
+
+        console.log(a); //10
+        console.log(b); //20
+        
+    </script>
+</body>
+</html>

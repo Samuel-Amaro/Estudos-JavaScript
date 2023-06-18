@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * sessionStorage(SESSÃO ARMAZENAMENTO)
+         * 
+         * O sessionStorage objeto é usado com muito menos frequência do que localStorage.
+         * 
+         * Propriedades e métodos são os mesmos, mas são muito mais limitados:
+         * 
+            * O sessionStorage existe apenas na guia atual do navegador.
+            * 
+                * Outra guia com a mesma página terá um armazenamento diferente.
+                * 
+                *Mas é compartilhado entre iframes na mesma guia (supondo que eles venham da mesma origem).
+                * 
+            * Os dados sobrevivem à atualização da página, mas não fecham/abre a guia. 
+            * 
+         * Vamos ver isso em ação.
+         * 
+         * Execute este código…
+        */
+
+        //session storage objeto e um objeto de armazenamento da web que permite salvar partes de chave/valor no navegador
+        //o metodo sessionStorage.setItem(chave, valor), armazena o par chave/valor, no navegador
+        sessionStorage.setItem('test', 1);
+
+        /**
+         * …Em seguida, atualize a página. Agora você ainda pode obter os dados:
+        */
+
+        //obtem o valor associado a chave test
+        alert(sessionStorage.getItem('test')); // after refresh: 1
+
+        /**
+         * …Mas se você abrir a mesma página em outra aba, e tentar novamente lá, o código acima retorna null, significando “nada encontrado”.
+         * 
+         * Isso porque sessionStorage está vinculado não apenas à origem, mas também à guia do navegador. Por esse motivo, sessionStorage é usado com moderação.
+        */
+
+    </script>
+
+</body>
+</html>

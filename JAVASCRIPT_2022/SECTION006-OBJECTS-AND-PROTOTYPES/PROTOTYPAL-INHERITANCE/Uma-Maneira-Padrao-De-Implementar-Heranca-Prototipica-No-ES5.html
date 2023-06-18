@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objetos</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * UMA MANEIRA PADRÃO DE IMPLEMENTAR HERANÇA PROTOTÍPICA NO ES5
+         * 
+         * ES5 forneceu uma maneira padrão de trabalhar com herança prototípica usando o Object.create() método.
+         * 
+         * Observe que agora você deve usar o ES6 mais recente class e as extends palavras-chave para implementar a herança. É muito mais simples.
+         * 
+         * O Object.create() método cria um novo objeto e usa um objeto existente como protótipo do novo objeto:
+         
+            Object.create(proto, [propertiesObject]);
+
+         * 
+         * O Object.create() método aceita dois argumentos:
+         
+            - O primeiro argumento (proto) é um objeto usado como protótipo para o novo objeto.
+
+            - O segundo argumento( propertiesObject), se fornecido, é um objeto opcional que define propriedades adicionais para o novo objeto.
+
+         * 
+         * Suponha que você tenha um person objeto:
+        */
+
+        //declara um objeto literal chamado person, usando a sintaxe literal.
+        //O JS por padrão fornece uma function construtora Object e um prototipo de objeto para person
+        //o person sera ligado ao prototipo de objeto que se econtra na propriedade Object.prototype que referencia um objeto anonimo
+        //compartilhando propriedades definidas nesse objeto, o person podera utilizalas, como o toString() metodo e valueOf() metodo
+        //quando se utiliza a sintaxe literal para declarar objeto, o objeto e uma instancia de Object do JavaScritp
+        let person = {
+            //propriedades, declaradas usando sintaxe chave : valor
+            name : "John Doe",
+            //metodo do objeto, declara uma propriedade chamada greet que possui um valor que e uma function anonima que retorna um valor e não possui paramentro declarado
+            //atribui a function anonima a greet propriedade
+            greet: function() {
+                return `Ei, I'm ${this.name}`;
+            }
+        };
+
+        /**
+         * O seguinte cria um teacher objeto vazio com o __proto__ do person objeto:
+        */
+
+        //exemplo de como implementar herança prototipica usando o metodo Object.create();
+        //Cria um objeto vazio chamado teacher, que tera como prototipo o o bjeto literal person
+        //o teacher podera acessar as propriedades de person objeto literal
+        //o person objeto tem como objeto prototipo o objeto Object.prototype objeto anonimo
+        let techer = Object.create(person);
+
+        /**
+         * Depois disso, você pode definir propriedades para o teacher objeto: 
+        */
+
+        //define um propriedade para o teacher objeto, propriedade individual so existe na instancia
+        techer.name = 'Jane Doe';
+        //define um propriedade chamada teach que recebe uma function anonima que declara um paramentro e retorna uma string
+        //a function anonoima e atribuida a teach propriedade que se tornara um metodo do objeto
+        techer.teach = function(subject) {
+            return `I can teach ${subject}`;
+        }
+
+        /**
+         * Ou você pode executar todas essas etapas em uma instrução da seguinte maneira:
+        */
+
+        //executa todas as etapas divididas acima em uma instrução somente, mesma logica, mas o segundo argumento do Object.create e um objeto descritor de propriedades, um objeto de descritor de propriedade data
+        let teacher2 = Object.create(person, {
+            name : {
+                //propriedade não configurave, não editavel mas pode ser iterada em loop for com o in operador unario
+                //valor da propriedade name
+                value : 'John Doe'
+            },
+            teach : {
+                value : function(subject) {
+                    return `I can teach ${subject}`;
+                }
+            }
+        });
+
+        /**
+         * ES5 também introduziu o Object.getPrototypeOf() método que retorna o protótipo de um objeto. Por exemplo:
+        */
+
+        //retorna o objeto prototipo de um objeto
+        console.log(`Object.getPrototypeOf(teacher) = ${Object.getPrototypeOf()}`);
+
+        /**
+         * A herança permite que um objeto use as propriedades e métodos de outro objeto.
+         * 
+         * JavaScript usa herança prototípica alcançada por meio de ligação de protótipo.
+        */
+       
+    </script>
+
+</body>
+</html>

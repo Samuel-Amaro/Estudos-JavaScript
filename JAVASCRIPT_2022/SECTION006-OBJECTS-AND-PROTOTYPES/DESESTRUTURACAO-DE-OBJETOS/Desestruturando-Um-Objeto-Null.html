@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturando Um Objeto Nulo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DESESTRUTURANDO UM OBJETO NULL
+         * 
+         *  Uma função pode retornar um objeto ou nulo em algumas situações. Por exemplo:
+        */
+
+        //declara uma function chamada getPerson que não possui paramentros mas retorna um valor
+        //a function e uma instancia de objeto do tipo function
+        function getPerson() {
+            //retorna um valor do tipo null
+            return null;
+        }
+
+        /**
+         * E você usa a atribuição de desestruturação de objetos:
+        */
+
+        //desestruturan um objeto que sera retornado pela function getPerson()
+        //atribuir as propriedades do objeto a variaveis individuais
+        //aqui o ojbeto sera null, apontando para um ponteiro vazio, objeto nem existe
+        //sera lançado um erro
+        //aqui assumimos que as variaveis são os mesmos nome das propriedades do objeto a ser desestruturado
+        let{firstName, lastName} = getPerson();
+
+        //mostra as variaveis apos a desestruturação
+        console.log(firstName, lastName);
+
+        /**
+         * O código lançará um TypeError:
+         
+            - TypeError: Cannot destructure property 'firstName' of 'getPerson(...)' as it is null.
+
+         * 
+         * Para evitar isso, você pode usar o OR operador ( ||) para fazer fallback do null objeto para um objeto vazio:
+        */
+
+        //nessa desestruturação de objeto o objeto não existe retorna um null valor tipo, assim para evitar erros usamos o operador ||| OR para nos ajudar a desviar dessas situações, assim quando tiver que escolher entre null ou objeto vazio o operador ira cair na condiação de objeto vazio e esquece null
+        //pois objeto vazio e um valor, e null não e nehum valor
+        //mas aqui não ha desestruturação pois ou e null ou vazio, objeto vazio as propriedades nem existem e variaveis não são incializadas, somente o valor padrão definido pelo Js O UNDEFINED
+        let{firstName, lastName} = getPerson() || {};
+
+        /**
+         * Agora, nenhum erro ocorrerá. E o firstName e lastName será undefined.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Array Of()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * ARRAY.of() Exemplos de JS
+         * 
+         *  Veja o seguinte exemplo:
+        */
+
+        //utilizando o metodo of() do Array tipo iremos criar uma array que contém os valores que você passa a ela, independentemente dos tipos ou do número de argumentos.
+        //chamando o metodo Array.of() passando o numero de argumentos indefinidos para serem os elementos que irão inicializar o array a ser criado
+        //aqui passamos um unico argumento, este argumento e o elemento que inicializara o array com somente um elemento a instancia de array criada sera atribuida a varaivel numbers
+        let numbers = Array.of(3); //[0]
+        console.log(`numbers.length = ${numbers.length}`); //1
+        console.log(`numbers[0] = ${numbers[0]}`); //3
+
+        /**
+         * Neste exemplo, passamos o número 3 para o Array.of() método. O Array.of() método cria uma array de um número
+         * 
+         * Considere o seguinte exemplo:
+        */
+
+        //aqui utilizando o metodo Array.of() declaramos um array inicializado com três elementos literais de string
+        //os argumentos passados para o of metodo inicializa a instancia de array a ser criada
+        //a instancia a ser criada e atribuida por referencia a chars variavel
+        let chars = Array.of('A', 'B', 'C');//['A', 'B', 'C'];
+        console.log(`chars.length = ${chars.length}`); //3
+        console.log(chars);
+
+        /**
+         * Neste exemplo, criamos um array de três strings passando 'A', 'B' e 'C' para o Array.of() método. O tamanho da array é 3.
+         * 
+         * * Array.of() POLYFILL(POLIENCHIMENTO) JS
+         * 
+         * Se você executar o JavaScript no ambiente que não suporta o  Array.of()método, poderá usar o seguinte polyfill:
+        */
+
+        //se o array of não puder ser usado no ambiente que JS esta sendo executado use o polyfill
+        //a negação de um array vazio e true
+        if(!Array.of()) {
+            //o metodo Array.of ira receber uma function anonima que não possui parametro declarado mas retorna um valor
+            Array.of = function() {
+                //o call metodo permite a ligação,
+                //do arguments array objeto chamar o metodo slice por meio dele, fazendo assim o arguments.slice() retorna todo o conjunto de elementos que o array do arguments possui, como um subconjunto para o of metodo, se passamos os argumentos para o slice metodo ele ira extrair um subconjunto a a partir de indices como não passsamos retorna o array por completo
+                return Array.prototype.slice.call(arguments);
+            };
+        }
+
+        /**
+         * Neste tutorial, você aprendeu como melhorar a construção de arrays usando o Array.of() método JavaScript no ES6.
+        */
+    </script>
+</body>
+</html>

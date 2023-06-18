@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Finally()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODO FINALLY() - FINALMENTE
+         * 
+         * Às vezes, você deseja executar o mesmo trecho de código, quer a promessa seja cumprida ou rejeitada. Por exemplo:
+        */
+
+        //declara uma arrow function anonima sem paramentro, que e atribuida a variavel render
+        const render = () => {
+            //...
+        };
+
+        //declara uma variavel chamada sucess e a inicializa com  o valor booleano false
+        let sucess = false;
+
+        //tentando simular um erro em uma operação assincrona encapsulada por uma promisse
+
+        //a function getUsers retorna uma promisse
+        function getUsers() {
+            //promisse e iniciada com o estado pendente
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser executada
+                setTimeout(() => {
+                    //operação foi concluida com sucesso, resolve a promessa com uma lista de usuarios, chama resolve, callback argumento para mudar o estado da promisse de pendente para cumprida com um valor, o valor e o argumento passado para o resolve callback
+                    if(sucess) {
+                        resolve([{username: 'john', email: 'john@test.com'},{username: 'jane', email: 'jane@test.com'}
+                        ]);
+                    }else{
+                        //se a operação assincrona não for concluida, rejeita promisse com o motivo do erro, der um erro
+                        //Em caso de erro, o executor chamará a reject() função para alterar o estado da promessa de pendente para rejeitada com o motivo do erro.
+                        //o argumento da reject callback e o motivo do erro
+                        reject('Failed to the user list');
+                    }
+                }, 1000);
+            });
+        }
+
+        //usando o encadeamento de métodos
+        //invocando o metodo getUsers para retorna o objeto promisse
+        //usando o metodo then para obter o valor da promisse(que neste caso resolve com uma lista de usuarios) quando ela tiver seu estado modificado de pendente para cumprida, obtem o valor resolvido
+        //e usando o metodo cath para obter o motivo do erro, quando a promisse tiver seu estado modificado de pendente para rejeitada, obter o erro, saber porque a operação assincrona não foi executada corretamente
+        //observe que ambos os metodos invocam o mesmo método, apos promisse ter sido rejeitada ou cumprida, isso e independente do resultado da promisse, then ou cath invocam um método.
+        getUsers().then((users) => {
+            console.log(users);
+            render(); //invoca método em promisse ja resolvida(estado cumprida).
+        }).catch((error) => {
+            console.log(error);
+            render(); //invoca método em promisse ja resolvida(estado rejeitada).
+        });
+
+        /**
+         * Como você pode ver, a render()chamada da função é duplicada nos métodos then() e .catch().
+         *
+         * Para remover essa duplicata e executar a render() promessa seja cumprida ou rejeitada, você usa o finally() método, assim:         
+        */
+
+        //a primeira forma de executar um mesmo trecho de codigo se uma promisse for rejeitada ou cumprida, ha duplicata de codigo, para resolver isso pode-se usar o método finally, que executara o render() metodo, independente do estado, cumprida ou rejeitada.
+        getUsers().then((users) => {
+            console.log(users);
+        }).catch((error) => {
+            console.log(error);
+        }).finally(() => {
+            //invoca o metodo quando a promisse for cumprida ou rejeitada, em qualquer estado esse trecho de codigo e executado
+            render();
+        });
+        
+    </script>
+</body>
+</html>

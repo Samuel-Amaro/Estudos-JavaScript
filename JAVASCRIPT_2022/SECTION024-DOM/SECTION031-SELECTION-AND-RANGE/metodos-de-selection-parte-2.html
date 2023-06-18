@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p id="p">Selecione aqui: <i>itálico</i> e <b>negrito</b></p>
+
+    <!--
+    no de elemento como um todo
+    <p id="p">       no de elemento completo <p>
+        Selecione aqui:     no de texto com indice 0 como numero filho <p>
+        <i>          no de elemento com indice 1 como numero filho <p>
+            itálico  no de texto como numero filho 0 de <i>
+        </i>    
+        e            no de texto com indice 2 como numero filho <p>
+        <b>          no de elemento com indice 3 como numero filho <p>
+            negrito  no de texto como numero filho 0 de <b>
+        </b>
+    </p>
+    -->
+
+    <script type="text/javascript">
+        /**
+         * A mesma coisa usando intervalos:
+        */
+
+        //cria um objeto range sem precisar informar argumentos, o objeto range e um par de pontos de fronteira inicio e fim do intervalo de uma seleção
+        let range = new Range();
+
+        //o metodo range.selectNodeContents(node) -> definir intervalo para selecionar todo o conteúdo de node
+        range.selectNodeContents(p); // ou selectNode(p) para selecionar a tag <p> também
+
+        //document.getSelection() -> obtem o objeto selection
+        //document.getSelection().removeAllRanges(); remova todos os intervalos.
+        document.getSelection().removeAllRanges(); // limpa a seleção existente se houver
+        //adicionar range à seleção. Todos os navegadores, exceto o Firefox, ignoram a chamada, se a seleção já tiver um intervalo associado.
+        document.getSelection().addRange(range);
+
+        /**
+         * * Para selecionar algo, remova primeiro a seleção existente
+         * 
+         * Se já existir uma seleção de documento, esvazie-a primeiro com removeAllRanges(). E, em seguida, adicione intervalos. Caso contrário, todos os navegadores, exceto o Firefox, ignoram novos intervalos.
+         * 
+         * A exceção são alguns métodos de seleção, que substituem a seleção existente, como setBaseAndExtent.
+        */
+
+    </script>
+</body>
+</html>

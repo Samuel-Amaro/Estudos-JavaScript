@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting Function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FUNCTION HOISTING
+         * 
+         * Em JavaScript, é possível usar uma função antes de ser declarada. Veja o seguinte exemplo:
+         * 
+         * 
+         * */
+
+        //invocando(chamando) uma função antes de ser declarada 
+        showMe(); // a hoisting example
+
+        //declara um função chamada showMe
+        //não possui paramentro
+        //nem retorna um valor personalizado, retorna undefined padrão
+        function showMe() {
+            //corpo da function
+            //logica
+            console.log('An hoisting example');
+        }
+
+        /**
+         * Esse recurso é chamado de içamento .
+         * 
+         * A elevação de função é um mecanismo pelo qual o mecanismo JavaScript move fisicamente as declarações de função para o topo do código antes de executá-las. 
+         * 
+         * O seguinte mostra a versão do código antes de o mecanismo JavaScript executá-lo:
+         
+            function showMe(){
+                console.log('a hoisting example');
+            }
+
+            showMe(); // a hoisting example
+            
+         * */
+    </script>
+</body>
+</html>

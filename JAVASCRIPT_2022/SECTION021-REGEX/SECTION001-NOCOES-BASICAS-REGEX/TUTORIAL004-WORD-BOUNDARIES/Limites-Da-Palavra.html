@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <h2>Anchors Limites de Palavra</h2>
+
+    <img src="./JavaScript-Regular-Expression-Word-Boundaries.png" alt="Imagen">
+
+    <script>
+
+        /**
+         * * REGULAR EXPRESSION: WORD BOUNDARIES(LIMITES DE PALAVRA)
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar o limite de palavras em expressões regulares.
+         * 
+         * O (\b) é uma âncora como o acento circunflexo (^) e o cifrão ($). Ele corresponde a uma posição que é chamada de “limite de palavra - word boundaries”. A correspondência de limite de palavra é de comprimento(lenght) zero.
+         * 
+         * As três posições a seguir são qualificadas como limites de palavras:
+         
+            - Antes do primeiro caractere em uma string se o primeiro caractere for um caractere de palavra.
+
+            - Após o último caractere em uma string, se o último caractere for um caractere de palavra.
+
+            - Entre dois caracteres em uma string, se um for um caractere de palavra e o outro não.
+
+         * Simplificando, o limite da palavra \b permite que você carregue a correspondência de toda a palavra usando uma expressão regular na seguinte forma:
+
+            \bpalavra\b
+
+         
+         * 
+         * Por exemplo, na string, Hello, JS! as seguintes posições se qualificam como um limite de palavra:
+         * 
+         * O exemplo a seguir retorna 'JS' porque 'Hello, JS!'corresponde à expressão regular /\bJS\b/:
+        */
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo o padrão /\bJS\b/ corresponde ao seguinte: o \b -> e uma ancora de limite de palavra, que corresponde a uma posição chamada de limite de palavra
+        //o padrão 'JS' corresponde a posição entre dois caracteres em uma string se for um caractere de palavra  e outro não.
+        //Porem o \bpalavra\b permite simplificar o limite de palavra permitindo carregar toda a correspondecia de toda a palavra usando uma expressão regular na seguinte forma
+        // \bpalavra\b
+        //essa expressão regular e do tipo RegExp, então podemos chamar métodos de instancia a partir do mesmo
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        console.log('Hello, JS!'.match(/\bJS\b/)); //true
+        
+        /**
+         * No entanto, o 'Hello, JScript' não corresponde /\bJS\b/:
+        */
+
+        //aqui não a correspondecia do limite de palavra usando a anchors \bJS\b
+        //a correspodencia não e carregada usando a expressão regular
+        console.log('Hello, JScript!'.match(/\bJS\b/)); //null
+
+        /**
+         * Observe que sem \b, o /JS/ corresponde a 'Hello, JS' e 'Hello, JScript':
+         * 
+        */
+
+        //declara uma expressão regular, que tem um padrão que corresponde ao seguinte caracteres JS
+        //o padrão e um texto que correspond a JS
+        //o método str.match(regex) retorna as correspondencias de regex na string str usando a expressão regular
+        console.log('Hello, JSscript!'.match(/JS/)); //["JS"]
+        console.log('Hello, JS!'.match(/JS/)); //["JS"]
+
+        /**
+         * É possível usar o limite da palavra com dígitos.
+         * 
+         * Por exemplo, a expressão regular \b\d\d\d\d\b corresponde a um número de 4 dígitos cercado por caracteres diferentes de \w:
+        */
+
+        //a expressão regular abaixo possui o seguinte padrão, um limite de palavra que permita carregar toda a correspondecia de toda a palavra usando uma expressão regular na seguinte forma
+        //\b/d/d/d/d\b, um padrão de 4 digitos cercados por caracteres diferentes de \w
+        //o método retorna todas as correspondecias da regexp na string que correspondam ao padrão da expreesão regular 
+        console.log('ES 2015'.match(/\b\d\d\d\d\b/));
+
+        /**
+         * O exemplo a seguir usa a palavra limite para encontrar a hora que tem o formato hh:mm, por exemplo, 09:15:
+        */
+
+        //declara uma variavel de escopo de bloco chamada str que e inicializada com uma string literal usada para a pesquisa
+        let str = 'I start coding JS at 05:30 AM';
+        //define uma expressão regular com o seguinte padrão um limite de palavra que permita carregar toda a correspondecia de toda a palavra usando uma expressão regular na seguinte forma
+        //\b/d/d:/d/d\b, um padrão que tenha um formato de  dois digitos:dois digitos
+        let re = /\b\d\d:\d\d\b/;
+        //usando o método str.match(regexp) para retorna todoas as correspondecias de regexp na string str, que corresponda ao padrão na expressão regular
+        let result = str.match(re);
+
+        console.log(result);
+
+        /**
+         * É importante observar que o \b não funciona para alfabetos não latinos.
+         * 
+         * Como você viu até agora, os padrões \d\d\d\de \d\d foram usados ​​para combinar um número de quatro ou dois dígitos.
+         * 
+         * Será mais fácil e flexível se você usar quantificadores que serão abordados no tutorial sobre quantificadores . Basicamente, você pode usar \d{4} em vez de \d\d\d\d, que é muito mais curto.
+         * 
+         * * RESUMO
+         * 
+         * A \b âncora corresponde a uma posição de limite de palavra.
+        */
+    </script>
+</body>
+</html>
+
+
+

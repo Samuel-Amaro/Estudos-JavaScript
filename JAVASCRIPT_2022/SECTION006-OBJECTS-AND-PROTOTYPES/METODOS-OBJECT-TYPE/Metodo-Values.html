@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodo Object.values()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * JAVASCRIPT OBJECT.VALUES() - VALORES
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar o Object.values() método JavaScript para acessar as próprias propriedades enumeráveis ​​de um objeto.
+         * 
+         * Antes do ES2017, você usava um for... in loop e um Object.hasOwnProperty()  método para acessar os valores das próprias propriedades enumeráveis de um objeto . Por exemplo:
+        */
+
+        //declara um objeto anonimo com propriedades, esse objeto e atribuido a person variavel por referencia, assim a variavel person referencia o objeto
+        const person = {
+            //propriedades do objeto usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            age: 25
+        };
+
+        //iterando sobre as propriedades proprias do objeto usando o loop for in, as propriedades do objeto tem que ser enumeraveis ter o descritor [[enumerable]] com valor true para cada propriedade
+        for(const key in person) {
+            //verifica se a propriedade pertecene ao objeto referenciado pela variavel person
+            if(person.hasOwnProperty(key)) {
+               const value = person[key]; 
+               console.log(value);
+            }
+        }
+
+        /**
+         * O ES2017 apresenta um novo método chamado Object.values() que permite retornar uma array de valores de propriedades enumeráveis ​​próprias de um objeto.
+         * 
+         * O seguinte mostra a sintaxe do Object.values():
+
+            Object.values(obj);
+
+         * 
+         * O Object.values() aceita um objeto e retorna os valores de sua própria propriedade enumerável como uma array. Veja o seguinte exemplo:
+        */
+
+        //utilizando o metodo Object.values(obj); do tipo Object
+        //este metodo ira permitir acessar os valores das propriedades proprias do objeto
+        //o metodo retorna um array com os valores das propriedades que são enumeraveis pelo descritor de propriedade [[enumerable]] que esteja definido como true para todas as propriedades
+        const profile = Object.values(person);
+
+        //mostra o array com os valores acessiveis das propriedades do objeto referenciado pela varaivel person
+        console.log(profile);
+
+        /**
+         * * Object.values() VS for ... in
+         * 
+         * O Object.values() retorna propriedades enumeráveis ​​próprias enquanto o for... in loop itera propriedades na cadeia de protótipos.
+         * 
+         * Tecnicamente, se você usar o for ... in loop com o Object.hasOwnProperty() método, obterá o mesmo conjunto de valores que o Object.values().
+        */
+        
+    </script>
+</body>
+</html>

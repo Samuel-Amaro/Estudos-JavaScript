@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+   
+    <script>
+
+        /**
+         * * CONVERTENDO UMA NÃO STRING EM UMA STRING
+         * 
+         * O toLowerCase() método converterá um valor não string em uma string se você definir seu this valor como um valor não string. Por exemplo:
+         * 
+        */
+
+       
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel user, assim a variavel user referencia o objeto literal
+        const user = {
+            //declara propriedades do objeto literal, usando sintaxe chave : valor
+            username: 'JOE',
+            toString() {
+                return this.username;
+            }
+        };
+
+        //functionName.call(thisArg, arg1, arg2, ...);
+        //O call() método chama uma função functionName com um determinado this valor e argumentos.
+        //aqui o método toLowerCase sera chamado a partir de um objeto literal que sera o seu this valor, sera chamado a partir de um ojeto literal
+        //o método toLowerCase sera invocado a partir da constante user que referencia um objeto literal
+        //o método toLowerCase convertera o objeto literal em string, invocando o toString método do objeto que o invoca para uma string, neste caso convertera o valor string para uma string toda maiuscula
+        const username = String.prototype.toLowerCase.call(user);
+
+        console.log(username);
+
+        /**
+         * Neste exemplo, invocamos o toLowerCase() método com os this conjuntos para o user objeto usando o call() método. O toLowerCase() método converte o user objeto em uma string chamando seu toString() método.
+         * 
+         * * RESUMO
+         * 
+         * Use o toLowerCase() método para retornar uma string com todos os caracteres convertidos em minúsculas.
+        */
+    </script>
+
+</body>
+</html>

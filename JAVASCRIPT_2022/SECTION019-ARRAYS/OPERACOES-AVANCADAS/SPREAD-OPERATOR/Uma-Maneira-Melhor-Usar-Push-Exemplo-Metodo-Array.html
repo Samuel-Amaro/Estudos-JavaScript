@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread operador</title>
+</head>
+<body>
+    <script>
+        /**
+         * * UMA MANEIRA MELHOR DE USAR O PUSH() EXEMPLO DO MÉTODO DO ARRAY
+         * 
+         * Às vezes, uma função pode aceitar um número indefinido de argumentos. Preencher argumentos de um array não é conveniente.
+         * 
+         * Por exemplo, o push() método de um objeto array permite adicionar um ou mais elementos a um array. Se você quiser passar um array para o push()método, você precisa usar apply() o método da seguinte forma:
+        */
+
+        //declara uma array literal denso inicialziado com 3 elementos array nomeado de rivers
+        let rivers = ['Nile', 'Ganges', 'Yangte'];
+        //declara outro array denso nomeado de moreRinvers inicializado com 2 elementos
+        let moreRivers = ['Danube', 'Amazon'];
+
+        //o aaply metodo e um metodo de uma instancia de objeto do tipo function, assim possui propriedads e metodos, neste caso push e uma instancia de objeto do tipo function que possui o apply metodo
+        //utilizando o metodo apply para chamar o metodo push a partir de um novo this valor passado os argumentos para o metodo push por meio da apply metodo
+        //o novo this valor sera o array rivers, e o argumentos a serem passados para o metodo push sera o array moreRivers
+        //assim o aaply metodo adicionara os dois arrays e seus elementos em um novo array vazio, tendo os dois arrays combinados em um so array, tudo por meio do metodo apply
+        //o array passado como argumento para o apply metodo e descompactado internamente pelo proprio metodo aaply e passado os seus elementos de forma individual para o push metodo
+        [].push.apply(rivers, moreRivers);
+        console.log(`rivers = ${rivers}`);
+
+        /**
+         * Esta solução parece detalhada.
+         * 
+         * O exemplo a seguir usa o operador spread para melhorar a legibilidade do código:
+         
+            rivers.push(...moreRivers);
+
+         * 
+         * Como você pode ver, usar o operador spread é muito mais limpo.
+        */
+    </script>
+</body>
+</html>

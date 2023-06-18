@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import</title>
+</head>
+<body>
+    <script type="module" src="./app.js">
+
+        /**
+         * * IMPORTING(IMPORTANDO)
+         * 
+         * Depois de definir um módulo com exportações, você pode acessar as variáveis, funções e classes exportadas em outro módulo usando a palavra- chave import. O seguinte ilustra a sintaxe:
+         
+            import {what, ever} from './other_module.js';
+
+         * 
+         * Nesta sintaxe:
+         
+            - Primeiro, especifique o que importar dentro das chaves, que são chamadas de associações.
+
+            - Em seguida, especifique o módulo do qual você importa as associações fornecidas.
+
+         * 
+         * Observe que quando você importa uma associação de um módulo, a associação se comporta como se fosse definida usando const. Isso significa que você não pode ter outro identificador com o mesmo nome ou alterar o valor da associação.
+         * 
+         * Veja o seguinte exemplo:
+
+            //greeting.js
+            export let message = 'Hi';
+
+            export function setMessage(msg) {
+                message = msg;
+            }
+
+         * 
+         * Ao importar a message variável e a setMessage() função, você pode usar a setMessage() função para alterar o valor da message variável conforme mostrado abaixo:
+         
+            // app.js
+            import {message, setMessage } from './greeting.js';
+            console.log(message); // 'Hi'
+
+            setMessage('Hello');
+            console.log(message); // 'Hello' 
+
+         * 
+         * No entanto, você não pode alterar o valor da message variável diretamente. A seguinte expressão causa um erro:
+         
+            message = 'Hallo'; // error
+
+         * Nos bastidores, quando você chamou a setMessage() função. JavaScript voltou para o greeting.js módulo e executou o código lá e alterou a message variável. A alteração foi refletida automaticamente na message ligação importada.
+         * 
+         * A vinculação de mensagem no app.js é o nome local do identificador de mensagem exportado. Então, basicamente, as variáveis de mensagem nos módulos app.js e greeting.js não são as mesmas.
+        */
+
+    </script>
+</body>
+</html>

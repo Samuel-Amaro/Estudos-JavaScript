@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * Em vez disso, nesses manipuladores, deve-se definir event.returnValue uma string para obter o resultado semelhante ao código acima:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom ao objeto window
+        //o manipulador de evento e para o evento beforeunload(antes de descarregar), esse evcento e acionado quando um visitante inicia a nevegação fora da pagina ou tenta fechar a janela, assim o manipulador solicitara uma confirmação adicional
+        window.addEventListener("beforeunload", (event) => {
+            //funciona, igual ao retornar de window.onbeforeunload
+            //definimos uma string não vazia como valor de retorno quando o usuario tentar fechar a janela ou iniciar navegação fora da pagina
+            event.returnValue = "Há alterações não salvas. Saia agora?";
+        });
+
+    </script>
+
+</body>
+</html>

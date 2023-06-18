@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Por exemplo, se tivermos uma array de URLs, podemos buscá-los todos assim:
+        */
+
+        //uma array
+        let urls = [
+            'https://api.github.com/users/iliakan',
+            'https://api.github.com/users/remy',
+            'https://api.github.com/users/jeresig'
+        ];
+
+        //mapear cada URL para a promessa da busca
+        //o map metodo abaixo chama cada callback para cada elemento do array url, a callback usa o fetch para fazer uma solicitaçaõ de rede usando o elemento como url e retorna um promise para o novo array mapeado
+        let requests = urls.map(url => fetch(url));
+
+        //Promise.all espera até que todos os trabalhos sejam resolvidos
+        //chama metodo statico Promise.all(iterable), para executar varias promessas simultaneamente
+        //o argumento passado e um array de promises a serem executadas
+        //o metodo retorna uma nova promise
+        Promise.all(requests)
+            //o metodo acima retorna uma nova promise, essa promise e resolvida quando todas as promises passadas por argumento foram resolvidas, assim o resolve metodo e chamado com um array de resultado de todas as promises
+            //consumindo o array de resultado das promises resolvidas
+            .then(responses => responses.forEach(response => {
+                alert(`${response.url}: ${response.status}`);            
+            }));
+
+    </script>
+</body>
+</html>

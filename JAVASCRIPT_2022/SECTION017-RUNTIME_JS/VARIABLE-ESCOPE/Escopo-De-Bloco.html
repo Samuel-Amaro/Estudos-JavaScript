@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ESCOPO DO BLOCO 
+         *
+         * O ES6 fornece as palavras-chave let e const que permitem declarar variáveis ​​no escopo do bloco.
+         * 
+         * Geralmente, sempre que você vê colchetes {}, é um bloco. Pode ser a área dentro das condições if, else, switch ou for, do while, e while loops.
+         * 
+         * Veja o seguinte exemplo:
+        */
+        
+        //declara uma function regular chamada say, que declara uma paramentro chamado message
+        function say(message) {
+            //inicia o escopo de bloco da function
+            if(!message) {
+                //inicia o escopo do bloco do if
+                //declara uma variavel de escopo de bloco usando a palavra-chave let, variavel e chamada de greeting, inicializada com o valor hello, esta variavel pertence somente ao escopo do if, so pode ser acessivel dentro do if
+                let greeting = 'Hello'; //escopo de bloco
+                console.log(greeting);
+            }
+            // diga isso de novo ?
+            //tentando acessar a variavel greeting fora do seu escopo de bloco, aqui a varaivel esta fora de seu bloco de escopo, não podemos acessala aqui
+            console.log(greeting); //ReferenceError
+        }
+
+        //chama, invoca a function say()
+        say();
+        
+        /**
+         * Neste exemplo, referenciamos a variável greeting fora do ifb loco que resulta em um erro.
+         * 
+         * Neste tutorial, você aprendeu sobre os escopos de variáveis ​​JavaScript, incluindo escopo de função, escopo global e escopo de bloco.
+        */
+    </script>
+
+</body>
+</html>

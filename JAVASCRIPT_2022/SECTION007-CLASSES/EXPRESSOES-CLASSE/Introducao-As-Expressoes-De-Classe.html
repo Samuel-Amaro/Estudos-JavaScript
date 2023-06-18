@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressões De Classe JS</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXPRESSÕES DE CLASSE JS
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar expressões de classe JavaScript para declarar novas classes.
+         * 
+         * * EXPRESSÕES
+         * 
+         * Uma expressão em linguagens de programação é uma combinação de valores, variáveis, operadores, e chamadas de funções que são interpretadas (avaliadas) de acordo com as regras de precedência e de associatividade particulares a uma determinada linguagem de programação, que calcula e, em seguida, produz (retorna) um valor. Expressões são os meios fundamentais de especificação de computações em uma linguagem de programação.[1] O propósito de uma expressão é especificar um valor a ser calculado.
+         * 
+         * * INTRODUÇÃO ÁS EXPRESSÕES DE CLASSE JS
+         * 
+         * Semelhante às funções, as classes têm formas de expressão. Uma expressão de classe fornece uma maneira alternativa de definir uma nova classe.
+         * 
+         * Uma expressão de classe não requer um identificador após a palavra- chave class. E você pode usar uma expressão de classe em uma declaração de variável e passá-la para uma função como um argumento.
+         * 
+         * Por exemplo, o seguinte define uma expressão de classe:
+        */
+
+        //definindo uma expressão de classe
+        //definido uma classe por meio de uma expressão de classe
+        //usando a expressão de classe em uma declaração de variavel
+        //define uma expressão de classe sem nome, não e necessario passar um identificar apos a palavra chave class
+        //a expressão fica a direita do operador igual, assim a expressão resulta em um valor que e atribuido a variavel Person por referencia porque e uma classe
+        //Person referencia a classe
+        //a expressão começa pela palavra-chave class e seguida pela definição da classe
+        //expressão de classe sem nome
+        let Person = class{
+            //construtor que inicializa propriedade da classe, declara um paramentro chamado name
+            constructor(name) {
+                //inicializa propriedade name com o argumento name
+                this.name = name;
+            }
+            //declara um metodo da classe chamado getName()
+            getName() {
+                //acessa o valor da propriedade name e retorna
+                return this.name;
+            }
+        };
+
+        /**
+         * Como funciona.
+         * 
+         * No lado esquerdo da expressão está a variável Person. É atribuído a uma expressão de classe.
+         * 
+         * A expressão de classe começa com a palavra-chave class seguida pela definição de classe.
+         * 
+         * Uma expressão de classe pode ter um nome ou não. Neste exemplo, temos uma expressão de classe sem nome.
+         * 
+         * Se uma expressão de classe tiver um nome, seu nome poderá ser local para o corpo da classe.
+         * 
+         * O seguinte cria uma instância da expressão de classe Person. Sua sintaxe é a mesma de uma declaração de classe.
+        **/
+
+        //declarando uma instancia de objeto por meio da expressão de classe Referenciada pela variavel Person
+        //a sintaxe e a mesma de uma declaração de class normal
+        let person = new Person('John Doe');
+
+        /**
+         * Como uma declaração de classe, o tipo de uma expressão de classe também é uma função :
+        */
+
+        //usando o operador typeof 
+        //O operador typeof retorna uma string indicando o tipo do operando sem avaliação.
+        //aqui verifica qual o tipo da Person variavel
+        //as class normais são funções especiais
+        //as expressões também são funções
+        console.log(typeof Person); //function
+
+        /**
+         * Semelhante às expressões de função, as expressões de classe não são içadas . Isso significa que você não pode criar uma instância da classe antes de definir a expressão de classe.
+        */
+    </script>
+</body>
+</html>

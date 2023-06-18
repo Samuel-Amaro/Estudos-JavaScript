@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Prevent default example</title>
+    <style>
+      div {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <form>
+      <div>
+        <label for="fname">Primeiro nome: </label>
+        <input id="fname" type="text">
+      </div>
+      <div>
+        <label for="lname">Ultimo nome: </label>
+        <input id="lname" type="text">
+      </div>
+      <div>
+        <input id="submit" type="submit">
+      </div>
+    </form>
+
+    <p></p>
+
+    <script>
+      //seleciona o elemento <form>
+      const form = document.querySelector('form');
+
+      //seleciona o elemento <label> com o id(fname)
+      const fname = document.getElementById('fname');
+      
+      //seleciona o elemento <input> com o id(lname)
+      const lname = document.getElementById('lname');
+
+      //seleciona o elemento <p>
+      const para = document.querySelector('p');
+
+      //registrando um manipulador de eventos com uma função anonima que recebe um objeto de evento e
+      //o manipulador de eventos responde ao evento do formulario (onsubmit) que o respodera quando o formulario for enviado ou o botão submit tiver sido clicado
+      form.onsubmit = function(e) {
+        //se os campos do formulario estiver vazio  
+        if(fname.value === '' || lname.value === '') {
+         //chama função do objeto de evento que interrope o envio do formulario, e em seguida,exibir uma mensagem de erro no paragrafo
+          e.preventDefault();
+          para.textContent = 'Você precisa preencher os dois nomes!'
+        }
+      }
+
+    </script>
+  </body>
+</html>

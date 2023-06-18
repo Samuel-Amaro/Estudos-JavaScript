@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * Então, mais tarde, publicamos a 2ª versão.
+         * 
+         * Podemos abri-lo com a versão 2 e realizar a atualização assim:
+        */
+
+        //conectando,a uma banco de dados.
+        //abrindo uma conexão
+        //o primeiro argumento passado para o metodo open e uma string, informando o nome do banco de dados
+        //o segundo argumento e um numero inteiro positivo, informando a versão
+        let openRequest = indexedDB.open("store", 2);
+
+        //o metodo retorna o openRequest objeto, devemos ouvir eventos nele e atribui manipuladores para os seguintes eventos, sucess, error, upgradeneeded
+
+        //este evento e acionado quando  o banco de dados está pronto, mas sua versão está desatualizada
+        //Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado
+        //O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+        openRequest.onupgradeneeded = function(event) {
+            // a versão do banco de dados existente é menor que 2 (ou não existe)
+            //obtem o objeto de banco de dados armazenado em result
+            let db = openRequest.result;
+            switch(event.oldVersion) { //versão de banco de dados existente
+                case 0:
+                    // versão 0 significa que o cliente não tinha banco de dados
+                    // executa a inicialização
+                    break;
+                case 1:
+                    // cliente tinha a versão 1
+                    // atualizar
+                    break;
+            }
+        };
+
+        //este evento e acionado quando a abertura falhou.
+        openRequest.onerror = function() {
+            console.error("Error", openRequest.error);
+        };
+
+        //este evento e acionado quando banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+        openRequest.onsuccess = function() {
+            //o na propriedade result esta o objeto banco de dados
+            let db = openRequest.result;
+            // continua trabalhando com banco de dados usando objeto db
+        };
+
+        /**
+         * Atenção: como nossa versão atual é 2, o onupgradeneeded handler possui um branch de código para version 0, indicado para usuários que estão acessando pela primeira vez e não possuem banco de dados, e também para version 1, para atualizações.
+         * 
+         * E então, somente se o onupgradeneeded handler terminar sem erros, openRequest.onsuccess triggers(acionado) e o banco de dados for considerado aberto com sucesso.
+         * 
+         * Para excluir um banco de dados:
+        */
+
+        let deleteRequest = indexedDB.deleteDatabase(name);
+        //deleteRequest.onsuccess/onerror rastreia o resultado
+
+        /**
+         * * Não podemos abrir um banco de dados usando uma versão de chamada aberta mais antiga 
+         * 
+         * Se o banco de dados do usuário atual tiver uma versão superior à da openchamada, por exemplo, a versão do banco de dados existente é 3, e tentamos open(...2), então isso é um erro, openRequest.onerror dispara.
+         * 
+         * Isso é raro, mas tal coisa pode acontecer quando um visitante carrega um código JavaScript desatualizado, por exemplo, de um cache de proxy. Portanto, o código é antigo, mas seu banco de dados é novo.
+         * 
+         * Para proteger contra erros, devemos verificar db.versione sugerir o recarregamento da página. Use cabeçalhos de cache HTTP adequados para evitar carregar o código antigo, para que você nunca tenha esses problemas.
+        */
+    </script>
+
+</body>
+</html>

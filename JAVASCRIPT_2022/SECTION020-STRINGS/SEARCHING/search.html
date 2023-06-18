@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <script>
+
+       /**
+        * * JS STRING search - pesquisa
+        * 
+        * Resumo : neste tutorial, você aprenderá a usar a search() função JavaScript String para localizar uma substring dentro de uma string usando uma expressão regular.
+        * 
+        * * INTRODUÇÃO Á FUNÇÃO JS STRING search()
+        * 
+        * O search() método aceita uma expressão regular e retorna o índice da primeira correspondência em uma string:
+        
+            let index = str.search(regexp);
+
+         * 
+         * Nesta sintaxe, o regexp é uma expressão regular. Se você passar um não-RegExp para o método, ele converterá esse valor em um RegExp.
+         * 
+         * * EXEMPLO DO MÉTODO JAVASCRIPT STRING SEARCH()
+         * 
+         * O exemplo a seguir usa o search() método para retornar a primeira ocorrência de qualquer letra maiúscula:
+       */
+
+        //declara uma expressão regular que procura ocorrencias de qualquer letra maiuscula
+        let re = /[A-Z]/;
+        //declara uma variavel de escopo de bloco chamada str que e inicilizada com um string literal
+        let str = 'hi There! How are you?';
+        //invocando um método em uma variavel que armazena um valor um valor primitivo
+        //usando o método String.search(regexp) para pesquisar ocorrencias em uma string de uma expressão regular e retorna o indice da primeira ocorrencia da expressão
+        //o metodo aceita uma expressão regular como argumento
+        //neste caso queremos a primeira ocorrencia de caracteres maiusculos.
+        //retorna o indice da primeira ocorrencia
+        let index = str.search(re);
+        //retorna o indice 3 onde o primeira ocorrencia de caractere maiusculo esta na string
+        console.log(index);
+
+        /**
+         * Ele retorna 3 que é o índice da letra maiúscula T.
+         * 
+         * O exemplo a seguir retorna -1 porque não há número na string:
+        */
+
+        //declara outra expressão regular que procura ocorrencia de numeros
+        re = /[0-9]/;
+        //declara uma variavel de escopo de bloco chamada str que e inicilizada com um string literal
+        str = 'Hello, JavaScript!';
+        //usando o método String.search(regexp) para pesquisar ocorrencias de numeros em uma string, passamos uma expressão regular para o método
+        index = str.search(re);
+        //o método retorna -1 porque não encontrou nenhuma correspondencia
+        console.log(index); 
+
+        /**
+         * * RESUMO
+         * 
+         * Use a String JavaScript search() para encontrar o índice da primeira correspondência com base em uma expressão regular em uma string.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+       
+        /**
+         * * SIBLINGS AND THE PARENT(IRMÃOS E OS PAIS)
+         * 
+         *  siblings(irmãos) são nós que são filhos do mesmo pai(parent).
+         * 
+         * Por exemplo, aqui <head> e <body> são irmãos:
+         
+            <html>
+                <head>...</head><body>...</body>
+            </html>
+        
+         * 
+         * <body> é dito ser o irmão(sibling) "próximo(next)" ou "direita(right)" de <head>.
+         * 
+         * <head> é dito ser o irmão(sibling) "anterior(previous)" ou "esquerdo(left)" de <body>.
+         * 
+         * O próximo irmão está na nextSibling propriedade e o anterior – em previousSibling.
+         * 
+         * O pai está disponível como parentNode.
+         * 
+         * Por exemplo:
+         * */
+
+        //pai do elemento <body> e <html>
+        alert(document.body.parentNode === document.documentElement); //true
+
+        //o proximo irmão do elemento <head> e <body>
+        alert(document.head.nextSibling); //HTMLBodyElement
+
+        //o irmão anterior ao elemento <body> e o elemento <head>
+        alert(document.body.previousSibling); //HTMLHeadElement
+        
+    </script>
+
+
+
+</body>
+</html>

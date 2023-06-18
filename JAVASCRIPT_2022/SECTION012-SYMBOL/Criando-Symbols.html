@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando Symbols</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * O GUIA DEFINITIVO PARA O SyMBOL JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o tipo primitivo de símbolo JavaScript e como usar o símbolo de forma eficaz.
+         *
+         * * CRIANDO SYMBOLS
+         *
+         * ES6 adicionado Symbol como um novo tipo primitivo. Ao contrário de outros tipos primitivos como number, boolean , null, undefined e string , o tipo de símbolo não tem uma forma literal.
+         *
+         * Para criar um novo símbolo, você usa a Symbol() função global conforme mostrado neste exemplo:
+        */
+
+        //cria um variavel s e a inicializa com o tipo primitivo Symbol, o tipo Symbol não possui uma valor literal.
+        //para cria um novo symbol usamos a function Symbol()
+        //cada vez que chamamos a função symbol ela cria um novo valor exclusivo
+        //passamos um argumento description para o symbol para tornar o novo valor exclusivo criado mais descritivo
+        let s = Symbol('foo');
+
+        /**
+         * A Symbol() função cria um novo valor exclusivo cada vez que você a chama:
+        */
+
+        console.log(Symbol() === Symbol()); //false
+
+        /**
+         * A Symbol() função aceita a description como argumento opcional. O description argumento tornará seu símbolo mais descritivo.
+         * 
+         * O exemplo a seguir cria dois símbolos: firstName e lastName.
+        */
+
+        //criando dois simbolos, usando a function global symbol e fornecendo como argumento um description para ajudar a descrrever os valores criados
+        //os simbolos criados são atribuidos as variaveis firstName e lastName
+        let firstName = Symbol('first name'), lastName = Symbol('last name');
+
+        /**
+         * Você pode acessar a propriedade de descrição do símbolo usando o toString() método. O console.log() método chama o toString() método do símbolo implicitamente conforme mostrado no exemplo a seguir:
+        */
+
+        //acessando as propriedades de descrição(description) do symbol tipo primitivo
+        //podemos usar o toString método, ou usamos o console.log
+        console.log(firstName); //Symbol(first name)
+        console.log(lastName); //Symbol(last name)
+
+        /**
+         * Como os símbolos são valores primitivos, você pode usar o  typeof operador para verificar se uma variável é um símbolo. ES6 estendido  typeof para retornar a symbol string quando você passa uma variável de símbolo:
+        */
+
+        //usando o operador unario typeof
+        //O operador typeof retorna uma string indicando o tipo do operando sem avaliação. operando é uma string, variável, palavra-chave ou objeto cujo tipo deve ser retornado. Os parênteses são opcionais.
+        console.log(typeof firstName); //tipo primitivo symbol
+
+        /**
+         * Como um símbolo é um valor primitivo, se você tentar criar um símbolo usando o new operador, receberá um erro:
+        */
+
+        //não podemos usar o new operador ao tentar criar um symbol, pois e um valor primitivo
+        //let s = new Symbol(); //error
+    </script>
+
+</body>
+</html>

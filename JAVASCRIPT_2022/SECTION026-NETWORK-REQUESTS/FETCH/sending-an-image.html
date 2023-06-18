@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0;">
+
+    <canvas id="canvasElem" width="100" height="80" style="border: 1px solid;"></canvas>
+
+    <input type="button" value="Submit" onclick="submit()"/>
+
+    <script type="text/javascript">
+        /**
+         * * SENDING AN IMAGE(ENVIANDO UMA IMAGEM)
+         * 
+         * Também podemos enviar dados binários com fetch using Blob ou BufferSource objects.
+         * 
+         * Neste exemplo, há um <canvas> onde podemos desenhar movendo o mouse sobre ele. Um clique no botão “enviar” envia a imagem para o servidor:
+         * 
+        */
+
+        canvasElem.onmousemove = function(e) {
+            let ctx = canvasElem.getContext('2d');
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.stroke();
+        };
+
+        async function submit() {
+            let blob = await new Promise(resolve => canvasElem.toBlob(resolve, 'image/png')); 
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            //passamos para o fetch como primeiro argumento o url para fazer a request, e o segundo argumento, e um objeto options 
+            let response = await fetch('https://javascript.info/article/fetch/post/image', {
+                //objeto com paramentros opcionais para o request header
+                method: 'POST', //method HTTP
+                body: blob //corpo da request, um objeto blob, os dados a serem enviados
+            });
+
+            // o servidor responde com a confirmação e o tamanho da imagem
+            //o metodo reponse.json() obtem corpo do response objeto, retorna uma promise que resolve e analisa a reposta como JSON
+            let result = await response.json();
+
+            alert(result.message);
+        }
+
+        /**
+         * Observe que aqui não definimos o Content-Type cabeçalho manualmente, porque um Blob objeto possui um tipo interno (aqui image/png, conforme gerado por toBlob). Para Blob objetos esse tipo se torna o valor de Content-Type.
+         * 
+         * A submit() função pode ser reescrita sem async/await assim:
+        */
+
+        //rescreve function submit sem asyn/await usando sintaxe de promesas pura
+        function submit() {
+            canvasElem.toBlob(function(blob) {
+                fetch('/article/fetch/post/image', {
+                    method: 'POST',
+                    body: blob
+                })  
+                .then(response => response.json())
+                .then(result => alert(JSON.stringify(result, null, 2)))
+            }, 'image/png');
+        }   
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * MICROTASKS(MICROTAREFAS)
+         * 
+         * Os manipuladores de promessas `.then`/ `.catch`/ `.finally` são sempre assíncronos.
+         * 
+         * Mesmo quando uma `Promise` é resolvida imediatamente, o código nas linhas abaixo de `.then` / `.catch`/ `.finally`ainda será executado antes desses manipuladores.
+         * 
+         * Aqui está uma demonstração:
+        */
+
+        //cria um promise que e resolvida instantanemente/imediatamente, com o metodo estatico resolve, da class Api Promise
+        let promise = Promise.resolve();
+
+        //anexamos um manipulador .then para obter o resultado da promise resolvida
+        //manipuladores anexados são sempre assincronos, demoram para ser executado, de acordo com o trabalho que a promise resolve
+        promise.then(() => alert('promise feita!'));
+
+        //este alerta é exibido primeiro
+        //por ser um codigo assincrono e o codigo atual que a fila de tarefas executa, depois passa para os manipuladores
+        //porem codigo abaixo de manipuladores de promisse são sincronos não espera promise ser resolvida para ser executada
+        alert("codigo finalizado!");
+
+        /**
+         * Se você executá-lo, verá code finished primeiro e depois promise done!.
+         * 
+         * Isso é estranho, porque a promessa é definitivamente feita desde o início.
+         * 
+         * Por que o .then gatilho depois? O que está acontecendo?
+        */
+    </script>
+
+</body>
+</html>

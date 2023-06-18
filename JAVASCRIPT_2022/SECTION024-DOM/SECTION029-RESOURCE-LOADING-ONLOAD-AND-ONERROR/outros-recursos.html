@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * OUTROS RECURSOS
+         * 
+         * Os eventos load e error também funcionam para outros recursos, basicamente para qualquer recurso que tenha um src externo.
+         * 
+         * Por exemplo:
+        */
+
+        //imgs também são recursos externos, qualquer recurso que tenha um src externo
+
+        //cria um elemento img
+        let img = document.createElement('img');
+        //carrega um recurso externo no elemento, uma img, quando recebe o src valor a img ja começa a ser carregada antes de ser adicionada no documento
+        img.src = "https://js.cx/clipart/train.gif"; // (*)
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento load, esse evento e acionado depois que o recurso externo a imagem no caso foi carregado
+        img.onload = function(event) {
+            alert(`Imagem carregada, tamanho ${img.width}x${img.height}`);
+        };
+
+        //o manipulador e para o evento error, esse evento e acionado depois que o recurso externo houve um erro no carregamento do mesmo. e acionado quando ha erros no carregamento do recurso.
+        img.onerror = function(event) {
+            alert("Ocorreu um erro ao carregar a imagem");
+        };
+
+        /**
+         * Mas há algumas notas:
+         * 
+            * A maioria dos recursos começa a ser carregado quando são adicionados ao documento. Mas <img> é uma exceção. Ele começa a carregar quando recebe um src (*).
+            * 
+            * Para <iframe>, o iframe.onload evento é acionado quando o carregamento do iframe termina, tanto para carregamento bem-sucedido quanto em caso de erro.
+            * 
+            * Isso por razões históricas.
+            * 
+         * 
+         * */
+    </script>
+
+</body>
+</html>

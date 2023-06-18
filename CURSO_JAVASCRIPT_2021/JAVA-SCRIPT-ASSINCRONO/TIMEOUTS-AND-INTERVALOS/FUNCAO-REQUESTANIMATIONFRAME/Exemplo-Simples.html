@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Pagina teste</title>
+    <style>
+        html {
+            background-color: white;
+            height: 100%;
+        }
+
+        body {
+            height: inherit;
+            background-color: red;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div {
+            display: inline-block;
+            font-size: 10rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <p>Esta e minha Pagina</p>
+
+    <div>&#8635;</div>
+
+    <script>
+        /**
+         * * UM EXEMPLO SIMPLES
+         * 
+         * Chega de teoria! Vamos construir seu próprio requestAnimationFrame()exemplo pessoal  . Você vai criar uma "animação giratória" simples - o tipo que você pode ver exibido em um aplicativo quando ele está ocupado se conectando ao servidor, etc.
+         * 
+        */
+
+        const spinner = document.querySelector('div');
+        let rotateCount = 0;
+        let startTime = null;
+        let rAF;
+
+        function draw(timestamp) {
+            //Eles definirão a hora de início, se ainda não estiver definida (isso só acontecerá na primeira iteração do loop), e definirão o rotateCountpara um valor para girar o botão giratório (a data e hora atual, pegue a data e hora de início, dividida por três para que não vai muito rápido):
+            if(!startTime) {
+                startTime = timestamp;
+            }
+
+            rotateCount = (timestamp - startTime) / 3;
+
+            //- isso verifica se o valor de rotateCountestá acima 359(por exemplo 360, um círculo completo). Nesse caso, ele define o valor para seu módulo de 360 ​​(ou seja, o resto que sobra quando o valor é dividido por 360) para que a animação do círculo possa continuar ininterrupta, em um valor baixo e sensível. Observe que isso não é estritamente necessário, mas é mais fácil trabalhar com valores de 0–359 graus do que valores semelhantes "128000 degrees".
+
+            if(rotateCount > 359) {
+                rotateCount = rotateCount % 360;
+            }
+
+            //adicione a seguinte linha para realmente girar o spinner:
+            //gira o elemento div por meio do css3 tranforma propriedade de css 3D
+            spinner.style.transform = 'rotate(' + rotateCount + 'deg)';
+
+            //Esta é a chave para toda a operação - você está definindo a variável definida anteriormente para uma requestAnimation()chamada ativa , que leva a draw()função como seu parâmetro. Isso inicia a animação, executando constantemente a draw()função a uma taxa tão próxima quanto possível de 60 FPS.
+            rAF = requestAnimationFrame(draw);
+        }
+
+        draw();
+
+    </script>
+</body>
+</html>

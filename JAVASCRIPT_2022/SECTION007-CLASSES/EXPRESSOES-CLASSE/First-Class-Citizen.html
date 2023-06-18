@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-Class Citizen</title>
+</head>
+<body>
+    <script>
+        /** 
+         * * FIRST-CLASS CITIZEN(CIDADÃO DE PRIMEIRA)
+         * 
+         * * OQUE E SER UM CIDADÃO DE PRIMEIRA CLASSE(First-class Citizen) ? é uma entidade que suporta todas as operações geralmente disponíveis para outras entidades. Estas operações incluem, normalmente, ser passado como um argumento, retornado por uma função, modificado, e atribuído à variáveis.
+         * 
+         * As classes JavaScript são cidadãos de primeira classe. Isso significa que você pode passar uma classe para uma função, retorná-la de uma função e atribuí-la a uma variável.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function chamada factory, essa function possui uma paramentro declarado chamado aClass, esse parametro e para ser uma expressão de classe, essa function vai receber uma expressão de classe como argumento
+        //mostrando que uma classe e uma First-Class-Citizen, podendo ser passada como argumento
+        //uma function e uma instancia de objeto do tipo function
+        function factory(aClass) {
+            //mostra que uma class e (First-Class-Citizen) podendo ser retornado como um valor para uma function
+            //retorna uma instancia de objeto da class aClass()
+            return new aClass();
+        }
+
+        //definindo uma expressão de classe
+        //aqui declaramos a variavel no lado esquerdo do operador igual e do lado direito a expressão de classe
+        //define uma expressão de classe sem nome, não e necessario passar um identificar apos a palavra chave class
+        //usando a expressão de classe em uma declaração de variavel
+        //a expressão de classe e atribuida como valor para a function factory, a expressão de classe e passada como argumento para a factory function mostrando que e uma class e uma First-Class-Citizen sendo passada como um argumento um valor
+        //a expressão começa pela palavra-chave class e seguida pela definição da classe
+        //e atribuido por referencia a variavel greeting uma instancia de objeto da expressão da classe retornado pela factory function
+        //assim a variavel greeting referencia a instancia de objeto
+        //a greeting variavel ira refereciar uma instancia de expressão da classe
+        let greeting = factory(class {
+            //metodo da classe
+            sayHi() {
+                console.log('Hi');
+            }
+        });
+
+        //chamando o metodo da instancia de objeto referenciado por greeting
+        greeting.sayHi(); //'Hi'
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina uma factory()função que receba uma expressão de classe como argumento e retorne a instância da classe:
+         * 
+         * Segundo, passe uma expressão de classe sem nome para a função factory() e atribua seu resultado à variável de saudação:
+         * 
+         * A expressão de classe tem um método chamado sayHi(). E a greeting variável é uma instância da expressão de classe.
+         * 
+         * Terceiro, chame o sayHi()método no objeto de saudação:
+        */
+        
+    </script>
+</body>
+</html>

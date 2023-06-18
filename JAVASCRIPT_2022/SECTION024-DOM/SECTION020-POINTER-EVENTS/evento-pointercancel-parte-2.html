@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #ball {
+            /*
+             - a propriedade css abaixo impede que o arrastar e soltar nativo de navegadores me dispositivos moveis de toque aconteçam, ao implementar o nosso proprio.
+             - a propriedade css touch-action forma uma determinada região que pode ser manipulada pelo usuário de uma tela sensível ao toque.
+             - o valor none, Desative o manuseio do navegador de todos os gestos de panorâmica e zoom.
+            */
+          touch-action: none;
+        }
+      </style>
+</head>
+<body style="height: 200px;">
+
+    <p>Arraste a bolla.</p>
+
+    <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="ball"/>
+
+    <textarea id="text" style="display:block;width:300px;height:100px"></textarea>
+
+    <script type="text/javascript">
+
+        /**
+         * Gostaríamos de implementar o arrastar e soltar por conta própria, então vamos dizer ao navegador para não assumir o controle.
+         * 
+         * * Impeça a ação padrão do navegador para evitar eventos pointercancel.
+         * 
+         * Precisamos fazer duas coisas:
+         
+            1. Impedir que o drag(arrastar)'n'drop(soltar) nativo aconteça
+
+                Podemos fazer isso definindo ball.ondragstart = () => false, conforme descrito no artigo Drag'n'Drop with mouse events .
+
+            2. Para dispositivos de toque, existem outras ações de navegador relacionadas ao toque (além de arrastar e soltar). Para evitar problemas com eles também:
+
+                Evite-os configurando #ball { touch-action: none } em CSS.
+
+                Em seguida, nosso código começará a funcionar em dispositivos de toque.
+
+            * Depois que fizermos isso, os eventos funcionarão conforme o esperado, o navegador não sequestrará o processo e não emitirá arquivos pointercancel.
+            * 
+            * Esta demonstração adiciona estas linhas:
+            * 
+            * Como você pode ver, não há pointercancel mais.
+            * 
+            * Agora podemos adicionar o código para realmente mover a bola, e nosso arrastar e soltar funcionará para dispositivos de mouse e dispositivos de toque.
+        */
+
+
+       //atribuindo a mesma function manipuladora para diferentes pointers events
+       //Eventos de ponteiro são uma maneira moderna de manipular a entrada de uma variedade de dispositivos apontadores, como mouse, caneta/stylus, tela sensível ao toque e assim por diante.
+       //Ele fornece um único conjunto de eventos para todos os tipos de dispositivos apontadores.
+
+        //evento de ponteiro para quando o dispositivo apontador estiver pressionado
+        ball.onpointerdown = log;
+        //evento de ponteiro para quando o dispositivo apontador estiver liberado
+        ball.onpointerup = log;
+        //evento de ponteiro para quando o dispositivo apontador estiver em movimento
+        ball.onpointermove = log;
+        //evento de ponteiro para quando o dispositivo apontador for cancelado, O pointercancel evento é acionado quando há uma interação de ponteiro em andamento e, em seguida, algo acontece que faz com que ele seja abortado, para que não sejam gerados mais eventos de ponteiro.
+        ball.onpointercancel = log;
+
+        //impede a ação padrão de arrastar nativa do navegador
+        ball.ondragstart = (event) => false;
+
+        let lastEventType, n = 1;
+
+        //function manipuladora dos eventos de ponteiro
+        function log(event) {
+            //se o ultimo evento ocorrido for do mesmo tipo que o evento atual
+            if(lastEventType == event.type) {
+                n++;
+                text.value = text.value.replace(/.*\n$/, `${event.type} * ${n} \n`);
+                return;
+            }
+            //atribui o tipo do evento a variavel 
+            lastEventType = event.type;
+            n = 1;
+            text.value += event.type + '\n';
+            text.scrollTop = 1e9;
+        }
+    </script>
+</body>
+</html>

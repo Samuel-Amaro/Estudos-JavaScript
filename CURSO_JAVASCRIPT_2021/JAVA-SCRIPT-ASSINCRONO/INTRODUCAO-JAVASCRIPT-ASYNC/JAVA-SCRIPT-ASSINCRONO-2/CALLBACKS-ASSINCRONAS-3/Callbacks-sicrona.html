@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de callback sicrona</title>
+</head>
+<body>
+    
+    <h1>Exemplo de callback sicrona - forEach</h1>
+
+    <script>
+        //cria uma constante array
+        const gods = ['Apoloo', 'Artemis', 'Ares', 'Zeus'];
+
+        //Executa a ação especificada para cada elemento em uma array
+        gods.forEach(
+            //registra uma função anonima(callback) que por padrão vai necessitar de dois paramentros, como o each name e index, each Name e o nome do array e index e os valores dos indices 
+            function (eachName, index) {
+                console.log(index + '. ' + eachName);
+            }
+        );
+    </script>
+</body>
+</html>

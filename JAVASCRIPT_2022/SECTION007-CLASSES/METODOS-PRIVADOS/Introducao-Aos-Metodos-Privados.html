@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Métodos Privados</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODOS PRIVADOS JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre métodos privados JavaScript, incluindo métodos de instância privada, métodos estáticos privados e getter/setter privado.
+         * 
+         * * INTRODUÇÃO AOS MÉTODOS PRIVADOS JS
+         * 
+         * Por padrão, os membros de uma classe são públicos. O ES2020 introduziu os membros privados que incluem campos e métodos privados.
+         * 
+         * Para tornar um método público privado, você prefixa seu nome com um hash #. JavaScript permite que você defina métodos privados para métodos de instância, métodos estáticos e getter/setters.
+         * 
+         * Veja a seguir a sintaxe de definição de um método de instância privada:
+        */
+
+        //sintaxe de definição de um metodo de instancia privado
+        //define uma class chamada MyClass usando palavra-chave class
+        class MyClass{
+            //metodo da classe privado, so pode ser acessado dentro do corpo da MyClass
+            #privateMethod() {
+                //...
+            }
+        }
+
+        /**
+         * Nesta sintaxe, o #privateMethod é um método de instância privada. Ele só pode ser chamado dentro do MyClass. Em outras palavras, ele não pode ser chamado de fora da classe ou nas subclasses do MyClass.
+         * 
+         * Para chamar o #privateMethod dentro da MyClass, você usa a palavra-chave this da seguinte forma:
+
+            this.#privateMethod();
+
+         * 
+         * O seguinte ilustra a sintaxe de definição de um método estático privado:
+        */
+
+        //sintaxe de definição de um metodo estatico privado
+        //define uma class chamada MyClass2 usando palavra-chave class 
+        class MyClass2{
+            //define um metodo privado usando o #, so pode ser acessado dentro do corpo da MyClass2
+            //e esse metodo também e estatico, isso e usando palavra-chave static, esta vinculado somente a classe, e não ha instancias
+            static #privateStaticMethod() {
+                //...
+            }
+        }
+
+        /**
+         * Para chamar o #privateStaticMethod()dentro do MyClass, você usa o nome da classe em vez da this palavra-chave:
+
+            MyClass2.#privateStaticMethod();
+
+         * 
+         * Veja a seguir a sintaxe dos getters/setters privados:
+        */
+
+        //sintaxe de métodos acessores de atributos como getter e setter privados
+        //define uma class chamada MyClass3 usando palavra-chave class
+        class MyClass3{
+            //define uma propriedade privada no corpo da classe chamada #field
+            //so pode ser acessada dentro do corpo da MyClass3
+            #field;
+            //define um metodo acessor de atributo usando a palavra-chave get, esse metodo acessa o atributo e retorna o seu valor, esse metodo e privado, so pode ser acessado dentro do corpo da classe
+            get #myField() {
+                return #field;
+            }
+            //define um metodo inicializador de atributo chamado #myField usando a palavra-chave set, declara um paramentro chamado value, esse metodo acessa o atributo e o inicializa com o parametro passado, esse metodo e privado, so pode ser acessado dentro do corpo da classe
+            set #myField(value) {
+                #field = value;
+            }
+        }
+
+        /**
+         * Neste exemplo, o #myField é o getter e o setter privado que fornecem acesso ao campo privado #field.
+         * 
+         * Na prática, você usa métodos privados para minimizar o número de métodos que o objeto expõe.
+         * 
+         * Como regra geral, você deve tornar todos os métodos de classe privados por padrão primeiro. E então você torna um método público sempre que o objeto precisar usar esse método para interagir com outros objetos.
+        */
+    </script>
+</body>
+</html>

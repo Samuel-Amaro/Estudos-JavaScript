@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * 2) USANDO O EXEMPLO DO MÉTODO SHIFT() DO ARRAY JS
+         * 
+         * O exemplo a seguir mostra como usar o shift() método com um while loop para remover todos os elementos de um array:
+        */
+
+        //declara um array literal chamado numbers que foi inicializado com 3 elementos
+        const numbers = [10, 20, 30];
+        //declara varaivel e não a inicializa
+        let number;
+        //usando o loop while para ir removendo todos os primeiros elementos do array numbers
+        //a cada iteração e um novo primeiro elemento removido
+        //usando o metodo shift da instancia de objeto do tipo array numbers podemos remover todo primeiro elemento do array avalido no momento, e logo em seguida atribuir esse elemento removido ao number variavel
+        //a cada remoção de elemento do array o shift metodo o reindexa atualizando o valor de lenght
+        //aqui a logica e enquanto o elemento do array removido for diferente de undefined continue removendo
+        while((number = numbers.shift()) != undefined) {
+            console.log(number);
+        }
+
+        
+    </script>
+</body>
+</html>

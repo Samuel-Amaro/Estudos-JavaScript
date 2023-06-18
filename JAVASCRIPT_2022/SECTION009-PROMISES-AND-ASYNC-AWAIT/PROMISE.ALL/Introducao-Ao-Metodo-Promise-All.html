@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.all() método</title>
+</head>
+<body>
+
+    <p>Neste diagrama, o promise1 resolve para um valor <b>v1 em t1</b> e o promise2 resolve para um valor <b>v2 em t2</b>. Portanto, o Promise.all(promise1, promise2) retorna uma promessa que resolve para uma array contendo os resultados de promise1 e promise2 <b>[v1, v2]</b> em t2.</p>
+
+    <img src="JavaScript-Promise.all-Fulfilled-1.svg" alt="imagen">
+
+    <p>Se uma das promessas de entrada for rejeitada, o Promise.all() método retornará imediatamente uma promessa que rejeita com um erro da primeira promessa rejeitada:</p>
+
+    <img src="JavaScript-Promise.all-Rejected.svg" alt="imagen">
+
+    <script>
+
+        /**
+         * * JAVASCRIPT Promise.all()
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o Promise.all()método estático para agregar resultados de várias operações assíncronas.
+         *
+         * * INTRODUÇÃO AO MÉTODO JS Promise.all()
+         * 
+         * O Promise.all() método estático recebe um iterável(iterable) de promessas(promise):
+
+            Promise.all(iterable);
+
+         * 
+         * O Promise.all() método retorna uma única promessa que resolve quando todas as promessas de entrada foram resolvidas. A promessa retornada resolve para uma array dos resultados das promessas de entrada:
+         * 
+         * Neste diagrama, o promise1 resolve para um valor v1 em t1 e o promise2 resolve para um valor v2 em t2. Portanto, o Promise.all(promise1, promise2) retorna uma promessa que resolve para uma array contendo os resultados de promise1 e promise2 [v1, v2] em t2.
+         * 
+         * Em outras palavras, Promise.all()espera que todas as promessas de entrada sejam resolvidas e retorna uma nova promessa que resolve para uma array contendo os resultados das promessas de entrada.
+         * 
+         * Se uma das promessas de entrada for rejeitada, o Promise.all() método retornará imediatamente uma promessa que rejeita com um erro da primeira promessa rejeitada:
+         * 
+         * Neste diagrama, a promessa2 rejeita em t1 com um erro. Portanto, o Promise.all() retorna uma nova promessa que rejeita imediatamente com o mesmo erro. Além disso, o Promise.all() não se importa com outras promessas de entrada, se elas serão resolvidas ou rejeitadas.
+         * 
+         * Na prática, o Promise.all() é útil para agregar os resultados de várias operações assíncronas.
+        */
+
+    </script>
+
+</body>
+</html>

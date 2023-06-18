@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * USANDO COM FETCH
+         * 
+         * Para poder cancelar fetch, passe a signal propriedade de um AbortController como fetch opção:
+        */
+
+        //criando um controlador
+        //usando Class AbortController Ele pode ser usado para abortar não apenas fetch, mas também outras tarefas assíncronas.
+        let controller = new AbortController();
+
+        //passamos como argumento para o metodo fetch o url que a request ira ser enviada, e passamos um objeto com informações adicionais para o request
+        fetch(url, {
+            //option signal para abortar o fetch
+            //obtemos o valor da propriedade controller.signal, que permite definir ouvintes de eventos nele, obtem um objeto
+            signal: controller.signal //passa objetct AbortSignal
+        });
+
+        /*
+         * O fetch método sabe como trabalhar com AbortController. Ele ouvirá os abort eventos no signal.
+         * 
+         * Agora, para abortar, chame controller.abort():
+        */
+
+        //abortando, cancelando, uma tarefa assincrona
+        //chamando metodo controller.abort();
+        //a propriedade controller.signal emite o "abort" evento, acionando o manipulador atribuido em objeto signal
+        //e controller.signal.aborted propriedade se torna true.
+        controller.abort();
+
+        /**
+         * Concluímos: fetch obtém o evento signal e aborta a solicitação.
+         * 
+         * Quando uma busca é abortada, sua promessa é rejeitada com um erro AbortError, então devemos tratá-la, por exemplo, em try..catch.
+        */
+    </script>
+
+</body>
+</html>

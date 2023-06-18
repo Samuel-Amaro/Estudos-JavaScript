@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * 2) CALCULE A SOMA DE N NÚMEROS NATURAIS EXEMPLO
+         * 
+         * Suponha que você precise calcular a soma dos números naturais de 1 a n usando a técnica de recursão. Para fazer isso, você precisa definir o sum()recursivamente da seguinte forma:
+         
+            sum(n) = n + sum(n - 1)
+            sum(n - 1) = n - 1 + sum(n - 2)
+            ...
+            sum(1) = n
+
+         * O seguinte ilustra a sum() função recursiva:
+        */
+
+        //declara uma function regular chamada sum, com o paramentro declarado chamado n, a function e uma instancia de objeto do tipo function
+        function sum(n) {
+            //condição de parada, para as chamadas recursivas da propria function
+            if(n <= 1) {
+                //a function sum, retorna o valor de n so se n for meno ou igual a 1
+                return n;
+            }
+
+            // a function ira retorna a soma de n + a chamada recursiva de si mesma passando o argumento n - 1,
+            //a function sum retorna um valor a cada chamada assim, ha sempre essa soma sendo realizada
+            return n + sum(n - 1);
+        }
+
+        console.log(sum(2));
+
+        /**
+         * * RESUMO
+         * 
+         * Uma função recursiva é uma função que chama a si mesma até que não
+         * 
+         * Uma função recursiva sempre tem uma condição que impede a função de chamar a si mesma.
+        */
+    </script>
+</body>
+</html>

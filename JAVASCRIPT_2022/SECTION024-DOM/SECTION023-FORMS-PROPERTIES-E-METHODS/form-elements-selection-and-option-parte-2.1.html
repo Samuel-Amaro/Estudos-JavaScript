@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        - elemento de formulario select, o atributo multiple permite selecionar varios elementos
+    -->
+    <select id="select" multiple>
+        <!--
+            - os options subelementos do form, o select tera varios elementos selecionados ao mesmo tempo
+        -->
+        <option value="blues" selected>Blues</option>
+        <option value="rock" selected>Rock</option>
+        <option value="classic">Classic</option>
+    </select>
+
+    <script>
+        /**
+         * Ao contrário da maioria dos outros controles, <select> permite selecionar várias opções de uma só vez se tiver multiple atributo. Este atributo raramente é usado, no entanto.
+         * 
+         * Para vários valores selecionados, use a primeira maneira de definir valores: adicionar/remover a selected propriedade dos <option> subelementos.
+         * 
+         * Aqui está um exemplo de como obter valores selecionados de uma seleção múltipla:
+        */
+
+        //obter todos os valores selecionados da seleção múltipla
+        //para obter todos os valores selecionados no select elemento
+        //criamos um novo array a partir da collection options subelementos do select que comtem todos os options subelementos
+        //filtramos o novo array para somente os subelementos options selecionados
+        //e mapeamos um novo array para somente subelementos options que possui valor especificado
+        let allSelected = Array.from(select.options)
+                            .filter(option => option.selected)
+                            .map(option => option.value);
+
+        console.log(allSelected); //blues, rock
+    </script>
+</body>
+</html>

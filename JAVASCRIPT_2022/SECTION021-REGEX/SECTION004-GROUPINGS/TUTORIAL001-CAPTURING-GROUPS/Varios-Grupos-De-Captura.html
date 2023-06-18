@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * VARIOS GRUPOS DE CAPTURA
+         * 
+         * Para capturar o recurso (posts) e o id (10) do caminho (post/10), você usa vários grupos de captura na expressão regular da seguinte maneira:
+         
+            /(\w+)\/(\d+)/
+
+         *
+         * A regex tem dois grupos de captura, um para \w+ e outro para \d+.
+         * 
+         * O script a seguir mostra a correspondência inteira e todos os subgrupos:
+        */
+       
+        //declara uma string literal para pesquisa
+        const path = 'posts/10';
+        //criando uma expressão regular que o seu padrão possui o seguinte significado:
+        //possui dois grupos de captura
+        //o padrão inicia como, o primeiro grupo de captura, que possui como regra captura um ou mais caracteres de palavra,
+        //seguido por um barra,
+        //o segundo grupo que tem como regra captura um ou mais digitos
+        //cada parenteses cria um grupo de captura para uma regra
+        //usamos os quantificadores gananciosos de abreviação como o + -> {n,} que combina varias vezes o seu caractere anterior.
+        //e usamos a (\) contra barra para escapar a barra(/)
+        let pattern = /(\w+)\/(\d+)/;
+        //usando o método String.match(regexp) para retornar todas as correspondecias do regexp na string
+        //se definirmos a flag g(global) na expressão regular o String.metch(regexp) método não retorna os grupos
+        //o método retorna uma array com as correspondecias, primeiro elemento são as correspondecias inteiras, depois os valores dos grupos de captura, definidos
+        const match = path.match(pattern);
+        console.log(match);
+
+        /**
+         * Para acessar o primeiro e o segundo subgrupos, você usa match[1] e match[2]. Observe que o match[0] retorna a correspondência inteira. Por exemplo:
+        */
+
+        //para acessar os valores dos grupos de captura de forma individual, acessamos os elementos do array retornado pelo metodo match
+        //match[0] -> correspondecia inteira
+        //match[1] -> valor do primeiro grupo de captura
+        //match[2] -> valor do segundo grupo de captura
+        console.log(match[0], match[1], match[2]);
+    </script>
+</body>
+</html>
+
+
+

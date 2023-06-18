@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - marque o div para mostrar "nome" aqui.
+        - adicionamos um atributo html não padrão personalizado com o nome show-info com o valor name
+        - esse atributo não padrão personalizado e para marcar o elemento html para o javascript
+    -->
+    <div show-info="name"></div>
+    <!--é idade aqui-->
+    <div show-info="age"></div>
+
+    <script type="text/javascript">
+        /**
+         * * ATRIBUTOS NÃO PADRÃO, CONJUNTO DE DADOS
+         * 
+         * Ao escrever HTML, usamos muitos atributos padrão. Mas e os personalizados não padronizados? Primeiro, vamos ver se eles são úteis ou não? Pelo que?
+         * 
+         * Às vezes, atributos não padrão são usados ​​para passar dados personalizados de HTML para JavaScript ou para “marcar” elementos HTML para JavaScript.
+         * 
+         * Assim
+        */
+
+        //o código encontra um elemento com a marca e mostra o que é pedido
+        //declara uma objeto anonimo que e atribuido por referencia a variavel user
+        let user = {
+            name: "Pete",
+            age: 25
+        };
+
+        //seleciona todos os elementos html que possui o atributo não padrão show-info
+        for(let div of document.querySelectorAll('[show-info]')) {
+            //insira as informações correspondentes no campo
+            //obtem o valor do atributo html não padrão show-info do no dom div
+            let field = div.getAttribute('show-info');
+            //inseri novo conteudo html dentro do no dom div, substitui o conteudo html antigo por esse abaixo
+            //ira escrever user[properti]
+            div.innerHTML = user[field]; //primeiro Pete em "nome", depois 25 em "idade"
+        }
+
+        /**
+         *  Também podem ser usados ​​para estilizar um elemento.
+         * 
+         * Por exemplo, aqui para o estado do pedido, o atributo order-state é usado:
+        */
+</script>
+
+</body>
+</html>

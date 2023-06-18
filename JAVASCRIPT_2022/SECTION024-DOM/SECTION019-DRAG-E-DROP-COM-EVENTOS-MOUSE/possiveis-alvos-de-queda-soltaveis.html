@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 0;
+        }
+
+        #gate {
+            cursor: pointer;
+            margin-bottom: 100px;
+            width: 83px;
+            height: 46px;
+        }
+
+        #ball {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--define um manipulador de evento por meio do atributo html. define um manipulador para quando o ponteiro do mouse estiver sobre o elem-->
+    <!--<div style="background: blue;" onmouseover="alert('never works')"></div>
+    <div style="background: red;" onmouseover="alert('over red!')"></div>
+    -->
+
+    <p>Arraste a bola</p>
+
+    <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable"/>
+
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"/>
+
+    <script type="text/javascript">
+
+      /**
+       * * POSSÍVEIS ALVOS DE QUEDA(SOLTÁVEIS)
+       * 
+       * Nos exemplos anteriores, a bola poderia ser largada apenas “em qualquer lugar” para ficar. Na vida real, geralmente pegamos um elemento e o colocamos em outro. Por exemplo, um “arquivo” em uma “pasta” ou outra coisa.
+       * 
+       * Falando em abstrato, pegamos um elemento “arrastável-draggable” e o soltamos no elemento “soltável-droppable”.
+       * 
+       * Nós precisamos saber:
+        
+            - onde o elemento foi solto no final de Drag'n'Drop(arrastar) - para fazer a ação correspondente.
+
+            - e, de preferência, conheça o droppable(soltavel) que estamos arrastando, para destacá-lo.
+
+        * A solução é meio interessante e um pouco complicada, então vamos cobri-la aqui.
+        * 
+        * Qual pode ser a primeira ideia? Provavelmente para definir mouseover/mouseup manipuladores em possíveis droppables?
+        * 
+        * Mas isso não funciona.
+        * 
+        * O problema é que, enquanto estamos arrastando, o elemento arrastável está sempre acima de outros elementos. E os eventos do mouse acontecem apenas no elemento superior, não nos abaixo dele.
+        * 
+        * Por exemplo, abaixo estão dois <div> elementos, um vermelho em cima do azul (totalmente cobre). Não há como pegar um evento no azul, porque o vermelho está em cima:
+        * 
+        * O mesmo com um elemento arrastável. A bola está sempre em cima sobre outros elementos, então os eventos acontecem nela. Quaisquer que sejam os manipuladores que definirmos em elementos inferiores, eles não funcionarão.
+        * 
+        * É por isso que a ideia inicial de colocar handlers em droppables em potencial não funciona na prática. Eles não vão executar.
+        * 
+        * Então o que fazer?
+        * 
+        * Existe um método chamado document.elementFromPoint(clientX, clientY). Ele retorna o elemento mais aninhado em determinadas coordenadas relativas à janela (ou null se determinadas coordenadas estiverem fora da janela). Se houver vários elementos sobrepostos nas mesmas coordenadas, o mais alto será retornado.
+        * 
+        * Podemos usá-lo em qualquer um dos nossos manipuladores de eventos do mouse para detectar o potencial droppable(soltavel) sob o ponteiro, assim:
+        
+            // in a mouse event handler
+            ball.hidden = true; // (*) hide the element that we drag
+
+            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            // elemBelow is the element below the ball, may be droppable
+
+            ball.hidden = false;
+
+         * Atenção: precisamos esconder a bola antes da chamada (*). Caso contrário, geralmente teremos uma bola nessas coordenadas, pois é o elemento superior sob o ponteiro: elemBelow=ball. Então nós o escondemos e imediatamente mostramos novamente.
+         * 
+         * Podemos usar esse código para verificar qual elemento estamos “sobrevoando” a qualquer momento. E lidar com a queda quando isso acontecer.
+         * 
+         * Um código estendido de onMouseMove para encontrar elementos “soltáveis”:
+        */
+
+        //potencial droppable(arastavel-drop) que estamos sobrevoando agora
+        let currentDroppable = null;
+
+        //atribui uma function manipuladora de evento de mouse
+        //atribui uma function manipuladora para o evento de button do mouse pressionado sobre o elem
+        ball.onmousedown = function(event) {
+            //cordenada do evento do mouse onde clicou em relação a janela menos a cordena do elemento em relação a janela
+            //o ponteiro do mouse vai ficar exatamento onde clicou, espaço da cordenada do clique em relação a janela menos espaço do elemento em relação a janela, resultado e o lugar exato do clique
+            //cordenadas do clique em relação a bola, mostra onde exatamento o clique foi feito dentro da ball
+            let shiftX = event.clientX - ball.getBoundingClientRect().left;
+            let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+            //(1) prepare-se para mover: faça absoluto e no topo por z-index
+            ball.style.position = 'absolute';
+            ball.style.zIndex = 1000;
+            document.body.append(ball);
+
+            //move a bola seguindo a movimentação do mouse
+            //as coordenasa passadas para a function são cordenadas do evento do mouse, a cada movimentação do mouse enviar as cordenas do mouse em relação ao documento
+            moveAt(event.pageX, event.pageY);
+
+            //
+            function moveAt(pageX, pageY) {
+                //posiciona a bola
+                //cordenada de evento do mouse onde o mouse se moveu pela ultima vez dentro do documento em relação ao documento menos cordenadas exatas do clique do mouse dentro de ball, posiciona a bola exatamento onde o cursor do mouse se movimenta em relação a elem
+                //a subtração e necessaria para que o mouse fique exatamente onde foi clicado, para que bola se posicione examente onde o mouse se mover. se não fica um espaço enxtra entre o mouse e bola.
+                ball.style.left = pageX - shiftX + 'px';
+                ball.style.top = pageY - shiftY + 'px';
+            }
+
+            //function manipulador de evento
+            //manipula evento de movimentação do mouse sobre um elem
+            function onMouseMove(event) {
+                //a cada movimentação do mouse move a bola junto, passando a cordenada do mouse, a cada movimentação, passa a cordenada da ultima movimentação do mouse em relação ao documento
+                moveAt(event.pageX, event.pageY);
+                //oculta bola
+                ball.hidden = true;
+                //A chamada para document.elementFromPoint(x, y) retorna o elemento mais aninhado nas coordenadas da janela(WINDOW) (x, y).
+                //retorna o elemento mais aninhado a partir das coordenadas forncecidas, as cordenas fornecidas são onde o mouse se movimentou pela ultima vez, ultima movimentação do mouse, a cada movimentação verifica se possui um elem aninhado
+                let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                //mostra bola
+                ball.hidden = false;
+
+                //se não possui um elemn mais anihado onde o mouse se movimentou sai da function 
+                if (!elemBelow) return;
+
+                //obtem o elemento ancestral .droppable mais proximo de elemBelow se possuir o elemento aninhado nas cordenas onde o mouse se movimentou 
+                //so obtem o elemento droppable se ele for um ancestral, o elem atual tem que ser descendente
+                let droppableBelow = elemBelow.closest('.droppable');
+                // estamos entrando ou saindo...
+                // nota: ambos os valores podem ser nulos
+                // currentDroppable=null se não estivéssemos sobre um droppable antes deste evento (por exemplo, sobre um espaço vazio)
+                // droppableBelow=null se não tivermos superado um droppable agora, durante este evento
+                //se o elemento atual que o mouse esta agora a partir das cordenasa fornceidas for diferente do elemento aninhado nas cordenadas
+                if (currentDroppable != droppableBelow) {
+                    console.log(currentDroppable);
+                    console.log(droppableBelow);
+                    console.log('entrou');
+                    //na primeira execução do evento mousemove não estavamos sobre o arrastavel
+                    //se for null nem entra
+                    //quando saio do elemento arrastavel ele fica armazenado como o ultimo arrastavel e saimos dele.
+                    if (currentDroppable) { // null quando não estávamos sobre um droppable antes deste evento
+                        //sai do arrastavel
+                        // a lógica para processar "voando para fora" do droppable (remover destaque)
+                        leaveDroppable(currentDroppable);
+                    }
+                    
+                    //atualiza o ultimo elemento arastavel, atualiza para o elemento arrastavel atual o elemento em que o usuario drop
+                    currentDroppable = droppableBelow;
+
+                    //se existir o elemento arrastavel atual
+                    if (currentDroppable) { 
+                        // null se não estamos chegando a um droppable agora
+                        // (talvez tenha deixado o droppable)
+                        //entra no elemento arrastavel e o destaca
+                        // a lógica para processar "voando" do droppable
+                        enterDroppable(currentDroppable);
+                    }
+                }
+            }
+
+            //atribui um manipulador de evento para o evento de movimentação do mouse, a cada movimento o manipulador e acionado
+            document.addEventListener('mousemove', onMouseMove);
+
+            //atribui um manipulador de evento na bola
+            //atribui um manipulador para o evento de quando o usuario libera o botão do mouse pressionado sobre a ball
+            ball.onmouseup = function() {
+                document.removeEventListener('mousemove', onMouseMove);
+                ball.onmouseup = null;
+            };
+
+        };
+
+        function enterDroppable(elem) {
+            elem.style.background = 'pink';
+        }
+
+        function leaveDroppable(elem) {
+            elem.style.background = '';
+        }
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        ball.ondragstart = function(event) {
+            //fornecer um return false para uma function manipulador de evento e uma execeção para informar o navegador que queremos impedir a ação padrão do navegador neste evento
+            return false;
+        };
+
+        /**
+         * No exemplo abaixo, quando a bola é arrastada sobre o gol de futebol, o gol é destacado.
+         * 
+         * Agora temos o “drop target” atual, sobre o qual estamos sobrevoando, na variável currentDroppabledurante todo o processo e podemos usá-lo para destacar ou qualquer outra coisa.
+         */
+        
+    </script>
+</body>
+</html>

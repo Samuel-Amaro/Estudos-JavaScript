@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT REGEX: CAPTURING GROUPS(CAPTURANDO GRUPOS)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre grupos de captura de regex JavaScript e como usá-los para criar subgrupos para uma correspondência.
+         * 
+         * * INTRODUCAO AOS GRUPOS DE CAPTURA DE REGEX JS
+         * 
+         * Suponha que você tenha o seguinte caminho:
+         
+            resource/10
+
+         * 
+         * Por exemplo:
+         
+            posts/10
+
+         * 
+         * No caminho, o recurso é posts e o id é 10. Para corresponder ao caminho, use a seguinte expressão regular:
+         
+            /\w+\/\d+/
+
+         * 
+         * Neste padrão:
+         
+            - \w+ é um conjunto de caracteres de palavra com um quantificador (+) que corresponde a um ou mais caracteres de palavra.
+
+            - /corresponde à barra ( /). A barra invertida ( \) escapa da barra,
+
+            - \d+ é a combinação do conjunto de caracteres de dígitos e um quantificador ( +), que corresponde a um ou mais dígitos.
+
+         * 
+         * O seguinte usa o padrão de expressão regular /\w+\/\d+/ para corresponder à string ' posts/10':
+        */
+
+        //declara uma string literal para pesquisa
+        const path = 'posts/10';
+        //criando uma expressão regular que o seu padrão possui o seguinte significado:
+        //corresponda a uma ou mais vezes a  caracteres de palavras, seguido por uma barra, (/) escapada por (\), e corresponda a um ou mais digitos
+        //a expressão regular usa os quantificadores de abreviação + -> {n,} que e um quantificador ganancioso, realiza muitas combinações com o seu caractere predecessor, e utiliza a contra barra para (\) para escape da barra
+        let pattern = /\w+\/\d+/;
+        //usando o método String.match(regexp) para retornar todas as correspondecias do regexp na string
+        const match = path.match(pattern);
+        console.log(match);
+        
+        /**
+         * Para obter o id 10 do caminho posts/10, você usa um grupo de captura. Para criar um grupo de captura para uma regra, coloque essa regra entre parênteses assim:
+         
+            (regra) -> cria um grupo de captura para uma regra, a regra esta entre parenteses
+
+         *
+         * O exemplo a seguir cria um grupo de captura que captura o id valor do caminho posts/10:
+         
+            '\w+/(\d+)'
+
+         *
+         * Nesse padrão, colocamos a regra \d+ entre parênteses (). Se você executar o programa com o novo padrão, verá que ele exibe uma correspondência:
+        */
+        
+        //criando uma nova expressão regular que o seu padrão possui o seguinte significado:
+        //corresponda a uma ou mais vezes a  caracteres de palavras, seguido por uma barra, (/) escapada por (\), e corresponda a uma regra entre parenteses, que captura um ou mais digitos.
+        //criamos um grupo de captura para uma regra, um grupo que captura um ou mais digitos, a regra esta especificado dentro dos parenteeses(regra), aqui a regra e correpsonder a um ou mais digitos(\d+).
+        //a expressão regular usa os quantificadores de abreviação + -> {n,} que e um quantificador ganancioso, realiza muitas combinações com o seu caractere predecessor, e utiliza a contra barra para (\) para escape da barra
+        const pattern2 = /\w+\/(\d+)/;
+        //usando o método String.match(regexp) para retornar todas as correspondecias do regexp na string, retorna uma array de correspondecias, o primeiro elemento e a correspondecia inteira, enquanto o segundo e o valor do grupo de captura
+        //não podemos usar a flag g(global) para o método match porque ele não retornara grupos
+        const match2 = path.match(pattern2);
+        console.log(match2);
+        
+        /**
+         * O método match() retorna uma matriz de correspondências. O primeiro elemento é a correspondência inteira ( 'posts/10') enquanto o segundo ( '10') é o valor do grupo de captura.
+         * 
+         * Observe que o String.match() método não retornará grupos se você definir o g sinalizador, por exemplo, /\w+\/(\d+)/g. Se você usar o g sinalizador, precisará usar o String.matchAll()método para obter os grupos.
+        */
+       
+    </script>
+</body>
+</html>
+
+
+

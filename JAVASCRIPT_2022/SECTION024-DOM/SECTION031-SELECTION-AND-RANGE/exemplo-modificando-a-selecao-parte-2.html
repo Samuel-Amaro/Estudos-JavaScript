@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <label for="one">Substitua ISTO no texto</label>
+    <input id="input" type="text" style="width: 200px;" value="Substitua ISTO no texto"/>
+    <br/>
+    <button id="button">Substituir ISTO</button>
+
+    <script type="text/javascript">
+        /**
+         * Com mais argumentos, podemos definir range start e end.
+         * 
+         * Neste exemplo encontramos "THIS" no texto de entrada, substituí-lo e manter a substituição selecionada:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        button.onclick = () => {
+            //obtem o indice da primeira ocorrecia do text "THIS" no conteudo do input
+            //a posição indexada onde a ocorrencia de "THIS" se inicia
+            let pos = input.value.indexOf("ISTO");
+
+            if(pos >= 0) {
+                //substitui o intervalo de texto pelo novo texto passado por argumento
+                //substitui o intervalo de texto da seleção realizada. por novo texto passado por argumento "*THIS*"
+                //o intervalo a ser subtituido inicia na posição pos e termina em pos + 4
+                //o select argumento define que o texto recem inserido sera selecionado
+                //assim susbtituimos o texto selecionado no intervalo começando em pos e termina em pos + 4 assim que substituir selecionar o texto recem inserido
+                input.setRangeText(`*ISTO*`, pos, pos + 4, "select");
+                //atribui o foco ao elemento input apos substituição do intervalo
+                input.focus();
+            }
+        };
+
+    </script>
+</body>
+</html>

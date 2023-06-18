@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DO MÉTODO JAVASCRIPT REGEX replace()
+         * 
+         * Vamos dar alguns exemplos de uso do replace() método.
+         * 
+         * * 3) USANDO O MÉTODO JS REGEX replace() com grupos de captura
+         * 
+         * Quando uma expressão regular contém os grupos de captura , você pode fazer referência a esses grupos newSubstr usando a $N sintaxe em que N é o número do agrupamento. Por exemplo, $1 e $2 fazem referência ao primeiro e segundo grupos de captura.
+         * 
+         * O exemplo a seguir ilustra como usar o replace() método com grupos de captura para trocar o nome e o sobrenome em um nome de pessoa:
+        */
+
+        //declara uma expressão regular que possui o seguinte padrão, um grupo de captura que possui como regra um padrão que corresponda a um ou varios caracteres de palavras, continuando o padrão, um caractere de espaço, outro grupo de captura que correponda a um ou varios caracteres de palavra
+        //padrão: um ou mais caracteres de palavra, espaço, um ou mais caracteres de palvra
+        let re = /(\w+)\s(\w+)/;
+        //declara string literal a ser usada na pesquisa
+        let name = 'Jane Doe';
+        //usando o método String.replace(regexp, newSubstr) para substituir todas as ocorrencias do regexp na str por newSubstr, o metodo ira susbstituir todas ocorrencias de str que combinam com o padrão por newSubstr.
+        //aqui iremos trocar as corresponcias, troca a ordem, a sintaxe $N referencia o nuumero do grupo de captura, na expressão regular o N e o numero do grupo de captura
+        //aqui iremos susbtituir as corresponcia por
+        //$2, $1, $2 corresponde ao grupo de captura dois, $1 corresponde ao grupo de captura um, o $2 corresponde as correspondecias do grupo de captura dois, $1 corresponde as correspondencias do grupo de captura dois
+        //assim trocamos a ordem das correspondecias, as correspndecias dos grupos de captura os valores capturados serão susbtituidos pela newSubstr, a correepondecia interira e substituida não os grupos de captura
+        //o metodo retorna uma nova string com as ocorrencias substituidas
+        const lastFirst= name.replace(re, '$2, $1');
+        console.log(lastFirst);
+
+        /**
+         * Como funciona.
+         * 
+         * A expressão regular /(\w+)\s(\w+)/corresponde a um ou mais caracteres de palavra, um espaço e, em seguida, um ou mais caracteres de palavra. Em outras palavras, ele corresponde a qualquer string que tenha uma palavra, espaço e outra palavra.
+         * 
+         * A expressão regular contém dois grupos de captura. O primeiro grupo de captura captura a primeira palavra e o segundo captura a segunda palavra após o espaço.
+         * 
+         * No newSubstr, usamos $1 para referenciar o primeiro grupo de captura e $2referenciar o segundo. Para trocar o nome e o sobrenome, colocamos a segunda correspondência ( $2) primeiro e depois a primeira correspondência ( $1).
+        */
+    </script>
+
+</body>
+</html>

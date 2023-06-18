@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * MAIS EXEMPLOS DE PARÂMETROS PADRÃO JS
+         * 
+         * Vejamos mais alguns exemplos para aprender algumas opções disponíveis para definir os valores padrão dos parâmetros da função.
+         * 
+         * * 1) PASSANDO ARGUMENTOS INDEFINIDOS
+         * 
+         * A createDiv() função a seguir cria um novo <div> elemento no documento com uma altura, largura e estilo de borda específicos:
+        */
+
+        //declara uma function regular chamada createDiv, com 3 paramentros que possuem valores padrões definidos, os paramentros possum valores padrãoes definidos
+        function createDiv(height = '100px', width = '100px', border = 'solid 1px red') {
+            let div = document.createElement('div');
+            div.style.height = height;
+            div.style.width = width;
+            div.style.border = border;
+            document.body.appendChild(div);
+            return div;
+        }
+
+        /**
+         * O seguinte não passa nenhum argumento para a função, portanto, a createDiv() função usa os valores padrão para os parâmetros. 
+        */
+
+        //chama - invoca a function sem fornecer nenhum argumento para os paramentros, assim a function ira usar os valores padrões dos paramentros
+        createDiv();
+
+        /**
+         * Suponha que você queira usar os valores padrão para os parâmetros de altura e largura e o estilo de borda específico. Nesse caso, você precisa passar undefined valores para os dois primeiros parâmetros da seguinte maneira:
+        */
+
+        //invoca chama a function createDiv, passando três argumentos para a function, os dois primeiros argumentos passados são os valores undefined por causa que queremos que a function use os valores padrões dos paramentros, e o terceiro argumento e uma string literal para o paramentro border, mapeando o paramentro para um novo valor
+        //passar undefined como argumento e o mesmo que não estar passando nenhum argumento para os parametros, como os paramentros ja possuem valor padrão eles não ficam sem inicializar e automaticamente a function usa os valores padrões
+        createDiv(undefined, undefined, 'solid 5px blue');
+
+
+
+    </script>
+</body>
+</html>

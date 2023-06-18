@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Piscando</h1>
+
+    <div id="div">Button</div>
+
+    <script type="text/javascript">
+       
+       /**
+        * * REDEFININDO A PROPRIEDADE DE STYLE
+        * 
+        *  Às vezes, queremos atribuir uma propriedade de estilo e depois removê-la.
+        * 
+        * Por exemplo, para ocultar um elemento, podemos definir elem.style.display = "none".
+        * 
+        * Então, mais tarde, podemos querer remover o style.display como se não estivesse definido. Em vez de delete elem.style.display devemos atribuir uma string vazia a ele: elem.style.display = "".
+        * 
+        */
+
+        //se executarmos este código, o <body> piscará
+        //usando a propriedade elem.style para atribur uma propriedade de estilo ao elemento
+        //lembrando style retorna um objeto a partir dele podemos acessar propriedade que correspondem ao que esta escrito em style atributo no elemento
+        //atribuindo propriedade de estilo
+        document.body.style.display = "none"; //oculto
+
+        //ao passar 1s executa a callback
+        //removendo propriedade de estilo com callback
+        setTimeout(() => document.body.style.display = "", 1000); //volta para normal
+            
+        /**
+         * Se definirmos style.display uma string vazia, o navegador aplicará as classes CSS e seus estilos internos normalmente, como se não existisse tal style.display propriedade.
+         * 
+         * * REESCRITA COMPLETA COM style.cssText
+         * 
+         * Normalmente, usamos style.* para atribuir propriedades de estilo individuais. Não podemos definir o estilo completo como div.style="color: red; width: 100px", porque div.style é um objeto e é somente leitura.
+         * 
+         * Para definir o estilo completo como uma string, há uma propriedade especial style.cssText:
+        */
+
+        div.style.cssText = `
+            color: red !important; 
+            background-color: yellow;
+            width: 100px;
+            text-align: center; 
+        `;
+
+        console.log(div.style.cssText);
+
+        /**
+         * Esta propriedade raramente é usada, pois tal atribuição remove todos os estilos existentes: ela não os adiciona, mas os substitui. Pode ocasionalmente excluir algo necessário. Mas podemos usá-lo com segurança para novos elementos, quando sabemos que não excluiremos um estilo existente.
+         * 
+         * O mesmo pode ser feito definindo um atributo: div.setAttribute('style', 'color: red...').
+        */
+    </script>
+</body>
+</html>

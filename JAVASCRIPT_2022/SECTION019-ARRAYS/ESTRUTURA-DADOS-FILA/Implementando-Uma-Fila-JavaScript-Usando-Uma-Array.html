@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila JS - usando arrays</title>
+</head>
+<body>
+    <header>
+        <h2>Implementando uma fila JavaScript usando uma array</h2>
+    </header>
+
+    <script>
+        /**
+         * * IMPLEMENTANDO UMA FILA JAVASCRIPT USANDO UMA ARRAY
+         * 
+         * Você pode usar uma matriz(array) como uma fila usando dois métodos do tipo Array:
+         * 
+         * Adicione um elemento no final da array usando o push() método. Este método é equivalente à operação de enfileiramento.
+         * 
+         * Remova um elemento da frente de uma array usando o  shift() método. É o mesmo que a operação de desenfileiramento.
+         * 
+         * Vamos implementar uma estrutura de dados de fila JavaScript usando um array.
+         * 
+         * O seguinte é o construtor da fila:
+         * */
+
+         //funçaõ contrutora de objeto, constroi um objeto do tipo fila
+         function Fila() {
+             this.elements = [];
+         }
+
+         /**
+          * A Queue() - fila função construtora usa uma matriz(Array) para armazenar seus elementos.
+          * 
+          * O enqueue() - enfileiramento -  método adiciona um elemento no final da fila. Usamos o push() método do objeto array para inserir o novo elemento no final da fila.
+          * */
+
+          //add uma propriedade em um objeto existente
+          Fila.prototype.enfileiramento = function(e) {
+             //add elemento no final da fila 
+             this.elements.push(e);
+          }
+
+          /**
+           * O dequeue() - desenfileiramento -  método remove um elemento da frente da fila. No dequeue() método, usamos o shift() método da matriz(Array) para remover um elemento da frente da fila.
+           * */
+
+          //add uma propriedade em um objeto existente 
+          //remove um elemento da frente da fila 
+          Fila.prototype.desenfileiramento = function() {
+              return this.elements.shift(); 
+          }
+
+          /**
+           * O isEmpty() método verifica se uma fila está vazia, verificando se a length propriedade da array é zero.
+           * */
+
+           //add uma propriedade em um objeto existente
+           //verifique se a fila está vazia
+           Fila.prototype.eVazia = function() {
+               //retorna bool : true se uma fila e vazia e false se não e vazia
+               return this.elements.length == 0;
+           }
+
+           /**
+            * O peek() método acessa o elemento na frente da fila sem modificá-lo.
+            * */
+
+           //pegue o elemento na frente da fila
+           Fila.prototype.espiar = function() {
+               //se a array não for vazia retorna o elemento com indice[0] se for vazia retorna undefined
+               return !this.eVazia() ? this.elements[0] : undefined;
+           } 
+           /**
+            * Para consultar o comprimento de uma fila, desenvolvemos o length() método:
+            * */
+
+           //add uma propriedade em um objeto existente
+           Fila.prototype.comprimento = function() {
+               return this.elements.length;
+           }
+
+           /**
+            * Para criar uma nova fila a partir da Queue()função do construtor, você usa a nova palavra-chave da seguinte maneira:
+            * */
+
+            //criando uma instancia de umo objeto do tipo Fila()
+            let q = new Fila();
+
+            /**
+             * Para enfileirar números de 1 a 7, use o código a seguir.
+             * */
+            for(let i = 1; i <= 7; i++) {
+                q.enfileiramento(i);
+            }
+
+            /**
+             * Para obter o número na frente da fila, você usa o peek() método.
+             * */
+            //primeiro elemento da fila
+            //pegue o item atual na frente da fila
+            console.log("Primeiro elemento da fila = " + q.espiar()); //1
+
+            /**
+             * Para obter o comprimento atual da fila, use o length() método como no exemplo a seguir.
+             * */
+
+            // obter o comprimento atual da fila
+            console.log("Length da Fila = " + q.comprimento());
+
+            /**
+             * Para remover o elemento da frente da fila, você usa o dequeue() método a seguir:
+             * */
+
+            //desenfileira todos os elementos, começando pelo primeiro elemento até chegat o ultimo
+            while(!q.eVazia()) {
+                console.log("Desenfileirou o elemento = " + q.desenfileiramento());    
+            }
+
+            /**
+             * Agora, você deve ter um bom entendimento da estrutura de dados da fila e saber como usar os métodos push() e shift() do tipo Array para implementar uma fila em JavaScript.
+             * */
+    </script>
+</body>
+</html>

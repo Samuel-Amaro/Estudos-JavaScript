@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilha And Memoria Heap</title>
+</head>
+<body>
+
+    <h2>Pilha De armazenamento de memoria</h2>
+
+    <p><b>Local de memoria:</b> Pilha de armazenamento de memoria para dados primitivos estaticos do JS</p>
+
+    <img src="imagens/JavaScript-stack-memory.svg" alt="imagen">
+
+    <p>Internamente, o mecanismo JavaScript aloca a memória conforme mostrado na figura a seguir:</p>
+
+    <img src="imagens/JavaScript-heap-memory.svg" alt="imagen">
+
+    <p>Nesta figura, JavaScript aloca memória na pilha para as três variáveis <b>name</b>, <b>age</b>, e <b>person</b></p>
+
+    <p>O mecanismo JavaScript cria um novo objeto na memória heap. Além disso, ele vincula a person variável na memória de pilha ao objeto na memória de heap.</p>
+
+    <p>Por isso, dizemos que a person variável é uma referência que se refere a um objeto.</p>
+
+    <script>
+        /**
+         * * PILHA AND MEMÓRIA HEAP
+         * 
+         *  Quando você declara variáveis , o mecanismo JavaScript aloca a memória para elas em dois locais de memória: pilha e heap.
+         * 
+         * Dados estáticos são os dados cujo tamanho é fixo em tempo de compilação. Os dados estáticos incluem:
+         
+            - Valores primitivos ( null , undefined , boolean , number , string , symbol e BigInt )
+
+            - Valores de referência que se referem a objetos.
+
+         * 
+         * Como os dados estáticos têm um tamanho que não muda, o mecanismo JavaScript aloca uma quantidade fixa de espaço de memória para os dados estáticos e os armazena na pilha.
+         * 
+         * Por exemplo, o seguinte declara duas variáveis ​​e inicializa seus valores para uma string literal e um número:
+        */
+
+        //como os dados das varaiveis são estaticos dados primitivos do JS que possum tamanho fixo o JS aloca quantidade fixa de espaço de memória para os dados estaticos e os armazena na pilha
+        //declara variavel name e a inicializa com uma string literal
+        let name = 'John';
+        //inicializa com o number literal
+        let age = 25;
+
+        /**
+         * Como namee age são valores primitivos, o mecanismo JavaScript armazena essas variáveis ​​na pilha, conforme mostrado na figura a seguir:
+         * 
+         * Observe que strings são objetos em muitas linguagens de programação, incluindo Java e C#. No entanto, strings são valores primitivos em JavaScript.
+         * 
+         * Ao contrário da pilha, o JavaScript armazena objetos (e funções) no heap. O mecanismo JavaScript não aloca uma quantidade fixa de memória para esses objetos. Em vez disso, ele alocará mais espaço conforme necessário.
+         * 
+         * O exemplo a seguir define as variáveis name, age e: person
+        */
+
+        //para objetos o javascript armazena objtos no heap pois objeto não possui tamanho fixo assim o armazena no heap com espçao de memoria conforme o necessario
+
+        //declara um objeto literal anonimo, e atribui esse objeto a variavel person, variavel person referencia o o objeto anonimo
+        let person = {
+            //declara propriedade usando sintaxe, chave valor
+            name : 'John',
+            age: 25
+        };
+    </script>
+</body>
+</html>

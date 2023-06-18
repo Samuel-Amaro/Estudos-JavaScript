@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <ul>
+        <li>The</li>
+        <li>test</li>
+    </ul>
+    <ul>
+        <li>has</li>
+        <li>passed</li>
+    </ul>
+
+    <script type="text/javascript">
+
+        /**
+         * * querySelectorAll
+         * 
+         *  De longe, o método mais versátil, elem.querySelectorAll(css) retorna todos os elementos dentro do elem que correspondem ao seletor CSS fornecido.
+         * 
+         * Aqui procuramos todos os <li> elementos que são os últimos filhos:
+         * */
+
+        //metodo elem.querySelectorAll(css) retorna todos os elementos dentro do document que correspondem ao seletor css fornecido
+        //aqui o seletor css fornecido e para obter todos os <li> elementos que são os ultimos filhos diretos de um <ul> elemento
+        let elements = document.querySelectorAll('ul > li:last-child');
+
+        //itera sobre os elementos obtidos
+        for(let elem of elements) {
+            console.log(elem.innerHTML); //"test", "passed"
+        }
+
+        /**
+         * Este método é realmente poderoso, porque qualquer seletor CSS pode ser usado.
+         * 
+         * * Pode usar pseudo-classes também
+         * 
+         * Pseudo-classes no seletor CSS como :hover e :active também são suportadas. Por exemplo, document.querySelectorAll(':hover') retornará a collection com elementos sobre os quais o ponteiro está agora (na ordem de aninhamento: do <html> mais externo para o mais aninhado).
+        */
+        
+    </script>
+</body>
+</html>

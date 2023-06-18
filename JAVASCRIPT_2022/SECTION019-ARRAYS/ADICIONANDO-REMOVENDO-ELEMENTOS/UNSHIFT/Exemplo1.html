@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DO MÉTODO JS ARRAY UNSHIFT()
+         * 
+         * Vamos dar alguns exemplos de uso do unshift() método.
+         * 
+         * * EXEMPLO 1) USANDO O MÉTODO JS ARRAY UNSHIFT() PARA ANEXAR UM ELEMENTO A UM ARRAY
+         * 
+         * O exemplo a seguir usa o unshift()método para adicionar o número 10 à numbers array:
+        */
+
+        //declara um array literal chamado numbers que foi inicializado com 2 elementos
+        const numbers = [30, 40];
+
+        //utilizando o metodo unshift da instancia de objeto do tipo array numbers, podemos adicionar um ou mais elementos ao inicio do array
+        //aqui adicionar um elemento com valor 20 no inicio do array numbers
+        //invoca o unshift metodo passando como argumento valor  ser adicionado no inicio do array, o metodo retorna o novo comprimento do array com o elemento adicionado
+        //o elemento e adicionado no indice 0 do array empurrando os elementos atuais para frente os reindexando um indice a mais do que era antes
+        const length = numbers.unshift(20);
+
+        //aqui mostra um objeto declrado com a sintaxe de extensão literal de objeto do ES6
+        //a lenght variavel e o nome da propriedade e valor da propriedade nessa sintaxe
+        console.log({length});
+        //mesma coisa
+        console.log({numbers});
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO 3) USANDO O MÉTODO ARRAY FINDINDEX() COM UM ARRAY DE OBJETOS
+         * 
+         * O exemplo a seguir usa o método Array findIndex() para encontrar o índice do primeiro produto cujo preço é maior que 1000:
+        */
+
+        //declara um array literal dense inicializado com 3 elementos, o array e atribuido por referencia a variavel products, asssim products referenci a o array literal
+        const products = [
+            //declara um objeto literal, usando a sintaxe de objeto literal
+            {
+                //declara propriedades do objeto literal usando, sintaxe chave : valor
+                name: 'Phone', 
+                price: 999
+            },
+            {
+                name: 'Computer',
+                price: 1999
+            },
+            {
+                name: 'Tablet',
+                price: 995
+            }
+        ];
+
+        //utilizando o metodo findIndex para encontrar o indice do primeiro produto que tenha o preco maior que 1000
+        //O findIndex() método retorna o índice do elemento que satisfaz uma função de teste ou -1 se nenhum elemento passou no teste.
+        //O testFn é uma função a ser executada em cada elemento do array até que a função retorne true, indicando que o elemento foi encontrado.
+        //metodo findIndex recebe como argumento uma callback function aqui no caso uma arrow function anonima que possui um paramentro declarado que vai ser cada elemento que o findIndex ira iterar do array e passar como argumento para a callback, a callback verifica se o elemento com a  propriedade price tem o valor maior que 1000, se sim retorna true para o findIndex e o findIndex retorna o indice do elemento
+        const index = products.findIndex(product => product.price > 1000);
+        console.log(index); // indice 1
+
+        /**
+         * Neste tutorial, você aprendeu como usar o findIndex() método JavaScript Array para encontrar o primeiro elemento que satisfaça um determinado teste.
+        */
+    </script>
+</body>
+</html>

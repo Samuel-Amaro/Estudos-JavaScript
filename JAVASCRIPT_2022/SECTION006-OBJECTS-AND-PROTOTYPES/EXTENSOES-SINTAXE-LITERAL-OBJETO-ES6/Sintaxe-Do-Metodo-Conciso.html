@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintaxe Metodo Consiso</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * * SINTAXE DO MÉTODO CONCISO
+         * 
+         * Antes do ES6, ao definir um método para um literal de objeto, você precisa especificar o nome e a definição completa da função, conforme mostrado no exemplo a seguir:
+         * 
+         * 
+        */
+
+        //declara um objeto anonimo literal, que e atribuido por referencia a variavel server, assim a variavel server referencia o objeto
+        let server = {
+            //declara propriedades usando a sintaxe chave : valor
+            name : "Server",
+            //declara um metodo para o objeto 
+            //declara uma function anonima sem paramentro que e atribuida por referencia a propriedade restart como um valor
+            //uma function e uma instancia de objeto do tipo funciton
+            restart: function() {
+                console.log("The" + this.name + " is restarting...");
+            }
+        };
+
+        /**
+         * O ES6 torna a sintaxe para tornar um método do objeto literal mais sucinto removendo os dois pontos (:) e a palavra- function chave.
+        */
+
+
+        //reescrevendo o objeto literal com a nova sintaxe do ES6 com a extensão de sintaxe literal de objeto
+        let server2 = {
+            name : "Server",
+            //usando a sintaxe do ES6 podemos rescrever o metodo restart do objeto sem utilizar a function palavra chave e sem utilizar os dois pontos
+            restart() {
+                console.log("The" + this.name + " is restarting...");
+            }
+        };
+
+        /**
+         * Essa sintaxe abreviada também é conhecida como sintaxe de método conciso . É válido ter espaços no nome da propriedade. Por exemplo:
+        */
+
+        let server3 = {
+            name : "Server",
+            //usando a sintaxe de metodo consiso do ES6 para defnier medotos on objeto literal sem a palavra cfunction e os :
+            restart() {
+                console.log("The" + this.name + " is restarting...");
+            },
+            //pode-se definir metodo também do objeto usando o espaço de nome na propriedade como uma string literal
+            'starting up'() {
+                console.log("The " + this.name + " is starting up!");
+            }
+        };
+
+        //invocando o metodo 'starting up' por meio da notaçaõ de colchete por causa que e uma propriedade que possui um espaço em branco no nome, e propriedades nomeadas dessa forma so podem ser acessadas assim, por meio da notação de colchetes
+        server3['starting up']();
+
+        /**
+         * Neste exemplo, o método 'starting up' tem espaços em seu nome. Para chamar o método, você usa a seguinte sintaxe:
+         
+            object_name['property name']();
+
+         * 
+         * Neste tutorial, você aprendeu como usar algumas novas extensões de sintaxe literal de objeto no ES6, incluindo abreviação do inicializador de propriedade, propriedades computadas e sintaxe de método concisa.
+         * 
+         * 
+        */
+    </script>
+</body>
+</html>

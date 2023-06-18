@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Functions</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTIONS
+         * 
+         * ES6 introduziu a  expressão de arrow function que fornece uma abreviação para declarar funções anônimas:
+         * 
+         * Por exemplo, esta função:
+         * */
+
+        //declara uma expressão de função regular anonima
+        //atribui a function anonima como um valor para a variavel show
+        //declara uma function anonima e não possui nenhum paramentro
+        let show = function() {
+            console.log('Anonymous function');
+        }; 
+
+        /**
+         * .. pode ser reduzido usando a seguinte arrow function:
+         * */
+
+        //cria uma expressão de arrow function anonima
+        //a arrow function ira atribuir a variavel
+        //declara uma arrow function que não possui nenhum paramentro, e possui uma expressão de valor no corpo da function
+        let showArrow = () => console.log('Anonymous functions');
+
+        /**
+         * Da mesma forma, a seguinte função anônima:
+         * */
+
+        //cria um expressão de function anonima regular
+        //declara um function anonima que possui dois paramentros e retorna a soma dos paramentros
+        //atribui a function a variavel 
+        let add = function(a, b) {
+            return a + b;
+        };
+
+        /**
+         * É equivalente à seguinte arrow function
+        * */
+        
+        //declara uma expressão de função anonima
+        //atribui a arrow function a variavel
+        //declara uma arrow function que possui dois paramentros e possui uma expressão aritimetica que resulta em um valor no corpo da arrow function
+        add = (a, b) => a + b;
+
+        /**
+         * arrow functions são funções sem nomes.
+         * 
+         * arrow functions podem ser usadas como um argumento para outras funções ou como uma execução de função imediatamente chamada.
+         * */
+    </script>
+</body>
+</html>

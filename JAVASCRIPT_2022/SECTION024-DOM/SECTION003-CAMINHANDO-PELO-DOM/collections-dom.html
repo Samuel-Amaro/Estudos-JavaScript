@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div>Begin</div>
+
+    <ul>
+        <li>
+            <b>Information</b>
+        </li>
+    </ul>
+
+    <div>End</div>
+
+    <script type="text/javascript">
+       
+      /**
+       * * COLLECTIONS DOM (COLEÇÕES DOM)
+       * 
+       * Como podemos ver, childNodes parece um array. Mas na verdade não é um array, mas sim uma coleção(collection) – um objeto iterável especial tipo array.
+       * 
+       * Há duas consequências importantes:
+       
+            1. Podemos usar for..of para iterar sobre ele:
+
+                for(let node of document.body.childNodes) {
+                    alert(node); //mostra todos os nós da coleção 
+                }
+
+            Isso porque é iterável (fornece a Symbol.iterator propriedade, conforme necessário).
+
+            2. Os métodos de array não funcionarão, porque não é uma array:
+
+                alert(document.body.childNodes.filter); // indefinido (não há método de filtro!)
+
+            A primeira coisa é legal. A segunda é tolerável, pois podemos usar Array.from para criar um array “real” da coleção, se quisermos métodos de array:
+
+                alert(Array.from(document.body.childNodes).filter); //function
+        
+        * As coleções DOM são somente leitura
+        *
+        * Coleções DOM e ainda mais – todas as propriedades de navegação listadas neste capítulo são somente leitura.
+        * 
+        * Não podemos substituir um filho por outra coisa atribuindo childNodes[i] = ....
+        * 
+        * Alterar o DOM precisa de outros métodos. Veremos eles no próximo capítulo.
+        * 
+        * As coleções do DOM estão ao vivo
+        * 
+        * Quase todas as coleções do DOM, com pequenas exceções, são ativas . Em outras palavras, eles refletem o estado atual do DOM.
+        * 
+        * Se mantivermos uma referência a elem.childNodes, e adicionarmos/removermos nós no DOM, eles aparecerão na coleção automaticamente.
+        * 
+        * Não use for..in para fazer loop sobre coleções
+        * 
+        * As coleções são iteráveis ​​usando for..of. Às vezes as pessoas tentam usar for..in para isso.
+        * 
+        * Por favor, não. O for..in loop itera sobre todas as propriedades enumeráveis. E as coleções têm algumas propriedades “extras” raramente usadas que geralmente não queremos obter:
+        */
+                
+        //acessa todos os elementos filhos diretos de body
+        //childNodes retorna collection um tipo de array iteravel
+        //se usarmos o for...in para iterar sobre a collection trara algumas propriedades exteras que não necessitamos
+        for(let prop in document.body.childNodes)
+            console.log(prop);
+    </script>
+
+</body>
+</html>

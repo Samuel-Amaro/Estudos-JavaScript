@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * PROPRIEDADSE DE SELECTION
+         * 
+         * Como dito, uma seleção pode, em teoria, conter vários intervalos(RANGE). Podemos obter esses objetos de intervalo usando o método:
+         * 
+            * getRangeAt(i)– obter o i-ésimo intervalo, a partir de 0. Em todos os navegadores, exceto Firefox, apenas 0 é usado.
+            * 
+         *  Além disso, existem propriedades que muitas vezes oferecem melhor conveniência.
+         * 
+         * Semelhante a um intervalo, um objeto de seleção tem um início, chamado de “âncora”(ANCHOR), e o fim, chamado de “foco”(FOCUS).
+         * 
+         * As principais propriedades de seleção são:
+         * 
+            *  anchorNode – o nó onde a seleção começa,
+            * 
+            * anchorOffset– o deslocamento em anchorNode que a seleção começa
+            * 
+            * focusNode – o nó onde a seleção termina,
+            * 
+            * focusOffset – o deslocamento em focusNode que a seleção termina,
+            * 
+            * isCollapsed– true se a seleção não selecionar nada (intervalo vazio) ou não existir.
+            * 
+            * rangeCount– contagem de intervalos na seleção, máximo 1 em todos os navegadores, exceto Firefox.
+            * 
+         * * SELECTION END/START VS RANGE
+         * 
+         *  Há uma diferença importante de uma âncora/foco de seleção em comparação com um Range início/fim.
+         * 
+         * Como sabemos, Range os objetos sempre têm seu início antes do fim.
+         * 
+         * Para seleções, isso nem sempre é o caso.
+         * 
+         * Selecionar algo com o mouse pode ser feito em ambas as direções: “da esquerda para a direita” ou “da direita para a esquerda”.
+         * 
+         * Em outras palavras, quando o botão do mouse é pressionado e, em seguida, ele avança no documento, seu final (foco) será após o início (âncora).
+         * 
+         * Por exemplo, se o usuário começa a selecionar com o mouse e passa de “Exemplo” para “itálico”:
+        */
+    </script>
+
+    <img src="./selection-direction-forward.svg" alt="image"/>
+
+    <script>
+        /**
+         * …Mas a mesma seleção pode ser feita para trás: começando de “itálico” para “Exemplo” (direção para trás), então seu final (foco) será antes do início (âncora):
+        */
+    </script>
+
+    <img src="./selection-direction-backward.svg" alt="image"/>
+</body>
+</html>

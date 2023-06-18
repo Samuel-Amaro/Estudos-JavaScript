@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        //inicializa variaveis atribuindo a cada uma por referencia um objeto literal anonimo com somente uma unica propriedade
+        let john = {name: 'John Doe'}, lily = {name: 'Lily Bush'}, peter = {name: 'Peter Drucker'};
+
+        /**
+         * * CONVERTER KEYS OU VALUES DE MAP EM UM ARRAY
+         * 
+         * Às vezes, você deseja trabalhar com um array em vez de um objeto iterável, neste caso, você pode usar o operador de propagação. [...]
+         * 
+         * O exemplo a seguir converte chaves para cada elemento em uma array de chaves:
+        */
+
+        //cria uma nova instancia de objeto do Tipo Map() invocando o construtor Map, atribui a instancia por referencia a variavel userRoles, a instancia do tipo Map criada, e inicializa com o argumento passado para o construtor Map, que recebe um array multidimensional literal dense anonimo, inicializado com 3 elementos, cada elemento e um novo array, inicializado com dois elementos
+        //O map construtor aceita um objeto iteravel opcional, cujos elementos são pares de chave valor 
+
+        let userRoles = new Map([
+            [john, 'admin'],
+            [lily, 'editor'],
+            [peter, 'subscriber']
+        ]);
+
+        //declara uma variavel chamada keys que e atribuida a ela um array literal dense anonimo
+        //usando o operador spread para descompactar o array retornado pelo método userRoles.keys(), o array retornado e um array que contém como elementos todas as chaves do map
+        //o operador spread ira descompactar o array e atribuilo individualemnte cada elemento ao novo array como um elemento
+        var keys = [...userRoles.keys()];
+        console.log(keys);
+
+        //E o seguinte converte os valores dos elementos em uma array
+        //aqui usando o método userRoles.entries() que retorna um array que contém elementos que são outro array do tipo [key, value], usando o operador spread [...] para descompactar cada elemento do array que e um array no novo array como um elemento do mesmo
+        let roles = [...userRoles.values()];
+        console.log(roles);
+
+        /**
+         * * EXCLUIR UM ELEMENTO POR CHAVE
+         * 
+         * Para excluir uma entrada no mapa, você usa o delete() método.
+        */
+
+        //usando o método userRoles.delete(key) para remover um elemento do map especificado pela chave, aqui neste caso queremos remover o elemento especificado pela chave john
+        userRoles.delete(john);
+
+        /**
+         * * EXCLUIR TODOS OS ELEMENTOS NO MAP
+         *
+         * Para excluir todas as entradas no Map objeto, você usa o clear() método:
+         *
+        */
+
+        //usando o método Map.clear() para remover todos os elementos do map objeto
+        //remove todos os elementos do map objeto
+        userRoles.clear();
+
+        //verificando se o map contém algum elemento apos a remoçaõ de todos, verificando seu comprimento tamanho
+        console.log(userRoles.size); //0
+
+        
+    </script>
+
+</body>
+</html>

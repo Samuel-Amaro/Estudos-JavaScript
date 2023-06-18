@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Includes() Arrays</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O ARRAY JS INLCUDE: VERIFICAR SE UM ELEMENTO ESTA NO ARRAY
+         * 
+         * Resumo : este tutorial apresenta o método JavaScript Array includes() que verifica se um elemento está em um array.
+         * 
+         * * INCLUDES() INTRODUÇÃO AO MÉTODO JS ARRAY
+         * 
+         * Ao trabalhar com um array , muitas vezes você quer verificar se o array contém um elemento. Para fazer isso, você usa o método indexOf() da seguinte forma:
+        */
+
+        //declara um array literal dense inicializado com 3 elementos, esse array e atribuido por referencia a variavel numbers, assim numbers variavel referencia o array
+        let numbers = [1, 2, 3];
+        //Este método o indexOf() retorna o índice da primeira ocorrência do elemento que você deseja encontrar, ou -1 se o elemento não for encontrado. 
+        //se o indice da primeiria ocorrencia do elemento 2 no array numbers for diferente de -1
+        if(numbers.indexOf(2) !== -1) {
+            //process here
+        }
+
+        /**
+         * O indexOf() método retorna o índice da primeira ocorrência do elemento na array. Se a array não incluir o elemento, o indexOf()retorno será -1.
+         * 
+         * Como você pode ver, o indexOf()método não indica claramente o que significa. Além disso, indexOf()usa o operador de igualdade estrita ( ===) para comparação, portanto, não funciona NaN conforme mostrado no exemplo a seguir:
+         
+            [NaN].indexOf(NaN); //-1
+
+         * 
+         * Neste exemplo, a array contém um elemento de NaN. No entanto, os indexOf(NaN) retornos -1.
+         * 
+         * Para contornar isso, os desenvolvedores criaram uma função auxiliar, por exemplo, que Lodash fornece o _.incudes() método que verifica se um valor está no array.
+         * 
+         * O ECMAScript 2016 padronizou essa funcionalidade fornecendo o Array.prototype.includes() método.
+         * 
+         * O includes() método retorna true se um array contiver um determinado elemento; Caso contrário, ele retorna false.
+         * 
+         * O seguinte ilustra a sintaxe do includes() método:
+         
+            array.includes(element, fromIndex);
+
+         * O includes() aceita dois argumentos:
+
+          - O primeiro argumento é o element que pode ser pesquisado.
+
+          - A fromIndex é a posição na array na qual a pesquisa começa.
+
+         * Veja o seguinte exemplo:
+        */
+
+        //declara um array literal dense inicializado com 3 elementos, chama o metodo includes para verificar se o elemento 2 esta contido no array, se sim retorna true
+        [1, 2, 3].includes(2); //true
+        [1, 2, 3].includes(4); //false
+        [1, 2, 3].includes(1, 1); //false, verificar se o array contem o elemento 1 mas procurar a partir do indice 1
+
+        /**
+         * Ao contrário do indexOf() método, o includes() método funciona perfeitamente bem com NaN:
+        */
+
+        [NaN].includes(NaN); //true
+
+        /**
+         * Observe que o includes() não faz distinção entre +0 e -0 conforme mostrado no exemplo a seguir:
+        */
+
+        [-0].includes(+0); //true
+
+        /**
+         * O exemplo a seguir demonstra como usar o includes() método para verificar se um objeto está em uma array.
+        */
+
+        //declara objetos literais a serem atribuidos por referencias a variaveis, as variaveis irão referenciar os objetos
+        let bmw = {name:'BMW'}, toyota = {name:'Toyota'}, ford = {name:'Ford'};
+
+        //declara um array literal dense inicializado com 2 elementos, o array e atribuido por referencia a variavel cars, assim cars referencia o array
+        let cars = [ford, toyota];
+
+        //usando o metodo inlcudes para verificar se o objeto que a varaivel ford referencia esta incluida no array cars
+        console.log(`cars inlcude ford = ${cars.includes(ford)}`); //true
+        console.log(`cars inlcude bmw = ${cars.includes(bmw)}`); //false
+
+        /**
+         * * NESTE EXEMPLO 
+         
+            - Primeiro, inicializamos o cars array com dois objetos: ford e toyota.
+
+            - Em seguida, usamos o includes() método para verificar se o cars array contém o   ford objeto, neste caso, ele retorna true
+
+            - Por fim, o bmw objeto não está no cars array, portanto, o includes() método retorna true conforme o esperado.
+
+         * 
+         * Neste tutorial, você aprendeu como usar o includes() método JavaScript Array para verificar se um elemento está em um array.
+        */
+       
+    </script>
+</body>
+</html>

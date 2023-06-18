@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturação de Objetos Aninhados</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DESESTRUTURAÇÃO DE OBJETOS ANINHADOS
+         * 
+         * Supondo que você tenha um employee objeto que tenha um name objeto como propriedade: 
+        */
+
+        //declara um objeto anonimo literal usando sintaxe literal, o objeto e atribuido por referencia a variavel employee, assim a variavel referencia o objeto
+        let employee = {
+            //propriedade do objeto usando sintaxe chave : valor
+            id : 1001,
+            //essa propriedade possui como valor um novo objeto literal que sera referenciado pela propriedade name
+            name: {
+                firstName: 'John',
+                lastName: 'Doe'
+            }
+        };
+
+        /**
+         * A instrução a seguir desestrutura as propriedades do name objeto aninhado em variáveis ​​individuais:
+        */
+
+        //desestruturando o objeto referenciado pela proprieade name do objeto employee
+        //tranasforma as propriedades do objeto em variaveis individuais
+        //aqui assumimos que as variaveis possue o mesmo nome das propriedades, assim omitimos o nome das propriedades
+        //propriedades a serem desestruturas ficam dentro das chaves, o name e a propriedade que referencia o ojbeto, e firstName, lastName, são variaveis que vai receber os valores das propriedadades
+        //let{name: {firstName, lastName}} = employee;
+
+        //console.log(firstName); //mostra o valor atribuido pela propriedade firstName
+        //console.log(lastName); //mesma coisa
+
+        /**
+         * É possível fazer várias atribuições de uma propriedade para várias variáveis:
+        */
+
+        //mesma coisa do exemplo de cima so que aqui também criamos uma varaivel chamada name que e o mesmo nome da propriedade name, assim a propriedade name e atribuida a vraivel name, lembrando que name referencia um objeto
+        let{name: {firstName, lastName}, name} = employee;
+
+        console.log(firstName); //mostra o valor atribuido pela propriedade firstName do objeto referenciado por name
+        console.log(lastName); //valor atribuido pela propriedade lastName do objeto referenciado por name
+        console.log(name); //mostra o valor da propriedade name
+    </script>
+</body>
+</html>

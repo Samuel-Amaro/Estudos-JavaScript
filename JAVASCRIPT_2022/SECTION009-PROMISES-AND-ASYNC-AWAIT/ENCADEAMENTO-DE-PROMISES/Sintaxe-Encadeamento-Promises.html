@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintaxe Encadeamento Promises</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * SINTAXE DE ENCADEAMENTO DE PROMISES
+         *
+         * Às vezes, você tem várias tarefas assíncronas que deseja executar em sequência. Além disso, você precisa passar o resultado da etapa anterior para a próxima. Nesse caso, você pode usar a seguinte sintaxe:
+
+            step1()
+                   .then(result => step2(resutl))
+                   .then(result => step3(result))
+                   ...
+
+         * 
+         * Se você precisar passar o resultado da tarefa anterior para a próxima sem passar o resultado, use esta sintaxe:
+
+            step1()
+                   .then(step2)
+                   .then(step3)
+                   ...
+
+         * 
+         * Suponha que você queira realizar as seguintes operações assíncronas em sequência:
+
+            - Primeiro, obtenha o usuário do banco de dados.
+
+            - Segundo, obtenha os serviços do usuário selecionado.
+
+            - Terceiro, calcule o custo do serviço dos serviços do usuário.
+
+         * 
+         * As funções a seguir ilustram as três operações assíncronas:
+        */
+
+        //usando promise para realizar 3 operações assincronas em sequencia usando o encadeamento de promises
+
+        //primeiro operação assincrona e obter o usuario do banco de dados
+        //define uma function chamada getUser que declara um paramentro chamado userId
+        function getUser(userId) {
+            //retorna uma instancia anonima de uma promise
+            return new Promise((resolve, reject) => {
+                //simula operação assincrona de obter um usuario por seuId em um banco de dados
+                console.log('Obter usuario do banco de dados');
+                //espera 1 segundo de atraso
+                setTimeout(() => {
+                    //resolve callback function muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um objeto literal anonimo
+                    resolve({
+                        userId: userId,
+                        username: 'admin'
+                    });
+                }, 1000);
+            });
+        }
+
+
+        //segunda operação assincrona e obter os serviços selecionados pelo usuario
+        //declara uma function chamada getServices que declara um paramentro chamado user
+        function getServices(user) {
+            //a function ira retorna uma instancia de um promise anonima
+            return new Promise((resolve, reject) => {
+                //simula a operação assincrona de obter os serviços selecinados por um usuario
+                console.log(`Get the services of ${user.username} from the API.`);
+                //espera 3 segundo de atraso para resolver promise
+                setTimeout(() => {
+                    //resolve callback function argumento do executor callbak, muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um array literal anonimo, inicializado com os serviços que o usuario solicitou, que sera o valor de resultado
+                    resolve(['Email', 'VPN', 'CDN']);
+                }, 3 * 1000);
+            });
+            
+        }
+
+        //terceira operação assicrona e calcula o custo dos serviços que o usuario selecionou
+        //declara uma function chamada getServiceCost que declara um paramentro chamado services
+        function getServicesCost(services) {
+            //a function ira retorna uma instancia de objeto anonima de uma promise
+            return new Promise((resolve, reject) => {
+                //simulação da operação assincrona de calcular o custo dos serviços escolhidos pelo usuario
+                console.log(`Calculate the service cost of ${services}.`);
+                //espera 2 segundos de atraso para resolver a promise
+                setTimeout(() => {
+                    //resolve callback function argumento do executor callbak, muda o estado da promise de pendente para cumprida com um valor
+                    //resolve a promise para um valor numerico que sera o valor de resultado para o then método
+                    resolve(services.length * 100);
+                }, 2 * 1000);
+            });
+        }
+
+        /**
+         * O seguinte usa as promessas para serializar as sequências:
+        */
+
+        //invocando o método then para obter os resultados da promises quando forem resolvidas, tiverem seu estado modificados de pendente para cumprida com valor
+        //a callbakc function argumento passado para os then métodos e executado assim que a promise e resolvida - mudar seu estado
+        //quando a primeira promise retornada por getUser for resolvida o método then executara o getServices para obter o resultado, quando a promise retornado por getServices for resolvida o getServicesCost mostra seu resultado, e quando o getServicesCost tiver sua promise resolvida o ultimo método then do encademento mostra o resultado da promise getServiceCost resolvida
+        getUser(100).then(getServices).then(getServicesCost).then(console.log);
+
+        /**
+         * Observe que o ES2017 introduziu o async/await que ajuda a escrever o código mais limpo do que usar a técnica de encadeamento de promessas.
+         * 
+         * Neste tutorial, você aprendeu sobre a cadeia de promessas que executa várias tarefas assíncronas em sequência.
+        */
+        
+    </script>
+
+</body>
+</html>

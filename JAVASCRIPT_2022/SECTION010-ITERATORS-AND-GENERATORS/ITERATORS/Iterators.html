@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterators</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ITERATORS(ITERADORES)
+         * 
+         * Como o ES6 fornece iteradores internos para os tipos de coleção  Array, Set e Map, você não precisa criar iteradores para esses objetos.
+         * 
+         * Se você tiver um tipo personalizado e quiser torná-lo iterável para poder usar a for...of construção de loop, precisará implementar os protocolos de iteração.
+         * 
+         * O código a seguir cria um Sequence objeto que retorna uma lista de números no intervalo de (start, end) com um interval entre os números subsequentes.
+        */
+
+        //definindo um tipo personalizado de class
+        //define um class chamada Sequence com uma palavra-chave class
+        class Sequence{
+            //construtor da class Sequence, define três paramentros com valores padrões
+            constructor(start = 0, end = Infinity, interval = 1) {
+                //define propriedades e as inicializa com os argumentos
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+            }
+            //define um método de instancia da classe
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformida com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            [Symbol.iterator]() {
+                let counter = 0;
+                let nextIndex = this.start;
+                //retorna uma instancia de objeto anonima literal, uma instancia de objeto que esteja em conformida com o protolo de iteração iterator
+                return {
+                    //define um método chamado next, sem paramentro
+                    next: () => {
+                        //verifica se ha mais elementos a serem iterados
+                        if(nextIndex <= this.end) {
+                            //define uma instancia de objeto anonima com duas propriedades value e done, value(o elemento atual),
+                            //done(um valor booleano que indica se há ou não mais elementos que podem ser iterados. - false, ha elementos para ser iterados, true não ha mais elementos)
+                            let result = {value: nextIndex, done: false};
+                            nextIndex += this.interval;
+                            counter++;
+                            return result;
+                        }
+                        //retorna uma instancia de objeto anonima, com uma propriedade value que indica o valor, e a done propriedade que indca que não ha mais elementos ha iterar
+                        return {value: counter, done: true};
+                    }
+                }
+            }
+        };
+
+        /**
+         * O código a seguir usa o Sequence iterador em um for...of loop:
+        */
+
+        //declara uma nova instancia de objeto da class Sequence invocando o construtor e passando três argumentos, o primeiro argumento e o start que recebe 2, o segundo argumento e o end que recebe 10 o terceiro argumento e o interval que recebe 2
+        let evenNumbers = new Sequence(2, 10, 2);
+
+        //a class sequence definiu um método de instancia chamado Symbol.iterator que retorna de acordo com o protocolo de iteração iterator um objeto em conformida com o protocolo iterator, que permite suas instancia da class sequence ou ela mesmo ser iteravel, por uma construção de tipo for...of ou for loop 
+        //vendo se deu certo a aplicacção do protocolo iterator na class sequence, para tornala iteravel
+        for(const num of evenNumbers) {
+            console.log(num);
+        }
+
+        /**
+         * Você pode acessar explicitamente o [Symbol.iterator]() método conforme mostrado no script a seguir:
+        */
+
+        //acessando o método Symbol.iterator que foi definido por meio de uma expressão de colchete propriedade computada
+        //acessando o método que define o tipo personalizado Sequence como iteravel por meio do protocolo de iteração iterator, este método retorna uma instancia de objeto anonima a ser refernciada, que possui duas propriedades importantes
+        let iterator = evenNumbers[Symbol.iterator]();
+
+        //a instancia de objeto anonima retornada possui um método next que retorna uma instancia de objeto anonima com duas propriedades, chamadas done e value
+        let result = iterator.next();
+
+        //acessando a propriedade done, ira me retorna um valor booleano indicando se ha mais elementos a serem iterados ou não
+        //true - não ha mais elementos
+        //false - possui elementos a serem iterados
+        while(!result.done) {
+            //acessando a propriedade value, retorna o valor atual iterado do objeto iteravel
+            console.log(result.value);
+            //a cada vez que chamo o método next ele retorna um novo valor na coleção iteravel, retorna uma nova instancia de objeto anonima com as mesmas propriedades done e value mas com valores diferentes
+            result = iterator.next();
+        }
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * CONTEXTO DE EXECUÇÃO JS (EXECUTION CONTEXT)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o contexto de execução do JavaScript para entender profundamente como o código JavaScript é executado.
+         * 
+         * * INTRODUÇÃO AO CONTEXTO DE EXECUÇÃO JS
+         * 
+         * Vamos começar com o seguinte exemplo:
+        */
+
+        //o contexto de execução desse script e
+        //na primeira vez que for executado, cria o contexto de execução global
+        //cria o objeto global window em ambiente de navegador
+        //cria o this objeto e vincule ao objeto global
+        //configure um heap de memoria para armazenar variaveis e referencias de função
+        //armazena declarações de function no heap de memoria e declaracoes de variaveis no contexto de execução global com valores iniciaais undefined
+         
+        //declara uma varaivel de escopo de bloco chamada x inicializada com o valor 10
+        let x = 10;
+
+        //declara uma function chamada timesTen que declara um paramentro chamado a, lembrando uma function e uma instancia de objeto do tipo Function
+        function timesTen(a) {
+            return a * 10;
+        }
+
+        //declara uma varaivel de escopo de bloco chamada y que inicializada com o valor retornado pela invocacao da function timesTen, passando a variavel x como argumento para a function
+        let y = timesTen(x);
+
+        //mostra o valor da variavel y
+        console.log(y); //100
+
+        /**
+         * Neste exemplo:
+         
+            - Primeiro, declare a x variável e inicialize seu valor com 10.
+
+            - Segundo, declare a timesTen() função que aceita um argumento e retorna um valor que é o resultado da multiplicação do argumento por 10.
+
+            - Terceiro, chame a timesTen()função com o argumento como o valor da x variável e armazene o resultado na variável y.
+
+            - Por fim, envie a variável y para o Console.
+
+         *
+         * Nos bastidores, o JavaScript faz muitas coisas. neste tutorial, você se concentrará nos contextos de execução.
+         * 
+         * Quando o mecanismo JavaScript executa o código JavaScript, ele cria contextos de execução.
+         * 
+         * Cada contexto de execução tem duas fases: a fase de criação e a fase de execução.
+        */
+    </script>
+
+</body>
+</html>

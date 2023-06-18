@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores</title>
+</head>
+<body>
+    
+    <h2>Operadores Relacionais</h2>
+
+    <script>
+        /**
+         * 
+         * * OPERADORES RELACIONAIS 
+         * 
+         * Um operador relacional compara seus operando e retorna um valor booleano baseado em se a comparação é verdadeira.
+         * 
+         * * OPERADOR instanceof(instancia de)
+         * 
+         * O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado. A sintaxe é:
+         
+            nomeObjeto instanceof tipoObjeto
+
+         * 
+         * onde nomeObjeto é o nome do objeto a ser comparado com tipoObjeto, e tipoObjeto é um tipo de objeto como Date ou Array.
+         * 
+         * 
+         * Utilize o instanceof quando você precisar confirmar o tipo de um objeto em tempo de execução. Por exemplo, ao capturar exceções você pode desviar para um código de manipulação de exceção diferente dependendo do tipo de exceção lançada.
+         * 
+         * Por exemplo, o código a seguir utiliza o instanceof para determinar se dia é um objeto Date. Como dia é um objeto Date, as declarações do if são executadas.
+         * */
+
+         //cria um objeto de tipo date
+         //e o inicializa com a seuinte data
+         var dia = new Date(1995, 12, 17);
+         
+         //se o tipo da intancia de objeto dia for date
+         if(dia instanceof Date) {
+            //declarações a serem executadas
+            console.log("O ", typeof(dia), " dia E DO TIPO Date.");
+         }
+    </script>
+</body>
+</html>

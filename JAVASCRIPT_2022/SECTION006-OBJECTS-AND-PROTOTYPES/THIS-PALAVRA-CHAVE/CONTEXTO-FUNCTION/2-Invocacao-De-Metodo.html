@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Palavra-Chave</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * 2) INVOCAÇÃO DE MÉTODO
+         * 
+         * Quando você chama um método de um objeto, o JavaScript define this o objeto que possui o método. Veja o seguinte car objeto:
+         *  
+        */
+
+        //declara um objeto literal chamado car, usando a sintaxe literal de objeto
+        let car = {
+            //declara uma propriedade usando a sintaxe chave : valor
+            brand: 'Honda',
+            //declara uma propriedade chamada getBrand que recebe como valor uma function anonima que não declara parametro e nem retorna valor
+            //a function anonima e atribuida a propriedade getBrand, tornando-a um metodo
+            getBrand: function() {
+                //o this aqui dentro da function anonima, dentro do objeto literal referencia o proprio objeto literal car, no caso a instancia atual do objeto literal esta sendo referciado por meio de this
+                return this.brand;
+            }
+        }
+
+        //invoca o metodo getBrand do objeto literal car
+        //aqui o this objeto referencia o car objeto literal 
+        //aqui o this objeto no getBrand metodo faz referencia ao car objeto literal
+        console.log(`car.getBrand() = ${car.getBrand()}`); //Honda
+
+        /**
+         * Neste exemplo, o this objeto no getBrand() método faz referência ao car objeto.
+         * 
+         * Como um método é uma propriedade de um objeto que é um valor, você pode armazená-lo em uma variável.
+        */
+
+        //armazena o metodo getBrand do objeto car em uma variavel, pois o metodo e uma propriedade de um objeto que possui um valor, e o valor dessa propriedade getBrand e uma function anonima que sera armazenada na variavel
+        let brand = car.getBrand;
+
+        /**
+         * E então chame o método por meio da variável:
+        */
+
+        //invocando(chamando) o metodo por meio da variavel que armazena a function anonima
+        //mas aqui na invocação do metodo esta sendo chamando sem especificar o objeto
+        //assim o JS define o this no modo não estrito no contexto global como referecia ao objeto window
+        //e no modo estritor define o this como undefined
+        console.log(`brand() = ${brand()}`); //undefined
+
+        /**
+         * Você obtém em undefined vez de "Honda"porque quando você chama um método sem especificar seu objeto, o JavaScript define this o objeto global no modo não estrito e undefined no modo estrito.
+         * 
+         * Para corrigir esse problema, você usa o bind() método do Function.prototype objeto. O bind() método cria uma nova função cuja this palavra-chave é definida para um valor especificado.
+        */
+
+        //para resolver o problema de chamar o metodo getBrand sem especificar o objeto e obter undefined ao inves de 'honda'
+        //usamos o metodo bind que cria uma nova função cuja a this palavra chave e definida para o valor especificado
+        //assim o this palavra chave da function armazenada em brand(), sera o car objeto literal, usaremos o objeto literal como o objeto que sera especificado para invocar o brand() metodo
+        brand = car.getBrand.bind(car);
+        //e o mesmo que
+        //car.brand();
+        console.log(`brand() = ${brand()}`); //Honda
+        
+        /**
+         * Neste exemplo, quando você chama o brand() método, a this palavra-chave é associada ao car objeto. Por exemplo:
+        */
+
+        //declara uma objeto literal chamado bike, usando a sintaxe literal de objeto
+        let bike = {
+            //declara uma propriedade usando sintaxe chave : valor
+            brand : 'Harley Davidson'
+        }
+
+        //aqui definiremos um valor para ser especificado como o this valor objeto para uma função
+        //aqui definiremos o bike objeto literal como this valor de uma function definida em car.getBrand, so que car.getBrand retorna o valor da propriedade this.brand, como o objeto a ser especificado como this aqui e o bike o brand propriedade valor retorna sera do objeto literal bike por causa do this definido no bind
+        let brand2 = car.getBrand.bind(bike);
+        console.log(`brand() = ${brand2()}`);
+
+        /**
+         * Neste exemplo, o bind() método define o this como o bike objeto, portanto, você vê o valor da brand propriedade do bike objeto no console.
+        */
+    </script>
+
+</body>
+</html>

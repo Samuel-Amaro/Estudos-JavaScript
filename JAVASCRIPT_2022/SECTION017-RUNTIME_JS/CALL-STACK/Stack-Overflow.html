@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+  
+    <script>
+
+        /**
+         * * STACK OVERFLOW(ESTOURO DE PILHA)
+         * 
+         * A pilha de chamadas tem um tamanho fixo, dependendo da implementação do ambiente do host, seja o navegador da web ou o Node.js.
+         * 
+         * Se o número de contextos de execução exceder o tamanho da pilha, ocorrerá um erro de estouro de pilha.
+         * 
+         * Se o número de contextos de execução exceder o tamanho da pilha, ocorrerá um erro de estouro de pilha.
+        */
+
+        //declara uma function chamada fn que não declara paramentros e uma function recursiva sem condição de parada
+        function fn() {
+            //a function fn chama ela mesma, function recursiva sem condição de parada, e proposital para causar um estouro na pilha de chamadas
+            fn();
+        }
+
+        //ao chamar a function causara um 
+        fn(); //stack overflow(estouro de pilha)
+
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * CASOS DE USO DO OPERADOR DE SPREAD DE OBJETOS JS
+         * 
+         * * EXEMPLO 2) MESCLANDO OBJETOS
+         * 
+         * Assim como os arrays, você pode usar o operador spread ( ...) para mesclar dois objetos:
+        */
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e o atribui a variavel circle por referencia
+        const circle = {
+            //declara propriedade usando sintaxe chave : valor
+            radius: 10
+        };
+
+        //declara um objeto literal anonimo, usando sintaxe de objeto literal, e o atribui a variavel style por referencia
+        const style = {
+            backgroundColor: 'red'
+        };
+
+        //usando o operador spread(...) para mesclar as propriedades proprias enumeraveis de objtos descompactados em um novo array
+
+        //aqui declaramos um novo objeto literal anonimo, que e atribuido por referencia a variavel solidCircle
+        //aqui iremos mesclar a propriedades enumeraveis proprias de dois objetos literais descompactados, descompactaresmo o objeto referenciado por circle, e o style
+        //as propriedades enumeraveis proprias de cada objeto referenciado se tornara propriedaded do objeto referenciado por solidCircle
+        const solidCircle = {
+            ...circle, //descompacta propriedades enumeraveis proprias do objeto referenciado
+            ...style //descompacta propriedades enumeraveis proprias do objeto referenciado
+        };
+
+        console.log(solidCircle);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Assincrono</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * GERADORES ASSÍNCRONOS(ASYNC GENERATORS)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os geradores assíncronos de JavaScript que iteram sobre dados que vêm de forma assíncrona.
+         *  
+         * * O QUE É UM GENERATOR ASSYNCRONO
+         * 
+         * Um gerador assíncrono é semelhante a um gerador regular , exceto que seu next() método retorna um Promise. Para iterar em um gerador assíncrono, você usa a for await...of instrução.
+         * 
+         * * INTRODUÇÃO AOS GERADORES ASSÍNCRONOS JS
+         * 
+         * Um gerador regular é uma função que pode pausar no meio do caminho e continuar de onde parou. Veja o seguinte exemplo:
+        */
+
+        //declara uma function generator regular chamada sequence
+        //declara uma function geradora, identificada pelo * apos a palavra-chave function, e um function que e executada de forma diferente, e uma function diferente das funções regulares, e uma function que pode ter sua execução pausada e retomada de diversas vezes
+        //a function e chamada de sequence e declara dois paramentros chamados start e end
+        function* sequence(start, end) {
+            //loop for que gera uma sequencia de numeros até end argumento
+            for(let i = start; i <= end; i++) {
+                //a instrução yield i, permite retomar e pausar a execução da fucntion geradora, aqui a yield retorna o valor i de acordo com o protocolo de iteração e pausa a execução da function geradora.
+                yield i;
+            }
+        }
+
+
+        //a invocação de uma function generator chamada sequence, e igual a uma função regular normal, informa dois argumento 1 e 5, dizendo que e para gerar um sequencia de 1 a 5, porem a execução da function geradora e diferente, quando e invocada ela não executa seu corpo logo em seguida a invocação, ela simplemente so retorna uma instancia de objeto do tipo Generator com o corpo da function geradora como resultado
+        let seq = sequence(1, 5); //Generator{}
+
+        //Um Objeto generator e um objeto iteravel, pois e definido de acordo com o protocolo de iteração
+        //implicitamente a construção abaixo a apartir do ES6 usando o for...of loop, invoca o next método a cada iteração no Generator objeto referenciado por seq 
+        for(const num of seq) {
+            console.log(num);
+        }
+
+        /**
+          * O sequence é um gerador que retorna um número do start para o end.
+          * 
+          * Um gerador assíncrono é semelhante a um gerador regular com as seguintes diferenças:
+
+            - A async palavra-chave é colocada na frente da palavra- function chave.
+
+            - O yield retorna um Promise, em vez de um valor. O Promise normalmente é um wrapper de uma operação assíncrona.
+
+         * O seguinte ilustra como converter o gerador sequence para o gerador assíncrono asyncSequence:
+        */
+
+        //exemplo, demostrando como transformar uma functin generator regular para uma function generator assincrona
+
+        //primeiro definir a function generator como uma function assincrona, uma funtin que e geradora e trata de operações assincronas, o async palavra-chave antes de function e o * apos palavra-chave function
+        async function* asyncSequence(start, end) {
+            //loop for que gera uma sequencia de numeros até end argumento
+            for(let i = start; i <= end; i++) {
+                //a yield instrução ao inves de retornar um valor e pausar a execução da function geradora assincrona, ira retornar uma promise que encapsula uma operação assincrona
+                //a yield retorna uma promise e pausa a execução da function geradora assyncrona
+                yield new Promise((resolve, reject) => {
+                    //simula uma operação assicrona
+
+                    //demora cerca de 1 segundo de atraso para resolver a promise
+                    setTimeout(() => {
+                        //usando a function callback argumento resolve para mudar o estado da promise de pendente, para cumprida com valor(resolvida com valor)
+                        //a valor resolvida pela promise e o valor que vai ser retornado pela function geradora assincrona, atraves da yield por meio do protocolo de iteração
+                        resolve(i);
+                    }, 1000);
+                });
+            }
+        }
+
+        /**
+         * Observe que usamos o setTimeout()para simular uma operação assíncrona.
+         * 
+         * Para iterar em todo o gerador assíncrono, você usa a for await...of instrução.
+         * 
+         * Como só podemos usar a palavra- await chave dentro de uma async função, agrupamos o código dentro de um IIFE assíncrono da seguinte maneira:
+        */
+
+        //usando um IIFE(Imediated Invoked Function Express), que declara uma function  assicrona por causa que so podemos usar a await for of instrução em funções assincronas ,neste caso e a invoca imediatamente logo em seguida após declaração, so pode ser invocada uma unica vez.
+        (async() => {
+            //corpo da IIFE assincrona
+
+            //declara uma instancia de objeto, invocando o constructor da class AsyncSequence, passando três argumentos, o primeiro o start argumento, o segundo o end argumento, o terceiro o interval
+            //a instancia e atribuida por referencia a variavel seq
+            let seq = new AsyncSequence(1, 10, 1);
+
+            //usando a nova construção do ES8-2018 for await..of, para iterar objetos iteraveis assincronos, iterar fonte de dados assincronas
+            //implicitamente o mecanismo JS, por meio das instruções em conjunto abaixo o for await...of, 
+            //invoca a next function do objeto literal que o método definido pela proriedade computada que identifica que o objeto e um iteravel assincrono retorna, assim a cada iteração a promisse e retornada a await espera a promise definir o estado e resolve com o resultado e a value recebe o resultado resolvido como elemento da seq e mostra logo depois
+            //cada numero da sequencia e retorna apos a simulação de atraso de 1 segundo de uma operação assincrona
+            for await(let value of seq) {
+                console.log(value);
+            }
+        })();
+
+        /**
+         * Os geradores assíncronos podem ser muito úteis quando você acessa um fluxo de dados e deseja relatar o progresso como usar uma barra de progresso.
+        */
+    </script>
+
+</body>
+</html>

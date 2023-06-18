@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador de Agrupamento</title>
+</head>
+<body>
+    
+    <h2>Operador de Agrupamento</h2>
+
+    <script>
+        /**
+         * 
+         * * OPERADOR DE AGRUPAMENTO
+         * 
+         * O operador de agrupamento ( ) controla a precedência de avaliação de expressões. Por exemplo, você pode substituir a precedência da divisão e multiplicação para que a adição e subtração sejam avaliadas primeiro.
+         * */
+
+         var a = 1;
+         var b = 2;
+         var c = 3;
+
+         // Precedência padrão
+         a + b * c     // 7
+         // a avaliação padrão pode ser assim
+         a + (b * c)   // 7
+
+         // Agora substitui a precedência
+         // soma antes de multiplicar   
+         (a + b) * c   // 9
+
+         // o que é equivalente a
+         a * c + b * c // 9
+         
+         
+    </script>
+</body>
+</html>

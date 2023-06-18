@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+        
+        /**
+         * * ALERT(ALERTA) JS
+         * 
+         * Resumo : neste tutorial, você aprenderá como exibir uma caixa de diálogo de alerta usando o alert()método JavaScript.
+         * 
+         * * INTRODUÇÃO AO ALERT() MÉTODO JS
+         * 
+         * O navegador pode invocar uma caixa de diálogo do sistema para exibir informações ao usuário.
+         * 
+         * A caixa de diálogo do sistema não está relacionada à página da Web exibida no navegador. Ele também não contém nenhum HTML. Sua aparência depende exclusivamente do sistema operacional e do navegador atuais, e não do CSS.
+         * 
+         * Para invocar um diálogo do sistema de alerta, você invoca o alert() método do window objeto.
+         
+            window.alert(message);
+
+         * OU
+
+            alert(message);
+
+         * O message é uma string que contém informações que você deseja mostrar aos usuários.
+         * 
+         * Por exemplo:
+        */
+
+        //o método alert(message) invoca uma caixa de dialogo de alerta do sistema
+        //a caixa de dialogo depende do navegador e do sistema operacional
+        //passamos como argumento para o método alert(message) uma string, que contem informações que desejamos mostrar para os usuarios
+        alert('Welcome to JavaScriptTutorial.net');
+        
+        /**
+         * Quando o alert() método é invocado, uma caixa de diálogo do sistema mostra a mensagem especificada ao usuário seguida por um único botão OK .
+         * 
+         * Você usa a caixa de diálogo de alerta para informar aos usuários algo sobre o qual eles não têm controle, por exemplo, um erro. A única escolha que os usuários podem fazer é descartar a caixa de diálogo depois de ler a mensagem.
+         * 
+         * Observe que a caixa de diálogo de alerta é síncrona e modal. Isso significa que a execução do código é interrompida quando uma caixa de diálogo é exibida e é retomada após ser encerrada. Por exemplo, o código a seguir exibe uma caixa de diálogo de alerta após três segundos:
+        */
+
+        setTimeout(() => {
+            //o método alert(message) invoca uma caixa de dialogo de alerta do sistema
+            //a caixa de dialogo depende do navegador e do sistema operacional
+            //passamos como argumento para o método alert(message) uma string, que contem informações que desejamos mostrar para os usuarios
+            //o método alert(message) e sincrono e modal, toda execução do codigo e interropida quando a caixa de dialogo e exibida e retomada apos ser encerrada.
+            //aqui sera exibida uma caixa de dialogo alert apos passar 3 segundos de atraso
+            alert('3 seconds has been passed!');
+        }, 3000);
+
+        /**
+         * * RESUMO
+         * 
+         * O alert() é um método do objeto de window.
+         * 
+         * O alert() método é modal e síncrono.
+         * 
+         * Use o alert() método para exibir informações que você deseja que os usuários reconheçam.
+        */
+    </script>
+
+</body>
+</html>

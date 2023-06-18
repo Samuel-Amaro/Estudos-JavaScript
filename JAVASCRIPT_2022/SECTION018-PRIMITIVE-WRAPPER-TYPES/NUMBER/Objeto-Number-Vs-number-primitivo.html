@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OBJETO JS NUMBER VS NÚMERO PRIMITIVO
+         * 
+         * A tabela a seguir ilustra as diferenças entre um Number objeto e um número primitivo:
+         
+            OPERADOR: typeof;
+            NUMBER OBJECT: "object";
+            NUMBER VALUE: "number";
+            -----------------------
+            OPERADOR: instanceof Number;
+            NUMBER OBJECT: true;
+            NUMBER VALUE: false;
+
+         * 
+         * 
+        */
+
+        //declarando um objeto do tipo Number invocando o construtor Number passando um valor numerico como argumento 
+        //declara uma instancia de obeto do tipo nuumber com um valor numerico de 100
+        let numberObject = new Number(100);
+        //declara uma variavel de escopo de bloco chamada x ininicializada com o valor primitivo number literal 10
+        let x = 10;
+
+        //O operador typeof retorna uma string indicando o tipo do operando sem avaliação.
+        //indica o tipo dos operandos
+        console.log(typeof numberObject); //"object"
+        console.log(typeof number); //number
+
+        //O operador instanceof retorna verdadeiro se o objeto especificado for do tipo de objeto especificado.
+        console.log(numberObject instanceof Number); //true
+        console.log(number instanceof Number); //false
+
+        /**
+         * Neste tutorial, você aprendeu sobre o Number tipo e alguns métodos úteis para formatar números.
+        */
+    </script>
+
+</body>
+</html>

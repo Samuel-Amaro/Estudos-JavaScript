@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo Instrução try...catch...finally</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLO DE INSTRUÇÃO JS try...catch...finally
+         * 
+         * O exemplo a seguir ilustra como usar a try...catch...finallyinstrução:
+        */
+
+        //declara uma variavel chamada result e a inicializa com um valor do tipo number
+        let result = 0;
+
+        //instrução da try...catch...finally instrução, para tratar e lidar com erros e executar um bloco de codígo apos tratamento do erro ou não
+        try{
+            //código pode causar erro
+
+            //a variavel chamada result, que recebe o resultado da invocação da function add, passando dois argumentos do tipo number
+            //so que a add function não foi definida anteriormente, aqui esta invocando uma function que não existe que não foi definida
+            //isso emite um erro gera um erro
+            //dentro dessa intrução, a partir daqui ira pular para o catch bloco para tratar o erro lançado
+            result = add(10, 20);
+        }catch(e) {
+            //código para lidar com erro
+            //abaixo esta o objeto de erro com suas respectivas propriedades, um objeto que contém informações mais detalhadas sobre erro
+            //propriedade e.name e o nome do erro
+            //aqui usamos a variavel error para armazenar o objeto de exceção que e lançado quando acontece um erro no bloco try
+            console.log(e.message);
+        }finally{
+            //código para executar se as exceções ocorrem ou não
+            console.log({result});
+        }
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, declare a result
+         * variável e inicialize seu valor com 0.
+         
+            let result = 0;
+
+         *
+         * Segundo, chame a add()função e atribua o valor de retorno à result variável no try bloco. Como a add() função não existe, o mecanismo JavaScript gera uma exceção.
+         * 
+         * Por causa da exceção, a instrução no catch bloco é executada para mostrar a mensagem de erro.
+         * 
+         * Terceiro, envie o result para o console no try bloco.
+        */
+       
+    </script>
+
+</body>
+</html>

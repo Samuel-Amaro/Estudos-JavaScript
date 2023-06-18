@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array From()</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO D) CRIAR UM ARRAY A PARTIR DE UM OBJETO ITERAVEL
+         * 
+         * Como o Array.from() método também funciona em um objeto iterável , você pode usá-lo para criar um array a partir de qualquer objeto que tenha uma [symbol.iterator] propriedade. Por exemplo:
+        */
+
+        //declara um objeto literal anonimo usando a sintaxe literal de objetos, esse objeto e atribuido por referencia a variavel even, variavel even referencia o objeto
+        let even = {
+            *[Symbol.iterator]() {
+                for(let i = 0; i < 10; i += 2) {
+                    yield i;
+                }
+            }
+        };
+
+        //usando  from metodo o from ira criar um novo array a partir do objeto referenciado por even, um array que so contera numeros pares e sera retornado para evenNumbers variavel
+        let evenNumbers = Array.from(even);
+        console.log(evenNumbers);
+
+        /**
+         * Neste exemplo:
+
+          - Primeiro, defina o evenobjeto com o [System.iterator] que retorna números pares de 0 a 10.
+
+          - Em seguida, use o Array.from()método para criar uma nova array de números pares do even objeto.
+
+         * 
+         * Neste tutorial, você aprendeu como usar o Array.from() método JavaScript Array para criar uma array a partir de um objeto iterável ou semelhante a uma array.
+        */
+    </script>
+</body>
+</html>

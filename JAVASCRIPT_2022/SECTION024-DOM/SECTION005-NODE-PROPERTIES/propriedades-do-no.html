@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * PROPRIEDADES DO NÓ: TIPO(type), TAG É CONTÉUDO(contents)
+         * 
+         * Vamos dar uma olhada mais detalhada nos nós DOM.
+         * 
+         * Neste capítulo veremos mais sobre o que são e aprenderemos suas propriedades mais usadas.
+         * 
+         * * CLASSES DE NÓS DOM
+         * 
+         * Diferentes nós DOM podem ter propriedades diferentes. Por exemplo, um nó de elemento correspondente a tag <a> possui propriedades relacionadas ao link, e aquele correspondente a <input> possui propriedades relacionadas à input e assim por diante. Os nós de texto não são iguais aos nós de elemento. Mas também existem propriedades e métodos comuns entre todos eles, pois todas as classes de nós DOM formam uma única hierarquia.
+         * 
+         * Cada nó DOM pertence à classe interna correspondente.
+         * 
+         * A raiz da hierarquia é EventTarget , que é herdada por Node , e outros nós DOM herdam dela.
+         *
+         * As classes são:
+         
+            - EventTarget – é a classe “abstrata” raiz. Objetos dessa classe nunca são criados. Ele serve como base, para que todos os nós DOM suportem os chamados “eventos”, vamos estudá-los mais tarde.
+
+            - Node – também é uma classe “abstrata”, servindo de base para os nós DOM. Ele fornece a funcionalidade da árvore principal: parentNode, nextSibling e childNodes assim por diante (são getters). Objetos de Node classe nunca são criados. Mas existem classes de nós concretas que herdam dele, a saber: Text para nós de texto, Element para nós de elemento e outras mais exóticas como Comment para nós de comentário.
+
+            - Element – ​​é uma classe base para elementos DOM. Ele fornece navegação em nível de elemento como nextElementSibling, children e métodos de pesquisa como getElementsByTagName, querySelector. Um navegador suporta não apenas HTML, mas também XML e SVG. A Element classe serve como base para classes mais específicas: SVGElement, XMLElemente HTMLElement.
+
+            - HTMLElement – ​​é finalmente a classe básica para todos os elementos HTML. Ele é herdado por elementos HTML concretos:
+
+                - HTMLInputElement – ​​a classe para <input> elementos,
+
+                - HTMLBodyElement – ​​a classe para <body> elementos,
+
+                -  HTMLAnchorElement – ​​a classe para <a> elementos,
+
+                - …e assim por diante.
+
+            - Existem muitas outras tags com suas próprias classes que podem ter propriedades e métodos específicos, enquanto alguns elementos, como <span>, <section>, <article> não possuem propriedades específicas, então são instâncias de HTMLElement classe.
+
+            - Assim, o conjunto completo de propriedades e métodos de um determinado nó vem como resultado da herança.
+
+            - Por exemplo, vamos considerar o objeto DOM para um <input> elemento. Pertence à classe HTMLInputElement.
+
+            - Ele obtém propriedades e métodos como uma superposição de (listados em ordem de herança):
+
+                - HTMLInputElement– esta classe fornece propriedades específicas de input,
+
+                - HTMLElement– fornece métodos comuns de elementos HTML (e getters/setters),
+
+                - Element– fornece métodos de elemento genéricos,
+
+                - Node– fornece propriedades comuns do nó DOM,
+
+                - EventTarget– dá o suporte para eventos (a serem cobertos),
+
+                - …e finalmente herda de Object, então métodos de “objeto simples” como hasOwnPropertytambém estão disponíveis.
+
+            - Para ver o nome da classe do nó DOM, podemos lembrar que um objeto geralmente tem a constructor propriedade. Ele faz referência ao construtor da classe e constructor.name é seu nome:
+         * */
+
+        //obtendo a classe interna correspondente desse no dom
+        console.log(document.body.constructor.name); //HTMLBodyElement
+        console.dir(document.body.constructor.name);
+
+        console.log(document.body); //[Object HTMLBodyElement]
+
+        //usando o operador instanceof para verificar se o elemento <body> e uma instancia de objeto da classe interna HTMLBodyElement
+        console.log(document.body instanceof HTMLBodyElement); //true
+        console.log(document.body instanceof HTMLElement);
+        console.log(document.body instanceof Element);
+        console.log(document.body instanceof Node);
+        console.log(document.body instanceof EventTarget);
+
+        /**
+         * Como podemos ver, os nós DOM são objetos JavaScript regulares. Eles usam classes baseadas em protótipos para herança.
+         * 
+         * Isso também é fácil de ver através da saída de um elemento console.dir(elem) em um navegador. Lá no console você pode ver HTMLElement.prototype, Element.prototype e assim por diante.
+         * 
+         * * console.dir(elem) contra console.log(elem)
+         *  
+         * A maioria dos navegadores oferece suporte a dois comandos em suas ferramentas de desenvolvedor: console.log e console.dir. Eles enviam seus argumentos para o console. Para objetos JavaScript, esses comandos geralmente fazem o mesmo.
+         * 
+         * Mas para elementos DOM eles são diferentes:
+         
+            - console.log(elem) mostra a árvore DOM do elemento.
+            - console.dir(elem) mostra o elemento como um objeto DOM, bom para explorar suas propriedades.
+
+         * Experimente document.body.
+         * 
+         * * IDL na especificação
+         * 
+         * Na especificação, as classes DOM não são descritas usando JavaScript, mas uma linguagem de descrição de interface (IDL) especial, que geralmente é fácil de entender.
+         * 
+         * Em IDL todas as propriedades são prefixadas com seus tipos. Por exemplo, DOMString, boolean e assim por diante.
+         * 
+         * 
+         * */
+    </script>
+</body>
+</html>

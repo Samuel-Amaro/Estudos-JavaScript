@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * TEMPORAL DEATH ZONE TDZ - ZONA DE MORTE TEMPORAL (TDZ)
+         * 
+         * Uma variável declarada pela let palavra-chave tem uma chamada zona morta temporal (TDZ). O TDZ é o tempo desde o início do bloco até que a declaração da variável seja processada.
+         * 
+         * O exemplo a seguir ilustra que a zona morta temporal é baseada em tempo, não baseada em local
+        */
+
+        //declara um escopo de bloco
+        { //insere novo escopo, TDZ inicia, o tempo desde o inicio do bloco até que a declaração da variavel seja processada
+
+            //expressão de função
+            //declara uma function anonima sem paramentro e atribui a function por referencia a variavel log
+            let log = function() {
+                //acessa a variavel message antes de ser declarada, acessa antes de message exisitir
+                console.log(message); // mensagem declarada mais tarde
+            };
+
+            //Este é o TDZ e o log de acesso
+            //causaria um ReferenceError
+            //o TDZ encerra aqui, quando accessa a variavel message, conta o tempo desde o inicio do blco ate o momento que message variavel e acesada, o mecanismo JS quando termina de processar a declaração da variavel TDZ termina
+            let message = 'Hello'; //TDZ ends
+            log(); //chamado fora do TDZ
+        }
+
+        /**
+         * Neste exemplo:
+         * 
+         * Primeiro, a chave inicia um novo escopo de bloco, portanto, o TDZ é iniciado.
+         * 
+         * Segundo, a log() expressão da função acessa a message variável. No entanto, a log() função ainda não foi executada.
+         * 
+         * Terceiro, declare a message variável e inicialize seu valor para 10. O tempo desde o início do escopo do bloco até o momento em que a message variável é acessada é chamado de zona de morte temporal . Quando o mecanismo JavaScript processa a declaração, o TDZ termina.
+         * 
+         * Por fim, chame a log() função que acessa a message variável fora da TDZ.
+         * 
+         * Observe que, se você acessar uma variável declarada pela palavra- chave let na TDZ, obterá um ReferenceError conforme ilustrado no exemplo a seguir.
+         * 
+        */
+
+        //dclara um escopo de bloco
+        { // inicia TDZ
+            //variavel não declarada tentar acessar antes da declaração
+            console.log(typeof myVar); // undefined
+            //variavel não declarada tentar acessar antes da declaração
+            console.log(typeof message); // ReferenceError
+            //declara variavel, aqui e onded o TDZ finaliza, contagem do tempo desde o inicio do bloco ate declaração da variavel let
+            let message; // TDZ ends
+        }
+
+        /**
+         * Observe que a myVar variável é uma variável inexistente, portanto, seu tipo é undefined.
+         * 
+         * A zona de morte temporal evita que você faça referência acidental a uma variável antes de sua declaração
+         *
+         * * RESUMO
+         * 
+         * As variáveis ​​são declaradas usando a letvpalavra-chave e têm escopo de bloco, não são inicializadas com nenhum valor e não são anexadas ao objeto global.
+         * 
+         * Redeclarar uma variável usando a let palavra-chave causará um erro.
+         * 
+         * Uma zona morta temporal de uma variável declarada usando a palavra-chave let começa a partir do bloco até que a inicialização seja avaliada.
+        */
+        
+    </script>
+
+</body>
+</html>

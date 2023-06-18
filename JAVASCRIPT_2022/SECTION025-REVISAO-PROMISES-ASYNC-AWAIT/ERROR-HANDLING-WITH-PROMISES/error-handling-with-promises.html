@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * ERROR HANDLING WITH PROMISES(TRATAMENTO DE ERROS COM PROMESSAS)
+         * 
+         * As cadeias de promessas são ótimas no tratamento de erros. Quando uma promessa é rejeitada, o controle salta para o manipulador de rejeição mais próximo. Isso é muito conveniente na prática.
+         * 
+         * Por exemplo, no código abaixo, o URL fetch está errado (sem esse site) e .catch trata o erro:
+        */
+
+        //metodo fetch responsavel por fazer uma solicitação de rede e retornar uma promise
+        //quando promise e rejeitada o controle salta para o manipulador de rejeição mais proximo
+        //promise e resolvida com objeto response,
+        //ou rejeitada com objeto error
+        fetch('https://no-such-server.blabla')//rejeitado
+            //registra manipulador .then com objeto de consumir so resultado de promise resolvida
+            .then(response => response.json())
+            //registra manipulador .catch com objetivo de consumir so o erro de promise rejeitada
+            .catch(err => alert(err));//TypeError: falhou ao buscar (o texto pode variar)
+
+        /**
+         * Como você pode ver, o .catch não tem que ser imediato. Pode aparecer depois de um ou talvez vários .then.
+         * 
+         * Ou, talvez, esteja tudo certo com o site, mas a resposta não é um JSON válido. A maneira mais fácil de capturar todos os erros é anexar .catch ao final da cadeia:
+        */
+
+        //usando metodo fetch para realizar uma solicitação de rede para o url passado por argumento e retorna um promese
+        //a promise retornada e resolvida com um response objeto quando o servidor remoto responde com headers, mas antes que a resposta completa seja baixada
+        fetch("https://javascript.info/article/promise-chaining/user.json")
+        //registrando um function .then manipulador para consumir a response objeto resolvido da promise
+        //.then abaixo é executado quando o servidor remoto responde com um header
+        .then((response) => {
+            //response.json() retorna uma nova promessa que e resolvida quando a promisse ja leu os dados remotos e os analise e retorna como JSON
+            //a promisse so e resolvida quando o dados foram analisados e carregados
+            //quando carrega
+            return response.json();
+        })
+        //registrando outro .then manipulador para consumir o objeto json do resolve metodo da promisse retornada pelo .then manipulador anterior
+        .then((user) => {
+            //logo em seguida faremos outra solicitação de rede para buscar um user do gitHub, isso retorna outra promisse com o fecth
+            return fetch(`https://api.github.com/users/${user.name}`);
+        })
+        //registra outro function .then manipulador para consumir outro response objeto, retornado por resolve quando promise e resolvida
+        .then((response) => {
+            //retorna outra promisse que so e resolvida quando dados estiverem carregados analisados em formato json
+            return response.json();
+        })
+        //Mostre a imagem do avatar (githubUser.avatar_url) por 3 segundos (talvez animar)
+        //registra outro manipualdor para consumir um objeto json como resultado da promisse anterior resolvida
+        .then((gitHubUser) => {
+            let img = document.createElement('img');
+            img.src = gitHubUser.avatar_url;
+            img.className = "promise-avatar-example";
+            document.body.prepend(img);
+
+            //apos 3s remove o img do documento
+            setTimeout(() => img.remove(), 3000); //(*)
+        })
+        //registra um manipulador .catch com objetivo dele consumir somente o error de uma promise rejeitada na cadeia
+        //anexa o .catch aon final da cadeia para capturar todos os erros
+        .catch(error => alert(error.message));
+    </script>
+</body>
+</html>

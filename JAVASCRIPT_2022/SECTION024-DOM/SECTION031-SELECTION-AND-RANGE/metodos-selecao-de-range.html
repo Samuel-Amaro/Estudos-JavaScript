@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * MÉTODOS DE SELEÇÃO DE RANGE(INTERVALO)
+         * 
+         * Existem muitos métodos convenientes para manipular intervalos.
+         * 
+         * Já vimos setStart e setEnd, aqui estão outros métodos semelhantes.
+         * 
+         * Definir o início do range:
+         * 
+            * setStart(node, offset) definir início em: posição offset em node
+            * 
+            * setStartBefore(node) definir início em: logo antes node
+            * 
+            * setStartAfter(node)definir início em: logo após node
+            * 
+         * Definir fim de intervalo (métodos semelhantes):
+         * 
+            * setEnd(node, offset) definir final em: posição offset em node
+            * 
+            * setEndBefore(node) definir final em: logo antes node
+            * 
+            * setEndAfter(node) definir final em: logo após node
+            * 
+         * Tecnicamente, setStart/setEnd pode fazer qualquer coisa, mas mais métodos fornecem mais conveniência. 
+         * 
+         * Em todos esses métodos, node pode ser tanto um nó de texto quanto um nó de elemento: para nós de texto offset pula muitos caracteres, enquanto para nós de elemento muitos nós filhos.
+         * 
+         * Ainda mais métodos para criar intervalos:
+         * 
+            * selectNode(node) defina o intervalo para selecionar todo o node
+            * 
+            * selectNodeContents(node) definir intervalo para selecionar todo o conteúdo de node 
+            * 
+            * collapse(toStart) se toStart=true set end=start, caso contrário, set start=end, reduzindo assim o intervalo
+            * 
+            * cloneRange() cria um novo intervalo com o mesmo início/fim       
+        */
+
+    </script>
+</body>
+</html>

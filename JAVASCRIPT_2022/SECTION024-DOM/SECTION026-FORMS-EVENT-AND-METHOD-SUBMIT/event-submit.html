@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        - por meio do atributo html onsubmit, atribuimos uma manipulador de evento.
+        - o manipulador e para o evento de submit de formulario, esse evento e acionado toda vez que o formulario e enviado. o manipulador mostra uma mensagem e retorna false, um manipulador com retorno false, e uma exceção para dizer ao navegador para impedir a ação padrão de enviar o formulario para o servidor processar.
+        - o formulario pode ser enviado de duas maneiras clicando em input type="submit" ou input type="image" ou pressionar enter em qualquer campo de input relacionado ao form.
+    -->
+    <form method="post" action="" target="_self" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on" onsubmit="alert('submit!'); return false">
+        <label for="one">Primeiro: Digite no campo de entrada</label>
+        <input type="text" name="one" value="text"/>
+        <br/>
+        <label for="two">Segundo: Clique me "enviar":</label>
+        <input type="submit" value="Enviar"/>
+    </form>
+
+    <script>
+        /**
+         * * EVENT: SUBMIT(EVENTO ENVIAR)
+         * 
+         * Existem duas maneiras principais de enviar um formulário:
+         * 
+            * O primeiro – para clicar <input type="submit"> ou <input type="image">.
+            * 
+            * O segundo – pressione Enter em um campo de entrada.
+            * 
+         * Ambas as ações levam ao submit evento no formulário. O manipulador pode verificar os dados e, se houver erros, mostrá-los e chamar event.preventDefault(), então o formulário não será enviado ao servidor.
+         * 
+         * No formulário abaixo:
+         * 
+            * Vá para o campo de texto e pressione Enter. 
+            * 
+            * Clique em <input type="submit">.
+            * 
+            * Ambas as ações são exibidas alert e o formulário não é enviado a lugar algum devido a return false:
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <table id="table">
+        <tbody>
+            <tr>
+                <td>One</td><td>Two</td>
+            </tr>
+            <tr>
+                <td>Three</td><td>Four</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+       
+        /**
+         * * MAIS LINKS: TABELAS
+         * 
+         * Até agora descrevemos as propriedades básicas de navegação.
+         * 
+         * Certos tipos de elementos DOM podem fornecer propriedades adicionais, específicas para seu tipo, por conveniência.
+         * 
+         * As tabelas são um ótimo exemplo disso e representam um caso particularmente importante:
+         
+            O <table> elemento suporta (além do dado acima) estas propriedades:
+
+                - table.rows – a coleção de <tr> elementos da tabela.
+
+                - table.caption/tHead/tFoot – referências a elementos <caption>, <thead>, <tfoot>.
+
+                - table.tBodies – a coleção de <tbody> elementos (podem ser muitos de acordo com o padrão, mas sempre haverá pelo menos um 
+
+                – mesmo que não esteja no HTML de origem, o navegador o colocará no DOM).
+
+            <thead>, <tfoot>,<tbody> os elementos fornecem a rows propriedade:
+
+                - tbody.rows– a recolha do <tr> interior.
+
+            <tr>:
+
+                - tr.cells – a coleção de <td> e <th> células dentro do dado <tr>.
+
+                - tr.sectionRowIndex– a posição (índice) do dado <tr> dentro do anexo <thead>/<tbody>/<tfoot>.
+
+                - tr.rowIndex– o número de <tr> na tabela como um todo (incluindo todas as linhas da tabela).
+
+            <td> e <th>:
+
+                - td.cellIndex – o número da célula dentro do anexo <tr>.
+        */
+
+        //obtém td com "dois" (primeira linha, segunda coluna)
+        //obtem a primeira linha da tabela e sua respectiva celula encontrada na segunda coluna
+        let td = table.rows[0].cells[1];
+        //muda a cor de fundo da celula para destaque
+        td.style.backgroundColor = "red"; 
+
+        /**
+         * Há também propriedades de navegação adicionais para formulários HTML. Veremos mais tarde, quando começarmos a trabalhar com formulários.
+         * */
+        
+    </script>
+
+</body>
+</html>

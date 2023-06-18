@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+        /**
+         * * OPTIONAL CATCH BINDING - LIGAÇÃO DE CAPTURA OPCIONAL
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar a ligação opcional catch na try...catch instrução.
+         * 
+         * * INTRODUÇÃO À CATCH LIGAÇÃO OPCIONAL
+         * 
+         * A try...catch instrução é usada para lidar com quaisquer erros que possam ocorrer. Geralmente, você coloca o código que pode causar um erro no try bloco e o código que trata o erro no catch bloco, assim:
+        */
+
+        //usando a instrução try...catch oara lidar com quaisquer erros
+        try {
+            //código que pode causar um erro
+        } catch (error) {
+            //código que trata o erro
+        }
+
+        /**
+         * No bloco catch, você pode acessar o objeto Error que contém informações detalhadas sobre o erro.
+         * 
+         * Na prática, você pode usar a try...catch instrução para verificar se um recurso foi implementado no navegador da web. Se não for, você deseja retornar a um recurso menos desejável com suporte mais amplo, por exemplo:
+        */
+
+        //usando a instrução try...catch para lidar com quaisquer erros
+        try {
+            //verificar se um recurso foi implementado
+        } catch (error) {
+            //voltar a um recurso menos desejável
+        }
+
+        /**
+         * Nesse caso, o error objeto é declarado, mas nunca usado.
+         * 
+         * O ES2019 introduziu a vinculação de captura opcional que permite omitir a catch vinculação e seus parênteses circundantes, assim:
+        */
+
+        try {
+            //código que pode causar um erro
+        }catch{
+            //código que trata o erro,
+            //isso faz com que não obtenha o objeto de erro que pode ser lançado pelo try bloco
+        }
+
+        /**
+         * * RESUMO
+         * 
+         *  Desde ES2019, você pode omitir a catch vinculação na try...catch instrução.
+        */
+    </script>
+
+</body>
+</html>

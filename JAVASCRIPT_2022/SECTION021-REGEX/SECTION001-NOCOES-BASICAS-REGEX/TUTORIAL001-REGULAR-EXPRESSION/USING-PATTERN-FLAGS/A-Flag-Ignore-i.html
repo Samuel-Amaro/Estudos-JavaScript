@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * USING PATTERN FLAGS(USANDO OS SINALIZADORES PADRÃO)
+         * 
+         * Além de um padrão, um RegExp objeto também aceita um parâmetro opcional de flag. Os sinalizadores(flags) são configurações que alteram o comportamento de pesquisa. As expressões regulares têm muitos sinalizadores.
+         * 
+         * * 1) O SINALIZADOR DE IGNORAR I - (A FLAG IGNORE) - i
+         * 
+         * O i sinalizador ignora casos ao pesquisar. A letra i significa ignore.
+         * 
+         * Por padrão, as pesquisas diferenciam maiúsculas de minúsculas. Por exemplo /hi/, corresponde apenas à string hi not Hi. Para procurar uma string hi em qualquer caso, você usa o i sinalizador:
+        */
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo /hi/ e um padrão que corresponde a somente a string 'hi', por padrão as pesquisas diferenciam maiusculas de minusculas.
+        //Para podermos procurar uma string 'hi' em qualquer caso tanto em maiuscula quanto em minuscula, usamos a flag (i)
+        //A flag (i): uma flag e uma configuração que altera o comportamento de pesquisa, a flag i, ignora os casos ao pesquisar, a i significa ignore
+        //essa expressão regular e uma instancia de objeto literal do tipo RegExp, assim podemos invocar métodos e propriedades
+        let re = /hi/i; 
+
+        //usando o método RegExp.test(string) que permite testar se uma string contem uma correspondencia do padrão na expressão regular
+        //o método retorna true se o argumento de string contiver uma correspondecia do padrão, neste caso o método ira retornar true 
+        //exemplo abaixo verifica se a string 'hi John' corresponde ao padrão hi, neste caso o padrão ira procurar string que correspondam ao padrão hi, tanto em minuscula, quanto em maiuscula, por possuir uma flag i mudando seu comportamento
+        //a flag i, ira ignorar casos que não são iguais, as correspondencia ao padrão que não forem iguais ao padrão original antes de mudar o comportamente o flag ignora, a correspondecia e muda o comportamente da expressão regular
+        //usando expressão regular para pesquisar se uma string corresponde a um padrão(expressão regular)
+        //exemplo de padrão de correspondecia
+        let result = re.test('Hi John'); //true
+
+        console.log(`'${'/hi/i'}' matching '${'Hi John'}' = ${result}`);
+
+        /**
+         * Neste exemplo, o /hi/i irá corresponder a qualquer string hi, Hi e HI. Observe que você coloca o sinalizador i após o último caractere de barra (/)
+         * 
+         *  exemplo a seguir mostra como usar o sinalizador no RegExp construtor:
+        */
+
+        //podemos usar também o RegExp construtor para criar uma expressão regular, passamos o padrão como primeiro argumento e como segundo argumento passamos uma flag que mudara o comportamento da expressão regular, passando o flag i - ignore, que ira ignorar todos os casos de não correspondecia com o padrão
+        //a flag i muda o comportamente do padrão para que ignore todos os casos de não correspondecia
+        //o construtor
+        //cria uma nova instancia de objeto com o padrão hi e sua flags de configuração
+        let er = new RegExp('hi', 'i');
+        //usando o método RegExp.test(string),  que permite testar se uma string contem uma correspondencia do padrão na expressão regular
+        //o método retorna true se o argumento string contiver alguma correspondia do padrao
+        let result2 = er.test('Hi John');
+
+        console.log(`'${'/hi/i'}' matching '${'Hi John'}' = ${result2}`);
+    </script>
+</body>
+</html>
+
+
+

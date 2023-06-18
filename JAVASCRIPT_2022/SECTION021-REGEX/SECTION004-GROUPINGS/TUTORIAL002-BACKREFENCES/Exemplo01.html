@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE REFERÊNCIAS ANTERIORES(BACKREFERENCE) DE REGEX JS
+         * 
+         * Os exemplos a seguir mostram algumas aplicações práticas de referências anteriores.
+         * 
+         * * 1) USANDO REFERENCIAS ANTERIORES PARA OBTER TEXTO ENTRE ASPAS
+         * 
+         * Para obter o texto entre aspas duplas assim:
+        
+            "JavaScript Regex Backreferences"
+
+         *
+         * Ou aspas simples:
+         
+            'JavaScript Regex Backreferenceces'
+
+         * 
+         * Mas não misto de aspas simples e duplas:
+         
+            'not match"
+
+         * 
+         * Para fazer isso, você pode criar a seguinte expressão regular:
+         
+            \[\'"](.*?)[\'"]/
+
+            - a expressão regular acima tem o seguinte padrão: um conjunto que corresponde a uma aspas simples ' ou uma aspas duplas ", seguido por um grupo de captura que possui a seguinte regra: um padrão que corresponda a qualquer caractere 0 ou mais vezes, o minimo possivel, usar quantificador preguiçoso, seguido por outro conjunto que corresponde a somente a uma aspas simples ou uma aspas duplas.
+            - o padrão na seguinte expressão usa, conjuntos de caracteres, e grupos de captura, e um abreviação de quantificador *, que e {0,n}, usado no modo preguiçoso, minimo de combinação para o caracter anterior.
+
+         * No entanto, essa expressão regular também corresponde ao texto que começa com aspas simples (') e termina com aspas duplas (“) ou vice-versa. Por exemplo:
+        */
+
+        //declara a string literal a ser usada na pesquisa
+        const message = `"JavaScript's cool". The said`;
+        //cria uma expressão regular com o seguinte padrão
+        //a expressão regular acima tem o seguinte padrão: um conjunto que corresponde a uma aspas simples ' ou uma aspas duplas ", seguido qualquer caractere 0 ou mais vezes, o minimo possivel de combinação para o caractere anterior, usar quantificador preguiçoso, seguido por outro conjunto que corresponde a somente a uma aspas simples ou uma aspas duplas.
+        let pattern = /[\'"].*?[\'"]/;
+        //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string
+        //retorna uma array
+        let match = message.match(pattern);
+        //acessando o array de resultado para acessar o primeiro elemento de forma individual para obter a primeira correspondencia
+        //a primeira correpondecia e o texto entre aspas mistas, não e o que queremos
+        console.log(match[0]);
+
+        /**
+         * Ele retorna o "JavaScript' não "JavaScript's cool".
+         * 
+         * Para resolvê-lo, você pode usar uma referência inversa na expressão regular:
+         
+            /([\'"]).*?\1/
+
+            - a expressão regular acima tem o seguinte padrão: uma grupo de captura que possui como regra um padrão que corresponde a um conjunto de caracteres, como uma aspa simples ' ou uma aspa dupla ", seguida por qualquer caractere nehuma ou varias vezes, o minimo possivel, seguida por uma backreference, uma referencia ao primeiro grupo de captura.
+            - o padrão na seguinte expressão usa, conjuntos de caracteres, e grupos de captura, e um abreviação de quantificador *, que e {0,n}, usado no modo preguiçoso, minimo de combinação para o caracter anterior, e um backreference que referencia o primeiro grupo de caractere.
+         * 
+         * A referência anterior \1 faz referência ao primeiro grupo de captura. Se o subgrupo começar com aspas simples, o \1 corresponderá às aspas simples. E se o subgrupo começar com aspas duplas, as \1 correspondências serão feitas.
+         * 
+         * Por exemplo
+        */
+
+        //para conseguimos os textos entre aspas simples ou duplas temos que modificar a expressão regular para o seguinte:
+        //a expressão regular abaixo tem o seguinte padrão: uma grupo de captura que possui como regra um padrão que corresponde a um conjunto de caracteres, como uma aspa simples ' ou uma aspa dupla ", seguida por qualquer caractere nehuma ou varias vezes, o minimo possivel, seguida por uma backreference, uma referencia ao primeiro grupo de captura.
+        //o padrão na seguinte expressão usa, conjuntos de caracteres, e grupos de captura, e um abreviação de quantificador *, que e {0,n}, usado no modo preguiçoso, minimo de combinação para o caracter anterior, e um backreference que referencia o primeiro grupo de caractere.
+        //o padrão e um caractere de aspas simples ou dupla seguido por qualquer caractere nenhum ou varias vezes seguido por um caractere de aspas simples ou dupla 
+        pattern = /([\'"]).*?\1/;
+        //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string
+        //retorna uma array
+        match = message.match(pattern);
+        //acessando a primeira correspondecia que tem que ser a corrrespondecia inteira, de um texto entre aspas simples ou duplas, mista não pode
+        console.log(match[0]);
+    </script>
+</body>
+</html>
+
+
+

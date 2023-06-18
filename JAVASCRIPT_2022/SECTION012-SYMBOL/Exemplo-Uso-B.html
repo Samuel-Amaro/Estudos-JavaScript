@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Uso B</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * USOS DE SÍMBOLOS
+         * 
+         * * EXEMPLO B) USANDO SÍMBOLO COMO O NOME DA PROPRIEDADE COMPUTADA DE UM OBJETO
+         *
+         * Você pode usar símbolos como nomes de propriedades computadas . Veja o seguinte exemplo:
+         * 
+        */
+
+        //cria um variavel status e a inicializa com o tipo primitivo Symbol, o tipo Symbol não possui uma valor literal.
+        //para cria um novo symbol usamos a function Symbol()
+        //cada vez que chamamos a função symbol ela cria um novo valor unico e exclusivo
+        //passamos um argumento description para o symbol para tornar o novo valor exclusivo criado mais descritivo
+        let status = Symbol('status');
+
+        //declara um objeto literal anonimo, atribuido a variavel statuses
+        let statuses = {
+            //declara propriedades usando sintaxe chave : valor
+            //os valores serão symbols(valores unicos e exclusivos) com description para ajudar descrever o symbol valor, para criar o symbol deve invocar a function global Symbol, passando como argumento um description que ajude a descrever o symbol valor
+            OPEN: Symbol('Open'),
+            IN_PROGRESS: Symbol('In progress'),
+            COMPLETED: Symbol('Completed'),
+            HOLD: Symbol('On hold'),
+            CANCELED: Symbol('Canceled')
+        };
+
+        //declara um objeto literal anonimo, atribuido por referencia a variavel task
+        let task = {
+            //declara propriedade usando sintaxe chave : valor
+            //exemplo de propriedade computada, usando expressão entre colchetes
+            //usa o resultado da expressão como nome da propriedade
+            //a expressão e derivada de um symbol valor unico e exclusivo criado pela fucntion Symbol com a descriçaõ status
+            //o valor da propriedade e a mesma coisa, e o resultado de um Symbol valor unico criado e exclusvio
+            [status]: statuses.OPEN,
+            description: 'Learn ES6 Symbol'
+        };
+
+        console.log(task);
+
+        /**
+         * Para obter todas as propriedades enumeráveis ​​de um objeto, você usa o Object.keys() método.
+        */
+
+        //usamos o método Object.keys(objeto) para obter todas as chaves das propriedades criadas usando sintaxe chave valor
+        //retorna todoas as propriedades proprias enumeraveis do objeto
+        console.log(Object.keys(task));
+
+        /**
+         * Para obter todas as propriedades de um objeto, sejam elas enumeráveis ​​ou não, você usa o Object.getOwnPropertyNames() método.
+        */
+
+        //usando o método Object.getOwnPropertyNames(), para obter todoas as propriddades de um objeto, proprieadades prorprias ou não do objeto
+        console.log(Object.getOwnPropertyNames(task)); //["description"]
+
+        /**
+         * Para obter todos os símbolos de propriedade de um objeto, você usa o Object.getOwnPropertySymbols() método, que foi adicionado no ES6.
+        */
+
+        //para obter todas as propriedades de um objeto que são symbols tipo primtivo
+        //retorna um array das propridas proprias enumeraveis do objeto que são do tipo symbol
+        console.log(Object.getOwnPropertySymbols(task));
+
+        /**
+         * O Object.getOwnPropertySymbols()método retorna uma array de símbolos de propriedade próprios de um objeto.
+        */
+        
+    </script>
+
+</body>
+</html>

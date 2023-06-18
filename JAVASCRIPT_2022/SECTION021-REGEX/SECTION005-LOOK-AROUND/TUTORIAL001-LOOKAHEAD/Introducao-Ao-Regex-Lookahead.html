@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        /**
+         * * LOOKAHEAD(OLHE PARA FRENTE)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre JavaScript regex lookahead para corresponder, X mas se for seguido por Y.
+         * 
+         * * INTRODUÇÃO AO JS REGEX LOOKAHEAD
+         * 
+         * Em expressões regulares, um lookahead permite que você faça a correspondência, X mas somente se for seguido por Y. Aqui está a sintaxe do lookahead:
+         
+            X(?=Y)
+
+            ?= -> sintaxe do lookahead, correspone a X somente se for seguido por Y, mas no final a correspondecia vai ser X seguido de Y
+
+         *
+         * Nessa sintaxe, o mecanismo regex procura, X mas corresponde apenas se for seguido por Y. Suponha que você tenha a seguinte string:
+         * */
+
+        //const s = '1 car is 15 feet long';
+
+        /**
+         * E você quer combinar o número 15 seguido por um espaço e a string literal feet, não o número 1. Para fazer isso, você pode usar um lookahead em uma expressão regular:
+         
+            /\d+(?=\s*feet)/
+
+            - a expressão regular acima possui o seguinte padrão, um ou mais digitos, seguido por um grupo de captura que possui a seguinte regra como padrão, corresponder a nenhum espaço em branco ou a varios, seguido da palavra feet.
+            - o padrão e um ou mais digitos seguidos por nenhum ou varios espaços em branco, e a string literal feet.
+
+         * Nesta expressão regular:
+
+            - \d+ corresponde a um ou mais digitos.
+            - ?= é a sintaxe de antecipação.
+            - \s* corresponde a zero ou mais espaços em branco.
+            - feet corresponde á string literal feet.
+
+         * 
+         * O código a seguir usa o padrão acima para corresponder ao número seguido por zero ou mais espaços e a string literal feet:
+        */
+        
+        //declara uma constante de bloco para ser usada na pesquisa
+        const s = '1 car is 15 feet long';
+        //cria uma expressão regular com um padrão, que corresponda ao seguinte:
+        //um ou mais digitos, somente se for seguido por um grupo de captura que possui a seguinte regra como padrão, corresponder a nenhum espaço em branco ou a varios, e a string literal feet.
+        //o padrão e um ou mais digitos seguidos por nenhum ou varios espaços em branco, e a string literal feet.
+        //aqui a sintaxe ?= e sintaxe de antecipação, que so permite corresponder a \d+ se \d+ for seguido de nenhum ou varios espaços em branco
+        //neste padrão usamos, grupos de captura, quantificadores gananciosos, e classe de caracteres e o novo assunto apreendido, o ?= e o lookahead, sintaxe de antecipação.
+        //padrão: corresponde a varios um ou varios digitos somente se for seguido de nenhum ou varios espaços em branco e a string literal  feet
+        const pattern = /\d+(?=\s*feet)/;
+
+        //usando o método String.match(regexp) para retornar todoas as correspondecias do regexp na string.
+        const match = s.match(pattern);
+        console.log(match);
+
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importando Sem Vinculações</title>
+</head>
+<body>
+
+    <script type="module" src="./app.js">
+
+        /**
+         * * IMPORTANDO SEM VINCULAÇÕES
+         * 
+         *  Às vezes, você deseja desenvolver um módulo que não exporta nada, por exemplo, você pode querer adicionar um novo método a um objeto interno, como o Array.
+         
+            // array.js
+            if (!Array.prototype.contain) {
+                Array.prototype.contain = function(e) {
+                    // contain implementation
+                    // ...
+                }
+            }
+
+         * 
+         * Agora, você pode importar o módulo sem nenhuma ligação e usar o contain() método definido no array.js módulo da seguinte forma:
+         
+            import './array.js';
+            [1,2,3].contain(2); // true
+
+         * */
+        
+    </script>
+
+</body>
+</html>

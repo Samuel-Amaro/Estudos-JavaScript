@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input id="input" type="checkbox" checked="true"> checkbox
+
+    <div id="div" style="color: red; font-size: 120%">Hello</div>
+    
+    <a id="a" href="#hello">link</a>
+
+    <script type="text/javascript">
+        /**
+         * * AS PROPRIEDADES DO DOM SÃO DIGITADAS
+         * 
+         * As propriedades do DOM nem sempre são strings. Por exemplo, a input.checked propriedade (para caixas de seleção) é um booleano:
+        */
+
+        //o input e uma variavel global nomeada por id que referencia um elemento dom input
+        //usando o metodo de acesso a atributos para obter o valor do atributo checked especificado no elemento html <input> representado pelo no dom input
+        console.log(input.getAttribute('checked')); //o valor do atributo é: true como string
+        //usando a propriedade mapeada input.checked para obter o valor do atributo html checked por meio da propriedade mapeada do objeto no dom input
+        //exemplo de propriedade que não e do tipo string e um booleano
+        console.log(input.checked); //o valor da propriedade e: true como booleano
+
+        /**
+         * Existem outros exemplos. O style atributo é uma string, mas a style propriedade é um objeto:
+        */
+
+        //string
+
+        //usando o metodo de acessor de atributo elem.getAttribute(nameAttribute); para acessar o valor do atributo html style especificado no elemento <div>, retorna uma string como valor do atributo style
+        //div e uma variavel global nomeada por id que referencia o elemento dom div
+        console.log(div.getAttribute('style')); //color: red; font-size: 120%
+
+        //object
+
+        //usando a propriedade mapeada elem.style para acessar o valor do atributo html style especificado no elemento html div, que esta sendo referenciado pelo no dom div
+        //retorna um objeto como valor do atributo style
+        console.log(div.style); //[object CSSStyleDeclaration]
+        //acessando uma propriedade do objeto retornado que e o valor do style atributo html no elemento <div>
+        //acessando a propriedade do objeto CSSStyleDeclaration.color
+        console.log(div.style.color); //string
+
+        /**
+         * A maioria das propriedades são strings.
+         * 
+         * Muito raramente, mesmo que um tipo de propriedade DOM seja uma string, pode diferir do atributo. Por exemplo, a href propriedade DOM é sempre um URL completo , mesmo que o atributo contenha um URL relativo ou apenas um #hash.
+         * 
+         * 
+        */
+
+        //atributo
+        //a e uma variavel global nomeada por um id que referencia um elemento DOM chamado a
+        //usando o metodo acessor de atributos elem.getAttribute(nameAtributo) para obter o valor do atributo html href do elemento <a> referenciado pelo no dom a
+        console.log(a.getAttribute('href')); //#hello
+
+        //usando a propriedade mapeada a.href para obter o valor do atributo html href do elemento <a> que e referencia pelo no dom a
+        //a propriedade retorna um URL completo ao inves de uma string
+        console.log(a.href); //URL completa do form file:///c:/Users/SAMUE/Documents/PROGRAMACAO_CURSOS_PROJETOS/JAVASCRIPT_2022/SECTION024-DOM/SECTION006-ATTRIBUTES-AND-PROPERTIES/as-propriedades-do-dom-sao-digitadas.html#hello
+
+        /**
+         * Se precisarmos do valor de href ou de qualquer outro atributo exatamente como escrito no HTML, podemos usar getAttribute.
+         * */
+    </script>
+
+</body>
+</html>

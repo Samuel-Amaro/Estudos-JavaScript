@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * FORMATANDO NUMEROS
+         * 
+         * Para formatar um número com um número especificado de pontos decimais, use o toFixed() método.
+         * 
+         * O toFixed() método aceita um argumento que indica quantos pontos decimais devem ser usados.
+         
+            numberObject.toFixed(decimalPlaces);
+
+         * 
+         * O toFixed() método retorna a string correspondente do número usando a notação de ponto fixo. Aqui está um exemplo.
+        */
+
+        //declara uma variavel de escopo global chamada distance que e inicializada com um valor primitivo do tipo number, um valor literal numerico de ponto flutuante
+        var distance = 19.006;
+        //tentando chamar um metodo de instancia em um variavel que armazena um valor primitivo do tipo number
+        //uma variavel que contem um valor de tipo primitivo como string, number, ou boolean, quando e chamada um metodo em uma variavel que contem um destes valores o mecanismo JS executa o seguinte:
+        //1- cria um objeto do tipo correspondente
+        //2- chama o metodo especificado na instancia(na variavel)
+        //3- exclua a instancia imediatamente
+        //neste caso queremos que o valor 10 seja mostrado como uma string mas na forma hexadecimal
+        //aqui tentamos invocar o metodo Number.toFixed() para formatar um numero com um numero especifico de pontos decimais, o método aceita um argumento que indica quantos pontos decimais devem ser usados
+        //o metodo retorna a string correspondente do numero, usando a notação de ponto fixo
+        //aqui queremos formatar o numero 19.006 para somente duas casas decimais
+        console.log(`${distance} : ${distance.toFixed(2)}`); //19.01
+
+        //atribui um novo valor na variavel
+        distance = 19.004;
+        //aqui formata o numero 19.004 para somente 2 casas decimais
+        console.log(`${distance} : ${distance.toFixed(2)}`); //19.00
+
+        /**
+         * É importante observar que os navegadores da Web podem usar métodos de arredondamento de maneira diferente. Portanto, você deve ter cuidado ao usar o toFixed() método especialmente para aplicativos que lidam com valores monetários.
+         * 
+         * Para formatar um número em notação eletrônica, use o toExponential() método conforme mostrado no exemplo a seguir.
+        */
+
+        //declara variaveis de escopo global e as inicializa com valores literal numerico do tipo primitivo number
+        var x = 10, y = 100, z = 1000;
+
+        //usando o metodo invoca na variavel, podemos formatar um número em notação eletrônica, use o toExponential() método
+        console.log(`${x} : ${x.toExponential()}`);
+        console.log(`${y} : ${y.toExponential()}`);
+        console.log(`${z} : ${z.toExponential()}`);
+
+        /**
+         * Para obter uma representação de string de um objeto numérico com a precisão especificada, você usa o toPrecision() método.
+         
+            numberObject.toPrecision(precision);
+
+         * O precision argumento determina o número de dígitos significativos.
+         * 
+         * O toPrecision() método retorna a representação de string de um  Number objeto em notação exponencial ou ponto fixo arredondado para dígitos significativos de precisão.
+         * 
+         * Observe que se você omitir o argumento de precisão, o toPrecision() método se comportará como o toString()método. Veja os seguintes exemplos:
+        */
+
+        //declara uma variavel de escopo global chamada distance que e inicializada com um valor primitivo do tipo number, um valor literal numerico de ponto flutuante
+        let x1 = 9.12345;
+
+        //usando o metodo Number.toPrecision() para obter uma representação de string de um numero, com a precisão especificada
+        //o argumento passado para o metodo representa o numero significativo de digitos que a precisao deve ter
+
+        //aqui a formatação se comporta como um método toString, pois não passsamos argumento para o metodo, so retorna a representação do numero em string
+        console.log(`${x1} : ${x1.toPrecision()}`);
+        //aqui a formatação e de 4 digitos, que o numero tem que ter
+        console.log(`${x1} : ${x1.toPrecision(4)}`);
+        //aqui a formatação e de 3 digitos, que o numero tem que ter
+        console.log(`${x1} : ${x1.toPrecision(3)}`);
+        //aqui a formatação e de 2 digitos, que o numero tem que ter 
+        console.log(`${x1} : ${x1.toPrecision(2)}`);
+        //aqui a formatação e de 1 digitos, que o numero tem que ter
+        console.log(`${x1} : ${x1.toPrecision(1)}`);
+
+        /**
+         * A notação eletrônica pode ser retornada em alguns casos, por exemplo:
+        */
+
+        //atribui um novo valor a variavel x
+        x1 = 123.5;
+        //a formtação de um numero em alguns casos de precisão podem retornar o numero de notação eletronica
+        console.log(`${x1} : ${x1.toPrecision(2)}`);
+    </script>
+
+</body>
+</html>

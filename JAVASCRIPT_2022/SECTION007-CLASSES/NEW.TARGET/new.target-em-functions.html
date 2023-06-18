@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New.Target em functions</title>
+</head>
+<body>
+    <script>
+        /**
+         * * JS new.target em funções
+         * 
+         * Vamos ver a seguinte Person função construtora:
+        */
+
+        //declara uma function construtora chamada Person, que declara uma paramentro chamado name
+        //uma function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //declara uma propriedade chamada name que e inicializada com o argumento name
+            this.name = name;
+        }
+
+        /*
+         * Você pode criar um novo objeto a partir da Person função usando o new operador da seguinte forma:
+        */
+
+        //declara uma instancia de objeto usando o new operador e invocando a function construtora Person, passando o argumento 'john'
+        //o new operador cria um novo objeto vazio e o atribui ao this, a function construtora define propriedades no objeto referenciado por this e o new operador retorna o this valor
+        //assim a variavel john referencia a instancia de objeto recem criada
+        let john = new Person('John');
+        //acessando a propriedade name da instancia de objeto referenciada por john
+        console.log(john.name); //john
+
+        /*
+         * Ou você pode chamar o Person como uma função:
+        */
+
+        //chamando(invocando) a function construtora Person sem usar o new operador, sera chamada como uma função regular normal, fornecendo o argumento 'Lily'
+        //quando se chama a function construtora sem o new operador não se tem a referencia do this, porque usa-se o this do contexto global que aqui nesse caso e o window objeto do navegador, assim a propriedade definidas pela function construtora são adicionadas ao window objeto
+        //ao chama function define propriedades no window objeto
+        Person('Lily');
+
+        /**
+         * Como o this é definido para o objeto global , ou seja, o window objeto quando você executa o JavaScript no navegador da Web, a name propriedade é adicionada ao window objeto da seguinte maneira:
+        */
+
+        console.log(window.name);
+
+        /**
+         * Para ajudá-lo a detectar se uma função foi chamada usando o new operador, você usa a new.target metapropriedade.
+         * 
+         * Em uma chamada de função normal, o new.target retorno undefined. Se a função foi chamada com o new operador, o new.target retorna uma referência à função.
+         * 
+         * Suponha que você não queira que o Person seja chamado como uma função, você pode usar o new.target da seguinte forma:
+        */
+
+        //declara uma function construtora chamada Person, que declara uma paramentro chamado name
+        //uma function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //utilizando a metapropriedade new.target para verificar se Person foi invocada(chamda) usando o new operador ou foi chamada sem o new operador como uma function normal regular
+            //se a metapropriedade new.target retornar undefined e a negação de undefined e true e porque a Person função construtora foi chamada como uma function regular
+            //se new.target retornar o nome da Function Person(a referencia) e porque foi chamada usando o new operador a negação de Person não existe(e false)
+            //isso a Person ser usada somente com o new operador
+            if(!new.target) {
+                //lança uma exceção
+                throw "must use new operator with Person";
+            }
+
+            //declara propriedade chamada name e a inicializa usando o name argumento
+            this.name = name;
+        }
+
+        /**
+         * Agora, a única maneira de usar  Person é instanciar um objeto dele usando o new operador. Se você tentar chamá-lo como uma função normal, receberá um erro.
+        */
+        
+    </script>
+</body>
+</html>

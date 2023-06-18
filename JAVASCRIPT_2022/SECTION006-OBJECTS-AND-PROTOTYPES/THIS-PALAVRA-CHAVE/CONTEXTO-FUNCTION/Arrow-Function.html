@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Palavra-Chave</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * ARROW FUNCTION
+         * 
+         * ES6 introduziu um novo conceito denominado arrow function. Nas arrow function, o JavaScript define o this léxico(Um escopo léxico em Javascript significa que uma variável definida fora de uma função pode ser acessível dentro de outra função definida após a declaração da variável. Mas o oposto não é verdadeiro, as variáveis ​​definidas dentro de uma função não estarão acessíveis fora dessa função.)
+         * 
+         * Isso significa que a arrow function não cria seu próprio contexto de execução, mas herda o this da função externa onde a arrow function é definida. Veja o seguinte exemplo:
+        */
+
+        //aqui definimos uma arrow function anonima que não possui parametro mas possui uma expressão que resulta em um objeto
+        //aqui o this esta no contexto global, assim o this referece ao objeto global window do navegador
+        //a arrow function por não criar seu contexto de execução, herda o this da function externa que aqui não temos mas estamos no contexto global assim, this referece ao objeto global window do navegador
+        //a arrow function e atribuida a getThis variavel como um valor
+        let getThis = () => this;
+        console.log(`getThis() === window = ${getThis() === window}`); //true
+
+        /**
+         * Neste exemplo, o this valor é definido como o objeto global, ou seja, window no navegador da web.
+         * 
+         * Visto que uma arrow function não cria seu próprio contexto de execução, definir um método usando uma arrow function causará um problema. Por exemplo:
+        */
+
+        //declara uma function construtora chamada Car que não possui paramentro declarado
+        //essa function construtora recebe um objeto anonimo como prototipo
+        //esse objeto anonimo de prototipo pode ser refenciado por Car.prototype, assim propriedades definidas nesse prototipo podera ser compartilhado por todas as instancias
+        function Car() {
+            //cria uma propriedade chamada speed e a adiciona no objeto this para ser retornado como referencia da instancia criada
+            this.speed = 120;
+        }
+
+        //definindo um metodo no objeto prototipo anonimo
+        //esse objeto e referenciado por Car.prototype
+        //propriedades definidas no prototipo de objeto vão ser compartilhadas por todas as istancias
+        //aqui definimos uma propriedade chamada getSpeed que recebe uma arrow function anonima que não possui paramentro mas retorna um valor
+        Car.prototype.getSpeed = () => {
+            //aqui tem um erro por estamos usando a arrow function para metodo, por a arrow function não definir um contexto de execução e herda o this valor do contexto da function externa chamadora que no caso e prototype e seu contexto externo e o contexto global e no contexto global o this e refenciado como um objeto global window do navegador, aqui o this não referencia uma instancia de objeto mas o objeto global window do navegador, assim gera um error por não conseguimos acessar o valor da propriedade na instancia atual avalida por o this esta referenciado o window e não possui uma propriedade definida como speed 
+            return this.speed;
+        }
+        
+        //declara uma instancia de objeto chamada car invocando o function construtor usando a new palavra chave referenciado a instancia para o this
+        var car = new Car();
+        //por o car objeto esta ligado ao prototipo anonimo referenciado por Car.prototype por meio da ligação de prototipos o JS procurada o metodo getSpeed no car objeto instancia se não encontrar ira percorrer a cadeia de prototipo e encontrara em Car.prototype objeto prototipico anonimo, isso ira gerar um erro por estamos usando o valor de getSpeed como uma arrow function onde o this não referncia a istancia de objeto global
+        car.getSpeed();
+
+        /**
+         * Dentro do getSpeed() método, o this valor faz referência ao objeto global, não ao Car objeto. Portanto, a car.getSpeed() chamada causa um erro porque o objeto global não possui a speed propriedade.
+         * 
+         * Neste tutorial, você aprendeu como o JavaScript this se comporta em diferentes contextos.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * REQUEST HEADERS(CABEÇLAHOS DE SOLICITAÇÃO)
+         * 
+         * Para definir um cabeçalho de solicitação(REQUEST HEADER) em fetch, podemos usar a headers opção. Ele tem um objeto com cabeçalhos de saída, assim:
+        */
+
+        //Os cabeçalhos HTTP permitem que o cliente e o servidor passem informações adicionais com a solicitação(REQUEST) ou a resposta(RESPONSE) HTTP.
+        //OBSE: Um cabeçalho de resposta é um cabeçalho HTTP que pode ser usado em uma resposta HTTP e que não está relacionado ao conteúdo da mensagem. Os cabeçalhos de resposta, como Age, Location ou Server são usados ​​para fornecer um contexto mais detalhado da resposta.
+
+        //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+        //passamos para o fetch como primeiro argumento o url para fazer a request, e o segundo argumento, e um objeto options com a propriedade de headers que tem como valor um header objeto
+        //definimos um header para o request, com informações adicionais
+        let response = fetch(protectedURL, {
+            headers: {
+                Authentication: 'secret'
+            }
+        });
+
+
+        /**
+         * …Mas há uma lista de cabeçalhos HTTP proibidos que não podemos definir
+         * 
+            * Accept-Charset,Accept-Encoding
+            * 
+            * Access-Control-Request-Headers
+            * 
+            * Access-Control-Request-Method
+            * 
+            * Connection
+            * 
+            * Content-Lengt
+            * 
+            * Cookie,Cookie2
+            * 
+            * Date
+            * 
+            * DNT
+            * 
+            * Expect
+            * 
+            * Host
+            * 
+            * Keep-Alive
+            * 
+            * Origin
+            * 
+            * Referer
+            * 
+            * TE
+            * 
+            * Trailer
+            * 
+            * Transfer-Encoding
+            * 
+            * Upgrade
+            * 
+            * Via
+            * 
+            * Proxy-*
+            * 
+            * Sec-*
+            * 
+         * Esses cabeçalhos garantem HTTP adequado e seguro, portanto, são controlados exclusivamente pelo navegador.
+        */
+    </script>
+
+</body>
+</html>

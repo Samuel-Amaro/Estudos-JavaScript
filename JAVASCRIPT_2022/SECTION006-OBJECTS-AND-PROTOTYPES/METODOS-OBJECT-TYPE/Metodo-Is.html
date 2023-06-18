@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodo Is</title>
+</head>
+<body>
+    <script>
+        /**
+         * * JAVASCRIPT Object.is() - É 
+         * 
+         *  Resumo : neste tutorial, você aprenderá sobre o JavaScript Object.is() para verificar se dois valores são iguais.
+         * 
+         * O Object.is() se comporta como o === operador(OPERADOR DE COMPARAÇÃO ESTRITAMENTE IGUAL) com duas diferenças:
+         
+            - -0 e +0
+
+            - NaN
+
+         * 
+         * * ZERO NEGATIVO
+         * 
+         * O === operador trata -0 e +0 tem o mesmo valor:
+        */
+
+        //declara duas variaveis que possum o mesmo valor mesmo ambas tendo operadores unarios associadoas a elas, como o operador aritimetico soma, e o subtração
+        let amount = +0, volume = -0;
+        console.log(`+0 === -0 : ${volume === amount}`); //true
+
+        /**
+         * No entanto, Object.is() trata +0 e -0 como valores diferentes. Por exemplo:
+        */
+
+        //utilizando o metodo Objec.is() que e responsavel por verificar se dois valores são iguais, aqui para o metodo são valores diferentes
+        console.log(`+0 Objec.is() -0 : ${Object.is(amount, volume)}`); //false
+
+        /**
+         * * NaN
+         * 
+         * O === operador considera NaN e NaN são valores diferentes. O NaN é o único número que não é igual a si mesmo. Por exemplo:
+        */
+
+        //usando o operador de comparação estritamente igual não ver NaN como um valor igual a NaN
+        let quantity = NaN;
+        console.log(`NaN === NaN = ${quantity === quantity}`); //false
+
+        /**
+         * No entanto, Object.is() trata NaN como o mesmo valor: 
+        */
+
+        //usando o metodo Object.is() o metodo enxerga o NaN valor como um NaN valor
+        console.log(`NaN Object.is() NaN = ${quantity, quantity}`); //true
+        
+    </script>
+</body>
+</html>

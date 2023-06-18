@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * * COISAS PARA SE MANTER EM MENTE SOBRE O setTimeout() e o setInterval()
+         * 
+         *  Existem algumas coisinhas que devemos sempre lembrar quando estamos trabalhando com setTimeout() e setInterval():
+         * 
+         * * TIMEOUTS RECURSIVOS
+         * 
+         * Há outra maneira de usar o   setTimeout(): você pode chamá-lo recusivamnete para executar o mesmo código repetidas vezes, ao invés de usar o  setInterval().
+         * 
+         * O exemplo abaixo usa um  setTimeout() recursivo para executar a função passada a cada 100 milissegundos:
+        */
+
+        let i = 1;
+
+        //executa a função rum a cada 100 milissegundos
+        setTimeout(function run() {
+            console.log(i);
+            i++;
+            //executa a função rum a cada 100 milissegundos
+            //chamada recursiva
+            setTimeout(run, 100);
+        }, 100);
+
+        /**
+         * 
+         * Compare o exemplo acima com o seguinte - ele usa setInterval()para obter o mesmo efeito:
+         * 
+         * */
+
+         let j = 1;
+
+         setInterval(function run(){
+             console.log(i);
+             i++;
+         }, 100);
+
+         /**
+          * 
+          * * QUAL A DIFERENÇA ENTRE O setTimeout() recursivo e o setInterval() ?
+          * 
+          * A diferença entre as duas versões é bem sútil.
+          * 
+              - O  setTimeout() recursivo garante que o mesmo intervalo entre as execuções (por exemplo,  100ms no exemplo acima). O código será obtido, depois esperar  100 milissegundos antes de fazer isso de novo— então o será o mesmo, idependente do tempo que o código leva para ser definido.
+
+              - O exemplo usando  setInterval() faz como coisas um pouco diferentes.O intervalo escolhido inclui o tempo necessário para executar o código que você deseja executar. Digamos que o código leva  40 milissegundos de execução - o intervalo acaba 60 levando apenas milissegundos.
+
+              - Quando usamos o setTimeout() recursivamente, cada iteração pode calcular um delay diferente antes de executar a próxima iteração. Em outras palavras, o valor do segundo parâmetro pode especificar um tempo diferente em milissegundos para esperar antes de rodar o código de novo.
+          * 
+          * Quando seu código tem o potencial para levar mais tempo do que lhe foi atribuido, é melhor usar o setTimeout() recursivo — isso irá manter o intervalo de tempo constant entre execuções independente do quanto tempo o código levar para ser executado, e você não terá erros.
+          * 
+          * * TIMEOUTS IMEDIATOS
+          * 
+          * Usar zero como o valor para setTimeout() faz a execução da callback ser o mais rápido o possível, mas apenas depois que a main thread for terminada.
+          * 
+          * Por exemplo, o código abaixo (veja funcionar aqui) mostra um alert que contém um "Hello", depois um  alert que contém "World" assim que você clicar em OK no primeiro alerta.
+          * */
+
+          setTimeout(function() {
+              alert('word');
+          }, 0);
+
+          alert('Hello');
+
+          /**
+           * 
+           * Isso pode ser útil em casos onde você quer fazer um bloco de código ser executado assim que a main thread acabar o seu processamento — colocar no loop de eventos async, assim ele vai ser executado logo depois.
+           * 
+           * 
+           * * CANCELANDO COM clearTimeout() ou clearInterval()
+           * 
+           * clearTimeout() e clearInterval() usam a mesma lista de entradas para cancelamento. Isso significa que você pode usar os dois para cancelar um setTimeout() ou setInterval().
+           * 
+           * Mas mesmo assim, você deve usar o clearTimeout() para entradas setTimeout() e clearInterval() para entradas setInterval(). Isso evita confusões.
+           * */
+    </script>
+</body>
+</html>
+

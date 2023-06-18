@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * EXLCUIR UMA PROPRIEDADE DE UM OBJETO
+         * 
+         * Para excluir uma propriedade de um objeto, você usa o delete operador:
+         
+            delete objectName.propertyName;
+
+         * 
+         * O exemplo a seguir remove a age propriedade do person objeto:
+        */ 
+
+        //declara um objeto chamado person, usando a sintaxe literal de objeto
+        let person = {
+            //declara propriedades usando o par chave-valor, quando a muitas propriedades a separamos por virgula
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        console.log(`person.age = ${person.age}`);
+
+        //adicionando uma nova propriedade ao objeto person apos ter sido criado, a instrução abaixo add uma nova propriedade ao person objeto, a propriedade possui a chave 'age' e o value 25
+        person.age = 25;
+        
+        console.log(`person.age = ${person.age}`);
+
+        //exclui(remove) uma propriedade existente do objeto person, a propriedade age sera exlcuida do objeto person usando o operador delete que e um operador unario onde so possui um operando no caso a propriedade
+        delete person.age;
+
+        /**
+         * Se você tentar acessar a propriedade age novamente, obterá um undefined valor.
+         * 
+        */
+
+        console.log(`person.age = ${person.age}`);
+    </script>
+
+</body>
+</html>

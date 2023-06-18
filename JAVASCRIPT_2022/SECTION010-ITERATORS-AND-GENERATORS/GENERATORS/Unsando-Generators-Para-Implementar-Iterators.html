@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Generators Para Implementar Iterators</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * USANDO GENERATORS PARA IMPLEMENTAR ITERATORS 
+         *
+         * Ao implementar um iterador, você precisa definir manualmente o next()método. No next() método, você também deve salvar manualmente o estado do elemento atual.
+         *
+         * Como os geradores são iteráveis, eles podem ajudá-lo a simplificar o código para implementar o iterador.
+         * 
+         * Veja a seguir um Sequence iterador criado no tutorial do iterador:
+         * 
+         * E aqui está o novo iterador Sequence que usa um gerador:
+        */
+
+        //definindo um tipo personalizado de class
+        //define um class chamada Sequence com uma palavra-chave class
+        class Sequence{
+            //construtor da class Sequence, define três paramentros com valores padrões
+            constructor(start = 0, end = Infinity, interval = 1) {
+                //define propriedades e as inicializa com os argumentos
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+            }
+            //define um método de instancia da classe
+            //o metodo definido e diferente dos métodos normais, e um método do tipo generator
+            //o * o classifica como um método generator
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformida com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            //a função geradora pode ser executada por pedaços, pode pausar no meio do caminho e continuar de onde parou
+            * [Symbol.iterator]() {
+                //loop for
+                for(let index = this.start; index <= this.end; index += this.interval) {
+                   //a yield instrução, retorna o valor index, e logo em seguida para a execução da function * generator
+                   //usando generator para salvar o valor do elemento atual para ser iterado
+                   yield index;
+                }
+            }
+        };
+
+        /**
+         * Como você pode ver, o método Symbol.iterator é muito mais simples usando o gerador.
+         *
+         * O script a seguir usa o iterador de sequência para gerar uma sequência de números ímpares de 1 a 10:
+        */
+
+        //declara uma nova instancia de objeto da class Sequence invocando o construtor e passando três argumentos, o primeiro argumento e o start que recebe 2, o segundo argumento e o end que recebe 10 o terceiro argumento e o interval que recebe 2
+        let oddNumbers = new Sequence(2, 10, 2);
+
+        //utilizando o for...of construção para iterar sobre o tipo personalizado sequence que acabamos de definir sobre seus elementos
+        for(const num of oddNumbers) {
+            console.log(num);
+        }
+        
+    </script>
+
+</body>
+</html>

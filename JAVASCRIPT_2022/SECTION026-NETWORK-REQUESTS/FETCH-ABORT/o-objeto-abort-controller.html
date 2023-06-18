@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * THE ABORTCONTROLLER OBJETC(o objeto AbortController)
+         * 
+         * Crie um controlador:
+        */
+
+        let controller = new AbortController();
+
+        /** Um controlador é um objeto extremamente simples.        
+         * 
+            * Possui um único método abort(),
+            * 
+            * E uma única propriedade signal que permite definir ouvintes de eventos nele.
+            * 
+         * Quando abort() é chamado:
+         * 
+            * controller.signal emite o "abort" evento.
+            * 
+            * controller.signal.aborted propriedade se torna true. 
+            * 
+         * Geralmente, temos duas partes no processo:
+         * 
+            * Aquele que realiza uma operação cancelável, coloca um listener em controller.signal.
+            * 
+            * A que cancela: chama controller.abort() quando precisa.
+            * 
+         * 
+        */
+    </script>
+
+</body>
+</html>

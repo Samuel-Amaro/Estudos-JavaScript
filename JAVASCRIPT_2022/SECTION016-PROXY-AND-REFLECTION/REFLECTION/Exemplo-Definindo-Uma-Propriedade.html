@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REFLECTION JS - REFLEXÃO
+         *
+         * * DEFININDO UMA PROPRIEDADE: Reflect.defineProperty()
+         * 
+         * O Reflect.defineProperty() é como o Object.defineProperty(). No entanto, ele retorna um booleano indicando se a propriedade foi definida com sucesso ou não, em vez de lançar uma exceção:
+         
+            Reflect.defineProperty(target, propertyName, propertyDescriptor);
+
+         * Veja o seguinte exemplo
+        */
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel person
+        let person = {
+            //declara propriedade usando sintaxe chave : valor
+            name: 'John Doe'
+        };
+
+        //usando a API REFLECTION
+        //para invocar o metodo estatico defineProperty
+        //usando o objeto global Reflect, que não e construtor e nem uma function, podemos invocar métodos estaticos por meio dele
+        //o reflect Api permite chamar métodos, construir objetos, obter e definir propriedades, manipular e estender propriedades, por meio de em tempo de execução.
+        //Usando o metodo estatico defineProperty invocado pela Objeto global Reflect, podemos definir uma propriedade em um objeto, definiremos uma propriedade no objeto person, a propriedade sera chamada de age
+        //o metodo defineProperty aceita três argumento o primeiro e o objeto que vai receber a propriedade, o segundo e o nome da proprieade o terceiro e o objeto descritor da propriedade
+        //ira definir uma propriedade no objeto literal person em tempo de execução por meio da api Reflect
+        if(Reflect.defineProperty(person, 'age', {
+            //objeto litreral descritor de propriedade
+            //que tem quatro propriedades: configurable, enumerable, writable, e value.
+            //define propriedades usando sintaxe chave : valor
+            writable: true, //propriedada sera gravavel
+            configurable: true, //propriedade sera configuravel,
+            enumerable: false, //propriedade não podera ser iterada por loops como o for in
+            value: 25 //valor que inicia a propriedade
+        })) { //se propriedade não foi definida
+            //mostra o valor da propriedade definida
+            console.log(person.age);
+        }else{
+            //se não definiu propriedade mostra o erro porque
+            console.log(`Cannot define age property on the person object.`);
+        }
+
+        /**
+         * Neste tutorial, você aprendeu sobre a reflexão JavaScript e a API Reflect que contém vários métodos reflexivos.
+        */
+       
+    </script>
+
+</body>
+</html>

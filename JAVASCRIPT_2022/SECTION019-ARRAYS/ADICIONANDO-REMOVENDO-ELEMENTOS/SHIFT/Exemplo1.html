@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLOS DO MÉTODO JS ARRAY SHIFT()
+         * 
+         * Vamos dar alguns exemplos de uso do shift() método.
+         * 
+         * * 1) USANDO O EXEMPLO DO MÉTODO JS ARRAY SHIFT
+         * 
+         * O exemplo a seguir usa o shift()método para remover o primeiro elemento de uma array:
+         * 
+        */
+
+        //declara um array literal chamado numbers que foi inicializado com 3 elementos
+        const numbers = [10, 20, 30];
+
+        //usando o metodo shift() da instancia de objeto do tipo array numbers para remover o primeiro elemento do array numbers, que aqui e o elemento 10, e remove o primeiro elemento do array e o retorna o elemento para a number variavel
+        let number = numbers.shift();
+
+        //aqui mostramos o number valor como um objeto, usando a extensão da sintaxe literal de objeto do ES6
+        //informar somente a variavel number informar que o number e o valor e o nome da propriedade ao mesmo tempo
+        console.log({number});
+        //propriedade numbers com o valor numbers
+        console.log({numbers});
+        console.log({length : numbers.length});
+    </script>
+</body>
+</html>

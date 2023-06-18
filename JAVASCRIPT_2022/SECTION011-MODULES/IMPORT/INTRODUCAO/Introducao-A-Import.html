@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import</title>
+</head>
+<body>
+
+   <button id="show">Show Dialog</button>
+   <script type="module" src="./app.js">
+
+       /**
+        * * JAVASCRIPT IMPORT
+        * 
+        * Resumo : neste tutorial, você aprenderá a importar módulos dinamicamente usando o tipo de função import() no ES2020.
+        * 
+        * * INTRODUÇÃO Á IMPORT JS
+        * 
+        * O ES6 introduziu o conceito de módulo que permite desenvolver código JavaScript modular. Suponha que você tenha o seguinte documento HTML simples com um botão:
+        
+            <!DOCTYPE html>
+            <html>
+
+            <head>
+                <title>Module Dynamic Import<title>
+            </head>
+            <body>
+
+                <button id="show">Show Dialog<button>
+                <script type="module" src="js/app.js"><script>
+            <body>
+            <html>
+
+        * 
+        * Quando os usuários clicam no botão, você deseja mostrar uma caixa de diálogo. Para deixar o código mais organizado, você desenvolve um módulo chamado dialog.js:
+        
+            export function show(message) {
+                alert(message);
+            }
+
+        *
+        * E use a show() função no app.js:
+        
+            import {show} from './dialog.js';
+
+            let btn = document.querySelector('#show');
+
+            btn.addEventListener('click', function () {
+                show('Hi');
+            });
+
+        *
+        * Antes do ES2020, não era possível carregar dinamicamente o dialog.js módulo quando necessário. O seguinte causará um erro:
+        
+            let btn = document.querySelector('#show');
+
+            btn.addEventListener('click', function () {
+                import {show} from './dialog.js';
+                show('Hi');
+            });
+
+        * O código acima tenta carregar o dialog.js módulo somente quando o botão é clicado.
+        * 
+        * O ES2020 introduziu a importação dinâmica do módulo por meio do tipo de função import() com a seguinte sintaxe:
+        
+            import(moduloEspecificador);
+
+        * O import() permite importar dinamicamente um módulo quando necessário. Aqui está como import()funciona:
+
+            - O import() aceita um especificador de módulo ( moduleSpecifier) que tem o mesmo formato que o especificador de módulo usado para a import instrução. Além disso, o moduleSpecifier pode ser uma expressão que resulta em uma string.
+
+            - O import() retorna um Promise que será preenchido(resolvido com valor) assim que o módulo for carregado completamente.
+
+        *
+        * Para carregar o dialog.js dinamicamente, você pode usar o da import() seguinte forma:
+        
+            let btn = document.querySelector('#show');
+
+            btn.addEventListener('click', function() {
+                import('./dialog.js')
+                    .then(( dialog ) => {
+                        dialog.show();
+                    })
+                    .catch( error => {
+                        // handle error here
+                    });
+            });
+
+        * 
+        * Como o import() retorna um Promise , você pode usar o async/await no app.js módulo assim:
+        
+            let btn = document.querySelector('#show');
+
+            btn.addEventListener('click', function () {
+                (async () => {
+                    try {
+                        let dialog = await import('./dialog.js');
+                        dialog.show('Hi')
+                    } catch (error) {
+                        console.log(error);
+                    }
+                })();
+
+            });
+            
+        * */
+
+   </script> 
+</body>
+</html>

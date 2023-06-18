@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OPERADORES UNARIO
+         * 
+         * Um operador unário é uma operação com apenas um operando.
+         * 
+         * * OPERADOR void
+         * 
+         * O operador void é utilizado de qualquer uma das seguintes formas:
+         
+            void (expressao)
+            void expressao
+
+         * 
+         * O operador void especifica que uma expressão deve ser avaliada sem retorno de valor. expressao é uma expressão JavaScript que deve ser avaliada. Os parênteses em torno da expressão são opcionais, mas é uma boa prática utilizá-los.
+         * 
+         * Você pode utilizar o operador void para especificar uma expressão como um link de hipertexto. A expressão é avaliada mas não é carregada no lugar do documento atual.
+         * 
+         * O código a seguir cria um link de hipertexto que não faz coisa alguma quando clicado pelo usuário. Quando o usuário clica no link, void(0) é avaliado como indefinido, que não tem efeito em JavaScript.
+         * */
+
+        //cria um elemento HTML <a> 
+        const ancoraLink = document.createElement('a');
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink.setAttribute("href", "javascript:void(0)");
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink.setAttribute("target", "_self");
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink.setAttribute("rel", "next");
+        //seta um texto de conteudo no elemento <a>
+        ancoraLink.textContent = "Clique aqui para fazer nada!";
+        //mudando o display do elemento
+        ancoraLink.style.display = "block";
+        //seleciona o corpo a area de conteudo do documento
+        let body = document.querySelector('body');
+        //adiciona o elemento <a> na area de conteudo do documento
+        body.appendChild(ancoraLink);
+
+        /**
+         * O código a seguir cria um link de hipertexto que submete um formulário quando clicado pelo usuário
+         *
+         */
+
+        //cria um elemento HTML <a> 
+        const ancoraLink2 = document.createElement('a');
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink2.setAttribute("href", "javascript:void(document.form.submit())");
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink2.setAttribute("target", "_self");
+        //seta um atributo no elemento <a> e o valor do atributo
+        ancoraLink2.setAttribute("rel", "next");
+        //seta um texto de conteudo no elemento <a>
+        ancoraLink2.textContent = "Clique aqui para Enviar!";
+        ancoraLink2.style.display = "block";
+        //body.append(ancoraLink2);
+        body.appendChild(ancoraLink2);
+    </script>
+</body>
+</html>

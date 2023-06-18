@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow functions</title>
+</head>
+<body>
+    <script>
+        /**
+         * * 3) PROTOTYPE METHODS
+         * 
+         * Veja o seguinte Counter objeto que usa o prototype padrão:
+        * */
+
+        //declara uma function construtora chamada Counter, que não possui parametro 
+        //function Counter() {
+            //declara uma propriedade
+        //    this.count = 0;
+        //}
+
+        //não se deve usar as arrow functions em metodos prototipos de obejetos ou functions construtoras
+        //uma arrow function anonima que não possui parametro mas possui declarações e uma instrução de retorno de valor
+        //Counter.prototype.next = () => {
+        //    return this.count;
+        //};
+
+        //uma arrow function anonima que não possui paramentro mas possui declarações e uma instrução de retorno de valor
+        //Counter.prototype.current = () => {
+        //    return ++this.next;
+        //};
+
+        /**
+         * O this valor nesses métodos next()e faz current() referência ao objeto global. Como você deseja que o this valor dentro dos métodos faça referência ao Counter objeto, você precisa usar as funções regulares:
+         * */
+
+        //forma correta de usar, usar a function regular anonima
+        
+        //declara uma Function construtura chamda Counter sem paramentro declarado
+        function Counter() {
+            //propriedade
+            this.count = 0;
+        }
+
+        //declara uma function anonima que não possui paramentro mas retorna um valor
+        Counter.prototype.next = function() {
+            return this.count;
+        };
+
+        //declara uma function anonima que não possui paramentro mas retorna um valor
+        Counter.prototype.current = function() {
+            return ++this.next;
+        }
+    </script>
+</body>
+</html>

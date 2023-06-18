@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REGULAR EXPRESSION: QUANTIFIERS(QUANTIFICADORES)
+         * 
+         * Os quantificadores correspondem a várias instâncias de um caractere, grupo ou classe de caracteres em uma string.
+         * 
+         * * REGULAR EXPRESSION: GREEDY(GANANCIOSO)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre quantificadores gananciosos e como eles funcionam nos bastidores.
+         * 
+         * Todos os quantificadores funcionam em modo guloso por padrão. Isso significa que os quantificadores combinarão o máximo possível com seus elementos anteriores.
+         * 
+         * O exemplo a seguir ilustra como os quantificadores gananciosos funcionam.
+         * 
+         * * O EXEMPLO DOS QUANTIFICADORES GANANCIOSOS(GREEDY QUANTIFIERS)
+         * 
+         * Suponha que você tenha uma string HTML que representa um elemento de botão:
+        */
+
+        //declara uma constante de escopo de bloco chamada button que e inicializada com uma string literal que representa um elemento HTML button
+        const button = '<button type="submit" class="btn">Send</button>';
+
+        /**
+         * E você quer combinar os textos entre aspas ("") como submit e btn.
+         * 
+         * Para fazer isso, você usa aspas duplas (“), a classe de caractere ponto (.) e o quantificador (+) para construir o seguinte padrão:
+         
+            /".+"/g
+
+         * Este padrão significa que:
+
+            - "começa com"
+            - . corresponde a qualquer caractere exceto a nova linha
+            - + corresponde ao caractere anterior uma ou mais vezes
+            - "termina com"
+            - g flag retorna todas as correspondências
+
+         * 
+         * O seguinte usa o match() método para corresponder a string s com o padrão:
+        */
+
+        //criando uma expressão regular que possui um padrão que significa o seguinte, quer combinar os textos entre aspas (""): começa com aspas duplas " o conteudo corresponde a qualquer caractere exceto nova linha uma ou mais vezes termina com " fecha aspas duplas, a g flag retorna todas as correspondecias.
+        //usamos a classe de caracteres .
+        //usamos o quantificador de abreviação (+) -> corresponde o caractere anterior uma ou mais veses {1,}
+        //usamos a flag g para retorna todas as correspondecias do padrão
+        const pattern = /".+"/g;
+        //usando o método String.match(regexp) para retorna todoas as correspondecias do regexp na string str usando o padrão especificado na expressão regular.
+        const result = button.match(pattern);
+        console.log(result);
+
+        /**
+         * Ele retorna '"submit" class="btn"' em vez de submit” e btn.
+         * 
+         * A razão é que no modo guloso, o quantificador (+) tenta combinar o elemento precedente(anterior) (".) tanto quanto possível.
+        */
+       
+    </script>
+</body>
+</html>
+
+
+

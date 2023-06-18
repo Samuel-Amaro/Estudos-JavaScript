@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <img src="./image/JavaScript-Call-Stack-main.png" alt="imagen">
+
+    <img src="./image/JavaScript-Call-Stack-step-2.png" alt="imagen">
+
+    <img src="./image/JavaScript-Call-Stack-step-3.png" alt="imagen">
+
+    <img src="./image/JavaScript-Call-Stack-step-4.png" alt="imagen">
+
+    <img src="./image/JavaScript-Call-Stack-step-5.png" alt="imagen">
+
+    <img src="./image/JavaScript-Call-Stack-empty-stack.png" alt="imagen">
+
+    <p>A imagem a seguir ilustra o status geral da pilha de chamadas em todas as etapas:</p>
+
+    <img src="./image/JavaScript-Call-Stack.png" alt="imagen">
+    
+    <script>
+
+        /**
+         * * EXEMPLO DE CALL STACK JS
+         * 
+         * Vamos começar com o seguinte exemplo:
+        */
+
+
+        //Quando esse script e executado pela primeira vez, você executa um script, o mecanismo JavaScript cria um Contexto de Execução Global e o coloca no topo da pilha de chamadas.
+        //Sempre que uma função é chamada, o mecanismo JavaScript cria um contexto de execução de função para a função, coloca-o no topo da pilha de chamadas e inicia a execução da função.
+        //Se uma função chama outra função, o mecanismo JavaScript cria um novo contexto de execução de função para a função que está sendo chamada e a coloca no topo da pilha de chamadas.
+        //Quando a função atual é concluída, o mecanismo JavaScript a retira da pilha de chamadas e retoma a execução de onde parou.
+        //O script irá parar quando a pilha de chamadas estiver vazia.
+
+
+        //declara uma function chamada add, que declara dois paramentros chamados a e b
+        function add(a, b) {
+            return a + b;
+        }
+
+        //declara uma function chamada average que declara dois paramentros chamados a e b    
+        function average(a, b) {
+            //(PONTO 2)
+            //aqui neste ponto quando a average function e invocada chama a fuction add, e neste ponto o mecanismo JS cria outro contexto de execução de função para a add() fucntion, e o coloca no topo da pilha de chamadas, acima da chamada de average, que esta acima do contexto de execução global
+            //(PONTO 3)
+            //neste ponto o mecanismo JS ja executou a function add, assim a retira da pilha de chamadas
+            return add(a, b) / 2;
+        }
+
+        //declara uma variavel de escopo de bloco chamada x, que e inicializada com o resultado da invocação da function average, passando os valores 10 e 20 como argumentos
+        //(PONTO 1)
+        //ao invocar a function average o mecanismo JS cria o contexto de execução de função e a coloca no topo da pilha de chamada, lembrando que o main() que referencia o contexto de execução global ja esta la
+        //(PONTO 4)
+        //neste passo a average function e seu contexto de execução de função estão no topo da pilha de chamadas, quando o mecanismo JS e executado a retira de la
+        //(PONTO 5)
+        //aqui o average ja foi executado e seu contexto de execução de função tmabém, assim o contexto global ja foi encerrado sua fase de execução ja terminou
+        let x = average(10, 20);
+
+        /**
+         * Quando o mecanismo JavaScript executa esse script, ele coloca o contexto de execução global (indicado por main() ou global()função na pilha de chamadas.
+         * 
+         * O contexto de execução global entra na fase de criação e passa para a fase de execução
+         * 
+         * O mecanismo JavaScript executa a chamada para a average(10, 20)função e cria um contexto de execução de função para a average() função e a coloca no topo da pilha de chamadas:
+         * 
+         * O mecanismo JavaScript começa a executar o average() since porque a average() função está no topo da pilha de chamadas.
+         * 
+         * A average() função chama a add() função. Neste ponto, o mecanismo JavaScript cria outro contexto de execução de função para a add()função e o coloca no topo da pilha de chamadas:
+         * 
+         * O mecanismo JavaScript executa a add() função e a retira da pilha de chamadas:
+         * 
+         * Neste ponto, a average() função está no topo da pilha de chamadas, o mecanismo JavaScript é executado e a retira da pilha de chamadas.
+         * 
+         * Agora, a pilha de chamadas está vazia, então o script para de ser executado:
+        */
+
+        </script>
+
+</body>
+</html>

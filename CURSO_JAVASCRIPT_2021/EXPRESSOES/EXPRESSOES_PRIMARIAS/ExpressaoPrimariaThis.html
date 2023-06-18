@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressão</title>
+</head>
+<body>
+    
+    <h2>Expressão Primaria</h2>
+
+    <script>
+        /**
+         * * EXPRESSÕES PRIMÁRIAS
+         * 
+         * Palavras reservadas e expressões gerais do JavaScript.
+         * 
+         * * this
+         * 
+         * Utilize a palavra reservada this para se referir ao objeto atual. Em geral, o this se refere ao objeto chamado em um método. Utilize o this das seguintes formas:
+        
+            this["nomePropriedade"];
+            this.nomePropriedade;
+
+         *
+         *
+         *  Suponha uma função chamada valide que valida a propriedade valor de um objeto, dado o objeto e os valores máximo e mínimo:
+         * */
+
+         function valide(obj, minimo, maximo) {
+             if((obj.value < minimo) || (obj.value > maximo)) {
+                alert("Valor Inválido!");
+             }
+         }
+
+         /**
+          * 
+          * Você poderia chamar valide em cada manipulador de evento onChange de um formulário utilizando this para passar o elemento do formulário, como no exemplo a seguir:
+          * 
+          * */
+
+          //cria elementos HTML e seta atributos nos elementos e valores
+          const label = document.createElement("label");
+          label.textContent = "Informe um número entre 18 e 99:";
+          let input = document.createElement("input");
+          input.setAttribute("type", "text");
+          input.setAttribute("name", "idade");
+          input.setAttribute("size", "3");
+          // seleciona o corpo do documento HTML
+          //seleciona a area de conteudo do documento
+          let body = document.querySelector("body");
+          //o this expressão primaria refencia o proprio elemento input text, no contexto atual, e considerado um objeto
+          input.setAttribute("onChange", "valide(this, 18, 99);"); 
+          
+          //ADD OS ELEMENTOS HTML CRIADOS COMO ELEMENTOS FILHOS DA TAG  BODY
+          body.appendChild(label);
+          body.appendChild(input);
+
+
+    </script>
+</body>
+</html>

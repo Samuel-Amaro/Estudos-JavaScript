@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Busca Simples(fetch()) de async/await</title>
+</head>
+<body>
+    <script>
+        //Chame o método fetch () para buscar a imagem e armazene-a em uma variável
+        async function myFetch() {
+            let response = await fetch('coffee.jpg');
+            // Use um bloco then () para responder à conclusão bem-sucedida da promessa
+            // pegando a resposta retornada e executando blob () nela para transformá-la em um blob
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+                return await response.blob();
+            }
+            // blob () também retorna uma promessa; quando é concluído com  sucesso, ele retorna
+            // O objeto blob no retorno de chamada
+        }
+
+        myFetch().then(function(blob) {
+            //Crie um URL de objeto que aponte para o objeto blob
+            let objectURL = URL.createObjectURL(blob);
+            //Crie um elemento <img> para exibir o blob (é uma imagem)
+            let image = document.createElement('img');
+            //Defina o src de <img> para o URL do objeto para que a imagem o exiba
+            image.src = objectURL;
+            //Anexe o elemento <img> ao DOM
+            document.body.appendChild(image);
+        }).catch(function(e) {
+            console.log(e)
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+
+        .alert{
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        /**
+         * * Criamos o elemento. Mas a partir de agora está apenas em uma variável chamada div, ainda não na página. Então não podemos ver.
+         * 
+         * * MÉTODOS DE INSERÇÃO
+         * 
+         * Para fazer a div aparecer, precisamos inseri-la em algum lugar no documento. Por exemplo, no elemento <body>, referenciado por document.body.
+         * 
+         * Existe um método especial append para isso: document.body.append(div).
+        */
+
+        //1. Cria o <div> element
+        
+        //usando o metodo document.createElement(tag) para criar um novo no de elemento com a tag fornecidda, cria um no de elemento <div>
+        let message = document.createElement('div');
+
+        //2. Defina sua classe como "alerta"
+        //define uma classe chamada alert no nó
+        message.className = "alert";
+
+        //3. Preencha-o com o conteúdo
+        //usando a propriedade elem.innerHTML para inserir um conteudo HTML no elemento
+        message.innerHTML = "<strong>Olá</strong> Você leu uma mensagem importante.";
+
+        //para a div aparencer precisamos inserila no documento
+        //para isso vamos usar o metodo document.body.append para adicionar o div no dom como um elemento filho do body
+        //anexamos o message node ao final do no body dentro dele, anexa message apos o ultimo elemento dentro de body
+        document.body.append(message);
+
+        /**
+         * Aqui chamamos append em document.body, mas podemos chamar o método append em qualquer outro elemento, para colocar outro elemento nele. Por exemplo, podemos anexar algo a <div> chamando div.append(anotherElement).
+         * 
+         * Aqui estão mais métodos de inserção, eles especificam diferentes locais onde inserir:
+         
+            node.append(...nodes or strings)– anexa nós ou strings no final de node
+
+            node.prepend(...nodes or strings) – inserir nós ou strings no início de node,
+
+            node.before(...nodes or strings)–- insere nós ou strings antes de node
+            
+            node.after(...nodes or strings)–- insere nós ou strings após node ,
+
+            node.replaceWith(...nodes or strings)–- substitui node pelos nós ou strings fornecidos.
+
+         * Os argumentos desses métodos são uma lista arbitrária de nós DOM a serem inseridos ou strings de texto (que se tornam nós de texto automaticamente).
+         * 
+         * 
+        */
+    </script>
+</body>
+</html>

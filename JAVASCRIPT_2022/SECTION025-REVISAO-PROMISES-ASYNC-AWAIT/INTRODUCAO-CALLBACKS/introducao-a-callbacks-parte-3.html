@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /**
+         * Aqui está um exemplo executável com um script real:
+        */
+
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(script);
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+        
+        //carrega um script externo, apos estar carregado e ter sido executado, chama functions declaradas no script, usa o script por meio das callbacks
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
+            alert(`Legal, o script ${script.src} está carregado`);
+            alert(_); // _ é uma função declarada no script carregado
+        });
+
+        /**
+         * Essa é a ideia: o segundo argumento é uma função (geralmente anônima) que é executada quando a ação é concluída.
+         * 
+         * Isso é chamado de estilo de programação assíncrona “baseado em retorno de chamada”. Uma função que faz algo de forma assíncrona deve fornecer um callback argumento onde colocamos a função para ser executada após a conclusão.
+         * 
+         * 
+        */
+    </script>
+</body>
+</html>

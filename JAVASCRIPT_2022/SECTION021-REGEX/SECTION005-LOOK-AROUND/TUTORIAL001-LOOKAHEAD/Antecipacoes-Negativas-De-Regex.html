@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * ANTECIPAÇÕES NEGATIVAS DE REGEX
+         *
+         * Suponha que você queira corresponder ao número, 1 mas não ao número 15 na seguinte string:
+        */
+
+        //declara uma string literal a ser usada na pesquisa
+        const s = '1 car is 15 feet long';
+
+        /**
+         * Para fazer isso, você usa um lookahead negativo. Aqui está a sintaxe do lookahead negativo:
+         
+            X(?!Y)
+
+            ?! - > sintaxe do lookahead negativo, so corresponde a X se não for seguido de Y, mas so vai corresponder a somente X, o Y, não sera correspondido, aqui so ira corresponder o X, o Y ficara de fora.
+
+         * 
+         * Nesta sintaxe, o mecanismo regex corresponde X apenas se for seguido por Y.
+         * 
+         * O exemplo a seguir ilustra como usar uma antecipação negativa:
+        */
+
+        //declara uma expressão regular que ira possui o seguinte padrão:
+        //um ou mais digitos, seguido por um grupo de captura que possui a seguinte regra como padrão, corresponder a nenhum espaço em branco ou a varios, e a string literal feet.
+        //o padrão e um ou mais digitos seguidos que não seje seguido por nenhum ou varios espaços em branco, e a string literal feet.
+        //aqui a sintaxe ?! e sintaxe de antecipação negativa, que so permite corresponder a \d+ se \d+ não for seguido de nenhum ou varios espaços em branco, mas não mostrara na correspondecia final o espaço em branco, somente o \d+
+        //neste padrão usamos, grupos de captura, quantificadores gananciosos, e classe de caracteres e o novo assunto apreendido, o ?! e o lookahead negativo, sintaxe de antecipação.
+        //padrão: corresponder a um ou varios digitos, somente se não for seguido de nenhum ou varios espaços em branco e a string liteal feet
+        const pattern = /\d+(?!\s*feet)/;
+
+        //usando o método String.match(regexp) para retornar todoas as correspondecias do regexp na string.
+        const match = s.match(pattern);
+        console.log(match);
+
+        /**
+         * * RESUMO
+         * 
+         * Uma regex lookahead X(?=Y)corresponde X apenas se for seguida por Y.
+         * 
+         * Um lookahead de regex negativo X(?!Y) corresponde X apenas se não for seguido por Y.
+        */
+    </script>
+</body>
+</html>
+
+
+

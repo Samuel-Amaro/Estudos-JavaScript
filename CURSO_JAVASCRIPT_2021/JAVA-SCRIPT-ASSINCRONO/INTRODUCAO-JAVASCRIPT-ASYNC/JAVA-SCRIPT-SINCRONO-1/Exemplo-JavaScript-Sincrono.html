@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Simples JavaScript Sincrono</title>
+</head>
+<body>
+    
+    <h1>Exemplo simples de JavaScript Sincrono</h1>
+
+    <button>Clique Aqui!</button>
+    
+    <script>
+        //obtem a referencia ao elemento HTML <button> por meio da API DOM
+        const btn = document.querySelector('button');
+        //registra um manipulador de evento no elemento button, ao ser clicado o button elemento tera um função anonima (arow function) para manipular o click do usuario no elemento
+        btn.addEventListener('click', () => {
+            //mostra um alerta ao clicar no elemento
+            alert('Você clicou Aqui!');
+            //e logo em seguida add um paragrafo no corpo da pagina, logo em sequencia
+            //cria um elemento HTML <P>
+            let pElem = document.createElement('p');
+            //seta conteudo no elemento
+            pElem.textContent = 'Este e um novo paragrafo.';
+            //add o elemento <P> como um elemento filho de <body> no corpo da pagina
+            document.body.appendChild(pElem);
+        });    
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .slider {
+            border-radius: 5px;
+            background: #E0E0E0;
+            background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+            width: 310px;
+            height: 15px;
+            margin: 5px;
+        }
+
+        .thumb {
+            width: 10px;
+            height: 25px;
+            border-radius: 3px;
+            position: relative;
+            left: 10px;
+            top: -5px;
+            background: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body">
+
+    <div class="slider">
+        <div class="thumb"></div>
+    </div>
+
+    <!--atribui um manipulador de evento por meio do atributo html para testar o captura de ponteiro de eventos no thumb. aqui atribuimos um manipulador para o evento de cada movimentação do mouse. o mesmo dispositivo apontador ira passar sobre o p elemento e sobre o thumb, mas o manipulador atribuido aqui não sera acionado pois o ponteiro de evento captura todos os eventos e os redireciona para thumb-->
+    <p style="border: 1px solid gray;" onmousemove="this.textContent = new Date()">Passe o mouse aqui para ver a data</p>
+
+    <script type="text/javascript">
+        /**
+         * * CAPTURA DE PONTEIRO
+         * 
+         * A captura de ponteiro é um recurso especial de eventos de ponteiro(o evento desce até o elemento passando pelos ancestrais).
+         * 
+         * A ideia é muito simples, mas pode parecer bastante estranha no início, pois nada disso existe para nenhum outro tipo de evento.
+         * 
+         * O método principal é:
+         
+            elem.setPointerCapture(pointerId) – vincula eventos com o dado pointerId a elem. Após a chamada todos os eventos de ponteiro com o mesmo pointerId(dispositivo apontador que esta causando o evento) terão elem como destino (como se tivessem acontecido em elem), não importando onde no documento eles realmente aconteceram.
+
+            Em outras palavras, elem.setPointerCapture(pointerId)redireciona todos os eventos subsequentes com o dado pointerId para elem.
+
+         * A ligação é removida:
+
+            automaticamente quando pointerup ou pointercancel eventos ocorrem,
+
+            automaticamente quando elem é removido do documento,
+
+            quando elem.releasePointerCapture(pointerId) é chamado.
+
+         * Agora para que serve? É hora de ver um exemplo da vida real.
+         * 
+         * * A captura de ponteiro pode ser usada para simplificar as interações do tipo arrastar(drap) e soltar(drop).
+         * 
+         * Vamos relembrar como se pode implementar um controle deslizante personalizado, descrito nos eventos Drag'n'Drop with mouse.
+         * 
+         * Podemos fazer um slider elemento para representar a faixa e o “corredor” ( thumb) dentro dela:
+         * 
+         * E aqui está a lógica de trabalho, como foi descrita, depois de substituir os eventos do mouse por eventos de ponteiro semelhantes:
+         
+            1. O usuário pressiona o controle deslizante thumb – pointerdown gatilhos.
+
+            2. Em seguida, eles movem o ponteiro – pointermove gatilhos, e nosso código move o thumb elemento.
+
+                …À medida que o ponteiro se move, ele pode sair do elemento deslizante thumb, ir acima ou abaixo dele. O thumb deve mover-se estritamente na horizontal, permanecendo alinhado com o ponteiro.
+
+            * Na solução baseada em eventos do mouse, para rastrear todos os movimentos do ponteiro, inclusive quando ele vai acima/abaixo do thumb, tivemos que atribuir mousemove o manipulador de eventos em todo o document.
+            * 
+            * Essa não é uma solução mais limpa, no entanto. Um dos problemas é que quando um usuário move o ponteiro pelo documento, ele pode acionar manipuladores de eventos (como mouseover) em alguns outros elementos, invocar funcionalidades de interface do usuário totalmente não relacionadas, e não queremos isso.
+            * 
+            * Este é o lugar onde setPointerCapture entra em jogo.
+            
+                Podemos chamar o thumb.setPointerCapture(event.pointerId) manipulador pointerdown,
+
+                Em seguida, futuros eventos de ponteiro até pointerup/cancel serão redirecionados para thumb.
+
+                Quando pointerup acontece (arrastando completo), a vinculação é removida automaticamente, não precisamos nos preocupar com isso.
+            
+            * Portanto, mesmo que o usuário mova o ponteiro pelo documento inteiro, os manipuladores de eventos serão chamados thumb. No entanto, as propriedades de coordenadas dos objetos de evento, como clientX/clientY ainda estarão corretas – a captura afeta apenas target/currentTarget.
+            * 
+            * Aqui está o código essencial:
+        */
+
+        let slider = document.querySelector('.slider');
+        let thumb = slider.querySelector(".thumb");
+        let shiftX;
+
+        //function manipuladora do ponteiro de evento
+        function onThumbDown(event) {
+            //previne a ação padrão do navegador
+            // impede o início da seleção (ação do navegador)
+            event.preventDefault();
+
+            shiftX = event.clientX - thumb.getBoundingClientRect().left;
+
+            //o metodo vincula eventos com o dado pointerId a elem.
+            //Após a chamada todos os eventos de ponteiro com o mesmo pointerId(disposito apontador onde iniciou o evento) terão thumb como destion (como se tivessem acontecido em thumb), independente de onde tenha começado 
+            //o pointerId e o identificador exclusivo do ponteiro que esta causando o evento
+            //captura de evento
+            //todo ou qualquer evento de ponteiro acionado fora de thumb sera redirecionado para thumb, para ser trado por ele, sendo que tenha que ter sido iniciado o evento pelo pointerId dispositivo apontador, o mesmo disposito tem que acionar os diferentes eventos para serem redirecionados para thumb
+            thumb.setPointerCapture(event.pointerId);
+
+            //atribui um manipualdor para o evento de ponteiro pointermove a cada movimentação do ponteiro
+            thumb.onpointermove = onThumbMove;
+
+            //atribui outro manipualdor de ponteiro, para o evento de ponteiro de quando o usuario liberar o ponteiro pressionado
+            thumb.onpointerup = event => {
+                //arrastando terminado, não há mais necessidade de rastrear o ponteiro
+                // ...qualquer outra lógica de "arrastar final" aqui...
+                //remove todos manipuladores de eventos de ponteiro
+                thumb.onpointermove = null;
+                thumb.onpointerup = null;
+            };
+        }
+
+        //outra function manipuladora de ponteiro de evento
+        function onThumbMove(event) {
+            let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+
+            //se o ponteiro estiver fora do controle deslizante => ajuste para a esquerda para ficar dentro dos limites
+            if(newLeft < 0) {
+                newLeft = 0;
+            }
+            let rightEdge = slider.offsetWidth - thumb.offsetWidth;
+            if(newLeft > rightEdge) {
+                newLeft = rightEdge;
+            }
+
+            thumb.style.left = newLeft + "px";
+        };
+
+        //atribui manipulador de evento para o evento de ponteiro, quando o ponteiro estiver pressionado
+        thumb.onpointerdown = onThumbDown;
+
+        //para evitar a ação padrão do navegador de arrastar o thumb
+        thumb.ondragstart = (event) => false;
+
+        /**
+         * Na demonstração, há também um elemento adicional com onmouseover o manipulador que mostra a data atual.
+         * 
+         * Observe: enquanto você está arrastando o polegar, você pode passar o mouse sobre este elemento e seu manipulador não é acionado.
+         * 
+         * Portanto, o arrastar agora está livre de efeitos colaterais, graças ao setPointerCapture.
+         * 
+         * No final, a captura de ponteiro nos oferece dois benefícios:
+         
+            1. O código fica mais limpo, pois não precisamos mais adicionar/remover manipuladores em geral document. A ligação é liberada automaticamente.
+
+            2. Se houver outros manipuladores de eventos de ponteiro no documento, eles não serão acionados acidentalmente pelo ponteiro enquanto o usuário estiver arrastando o controle deslizante.
+
+         * 
+         * * PONTEIRO CAPTURANDO EVENTOS
+         * 
+         * Há mais uma coisa a mencionar aqui, por uma questão de completude.
+         * 
+         * Existem dois eventos associados à captura de ponteiro:
+         
+            1. gotpointercapture é acionado quando um elemento usa setPointerCapture para habilitar a captura.
+
+            2. lostpointercapture é acionado quando a captura é liberada: explicitamente com releasePointerCapture chamada ou automaticamente em pointerup/ pointercancel.
+        */
+    </script>
+</body>
+</html>

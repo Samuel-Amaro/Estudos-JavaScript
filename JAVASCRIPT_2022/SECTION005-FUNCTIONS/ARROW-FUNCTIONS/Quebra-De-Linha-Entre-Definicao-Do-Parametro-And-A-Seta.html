@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * QUEBRA DE LINHA ENTRE A DEFINIÇÃO DO PARÂMETRO E A SETA
+         * 
+         * JavaScript não permite que você tenha uma quebra de linha entre a definição do parâmetro e a seta ( =>) em uma arrow function.
+         * 
+         * Por exemplo, o código a seguir causa um SyntaxError:
+         * */
+
+        //exemplo de codigo que causa um 
+        //SyntaxError
+        //porque esta quebrando linha antes da seta , entre a definição de paramentro e seta
+        //exemplo de uma arrow function anonima que recebe dois paramentros e retorna um valor
+
+        let multiply = (x, y)
+        => x * y;
+
+        /**
+         * No entanto, o código a seguir funciona perfeitamente bem:
+         * */
+
+        //exemplo de codigo que funciona bem, devido a quebra de linha ser depois da definiçaõ de parametro e seta
+        //exemplo de uma arrow function anonima que recebe dois paramentros e retorna um valor
+        multiply = (x, y) => x * y;
+        
+        /**
+         * JavaScript permite que você tenha quebras de linha entre os parâmetros, conforme mostrado no exemplo a seguir:
+         * */
+
+        //exemplo de codigo que funciona bem, onde a arrow function permite quebrar linhas
+        //exemplo de uma arrow function anonima que recebe dois paramentros e retorna um valor
+        multiply = (
+             x,
+             y
+           ) => 
+            x * y;
+        
+    </script>
+</body>
+</html>

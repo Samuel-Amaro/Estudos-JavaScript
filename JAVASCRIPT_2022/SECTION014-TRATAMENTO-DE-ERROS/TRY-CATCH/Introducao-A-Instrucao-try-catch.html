@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Introdução Instrução try...catch</title>
+</head>
+<body>
+
+    <h2>Introdução a instrução try...catch</h2>
+
+    <p>Fluxograma que ilustra funcionamento do try...catch instrução.</p>
+
+    <img src="./images/JavaScript-try-catch-1.svg" alt="fluxograma">
+
+    <script>
+        /**
+         * * TRY...CATCH - TENTE...CAPTURE
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar a try...catch instrução JavaScript para lidar com exceções.
+         * 
+         * * INTRODUÇÃO AO JS INSTRUÇÃO TRY...CATCH
+         * 
+         * O exemplo a seguir tenta chamar a add()função que não existe:
+        */
+
+        //declara uma variavel chamada result, que recebe o resultado da invocação da function add, passando dois argumentos do tipo number
+        //so que a add function não foi definida anteriormente, aqui esta invocando uma function que não existe que não foi definida
+        let result = add(10, 20);
+        console.log(result);
+
+        console.log('Bye');
+
+        /**
+         * E o mecanismo JavaScript emite o seguinte erro:
+         
+            Uncaught TypeError: add is not a function
+
+         * 
+         * A mensagem de erro informa que add não é uma função e o tipo de erro é TypeError.
+         * 
+         * Quando o mecanismo JavaScript encontra um erro, ele emite esse erro e encerra imediatamente a execução de todo o script. No exemplo acima, a execução do código para na primeira linha.
+         * 
+         * Às vezes, você deseja manipular o erro e continuar a execução. Para fazer isso, você usa a try...catch instrução com a seguinte sintaxe:
+         
+            try{
+                //código pode causar erro
+            }catch(error) {
+                //código para lidar com erro
+            }
+
+         *
+         * Nesta sintaxe:
+         
+            - Primeiro, coloque o código que pode causar um erro no try bloco.
+
+            - Segundo, implemente a lógica para tratar o erro no catch bloco.
+
+         * 
+         * Se ocorrer um erro no try bloco, o mecanismo JavaScript executa imediatamente o código no catch bloco. Além disso, o mecanismo JavaScript fornece um objeto de erro que contém informações detalhadas sobre o erro.
+         * 
+         * Basicamente, o objeto de erro tem pelo menos duas propriedades:
+         
+            - name especifica o nome do erro.
+
+            - message explica o erro em detalhes.
+
+         *
+         * Se nenhum erro ocorrer no try bloco, o mecanismo JavaScript ignorará o catch bloco.
+         * 
+         * Observe que os navegadores da Web podem adicionar mais propriedades ao error objeto. Por exemplo, o Firefox adiciona as propriedades filename, lineNumber e stack ao error objeto.
+         * 
+         * É uma boa prática colocar apenas o código que pode causar uma exceção no try bloco.
+         * 
+         * O fluxograma a seguir ilustra como a try...catch instrução funciona:
+        */
+    </script>
+
+</body>
+</html>

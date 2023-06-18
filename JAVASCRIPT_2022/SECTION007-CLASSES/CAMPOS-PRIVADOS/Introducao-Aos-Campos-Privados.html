@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campos Privados</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CAMPOS PRIVADOS JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os campos privados do JavaScript e como usá-los de forma eficaz.
+         * 
+         * * INTRODUÇÃO AOS CAMPOS PRIVADOS DO JS
+         * 
+         * O ES2022 permite definir campos privados para uma classe. Para definir um campo privado, você prefixa o nome do campo com o # sinal
+         * 
+         * Por exemplo, o seguinte define a Circle classe com um campo privado radius:
+        */
+
+        //define uma class chamada Circle que utiliza a palavra-chave class
+        class Circle{
+            //define uma propriedade chamada radius privada no corpo da classe
+            //essa propriedade e uma propriedade privada o # sinal define que a propriedade e privada, so pode ser acessada dentro do escopo da classe 
+            #radius;
+            //define um construtor para a class Circle e declara um parametro chamado value
+            constructor(value) {
+                //inicializa a raidus propriedade privada como um argumento vlaue
+                this.#radius = value;
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade
+            //usando a palavra chave get, para definir o metodo get area que acessa o valor da propriedade area
+            //calcula a area do circulo o método
+            get area() {
+                //retorna o produto de uma multiplicação
+                return Math.PI * Math.pow(this.#radius, 2);
+            }
+        }
+
+        /**
+         * Neste exemplo:
+
+            - Primeiro, defina o campo privado #radius no corpo da classe.
+
+            - Segundo, inicialize o #radius campo no construtor com um argumento.
+
+            - Terceiro, calcule a área do círculo acessando o #radius campo privado no método getter.
+
+         * 
+         * O seguinte cria uma nova instância da Circle classe e calcula sua área:
+        */
+
+        //declara uma nova instancia de objeto usando o new operador e invocando o construtor da circle class e fornecendo um argumento 
+        //o objeto instanciado e atribuido por referencia a variavel circle
+        let circle = new Circle(10);
+        //tentando acessar a propriedade privada radius forda do copor da classe, 
+        //isso não e permitido propriedades privadas so podem ser acessadas dentro do corpo da classe
+        //a propriedde radius privada e invisivel fora da circle classe
+        console.log(circle.radius); //undefined
+        
+    </script>
+</body>
+</html>

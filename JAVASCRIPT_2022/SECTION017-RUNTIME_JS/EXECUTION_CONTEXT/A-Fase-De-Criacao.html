@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <h2>Contexto de Execução</h2>
+
+    <h3>A fase de criação</h3>
+
+    <img src="./image/javascript-execution-context-global-execution-context-in-creation-phase.png" alt="imagen">
+
+    <script>
+
+        /**
+         * * A FASE DE CRIAÇÃO
+         * 
+         * Quando o mecanismo JavaScript executa um script pela primeira vez, ele cria o contexto de execução global. Durante esta fase, o mecanismo JavaScript executa as seguintes tarefas:
+         
+            - Crie o objeto global , ou seja, window no navegador da web ou global no Node.js.
+
+            - Crie o this objeto e vincule-o ao objeto global.
+
+            - Configure um heap de memória para armazenar variáveis ​​e referências de função .
+
+            - Armazene as declarações de função no heap de memória e variáveis ​​dentro do contexto de execução global com os valores iniciais como undefined.
+
+         
+         * Quando o mecanismo JavaScript executa o exemplo de código acima, ele faz o seguinte na fase de criação:
+
+            - Primeiro, armazene as variáveis x ​​e y a declaração da função timesTen() no contexto de execução global.
+
+            - Em segundo lugar, inicialize as variáveis x ​​e y para undefined.
+
+         * 
+         * Após a fase de criação, o contexto de execução global passa para a fase de execução.
+        */
+
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * SearchParams"?..."(PARAMETROS DE PESQUISA)
+         * 
+         * Digamos que queremos criar um URL com determinados parâmetros de pesquisa, por exemplo, https://google.com/search?query=JavaScript.
+         * 
+         * Podemos fornecê-los na string de URL:
+         
+            new URL('https://google.com/search?query=JavaScript')
+
+         * 
+         * …Mas os parâmetros precisam ser codificados se contiverem espaços, letras não latinas, etc (mais sobre isso abaixo).
+         * 
+         * Portanto, há uma propriedade de URL para isso: url.searchParams, um objeto do tipo URLSearchParams.
+         * 
+         * Ele fornece métodos convenientes para parâmetros de pesquisa:
+         * 
+            * append(name, value)– adicione o parâmetro por name,
+            * 
+            * delete(name)– remova o parâmetro por name,
+            * 
+            * get(name)– obter o parâmetro por name,
+            * 
+            * getAll(name)– obter todos os parâmetros com o mesmo name(isso é possível, por exemplo ?user=John&user=Pete),
+            * 
+            * has(name)– verifique a existência do parâmetro por name,
+            * 
+            * set(name, value)– definir/substituir o parâmetro,
+            * 
+            * sort()– ordenar parâmetros por nome, raramente necessários,
+            * 
+            * …e também é iterável, semelhante ao Map
+            * 
+            * 
+        * Um exemplo com parâmetros que contêm espaços e sinais de pontuação:  
+        */
+        
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url = new URL('https://google.com/search');
+
+        //add parametros de pesquisa na url, podemos adicionar parametros diretamente na string de url mesmo, mas os pamentros precisam ser codificados se possuirem espaços em branco, caracteres especiais, letras não latinas etc..
+        //para isso usamos a propriedade url.searchParams que retorna um objeto URLSearchParams que atraves de seus metodos podemos manipular os paramentros de pesquisa da url
+        //o metodo set add o paramentro q com o valor 'test me!'
+        url.searchParams.set('q', 'test me!');
+        
+        //mostra a url com o paramentros de pesquisa codificados
+        alert(url);
+
+        //add outro paramentro com o nome tbs e o valor 'qdr:y'
+        url.searchParams.set('tbs', 'qdr:y');
+
+        //paramentros foram codificados automanticamente
+        alert(url);
+
+        //iterando sobre o objeto URLSearchParams que e um objeto semelhante ao map, cada item e um par de chave valor
+        for(let [param, value] of url.searchParams) {
+            alert(`${param}=${value}`); // q=test me!, then tbs=qdr:y
+        }
+
+    </script>
+
+</body>
+</html>

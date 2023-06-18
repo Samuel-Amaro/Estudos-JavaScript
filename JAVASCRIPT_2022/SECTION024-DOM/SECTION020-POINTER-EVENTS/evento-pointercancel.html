@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<body style="height: 200px;">
+
+    <p>Arraste a bolla.</p>
+
+    <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="ball"/>
+
+    <textarea id="text" style="display:block;width:300px;height:100px"></textarea>
+
+    <script type="text/javascript">
+
+      /**
+       * * EVENTO: pointercancel(cancelar ponteiro)
+       * 
+       * O pointercancel evento é acionado quando há uma interação de ponteiro em andamento e, em seguida, algo acontece que faz com que ele seja abortado, para que não sejam gerados mais eventos de ponteiro.
+       * 
+       * Tais causas são:
+       
+            - O hardware do dispositivo ponteiro foi fisicamente desabilitado.
+
+            - A orientação do dispositivo mudou (tablet girado).
+
+            - O navegador decidiu lidar com a interação por conta própria, considerando-a um gesto do mouse ou ação de zoom-and-pan ou qualquer outra coisa.
+
+        * Vamos demonstrar pointercancel em um exemplo prático para ver como isso nos afeta.
+        * 
+        * Digamos que estamos impulsionando drag'n'drop(arrastar e soltar) para uma bola, assim como no início do artigo Drag'n'Drop with mouse events.
+        * 
+        * Aqui está o fluxo de ações do usuário e os eventos correspondentes:
+        
+            1. O usuário pressiona uma imagem, para começar a arrastar
+
+                pointerdown(ponteiro pressionado) incêndios de eventos.
+
+            2. Então eles começam a mover o ponteiro (arrastando assim a imagem)
+
+                pointermove(ponteiro movido) incendios talvez várias vezes
+
+            3. E então a surpresa acontece! O navegador tem suporte nativo de arrastar e soltar para imagens, que entra em ação e assume o processo de arrastar e soltar, gerando pointercancel eventos.
+
+                O navegador agora lida com arrastar e soltar da imagem por conta própria. O usuário pode até mesmo arrastar a imagem da bola para fora do navegador, em seu programa de correio ou em um gerenciador de arquivos.
+
+                Não há mais pointermove eventos para nós.
+
+            * Então, o problema é que o navegador “seqüestra” a interação: é pointercancel acionado no início do processo de “arrastar e soltar”, e não pointermove são gerados mais eventos.
+            * 
+            * Aqui está a demonstração de arrastar e soltar com loggin de eventos de ponteiro (somente up/down, move e cancel) no textarea:
+       */
+
+       //atribuindo a mesma function manipuladora para diferentes pointers events
+       //Eventos de ponteiro são uma maneira moderna de manipular a entrada de uma variedade de dispositivos apontadores, como mouse, caneta/stylus, tela sensível ao toque e assim por diante.
+       //Ele fornece um único conjunto de eventos para todos os tipos de dispositivos apontadores.
+
+        //evento de ponteiro para quando o dispositivo apontador estiver pressionado
+        ball.onpointerdown = log;
+        //evento de ponteiro para quando o dispositivo apontador estiver liberado
+        ball.onpointerup = log;
+        //evento de ponteiro para quando o dispositivo apontador estiver em movimento
+        ball.onpointermove = log;
+        //evento de ponteiro para quando o dispositivo apontador for cancelado, O pointercancel evento é acionado quando há uma interação de ponteiro em andamento e, em seguida, algo acontece que faz com que ele seja abortado, para que não sejam gerados mais eventos de ponteiro.
+        ball.onpointercancel = log;
+
+        let lastEventType, n = 1;
+
+        //function manipuladora dos eventos de ponteiro
+        function log(event) {
+            //se o ultimo evento ocorrido for do mesmo tipo que o evento atual
+            if(lastEventType == event.type) {
+                n++;
+                text.value = text.value.replace(/.*\n$/, `${event.type} * ${n} \n`);
+                return;
+            }
+            //atribui o tipo do evento a variavel 
+            lastEventType = event.type;
+            n = 1;
+            text.value += event.type + '\n';
+            text.scrollTop = 1e9;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasitic constructor pattern</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PARASITIC CONSTRUCTOR PATTERN(PADRÃO DE CONSTRUTOR PARASITA)
+         * 
+         * Em um padrão de construtor parasita, você cria uma função construtora que cria um objeto e retorna esse objeto.
+         * */
+
+        //declara uma function regular construtora chamada Animal, que declara um paramentro chamado name
+        //essa function construtora possui uma propriedade chamda Animal.prototype onde referencia um objeto anonimo de prototipo onde pode definir propriedades para serem herdadas pelas instancias criadas por animal Function
+        function Animal(name) {
+            //cria uma instancia de objeto do tipo Object do JS usando o new palavra chave e invocando a function construtora Object
+            //Por padrão o JS fornece uma function construtora chamada Object, e fornece um prototipo de objeto anonimo que pode ser acessado por Object.prototype onde contem propriedades para ser compartilhadas por todas as intancias de Object
+            var o = new Object();
+            //adiciona uma propriedade chamada name ao o objeto uma propriedade propria, que recebe o argumento name como valor para inicialziar a propriedade
+            o.name = name;
+            //adiciona uma nova propriedade chamada identify que recebe como valor uma function anonima que não possui paramentro e nem retorna valor, essa function e atribuida a propriedade notify tornando um metodo
+            //adiciona uma propriedaed propria ao objeto
+            o.identify = function() {
+                console.log(`I'm ${o.name}`);
+            }
+            //retorna a instancia de objeto recem criada
+            return o;
+        } 
+
+        /**
+         *  Neste exemplo, a função construtora Animal é a mesma do padrão de fábrica. No entanto, você o chama como um construtor usando o new operador.
+        */
+
+        //declara uma instancia de objeto chamada dog invocando a function construtora Animal passando um argumento e usando a new palavra chave
+        //o dog intancia de objeto se ligara ao objeto anonimo prototipo refernciado por Animal.prototype
+        //aqui usamos a new palavra chave para retorna um objeto 
+        //diferente da função de fabrica que ja retorna a instancia de objeto bastando so invocar a function sem usar a new palavra chave
+        //aqui usamos a new operador retorna o objeto retornado pela constructor function. se a function construtora não retorna um objeto o new operador cria esse objeto
+        var dog = new Animal('Bingo');
+        
+        /**
+         * Por padrão, o new operador retorna o objeto retornado pela constructor  função. Se a constructor função não retornar um objeto, o new operador cria esse objeto.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DO MÉTODO JAVASCRIPT REGEX replace()
+         * 
+         * Vamos dar alguns exemplos de uso do replace() método.
+         * 
+         * * 2) USANDO O MÉTODO JAVASCRIPT regex replace() COM A FLAG G
+         * 
+         * O exemplo a seguir usa o replace()método com uma expressão regular contendo um sinalizador global ( g) para substituir todas as correspondências:
+        */
+
+        //declara uma string literal a ser usada na pesquisa
+        const s = 'JS and js';
+        //cria uma expressão regular, com o seguinte padrão: corresponder a uma string literal js
+        //usa a flag i(ignore) para ignorar todos os casos de não correpondencia, ignora as diferencas de maiuesculas e minusculas na correspondencia
+        //a flag g(global) instrui o objeto RegExp a buscar todoas correspondencias ao padrão, retorna todoas correspencias
+        const re = /js/gi;
+
+        //usando o método String.replace(regexp, newSubstr) para substituir todas as ocorrencias do regexp na str por newSubstr, o metodo ira susbstituir todoas ocorrencias de str que combinam com o padrão por newSubstr.
+        //aqui iremos substituir js por JavaScript na str
+        //o metodo retorna uma nova string com as ocorrencias substituidas
+        const newS = s.replace(re, 'JavaScript');
+        console.log(newS);
+
+    </script>
+
+</body>
+</html>

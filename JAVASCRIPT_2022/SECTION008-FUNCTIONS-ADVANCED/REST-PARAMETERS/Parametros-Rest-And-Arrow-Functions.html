@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Paramêtros</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PARÂMETROS REST E ARROW FUNCTIONS
+         * 
+         * Uma arrow function não tem o arguments objeto. Portanto, se você deseja passar alguns argumentos para a arrow function, deve usar os parâmetros rest. Veja o seguinte exemplo:
+        */
+
+        //declara uma arrow function anonima que possui somente um parametro do tipo rest esse paramentro pode receber um numero indefinido de argumentos como array
+        //a arrow function e atribuida a constante combine por referencia, assim combine constante referencia a arrow function
+        const combine = (...args) => {
+            //o paramentro rest args e uma instancia do tipo array, asssim pode usar seus metodos como o reduce
+            //o reduce metodo retorna um valor que e um resultado acumulador e esse resultado e fornecido como um argumento na proxima chamada da reducer
+            return args.reduce(function(prev, curr) {
+                return `${prev} ${curr}`;
+            });
+        };
+
+        //invoca a arrow function por meio da referencia a constante combine passando varios argumentos para serem mapeados para o rest paramentro
+        //a arrow function retorna a concatenação acumulado dos argumentos
+        let message = combine('JavaScript', 'Rest', 'Parameters'); // =>
+        console.log(message); //JavaScript Rest Parameters
+
+        /**
+         * A combine() função é uma seta que recebe um número indefinido de argumentos e concatena esses argumentos.
+        */
+    </script>
+</body>
+</html>

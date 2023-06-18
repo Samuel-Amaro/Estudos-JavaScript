@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OPEN DATABASE(ABRIR BANCO DE DADOS)
+         * 
+         * Para começar a trabalhar com IndexedDB, primeiro precisamos open(conectar a) um banco de dados.
+         * 
+         * A sintaxe:
+        */
+
+        //let openRequest = indexedDB.open(name, version);
+
+        /**
+         * name– uma string, o nome do banco de dados.
+         * 
+         * version– uma versão de número inteiro positivo, por padrão 1(explicado abaixo).
+         * 
+         * Podemos ter muitos bancos de dados com nomes diferentes, mas todos eles existem dentro da origem atual (domínio/protocolo/porta). Sites diferentes não podem acessar os bancos de dados uns dos outros.
+         * 
+         * A chamada retorna o openRequest objeto, devemos ouvir os eventos nele:
+         * 
+            * success: banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+            * 
+            * error: a abertura falhou.
+            * 
+            * upgradeneeded: o banco de dados está pronto, mas sua versão está desatualizada (veja abaixo).
+            * 
+         * IndexedDB possui um mecanismo embutido de “versão de esquema - schema versioning”, ausente em bancos de dados do lado do servidor.
+         * 
+         * Ao contrário dos bancos de dados do lado do servidor, o IndexedDB é do lado do cliente, os dados são armazenados no navegador, então nós, desenvolvedores, não temos acesso em tempo integral a ele. Assim, quando publicamos uma nova versão do nosso aplicativo e o usuário visita nossa página, podemos precisar atualizar o banco de dados.
+         * 
+         * Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado e poderemos comparar as versões e atualizar as estruturas de dados conforme necessário.
+         * 
+         * O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+         * 
+         * Digamos que publicamos a primeira versão do nosso aplicativo.
+         * 
+         * Então podemos abrir o banco de dados com version 1 e realizar a inicialização em um upgradeneeded handler assim:
+        */
+
+        //conectando,a uma banco de dados.
+        //abrindo uma conexão
+        //o primeiro argumento passado para o metodo open e uma string, informando o nome do banco de dados
+        //o segundo argumento e um numero inteiro positivo, informando a versão
+        let openRequest = indexedDB.open("store", 1);
+
+        //o metodo retorna o openRequest objeto, devemos ouvir eventos nele e atribui manipuladores para os seguintes eventos, sucess, error, upgradeneeded
+
+        //este evento e acionado quando  o banco de dados está pronto, mas sua versão está desatualizada
+        //Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado
+        //O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+        openRequest.onupgradeneeded = function() {
+            // dispara se o cliente não tiver banco de dados
+            // ...executa a inicialização...
+        };
+
+        //este evento e acionado quando a abertura falhou.
+        openRequest.onerror = function() {
+            console.error("Error", openRequest.error);
+        };
+
+        //este evento e acionado quando banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+        openRequest.onsuccess = function() {
+            //o na propriedade result esta o objeto banco de dados
+            let db = openRequest.result;
+            // continua trabalhando com banco de dados usando objeto db
+        };
+    </script>
+
+</body>
+</html>

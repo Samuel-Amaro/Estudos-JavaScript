@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Array.from()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * JS Array.from()
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o Array.from() método JavaScript que cria um novo array a partir de um objeto tipo array ou iterável.
+         * 
+         * * INTRODUÇÃO AO MÉTODO Array.from()
+         * 
+         * Para criar uma array a partir de um objeto semelhante a uma array no ES5, você itera sobre todos os elementos da array e adiciona cada um deles a uma array intermediária como esta:
+        */
+
+        //utilizando a sintaxe do ES5
+        //declara uma function chamada arrayFromArgs() que não possui nenhum paramentro declarado
+        //a function arrayFromArgs e uma instancia de objeto do tipo function
+        function arrayFromArgs() {
+            //declara um array literal vazio
+            var results = [];
+            //itera sobre o array arguments
+            for(var i = 0; i < arguments.length; i++) {
+                //cada elemento do array arguments e adicionado ao array results
+                results.push(arguments[i]);
+            }        
+            return results;
+        }
+
+        //invocando a function arrayFromArgs, passando um numero indefinido de argumentos,
+        //a function ira retornar um array, esse array retornado e atribuido por referencia ao fruits variavel
+        var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
+        console.log(fruits);
+
+        /**
+         * Para torná-lo mais conciso, você pode usar o slice() método da Array.prototype seguinte forma:
+        */
+
+        //faz a mesma coisa do exemplo acima so que com uma nova sintaxe
+        //declara uma function chamada arrayFromArgs2() que não possui nenhum paramentro declarado
+        //a function arrayFromArgs2 e uma instancia de objeto do tipo function
+        function arrayFromArgs() {
+            //utilizando o metodo call para ligações, podemos usar o arguments objeto array para chamar o metodo slice por meio do call metodo
+            //fica assim: arguments.slice(); 
+            //o slice metodo chamado pelo arguments retorna uma nova array que contém os elementos da array original.
+            //da forma que o slice metodo e chamado aqui e uma forma de clonar o arguments objeto array, quando chamamos o slice metodo sem informar os argumentos
+            //aqui o arraFromArgs retornara uma copia do arguments objeto por meio da ligação do call metodo
+            return Array.prototype.slice.call(arguments);
+        }
+
+        //invocando a function arrayFromArgs, passando um numero indefinido de argumentos,
+        //a function ira retornar um array, esse array retornado e atribuido por referencia ao fruits variavel
+        var fruits2 = arrayFromArgs2('Apple', 'Orange', 'Banana');
+        console.log(fruits2);
+
+        /**
+         * O ES6 apresenta o Array.from() método que cria uma nova instância de Array um objeto tipo array ou iterável . O seguinte ilustra a sintaxe do Array.from() método:
+         
+            Array.from(target [, mapFn[, thisArg]]);
+
+         * 
+         * Nesta sintaxe:
+         
+            - target é um objeto tipo array ou iterável(iterable) para converter em um array.
+
+            - mapFn é a função map para chamar todos os elementos do array
+
+            - thisArg é o this valor ao executar a mapFn função.
+
+         * 
+         * O Array.from() retorna uma nova instância de Array que contém todos os elementos do target objeto.
+        */
+    </script>
+</body>
+</html>

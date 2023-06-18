@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - atribuindo um manipulador que ira reagir a um evento de click no input button
+        - o manipulador de evento pode ser definido em HTML por meio do atributo de evento chamado on<event> 
+        - aqui como exemplo iremos definir um click manipulador para um input, usando o atributo de evento onclick
+        - no clique do mouse o codigo dentro onclick e executado
+    -->
+    <input value="Clique Aqui!" onclick="alert('Click!')" type="button"/>
+
+    <!--
+        - o onclick e o atributo de evento que define o manipulador do evento click
+        - no clique do mouse o codigo dentro onclick e executado, chama a function countRabbits()
+    -->
+    <input value="Contar Rabbits" onclick="countRabbits()" type="button"/>
+
+    <script type="text/javascript">
+        /**
+         * * atributo HTML
+         * 
+         * Um manipulador pode ser definido em HTML com um atributo chamado on <event>.
+         * 
+         * Por exemplo, para atribuir um click manipulador para um input, podemos usar onclick, como aqui:
+         * 
+         * No clique do mouse, o código dentro onclick é executado.
+         * 
+         * Por favor, note que dentro onclick nós usamos aspas simples, porque o próprio atributo está entre aspas duplas. Se esquecermos que o código está dentro do atributo e usarmos aspas duplas dentro, assim: onclick="alert("Click!")", então não funcionará direito.
+         * 
+         * Um atributo HTML não é um lugar conveniente para escrever muito código, então é melhor criar uma função JavaScript e chamá-la lá.
+         * 
+         * Aqui um clique executa a função countRabbits():
+        */
+       
+        //essa function e executada somente quando o button e clicado com o mouse
+        function countRabbits() {
+            for(let i=1; i < 3; i++) {
+                alert("Rabbit number " + i);
+            }
+        }
+
+        /**
+         * Como sabemos, os nomes de atributos HTML não diferenciam maiúsculas de minúsculas, portanto ONCLICK funcionam tão bem quanto onClicke onCLICK… Mas geralmente os atributos são minúsculos: onclick.
+         * */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * STRINGS DE CODIFICAÇÃO
+         * 
+         * Antigamente, antes URL dos objetos aparecerem, as pessoas usavam strings para URLs.
+         * 
+         * A partir de agora, URL os objetos geralmente são mais convenientes, mas as strings também podem ser usadas. Em muitos casos, usar uma string torna o código mais curto.
+         * 
+         * Se usarmos uma string, porém, precisamos codificar/decodificar caracteres especiais manualmente.
+         * 
+         * Existem funções internas para isso:
+         * 
+            * encodeURI – codifica o URL como um todo.
+            * 
+            *  decodeURI – decodifica de volta.
+            * 
+            * encodeURIComponent – ​​codifica um componente de URL, como um parâmetro de pesquisa, um hash ou um nome de caminho.
+            * 
+            * decodeURIComponent – ​​decodifica de volta.
+            * 
+         * Uma pergunta natural é: “Qual é a diferença entre encodeURIComponent e encodeURI? Quando devemos usar qualquer um?” 
+         * 
+         * Isso é fácil de entender se olharmos para a URL, que está dividida em componentes na imagem acima:
+        
+            https://site.com:8080/path/page?p1=v1&p2=v2#hash
+
+         * 
+         * Como podemos ver, caracteres como :, ?, =, &, #são permitidos na URL.
+         * 
+         * …Por outro lado, se olharmos para um único componente de URL, como um parâmetro de pesquisa, esses caracteres devem ser codificados, para não quebrar a formatação.
+         * 
+         * encodeURI codifica apenas caracteres que são totalmente proibidos na URL.
+         * 
+         * encodeURIComponent codifica os mesmos caracteres e, além deles, os caracteres #, $, &, +, ,, /, :, ;, =e ?.@
+         * 
+         * Então, para um URL inteiro, podemos usar encodeURI:
+        */
+
+        // usando caracteres cirílicos no caminho da url
+        //usando strings como URL, isso necessida codificar/decodificar caracteres especiais manualmente
+        //a function interna encodeURI, codifica a url como um todo, codifica apenas os caracteres que são proibidos na URL
+        let url = encodeURI('http://site.com/привет');
+
+        //mostra url codificada
+        alert(url); //http://site.com/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82
+
+        /**
+         * …Enquanto para parâmetros de URL devemos usar encodeURIComponent:
+        */
+
+        //usando uma string de url como paramentros de pesquisa
+        //precisamos codificar esses paramentros manulamente, usando a function interna encodeURIComponent ​codifica um componente de URL, como um parâmetro de pesquisa, um hash ou um nome de caminho, codifica os caracteres que são proibidos numa url e os caracteres especiais permitidos nos paramentros
+        let music = encodeURIComponent('Rock&Roll');
+
+        let urlMusic = `https://google.com/search?q=${music}`;
+
+        //url codificada
+        alert(urlMusic);
+
+        /**
+         * Compare com encodeURI:
+        */
+
+        //string url de paramentros de pesquisa sendo codificada manulamente pelo metodo encodeURI que so codifica os caracters totalmente proibidos em uma URL 
+        let music2 = encodeURI('Rock&Roll');
+
+        let urlMusic2 = `https://google.com/search?q=${music2}`;
+
+        //mostra url codificada
+        alert(urlMusic2); //https://google.com/search?q=Rock&Roll
+
+        /**
+         * Como podemos ver, encodeURI não codifica &, pois este é um caractere legítimo na URL como um todo.
+         * 
+         * Mas devemos codificar & dentro de um parâmetro de pesquisa, caso contrário, obtemos q=Rock&Roll– que na verdade é q=Rock mais algum parâmetro obscuro Roll. Não como pretendido.
+         * 
+         * Portanto, devemos usar apenas encodeURIComponent para cada parâmetro de pesquisa, para inseri-lo corretamente na string da URL. O mais seguro é codificar tanto o nome quanto o valor, a menos que tenhamos certeza absoluta de que ele tem apenas caracteres permitidos.
+         * 
+         * * DIFERENÇA DE CODIFICAÇÃO EM COMPARAÇÃO COM URL
+         * 
+         * As classes URL e URLSearchParams são baseadas na especificação de URI mais recente: RFC3986 , enquanto encode * as funções são baseadas na versão obsoleta RFC2396.
+         * 
+         * Existem algumas diferenças, por exemplo, os endereços IPv6 são codificados de forma diferente:
+        */
+
+        //valido url com endereço IPV6
+        let url3 = 'http://[2607:f8b0:4005:802::1007]/';
+
+        alert(encodeURI(url3)); //http://%5B2607:f8b0:4005:802::1007%5D/
+        alert(new URL(url3)); //http://[2607:f8b0:4005:802::1007]/
+
+        /**
+         * Como podemos ver, encodeURI colchetes substituídos [...], isso não está correto, o motivo é: urls IPv6 não existiam no momento da RFC2396 (agosto de 1998).
+         * 
+         * Esses casos são raros, as encode*funções funcionam bem na maioria das vezes.
+        */
+    </script>
+
+</body>
+</html>

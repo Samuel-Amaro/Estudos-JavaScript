@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * UPLOAD PROGRESS(PROGRESSO DE UPLOAD)
+         * 
+         * O progress evento é acionado apenas no estágio de download.
+         * 
+         * Ou seja: se fizermos POST algo, XMLHttpRequest primeiro carregamos nossos dados (o corpo da solicitação) e depois baixamos a resposta.
+         * 
+         * Se estamos fazendo upload de algo grande, certamente estamos mais interessados ​​em acompanhar o progresso do upload. Mas xhr.onprogress não ajuda aqui.
+         * 
+         * Existe outro objeto, sem métodos, exclusivamente para rastrear eventos de upload: xhr.upload
+         * 
+         * Ele gera eventos, semelhantes a xhr, mas xhr.upload os aciona apenas no upload:
+         * 
+            *  loadstart – carregamento iniciado.
+            * 
+            * progress– dispara periodicamente durante o upload.
+            * 
+            * abort– upload abortado.
+            * 
+            * error– erro não HTTP.
+            * 
+            * load– upload concluído com sucesso.
+            * 
+            * timeout– o upload expirou (se a timeout propriedade estiver definida).
+            * 
+            * loadend – upload concluído com sucesso ou erro.
+            * 
+         * Exemplo de manipuladores:
+        */
+
+        //para acompanhar o progresso de upload,
+        //existe um objeto sem metodos, exclusivamente para rastrear eventos de upload, xhr.upload
+
+        //acionado periodicamente durante o upload
+        xhr.upload.onprogress = function(event) {
+            //propriedade event.loaded o numero de bytes ja enviados
+            //propriedade event.total o numero total de bytes
+            alert(`Uploaded ${event.loaded} of ${event.total} bytes`);
+        };
+
+        //acionado quando o upload e concluido com sucesso
+        xhr.upload.onload = function() {
+            alert(`Upload finished successfully.`);
+        };
+
+        //acionado quando haver um erro não HTTP
+        xhr.upload.onerror = function() {
+            //propriedade xhr.status informa o status http
+            alert(`Error during the upload: ${xhr.status}`);
+        };      
+    </script>
+
+</body>
+</html>

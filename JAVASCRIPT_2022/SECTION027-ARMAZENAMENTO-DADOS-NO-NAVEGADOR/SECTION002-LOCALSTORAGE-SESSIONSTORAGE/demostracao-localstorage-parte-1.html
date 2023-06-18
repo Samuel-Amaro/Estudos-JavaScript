@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * DEMOSTRAÇÃO localStorage
+         * 
+         * As principais características do localStorage são:
+         * 
+            * Compartilhado entre todas as guias e janelas da mesma origem.
+            * 
+            * Os dados não expiram. Permanece após a reinicialização do navegador e até a reinicialização do sistema operacional.
+            * 
+            * Por exemplo, se você executar este código…
+        */
+
+        //o localStorage e um objeto de armazenamento da web, permitindo salvar pares de chave e valor no navegador
+        //o metodo localStorage.setItem(chave, valor), armazena o par chave/valor, no navegador
+        localStorage.setItem('test', 1);
+
+        /**
+         * …E feche/abra o navegador ou apenas abra a mesma página em uma janela diferente, então você pode obtê-lo assim:
+        */
+
+        //obtendo o valor armazenado por meio do metodo, informando a chave do par
+        alert(localStorage.getItem('test')); //
+        
+        /**
+         * Só precisamos estar na mesma origem (domínio/porta/protocolo), o caminho da url pode ser diferente.
+         * 
+         * O localStorage é compartilhado entre todas as janelas com a mesma origem, portanto, se definirmos os dados em uma janela, a alteração se tornará visível em outra.
+        */
+
+    </script>
+
+</body>
+</html>

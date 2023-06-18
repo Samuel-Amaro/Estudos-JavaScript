@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DECLARAÇÕES E EXPRESSÕES NO CORPO DA ARROW FUNCTION
+         * 
+         * * EXPRESSÃO OQUE SÃO: Uma expressão consiste em qualquer unidade válida de código que é resolvida como um valor.  Conceitualmente, existem dois tipos de expressões: aquelas que atribuem um valor a uma variável e aquelas que simplesmente possuem um valor. A expressão x = 7 e um exemplo de (expressão de atribuição de valor) e 3 + 4 e um exemplo de (expresões que simplesmente possuem um valor).  O JavaScript possui as seguintes categorias de expressão:
+            
+            - Aritmética: é avaliada como um número, por exemplo 3.14159. (Geralmente utiliza operadores aritméticos).
+            
+            - String: é avaliada como uma string de caracteres, por exemplo, "Fred" ou "234". (Geralmente utiliza operadores de string).
+
+            - Lógica: é avaliada como verdadeira ou falsa. (Costuma envolver operadores lógicos).
+
+            - Expressões primárias: Palavras reservadas e expressões gerais do JavaScript.
+
+            - Expressão lado esquerdo: atribuição à esquerda de valores.
+
+         * Em JavaScript, uma expressão é avaliada como um valor, conforme mostrado no exemplo a seguir.
+         
+            10 + 20;
+
+         * 
+         * Uma declaração realiza uma tarefa específica, como:
+         * */
+
+        if(x === y) {
+            console.log('x equals y');
+        }
+
+        /**
+         * Se você usar uma expressão no corpo de uma arrow function, não será necessário usar as chaves.
+         * */
+
+        //declara um arrow function anonima que possui um paramentro e tem uma expressão, quando possui um so paramentro não precisa de parenteses, e quando possui somente expressão no corpo não precisa de chaves 
+        let square = x => x * x; 
+
+        /**
+         * No entanto, se você usar uma instrução, deve colocá-la dentro de um par de chaves como no exemplo a seguir:
+         * */
+
+        //declara uma arrow function anonima que possui um paramentro e tem uma instrução.
+        //quando possui so um paramentro não precisa de parenteses, e quando possui instrução no corpo da arrow funcion precisa de chaves 
+        let except = msg => {
+            throw msg;
+        };
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getter And Setter Campos Privados</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO GETTER AND SETTER PARA ACESSAR CAMPOS PRIVADOS
+         * 
+         * O seguinte redefine a Circle classe adicionando o radius getter e o setter para fornecer acesso ao #radius campo privado:
+        */
+
+        //define uma class chamada Circle que utiliza a palavra-chave class
+        class Circle{
+            //define uma propriedade chamada radius privada no corpo da classe
+            //essa propriedade e uma propriedade privada o # sinal define que a propriedade e privada, so pode ser acessada dentro do escopo da classe
+            //iniciliaza a propriedade com o valor 0 
+            #radius = 0;
+            //define um construtor para a class Circle e declara um parametro chamado value
+            constructor(radius) {
+                //declara uma propriedade chamada radius e a inicializa com o radius argumento
+                this.radius = radius;
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade
+            //usando a palavra chave get, para definir o metodo get area 
+            //calcula a area do circulo o método
+            get area() {
+                //retorna o produto de uma multiplicação
+                return Math.PI * Math.pow(this.radius, 2);
+            }
+            //define um metodo setter da classe Circle chamado de radius e declara um paramentro chamado value
+            //usando a sintaxe especifica do ES6 para definir o setter método inicializador de propriedade privada #radius
+            set radius(value) {
+                if(typeof value === 'number' && value > 0) {
+                    //inicializa a propriedade privada #radius com o value argumento
+                    this.#radius = value;
+                }else{
+                    //lança exceção
+                    throw 'The radius must be a positive number';
+                }
+            }
+            //define um metodo getter da classe Circle chamado de area
+            //usando a sintaxe especifica do ES6 para definir o getter método manipulador de propriedade #radius privada para obter o valor da mesma
+            get radius() {
+                return this.#radius;
+            }
+        }
+
+        /**
+         * Como funciona.
+
+            - O radius setter valida o argumento antes de atribuí-lo ao #radius campo privado. Se o argumento não for um número positivo, o radius setter lançará um erro.
+
+            - O radius getter retorna o valor do #radius campo privado.
+
+            - O construtor chama o radius setter para atribuir o argumento ao #radius campo privado.
+        */
+    </script>
+</body>
+</html>

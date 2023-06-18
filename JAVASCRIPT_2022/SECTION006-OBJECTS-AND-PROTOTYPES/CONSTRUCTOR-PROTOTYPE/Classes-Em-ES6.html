@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objetos</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * CLASSES EM ES6
+         * 
+         * ES6 apresenta a palavra-chave class que torna o padrão construtor/protótipo mais fácil de usar.
+         * 
+         * O seguinte usa a class palavra-chave para definir exatamente o mesmo Person tipo:
+        */
+
+        //define um tipo chamado Person
+        class Person{
+            
+            constructor(firstName, lastName) {
+                //propriedades
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+
+            //metodo
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        }
+
+        /**
+         * Nessa sintaxe, o class move a inicialização da propriedade para o constructor método. Ele também empacota o getFullName() método no mesmo lugar que a constructor função.
+         * 
+         * A sintaxe da classe parece mais limpa e menos prolixa. No entanto, é apenas açúcar sintático(Em ciência da computação, um açúcar sintático é uma sintaxe dentro da linguagem de programação que tem por finalidade tornar suas construções mais fáceis de serem lidas e expressas.) sobre o padrão de construtor/protótipo.
+         * 
+         * * RESUMO
+         * 
+         * Use o construtor/protótipo de JavaScript para definir um tipo personalizado no ES5.
+         * 
+         * Inicialize as propriedades do objeto na função do construtor e defina métodos e propriedades que podem ser compartilhados por todas as instâncias no objeto de protótipo.
+        */
+
+    </script>
+
+</body>
+</html>

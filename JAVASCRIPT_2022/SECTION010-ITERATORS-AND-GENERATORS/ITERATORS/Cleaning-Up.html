@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Up</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * CLEANING UP(LIMPANDO)
+         * 
+         * Além do next() método, o [Symbol.iterator]() pode opcionalmente retornar um método chamado return().
+         * 
+         * O return() método é invocado automaticamente quando a iteração é interrompida prematuramente. É onde você pode colocar o código para limpar os recursos.
+         * 
+         * O exemplo a seguir implementa o return() método para o Sequence objeto:
+        */
+
+        //definindo um tipo personalizado de class
+        //define um class chamada Sequence com uma palavra-chave class
+        class Sequence{
+            //construtor da class Sequence, define três paramentros com valores padrões
+            constructor(start = 0, end = Infinity, interval = 1) {
+                //define propriedades e as inicializa com os argumentos
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+            }
+            //define um método de instancia da classe
+            //o nome do método e definido por meio de um propriedade computada, usando a expressão entre colchetes, em seguida usara o resultado da expressão com o nome do método, aqui o nome do método sera Symbol.iterator.
+            //esse método não define parametro e retorna um objeto que esta em conformida com o protocolo do iterator
+            //definir um método com o nome Symbol.iterator em um tipo Personalizado, torna o tipo personalizado iteravel, podendo ser iterado por uma construção for of
+            [Symbol.iterator]() {
+                let counter = 0;
+                let nextIndex = this.start;
+                //retorna uma instancia de objeto anonima literal, uma instancia de objeto que esteja em conformida com o protolo de iteração iterator
+                return {
+                    //define um método chamado next, sem paramentro
+                    next: () => {
+                        //verifica se ha mais elementos a serem iterados
+                        if(nextIndex <= this.end) {
+                            //define uma instancia de objeto anonima com duas propriedades value e done, value(o elemento atual),
+                            //done(um valor booleano que indica se há ou não mais elementos que podem ser iterados. - false, ha elementos para ser iterados, true não ha mais elementos)
+                            let result = {value: nextIndex, done: false};
+                            nextIndex += this.interval;
+                            counter++;
+                            return result;
+                        }
+                        //retorna uma instancia de objeto anonima, com uma propriedade value que indica o valor, e a done propriedade que indca que não ha mais elementos ha iterar
+                        return {value: counter, done: true};
+                    },
+                    //implementa um método chamdo return, não declara paramentro, e retorna uma instancia de objeto literal anonimo
+                    //O return() método é invocado automaticamente quando a iteração é interrompida prematuramente.
+                    return: () => {
+                        console.log(`cleaning up...`);
+                        //retorna uma instancia de objeto anonima, com uma propriedade value que indica o valor undefined, e a done propriedade que indica que não ha mais elementos ha iterar
+                        return {value: counter, done: true};
+                    }
+                }
+            }
+        };
+
+        /**
+         * O trecho a seguir usa o Sequence objeto para gerar uma sequência de números ímpares de 1 a 10. No entanto, ele interrompe a iteração prematuramente. Como resultado, o return() método é invocado automaticamente.
+        */
+
+        //declara uma nova instancia de objeto da class Sequence invocando o construtor e passando três argumentos, o primeiro argumento e o start que recebe 1, o segundo argumento e o end que recebe 10 o terceiro argumento e o interval que recebe 2
+        let evenNumbers = new Sequence(2, 10, 2);
+
+        //a class sequence definiu um método de instancia chamado Symbol.iterator que retorna de acordo com o protocolo de iteração iterator um objeto em conformidade com o protocolo iterator, que permite suas instancia da class sequence ou ela mesmo ser iteravel, por uma construção de tipo for...of ou for loop 
+        //vendo se deu certo a aplicacção do protocolo iterator na class sequence, para tornala iteravel
+        for(const num of evenNumbers) {
+            //quando o elemento atual da coleção que estiver sendo iterado atualmente for maior que 7, ira interroper a iteração bruscamente
+            if(num > 7) {
+                //quando se interrope a iteração bruscamente, o método return definido no objeto de protocolo de iteração iterator retornado pelo método Symbol.iterator e invocado automaticamente, se o método return estiver definido no objeto retornado por Symbol.iterator
+                break;
+            }
+            console.log(num);
+        }
+
+        /**
+         * Neste tutorial, você aprendeu sobre o iterador JavaScript e como usar os protocolos de iteração para implementar a lógica de iteração de personalização.
+        */
+        
+    </script>
+
+</body>
+</html>

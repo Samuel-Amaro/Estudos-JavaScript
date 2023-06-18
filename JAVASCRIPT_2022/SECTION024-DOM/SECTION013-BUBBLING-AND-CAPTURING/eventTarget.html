@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        
+        form{
+            background-color: green;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        div{
+            background-color: blue;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 100px;
+            height: 100px;
+        }
+
+        p{
+            background-color: red;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin: 0;
+        }
+
+        body{
+            line-height: 25px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <p>
+        Um clique mostra <code>event.target</code> e <code>this</code> para comparar: 
+    </p>
+
+    <form id="form">FORM
+        <div>DIV
+            <p>P</p>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        /**
+         * * event.target
+         * 
+         * Um manipulador em um elemento pai sempre pode obter os detalhes sobre onde realmente aconteceu.
+         * 
+         * O elemento aninhado mais profundamente que causou o evento é chamado de elemento de destino, acessível como event.target.
+         * 
+         * Observe as diferenças de this(= event.currentTarget):
+         
+            - event.target– é o elemento “alvo” que iniciou o evento, não muda durante o processo de borbulhamento.
+
+            - this– é o elemento “atual”, aquele que possui um manipulador atualmente em execução nele.
+
+         * Por exemplo, se tivermos um único manipulador form.onclick, ele poderá “capturar-catch” todos os cliques dentro do formulário. Não importa onde o clique aconteceu, ele borbulha <form> e executa o manipulador.
+         * 
+         * No form.onclick manipulador:
+         
+            this(= event.currentTarget) é o <form> elemento, porque o manipulador é executado nele.
+
+            event.target é o elemento real dentro do formulário que foi clicado.
+        */
+
+        //atribuindo uma function manipulador de evento por meio da propriedade DOM, a function manipulador e uma function anonima que e atribuida por referencia a apropriedade
+        //declara o paramentro event que e o paramentro, que e o objeto do evento que possui detalhes nele sobre o evento ocorrido
+        form.onclick = function(event) {
+            //event.target e o elemento alvo que iniciou o evento, não muda durante o processo de borbulhamento.
+            event.target.style.backgroundColor = 'yellow';
+            //chrome precisa de algum tempo para pintar de amarelo
+            //apos 0s de tempo passado executa a callback
+            setTimeout(() => {
+                //o event.target e o elemento alvo que inicio o evento
+                //this e o elemento atual aquele que possui um manipulador atualmente em execução nele
+                alert("Target = " + event.target.tagName + ", this= " + this.tagName);
+                event.target.style.backgroundColor = '';
+            }, 0);
+        }
+
+        /**
+         * É possível que seja event.target igual this– acontece quando o clique é feito diretamente no <form> elemento.
+        */
+    </script>
+</body>
+</html>

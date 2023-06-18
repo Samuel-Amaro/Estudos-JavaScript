@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(null, script);
+
+            //atribui um manipulador de evento por meio da propriedad dom
+            //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+            //assim o callback e executado, tratando o erro, lançando um erro
+            script.onerror = () => callback(new Error(`Erro de carregamento de script para ${src}`));
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+
+        /**
+         * 
+         * Na prática, podemos precisar prometer mais de uma função, então faz sentido usar um auxiliar.
+         * 
+         * Vamos chamá-lo promisify(f): ele aceita uma função de promessa f e retorna uma função wrapper.
+        */
+
+        //APLICANDO promisificação(processo de transformação/conversão de uma função que aceita um callback em uma função que retorna um promisse)
+
+        function promisify(f) {
+            //retorna um function que aceita varios argumentos
+            return function(...args) { //retornar uma função wrapper (*)
+                //retorna um nova promisse
+                return new Promise(function executor(resolve, reject) {
+                    //trabalho da promisse 
+
+                    //callback para ser passado para loadScript
+                    function callback(err, result) { //nosso retorno de chamada personalizado para f (**)
+                        //se exisitr um erro
+                        if(err) {
+                            //rejeita promisse com err
+                            reject(err);
+                        }else{
+                            //se não existir erro, resolve promisse com result
+                            resolve(result);
+                        }
+                    }
+
+                    args.push(callback); // anexa nosso retorno de chamada personalizado ao final dos argumentos f, args tem que possuir src, callback, para ser informado como argumentos para loadScript
+
+                    f.call(this, ...args); // chama a função original
+                    //window.f(...args); f e o mesmo que loadScript(src, callback)
+                });
+            };
+        }
+
+        //uso:
+        let loadScriptPromise = promisify(loadScript);
+        //loadScriptPromise(...).then(...);
+
+
+        /**
+         * O código pode parecer um pouco complexo, mas é essencialmente o mesmo que escrevemos acima, enquanto prometemos a loadScript função.
+         * 
+         * Uma chamada para promisify(f) retorna um wrapper em torno de f(*) . Esse wrapper retorna uma promessa e encaminha a chamada para o original f, rastreando o resultado no retorno de chamada personalizado (**).
+         * 
+         * Aqui, promisify assume-se que a função original espera um retorno de chamada(callback) com exatamente dois argumentos (err, result). Isso é o que encontramos com mais frequência. Então, nosso retorno de chamada personalizado está exatamente no formato certo e promisify funciona muito bem para esse caso.
+         * 
+         * Mas e se o original fespera um retorno de chamada(callback) com mais argumentos callback(err, res1, res2, ...)?
+         * 
+         * Podemos melhorar nosso ajudante. Vamos fazer uma versão mais avançada do promisify.
+        */
+    </script>
+
+</body>
+</html>

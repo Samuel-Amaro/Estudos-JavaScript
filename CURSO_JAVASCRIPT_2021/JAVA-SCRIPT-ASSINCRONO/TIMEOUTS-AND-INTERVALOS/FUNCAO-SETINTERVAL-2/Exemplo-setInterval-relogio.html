@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simples setInterval relógio</title>
+    <style>
+        p{
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Exemplo simples de uso do setInterval() como um relógio</h1>
+
+    <p class="clock"></p>
+
+    <script>
+
+        //função nomeada
+        function mostraTempo() {
+            //cria um instancia de objeto da class Date
+            //Cria uma instância JavaScript de Date que representa um único momento no tempo.
+            //Construtor
+            let date = new Date();
+            //O método toLocaleTimeString() retorna uma string com uma representação sensível ao idioma de uma porção de tempo desta data 
+            let tempo = date.toLocaleTimeString();
+            //o conteudo do elemento <p> sera a data especificada
+            document.querySelector('.clock').textContent = tempo;
+        }
+
+        //chama a função 
+        mostraTempo();
+
+        //registrando o setInterval para executar a função repetidamente a cada passar do tempo especificado
+
+        //a cada passar de 1s(1000 milissegundos) a função mostra o valor da variavel tempo atualizada sera executada
+        const createRelogio = setInterval(mostraTempo, 1000);
+
+    </script>
+</body>
+</html>

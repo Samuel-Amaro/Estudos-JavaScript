@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singleton</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * SINGLETON
+         * 
+         * Singleton é um padrão de design que limita a instanciação de uma classe a uma única instância. Ele garante que apenas uma instância de uma classe possa ser criada em todo o sistema.
+         * 
+         * As expressões de classe podem ser usadas para criar um singleton chamando o construtor de classe imediatamente.
+         * 
+         * Para fazer isso, você usa o new operador com uma expressão de classe e inclui os parênteses no final da declaração de classe, conforme mostrado no exemplo a seguir:
+        */
+
+        //uma forma de limitar e usar o padrão de projeto singleton
+        //so podendo instancia uma unica objeto de uma classe
+        //definido uma classe por meio de uma expressão de classe
+        //usando a expressão de classe em uma declaração de variavel
+        //define uma expressão de classe sem nome, não e necessario passar um identificar apos a palavra chave class
+        //a expressão fica a direita do operador igual, assim a expressão resulta em um valor que e atribuido a variavel app por referencia porque e uma classe
+        //app variavel referencia a classe
+        //a expressão começa pela palavra-chave class e seguida pela definição da classe
+        //expressão de classe sem nome
+        //o operador new cria uma nova instancia da expressão da classe, assim o app variavel referencia uma instancia da expressão
+        //o parenteses no final da classe e uma expressão imediatamente declarada e invocada, isso e o parenteses chama o construtor passando o argumento,
+        //uma expressão e executada imediatamente após a criação
+        //aqui definimos uma expressão de classe e logo em seguida a executamos invocando seu contrutor para retorna uma instancia de expressão e atribuir a variavel app por referencia
+        //assim a app variavel referencia a instancia de expressão, isso so e possivel ao parenteses no final da definição da classe, invocando o construtor 
+        let app = new class{
+            //construtor, inicializa propriedades da classe
+            constructor(name) {
+                //define uma propriedade chamada name, assim a name propriedade e inicializada com o argumento name
+                this.name = name;
+            }
+            //declara uma metodo da expressão da classe
+            start() {
+                console.log(`Starting the ${this.name}...`);
+            }
+        }('Awesome App');
+
+        //chamando o metodo da instancia da expressão
+        app.start(); //'Starting the Awesome App...'
+
+        /**
+         * Como funciona.
+         * 
+         * O seguinte é uma expressão de classe sem nome:
+
+            new class {
+                constructor(name) {
+                    this.name = name;
+                }
+                start() {
+                    console.log(`Starting the ${this.name}...`);
+                }
+            }
+
+         * 
+         * A classe tem um constructor()que aceita um argumento. Ele também tem um método chamado start().
+         * 
+         * A expressão de classe é avaliada como uma classe. Portanto, você pode chamar seu construtor imediatamente colocando parênteses após a expressão: 
+         * 
+         * Essa expressão retorna uma instância da expressão de classe que é atribuída à variável app.
+         * 
+         * O seguinte chama o start()método no objeto do aplicativo:
+         * 
+         * * RESUMO
+         * 
+         * O ES6 fornece uma maneira alternativa de definir uma nova classe usando uma expressão de classe.
+         * 
+         * As expressões de classe podem ser nomeadas ou não nomeadas.
+         * 
+         * A expressão de classe pode ser usada para criar um objeto singleton.
+        */
+    </script>
+</body>
+</html>

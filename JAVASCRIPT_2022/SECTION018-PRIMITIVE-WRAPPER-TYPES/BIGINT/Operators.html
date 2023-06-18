@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OPERADORES
+         * 
+         * O BigInt suporta o seguinte operador +(soma), *(multiplicacao), -(subtracao), **(elevar um numero a uma potencia), %(modulo), operadores bit a bit, exceto >>> (deslocamento à direita de preenchimento zero). Não suporta o operador unário ( +).
+         * 
+         * O / operador também trabalhará com os números inteiros. No entanto, o resultado não retornará nenhum dígito fracionário. Por exemplo:
+        */
+
+        //o operador de divisão so trabalha com divisoes inteiras, isso e so divisoes que resultam em resultados inteiros, divisores que sobram resto o operador nao conta, so conta a parte inteira
+        //por exemplo aqui, a divisão de um numero do tipo bigInt por outro bigInt resultam em 1.5n mas o operador so retorna a parte inteira, o resto não conta
+        let result = 3n / 2n;
+        console.log(result); //1n, não 1.5n
+        
+    </script>
+
+</body>
+</html>

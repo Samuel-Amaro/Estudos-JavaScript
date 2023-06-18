@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * JAVASCRIPT REGEX LOOKBEHIND(Olhar para trás)
+         *
+         * Resumo : neste tutorial, você aprenderá como usar JavaScript regex lookbehind em expressões regulares para corresponder X se for precedido(ANTERIOR) por Y.
+         * 
+         * * INTRODUÇÃO AO JS REGEX LOOKBEHIND
+         * 
+         * Em expressões regulares, um lookbehind corresponde a um elemento se houver outro elemento específico antes dele. Um lookbehind tem a seguinte sintaxe:
+         
+            (?<=Y)X
+
+            - sintaxe do lookbehind ?<=
+            - O elemento X so sera correspondido se somente o elemento Y vier antes de X.
+
+         * 
+         * Nesta sintaxe, o padrão corresponde X se houver Y antes dele.
+         * 
+         * Por exemplo, suponha que você queira corresponder ao número 900 e não ao número 1 na seguinte string:
+
+            '1 computer costs $900'
+
+         *
+         * Para fazer isso, você usa um lookahead na expressão regular da seguinte forma:
+        
+            /(?<=\$)\d+/
+
+            - a seguinte expressão regular acima possui o seguinte padrão: um grupo de captura que possui a seguinte regra, um lookbehind que corresponde a \$ string literal como o elemento, tem que escapar o elemento, para ser correspondido como string, anterior a ser correspondido, e um ou mais digitos.
+            //padrão: corresponder um ou mais digitos que tenha o $ como caractere anterior
+
+         * 
+         * Nesta expressão regular:
+         
+            - O (?<=\$) corresponde a um elemento se houver uma string literal $ antes dele. Por $ ser um caractere especial na regex, precisamos usar a barra invertida \ para escapar dele. Ao fazer isso, o mecanismo regex trata \ $ como um caractere literal $.
+            - O \d+ corresponde a um ou mais dígitos.
+
+         * 
+         * O exemplo a seguir ilustra como usar um lookbehind em uma expressão regular para corresponder a um número que tem o $ sinal antes dele:
+        */
+
+        //declara uma string literal a ser usada na pesquisa
+        const s = '1 computer costs $900';
+        //cria uma expressão regular com o seguinte padrão: 
+        //um grupo de captura que possui a seguinte regra, um lookbehind que corresponde a \$ string literal como o elemento, tem que escapar o elemento, para ser correspondido como string, anterior a ser correspondido, e um ou mais digitos.
+        //so corresponde ao elemento \d+ somente se o string literal \$ vier antes dele
+        //padrão: corresponder um ou mais digitos que tenha o $ como caractere anterior
+        const pattern = /(?<=\$)\d+/;
+        //usando o método String.match(regex) para retornar todas as correspondecias de regexp na string
+        const match = s.match(pattern);
+        console.log(match);
+    </script>
+</body>
+</html>
+
+
+

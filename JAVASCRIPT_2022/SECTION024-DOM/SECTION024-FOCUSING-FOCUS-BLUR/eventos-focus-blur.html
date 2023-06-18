@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        .invalid {
+            border-color: red;
+        }
+
+        #error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <label>Seu email por-favor:</label>
+    <input type="email" id="input"/>
+
+    <div id="error"></div>
+
+    <script>
+        /**
+         * * EVENTOS BLUR(DESFOQUE)/FOCUS(FOCO)
+         * 
+         * O focus evento é chamado de foco, e blur – quando o elemento perde o foco.
+         * 
+         * Vamos usá-los para validação de um campo de entrada.
+         * 
+         * No exemplo abaixo:
+         * 
+            * O blur manipulador verifica se o campo possui um e-mail inserido e, caso não tenha, mostra um erro.
+            * 
+            * O focus manipulador oculta a mensagem de erro ( blur ela será verificada novamente):
+            * 
+         *  
+        */
+       
+        //atribuindo uma manipulador de evento, por meio da propriedade dom
+        //atribuimos um manipualdor para o evento de desfoque(blur), quando o elemento não possui mais o foco
+        input.onblur = function(event) {
+            //se o input valor do input não possui o @
+            if(!input.value.includes("@")) { //não email
+                input.classList.add('invalid');
+                error.innerHTML = 'Por favor entre com o email correto.';
+            }
+        };
+
+        //atribuindo um manipulador de evento, por meio da propriedade dom
+        //atribuimos um manipulador para o evento de foco(focus) quando o elemento recebe o foco
+        input.onfocus = function(event) {
+            if(this.classList.contains('invalid')) {
+                // remove a indicação de "erro", porque o usuário quer redigitar algo
+                this.classList.remove('invalid');
+                error.innerHTML = "";
+            };
+        };
+
+        /**
+         * O HTML moderno nos permite fazer muitas validações usando atributos de entrada: required, pattern e assim por diante. E às vezes eles são exatamente o que precisamos. JavaScript pode ser usado quando queremos mais flexibilidade. Também podemos enviar automaticamente o valor alterado para o servidor se estiver correto.
+        */
+    </script>
+</body>
+</html>

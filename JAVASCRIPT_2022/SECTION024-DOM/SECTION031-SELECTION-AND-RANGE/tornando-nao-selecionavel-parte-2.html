@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div>
+        Selecionável <div id="elem">Não selecionável</div> Selecionável
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * Impedir a ação padrão em onselectstart ou mousedown eventos.
+        */
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento de quando a seleção e iniciada no elem elemento, o evento e acionado quando uma seleção e iniciada em elem
+        //o manipulador retornado false, e uma excecção para que impeça a ação padrão do navegador, impeça a seleção no elem
+        elem.onselectstart = () => false;
+
+        /**
+         * Isso evita iniciar a seleção em elem, mas o visitante pode iniciá-la em outro elemento e depois estender para elem.
+         * 
+         * Isso é conveniente quando há outro manipulador de eventos na mesma ação que aciona a seleção (por exemplo mousedown, ). Então desabilitamos a seleção para evitar conflito, ainda permitindo que elem o conteúdo seja copiado.
+         * 
+         * Também podemos limpar a seleção post-factum depois que ela acontecer com document.getSelection().empty(). Isso raramente é usado, pois isso causa piscadas indesejadas à medida que a seleção aparece-desaparece.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXCLUDING AND TRANSFORMING: REPLACER(EXCLUINDO E TRANSFORMANDO: SUBSTITUTO)
+         * 
+         * A sintaxe completa de JSON.stringify é:
+         
+            let json = JSON.stringify(value[, replacer, space]);
+
+         * value(valor):
+
+            - Um valor para codificar.
+
+         * replacer(substituto):
+
+            - Array de propriedades para codificar ou uma função de mapeamento function(key, value).
+
+         * space(espaço):
+
+            - Quantidade de espaço a ser usado para formatação
+
+         * Na maioria das vezes, JSON.stringify é usado apenas com o primeiro argumento. Mas se precisarmos ajustar o processo de substituição, como filtrar referências circulares, podemos usar o segundo argumento de JSON.stringify.
+         * 
+         * Se passarmos um array de propriedades para ele, somente essas propriedades serão codificadas.
+         * 
+         * Por exemplo:
+        */
+
+        //declara objeto literal anonimo que e atribuido por referencia a varaivel room
+        let room = {
+            //declara propriedades usando sintaxe chave : valor
+            number: 23  
+        };
+
+        //declara objeto literal anonimo que e atribuido por referencia a varaivel meetup
+        let meetup = {
+            //declara propriedades usando sintaxe chave : valor
+            title: "Conference",
+            //declara uma propriedade que possui como valor um array literal que possui como elementos objeto literais
+            participants: [{name: "John"}, {name: "Alice"}],
+            //declara propriedade que possui como valor uma referencia ao objeto literal anonimo referenciado por room, referencia circular entre objetos
+            place: room //meetup referencia room
+        };
+
+        //declara uma nova propriedade no objeto literal anonimo referenciado pela variavel room, a propriedade e chamada de place e possui como valor referencia o objeto literal anonimo referenciado pela variavel meetup
+        //referencia circular entre objetos
+        room.occupiedBy = meetup; //room references meetup
+
+        //Usando o método JSON.stringify(value, replace, space), para converte um objeto literal anonimo referenciado por meetup em string JSON(JavaScript Object Notation).
+        //retorna uma string resultante chamada de objeto codificado em JSON ou serializado ou stringified(encadeado) ou empacotado do objeto literal.
+        //passamos como parametro a referencia ao objeto literal, o valor a ser codificado para string JSON
+        //passamos um array literal como paramentro, com dois elementos que inicializa o array, cada elemento e uma nome de propriedade que existe no paramentro value passado, cada elemento que e uma propriedade do argumento value, informa ao método que o mesmo tem que ser codificado para o string JSON resultante, neste caso aqui não codificaremos a propriedade place do value, e nem a propriedade name dos elementos do array value da propriedade participants
+        console.log(JSON.stringify(meetup, ['title', 'participants'])); //{"title":"Conference","participants":[{},{}]}
+
+        /**
+         * Aqui provavelmente somos muito rigorosos. A lista de propriedades é aplicada a toda a estrutura do objeto. Portanto, os objetos em participants estão vazios, porque name não estão na lista.
+         * 
+         * Vamos incluir na lista todas as propriedades, exceto room.occupiedBy aquela que causaria a referência circular:
+        */
+
+        
+        //passamos como argumento a referencia ao objeto literal referenciado por meetup, o valor a ser codificado para string JSON
+        //passamos um array literal como argumento, com cinco elementos que inicializa o array, cada elemento e uma nome de propriedade que existe no argumento value passado, cada elemento e uma propriedade do argumento value, informa ao método que cada propriedade tem que ser codificado para o string JSON resultante, neste caso aqui não codificaremos as seguintes propriedades: a title, participants, place, name(propriedade dos elementos que inicializam o array value da propriedade participants), number(propriedade que pertence ao objeto literal anonimo referenciado pela propriedade place, referencia circular resolvida), so não sera codifica a propriedade occupiedBy que pertence ao objeto literal anonimo referenciado por propriedade place, que diz respeito a referencia circular, porque essa propriedade occupiedBy referencia o proprio objeto meetup
+        console.log(JSON.stringify(meetup, ['title', 'participants', 'place', 'name', 'number'])); //{"title":"Conference","participants":[{"name":"John"},{"name":"Alice"}],"place":{"number":23}}
+
+        /**
+         * Agora tudo, exceto occupiedBy é serializado. Mas a lista de propriedades é bastante longa.
+         * 
+         * Felizmente, podemos usar uma função em vez de um array como o replacer.
+         * 
+         * A função será chamada para cada (key, value) par e deverá retornar o valor “substituído”, que será utilizado no lugar do original. Ou undefined se o valor deve ser ignorado.
+         * 
+         * No nosso caso, podemos retornar value “como está” para tudo, exceto occupiedBy. Para ignorar occupiedBy, o código abaixo retorna undefined:
+        */
+
+        //argumentos passados para o metodo JSON.stringify
+        //passamos como primeiro argumento a referencia ao objeto literal referenciado por meetup, o valor a ser codificado para string JSON
+        //passamos uma function regular chamada replacer que declara dois paramentros chamados key, value que e uma function de mapeamento para mapear propriedades que vão ser codificadas em string JSON, a function e chamada para cada par de (key, value), devera retorna o valor "replacement" que devera ser utilizado no lugar do valor original, no caso podemos retornar value como esta para tudo, e retornar undefined para propriedade occupiedBy para ignorar essa propriedade e não ser mapeada para string JSON
+        console.log(JSON.stringify(meetup, function replacer(key, value) {
+            console.log(`${key} : ${value}`);
+            return (key == 'occupiedBy') ? undefined : value;
+        })); //{"title":"Conference","participants":[{"name":"John"},{"name":"Alice"}],"place":{"number":23}}
+
+        /*
+            pares chave:valor que vêm para substituir:
+            title : Conference
+            participants : [object Object],[object Object]
+            0 : [object Object]
+            name : John
+            1 : [object Object]
+            name : Alice
+            place : [object Object
+            number : 23
+            occupiedBy : [object Object]
+        */
+
+        /**
+         * Observe que a replacer função obtém todos os pares de chave/valor, incluindo objetos aninhados e itens de array. É aplicado recursivamente. O valor de this inside replacer é o objeto que contém a propriedade atual.
+         * 
+         * A primeira chamada é especial. É feito usando um “objeto wrapper” especial: {"": meetup}. Em outras palavras, o primeiro (key, value) par tem uma chave vazia e o valor é o objeto de destino como um todo. É por isso que a primeira linha está ":[object Object]" no exemplo acima.
+         * 
+         * A ideia é fornecer o máximo de energia replacer possível: ele tem a chance de analisar e substituir/pular até mesmo o objeto inteiro, se necessário.
+        */
+    </script>
+</body>
+</html>

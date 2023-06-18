@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+        
+        /**
+         * * JAVASCRIPT CONFIRM(CONFIRMAR)
+         *  
+         * Resumo : neste tutorial, você aprenderá a exibir uma caixa de diálogo de confirmação usando o confirm() método JavaScript.
+         * 
+         * * INTRODUÇÃO AO CONFIRM() MÉTODO JS
+         * 
+         * Para invocar um diálogo com uma pergunta e dois botões OK e Cancel, você usa o confirm() método do window objeto:
+         
+            let result = window.confirm(question);
+
+         * 
+         * Nesta sintaxe:
+         
+            - O question é uma string opcional a ser exibida na caixa de diálogo.
+            - O resultado é um valor booleano que indica se o botão OK ou Cancel foi clicado. Se o OK botão for clicado, o resultado será true; caso contrário, o resultado é false.
+        
+         * 
+         * Observe que, se um navegador ignorar as caixas de diálogo na página, o result será sempre false.
+         * 
+         * A caixa de diálogo de confirmação é modal e síncrona. Isso significa que a execução do código é interrompida quando uma caixa de diálogo é exibida e é retomada após ser encerrada.
+         * 
+         * O exemplo a seguir usa o confirm()método para invocar uma caixa de diálogo de confirmação. Com base na seleção do usuário, exibe a mensagem correspondente com base no alert()método:
+        */
+
+        //Exibindo um caixa de dialogo de confirmação do sistema usando o método confirm(question)
+        //invocar um caixa diálogo com uma pergunta e dois botões OK e Cancel
+        //o argumento passado e um string question a ser exibida na caixa de dialogo
+        //o método confirm retorna true ou false dependendo da seleção do usuario, se ele clicar em OK retorna true, se clicar em CANCEL, retorna false
+        let result = confirm('Tem certeza de que deseja excluir?');
+        //escolhe uma string literal de message a ser mostrada de acordo com escolha do usuario
+        let message = result ? 'Você clicou no botão OK' : 'Você clicou no botão Cancelar';
+        //o método alert(message) invoca uma caixa de dialogo de alerta do sistema
+        //a caixa de dialogo depende do navegador e do sistema operacional
+        //passamos como argumento para o método alert(message) uma string, que contem informações que desejamos mostrar para os usuarios
+        alert(message);
+
+        /**
+         * * RESUMO
+         * 
+         * O confirm() é um método do window objeto.
+         * 
+         * O confirm() mostra uma caixa de diálogo do sistema que consiste em uma pergunta e dois botões: OK e Cancel.
+         * 
+         * O confirm() retorna true se o OK botão foi clicado ou false se o Cancel botão foi selecionado.
+        */
+    </script>
+
+</body>
+</html>

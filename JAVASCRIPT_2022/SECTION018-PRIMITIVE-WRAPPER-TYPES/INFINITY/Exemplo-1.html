@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ARMADILHAS DO INFINITY
+         * 
+         * * 1) FUNÇÃO parseFloat()
+         * 
+         * Suponha que você tenha um formulário que coleta informações do usuário. No formulário, você tem um campo que permite que os usuários insiram seu peso.
+         * 
+         * Como o valor do campo do formulário é uma string, você precisa convertê-lo em um número:
+        */
+
+        //usando o metodo abaixo parseInt, passando a string literal como argumento, o metodo converte o argumento que e uma string em numero
+        let weight = parseInt('120kg');
+        //mostra o conteudo armazenado na variavel num
+        console.log(weight); //120
+
+        /**
+         * Isso está funcionando bem. Se os usuários inserirem uma string que não pode ser convertida em um número, parseInt() retornará um NaN:
+        */
+
+        //mas nesse caso o Js não pode converte a string em numero, o método retorna NaN(Não e um numero), o valor retornado NaN, indica que a nalise falhou
+        let weight2 = parseInt('More than 100kg');
+        //mostra o conteudo armazenado na variavel weight2
+        console.log(weight2); //NaN
+
+        /**
+         * Se a string de entrada for Infinity, o parseInt() também retornará NaN porque não reconhece o número infinito:
+        */
+
+        //o Js não pode converte a string em numero, o método retorna NaN(Não e um numero), o valor retornado NaN, indica que a nalise falhou
+        //o método parseInt não conhece a string de entrada 'Infinity'
+        let weight3 = parseInt('Infinity');
+        //mostra o conteudo armazenado na variavel weight3
+        console.log(weight2); //NaN
+
+        /**
+         * Mas se você usar a parseFloat()função assim:
+        */
+
+        //usando o metodo abaixo parseFloat, passando a string literal como argumento, o metodo converte o argumento que e uma string em numero de ponto flutuante
+        //No caso a string de entrada e Infinity, o metodo conhece esse valor, e o converte para o proprio Infinity
+        let weight4 = parseFloat('Infinity');
+        //mostra o conteudo armazenado na variavel weight4
+        console.log(weight4); //Infinity
+
+        /**
+         * ... a parseFloat() função reconhece o Infinity e retorna um número infinito.
+         * 
+         * Portanto, é uma boa prática emitir um erro de validação quando um campo de entrada tiver a 'Infinity' string.
+        */
+    </script>
+
+</body>
+</html>

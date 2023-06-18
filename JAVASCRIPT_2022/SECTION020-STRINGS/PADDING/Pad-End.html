@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método String Pad End()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * PREENCHENDO(PADDING) UMA STRING ATÉ UM DETERMINADO COMPRIMENTO COM OUTRA STRING 
+         * 
+         * Resumo : neste tutorial, você aprenderá como preencher uma string com outra string em um determinado comprimento.
+         * 
+         * * String.prototype.padEnd();
+         * 
+         * Semelhante ao padStart() método, o padEnd() método preenche uma string em um determinado comprimento com outra string. No entanto, o padEnd() método é preenchido a partir do final da string. Veja a seguir a sintaxe do padEnd() método:
+         
+            String.prototype.padEnd(padLength[, padString]);
+
+         * 
+         * * Exemplos de String.prototype.padEnd()
+         * 
+         * Veja o seguinte exemplo:
+         * 
+        */
+
+        //utilizando o método string.padEnd(), para preenchimento da string literal com outra string a partir do final da string, até um determinado comprimento que a string atinja,
+        //aqui preencheremos, o a string literal a partir do final dela, a aprtir do caractere c, com espaços vazio até a string atingir o comprimento 5
+        //o metodo recebe dois argumentos aqui so passamos um argumento o valor 5 que e  O padLength é o comprimento da string resultante depois de preenchida. Se padLength for menor que o comprimento da string, a string será retornada como está sem preenchimento.
+        let str = 'abc'.padEnd(5);
+        console.log(str); //"abc  ";
+
+        /**
+         * Neste exemplo, como não fornecemos o segundo argumento, o padEnd() método usa o espaço ' 'para preencher a 'abc'string. Aqui está outro exemplo:
+        */
+
+        //aqui preencheremos, o a string literal a partir do final dela, a aprtir do caractere c, com caractere '*' até a string atingir o comprimento 5
+        //o metodo recebe dois argumentos aqui so passamos o primeiro como argumento o valor 5 que e  O padLength é o comprimento da string resultante depois de preenchida. Se padLength for menor que o comprimento da string, a string será retornada como está sem preenchimento.
+        //o segundo argumento e o O padString é um argumento opcional que é usado para preencher a string. O valor padrão para este parâmetro é ' '. Se o padString for maior que padLength, o padString será truncado e somente a parte mais à esquerda será preenchida.
+        str = 'abc'.padEnd(5, '*');
+        console.log(str); //"abc**";
+
+        /**
+         * Neste exemplo, usamos a * string como segundo argumento, a string resultante foi preenchida por duas * strings para tornar seu comprimento 5. E outro exemplo:
+        */
+
+        //aqui preencheremos, o a string literal a partir do final dela, a aprtir do caractere c, com a string 'def' até a string atingir o comprimento 5
+        //aqui a a string de preenchimento "def" foi truncada e so permaneceu sua parte mais a esquerda, porque a string normal passa do comprimento final estabelecido pelo argumento de padEnd
+        //o metodo recebe dois argumentos aqui so passamos o primeiro como argumento o valor 5 que e  O padLength é o comprimento da string resultante depois de preenchida. Se padLength for menor que o comprimento da string, a string será retornada como está sem preenchimento.
+        //o segundo argumento e o O padString é um argumento opcional que é usado para preencher a string. O valor padrão para este parâmetro é ' '. Se o padString for maior que padLength, o padString será truncado e somente a parte mais à esquerda será preenchida.
+        str = 'abc'.padEnd(5, 'def');
+        console.log(str); //"abcde"
+
+        /**
+         * Neste exemplo, o comprimento da string resultante deve ser 5, portanto, a string de preenchimento foi truncada ("f") e apenas sua parte mais à esquerda ( "de") foi preenchida.
+         * 
+         * Neste tutorial, você aprendeu como preencher uma string em um determinado comprimento com outra string usando os métodos padStart()e .padEnd()
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * BOM(Modelo de objeto do navegador - Browser Object Model)
+         * 
+         * O Browser Object Model (BOM) representa objetos adicionais fornecidos pelo navegador (ambiente host) para trabalhar com tudo, exceto o documento.
+         * 
+         * Por exemplo:
+         * 
+         * O objeto navigator fornece informações básicas sobre o navegador e o sistema operacional. Existem muitas propriedades, mas as duas mais conhecidas são: navigator.userAgent– sobre o navegador atual, e navigator.platform– sobre a plataforma (pode ajudar a diferenciar entre Windows/Linux/Mac etc).
+         * 
+         * O objeto de location nos permite ler o URL atual e pode redirecionar o navegador para um novo.
+         * 
+         * Veja como podemos usar o location objeto:
+         * */
+
+        //mostra URL atual
+        alert(location.href);
+
+        if(confirm("Já para Wikipedia?")) {
+            location.href = "https://wikipedia.org"; //redireciona o navegador para outra URL
+        }
+
+        /**
+         * As funções alert/confirm/prompt também fazem parte do BOM: elas não estão diretamente relacionadas ao documento, mas representam métodos puros do navegador de comunicação com o usuário.
+         * 
+         * Especificações
+         * 
+         * BOM é a parte da especificação HTML geral.
+         * 
+         * Sim, você ouviu direito. A especificação HTML em https://html.spec.whatwg.org não é apenas sobre a “linguagem HTML” (tags, atributos), mas também abrange vários objetos, métodos e extensões DOM específicas do navegador. Isso é "HTML em termos gerais". Além disso, algumas peças têm especificações adicionais listadas em https://spec.whatwg.org.
+         * 
+         * Agora vamos começar a aprender DOM, porque o documento desempenha o papel central na interface do usuário.
+        */
+    </script>
+</body>
+</html>

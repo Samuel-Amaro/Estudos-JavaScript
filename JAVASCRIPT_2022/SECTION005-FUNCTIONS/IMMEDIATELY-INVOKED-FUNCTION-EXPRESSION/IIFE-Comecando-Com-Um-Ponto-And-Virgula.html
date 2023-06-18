@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIFE</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * IIFE COMEÇANDO COM UM PONTO E VÍRGULA(;)
+         * 
+         * Às vezes, você pode ver um IIFE que começa com um ponto e vírgula (;):
+         * 
+        */
+
+        //exemplo de uma expressão de função imediatamente invocada começando com um ponto e virgula
+        ;(function() {
+            /**/
+        })();
+
+        /**
+         * Nessa sintaxe, o ponto-e-vírgula é usado para encerrar a instrução no caso de dois ou mais arquivos JavaScript serem concatenados cegamente em um único arquivo.
+         * 
+         * Por exemplo, você pode ter dois arquivos lib1.js e lib2.js que usam IIFEs:
+         * */
+
+        (function(){
+            // ...
+        })();
+
+        (function(){
+            // ...
+        })(); 
+
+        /**
+         * Se você usar uma ferramenta de empacotador de código para concatenar o código de ambos os arquivos em um único arquivo, sem o ponto-e-vírgula ( ;), o código JavaScript concatenado causará um erro de sintaxe.
+        */
+    </script>
+</body>
+</html>

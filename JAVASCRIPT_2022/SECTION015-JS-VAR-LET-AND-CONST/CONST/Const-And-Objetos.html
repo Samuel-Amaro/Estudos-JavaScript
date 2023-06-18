@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT CONST E OBJETOS
+         *
+         *  A palavra-chave const garante que a variável que ela cria seja somente leitura. No entanto, isso não significa que o valor real ao qual a const referência da variável seja imutável. Por exemplo:
+        */
+        
+        //declara uma constante de escopo de bloco que cria uma referencia de somente leitura para um valor, não pode reatribuir o valor ou modificar
+        //a constante e chamada de person e e inicializada, recebe por referencia um objeto literal anonimo que possui somente uma propriedade
+        const person = {age: 20};
+        //atribui um novo valor a propriedade age do objeto literal referenciado pela constante person
+        //aqui mostramos que que e imutavel e somente a constante, o objeto que e atribuido a constante como valor não e imutavel, não podemos atribuir um valor diferente a constante, ela vai sempre referencia esse objeto literal, mas podemos modificar o objeto, o objeto e mutavel
+        person.age = 30; //OK
+        console.log(person.age); //30
+
+        /**
+         * Mesmo que a person variável seja uma constante, você pode alterar o valor de sua propriedade.
+         * 
+         * No entanto, você não pode reatribuir um valor diferente à person constante assim:
+        */
+
+        try {
+            //se tentarmos atribuir um novo valor a constante, tentarmos mudar o valor atual para um novo valor, dara um erro do tipo assim TypeError, o valor atual da constante e referencia o objeto literal anonimo, se tentarmos mudar isso, para que ela referencia um novo objeto literal anonimo criado dara um erro
+            person = {age : 40}; //TypeError
+        } catch (error) {
+            console.log(`Erro: ${error.name}, description: ${error.message}`);
+            console.log(`Não pode reatribuir valor a uma constante ja declarada.`);
+        }
+
+        /**
+         * Se você quiser que o valor do  person objeto seja imutável, você deve congelá-lo usando o Object.freeze() método:
+        */
+
+        try {
+            //declarando uma constante de escopo de bloco que e imutavel que e chamada de person, que referencia um objeto literal anonimo para somente leitura
+            //usando o método de objeto Object.freeze() para tornar o objeto literal anonimo imutavel(não pode reatribuir valores diferentes), o método congela todas as propriedades do objeto, não os objetos referenciados pelas propriedadades
+            const person = Object.freeze({age: 20});
+            //não podemos reatribuir valores as prorpiedades do objeto, as propriedads se tornaram imutaveis, referencia valor para somente leitura
+            person.age = 30; //TypeError
+        } catch (error) {
+            console.log(`Erro: ${error.name}, description: ${error.message}`);
+            console.log(`Não pode reatribuir valor a uma propriedade ja declarada.`);
+        }
+
+        /**
+         * Observe que Object.freeze() é superficial, o que significa que pode congelar as propriedades do objeto, não os objetos referenciados pelas propriedades.
+         * 
+         * Por exemplo, o company objeto é constante e congelado.
+        */
+
+        //declara uma constante chamada company com escopo de bloco e referencia um objeto literal anonimo para somente leitura, o objeto e criado usando método Object.freeze, que declara um objeto imutavel, as propriedads do objeto são imutaveis somente leitura
+        const company = Object.freeze({
+            name: 'ABC corp',
+            address: {
+                street: 'North 1st street',
+                city: 'San Jose',
+                state: 'CA',
+                zipcode: 95134
+            }
+        });
+
+        /**
+         * Mas o company.address objeto não é imutável, você pode adicionar uma nova propriedade ao company.address objeto da seguinte forma:
+        */
+
+        //as propriedades do objeto literal referenciado por company constrante são imutaveis, as que referenciam valores, as propriedade que referenciam outros objetos esses objetos refernciados não são imutaveis, eles são mutaveis podem ser modificados, podem receber novos valores, nas propriedades, como disse o método Object.freeze e superficial, so imuta até a primeira camada
+        //exemplo abaixo mostra atribuindo um novo valor a um obejto referenciado pela propriedade addres propriedade referenciado pela company constnate
+        company.address.country = 'USA'; //OK
+    </script>
+
+</body>
+</html>

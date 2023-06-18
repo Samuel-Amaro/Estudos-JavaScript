@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button>Clique com o botão direito do mouse mostra o menu de contexto do navegador</button>
+
+    <!--
+        - add um manipulador de evento por meio do atributo html.
+        - forma de evitar a ação padrão do navegador.
+        - o evento oncontextmenu e acionado com o clique direito do botão do mouse no button.
+        - esse evento contextmenu(clique com o botão direito do mouse) mostra o menu de contexto com opções padrão. para evitar a ação padrão do navegador façamos o manipulador retornar false. assim a ação padrão de o navegador chamar o menu de contexto e impedida.
+        - evita a ação padrão do navegador de mostra o menu de contexto e mostramos o nosso proprio menu de contexto.
+    -->
+    <button oncontextmenu="alert('Desenha outro menu'); return false;">Clique com o botão direito para mostrar nosso menu de contexto.</button>
+
+    <script type="text/javascript">
+        /**
+         * * event.defaultPrevented
+         * 
+         * A propriedade event.defaultPrevented é true se a ação padrão foi impedida e false caso contrário.
+         * 
+         * Há um caso de uso interessante para isso.
+         * 
+         * Você se lembra no capítulo Borbulhando e capturando sobre o qual falamos event.stopPropagation() e por que parar de borbulhar é ruim?
+         * 
+         * Às vezes, podemos usar event.defaultPrevented, em vez disso, para sinalizar a outros manipuladores de eventos que o evento foi manipulado.
+         * 
+         Vamos ver um exemplo prático.
+         * 
+         * Por padrão, o navegador no contextmenu evento (clique com o botão direito do mouse) mostra um menu de contexto com opções padrão. Podemos evitá-lo e mostrar o nosso, assim
+        */
+
+    </script>
+</body>
+</html>

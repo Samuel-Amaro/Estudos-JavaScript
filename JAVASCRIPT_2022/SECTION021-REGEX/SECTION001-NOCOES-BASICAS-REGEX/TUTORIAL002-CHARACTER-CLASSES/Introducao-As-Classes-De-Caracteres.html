@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXPRESSION REGULAR : CLASSES DE CARACTERES
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre classes de caracteres em expressões regulares para corresponder a um conjunto de caracteres, incluindo dígitos, espaços em branco e caracteres de palavras.
+         * 
+         * * INTRODUÇÃO ÁS CLASSES DE CARACTERES
+         * 
+         * Uma classe de caracteres permite que você combine qualquer símbolo de um determinado conjunto de caracteres. Uma classe de caracteres também é chamada de conjunto de caracteres. Suponha que você tenha um número de telefone como este:
+         
+            +1-(408)-555-0105
+
+         * E você quer transformá-lo em um número simples:
+
+            14085550105
+
+         * As classes de caracteres em expressões regulares podem ajudá-lo a fazer isso.
+         *
+         * Vamos explorar a classe de  caracteres de dígitos. A classe de caractere de dígito é denotada por \d que corresponde a qualquer dígito:
+         
+            \d -> classe de caracteres de digito, corresponde a qualquer digito
+
+         * 
+         * O exemplo a seguir usa o \d para corresponder ao primeiro número no número de telefone:
+        */
+
+        //declara uma variavel chamada phone que e inicaliza com uma string literal que sera usada para pesquisa
+        let phone = '+1-(408)-555-0105';
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo \d e o padrão o \d(e uma classe de caracteres que corresponde a qualquer digito)
+        //no exemplo abaixo criamos uma expressão regular que o padrão e qualquer digito
+        //essa expressão regular e do tipo RegExp
+        let re = /\d/; 
+
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        //usando o método String.match(regexp) retornarara a primeira ocorrencia de digito na String phone
+        console.log(phone.match(re));
+
+        /**
+         * Quando você adiciona o sinalizador global (g), a expressão regular pesquisará todos os números, não o primeiro:
+        */
+
+        //quando adiconamos a flag (g) global na expressão regular, configuramos uma novo comportamento a expressão regular, o alterando e intruindo o objeto RegExp a pesquisar todas ocorrencias de digitos(numeros)
+        re = /\d/g;
+
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todoas as ocorrencias de numeros na string phone
+        console.log(phone.match(re));
+
+        /**
+         * Agora, você pode transformar o número de telefone em um número simples da seguinte maneira:
+         
+            - Use o match() método para retornar uma array contendo números.
+
+            - Use o join() método para concatenar elementos da array em uma string.
+        */
+
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todas as ocorrencias de numeros na string phone, retorna um array com todas as ocorrencias do padrão
+        let numbers = phone.match(re);
+        //utilizando o metodo join, ira concatenar todos os elementos de uma array e retorna uma nova string
+        //o paramentro de join e separator que é uma string que separa cada par de elementos adjacentes da array na string de resultado.
+        //aqui cada par de elemento não sera separado vão ficar juntos
+        let phoneNo = numbers.join('');
+
+        console.log(phoneNo);
+
+        /**
+         * Para resumir, você pode encadear os métodos match() e join() assim:
+        */
+
+        //usando os métodos de forma encadeada
+        console.log('+1-(408)-555-0105'.match(/\d/g).join(''));
+
+        /**
+         * Além da classe de caracteres de dígitos (\d), as expressões regulares suportam outras classes de caracteres.
+         * 
+         * As classes de caracteres mais usadas são:
+         
+            - \d – corresponder a um único dígito ou a um caractere de 0 a 9.
+
+            - \s – corresponder a um único símbolo de espaço(space) em branco, como um espaço, uma tabulação (\t), uma nova linha (\n).
+
+            - \w– w significa caractere de palavra(word). Ele corresponde ao caractere ASCII, [A-Za-z0-9_]incluindo alfabetos latinos, dígitos e sublinhado ( _).
+
+         * 
+         * Na prática, muitas vezes você combina as classes de caracteres para formar uma combinação mais poderosa.
+         * 
+         * Por exemplo \w\d, corresponde a qualquer palavra seguida por um dígito como O2:
+        */
+
+        //declara uma varaivel de escopo de bloco chamada str que e inicalizada com uma string literal que sera usada para pesquisa
+        let str = 'O2 is oxigen';
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo \w\d e o padrão a ser usado. esse padrão esta representado por classes de caracteres, \d -> e a classe que corresponde a um unico digito ou a um caractere de 0 a 9, o \w -> e caractere de palavra, corresponde a qualquer caractere de palavra(letras por exemplo)
+        //aqui neste exemplo combinamos o uso das duas classes de caracteres para formar uma combinaçaõ mais podera
+        //o padrão e uma caractere de palavra seguido por um digito
+        //quando adiconamos a flag (g) global na expressão regular, configuramos uma novo comportamento a expressão regular, o alterando e intruindo o objeto RegExp a pesquisar todas ocorrencias de caractere de palavra seguido por um digito
+        //essa expressão regular e do tipo RegExp
+        re = /\w\d/g;
+
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todas as ocorrencias de caractere de palavra seguido por numero na string str
+        console.log(str.match(re));
+
+        /**
+         * Um padrão pode conter caracteres regulares e classes de caracteres. Por exemplo, a ES\d expressão regular corresponde ES seguida por um dígito como ES6:
+        */
+
+        //string a ser pesquisa
+        str = 'ES6 Tutorial';
+        //a expressão regular abaixo possui como padrão o seguinte: /ES\d/g, o ES -> são caracteres regulares, o \d -> e uma classe de caractere que corresponde a qualquer digito ou um caractere de 0 a 9, e a flag (g) global, instrui a expressão regular a pesquisar todas ocorrencias
+        re = /ES\d/g;
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todas as ocorrencias de caracteres regulares(ES) seguido por um digito como ES6
+        console.log(str.match(re));
+
+        
+    </script>
+</body>
+</html>
+
+
+

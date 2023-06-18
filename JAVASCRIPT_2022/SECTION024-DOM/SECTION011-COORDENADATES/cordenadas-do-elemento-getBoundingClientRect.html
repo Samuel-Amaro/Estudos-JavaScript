@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <img src="./coordinates.svg" alt="image">
+
+    <img src="./coordinates-negative.svg" alt="image"/>
+
+    <script type="text/javascript">
+       
+       /**
+        * * COORDENADAS DO ELEMENTO: getBoundingClientRect(obter retangulo de cliente limitante)
+        * 
+        * O método elem.getBoundingClientRect()retorna as coordenadas da janela(window) para um retângulo mínimo que inclui elem um objeto da classe DOMRect integrada .
+        * 
+        * DOMRect Propriedades principais :
+        
+            x/y – Coordenadas X/Y da origem do retângulo em relação à janela,
+
+            width/height– largura/altura do retângulo (pode ser negativo).
+
+        * 
+        * Além disso, existem propriedades derivadas:
+        
+            top/bottom– Coordenada Y para a borda do retângulo superior/inferior,
+
+            left/right– Coordenada X para a borda esquerda/direita do retângulo.
+
+         * Como você pode ver, x/y e width/height descrever completamente o retângulo. Propriedades derivadas podem ser facilmente calculadas a partir deles:
+        
+            left = x
+            top = y
+            right = x + width
+            bottom = y + height
+
+         * 
+         * Observe:
+         
+            - As coordenadas podem ser frações decimais, como 10.5. Isso é normal, internamente o navegador usa frações nos cálculos. Não precisamos arredondá-los ao definir como style.left/top.
+
+            - As coordenadas podem ser negativas. Por exemplo, se a página for rolada de modo que elem agora esteja acima da janela, elem.getBoundingClientRect().top será negativo.
+
+         * 
+         * * Por que as propriedades derivadas são necessárias? Por que top/left existe se existe x/y?
+         * 
+         * Matematicamente, um retângulo é definido exclusivamente com seu ponto inicial (x,y) e o vetor de direção (width,height). Portanto, as propriedades derivadas adicionais são por conveniência.
+         * 
+         * Tecnicamente é possível width/height ser negativo, o que permite retângulo “direcionado”, por exemplo, para representar a seleção do mouse com início e fim devidamente marcados.
+         * 
+         * Valores negativos width/height significam que o retângulo começa no canto inferior direito e depois “cresce” da esquerda para cima.
+         * 
+         * Aqui está um retângulo com negativo width e height(por exemplo width=-200, , height=-100):
+         * 
+         * Como você pode ver, left/top não é igual x/y nesse caso.
+         * 
+         * Na prática, porém, elem.getBoundingClientRect() sempre retorna largura/altura positiva, aqui mencionamos negativo width/height apenas para você entender por que essas propriedades aparentemente duplicadas não são realmente duplicadas.
+         * 
+         * * Internet Explorer: sem suporte para x/y
+         * 
+         * O Internet Explorer não oferece suporte x/y a propriedades por motivos históricos.
+         * 
+         * Portanto, podemos fazer um polyfill (adicionar getters em DomRect.prototype) ou apenas usar top/left, pois eles são sempre os mesmos que x/y para positivos width/height, em particular no resultado de elem.getBoundingClientRect().
+         * 
+         * * As coordenadas direita/inferior são diferentes das propriedades de posição CSS
+         * 
+         * Existem semelhanças óbvias entre as coordenadas relativas à janela e CSS position:fixed.
+         * 
+         * Mas no posicionamento CSS, right propriedade significa a distância da borda direita e bottom propriedade significa a distância da borda inferior.
+         * 
+         * Se olharmos apenas para a imagem acima, podemos ver que em JavaScript não é assim. Todas as coordenadas da janela são contadas a partir do canto superior esquerdo, incluindo estas.
+        */
+       
+        console.log(document.documentElement.getBoundingClientRect());
+    </script>
+</body>
+</html>

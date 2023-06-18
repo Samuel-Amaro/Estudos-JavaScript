@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * A CLASSE DE CARACTERE PONTO(.)
+         * 
+         * O ponto (.) é uma classe de caractere especial que corresponde a qualquer caractere, exceto uma nova linha:
+        */
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo o padrão e /E.6/ o caractere ponto(.) e uma classe de caractere que corresponde a qualquer caractere exceto o de nova linha, o padrão e o caractere E.6, sendo que o ponto pode ser qualquer caracter menos o de nova linha
+        //essa expressão regular e do tipo RegExp 
+        let re = /E.6/;
+        
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        //usando o método que retorna todas as ocorrencias da regexp na string str, retorna todas as ocorrencias do padrão na string literal, retorna um array com todas as ocorrencias do padrão
+        console.log('ES6'.match(re));
+        
+        /**
+            * No entanto, o exemplo a seguir retorna null:
+        */
+
+        //expressão regular com o seguinte padrão, no exemplo abaixo o padrão e /ES.6/ o caractere ponto(.) e uma classe de caractere que corresponde a qualquer caractere exceto o de nova linha, o padrão e o caractere ES.6, sendo que o ponto pode ser qualquer caracter menos o de nova linha
+        re = /ES.6/;
+        //string literal com um caracter de nova linha
+        //o metodo retorna null por que não houve correspondecia
+        console.log('ES\n6'.match(re)); 
+
+        /**
+         * Se você quiser usar a . classe de caractere ponto ( ) para corresponder a qualquer caractere, incluindo a nova linha, você pode usar o s sinalizador:
+         * */
+
+        //expressão regular  no exemplo abaixo o padrão e /ES.6/s o caractere ponto(.) e uma classe de caractere que corresponde a qualquer caractere exceto o de nova linha, a flag s, correponde a um unico simbolo de espaço o padrão e o caractere ES.6, sendo que o ponto pode ser qualquer caracter ate o de nova linha, por causa da flag s
+        re = /ES.6/s;  
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string literal
+        //usando o método que retorna todas as ocorrencias da regexp na string literal, retorna todas as ocorrencias do padrão na string literal, retorna um array com todas as ocorrencias do padrão
+        console.log('ES\n6'.match(re));
+
+        /**
+         * * RESUMO
+         * 
+         * As classes de caracteres correspondem a qualquer símbolo de determinados conjuntos de caracteres, por exemplo, \d, \s e \w.
+         * 
+         * As classes \d de caracteres , \s e \w têm as classes inversas e que correspondem a outros caracteres, exceto , e .\D \S \W \d \s \w
+         * 
+         * O ponto(.) corresponde a qualquer caractere, exceto o caractere de nova linha. Use o s sinalizador para fazer com que a classe de caractere ponto (.) corresponda a qualquer caractere, incluindo a nova linha.
+        */
+    </script>
+</body>
+</html>
+
+
+

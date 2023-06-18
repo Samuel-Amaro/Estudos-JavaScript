@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durable constructor pattern</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DURABLE CONSTRUCTOR PATTERN(PADRÃO DE CONSTRUTOR DURÁVEL)
+         * 
+         * Um objeto durável é um objeto que não possui propriedade pública e seus métodos não fazem referência ao this objeto.
+         * 
+         *  Os objetos duráveis ​​são frequentemente utilizados em ambientes seguros onde o acesso this e new não são permitidos.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function regular chamada secureAnimal, que declara um paramentro chamado name
+        function secureAnimal(name) {
+            //cria uma instancia de objeto do tipo Object do JS usando o new palavra chave e invocando a function construtora Object
+            //Por padrão o JS fornece uma function construtora chamada Object, e fornece um prototipo de objeto anonimo que pode ser acessado por Object.prototype onde contem propriedades para ser compartilhadas por todas as intancias de Object
+            var o = new Object();
+            //adiciona uma propriedade chamada name ao o objeto uma propriedade propria, que recebe o argumento name como valor para inicialziar a propriedade
+            //não utiliza o this objeto publico
+            o.name = name;
+            //adiciona uma nova propriedade chamada identify que recebe como valor uma function anonima que não possui paramentro e nem retorna valor, essa function e atribuida a propriedade notify tornando um metodo
+            //adiciona uma propriedaed propria ao objeto
+            //não utiliza o this objeto publico
+            o.identify = function() {
+                //não usa o this objeto publico
+                console.log(`I'm ${o.name}`);
+            }
+            //retorna a instancia de objeto recem criada
+            return o;
+        }
+
+        //cria uma instancia de objeto usando o padrão de fabrica chamado secureAnimal passando um argumento e sem usar a new palavra chave e a this objeto 
+        //somente invocando a function e ela retorna uma instancia de objeto com propriedades
+        //cria uma instancia de objeto chamada alien
+        var alien = secureAnimal('?#@');
+        //acessa o metodo proprio da instancia de objeto
+        alien.identify(); //?#@
+
+        /**
+         * O alien é um objeto durável que não permite que o código externo acesse seus membros sem chamar seus métodos.
+         * 
+         * Neste tutorial, você aprendeu vários padrões para criar objetos em JavaScript. Cada padrão tem prós e contras, escolher o apropriado depende do seu contexto de programação.
+        */
+    </script>
+</body>
+</html>

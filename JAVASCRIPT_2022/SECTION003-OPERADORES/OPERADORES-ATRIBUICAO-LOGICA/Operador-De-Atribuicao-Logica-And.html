@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador de Atribuição Logica And</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O OPERADOR DE ATRIBUIÇÃO LÓGICO AND - E - &&
+         * 
+         * O operador de atribuição lógico AND só atribui y se x for x verdadeiro:
+
+          x &&= y
+
+         * 
+         * O operador de atribuição lógico AND também causa curto-circuito. Significa que
+
+            x &&= y
+
+         * 
+         * é equivalente a:
+
+            x && (x = y)
+
+         * 
+         * O exemplo a seguir usa o operador de atribuição lógico AND para alterar o sobrenome de um person objeto se o sobrenome for verdadeiro:
+        */
+
+        //declara um objeto anonimo com a sintaxe literal da linguagem, o objeto e declarado e atribuido a variavel person, a variavel person ira referenciar o objeto
+        let person = {
+            //propriedades do objeto usando a sintaxe chave valor
+            firstName: 'Jane',
+            lastName: 'Doe'
+        };
+
+        //usando o operador de atribuição logico AND (E) &&
+        //para alterar o valor da lastName propriedade de person
+        //se o operando da esquerda que e a propriedade lastName do objeto e essa propriedade possui um valor verdadeiro isso e possui um valor, o operador ira atribui o valor do operando da direita para o operando da esquerda, usando a seguinte sintaxe
+        //x && (x = y)
+        person.lastName &&= 'Smith';
+
+        console.log(`person = ${person}`);
+
+        
+    </script>
+</body>
+</html>

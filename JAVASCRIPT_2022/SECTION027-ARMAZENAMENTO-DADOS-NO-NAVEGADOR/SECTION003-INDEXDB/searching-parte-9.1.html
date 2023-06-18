@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * PROCURANDO POR UM CAMPO USANDO UM INDICE
+         * 
+         * Para pesquisar por outros campos de objetos, precisamos criar uma estrutura de dados adicional chamada “index”.
+         * 
+         * Um índice é um “complemento” para o armazenamento que rastreia um determinado campo de objeto. Para cada valor desse campo, ele armazena uma lista de chaves para objetos que possuem esse valor. Haverá uma imagem mais detalhada abaixo.
+         * 
+         * A sintaxe:
+        */
+
+        objectStore.createIndex(name, keyPath, [options]);
+
+        /**
+         * name– nome do índice,
+         * 
+         * keyPath– caminho para o campo do objeto que o índice deve rastrear (vamos pesquisar por esse campo),
+         * 
+         * option– um objeto opcional com propriedades:
+         * 
+            * unique– se true, então pode haver apenas um objeto na store com o valor fornecido no keyPath. O índice irá impor isso gerando um erro se tentarmos adicionar uma duplicata.
+            * 
+            * multiEntry– usado apenas se o valor em keyPath for uma array. Nesse caso, por padrão, o índice tratará o array inteiro como a chave. Mas se multiEntry for true, o índice manterá uma lista de objetos de armazenamento para cada valor nesse array. Assim, os membros da array tornam-se chaves de índice.
+            * 
+          * Em nosso exemplo, armazenamos livros codificados por id.
+          * 
+          * Digamos que queremos pesquisar por price.
+          * 
+          * Primeiro, precisamos criar um índice. Deve ser feito em upgradeneeded, assim como um armazenamento de objetos:
+         */
+       
+         //criar/atualizar o banco de dados sem verificações de versão
+         //Um store objetct só pode ser criado/modificado durante a atualização da versão do banco de dados, no upgradeneeded handler
+         //Para realizar uma atualização de versão do banco de dados, existem duas abordagens principais:
+         //atribuindo um manipulador para o evento 
+         //este evento e acionado quando  o banco de dados está pronto, mas sua versão está desatualizada
+         //Se a versão do banco de dados local for menor que a especificada em open, um evento especial upgradeneeded será acionado
+         //O upgradeneeded evento também é acionado quando o banco de dados ainda não existe (tecnicamente, sua versão é 0), para que possamos realizar a inicialização.
+         openRequest.onupgradeneeded = function() {
+            //cria um objeto store para armazenar algo no indexDB
+            //o primeiro argumento passado e o nome do store objeto
+            //o segundo argumento e um objeto opcional com uma propriedade
+            //a propriedade keyPath e um caminho para um propriedade de objeto que indexDb usara como key
+            let books = db.createObjectStore('books', {keyPath: 'id'});
+            //para pesquisar por outros cmapos de objetos criar uma estrutura de dados adicional chamada index
+            //o index rastreia um determinado campo do objeto, para cada valor desse campo ele amazena uma lista de chaves para objetos que possuem esse valor
+            //primeiro argumento nome do indice
+         }
+    </script>
+
+</body>
+</html>

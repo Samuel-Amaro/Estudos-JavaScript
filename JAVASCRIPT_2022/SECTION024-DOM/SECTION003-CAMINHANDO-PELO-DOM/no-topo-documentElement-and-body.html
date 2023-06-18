@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script>
+        alert("De HEAD: " + document.body); // null, ainda não existe <body>
+    </script>
+</head>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * NO TOPO: documentElement and body
+        * 
+        * Os nós de árvore mais altos estão disponíveis diretamente como document propriedades:
+        
+            <html> = document.documentElement
+
+        * O nó de documento mais alto é document.documentElement. Esse é o nó DOM da tag <html>.
+
+            <body> = document.body
+
+        * Outro nó DOM amplamente utilizado é o <body> elemento – document.body.
+
+            <head> = document.head
+
+        * A <head> tag está disponível como document.head.
+        * 
+        * Há um problema: document.body pode ser null
+        * 
+        * Um script não pode acessar um elemento que não existe no momento da execução.
+        * 
+        * Em particular, se um script estiver dentro de <head>, document.body não estará disponível, porque o navegador ainda não o leu.
+        * 
+        * Então, no exemplo abaixo, o primeiro alert mostra null:
+        * */
+
+        alert("De BODY: " + document.body); // HTMLBodyElement, agora existe
+
+        /*
+         * No mundo DOM null significa “não existe”
+         * 
+         * No DOM, o null valor significa “não existe” ou “não existe tal nó”.
+        */
+    </script>
+</body>
+</html>

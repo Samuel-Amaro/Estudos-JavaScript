@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT CONST EM UM FOR LOOP
+         *
+         * O ES6 fornece uma nova construção chamada for...of que permite criar um loop iterando sobre objetos iteráveis, como arrays, maps e set.
+        */
+        
+        //declara um array literal dense anonimo inciialziado com 3 elementos o array e atribuido por referencia a variavel scores
+        let scores = [75, 80, 95];
+
+        //usando a cosntrução for...of para iterar sobre o objeto iteravel array literal
+        for(let score of scores) {
+            //itera sobre cada elemento do array
+            console.log(score);
+        }
+
+        /**
+         * Se você não pretende modificar a score variável dentro do loop, pode usar a const palavra-chave:
+         *  
+        */
+
+        //usando o for...of construção para iterar sobre o objeto iteravel array literal referenciado por scores
+        //aqui a cada iteração e criada uma nova constante score variavel que e inicializada pelo elemento atual iterador pelo loop, um elemento do array na iteração
+        for(const score of scores) {
+            console.log(score);
+        }
+
+        /**
+         * Neste exemplo, o for...of   cria uma nova ligação para a palavra-chave const em cada iteração de loop. Em outras palavras, uma nova score constante é criada em cada iteração.
+         * 
+         * Observe que o const não funcionará em um loop imperativo for. Tentar usar a palavra-chave const para declarar uma variável no for loop imperativo resultará em TypeError:
+        */
+
+        
+        try {
+            //no loop for tradicional, imperativo em que a variavel controladora do loop e modificada a cada iteração, não funcionao usar const como variavel controladora, pois o motivo que a declaracao da variavel e avalida somente uma vez, antes do inicio do corpo do loop
+            for(const i = 0; i < scores.length; i++) { //typeerror
+                console.log(scores[i]);
+            }
+        } catch (error) {
+            console.log(`Error: ${error.name} | ${error.message}`);
+        }
+        
+        /**
+         * O motivo é que a declaração é avaliada apenas uma vez antes do início do corpo do loop.
+         * 
+         * * RESUMO
+         * 
+         * A const palavra-chave cria uma referência somente leitura para um valor. A referência readonly não pode ser reatribuída, mas o valor pode ser alterado.
+         * 
+         * As variáveis ​​declaradas pela palavra-chave const são de escopo bloqueado e não podem ser redeclaradas.
+        */
+    </script>
+
+</body>
+</html>

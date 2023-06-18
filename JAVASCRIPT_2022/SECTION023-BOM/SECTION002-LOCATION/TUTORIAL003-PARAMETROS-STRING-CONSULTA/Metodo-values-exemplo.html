@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        /**
+         * * MÉTODO values() - valores exmplo
+         * 
+         * O exemplo a seguir usa o keys()método para listar todos os valores de parâmetro de uma string de consulta:
+         */
+
+        //location.search é uma string que representa a string de consulta da URL:
+        //o URLSearchParams retorna uma instancia de objeto atribuida por referencia a constante urlParams
+        //o construtor URLSearchParams recebe como argumento uma string com paramentros de consulta de uma URL
+        const urlParams = new URLSearchParams('?type=list&page=20');
+
+        //usando a construção for...of para iterar sobre as values de um iterator(objeto iteravel), sendo que cada value representa um valor de um paramentro de uma string de consulta de um URL
+        //método values() retorna um iterador que itera sobre os valores de parâmetro.
+        for(const value of urlParams.values()) {
+            console.log(value);
+        }
+    </script>
+</body>
+</html>

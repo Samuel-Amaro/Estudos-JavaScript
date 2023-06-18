@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * MÉTODOS FormData
+         * 
+         * Podemos modificar campos com FormData métodos:
+         * 
+            * formData.append(name, value) – adicione um campo de formulário com o dado name e value,
+            * 
+            * formData.append(name, blob, fileName)– adicione um campo como se fosse <input type="file">, o terceiro argumento fileName define o nome do arquivo (não o nome do campo do formulário), como se fosse um nome do arquivo no sistema de arquivos do usuário,
+            * 
+            * formData.delete(name) – remova o campo com o dado name,
+            * 
+            * formData.get(name) – obter o valor do campo com o dado name,
+            * 
+            * formData.has(name)– se existir um campo com o dado name, retorna true, caso contrário false
+            * 
+         * Um formulário é tecnicamente permitido ter muitos campos com o mesmo name, portanto, várias chamadas para append adicionar mais campos com o mesmo nome.
+         * 
+         * Há também method set, com a mesma sintaxe que append. A diferença é que .set remove todos os campos com o dado name e, em seguida, acrescenta um novo campo. Portanto, garante que haja apenas um campo com tal name, o resto é como append:
+         * 
+            * formData.set(name, value),
+            * 
+            * formData.set(name, blob, fileName).
+            * 
+         * Também podemos iterar sobre os campos formData usando for..of loop: 
+        */
+
+        //objeto formData é o objeto para representar os dados do formulário HTML.
+        //Se o elemento HTML form for fornecido, ele captura automaticamente seus campos.
+        let formData = new FormData();
+
+        //metodo formData.append(name, valor) adicione um campo de formulário com o dado name e value,
+        formData.append('key1', 'value1');
+        formData.append('key2', 'value2');
+
+        //lista de pares key/value
+        //iterando sobre o par de chave/valor do objeto formData
+        for(let [name, value] of formData) {
+            alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
+        }
+    </script>
+
+</body>
+</html>

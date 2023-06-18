@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo A</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * Array.from() Exemplos de métodos JS
+         * 
+         * Vamos dar alguns exemplos de uso do Array.from() método.
+         * 
+         * * EXEMPLO A) CRIAR UMA ARRAY A PARTIR DE UM OBJETO SEMELHANTE A UMA ARRAY
+         * 
+         * O exemplo a seguir usa o Array.from() método para criar uma nova array a partir do arguments objeto de uma função:
+        */
+
+        //declara uma function chamada arrayFromArgs() que não possui nenhum paramentro declarado
+        //a function arrayFromArgs e uma instancia de objeto do tipo function
+        function arrayFromArgs() {
+            //utilizando o metodo Array.from() podemos criar um novo array a partir de um objeto tipo array ou iterável(iterable).
+            //o Metodo Array.from() retorna uma nova instância de Array que contém todos os elementos do target objeto.
+            //o from metodo array recebe o objeto array como argumento para que possa criar um novo array a partir do argumento passado
+            //aqui então sera criado um novo array que ira conter todos os elementos do array objeto arguments por meio do metodo from
+            //retorna o novo array criado
+            return Array.from(arguments);
+        }
+
+        //invoca a function arrayFromArgs passando um numero indefinido de argumentos, os argumentos  passados são armazenados no objeto array arguments
+        //a function ira retornar um array com os argumentos passados como elementos
+        console.log(arrayFromArgs(1, 'A'));
+
+        /**
+         * Neste exemplo, criamos um array a partir de argumentos da arrayFromArgs() função e retornamos o array.
+         * 
+         * 
+        */
+    </script>
+</body>
+</html>

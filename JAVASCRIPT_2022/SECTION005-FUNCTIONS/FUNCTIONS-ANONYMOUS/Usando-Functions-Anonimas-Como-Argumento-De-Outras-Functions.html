@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions anonimas</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO FUNCTIONS ANÔNIMAS COMO ARGUMENTOS DE OUTRAS FUNCTIONS
+         * 
+         * Freqüentemente, usamos funções anônimas como argumentos de outras funções. 
+         * 
+         * Por exemplo:
+         * */
+
+        //a setTimeout() function recebe uma function anonima como argument, executa essa function anonima um segundo depois
+        setTimeout(function() {
+            console.log('Execute later after 1 second');
+        }, 1000) ;
+
+        /**
+         * Neste exemplo, passamos uma função anônima para a setTimeout()função. A setTimeout() função executa esta função anônima um segundo depois.
+         * 
+         * Observe que as funções são os cidadãos de primeira classe em JavaScript, portanto, você pode passar uma função para outra como um argumento.
+         **/ 
+    </script>
+</body>
+</html>

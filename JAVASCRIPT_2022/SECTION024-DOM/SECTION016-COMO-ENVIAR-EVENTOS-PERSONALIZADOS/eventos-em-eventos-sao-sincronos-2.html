@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="menu" type="button">Menu (clique aqui!)</button>
+
+    <script type="text/javascript">
+
+        //execução de eventos em eventos de forma assicrona, executa um evento apos a conclusão de outro
+
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        menu.onclick = function(event) {
+            alert(1);
+
+            //demora 0s para executar a callback, para executar o evento aninhado personalizado de tipo novo
+            setTimeout(() => {
+                //cria um novo objeto de evento do tipo de evento personalizado do tipo "menu-open"
+                //o metodo elem.dispatchEvent(event) ira executar o evento novo e personalizado no menu permitindo borbulhamento
+                //este evento abaixo personalizado e executado durante a execução do evento de click no menu, um evento sincrono.
+                menu.dispatchEvent(new CustomEvent("menu-open", {
+                    bubbles: true //permite que o evento borbulhe
+                }));
+            });
+            
+            //o atraso proposital para executar o evento personalizdo novo acima permite que executamos todo o manipulador do evento de click no menu e por ultimo executamos o evento personalziado de tipo novo 
+            //execução de forma assincrona
+            alert(2);
+        }
+
+        //atribuindo uma manipulador de evento por meio do metodo elem.addEventListener(event, handler, options)
+        //o manipulador e para o evento personalizado novo do tipo "menu-open"
+        document.addEventListener("menu-open", () => alert('aninhado'));
+
+        /**
+         * Agora dispatchEvent é executado de forma assíncrona após a conclusão da execução do código atual, incluindo menu.onclick, para que os manipuladores de eventos sejam totalmente separados.
+         * 
+         * A ordem de saída se torna: 1 → 2 → aninhada.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p id="p">Selecione aqui: <i>itálico</i> e <b>negrito</b></p>
+
+    <!--
+    no de elemento como um todo
+    <p id="p">       no de elemento completo <p>
+        Selecione aqui:     no de texto com indice 0 como numero filho <p>
+        <i>          no de elemento com indice 1 como numero filho <p>
+            itálico  no de texto como numero filho 0 de <i>
+        </i>    
+        e            no de texto com indice 2 como numero filho <p>
+        <b>          no de elemento com indice 3 como numero filho <p>
+            negrito  no de texto como numero filho 0 de <b>
+        </b>
+    </p>
+    -->
+
+    <script type="text/javascript">
+        /**
+         * * SELEÇÃO EM CONTROLES DE FORMULÁRIO
+         * 
+         * Elementos de formulário, como input e textarea fornecem API especial para seleção , sem Selection ou Range objetos. Como um valor de entrada é um texto puro, não HTML, não há necessidade de tais objetos, tudo é muito mais simples.
+         * 
+         * Propriedades:
+         * 
+            * input.selectionStart– posição do início da seleção (gravável),
+            * 
+            * input.selectionEnd– posição do final da seleção (gravável),
+            * 
+            * input.selectionDirection– direção de seleção, uma de: “para frente-forward”, “para trás-backward” ou “nenhuma-none” (se, por exemplo, selecionado com um duplo clique do mouse),
+            * 
+         * EVENTOS:
+         * 
+            * input.onselect – dispara quando algo é selecionado
+            * 
+         * MÉTODOS:
+         *         
+            * input.select()– seleciona tudo no controle de texto (pode ser textarea em vez de input)
+            * 
+            * input.setSelectionRange(start, end, [direction]) – altera a seleção para span da posição inicial até o final, na direção especificada (opcional).
+            * 
+            * input.setRangeText(replacement, [start], [end], [selectionMode]) – substitui um intervalo de texto pelo novo texto.
+            * 
+                * Argumentos opcionais start e end, se fornecidos, definem o início e o fim do intervalo, caso contrário, a seleção do usuário é usada. 
+                * 
+                * O último argumento, selectionMode, determina como a seleção será definida após a substituição do texto. Os valores possíveis são:
+                * 
+                    * "select"– o texto recém-inserido será selecionado.
+                    * 
+                    * "start"– o intervalo de seleção é recolhido imediatamente antes do texto inserido (o cursor estará imediatamente antes dele).
+                    * 
+                    * "end"– o intervalo de seleção é recolhido logo após o texto inserido (o cursor estará logo após ele).
+                    * 
+                    * "preserve"– tenta preservar a seleção. Este é o padrão.
+                    * 
+         * Agora vamos ver esses métodos em ação. 
+        */
+
+    </script>
+</body>
+</html>

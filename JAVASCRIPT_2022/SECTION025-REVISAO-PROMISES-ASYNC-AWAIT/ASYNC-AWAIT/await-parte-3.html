@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="module" src="./modulo.js">
+        /**
+         * * NAVEGADORES MODERNOS PERMITEM AWAIT MÓDULOS DE NÍVEL SUPERIOR
+         * 
+         * Nos navegadores modernos, await no nível superior funciona bem, quando estamos dentro de um módulo. Abordaremos os módulos no artigo Módulos, introdução .
+         * 
+         * Por exemplo:
+         * 
+         * Se não estamos usando módulos, ou navegadores mais antigos devem ser suportados, há uma receita universal: encapsular em uma função assíncrona anônima.
+         * 
+         * Assim:
+        */
+
+        //usando IIFE
+        /*
+        (async () => {
+            let response = await fetch('/article/promise-chaining/user.json');
+            let user = await response.json();
+            //...
+        })();
+        */
+    </script>
+
+</body>
+</html>

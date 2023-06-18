@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread Operador</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * OPERADOR DE PROPAGAÇÃO JS E MANIPULAÇÃO DE ARRAY
+         * 
+         * * 1) CONSTRUINDO LITERAL DE ARRAY
+         * 
+         *  O operador spread permite que você insira outro array no array inicializado ao construir um array usando a forma literal. Veja o seguinte exemplo:
+        */
+
+        //declara um array lteral denso chamado initialChars que foi inicializado com dois elementos
+        let initialChars = ['A', 'B'];
+        //declara um array literal denso nomeado chars que foi inicializado com o operador spread que ira descompactar o array initialChar no array chars e seus elementos
+        let chars = [...initialChars, 'C', 'D'];
+        console.log(chars); //["A", "B", "C", "D"]
+
+        /**
+         * * 2) CONCATENAR ARRAYS
+         * 
+         * Além disso, você pode usar o operador spread para concatenar dois ou mais arrays:
+         * 
+        */
+
+        //declara um array literal chamada numbers inicializado com dois elementos
+        let numbers = [1, 2];
+        //declara uma array literal chamada moreNumbers inicializada com dois elementos
+        let moreNumbers = [3, 4];
+        //usando o operador spread para concatenar arrays
+        //aqui declaramos um array chamado allNumbers que sera inicializado pela descompactação feita pelo operador spread nos arrays numebrs e moreNumbers, que descompactar os arrays e seus elementos serão adicionados de forma individual como elementos no array allNumbers
+        let allNumbers = [...numbers, ...moreNumbers];
+
+        console.log(`allNumbers = ${allNumbers}`);
+
+        /**
+         * * 3) COPIANDO UMA ARRAY
+         * 
+         * Além disso, você pode copiar uma instância de array usando o operador spread:
+        */
+
+        //declara um array literal chamado scores que possui 3 elementos
+        let scores = [80, 70, 90];
+
+        //utillizando o operador spread para copiar um array
+        //aqui o operador spread descompactara o array scores e seus elementos serão atribuido como elementos do array copiedScores para inicializar o array copiedScores
+        //aqui e copia feita por atribuição e não por referencia, somentes os valores são copiados de um array para o outro, não e uma copia de referncia
+        let copiedScores = [...scores];
+        console.log(`copiedScores = ${copiedScores}`); //[80, 70, 90]
+
+        /**
+         * Observe que o operador spread apenas copia o próprio array para o novo, não os elementos. Isso significa que a cópia é superficial, não profunda.
+         * 
+         * * OPERADOR SPREAD AND STRINGS
+         * 
+         * Considere o seguinte exemplo:
+         * 
+         * 
+        */
+
+        //declara um array literal denso inicializado com 3 elementos, utilziando o operador spread
+        //aqui passamos o elemento literal string com 2 caracteres, utilziando o ooperador spread ele ira desconpactar essa string literal em dois caracteres individuais formando dois elementos separados para o array na inicialização
+        let chars2 = ['A', ...'BC', 'D'];
+
+        console.log(chars2); //["A", "B", "C", "D"];
+
+        /**
+         * Neste exemplo, construímos o chars array a partir de strings individuais. Quando aplicamos o operador spread à 'BC'string, ele espalha cada caractere individual da string 'BC'em caracteres individuais.
+         * 
+         * * RESUMO
+         * 
+         * O operador spread é indicado por três pontos (…).
+         * 
+         * O operador spread descompacta elementos de objetos iteráveis, como ARRAYS, conjuntos e mapas em uma lista.
+         * 
+         * O parâmetro rest também é indicado por três pontos (…). No entanto, ele empacota os argumentos restantes de uma função em uma array.
+         * 
+         * O operador spread pode ser usado para clonar um objeto iterável ou mesclar objetos iteráveis ​​em um.
+        */
+    </script>
+</body>
+</html>

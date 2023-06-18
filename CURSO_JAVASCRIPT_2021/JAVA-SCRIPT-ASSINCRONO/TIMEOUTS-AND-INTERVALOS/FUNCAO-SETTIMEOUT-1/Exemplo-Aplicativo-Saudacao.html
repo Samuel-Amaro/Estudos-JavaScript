@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo Saudação</title>
+    <style>
+        form{
+            width: 300px;
+        }
+
+        fieldset{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button{
+            width: 120px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>Dê uma saudação a alguém!</h1>
+
+    <form>
+        <fieldset>
+            <label for="name">Entre com um nome:</label>
+            <input type="name" id="name" required>
+        </fieldset>
+        <fieldset>
+            <button>Saudar!</button>
+        </fieldset>
+    </form>
+
+    <p>
+        <button class="cancel">Cancelar saudação</button>
+    </p>
+
+    <script>
+        //Armazene referências ao nosso formulário, elemento de entrada e botões
+        const form = document.querySelector('form');
+        const nameInput = document.getElementById('name');
+        const cancelBtn = document.querySelector('.cancel');
+
+        // Desative o botão de cancelamento por enquanto para que ele não possa fazer nada se
+        //uma saudação ainda não está em andamento
+        cancelBtn.disabled = true;
+
+        //Defina nossa função de saudação
+        function dizOla(who) {
+            alert('Olá ' + who + '!');
+            //Desative o botão de cancelamento quando uma saudação foi mostrada
+            cancelBtn.disabled = true;
+        }
+
+        //Crie uma variável global que atuará como nossa referência setTimeout
+        let minhaSaudacao;
+
+        //Adicione ouvinte de evento ao nosso formulário para iniciar a saudação
+        //evento submit e usado quando o formulario e enviado ou submetido
+        form.addEventListener('submit', (e) => {
+            //Impedir o envio de formulários; nós não queremos isso  
+            e.preventDefault();
+            //Habilita o button de cancelar
+            cancelBtn.disabled = false;
+            //define o tempo limite para saudar o nome inserido na entrada
+            //o tempo limite para mostrar a mensagem e 5 segundos(ou 5 millisegundos)
+            minhaSaudacao = setTimeout(dizOla, 5000, nameInput.value);
+        });
+
+        //Adicione ouvinte de evento ao botão cancelar para cancelar a saudação
+        //registra um manipulador de evento, o evento e de click ao clicar no botão de cancelar a saudação
+        cancelBtn.addEventListener('click', () => { 
+            //cancela o setTimeout estabelecido, antes de o tempo especificado ter sido passado
+            clearTimeout(minhaSaudacao);
+            //Desative o botão de cancelamento por enquanto para que ele não possa fazer nada
+            cancelBtn.disabled = true;
+            console.log('Saudação cancelada!');
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * TRANSACTIONS(TRANSAÇÕES)
+         * 
+         * O termo “transação” é genérico, utilizado em diversos tipos de bancos de dados.
+         * 
+         * Uma transação é um grupo de operações, que devem todas ter sucesso ou todas falhar.
+         * 
+         * Por exemplo, quando uma pessoa compra algo, precisamos:
+         * 
+            * Subtraia o dinheiro da conta deles. 
+            * 
+            * Adicione o item ao seu inventário.
+            * 
+         * Seria muito ruim se completarmos a 1ª operação, e então algo der errado, por exemplo, as luzes se apagarem e não conseguirmos fazer a 2ª. Ambos devem ter sucesso (compra completa, bom!) ou ambos falharem (pelo menos a pessoa guardou seu dinheiro, para que possa tentar novamente). 
+         * 
+         * As transações podem garantir isso.
+         * 
+         * Todas as operações de dados devem ser feitas dentro de uma transação(transaction) no IndexedDB.
+         * 
+         * Para iniciar uma transação:
+        */
+
+        //db.transaction(store[, type]);
+
+        /**
+         * store é um nome de store que a transação vai acessar, por exemplo "books". Pode ser uma array de nomes de stores se formos acessar várias stores.
+         * 
+         * type– um tipo de transação, um dos seguintes:
+         * 
+            * readonly – só pode ler, o padrão.
+            * 
+            * readwrite – pode apenas ler e gravar os dados, mas não criar/remover/alterar armazenamentos de objetos.
+            * 
+         * Há também versionchange o tipo de transação: essas transações podem fazer tudo, mas não podemos criá-las manualmente. IndexedDB cria automaticamente uma versionchange transação ao abrir o banco de dados, para upgradeneeded handler. É por isso que é um único lugar onde podemos atualizar a estrutura do banco de dados, criar/remover store objetos. 
+         * 
+         * * Por que existem diferentes tipos de transações?
+         * 
+         * O desempenho é a razão pela qual as transações precisam ser rotuladas como readonly e readwrite.
+         * 
+         * Muitas readonly transações podem acessar a mesma loja simultaneamente, mas as readwrite transações não podem. Uma readwrite transação “bloqueia” a loja(store) para escrita. A próxima transação deve esperar antes que a anterior termine antes de acessar a mesma loja.
+         * 
+         * Após a transação ser criada, podemos adicionar um item à loja(store), assim:
+        */
+
+        //Todas as operações de dados devem ser feitas dentro de uma transação(transaction) no IndexedDB.
+        //para iniciar a transação usamos db.transaction(store, typeTransaction);
+        //o argumento store e um nome de store que a transaction vai acessar. pode ser um array de nome de stores se formos acessar varias stores
+        //o type argumento um tipo de transação, o valor readwrite e uma transação que pode apenas ler e gravar dados, mas não criar, remove, alterar store objetos
+        let transaction = db.transaction("books", "readwrite"); // (1)
+
+        //cria um objeto store para armazenar algo no indexDB
+        //o primeiro argumento passado e o nome do store objeto
+        //o segundo argumento e um objeto opcional com uma propriedade
+        //a propriedade keyPath e um caminho para um propriedade de objeto que indexDb usara como key, assim todos values armazenados em store tera id como chave
+        let books = transaction.objectStore("books"); //(2)
+
+        //cria um objeto anonimo 
+        let book = {
+            id: 'js', //key
+            price: 10,
+            created: new Date()
+        };
+
+        //adiciona o objeto anonimo referenciado por book, ao store, o objeto book e adicionado ao store com a chave sendo o valor da propriedade id do mesmo book, isso salva o book objeto no store objeto
+        //envia uma request ao store objeto para armazenar book
+        //store objeto oferece suporte a metodo para armazenar um valor, metodo add(value, [key]);
+        //adicionar o value a store. o key so e fornecido apenas se o store objeto não tiver uma keyPath option autoIncrement, se ja houver um valor com a mesma chave ele sera susbtituido, se ja houver um valor com a mesma chave armazenado em store a request falaha e sera gerado um erro com o nome "ConstraintError"
+        //adiciona o book a store 
+        let request = books.add(book); //(3)
+
+        //SEMELHANTE A BANCO DE DADOS PODEMOS ENVIAR UMA REQUEST E AGURDAR OS SUCESS/ERROR EVENTOS
+        //transação realizada com suceso
+        //este evento e acionado quando banco de dados está pronto, há o “objeto banco de dados” em openRequest.result, devemos usá-lo para futuras chamadas.
+        //se este evento for acionado o book foi adicionar ao store com suceso
+        request.onsucess = function() {
+            //O request.result para add é a chave do novo objeto.
+            console.log("Book added to the store", request.result);
+        };
+
+        //transação não realizada 
+        //este evento e acionado quando a abertura falhou.
+        //este evento e acionado quando o request para store objeto falhou ao tentar salvar book objeto
+        request.onerror = function() {
+            //O erro está em request.error(se houver).
+            console.log("Error", request.error);
+        };
+
+        /**
+         * Foram basicamente quatro etapas:
+         * 
+            * Crie uma transação, mencionando todas as lojas que vai acessar, em (1).
+            * 
+            * Obtenha o objeto de armazenamento usando transaction.objectStore(name), em (2).
+            * 
+            * Execute a solicitação ao armazenamento de objetos books.add(book), em (3).
+            * 
+            * …Tratar o sucesso/erro da solicitação (4), então podemos fazer outras solicitações, se necessário, etc.
+            * 
+         * Os store objetos oferecem suporte a dois métodos para armazenar um valor:
+         * 
+            * put(valor, [chave]) Adicione o value à loja. O key é fornecido apenas se o armazenamento de objetos não tiver uma keyPath opção autoIncrement. Se já houver um valor com a mesma chave, ele será substituído. 
+            * 
+            * add(value, [key]) Igual a , mas se já houver um valor com a mesma chave, a solicitação falhará e será gerado put um erro com o nome ."ConstraintError"
+            * 
+            * Semelhante à abertura de um banco de dados, podemos enviar uma solicitação: books.add(book), e aguardar os success/erroreventos.
+            * 
+                * O request.result for add é a chave do novo objeto.
+                * 
+                * O erro está em request.error(se houver). 
+        */
+    </script>
+
+</body>
+</html>

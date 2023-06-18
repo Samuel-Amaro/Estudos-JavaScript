@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessando Exportação Padrão</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * ACESSANDO A EXPORTAÇÃO PADRÃO
+         * 
+         * Se um módulo tiver uma exportação padrão, você poderá acessá-lo usando a palavra-chave default. Por exemplo:
+         * */
+
+         import(moduleSpecifer).then((module) => {
+            //acessa a exportação padrão
+            console.log(module.default);
+         });
+
+         /**
+          * * RESUMO 
+          * 
+          * Use o JavaScript import() para carregar dinamicamente um módulo. O import()retorna um Promise que será preenchido(esta fullfiled - resolvido com valor) assim que o módulo for carregado completamente.
+          * 
+          * Use o async/await para manipular o resultado do import().
+          * 
+          * Use o Promise.all() método para carregar vários módulos de uma vez.
+          * 
+          * Use a desestruturação de objetos para atribuir variáveis ​​aos objetos de exportação de um módulo.
+          * 
+          * Use a default palavra-chave para acessar a exportação padrão.
+        */
+    </script>
+</body>
+</html>

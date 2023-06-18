@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        //inicializa variaveis atribuindo a cada uma por referencia um objeto literal anonimo com somente uma unica propriedade
+        let john = {name: 'John Doe'}, lily = {name: 'Lily Bush'}, peter = {name: 'Peter Drucker'};
+
+        /**
+         * * INICIALIZAR UM MAP COM UM OBJETO ITERÁVEL
+         * 
+         * Como mencionado anteriormente, você pode passar um objeto iterável para o Map() construtor:      
+        */
+
+        //cria uma nova instancia de objeto do Tipo Map() invocando o construtor Map, atribui a instancia por referencia a variavel userRoles, a instancia do tipo Map criada, e inicializa com o argumento passado para o construtor Map, que recebe um array multidimensional literal dense anonimo, inicializado com 3 elementos, cada elemento e um novo array, inicializado com dois elementos
+        //O map construtor aceita um objeto iteravel opcional, cujos elementos são pares de chave valor 
+
+        let userRoles = new Map([
+            [john, 'admin'],
+            [lily, 'editor'],
+            [peter, 'subscriber']
+        ]);
+
+        /**
+         * * OBTER UM ELEMENTO DE UM MAP POR CHAVE
+         * 
+         * Se você quiser ver os papéis de John, use o get() método:
+        */
+
+        //usando o método Map.get(key) podemos obter o valor associado uma chave passada para o método
+        //se a chave não existir o método retorna undefined
+        console.log(userRoles.get(john)); //admin
+
+        /**
+         * Se você passar uma chave que não existe, o get() método retornará undefined.
+        */
+
+        //declara uma variavel e atribui a mesma um objeto literal dense anonimo que possui so uma propriedade
+        let foo = {name: 'Foo'};
+        //obtendo o valor associado a chave foo, obtermos o valor undefined pois a chave passada não esta definido no map objeto
+        userRoles.get(foo); //undefined
+
+        /**
+         * * VERIFICAR A EXISTÊNCIA DE UM ELEMENTO POR CHAVE
+         * 
+         * Para verificar se existe uma chave no mapa, você usa o has()
+         método.
+        */
+
+        //usando o método userRoles.has(key) para verificar se existe um valor associado a chave
+        console.log(`foo has key ? ${userRoles.has(foo)}`); //false
+        console.log(`lily has key ? ${userRoles.has(lily)}`); //true
+
+        /**
+         * * OBTER O NÚMERO DE ELEMENTOS NO MAP
+         * 
+         * A size propriedade retorna o número de entradas do mapa.
+        */
+
+        console.log(userRoles.size); //retorna o numero de entradas no map
+        
+    </script>
+
+</body>
+</html>

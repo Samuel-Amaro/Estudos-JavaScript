@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE REFERÊNCIAS ANTERIORES(BACKREFERENCE) DE REGEX JS
+         * 
+         * * 2) USANDO REFERÊNCIAS ANTERIORES PARA ENCONTRAR PALAVRAS QUE TENHAM PELO MENOS UM CARACTERE REPETIDO CONSECUTIVO
+         * 
+         * O exemplo a seguir mostra como usar uma referência anterior para encontrar a palavra que possui pelo menos um caractere repetido consecutivo, por exemplo, apple(a letra pé repetida):
+        */
+
+        //declara uma array literal dense anonimo inicializado com 3 elementos, o array e atribuido por referencia a variavel words
+        const words = ['apple', 'orange', 'strawberry'];
+        //cria uma expressão regular que possui o seguinte padrão
+        //usando a ancora \b ele permite corresponde a uma posicao que e chamada de limite de palavra que possui lenght 0, carrega a correspondecia de toda a palavra usando uma expressão regular na seguinte forma \bpalavra\b,
+        //a correspondecia que o limite de palavra tem que carregar e nenhum ou varios caracteres de palavra, seguido por um grupo de captura que possui a seguinte regra, que corresponda ao seguinte padrão, correponde a um caractere, o proximo no padrão e um backreference que referencia o primeiro grupo de captura, depois corresponda a nenhum ou varios caracteres de palavra
+        //o padrão e o seguinte: no limite de palavra, no primeiro caractere da string se for um \w, ou no ultimo se for \w, ou entre dois caracteres um de palavra outro não, corresponda a seguinte string: um ou varios caracteres de palavra, um caracter de palavra, outro caracter de palavra, um ou varios caracteres de palavra
+        const pattern = /\b\w*(\w)\1\w*\b/;
+        //usando a construção for...of para iterar sobre um iteravel, ira iterar sobre os elementos do array
+        for(const word of words) {
+            //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string, obter todas as correspondecias de palavras que possui pelo menos um caractere repetido
+            //retorna uma array
+            const result = word.match(pattern);
+            if(result) {
+                //acessando correspondecias
+                console.log(result[0], '->', result[1]);
+            }
+        } 
+
+        /**
+         * * RESUMO
+         * 
+         * Use referências anteriores para fazer referência aos grupos de captura em uma expressão regular.
+        */
+    </script>
+</body>
+</html>
+
+
+

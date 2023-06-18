@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exempo de synchronous JavaScrit</title>
+</head>
+<body>
+    
+    <h1>Exemplo de sicronismo no JavaScript</h1>
+
+    <button>Clique Aqui!</button>
+
+    <script>
+        /*
+         * No nosso exemplo simple-sync.html (veja aqui), nós adicionamos um evento de click em um botão para que, quando clicado, ele executa uma tarefa pesada (calcula 10 milhões de datas e depois imprime a última delas no console) e depois adiciona um parágrafo no DOM:
+         * 
+         * Isso é uma nova versão do nosso exemplo que calcula 10 milhões de datas em uma tread worker separada. Agora, quando você clica no botão, o navegador é capaz de mostrar o parágrafo antes que as datas sejam terminadas. A primeira opreção não bloqueia a segunda.
+        */
+
+        //obtem referncia do elemento <button> por meio DA API DOM
+        const btn = document.querySelector('button');
+
+        /*
+         * Web Workers API
+         * 
+         * Web Workers são mecanismos que permitem que uma operação de um dado script seja executado em uma thread diferente da thread principal da aplicação Web. Permitindo que cálculos laboriosos sejam processados sem que ocorra bloqueio da thread principal (geralmente associado à interface).
+         * 
+         * Um "worker" é um objeto criado através da utilização do construtor (ex Worker()) que executa um dado arquivo Javascript —  o código contido em tal arquivo é executado no thread do worker; e tais workers são executados em um contexto diferente do principal window.
+         * 
+         * O thread do worker roda qualquer trecho de código, mas é importante ressaltar que esse trecho não poderá manipular o DOM, ou usar alguns métodos e propriedades do objeto window
+         * 
+         * O thread principal e os threads dos workers comunicam-se entre si enviando dados através do sistema de mensagens — ambos os lados enviam mensagens usando o método postMessage(), e respondem as mensagens via o manipulador de eventos onmessage (a mensagem está contida no atributo data do evento Message). É importante ressaltar que os dados são copiados, e não compartilhados.
+         * 
+         * A interface Worker da API do Web Worker representa uma tarefa em background (segundo plano) que pode ser facilmente criada e emitir mensagens de volta ao seu criador. Criar um worker é possível chamando o construtor Worker("path/to/worker/script") e especificando um script para ser executado em sua própria thread.
+         * 
+         * Cria um worker dedicado da web que executa o script especificado na URL.
+        */
+        const worker = new Worker('worker.js');
+
+
+        //registra um manipulador de evento no botão, ao botão ser clicado vai acionar o tratador do evento
+        //o evento e o evento de click, ao botão ser clicado executara o manipulador do evento
+        //registra uma arrow function anonima que manipula o evento de clique
+        btn.addEventListener('click', () => {
+            
+            //manda uma mensagem para a thead work que esta em segundo plano em outro script, manda um mensagem para o worker script externo passando um texto para ele
+            worker.postMessage('Go!');
+
+            //cria um elemento HTML <p>
+            let pElem = document.createElement('p');
+            //conteudo do elemento
+            pElem.textContent = 'Este é um parágrafo recém-adicionado.';
+            //add o elemento criado no corpo da pagina
+            document.body.appendChild(pElem);
+        });
+
+        //a mensagem que o worker script externo vai mandar para o script global do worker que e esse vai receber a mensagem e por aqui por meio desse evento onmessage. e por meio do atributo data que onde os dados da mensagem fica vai mostra o ultimo objeto criado de date no console, por meio de um manipulador de evento que vai ser uma função anonima
+        worker.onmessage = function(e) {
+            console.log(e.data);
+        }
+        
+    </script>
+</body>
+</html>

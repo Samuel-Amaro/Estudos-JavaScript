@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT PERMITE VARIÁVEIS E HOISTING(IÇAMENTO)
+         * 
+         * Vamos examinar o seguinte exemplo:
+        */
+        
+        try {
+            {
+                //aqui tentamos acessar a variavel couter antes de ser declarada. isso causa um ReferenceError
+                console.log(counter); //
+                //declara uma variavel chamada counter que possui um escopo de bloco, e inicializada com vlaor 10
+                let counter = 10;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+        /**
+         * Neste exemplo, acessar a counter variável antes de declará-la causa um ReferenceError. Você pode pensar que uma declaração de variável usando a palavra-chave let não eleva(hoist), mas sim.
+         * 
+         * Na verdade, o mecanismo JavaScript elevará uma variável declarada pela let palavra-chave para o topo do bloco. No entanto, o mecanismo JavaScript não inicializa a variável. Portanto, ao fazer referência a uma variável não inicializada, você obterá um arquivo ReferenceError.
+        */
+    </script>
+
+</body>
+</html>

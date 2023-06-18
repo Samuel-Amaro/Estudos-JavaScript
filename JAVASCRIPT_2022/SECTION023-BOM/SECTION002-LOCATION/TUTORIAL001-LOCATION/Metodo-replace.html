@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        /** 
+         * * REPLACE() - SUBSTITUIR
+         * 
+         * O replace() método é semelhante ao assign() método, exceto que não cria uma nova entrada na pilha de histórico do navegador. Portanto, você não pode clicar no botão voltar para ir para a página anterior.
+         * 
+         * O código a seguir usa o replace()método para navegar até a URL https://www.javascripttutorial.net após 3 segundos:
+        */
+
+        //invoca a function setTimeout para executar uma função apos um timer de 3 segundos ter sido executado
+        setTimeout(() => {
+            //o método replace aceita uma URL como argumento navega até a mesma so que não faz uma entrada na pilha de historico do navegador
+            location.replace('https://www.javascripttutorial.net');
+        }, 3000);
+    </script>
+</body>
+</html>

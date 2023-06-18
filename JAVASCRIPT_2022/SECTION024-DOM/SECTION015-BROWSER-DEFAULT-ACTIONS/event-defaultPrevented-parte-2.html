@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Clique com o botão direito do mouse mostra o menu de contexto do navegador</p>
+
+    <button type="button" id="elem">Clique com o botão direito do mouse aqui para o menu de contexto do botão</button>
+    
+
+    <script type="text/javascript">
+        /**
+         * Agora, além desse menu de contexto, gostaríamos de implementar o menu de contexto para todo o documento.
+         * 
+         * Ao clicar com o botão direito, o menu de contexto mais próximo deve aparecer.
+        */
+
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        //o evento e o contextmenu(clique direito do botão do mouse sobre elem)
+        elem.oncontextmenu = function(event) {
+            //este metodo do objeto evento, evita a ação padrão do navegador, a ação padrão do navegador e interropida.
+            //a ação padrão de mostrar menu de contexto do navegador e interropida
+            event.preventDefault();
+            //nossa propria ação para o evento acionado
+            alert("Contexto Menu do botão");
+            //este manipulador ocorrera borbulhamento e captura, pois ao ir borbulhando ira acionar o manipulador do document. os manipuladores dos ancetrais desse elemento sera acionado
+        }
+
+        //atribui outro manipulador de evento por meio de propriedade dom ao document
+        document.oncontextmenu = function(event) {
+            //este metodo do objeto de evento evita a ação padrão do navegador
+            event.preventDefault();
+            //ação padrão, nossa propriedade ação
+            alert("Contexto de menu do documento");
+        };
+
+
+    </script>
+</body>
+</html>

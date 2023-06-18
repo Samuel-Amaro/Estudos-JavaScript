@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * NEGATIVE LOOKBEHIND(RETROSPECTIVA NEGATIVA)
+         *
+         * Para negar um lookbehind, você usa um lookbehind negativo com a seguinte sintaxe:
+         
+            (?<!Y)X
+
+            - aqui nesta sintaxe o ?<! e um lookbehind negativo que diz que o elemento X so pode ser correspondido se somente nenhum elemento Y for anterior a ele ou antes dele.
+
+         * Nesta sintaxe, o mecanismo regex corresponde X se não houver nenhum Y antes dele. O exemplo a seguir usa uma expressão regular com um lookbehind negativo para corresponder a um número que não tem a $ letra antes dele:
+        */
+
+        //declara string literal a ser usada na pesquisa
+        const s = '1 computer costs $900';
+        //cria uma expressão regular com o seguinte padrão:
+        //um grupo de captura que possui a seguinte regra, um lookbehind que corresponde a uma string literal que não pode ser um elemento anterior a ser correspondido no padrão, um ou mais digitos
+        //padrão: corresponder a um ou mais digitos que não tenham  como elemento anterior a string literal $
+        const pattern = /(?<!\$)\d+/;
+        //usando o método String.match(regex) para retornar todas as correspondecias de regexp na string
+        const match = s.match(pattern);
+        console.log(match);
+
+        /**
+         * * RESUMO 
+         * 
+         *  Um lookbehind (?<!Y) X corresponde X apenas se for precedido por Y.
+         * 
+         * Um lookbehind negativo (?<!Y)X corresponde X apenas se não for precedido por Y.
+        */
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedade das Functions Types</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PROPRIEDADES DAS FUNÇÕES
+         * 
+         *  Cada função tem duas propriedades: length e prototype.
+         
+            - A length propriedade determina o número de argumentos nomeados especificados na declaração da função.
+
+            - A prototype propriedade faz referência ao objeto de função real.
+
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function regular chamada swap que possui dois paramentros declarados chamados x, y
+        //essa function e um objeto do tipo Function do JS
+        //assim o swap function instancia de objeto possui propriedades e metodos a serem usados
+        function swap(x, y) {
+            let tmp = x;
+            x = y;
+            y = tmp;
+        }
+
+        //acessando as propriedades da instancia de objeto swap function regular do tipo Function
+
+        //swap.length determina o numero de argumentos especificados na declaração da função
+        console.log(`swap.length = ${swap.length}`); //2
+        //o swap.prototype faz referencia ao objeto real da função, esse objeto e um objeto anonimo na memoria onde e atribuido a swap.prototype quando a function e declarada assim swap.prototype pode referencialo
+        //mostra o objeto real da function swap instancia de objeto
+        console.log(`swap.prototype = ${swap.prototype}`); //Object{}
+
+        /**
+         * A swap() função aceita dois argumentos x e y, portanto, a length propriedade retorna 2. Discutiremos a prototype propriedade com mais detalhes no tutorial do protótipo.
+         * 
+         * Normalmente, uma função é invocada como uma função que pode ser chamada. Por exemplo:
+        */
+
+        //declara uma function regular chamada fn
+        //declara uma instancia de objeto da Function tipo do JS
+        function fn() {
+            //...
+        }
+
+        //invoca(chama) a função
+        fn();
+
+        /**
+         * E a função pode ser chamada como um construtor para criar um novo objeto:
+        */
+
+        //declara uma nova instancia de objeto invocando a function Fn usando o new palavra chave
+        //a variavel f recebe um novo objeto
+        //assim f referencia um novo objeto
+        let f = new fn();
+
+        /**
+         * O ES6 adicionou uma nova propriedade chamada target.new que permite detectar se uma função ( fn) é chamada como uma função normal (fn()) ou como um construtor usando o operador new (new fn()).
+         * 
+         * Se uma função é chamada normalmente (f()), o new.target será undefined.
+         * 
+         * Por outro lado, se a função for chamada usando a new palavra - chave, new.target fará referência ao construtor:
+        */
+        
+        //declara uma function regular chamada fn2
+        //declara uma instancia de objeto da Function tipo do JS
+        //declara uma instancia de objeto function regular chamada fn2 que e do tipo Function que possui propriedadades
+        function fn2() {
+            //se a fn2() function for chamada como uma função normal new.target possuira o valor undefined
+            //se fn2() for chamada como um construtor usando o operador new o new.target fara referencia a função construtora
+            console.log(`new.target = ${new.target} : ${new.target != undefined ? 'fn2() chamada como uma function normal' : 'fn2() chamada como uma function construtora'}`);
+        }
+
+        //invocando a function fn2() como uma função normal
+        fn2(); //new.target = undefined
+        //invocando a function fn2() como uma função construtora que instancia objetos e retorna a referencia
+        //para isso temos que usar a new palavra chave na invocação da função
+        let f2 = new fn2(); 
+    </script>
+</body>
+</html>

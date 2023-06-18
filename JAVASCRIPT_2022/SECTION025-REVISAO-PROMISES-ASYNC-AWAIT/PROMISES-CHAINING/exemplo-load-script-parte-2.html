@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        function loadScript(src) {
+            //retorna um objeto promise
+            return new Promise(function executor(resolve, reject) {
+                //trabalho da promisse e carregar um script externo e add no documento
+                let script = document.createElement('script');
+                //carrega o script externo
+                script.src = src;
+
+                //atribui uma manipulador de evento por meio da propriedade dom
+                //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+                //quando o script estiver carregado e ja executado o manipulador e acionado
+                script.onload = (event) => {
+                    //dentro do manipulador do evento chamamos o resolve callback passando script como valor para mudar o estado da promisse para resolvida com valor
+                    //a promisse e resolvida quando o script estiver carregado e ja ter sido executado
+                    resolve(script);
+                };
+
+                //o manipulador e para o evento error que e acionado quando um erro acontece no carregamento do script
+                //quando manipulador for acionado por um error no carregamento do script
+                script.onerror = (event) => {
+                    //dentro do manipulador do evento chamamos reject para rejeitar a promisse passando o objeto error como error para informar o motivo do erro da promisse ter sido rejeitada
+                    //a promisse e rejeitada quando houver um erro no carregamento do script
+                    reject(new Error(`Erro de carregamento de script para ${src}`));
+                };
+
+                //add script no final da section head do documento
+                document.head.append(script);
+            });
+        }
+
+        /**
+         * Este código pode ser um pouco mais curto com funções de seta(arrow functions):
+        */
+
+        //chamada a loadScript retorna um promisse
+        loadScript("https://javascript.info/article/promise-chaining/one.js")
+            //consumindo o resultado da promisse resolvida
+            .then((script) => 
+                //retornando uma nova promisse para o proximo manipulador
+                //o argumento do resolve e o valor a ser passado para o proximo manipulador
+                loadScript("https://javascript.info/article/promise-chaining/two.js")
+            )
+            //consumindo o resultado da promisse retornado pelo ultimo manipulador, o manipulador abaixo espera a promise retornado ser resolvida
+            .then((script) =>
+                //retornando uma nova promisse para o proximo manipulador
+                //o argumento do resolve e o valor a ser passado para o proximo manipulador
+                loadScript("https://javascript.info/article/promise-chaining/three.js")
+            )
+            //consumindo o resultado da promisse retornado pelo ultimo manipulador, o manipulador abaixo espera a promise retornado ser resolvida
+            .then((script) => {
+                //usar funções declaradas em scripts
+                //para mostrar que eles realmente carregaram
+                //apos todos os scripts terem sido carregados e executados, podemos usalos
+                one();
+                two();
+                three();
+            });
+
+        /**
+         * Aqui, cada loadScript chamada retorna uma promessa e a próxima .then é executada quando é resolvida. Em seguida, ele inicia o carregamento do próximo script. Assim, os scripts são carregados um após o outro.
+         * 
+         * Podemos adicionar mais ações assíncronas à cadeia. Observe que o código ainda é “plano” – ele cresce para baixo, não para a direita. Não há sinais da “pirâmide da destruição”.
+         * */
+    </script>
+</body>
+</html>

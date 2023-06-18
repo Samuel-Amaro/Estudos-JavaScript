@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * BOTÃO DO MOUSE
+         * 
+         * Eventos relacionados a cliques sempre têm a button propriedade, o que permite obter o botão exato do mouse.
+         * 
+         * Normalmente não usamos para click eventos contextmenu, porque o primeiro acontece apenas com o botão esquerdo, e o segundo – apenas com o botão direito.
+         * 
+         * Por outro lado, mousedown e mouseup os manipuladores podem precisar de event.button, porque esses eventos são acionados em qualquer botão, o que button permite distinguir entre “right-mousedown” e “left-mousedown”.
+         * 
+         * Os valores possíveis de event.button são:
+         
+            ESTADO DO BOTÃO: botão esquerdo (primário)
+            event.button: 0
+            --------------------------------
+            ESTADO DO BOTÃO: botão do meio(auxiliar)
+            event.button: 1
+            --------------------------------
+            ESTADO DO BOTÃO: botão direito(secundário)
+            event.button: 2
+            --------------------------------
+            ESTADO DO BOTÃO: botão X1(voltar)
+            event.button: 3
+            --------------------------------
+            ESTADO DO BOTÃO: botão XX(avançar)
+            event.button: 4
+
+         * 
+         * A maioria dos dispositivos de mouse possui apenas os botões esquerdo e direito, portanto, os valores possíveis são 0 ou 2. Dispositivos de toque também geram eventos semelhantes quando se toca neles.
+         * 
+         * Também há uma event.buttons propriedade que tem todos os botões pressionados no momento como um inteiro, um bit por botão. Na prática esta propriedade é muito raramente usada, você pode encontrar detalhes no MDN se precisar.
+         * 
+         * * O DESATUALIZADO event.which
+         * 
+         * O código antigo pode usar event.which a propriedade que é uma maneira antiga e não padrão de obter um botão, com valores possíveis:
+         
+            - event.which == 1- botão esquerdo,
+            - event.which == 2- botão do meio,
+            - event.which == 3- botão direito.
+
+         * A partir de agora, event.which está obsoleto, não devemos usá-lo.
+        */
+    </script>
+</body>
+</html>

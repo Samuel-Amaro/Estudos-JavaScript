@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div>Begin</div>
+
+    <ul>
+        <li>
+            <b>Information</b>
+        </li>
+    </ul>
+
+    <div>End</div>
+
+    <script type="text/javascript">
+       
+      /**
+       * * FILHOS: childNodes, firstChild, lastChild
+       * 
+       * Existem dois termos que usaremos a partir de agora:
+       
+        - child nodes(or children) – elementos que são filhos diretos. Em outras palavras, eles estão aninhados exatamente no dado. Por exemplo, <head> e <body> são filhos do <html> elemento.
+        - descendants – todos os elementos que estão aninhados no dado, incluindo filhos, seus filhos e assim por diante.
+
+       * Por exemplo, aqui <body> tem filhos <div> e <ul>(e alguns nós de texto em branco):
+       *
+       * …E descendentes de <body> não são apenas filhos diretos <div>, <ul> mas também elementos aninhados mais profundamente, como <li>(um filho de <ul>) e <b> (um filho de <li>) – toda a subárvore. 
+       * 
+       * A childNodes coleção lista todos os nós filho, incluindo nós de texto.
+       * 
+       * O exemplo abaixo mostra filhos de document.body:
+       * */
+
+        //document.body.childNodes, lista todos os nos filho de body incluindo no de texto
+        for(let i = 0; i < document.body.childNodes.length; i++) {
+           alert(document.body.childNodes[i]); //Text, DIV, Text, UL, ..., SCRIPT
+        }
+
+        /**
+         * Observe um detalhe interessante aqui. Se executarmos o exemplo acima, o último elemento mostrado é <script>. Na verdade, o documento tem mais coisas abaixo, mas no momento da execução do script o navegador ainda não o leu, então o script não o vê.
+         * 
+         * Propriedades firstChild e lastChild dar acesso rápido ao primeiro e último filhos.
+         * 
+         * São apenas abreviações. Se existirem nós filhos, o seguinte será sempre verdadeiro:
+         
+            elem.childNodes[0] === elem.firstChild
+            elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
+
+         * Há também uma função especial elem.hasChildNodes() para verificar se existem nós filhos.
+        */
+    </script>
+
+    ...more stuff...
+</body>
+</html>

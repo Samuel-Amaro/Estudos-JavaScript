@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * DOMAIN(DOMÍNIO)
+         * 
+         * domain=site.com
+         * 
+         * Um domínio define onde o cookie é acessível. Na prática, porém, existem limitações. Não podemos definir nenhum domínio.
+         * 
+         * Não há como permitir que um cookie seja acessível a partir de outro domínio de 2º nível, portanto other.com, nunca receberá um cookie definido em site.com.
+         * 
+         * É uma restrição de segurança, para nos permitir armazenar dados confidenciais em cookies que deveriam estar disponíveis apenas em um site.
+         * 
+         * Por padrão, um cookie é acessível apenas no domínio que o configurou.
+         * 
+         * Observe que, por padrão, um cookie também não é compartilhado com um subdomínio, como forum.site.com.
+        */
+
+        // se definirmos um cookie no site site.com...
+        document.cookie = "usuario=Joao"
+
+        // ...não veremos isso em forum.site.com
+        alert(document.cookie); // nenhum usuário
+
+        /**
+         * …Mas isso pode ser mudado. Se quisermos permitir que subdomínios forum.site.com tenham um cookie definido em site.com, isso é possível.
+         * 
+         * Para que isso aconteça, ao definir um cookie em site.com, devemos definir explicitamente a domain opção para o domínio raiz: domain=site.com. Em seguida, todos os subdomínios verão esse cookie.
+         * 
+         * Por exemplo:
+        */
+
+        //o mesmo cookie pode ser visto em sites com dominio e raiz e subdominios
+
+        // em site.com
+        // torna o cookie acessível em qualquer subdomínio *.site.com:
+        //Os cookies têm várias opções, muitas delas são importantes e devem ser definidas
+        //As opções são listadas após key=value, delimitadas por ;, assim: 
+        //definimos um cookie com o name user e o value John
+        //e definimos uma serie de opções importantes
+        //a option domain, define onde o cookie e acessivel 
+        //por padrão um cookie e acessivel apenas no dominio que o configurou
+        //definimos aqui na option domain o dominio raiz
+        document.cookie = "user=John; domain=site.com";
+
+        // mais tarde
+        //os subdominios de site.com poderão ver o cookie pois estão no mesmo dominio
+        // em forum.site.com
+        alert(document.cookie); // tem cookie user=John
+
+        /**
+         * Por motivos históricos, domain=.site.com(com um ponto antes de site.com) também funciona da mesma maneira, permitindo o acesso ao cookie de subdomínios. Essa é uma notação antiga e deve ser usada se precisarmos oferecer suporte a navegadores muito antigos.
+         * 
+         * Para resumir, a domain opção permite tornar um cookie acessível em subdomínios.
+        */
+    </script>
+
+</body>
+</html>

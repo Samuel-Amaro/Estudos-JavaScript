@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * MouseEvent, KeyboardEvent e outros
+         * 
+         * Aqui está uma pequena lista de classes para UI Events da especificação UI Event :
+         
+            UIEvent
+            FocusEvent
+            MouseEvent
+            WheelEvent
+            KeyboardEvent
+
+         * Devemos usá-los em vez de new Event se quisermos criar tais eventos. Por exemplo, new MouseEvent("click").
+         * 
+         * O construtor certo permite especificar propriedades padrão para esse tipo de evento.
+         * 
+         * Como clientX/clientY para um evento de mouse:
+        */
+
+        //cria um objeto de evento para um evento de UI(User Interface)
+        //so buscamos a classe necessearia e seu construtor e passar os argumentos corretos
+        //cria um evento de mouse de UI
+        let event = new MouseEvent("click", {
+            bubbles: true, //permite evento borbulhar
+            cancelable: true,
+            clientX: 100, //coordenada do mouse
+            clientY: 100  //coordenada do mouse
+        });
+
+        alert(event.clientX); //100
+        
+        /**
+         * Observe: o Event construtor genérico não permite isso.
+         * 
+         * Vamos tentar:
+        */
+
+        //o evento contrutor generico não permite fazer o mesmo que as classes de eventos UI
+        let eventGenery = new Event("click", {
+            bubbles: true, //apenas bolhas e canceláveis
+            cancelable: true, //trabalhar no construtor Event
+            clientX: 100,
+            clientY: 100
+        });
+
+        alert(eventGenery.clientX); // indefinido, a propriedade desconhecida é ignorada!
+
+        /**
+         * Tecnicamente, podemos contornar isso atribuindo diretamente event.clientX=100 após a criação. Então isso é uma questão de conveniência e seguir as regras. Os eventos gerados pelo navegador sempre têm o tipo certo.
+         * 
+         * A lista completa de propriedades para diferentes eventos de interface do usuário está na especificação, por exemplo, MouseEvent .
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Funções</title>
+</head>
+<body>
+    <script>
+        /**
+         * * USANDO FUNÇÕES
+         * 
+         * Você pode usar um valor de retorno de uma função como um valor padrão para um parâmetro. Por exemplo:
+         * 
+        */
+
+        //exemplo usando uma valor de retorno de uma função como um valor padrão de parâmetro
+        //declara uma arrow function anonima sem parametro que retorna uma expressão de valor
+        //a arrow function e atribuida a varaivel taxRate, a variavel ira referenciar a arrow function
+        //lembrando que uma function e uma instancia de objeto, então a function e atribuida por referencia a varaivel texRate
+        let taxRate = () => 0.1;
+        //declara uma function anonima com 2 paramentros, o primeiro paramentro não possui valor padrão definido somente o valor padrão atribuido pelo proprio JS o undefined
+        //o segundo paramentro chamado tax possui um valor padrão que e o valor retornado pela function referenciado pela varaivel taxRate * o proprio paramentro price
+        //a function e atribuida por referencia a variavel getPrice, assim a variavel referencia a function
+        //aqui demostra o uso de uma função como um valor padrão para um paramentro
+        let getPrice = function(price, tax = price * taxRate()) {
+            return price + tax;
+        }
+
+        //invoca a function por meio da variavel getPrice() passando um argumento para o parametro price
+        let fullPrice = getPrice(100);
+        console.log(fullPrice); //110
+
+        /**
+         * Na getPrice() função, chamamos a taxRate() função para obter a taxa de imposto e usamos essa taxa de imposto para calcular o valor do imposto a partir do preço.
+        */
+    </script>
+</body>
+</html>

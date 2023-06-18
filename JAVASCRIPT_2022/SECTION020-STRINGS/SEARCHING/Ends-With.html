@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método endsWith() String</title>
+</head>
+<body>
+    <script>
+        /**
+         * * A STRING JS TERMINA COM - endsWith()
+         *  
+         * Resumo : neste tutorial, você aprenderá a usar o endsWith()método JavaScript String para verificar se uma string termina com os caracteres de outra string.
+         * 
+         * O endsWith() retorna true se uma string termina com os caracteres de uma string especificada; caso contrário false.
+         * 
+         * Segue a sintaxe do endsWith()método:
+
+            String.endsWith(searchString[, length]);
+
+         * 
+         * * ARGUMENTOS
+
+            - searchString são os caracteres a serem pesquisados ​​no final da string.
+
+            - length é um parâmetro opcional que determina o comprimento da string a ser pesquisada. O padrão é o comprimento da string.
+
+         * 
+         * Observe que para verificar se uma string começa com os caracteres de uma string especificada, você usa o startsWith() método.
+         * 
+         * * endsWith() EXEMPLOS DE STRINGS JS
+         * 
+         * Suponha que você tenha uma string chamada title:
+        */
+
+        //declara uma constante chamada title que e inicializada com uma string literal
+        const title = 'Jack and Jill Went Up the Hill';
+
+        /**
+         * O exemplo a seguir usa o endsWith() método para verificar se title termina com a string 'Hill'
+        */
+
+        //utilizando o metodo String.endsWith() para verificar se a title constante string termina com a string 'Hill'
+        //o metodo recebe um argumento que e searchString são os caracteres a serem pesquisados ​​no final da string.
+        //se a constante title termina com a string 'Hill' retorna true se não false
+        console.log(title.endsWith('Hill')); //true
+
+        /**
+         * O endsWith() método faz a correspondência dos caracteres diferenciando maiúsculas de minúsculas, portanto, o exemplo a seguir retorna false:
+        */
+
+        //usando o metodo endsWith para verificar se a cosntante literal string termina com a string 'hill' sendo que aqui e toda maiuscula para o metodo fazer diferenciação entre maiusculas e minusculas
+        title.endsWith('hill'); //false
+
+        /**
+         * O exemplo a seguir usa o endsWith() método com o segundo parâmetro que determina o comprimento da string a ser pesquisada:
+        */
+
+        //utlizando o metodo endsWith() para verificar se a constante literal de string title termina com a string 'Up' a partir do array de caracters da string no indice 21
+        console.log(title.endsWith('Up', 21)); //true
+    </script>
+</body>
+</html>

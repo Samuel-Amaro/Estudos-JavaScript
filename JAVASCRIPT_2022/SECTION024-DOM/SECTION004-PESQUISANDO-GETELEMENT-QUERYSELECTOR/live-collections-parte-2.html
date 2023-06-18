@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div>First div</div>
+
+    <script type="text/javascript">
+        /**
+         * Por outro lado, querySelectorAll retorna uma collection static . É como uma array fixa de elementos.
+        */
+
+        //obtem todas os elementos <div> do documento
+        //retorna uma collection statict, com todos os elementos div encontrados no documento
+        let divs = document.querySelectorAll('div');
+        //encontrou somente um elemento <div> dentro do documento.
+        console.log(divs.length); //1
+    </script>
+
+    <!-- adicionamos mais uma nova tag div no documento apos a execução do script acima, no script acima so temos uma div neste documento, a collection so possui um elemento-->
+    <div>Second div</div>
+
+    <!--
+        este script e executado apos adicionarmos uma nova tag div no documento, assim a collection que obtem as divs do documento, não sera atualizada pois e uma collection static, não acompanham os elementos ao vivo.
+    -->
+    <script>
+
+        //O segundo script é executado depois de adicionarmos mais uma tag div no documento
+        //porem a collection static so obteve somente um unico elemento <div>
+        console.log(divs.length); //1
+        
+        /**
+         * Agora podemos ver facilmente a diferença. A collection static não aumentou após o aparecimento de um novo div no documento.
+         * 
+         * * Resumo
+         * 
+         * Existem 6 métodos principais para procurar nós no DOM:
+         * 
+         * De longe os mais usados ​​são querySelector e querySelectorAll, mas getElement(s)By* podem ser esporadicamente úteis ou encontrados nos scripts antigos.
+         * 
+         * Além disso:
+         
+            - Há elem.matches(css) para verificar se elem corresponde ao seletor CSS fornecido.
+
+            - É elem.closest(css) preciso procurar o ancestral mais próximo que corresponda ao seletor CSS fornecido. O elem próprio também é verificado.
+
+         * 
+         * E vamos mencionar mais um método aqui para verificar o relacionamento pai-filho, pois às vezes é útil:
+         
+            - elemA.contains(elemB) retorna true se elemB estiver dentro elemA(descendente de elemA) ou quando elemA==elemB.
+            
+         * */
+    </script>
+
+</body>
+</html>

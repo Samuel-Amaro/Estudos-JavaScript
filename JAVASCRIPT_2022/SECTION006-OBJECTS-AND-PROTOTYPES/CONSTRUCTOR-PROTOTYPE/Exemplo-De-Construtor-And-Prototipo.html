@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objetos</title>
+</head>
+<body>
+    
+    <p>A Person função tem a prototype propriedade que faz referência a um objeto anônimo. O objeto anônimo possui uma constructor propriedade que faz referência à Person função.</p>
+
+    <img src="JavaScript-Constructor-Prototype-Person-Function.png" alt="imagen">
+
+    <p>JavaScript define o getFullName()método no Person.prototype objeto assim:</p>
+
+    <img src="JavaScript-Constructor-Prototype-Add-method-to-the-Prototype-object.png" alt="imagen">
+
+    <p>Javascript cria dois objetos p1 e p2. Esses objetos se vinculam ao Person.prototype objeto por meio da [[Prototype]] ligação:</p>
+
+    <img src="JavaScript-Constructor-Prototype-Objects.png" alt="imagen">
+
+    <script>
+        /**
+         * * EXEMPLO DE CONSTRUTOR/PROTÓTIPO DE JS
+         * 
+         * Suponha que você queira definir um tipo personalizado chamado Person que tem:
+
+            - Duas propriedades firstName e lastName.
+
+            - Um método getFullName()
+
+         * 
+         * Primeiro, você usa a função construtora para inicializar as propriedades:
+        */
+
+        //declara um function construtora chamada Person que declara dois paramentros
+        function Person(firstName, lastName) {
+            //declara duas propriedades do objeto interno this = {}, para ser retornado por person, mas aqui e refernciado por this
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        /**
+         * Nos bastidores, JavaScript define uma Person função denotada pelo círculo e um objeto anônimo denotado pelo quadrado.
+         * 
+         * A Person função tem a prototype propriedade que faz referência a um objeto anônimo. O objeto anônimo possui uma constructor propriedade que faz referência à Person função.
+         * 
+         * Em segundo lugar, você define o getFullName() método no objeto de protótipo da Person função:
+        */
+
+        //define um metodo, no objeto de prototipo anonimo de Person
+        //O Person.prototype referencia um objeto anonimo, que e um prototipo
+        //definiremos o metodo neste prototipo, para que mais tarde instancias de person sejam ligadas a esse prototipo para que possam compartilhar o metodo definido no objeto anonimo
+        //define uma propriedade chamada getFullName, essa propriedade recebe uma function anonima, assim ela se torna um metodo do prototipo
+        //a function anonima e atribuida a getFullName
+        Person.prototype.getFullName = function() {
+            return `${this.firstName} ${this.lastName}`;  
+        };
+
+        /**
+         * JavaScript define o getFullName()método no Person.prototype objeto assim:
+         * 
+         * 
+         * Terceiro, você pode criar várias instâncias do Person tipo:
+        */
+
+        //declara uma instancia de Person, um objeto chamado p1, chamando o Person function construtor e passando argumentos para os atributos e usando a new palavra chave
+        //essa instancia sera ligada ao objeto prototipo de Person por meio da propriedade acessora [[prototype]] e por meio da ligação de prototipo
+        //assim a instancia p1 esta ligada ao prototipo
+        let p1 = new Person("John", "Doe");
+        //invocando chamando o metodo definido no prototipo, este metodo não existe na instancia de p1, procura primeiro na instancia como não existe na instancia, segue para a ligação de prototipo e procura o metodo em Person.prototype prototipo
+        console.log(p1.getFullName());
+        //mesma logica dos exemplos acima
+        let p2 = new Person("Jane", "Doe");
+        console.log(p2.getFullName());
+
+        /**
+         * Javascript cria dois objetos p1 e p2. Esses objetos se vinculam ao Person.prototype objeto por meio da [[Prototype]] ligação:
+         * 
+         * Cada objeto tem suas próprias propriedades firstName e lastName. No entanto, eles compartilham o mesmo getFullName() método.
+         * 
+         * Quando você chama o getFullName()método no objeto p1 ou p2, o JavaScript procura esse método na instância. Como o JavaScript não encontra o método lá, ele segue a ligação do protótipo e procura o método no Person.prototype objeto.
+         * 
+         * Como o Person.prototype objeto tem o getFullName() método, o JavaScript para de pesquisar e executa o método.
+        */
+    </script>
+
+</body>
+</html>

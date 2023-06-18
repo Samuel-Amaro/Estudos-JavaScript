@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo F</title>
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * EXEMPLO F) USANDO O yield PARA RETORNAR ELEMENTOS INDIVIDUAIS DE UMA ARRAY
+         * 
+         * Veja a seguinte função geradora:
+        */
+
+        //define uma function generator com o * apos a palavra chave function, a fucntion e chamada de yieldArrayElements.
+        //define um novo tipo de função no ES6
+        //define uma function generator chamado yieldArrayElements que não declara paramentros
+        //e uma função diferente de uma função normal regular, e uma função geradora, a sua execução e em pedaços, não e com uma function normal que e executada por completo, e executada em pedaços
+        function* yieldArrayElements() {
+            //yield palavra-chave permite pausar e retomar uma função geradora(function*).
+            //a yield especifica o valor a ser retornado de uma função geradora chamada yieldArrayElements por meio do protocolo de iteração.
+            //logo abaixo a yield palavra-chave retorna o valor 1, e pausa a execução da function geradorada yieldArray
+            yield 1;
+            //logo em seguida a nova sintaxe yield* expressão, retoma a execução da function geradora yieldArrayElements, é e usada para delegar a outro Objeto ou gerador iterável, essa expressão resulta em outro Generator objeto interno, que implicitamente ira retornar os elementos individuais do array, implicitamente por next métodos.
+            //para retornar os elementos individuais do array
+            yield* [20, 30, 40];
+        }
+
+        //invocando a function generator* yieldArrayElements, ao ser invoca esse tipo de function não executa seu corpo logo em seguida, ela so retorna um objeto literal Generator com o corpo da function generator yieldArrayElements
+        //o objeto retornado pela invocação da function generator yieldArrayElements e atribuido a variavel a por referencia
+        let a = yieldArrayElements(); //Generator{}
+
+        //o objeto Generator {} referenciado por a e um iteravel, pois ele esta definido de acordo com o protocolo de iteração iterator, e porque também possui o método next
+        //Tecnicamente falando, um objeto é qualificado como iterator quando possui um next(), método que retorna um objeto anonimo literal com duas propriedades chamadas done e value, isso e o padrão de conformidade definido pelo protocolo iterator para tornar tipos iteraveis
+        //a propriedade value do objeto retornado e o proprio valor retornado pelo yield na function geradora
+        //assim o next também serve Cada vez que você chama o next(), ele retorna o próximo valor na coleção:
+        console.log(a.next()); //{value: 1, done: false}
+
+        //realiza uma segunda invocação ao next método do Generator Objeto anonimo, ele retorna o próximo valor na coleção, sendo que o value propriedade e definido pela palavra-chave yield na fucntion geradora:
+        console.log(a.next());//{value:20, done: false}
+
+        //realiza uma terceira invocação ao next método do Generator Objeto anonimo, ele retorna o próximo valor na coleção, até a done propriedade for igual a true
+        console.log(a.next()); //{value: 30, done: false}
+
+        //quarta invocação ao next método
+        console.log(a.next()); //{value: 40, done: false}
+
+        /**
+          * Neste exemplo, yield* é a nova sintaxe. A yield* expressão é usada para delegar a outro objeto ou gerador iterável.
+          * 
+          * Como resultado, a seguinte expressão retorna os elementos individuais do array [20, 30, 40]:
+          * 
+          * Neste tutorial, você aprendeu sobre a yield palavra-chave JavaScript e como usá-la em geradores de função
+        */
+
+    </script>
+
+</body>
+</html>

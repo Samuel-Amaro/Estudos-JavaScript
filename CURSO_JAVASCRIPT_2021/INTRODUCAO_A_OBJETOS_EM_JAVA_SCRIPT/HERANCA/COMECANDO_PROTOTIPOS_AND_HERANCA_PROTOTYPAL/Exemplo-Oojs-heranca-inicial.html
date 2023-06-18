@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>Orientação a objetos JavaScript herança</title>
+</head>
+<body>
+  <div>
+    <label for="jscode">Ensira o código:</label>
+    <input type="text" id="jscode">
+    <button>Enviar codigo</button>
+  </div>
+
+  <p></p>
+
+  <!--script local incorporado ao documento-->
+  <script>
+      //seleciona elemento do documento HTML5 usando a API DOM
+      const input = document.querySelector('input');
+      const btn = document.querySelector('button');
+      const para = document.querySelector('p');
+
+      //FORMA 01 - HERANÇA PROTOTIPICA SUBJACENTE
+
+      //registrando uma manipulador de eventos a o botão, quando acionado a propriedade
+      btn.onclick = function() {
+        const code = input.value;
+        para.textContent = eval(code);
+      }
+
+      //função construtora com paramentros obrigatorios
+      //essa função construtura define propriedades somente as propriedades
+      //essa função e a definição de um classe, e um modelo, uma abstração, no JS de como Representar classe
+      function Pessoa(primeiro, ultimo, idade, sexo, interesses) {
+        //prorpriedade da classe, que e um outra classe, com duas propriedades  
+        this.nome = {
+          primeiro,
+          ultimo
+        };
+        //propriedades da classe
+        this.idade = idade;
+        this.sexo = sexo;
+        this.interesses = interesses;
+      };
+
+      //define um metodo a função construtora, que todoas instancias herdara esse metodo, esse metodo e definido no prototipo do construtor
+      Pessoa.prototype.bio = function() {
+        //Primeiro definir uma sequência, e torná-lo igual à parte de
+        //a biografia que conhecemos sempre será a mesma.
+        let string = this.nome.primeiro + ' ' + this.nome.ultimo + ' e ' + this.idade + 'anos vida.'; 
+        //definir uma variável que conterá a parte pronome de
+         //a segunda frase
+        let pronome;
+
+        // verificar qual é o valor do gênero, e definir pronome
+        //a um valor apropriado em cada caso
+        //de acordo com o sexo a frase de apresentação vai variar os pronomes para ficararem com concordancia verbal na frase
+        if(this.sexo === 'masculino' || this.sexo === 'feminino' || this.sexo === 'm' || this.sexo === 'M') {
+                pronome = 'Ele gosta.';
+        }else if(this.sexo === 'feminino' || this.sexo === 'Feminino' || this.sexo === 'f' || this.sexo === 'F'){
+                pronome = 'Ela gosta.';
+        }else{
+                pronome = 'Eles gostam.';
+        }
+
+        //add a string pronome no final da string principal que forma a frase
+        string += pronome;
+
+        // usar outro condicional para estruturar a última parte do
+        //segunda sentença, dependendo se o número de interesses
+        //é 1, 2 ou 3
+        if(this.interesses.lenght === 1) {
+                string += this.interesses[0];
+        }else if(this.interesses.lenght === 2) {
+                string += this.interesses[0] + ' e ' + this.interesses[1] + '.';
+        }else{
+            //se houver mais de 2 interesses, nós loop através deles todos, adicionando cada um à string principal seguido de uma vírgula,
+            //exceto pelo último, que precisa de uma e e e uma parada completa
+            for(let i = 0; i < this.interesses.lenght; i++) {
+                if(i === this.interesses.lenght - 1) {
+                    string += ' e ' + this.interesses[i] + '.';
+                }else{
+                    string += this.interesses[i] + ', ';
+                }
+            }
+        }
+
+        // finalmente, com a string construída, alertamos()
+        alert(string);
+      };
+
+      //definindo um metodo a função construtura(classe) em JS
+      //que sera aplicado a todas intancias da classe
+      //esse metodo e definido no prototipo do construtor
+      Pessoa.prototype.saudacao = function() {
+            alert('Ali e ' + this.nome.primeiro + '.');
+      };
+
+      //mesma coisa
+      Pessoa.prototype.adeus = function() {
+         alert(this.nome.primeiro + ' deixou o prédio. Tchau agora!')
+      };
+
+      //instanciando um objeto da classe Pessoa, e o inicializando com informações
+      let pessoa1 = new Pessoa('Tammi', 'Smith', 17, 'feminino', ['musica', 'skiar', 'kickboxing']);
+
+      //criando uma função construtura que vai definir as propriedades de um Professor, isso e uma classe em JS, com uma especialização
+      function Professor(primeiro, ultimo, idade, sexo, interesses, assunto) {
+          //chama função construora de pessoa, passando este objeto e os paramentros de uma pessoa generica
+          Pessoa.call(this, primeiro, ultimo, idade, sexo, interesses);
+
+          //especializacao de propriedade de um professor
+          this.assunto = assunto;
+      }
+
+      //definindo um objeto como valor de prototype para professor, esse objeto tem um prototype Pessoa.prototype, assim conseguira herdar os metodos que estão definidos no Prototype pessoa
+      Professor.prototype = Object.create(Pessoa.prototype);
+
+      //como o prototype definido em professor atraves do novo objeto faz referencia a pessoa, isso pode causar problema, porque a referencia vai ao construtor pessoa, as linhas abaixo define o prototype de Professor, com o seu construtor
+      Object.defineProperty(Professor.prototype, 'constructor', {
+          value: Professor,
+          enumerable: false, // de modo que ele não apareça no loop 'for in'
+          writable: true
+      });
+
+      //definindo um metodo a classe Professor, pela propriedade prototype
+      //definindo um metodo ao construtor pelo prototipo do construtor
+      Professor.prototype.saudacao = function() {
+
+      var prefix;
+
+      if(this.sexo === 'masculino' || this.sexo === 'Masculino' || this.sexo === 'm' || this.sexo === 'M') {
+          prefix = 'Senhor';
+      }else if(this.sexo === 'feminino' || this.sexo === 'Feminino' || this.sexo === 'f' || this.sexo === 'F') {
+          prefix = 'Senhores';
+      }else{
+          prefix = 'Senhores.';
+      }
+
+      alert('Ola. Meu nome e ' + prefix + ' ' + this.nome.primeiro + ', e sou professor ' + this.assunto + '.');
+      };
+
+      //criando uma instancia da class professor
+      var professor1 = new Professor('Dave', 'Griffinths', 31, 'masculino', ['football', 'cookery'], 'mathematics');
+
+      //FORMA 02 - CLASSES ECMASCRIPT 2015
+
+      
+      
+  </script>
+</body>

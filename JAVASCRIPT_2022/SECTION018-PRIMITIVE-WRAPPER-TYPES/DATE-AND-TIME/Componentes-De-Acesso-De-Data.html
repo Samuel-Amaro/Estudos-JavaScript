@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * COMPONENTES DE ACESSO DE DATA
+         * 
+         * Existem métodos para acessar o ano, mês e assim por diante do Date objeto:
+         * 
+         * getFullYear() : Obter o ano (4 dígitos)
+         * 
+         * getMonth() : Obtenha o mês, de 0 a 11 .
+         * 
+         * getDate() : Pegue o dia do mês, de 1 a 31, o nome do método parece um pouco estranho.
+         * 
+         * getHours(), getMinutes(), getSeconds(), getMilliseconds() : Obtenha os componentes de tempo correspondentes.
+         * 
+         * Não getYear(), mas getFullYear()Muitos mecanismos JavaScript implementam um método não padrão getYear(). Este método está obsoleto. Ele retorna ano de 2 dígitos às vezes. Por favor, nunca use. Existe getFullYear() para o ano.
+         * 
+         * Além disso, podemos obter um dia da semana:
+         * 
+         * getDay() : Obtenha o dia da semana, de 0(domingo) a 6(sábado). O primeiro dia é sempre domingo, em alguns países não é assim, mas não pode ser mudado.
+         * 
+         * Todos os métodos acima retornam os componentes relativos ao fuso horário local.
+         * 
+         * Há também suas contrapartes UTC, que retornam dia, mês, ano e assim por diante para o fuso horário UTC+0: getUTCFullYear() , getUTCMonth() , getUTCDay() . Basta inserir o "UTC"logo após "get".
+         * 
+         * Se o fuso horário local for alterado em relação ao UTC, o código abaixo mostrará horários diferentes:
+        */
+
+        //cria uma instancia de objeto date, sem fornecer argumentos, cria um objeto date com data e hora atuais
+        let date = new Date();
+
+        //obtem a hora atual no fuso horario atual
+        console.log(`Horario Atual fuso horario atual: ${date.getHours()}`);
+
+        //a hora no fuso horário UTC+0 (horário de Londres sem horário de verão)
+        //obtem a hora atual no fuso horario UTC+0
+        console.log(`Horario fuso horario UTC+0(EN): ${date.getUTCHours()}`);
+
+        /**
+         * Além dos métodos fornecidos, existem dois métodos especiais que não possuem uma variante UTC:
+         
+            getTime() : Retorna o timestamp para a data – um número de milissegundos passados ​​desde 1º de janeiro de 1970 UTC+0.
+
+            getTimezoneOffset() : Retorna a diferença entre o UTC e o fuso horário local, em minutos:
+        */
+
+        //se você estiver no fuso horário UTC-1, gera 60
+        //se você estiver no fuso horário UTC + 3, gera -180
+        //cria uma nova instancia de objeto date, sem passar argumentos obtem data e hora atuais de fuso horario atual, o método getTimezoneOffset(), retorna a direfença entre o fuso UTC e o fuso horario local, em minutos
+        console.log(new Date().getTimezoneOffset()); //180 -> e horas de difernça, aqui no brasil e x em londres e x + 3h
+
+    </script>
+</body>
+</html>

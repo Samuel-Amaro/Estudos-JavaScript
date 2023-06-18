@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <pre class="language-javascript">
+        <code>
+            // aqui está o código
+            let hello = "world";
+        </code>
+    </pre>
+
+    <script type="text/javascript">
+        /**
+         * * USO PARA ARQUITETURA
+         * 
+         * Há também situações em que MutationObserver é bom do ponto de vista arquitetônico.
+         * 
+         * Digamos que estamos fazendo um site sobre programação. Naturalmente, artigos e outros materiais podem conter trechos de código-fonte.
+         * 
+         * Esse snippet em uma marcação HTML se parece com isso:
+         
+            ...
+            <pre class="language-javascript"><code>
+                // aqui está o código
+                let hello = "world";
+            </code></pre>
+            ...
+
+         * 
+         * Para melhor legibilidade e, ao mesmo tempo, para embelezá-lo, usaremos uma biblioteca de realce de sintaxe JavaScript em nosso site, como Prism.js . Para obter realce de sintaxe para o trecho acima no Prism, Prism.highlightElem(pre) é chamado, que examina o conteúdo de tais pre elementos e adiciona tags e estilos especiais para realce de sintaxe colorido nesses elementos, semelhante ao que você vê nos exemplos aqui, nesta página.
+         * 
+         * Quando exatamente devemos executar esse método de destaque? Bem, podemos fazer isso no DOMContentLoaded evento, ou colocar o script no final da página. No momento em que nosso DOM estiver pronto, podemos procurar por elementos pre[class*="language"] e chamá-los Prism.highlightElem:
+         * 
+         
+            // destacar todos os trechos de código na página
+            document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
+
+         * Tudo é simples até agora, certo? Encontramos trechos de código em HTML e os destacamos.
+         * 
+         * Agora vamos continuar. Digamos que vamos buscar dinamicamente materiais de um servidor. Estudaremos métodos para isso mais tarde no tutorial . Por enquanto, importa apenas buscar um artigo HTML de um servidor web e exibi-lo sob demanda:
+         * 
+         
+            let article = //buscar novo conteúdo do servidor
+            articleElem.innerHTML = article;
+
+         * 
+         * O novo articleHTML pode conter trechos de código. Precisamos chamá-los Prism.highlightElem, caso contrário eles não serão destacados.
+         * 
+         * * Onde e quando solicitar Prism.highlightElem em um artigo carregado dinamicamente?
+         * 
+         * Poderíamos anexar essa chamada ao código que carrega um artigo, assim:
+         
+            let article = //buscar novo conteúdo do servidor
+            articleElem.innerHTML = article;
+
+            let snippets = articleElem.querySelectorAll('pre[class*="language-"]');
+            snippets.forEach(Prism.highlightElem);
+
+         * 
+         * …Mas, imagine se tivermos muitos lugares no código onde carregamos nosso conteúdo – artigos, questionários, postagens em fóruns, etc. Precisamos colocar a chamada de destaque em todos os lugares, para destacar o código no conteúdo após o carregamento? Isso não é muito conveniente.
+         * 
+         * E se o conteúdo for carregado por um módulo de terceiros? Por exemplo, temos um fórum escrito por outra pessoa, que carrega conteúdo dinamicamente, e gostaríamos de adicionar realce de sintaxe a ele. Ninguém gosta de corrigir scripts de terceiros.
+         * 
+         * Felizmente, há outra opção.
+         * 
+         * Podemos usar MutationObserver para detectar automaticamente quando trechos de código são inseridos na página e destacá-los.
+         * 
+         * Assim, trataremos da funcionalidade de realce em um só lugar, eliminando a necessidade de integrá-la.
+        */
+    </script>
+
+</body>
+</html>

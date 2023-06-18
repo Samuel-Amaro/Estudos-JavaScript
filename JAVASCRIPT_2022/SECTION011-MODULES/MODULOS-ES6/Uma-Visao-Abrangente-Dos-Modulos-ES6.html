@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulos ES6</title>
+</head>
+<body>
+    
+    <script type="module" src="./app.js">
+        /**
+         * * UMA VISÃO ABRANGENTE DOS MÓDULOS ES6
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os módulos ES6 e como exportar variáveis, funções, classes de um módulo e reutilizá-los em outros módulos.
+         * 
+         * Um módulo ES6 é um arquivo JavaScript que é executado apenas no modo estrito. Isso significa que quaisquer variáveis ​​ou funções  declaradas no módulo não serão adicionadas automaticamente ao escopo global.
+         *
+         * * EXECUTANDO MÓDULOS EM NAVEGADORES DA WEB
+         *
+         * Primeiro, crie um novo arquivo chamado message.js e adicione o seguinte código:
+         
+            export let message = 'ES6 Modules';
+
+         * 
+         * O message.js é um módulo em ES6 que contém a message variável. A export instrução expõe a message  variável para outros módulos.
+         * 
+         * Segundo, crie outro novo arquivo chamado app.js que use o message.js módulo. O app.js módulo cria um novo elemento de título 1 (h1) e o anexa a uma página HTML. A import instrução importa a message variável do message.js módulo.
+         
+            import { message } from './message.js'
+
+            const h1 = document.createElement('h1');
+            h1.textContent = message;
+
+            document.body.appendChild(h1);
+
+         * 
+         * Terceiro, crie uma nova página HTML que use o app.js módulo:     
+         
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <title>ES6 Modules</title>
+            </head>
+            <body>
+            <script type="module" src="./app.js"><script>
+            </body>
+            </html>
+
+         * Observe que usamos o type="module" na tag script para carregar o app.js módulo. Se você visualizar a página em um navegador da Web, verá a seguinte página:    
+        */
+       
+    </script>
+
+</body>
+</html>

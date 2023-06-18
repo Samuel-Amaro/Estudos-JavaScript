@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p>Arraste a bola</p>
+
+    <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="ball"/>
+
+    <script type="text/javascript">
+
+      /**
+       * * ALGORITMO DE ARRASTAR(DRAG) E SOLTAR(DROP)
+       * 
+       * O algoritmo básico de Drag'n'Drop é assim:
+       
+            1. No mousedown – prepare o elemento para mover, se necessário (talvez crie um clone dele, adicione uma classe a ele ou qualquer outra coisa).
+
+            2. Em seguida, mova-o  mousemove mudando(ou alterando) left/top com position:absolute.
+
+            3. Ligado mouseup – executa todas as ações relacionadas à finalização do arrastar(drag) e soltar(drop).
+
+        * 
+        * Estes são os fundamentos. Mais tarde veremos outros recursos, como destacar os elementos subjacentes atuais enquanto arrastamos sobre eles.
+        * 
+        * Aqui está a implementação de arrastar uma bola:
+        */
+        
+        //atribui uma manipulador de evento por meio da propriedade dom
+        //manipulador para o evento de quando o botão do mouse e clicado
+        ball.onmousedown = function(event) {
+            //(1) prepare-se para mover: faça absoluto e no topo por z-index
+            ball.style.position = 'absolute';
+            ball.style.zIndex = 1000;
+
+            // move-o para fora de qualquer pai atual, diretamente para o body
+            // para torná-lo posicionado em relação ao body
+            document.body.append(ball);
+
+            //centra a bola nas coordenadas (pageX, pageY)
+            function moveAt(pageX, pageY) {
+                ball.style.left = pageX - ball.offsetWidth / 2 + "px";
+                ball.style.top = pageY - ball.offsetHeight / 2 + "px";
+            }
+
+            moveAt(event.pageX, event.pageY);
+
+            //function manipuladora do evento mousemove, a cada mover do mouse, mova a bola junto, a bola segue as cordenadas de click do mouse
+            function onMouseMove(event) {
+                //move nossa bola absolutamente posicionada sob o ponteiro
+                //coodernas do evento do mouse, relativas ao documento
+                moveAt(event.pageX, event.pageY);
+            }
+
+            // (2) move a bola no mousemove
+            //toda vez que tiver um movimentação do mouse sobre o documento
+            //atribui um manipulador de evento
+            //esse evento so sera processado apos o termino do mousedown
+            document.addEventListener('mousemove', onMouseMove);
+
+            //(3) soltar a bola, remover manipuladores desnecessários
+            //atribui um manipualador de evento para o evento de liberar botão do mouse pressionado
+            //so ira processar esse evento apos o termino do mousemove evento
+            ball.onmouseup = function() {
+                //remove evento
+                document.removeEventListener("mousemove", onMouseMove);
+                //remove o evento do mouseup
+                ball.onmouseup = null;
+            }
+        }
+
+        /**
+         * Se executarmos o código, podemos notar algo estranho. No início do arrastar e soltar, a bola “se bifurca”: começamos a arrastar seu “clone”.
+         * 
+         * Aqui está um exemplo em ação:
+         * 
+         * tente arrastar e soltar com o mouse e você verá esse comportamento.
+         * 
+         * Isso porque o navegador tem seu próprio suporte de arrastar e soltar para imagens e alguns outros elementos. Ele é executado automaticamente e entra em conflito com o nosso.
+         * 
+         * Para desativá-lo:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        ball.ondragstart = function(event) {
+            //fornecer um return false para uma function manipulador de evento e uma execeção para informar o navegador que queremos impedir a ação padrão do navegador neste evento
+            return false;
+        };
+
+        /**
+         * Outro aspecto importante – rastreamos mousemove em document, não em ball. À primeira vista, pode parecer que o mouse está sempre sobre a bola, e podemos colocá mousemove nela.
+         * 
+         * Mas, como lembramos, o mousemove é acionado com frequência, mas não para todos os pixels. Então, após um movimento rápido, o ponteiro pode pular da bola em algum lugar no meio do documento (ou até mesmo fora da janela).
+         * 
+         * Portanto, devemos ouvir no documento para pegá-lo.
+         */
+    </script>
+</body>
+</html>

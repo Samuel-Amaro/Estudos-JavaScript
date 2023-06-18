@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * MÉTODOS
+         * 
+         * Além de dados, os objetos podem ter ações. As ações dos objetos são conhecidas como métodos.
+         * 
+         * O seguinte adiciona a greet ação ao person objeto:
+        */
+
+        //declara um objeto chamado person, usando a sintaxe literal de objeto
+        let person = {
+            //declara as propriedades usando o par chave-valor, quando a muitas propriedades a separamos por virgula
+            //propriedades representa(atributos na POO)
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //adicionando um metodo, acao em POO no objeto person
+        //o metodo so pode ser acessado por meio da sua chave usando a notação de colchetes o valor da chave e uma function anonima que representa um metodo
+        //utiliza-se aqui a expressão de função, a expressão de função fica do lado direito do operador de atribuição =
+        //a function anonima criada e atribuida a greet propriedade para ser referenciada
+        //a function anonima não possui paramentros e não possui retorno
+        person.greet = function() {
+            console.log(`Hello!`);
+        }
+
+        //acessando o metodo criado no person objeto literal
+        //o metodo e acessado como uma propriedade, chamamos a propriedade greet e adicionamos parenteses porque e uma function
+        //usando a notação de ponto
+        person.greet();
+
+        /**
+         * Neste exemplo, usamos uma expressão de função para criar a função e atribuí-la à greet propriedade do person objeto.
+         * 
+         * Em seguida, chamamos a função por meio da greet propriedade as greet().
+         * 
+         * Além de usar uma expressão de função, você pode definir uma função e atribuí-la a um objeto como este:
+        */
+
+        //declara uma function regular chamada greet2 que não possui parametro e nem valor de retorno
+        function greet2() {
+            console.log('Hello, world!');
+        }
+
+        //adiciona um metodo ao person objeto literal
+        //a function greet2 sera atribuido a gree2 propriedade como uma referencia so informando o nome da function sem usar os parenteses para invocação
+        person.greet2 = greet2;
+
+        //chamando, invocando a function fora do objeto mas metodo dentro do objeto como uma propriedade usando notação literal de ponto
+        person.greet2();
+
+        /**
+         * Neste exemplo, a saudação é definida como uma função regular. A expressão person.greet = greet atribui a greet função à greet propriedade do person objeto.
+         * */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clonagem de Objeto</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO JAVASCRIPT Object.assign() PARA CLONAR UM OBJETO
+         * 
+         * O exemplo a seguir usa o Object.assign() método para clonar um objeto. 
+        */
+
+        //declara um objeto anonimo literal, esse objeto e atribuido por referncia a variavel widget
+        //o objeto sera referenciado pela variavel widget
+        let widget = {
+            //declara propriedade usando sintaxe chave : valor
+            color : 'red'
+        };
+
+        //usando o metodo Object.assign(target, source);
+        //podemos clonar um objeto
+        //o metodo ira clonar todas as propriedades enumeraveis e proprias do objeto de origem para o objeto de destino
+        //o metodo ira retorna o objeto de origem
+        //atribui as propriedades do source objeto para o target objeto
+        //o metodo ira atribui todas as propriedades do ojbeto widget para o objeto literal anonimo target argumento do metodo assign
+        let cloneWidget = Object.assign({}, widget);
+
+        //mostra o target objeto com as propriedades recebidas do objeto referenciado por widget
+        console.log(cloneWidget);
+
+        /**
+         * Observe que o Object.assign()único carrega um clone superficial, não um clone profundo.
+        */
+    </script>
+</body>
+</html>

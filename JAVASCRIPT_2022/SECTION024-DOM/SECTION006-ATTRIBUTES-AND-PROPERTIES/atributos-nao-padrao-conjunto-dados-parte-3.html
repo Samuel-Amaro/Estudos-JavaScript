@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* estilos dependem do atributo personalizado "order-state" */
+        .order[data-order-state="new"] {
+            color: green;
+        }
+
+        .order[data-order-state="pending"] {
+            color: blue;
+        }
+
+        .order[data-order-state="canceled"] {
+            color: red;
+        }
+
+    </style>
+</head>
+<body data-about="Elephants">
+
+    <!--
+        - o elemento html abaixo possui um atributo html não padrão personalizado chamado data-order-state com o valor new, esse atributo e para marcar o elemento html para o JS
+        - atributos não padrão personalizado data-*
+        - atributos que começam com data- são reservadors para uso dos programadores
+    -->
+    <div id="order" class="order" data-order-state="new">
+        A new order.
+    </div>
+    <div class="order" data-order-state="pending">
+        A pending order.
+    </div>
+    <div class="order" data-order-state="canceled">
+        A canceled order.
+    </div>
+
+    <script type="text/javascript">
+
+        /**
+         * Atributos multipalavra como data-order-state tornar-se camel-case: dataset.orderState.
+         * 
+         * Aqui está um exemplo de "estado do pedido" reescrito:
+         * 
+        */
+
+        //lendo
+        //order e um variavel global nomeada por id que referencia um elemento dom
+        //dataSet e uma propriedade em que esta disponivel nos objetos nos dom, para que possam acessar atributos html não padrão personalizados que estejam prefixados com o data-
+        //atributos prefixados com o data- que e multipalavras ele estara disponivel como camel-case
+        console.log(order.dataset.orderState); // new
+
+        //modificando
+        //inseri um novo valor no atributo html não padrão personalizado prefixado com data-
+        order.dataset.orderState = "pending"; // (*)
+        
+        /**
+         * Usar data-* atributos é uma maneira válida e segura de passar dados personalizados.
+         * 
+         * Observe que podemos não apenas ler, mas também modificar os atributos de dados. Em seguida, o CSS atualiza a visualização de acordo: no exemplo acima, a última linha (*) altera a cor para azul.
+         * */
+</script>
+
+</body>
+</html>

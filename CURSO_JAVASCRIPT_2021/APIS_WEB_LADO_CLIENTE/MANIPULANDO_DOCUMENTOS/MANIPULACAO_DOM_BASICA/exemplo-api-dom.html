@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Adicione o seguinte em seu HTML <head>-->
+    <style>
+        .highlight {
+          color: white;
+          background-color: black;
+          padding: 10px;
+          width: 250px;
+          text-align: center;
+        }
+        </style>
+    <title>Exemplo simples da API DOM</title>
+</head>
+<body>
+    <section>
+        <img src="images/dinosaur.png" alt="imagen de dinossauro">
+        <p>Aqui vamos adicionar um link para o <a href=" https://www.mozilla.org/">Mozilla página inicial</a></p>
+    </section>
+
+    <!--SCRIPT LOCAL-->
+    <script>
+      //Para manipular um elemento dentro do DOM, você primeiro precisa selecioná-lo e armazenar uma referência a ele dentro de uma variável. 
+      // A querySelector() chamada corresponderá ao primeiro <a> elemento que aparece no documento.
+      const link = document.querySelector('a');  
+
+      //Agora que temos a referência do elemento armazenada em uma variável, podemos começar a manipulá-la usando propriedades e métodos disponíveis para ela (estes são definidos em interfaces como HTMLAnchorElement no caso do <a> elemento, sua interface pai mais geral HTMLElement, e Node(no) - que representa todos os nós em um DOM). Em primeiro lugar, vamos alterar o texto dentro do link atualizando o valor da Node.textContent propriedade.
+      
+      //altera o texto dentro do elemento
+      link.textContent = 'Mozilla Developer Network';
+
+      //Devemos também mudar o URL para o qual o link está apontando, para que ele não vá para o lugar errado quando for clicado.
+    
+      //altera a URL do atributo href
+      link.href = 'https://developer.mozilla.org';
+
+      /**
+        * Observe que, como acontece com muitas coisas em JavaScript, há muitas maneiras de selecionar um elemento e armazenar uma referência a ele em uma variável.
+        * 
+        * Document.querySelector() é a abordagem moderna recomendada, que é conveniente porque permite selecionar elementos usando seletores CSS.
+        * 
+        * A querySelector() chamada acima corresponderá ao primeiro <a> elemento que aparece no documento.
+        * 
+        * Se você quiser combinar e fazer coisas com vários elementos, pode usar Document.querySelectorAll(), que corresponde a cada elemento no documento que corresponde ao seletor e armazena referências a eles em um objeto semelhante a um array chamado a NodeList.
+        * 
+        * Existem métodos mais antigos disponíveis para obter referências de elementos, como:
+        * 
+            - Document.getElementById(), que seleciona um elemento com um determinado id valor de atributo, por exemplo <p id="myId">My paragraph</p>. O ID é passado para a função como um parâmetro, ou seja const elementRef = document.getElementById('myId')
+            - 
+            - Document.getElementsByTagName(), que retorna um objeto semelhante a um array contendo todos os elementos na página de um determinado tipo, por exemplo <p>s, <a>s, etc. O tipo de elemento é passado para a função como um parâmetro, isto é const elementRefArray = document.getElementsByTagName('p').
+            * 
+            * Esses dois funcionam melhor em navegadores mais antigos do que os métodos modernos querySelector(), mas não são tão convenientes. 
+      */
+
+      /**
+       * * CRIAÇÃO E COLOCAÇÃO DE NOVOS NÓS(NO REPRESENTA UM ELEMENTO HTML)
+       * 
+       * O texto acima deu a você uma pequena amostra do que você pode fazer, mas vamos mais além e ver como podemos criar novos elementos.
+      */
+      
+      //pegando uma referencia ao elemento <section>
+      const section = document.querySelector('section');
+
+      //Agora vamos criar um novo parágrafo usando Document.createElement() e dar a ele algum conteúdo de texto da mesma maneira que antes:
+      
+      //criando um elemento <p> no documento carregado 
+      const paragrafo = document.createElement('p');
+      //altera o texto dentro do elemento(nesse caso inserindo texto no elemento que acabou de ser criado)
+      paragrafo.textContent = 'Esperamos que você tenha gostado do passeio.';
+
+      //Agora você pode anexar o novo parágrafo ao final da seção usando Node.appendChild():
+
+      //add o elemento <p> como filho do elemento <section>
+      section.appendChild(paragrafo);
+    
+      //Finalmente, nesta parte, vamos adicionar um nó de texto ao parágrafo dentro do qual o link está localizado, para encerrar bem a frase. Primeiro, criaremos o nó de texto usando Document.createTextNode():
+      const texto = document.createTextNode('- a principal fonte de conhecimento de desenvolvimento web.');
+
+      //Agora, vamos pegar uma referência ao parágrafo dentro do link e anexar o nó de texto a ele:
+      //obtem a referencia do elemento <p> que e filho de <a> no documento HTML
+      const paragrafoFilhoLink = document.querySelector('p');
+
+      //add o no de texto, uma string de texto como filho do elemento <p>
+      paragrafoFilhoLink.appendChild(texto);
+
+      /**
+       * Isso é muito do que você precisa para adicionar nós(elementos HTML) ao DOM(document object model)
+       * 
+       * * MOVENDO E REMOVENDO ELEMENTOS
+       * 
+       * Pode haver momentos em que você deseja mover nós ou excluí-los completamente do DOM. Isso é perfeitamente possível.
+      */
+
+      //Se quiséssemos mover o parágrafo com o link dentro dele para a parte inferior da seção, poderíamos fazer isso:
+      section.appendChild(paragrafoFilhoLink);
+
+      /**
+       * 
+       * Isso move o parágrafo para baixo na parte inferior da seção. Você pode ter pensado que faria uma segunda cópia, mas este não é o caso - linkPara é uma referência à única cópia daquele parágrafo. Se você quiser fazer uma cópia e adicioná-la também, será necessário usar Node.cloneNode().
+       * */
+
+       //Remover um nó também é muito simples, pelo menos quando você tem uma referência ao nó a ser removido e seu pai. Em nosso caso atual, apenas usamos Node.removeChild(), assim:
+       //remove o no elemento <p><a></a></p> do elemento <section>
+       //section.removeChild(paragrafoFilhoLink);
+
+       //Quando quiser remover um nó com base apenas em uma referência a ele mesmo, o que é bastante comum, você pode usar  ChildNode.remove():
+       //remove o proprio no referenciado
+       paragrafoFilhoLink.remove();
+
+       //Este método não é compatível com navegadores mais antigos. Eles não têm nenhum método para dizer a um nó para remover a si mesmo, então você teria que fazer o seguinte.
+       //paragrafoFilhoLink.parentNode.removeChild(paragrafoFilhoLink);
+
+       /**
+        * 
+        * * MANIPULANDO ESTILOS
+        * 
+        *  É possível manipular estilos CSS via JavaScript de várias maneiras.
+        * 
+        * Para começar, você pode obter uma lista de todas as folhas de estilo anexadas a um documento usando Document.stylesheets, que retorna um objeto semelhante a um array com CSSStyleSheet objetos. Você pode então adicionar / remover estilos como desejar. No entanto, não vamos expandir esses recursos porque eles são uma forma um tanto arcaica e difícil de manipular o estilo. Existem maneiras muito mais fáceis.
+        * 
+        * A primeira maneira é adicionar estilos embutidos diretamente nos elementos que você deseja estilizar dinamicamente. Isso é feito com a (ElementoHTML.style)  propriedade, que contém informações de estilo embutidas(css inline) para cada elemento no documento. Você pode definir as propriedades deste objeto para atualizar diretamente os estilos de elemento.
+       */
+
+       //Como exemplo, tente adicionar estas linhas ao nosso exemplo contínuo:
+       //estilizando o elemento <p>, por meio de manipulação de estilos usando o dom
+       //paragrafo.style.color = 'white'; 
+       //paragrafo.style.backgroundColor = 'black';
+       //paragrafo.style.padding = '10px';
+       //paragrafo.style.width = '250px';
+       //paragrafo.style.textAlign = 'center';
+
+       /**
+        * Nota : Observe como as versões de propriedade JavaScript dos estilos CSS são escritas em letras minúsculas, enquanto as versões CSS são hifenizadas (por exemplo, backgroundColorversus background-color). Certifique-se de não confundi-los, caso contrário, não funcionará.
+        * 
+        * Existe outra maneira comum de manipular estilos dinamicamente em seu documento, que veremos agora.
+       */
+
+       //Agora vamos nos voltar para um método muito útil para manipulação geral de HTML Element.setAttribute() - isso leva dois argumentos, o atributo que você deseja definir no elemento e o valor para o qual deseja defini-lo. Neste caso, definiremos um nome de classe de destaque em nosso parágrafo:
+       //definindo um class atribute no elemento <p>, para se associar a um css local no arquivo HTML
+       paragrafo.setAttribute('class','highlight');
+        
+       //
+
+       /**
+        * 
+        * Atualize sua página e você não verá nenhuma mudança - o CSS ainda é aplicado ao parágrafo, mas desta vez dando a ele uma classe que é selecionada por nossa regra CSS, não como estilos CSS embutidos
+        * 
+        * Qual método você escolhe é com você; Ambos tem suas vantagens e desvantagens. O primeiro método requer menos configuração e é bom para usos simples, enquanto o segundo método é mais purista (sem misturar CSS e JavaScript, sem estilos embutidos, o que é visto como uma prática ruim). À medida que você começar a construir aplicativos maiores e mais complexos, provavelmente começará a usar mais o segundo método, mas é você quem decide.
+        * 
+        * Neste ponto, não fizemos nada realmente útil! Não faz sentido usar JavaScript para criar conteúdo estático - você também pode simplesmente escrevê-lo em seu HTML e não usar JavaScript. É mais complexo do que HTML e criar seu conteúdo com JavaScript também tem outros problemas associados a ele (como não ser legível pelos mecanismos de pesquisa).
+        *  
+       */
+    </script>
+</body>
+</html>

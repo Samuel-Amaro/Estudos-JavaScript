@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function and Objeto argumentos</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTIONS E O OBJECT ARGUMENTS
+         * 
+         * Uma arrow function não tem o arguments objeto. Por exemplo:
+         * */
+
+        //declara uma function sem paramentro 
+        function show() {
+            //declara um arrow function que possui um paramentro e retorna o primeiro argumento passado para a arrow function por meio do objetct arguments
+            //a show function retorna uma arrow function que retorna o primeiro argumento passado para a show function
+            return x => x + arguments[0];
+        } 
+
+        //chama invoca a function show, passando dois argumentos
+        let display = show(10, 20);
+
+        //chama a arrow function retornada pelo show function e passa um argumento 
+        let result = display(5); //15 porque 10 o primeiro argumento passado para a function show, e 5 o argumento passado para a arrow function
+        
+        console.log(result); //15 
+
+        /**
+         * A arrow function da showMe()função faz referência ao arguments objeto. No entanto, esse arguments objeto pertence à show() função, não à arrow function.
+         * 
+         * Além disso, uma arrow function não possui a new.target palavra - chave.
+         * */
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./xhr-another-domain.svg" alt="imagen"/>
+
+    <script>
+
+        /**
+         * * CORS(Cross-Origin Resource Sharing - Politica de compartilhamento de recursos de origem cruzada) PARA REQUESTS SAFES(solicitações seguras)
+         * 
+         * Se uma solicitação(request) for de origem cruzada(cross-origin), o navegador sempre adicionará o Origin cabeçalho a ela.
+         * 
+         * Por exemplo, se solicitarmos https://anywhere.com/request de https://javascript.info/page, os cabeçalhos(headers) serão parecidos com:
+         * 
+
+            GET /request
+            Host: anywhere.com
+            Origin: https://javascript.info
+            ... 
+
+         * 
+         * Como você pode ver, o Origin cabeçalho(header) contém exatamente a origem (domínio(domain)/protocolo(protocol)/porta(port)), sem um caminho.
+         * 
+         * O servidor pode inspecionar Origin e, se concordar em aceitar tal solicitação(request), adicionar um cabeçalho especial Access-Control-Allow-Origin(Controle de acesso Permitir origem) à resposta(response). Esse cabeçalho(header) deve conter a origem permitida (no nosso caso https://javascript.info), ou uma estrela *. Então a resposta(response) é bem sucedida, caso contrário é um erro.
+         * 
+         * O navegador desempenha o papel de um mediador confiável aqui:
+         * 
+            1. Ele garante que o correto Origin seja enviado com uma solicitação de origem cruzada(cross-origin request).  
+            
+            2. Ele verifica a permissão Access-Control-Allow-Origin na resposta(response), se existir, o JavaScript tem permissão para acessar a resposta(response), caso contrário, falha com um erro.
+
+         * 
+         * Aqui está um exemplo de uma resposta permissiva do servidor:
+         
+            200 OK
+            Content-Type: text/html; charset=UTF-8
+            Access-Control-Allow-Origin: https://javascript.info
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flat Método</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * JAVASCRIPT ARRAY FLAT() - PLANA
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o flat() método JavaScript Array para nivelar um array.
+         * 
+         * * INTRODUÇÃO AO FLAT() MÉTODO ARRAY
+         * 
+         * O ES2019 introduziu o Array.prototype.flat() método que cria um novo array com todos os elementos dos subarrays concatenados a ele recursivamente até uma profundidade especificada.
+         * 
+         * Veja a seguir a sintaxe do flat() método:
+         
+            let newArray = arrayObject.flat([depth]);
+
+         * 
+         * O depth parâmetro especifica a profundidade com que o método nivela a estrutura da array. O padrão é 1.
+         * 
+         * O exemplo a seguir mostra como nivelar uma array de números:
+        */
+
+        //declara um array dense multidimensional inicializado com 3 elementos sendo que o 3 elemento e um array com mais três elementos
+        const numbers = [1, 2, [3, 4, 5]];
+        //utilizando o metodo flat da instancia de objeto do tipo array nomeado numbers para obter os subarrays contatenados a ele recursivamente até um profundidade especificada
+        //aqui o flat retornara um novo array com os elementos concatenados do array original, retornara o array concatenado como os  elementos do array que eram um outro array
+        //como não passamos uma profundiade o padrão e 1
+        //o flat metodo concatena todos os elementos do array aninhado como elemento aos elementos do novo array, retornando um novo array reindexado com novos elementos do array aninhado, isso e tira o array aninhado do array original
+        //aqui o array aninhado era o [3, 4, 5]
+        //retorna esse array como elementos do no array
+        const flatNumbers = numbers.flat();
+        console.log(numbers);
+        //o flat metodo cria um novo array e não altera o original
+        console.log(flatNumbers);
+
+        /**
+         * O exemplo a seguir nivela uma array com dois níveis de profundidade:
+        */
+
+        //declara um array com dois arrays aninhados, um array multimensional, dense inicializado com 3 elementos e elementos aninhados
+        //o array e inicializado com 3 elementos
+        //sendo que o 3 elemento e um subArray com 4 elementos, sendo que o 4 elemento do subArray e um novo subsubArray com dois elementos
+        const numbers2 = [1, 2, [3, 4, 5, [6, 7]]];
+        //console.log(numbers2[2][3]);
+        //utilizando o metodo flat para nivelar o array numbers2 que e uma instancia de objeto do tipo array
+        //o metodo flat ira nivela os array aninhados a ele mesmo de forma recursiva até um certo nivel de profundidade especificada, se não passar profundiade o padrão e 1
+        //o flat nivela os subarrays ao array pai de todos de forma a todos ficarem e um unico arrray de forma nivelada
+        //aqui os subArrays [3, 4, 5, [6, 7]] se alinharam ao array [1, 2] 
+        //sera retornado um novo array com nivelamento feito pelo metodo flat
+        //passando o argumento 2 para o flat metodo para especificar o nivel de profundidade que o metodo nivel a estrutura do array
+        const flatNumbers2 = numbers2.flat(2);
+        console.log(numbers2);
+        //mostra array nivelado
+        console.log(flatNumbers2);
+
+        /**
+         * Quando você não conhece o nível de profundidade, pode passar o Infinity método flat() para concatenar recursivamente todos os elementos dos sub-arrays no novo array:
+         * 
+        */
+
+        //declara um array nomeado number3 inicializado com 3 elementos mas com um nivel de profundidade que não conheço pois e muito array aninhado, não conheço o nivel de profundidade aqui
+        const numbers3 = [1, 2, [3, 4, 5, [6, 7, [8, 9]]]];
+        //como queremos nivelar o array numbers por causa da quantidade de array aninhados em sua estrutura vamos utilizar o metodo flat, porem não sabemos o nivel da profundidade, para poder informar o flat sobre a estrutura da profundiade que o flat tem que percorrer para se nivelar o array
+        //assim podemos passar o Infinity valor para informar que não sabemos a estrurura de profundiade do array, o proprio flat ira descobrir e nivelar, e retornar o novo array nivelado sem modificar o original
+        const flatNumbers3 = numbers3.flat(Infinity);
+        console.log(numbers3)
+        console.log(flatNumbers3);
+
+        /**
+         * Se um array tiver slots vazios, você pode usar o flat() método para remover os buracos, assim:  
+        */
+
+        //declara uma array literal esparsada com elementos vazios, o array e inicializado com 6 elementos
+        const numbers4 = [1, 2, , 4, , 5];
+        //utilizando o flat metodo da instancia de objeto literal do tipo array numbers4 podemos tornar a array dense com posições contiguas e inicilizadas no array
+        //removendo os slots vazios do array
+        //se não passar argumento para o flat metodo ele assume que a profundiade e 1
+        const sequence = numbers4.flat();
+
+        console.log(numbers4);
+        console.log(sequence);
+
+        /**
+         * * RESUMO
+         * 
+         * Use o Array.prototype.flat() método para nivelar uma array com as array aninhadas.
+         * 
+         * Use o depth argumento para especificar a profundidade com que as arrays aninhadas devem ser achatadas. A profundidade é 1 por padrão.
+         * 
+         * O flat() também remove os furos na array com slots vazios.
+        */
+    </script>
+</body>
+</html>

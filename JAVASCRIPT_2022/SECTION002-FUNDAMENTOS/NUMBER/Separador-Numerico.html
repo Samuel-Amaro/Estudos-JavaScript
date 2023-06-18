@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separador Numerico</title>
+</head>
+<body>
+    <script>
+        /**
+         * * SEPARADOR NUMÉRICO JS
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o separador numérico JavaScript para tornar os literais numéricos mais legíveis.
+         * 
+         * * INTRODUÇÃO AO SEPARADOR NUMÉRICO JS
+         * 
+         * O separador numérico permite criar uma separação visual entre grupos de dígitos usando sublinhados ( _) como separadores.
+         * 
+         * Por exemplo, o número a seguir é muito difícil de ler, especialmente quando contém repetições de dígitos longos:
+        */
+
+        //declara uma constante e a inicializa com um valor numerico inteiro grande
+        const budget = 1000000000;
+
+        /**
+         * Isso é um bilhão ou cem milhões?
+         * 
+         * O separador numérico corrige esse problema de legibilidade da seguinte maneira:
+        */
+
+        //declara uma variavel e a inicializa com um valor numerico inteiro grande usando o separador numerico usando o sublinhado, permitindo criar uma separação visual entre grupos de digitos  
+        const budgetSeparator = 1_000_000_000; 
+
+        /**
+         * Como você pode ver, o número agora é muito fácil de interpretar.
+         * 
+         * JavaScript permite que você use separadores numéricos para números inteiros e de ponto flutuante. Por exemplo:
+        */
+
+        //declara variavel e a inicaliza com um valor de ponto flutuante, usando o separador numerico sublinhado para separação visual de grupo de digitos
+        let amount = 120_201_123.05; //120,201,123.05
+        let expense = 123_4500; //123.45
+        let fee = 12345_00; //12,345
+
+        /**
+         * É importante observar que todos os números em JavaScript são números de ponto flutuante. 
+         * 
+         * Além disso, você pode usar os separadores numéricos para partes faccionais e expoentes. Por exemplo:
+         * 
+        */
+
+        //declara variavel e a inicaliza com um valor fracionario de ponto flutuante usando o separador numerico sublinhado para separação visual de grupo de digitos
+        let amount2 = 0.000_001; //1millionth
+
+        /**
+         * É importante observar que você pode usar o separador numérico para bigint literal, literal binário, literal octal e literal hexadecimal. Por exemplo:
+        */
+
+        //BigInt
+        //declara uma constante e a inicaliza com um valor numerico inteiro grande do tipo BigInt usando o separador numerico sublinhado para separação visual de grupo de digitos 
+        const max = 9_223_372_036_854_775_807n;
+
+        //binary
+        //representação de um valor binario em JS
+        //usando o separador numerico 
+        let nibbles = 0b1011_0101_0101;
+
+        //octal
+        //representa valores octal em javascript usando o prefixo 0o
+        //usando o separador numerico
+        let val = 0o1234_5670;
+        
+        //hex
+        //representa valores hexadecimais em js usando o prefixo 0x ou 0X
+        let message = 0xD0_E0_F0;
+
+    </script>
+</body>
+</html>

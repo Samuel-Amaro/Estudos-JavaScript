@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contructor pattern</title>
+</head>
+<body>
+    <img src="JavaScript-Constructor-Pattern.png" alt="imagen">
+
+    <img src="Create-Objects-in-JavaScript-Constructor-Pattern.png" alt="imagen">
+
+    <img src="Create-Objects-in-JavaScript-Multiple-Instances.png" alt="imagen">
+
+    <script>
+        /**
+         * * CONSTRUCTOR PATTERN
+         *  
+         * JavaScript permite que você crie uma função de construtor personalizada que define as propriedades e métodos de objetos definidos pelo usuário.
+         * 
+         * Por convenção, o nome de uma função construtora em JavaScript começa com uma letra maiúscula.
+         * 
+         * Por exemplo, o seguinte reescreveu o animal objeto do exemplo anterior:
+        */
+
+        //declara uma function regular Construtora chamada Animal que possui uma paramentro chamado name essa function retorna uma referencia de uma instancia de objeto criado pelo this objeto
+        //por padrão o JS fornecera um objeto prototipo anonimo que pode ser referenciado por Animal.prototype, esse objeto contem propriedades que podem ser herdadas por Qualquer instancia criada por animal
+        //E o objeto anonimo referencia a Function construtora Animal por meio da contructor propriedade que pode ser acessada por meio de
+        //Animal.prototype.constructor
+        //O objeto anonimo e ligado a Object.prototype objeto anonimo de referencia por meio do Mecanismo do JS por padrão, para herdar os metodos como toString, valueOf e outros la
+        function Animal(name) {
+            //adiciona propriedades ao this objeto, propriedades proprias
+            //adiciona uma propriedade chamada name que recebe o name argumento como valor
+            this.name = name;
+            //adiciona uma nova propriedade chamada identify que recebe como valor uma function anonima que não possui paramentro e nem retorna valor, essa function e atribuida a propriedade notify tornando um metodo
+            //adiciona uma propriedaed propria ao objeto
+            this.identify = function() {
+                console.log(`I'm ${o.name}`);
+            };
+        }
+
+        /**
+         * Ao contrário do padrão de fábrica, as propriedades e métodos do animal objeto são atribuídos diretamente ao this objeto dentro da função construtora.
+         * 
+         * Ao contrário do padrão de fábrica, as propriedades e métodos do animal objeto são atribuídos diretamente ao this objeto dentro da função construtora.
+         * 
+         * A Animal() função tem como prototype referência de propriedade um objeto anônimo e o objeto anônimo tem como constructor referência de propriedade a Animal() função.
+         * 
+         * Além disso, o mecanismo JavaScript vincula o objeto anônimo ao objeto.
+         * 
+         * Para criar uma nova instância de Animal, você usa o new operador. Por exemplo:
+        */
+           
+        //cria uma nova instancia de objeto usando a função constrututora Animal, a invocando e passando um argumento para inicializar a propriedade e usando o operador new para definir o this valor do construtor para o new
+        //retorna uma nova instancia de objeto com propriedades, o objeto foi criado pelo this objeto dentro do contexto da função
+        //esse objeto por padrão foi ligado ao objeto anonimo de referencia de prototipo por meio da ligação de prototipo
+        var donald = new Animal('Donald');
+
+        /**
+         * Nos bastidores, o JavaScript executa estas quatro etapas:
+         
+            1. Crie um novo objeto.
+
+            2. Defina o this valor do construtor para o new objeto.
+
+            3. Execute o código dentro do construtor, ou seja, adicionando propriedades ao novo objeto.
+
+            4. Retorne o novo objeto.
+
+         *
+         * A figura a seguir ilustra a relação entre o donald objeto e outros objetos.
+         * 
+         * Veja o seguinte exemplo.
+        */
+
+        //aqui queremos verificar se o donald.constructor objeto e igual a Animal function construtora
+        //o JS procura a propriedade constructor no objeto donald e não encontrara, assim ira usar a ligação de prototipo a cadeia de prototipo e econtrada em Animal.prototype.constructor que referncia a propria function construtora Animal, vendo assim que animal foi criado pela invocação da function construtora Animal
+        console.log(`donald.constructor === Animal = ${donald.constructor === Animal}`); //true
+
+        /**
+         * Neste exemplo, como o   donald objeto não tem a constructor propriedade, o mecanismo JavaScript segue a cadeia de protótipo para encontrá-lo no Animal.prototype objeto.
+         * 
+         * Encontrou a constructor propriedade no Animal.prototype objeto e neste caso a constructor propriedade aponta para a Animal()função, portanto o comando acima retorna true.
+         * 
+         * O donald objeto também é uma instância de Animal e da  Object seguinte forma:
+        */
+
+        //verifica se o donald objeto e instancia da Animal function construtora
+        console.log(`donald instanceof Animal = ${donald instanceof Animal}`); //true
+        //verifica se o donald objeto e instancia da Object function construtora
+        console.log(`donald instanceof Object = ${donald instanceof Object}`); //true
+
+        /**
+         * A desvantagem do padrão de construtor é que o mesmo método identify() é duplicado em cada instância. 
+         * 
+         * O código a seguir cria um novo Animal objeto denominado bob.
+        */
+
+        //cria uma nova instancia de objeto usando a função constrututora Animal, a invocando e passando um argumento para inicializar a propriedade e usando o operador new para definir o this valor do construtor para o new
+        //retorna uma nova instancia de objeto com propriedades, o objeto foi criado pelo this objeto dentro do contexto da função
+        //esse objeto por padrão foi ligado ao objeto anonimo de referencia de prototipo por meio da ligação de prototipo
+        //os metodos são duplicados por causa que as propriedade são definidas como proprias de cada instancia de objeto, assim cada objeto tera o mesmo metodo, uma forma de resolver isso e usando propriedade herdadas fazendo um prototipo de objeto definir as propriedades e objetos ligados a ele compartilhem essa propriedades por meio de herança
+        var bob = new Animal('Bob');
+
+        /**
+         * Como você pode ver, o identify()método é duplicado nos   objetos donald e bob. Para resolver esse problema, você usa o padrão de protótipo.
+        */
+    </script>
+</body>
+</html>

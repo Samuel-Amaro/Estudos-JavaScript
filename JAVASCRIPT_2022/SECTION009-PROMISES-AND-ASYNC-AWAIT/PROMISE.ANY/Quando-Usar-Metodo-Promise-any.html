@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.any()</title>
+</head>
+<body>
+
+
+
+    <script>
+
+        /**
+         * * QUANDO USAR O MÉTODO JS Promise.any()
+         * 
+         * Na prática, você usa o Promise.any() para retornar a primeira promessa cumprida. Depois que uma promessa é cumprida, o Promise.any() método não espera que outras promessas sejam concluídas. Em outras palavras, os Promise.any() curtos-circuitos após o cumprimento de uma promessa.
+         * 
+         * Por exemplo, você tem um recurso servido por duas ou mais redes de entrega de conteúdo (CDN). Para carregar dinamicamente o primeiro recurso disponível, você pode usar o Promise.any() método.
+         * 
+         * O exemplo a seguir usa o Promise.any() método para buscar duas imagens e exibe a primeira imagem disponível.
+        */
+
+        //declara uma function chamada getImageBlob e declara um parametro chamado url
+        function getImageBlob(url) {
+            //usando o then métrodo para ober o valor resolvido pela promise do fetch
+            return fetch(url).then((response) => {
+                if(!response.ok) {
+                    //lança exceção
+                    throw new Error(`HTTP status: ${response.status}`);
+                }
+                return response.blob();
+            });
+        }
+
+        let cat = getImageBlob('https://upload.wikimedia.org/wikipedia/commons/4/43/Siberian_black_tabby_blotched_cat_03.jpg');
+
+        let dog = getImageBlob('https://upload.wikimedia.org/wikipedia/commons/a/af/Golden_retriever_eating_pigs_foot.jpg');
+
+        //usando o método promise.any para verifica qual sera a primeira promise a ser resolvida.
+        //o metodo retornara uma nova promise com o valor da primeira promise de entrada resolvida, o método then obten o valor da promise resolvida e mostra, a callback do them método e chamada quando a promise retornada pelo then for resolvida para o valor da primeira promise de entrada a ter sido resolvida(cumprida com vlaor)
+        Promise.any([cat, dog]).then((data) => {
+            let objectURL = URL.createObjectURL(data);
+            let image = document.createElement('img');
+            image.src = objectURL;
+            document.body.appendChild(image);
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+        /**
+         * Como Funciona:
+
+            - Primeiro, defina a getImageBlob() função que usa a API de busca para obter o blob da imagem de um URL. O getImageBlob() retorna um Promise objeto que resolve para o blob de imagem.
+
+            - Segundo, defina duas promessas que carregam as imagens.
+
+            - Terceiro, mostre a primeira imagem disponível usando o Promise.any() método.
+
+         * 
+         * * RESUMO
+
+          * Use o método JavaScript Promise.any() para obter uma lista de promessas e retornar uma promessa que cumpra primeiro.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        um elemento form no documento 
+    -->
+    <form action="#" method="post" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on" name="my">
+        <!--elementos do formulario, entradas para o formulario-->
+        <input type="radio" name="age" value="10"/>
+        <input type="radio" name="age" value="20"/>
+    </form>
+
+    <script>
+        /**
+         * Pode haver vários elementos com o mesmo nome. Isso é típico com botões de opção e caixas de seleção.
+         * 
+         * Nesse caso, form.elements[name] é uma coleção(collection). Por exemplo:
+        */    
+       
+        //obtem o formulario
+        //obtendo o formulario por meio da collection document.forms, atraves da indexação(ordenação) por meio do indice a ordem em que se encontra no documento
+        let form = document.forms[0];
+
+        //obtem os elemento do form
+        //se tiver varios elementos do form com o mesmo valor no atributo html name, o name vira uma collection, com todos os elementos do form que possuem o valor age no atributo name
+        let ageElems = form.elements.age;
+
+        //acessando a collection ageElements por meio da ordem de indexação, para obter o elemento do form, o primeiro elemento do form
+        console.log(ageElems[0]);
+
+        /**
+         * Essas propriedades de navegação não dependem da estrutura da tag. Todos os elementos de controle, não importa quão profundos estejam no formulário, estão disponíveis em form.elements.
+        */
+    </script>
+</body>
+</html>

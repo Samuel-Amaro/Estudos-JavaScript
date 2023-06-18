@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * POST REQUESTS(SOLICITAÇÕES POST)
+         * 
+         * Para fazer uma POST solicitação, ou uma solicitação com outro método, precisamos usar as fetch opções:
+         * 
+            * method– Método HTTP, por exemplo POST,
+            * 
+            * body– o organismo do pedido, um dos seguintes:
+            * 
+                * uma string (por exemplo, codificada em JSON),
+                * 
+                * FormData objeto, para enviar os dados como multipart/form-data,
+                * 
+                * Blob/ BufferSource para enviar dados binários,
+                * 
+                * URLSearchParams , para enviar os dados em x-www-form-urlencoded codificação, raramente usado.
+                * 
+             * O formato JSON é usado na maioria das vezes.
+             * 
+             * Por exemplo, este código envia user o objeto como JSON:
+        */
+
+        //declara um objeto anonimo e o atribui a variavel user por referencia
+        let user = {
+            name: 'John',
+            surname: 'Smith'
+        };
+
+        async function demoRequestPost() {
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            //passamos para o fetch como primeiro argumento o url para fazer a request, e o segundo argumento, e um objeto options 
+            let response = await fetch('https://javascript.info/article/fetch/post/user', {
+                //objeto com paramentros opcionais para o request header
+                method: 'POST', //method HTTP
+                headers: { //request header optional, um objeto com request header (nenhum header e permitido)
+                    'Content-Type' : 'application/json;charset=utf-8' //tipo do conteudo
+                },
+                body: JSON.stringify(user) //corpo da request, um objeto JSON, os dados a serem enviados
+            });
+            
+            //o metodo reponse.json() obtem corpo do response objeto, retorna uma promise que resolve analisa a resposta como JSON,
+            let result = await response.json();
+            //promise retorna e resolvida com
+            return result.message;
+        }
+
+        demoRequestPost().then(result => {
+            alert(result);
+        });
+
+
+        /**
+         * Observe que, se a solicitação body for uma string, o Content-Type cabeçalho será definido como text/plain;charset=UTF-8 padrão.
+         * 
+         * Mas, como vamos enviar JSON, usamos headers a opção de enviar application/json, em vez disso, o correto Content-Type para dados codificados em JSON.
+        */
+    </script>
+
+</body>
+</html>

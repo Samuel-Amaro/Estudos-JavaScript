@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <textarea id="area" style="width: 80%; height: 60px;">Concentre-se em mim, o cursor estará na posição 10.</textarea>
+
+    <script type="text/javascript">
+        /**
+         * * exemplo: mover o cursor
+         * 
+         * Podemos alterar selectionStart e selectionEnd, que define a seleção.
+         * 
+         * Um caso de borda importante é quando selectionStart e selectionEnd igualar um ao outro. Então é exatamente a posição do cursor. Ou, para reformular, quando nada é selecionado, a seleção é recolhida na posição do cursor.
+         *  
+         * Assim, definindo selectionStart e selectionEnd para o mesmo valor, movemos o cursor.
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom
+        //atribuimos uma manipulador de evento o manipulador e acionado toda vez que o elemento are receber o foco
+        area.onfocus = (event) => {
+            //zero delay setTimeout para ser executado após a conclusão da ação de "foco" do navegador
+            //logo apos o elemento area receber o foco apos 0s o callback do timeout e executado
+            setTimeout(() => {
+                // podemos definir qualquer seleção
+                // se start=end, o cursor está exatamente nesse lugar
+                //definimos que o final e o inicio da seleção vão esta exatamente no mesmo lugar na posição indexada 10 do texto dentro do text area.
+                area.selectionStart = area.selectionEnd = 10;
+            });
+        };
+    </script>
+</body>
+</html>

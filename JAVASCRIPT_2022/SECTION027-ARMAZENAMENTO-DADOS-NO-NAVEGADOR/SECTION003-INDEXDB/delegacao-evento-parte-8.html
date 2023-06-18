@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * DELEGAÇÃO DO EVENTO
+         * 
+         * Precisamos de onerror/onsuccess para cada solicitação? Nem sempre. Podemos usar a delegação de eventos.
+         * 
+         * Bolha de eventos IndexedDB(IndexDB events bubble): request → transaction → database.
+         * 
+         * Todos os eventos são eventos DOM, com captura e borbulhamento, mas geralmente apenas o estágio de borbulhamento é usado.
+         * 
+         * Assim, podemos capturar todos os erros usando db.onerror o manipulador, para relatórios ou outros fins:
+        */
+
+        //atribui um um manipulador de evento que e acionado ha erros no indexDB
+        db.onerror = function(event) {
+            let request = event.target; //a solicitação que causou o erro 
+            //O erro está em request.error(se houver).
+            console.log("Error", request.error);
+        }
+
+        /**
+         * …Mas e se um erro for totalmente tratado? Não queremos denunciá-lo nesse caso.
+         * 
+         * Podemos parar o borbulhar e, portanto db.onerror, usando event.stopPropagation() in request.onerror.
+         * 
+        */
+
+        //atribui um manipulador de evento que e acionado toda vez que uma request falha
+        request.onerror = function(event) {
+            //ConstraintError ocorre quando um objeto com o mesmo id já existe
+            if(request.error.name == "ConstraintError") {
+                console.log("Book with such id already exists"); //manipula o error
+                //previne a ação padrão de abortar a transação
+                event.preventDefault(); // não aborta a transação
+                //o evento para de borbulhar e não aciona o proximo manipulador
+                event.stopPropagation(); // não borbulhe o erro, "mastigue"
+            }else{
+                // fazer nada
+                // a transação será abortada
+                // podemos cuidar do erro em transaction.onabort
+            }
+        }
+    </script>
+
+</body>
+</html>

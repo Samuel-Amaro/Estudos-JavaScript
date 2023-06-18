@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ARMADILHAS DO INFINITY
+         * 
+         * * 2) SERIALIZAÇÃO JSON
+         * 
+         * O JSON.stringify() serializa um número infinito para null. Por exemplo:
+        */
+
+        //declara um objeto literal anonimo atribuido por referencia a constante resource
+        const resource = {
+            //declara prorpiedade usando sintaxe chave : valor
+            //o valor Infinity e uma propriedade global, variavel gloabal que representa um valor maior que outros finitos
+            amount: Infinity
+        };
+
+        //declara uma variavel de escopo de bloco chamada result que e inicializada com o resultado do metodo abaixo
+        //o JSON.stringify() serializa um numero infinito para null
+        let result = JSON.stringify(resource);
+
+        console.log(result);
+    </script>
+
+</body>
+</html>

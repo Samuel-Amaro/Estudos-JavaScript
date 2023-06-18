@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <h2>Como Os Quantificadores Gananciosos Funcionam</h2>
+
+    <p>como o primeiro caractere &lt; não corresponde à cotação ("), o mecanismo regex continua a corresponder aos próximos caracteres até encontrar a primeira cotação (")</p>
+
+    <img src="./images/JS-Regex-Greedy-Step-1.svg" alt="Exemplo 01 Funcionamento do quantificador ganacioso">
+
+    <p>Em seguida, o mecanismo regex corresponde à string com a próxima regra .+ na expressão regular.</p>
+
+    <p>Como a .+ regra corresponde a um ou mais caracteres, o mecanismo regex corresponde aos caracteres até encontrar o final da string:</p>
+
+    <img src="./images/JS-Regex-Greedy-Step-2.svg" alt="Exemplo 02 Funcionamento do quantificador ganacioso">
+
+    <p>Depois disso, o mecanismo regex verifica a última regra na expressão regular, que é uma aspa (“). No entanto, não há mais caractere para corresponder porque já atingiu o final da string. Isso significa que o mecanismo regex é muito ganancioso por ir longe demais.</p>
+
+    <p>Finalmente, o mecanismo regex volta do final da string para encontrar a aspa (“). Esta etapa é muitas vezes referida como retrocesso<b><q>backtracking</q></b>.</p>
+
+    <img src="./images/JS-Regex-Greedy-Step-3.svg" alt="Exemplo 03 Funcionamento do quantificador ganacioso">
+
+    <p>Como resultado, a correspondência é a seguinte substring, que não é o que você poderia esperar:</p>
+
+    <img src="./images/JS-Regex-Greedy-Step-4.svg" alt="Exemplo 04 Funcionamento do quantificador ganacioso">
+
+    <script>
+
+        /**
+         * * COMO OS QUANTIFICADORES GANANCIOSOS FUNCIONAM
+         * 
+         * Primeiro, o mecanismo regex inicia a correspondência a partir do primeiro caractere na string button.
+         * 
+         * Em seguida, como o primeiro caractere < não corresponde à cotação ("), o mecanismo regex continua a corresponder aos próximos caracteres até encontrar a primeira cotação ("):
+         * 
+         * Em seguida, o mecanismo regex corresponde à string com a próxima regra .+ na expressão regular.
+         * 
+         * Como a .+ regra corresponde a um ou mais caracteres, o mecanismo regex corresponde aos caracteres até encontrar o final da string:
+         * 
+         * Depois disso, o mecanismo regex verifica a última regra na expressão regular, que é uma aspa (“). No entanto, não há mais caractere para corresponder porque já atingiu o final da string. Isso significa que o mecanismo regex é muito ganancioso por ir longe demais.
+         * 
+         * Finalmente, o mecanismo regex volta do final da string para encontrar a aspa (“). Esta etapa é muitas vezes referida como retrocesso .
+         * 
+         * Como resultado, a correspondência é a seguinte substring, que não é o que você poderia esperar:
+         
+            "subimt" class="btn"
+
+         * 
+         * Para resolver esse problema, você precisa instruir o quantificador ( +) a usar o modo não ganancioso (ou preguiçoso) em vez do modo ganancioso. Para fazer isso, você adiciona um ponto de interrogação ( ?) após o quantificador assim:
+         
+            /".+?"/g
+
+         * 
+         * O script a seguir retorna o resultado esperado:
+        */
+
+        //declara uma constante de escopo de bloco chamada button que e inicializada com uma string literal que representa um elemento HTML button
+        const button = '<button type="submit" class="btn">Send</button>';
+
+        /**
+         * E você quer combinar os textos entre aspas ("") como submit e btn.
+         * 
+         * Para fazer isso, você usa aspas duplas (“), a classe de caractere ponto (.) e o quantificador (+) para construir o seguinte padrão:
+         
+            /".+"/g
+
+         * Este padrão significa que:
+
+            - "começa com"
+            - . corresponde a qualquer caractere exceto a nova linha
+            - + corresponde ao caractere anterior uma ou mais vezes.
+            - "termina com"
+            - g flag retorna todas as correspondências
+
+         * 
+         * O seguinte usa o match() método para corresponder a string s com o padrão:
+        */
+
+        //criando uma expressão regular que possui um padrão que significa o seguinte, quer combinar os textos entre aspas (""): começa com aspas duplas " o conteudo corresponde a qualquer caractere exceto nova linha uma ou mais vezes termina com " fecha aspas duplas, a g flag retorna todas as correspondecias.
+        //usamos a classe de caracteres .
+        //usamos o quantificador de abreviação (+) -> corresponde o caractere anterior uma ou mais veses {1,}, porem esse quantificador e ganancioso por padrão, o mecanismo regex combina o (.) mais do que deve, assim faz o padrão ter correspondecias inesperadas, assim temos que usar o modo não ganacioso(preguiçoso), usando o quantificador ?, que e uma abreviação para {0, 1}, corresponde a zero ou uma vez
+        //usamos a flag g para retorna todas as correspondecias do padrão
+        const pattern = /".+?"/g;
+        //usando o método String.match(regexp) para retorna todoas as correspondecias do regexp na string str usando o padrão especificado na expressão regular.
+        const result = button.match(pattern);
+        console.log(result);
+
+        /**
+         * * RESUMO
+         * 
+         * Os quantificadores usam o modo guloso por padrão.
+         * 
+         * Quantificadores gananciosos combinam seus elementos precedentes tanto quanto possível.
+        */
+    </script>
+</body>
+</html>
+
+
+

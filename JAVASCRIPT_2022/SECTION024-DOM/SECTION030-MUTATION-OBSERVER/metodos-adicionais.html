@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * MÉTODOS ADICIONAIS
+         * 
+         * Existe um método para parar de observar o nó:
+         * 
+            * observer.disconnect()– interrompe a observação.
+            * 
+         * Quando paramos a observação, pode ser que algumas mudanças ainda não tenham sido processadas pelo observador. Nesses casos, usamos
+         * 
+            *  observer.takeRecords()– obtém uma lista de registros de mutação não processados ​​– aqueles que aconteceram, mas o retorno de chamada(CALLBACK) não os tratou.
+            * 
+         * Esses métodos podem ser usados ​​juntos, assim: 
+        */
+
+        // obter uma lista de mutações não processadas
+        // deve ser chamado antes de desconectar,
+        // se você se importa com mutações recentes possivelmente não tratadas
+        let mutationRecords = observer.takeRecords();
+
+        // parar de rastrear alterações
+        observer.disconnect();
+
+        /**
+         * * Os registros retornados por observer.takeRecords() são removidos da fila de processamento
+         * 
+         * O retorno de chamada não será chamado para registros, retornado por observer.takeRecords().
+         * 
+         * * Interação de coleta de lixo
+         * 
+         * Os observadores usam referências fracas para nós internamente. Ou seja, se um nó for removido do DOM e se tornar inacessível, ele poderá ser coletado como lixo.
+         * 
+         * O simples fato de um nó DOM ser observado não impede a coleta de lixo.
+        */
+    </script>
+
+</body>
+</html>

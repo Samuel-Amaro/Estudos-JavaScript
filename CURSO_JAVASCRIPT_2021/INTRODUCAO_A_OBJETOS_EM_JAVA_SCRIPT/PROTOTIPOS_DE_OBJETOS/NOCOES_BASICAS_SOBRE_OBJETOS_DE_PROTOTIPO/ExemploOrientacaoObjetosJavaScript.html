@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Exemplo de JavaScript orientado a objetos </title>
+  </head>
+
+  <body>
+
+    <h1>Exemplo de Orientação a Objetos em JavaScript</h1>
+    
+    <p>Este exemplo requer a inserção de comandos no console JavaScript do seu navegador (veja <a a  href = " https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools " > Quais são as ferramentas de desenvolvimento do navegador </a> para mais informações).</p>
+
+  </body>
+
+  <!--
+      script local que manipulara e demostrara exemplos de OOP em JS
+  -->
+  
+  <script>
+      
+      //função construtora de classe com paramentros obrigatorios para a definição da classe, essa função construtora e a maneira de representar uma classe no JS
+      function PessoaCompleta(primeiro, ultimo, idade, sexo, interesses) {
+            //a propriedade nome do obj e um objeto
+            this.nome = {
+                'primeiro' : primeiro,
+                'ultimo' : ultimo
+            };
+            //propriedade do obj 
+            this.idade = idade;
+            //propriedade do obj
+            this.sexo = sexo,
+            //propriedade do obj
+            this.interesses = interesses;
+            //metodo do obj
+            this.bio = function() {
+                alert(this.nome.primeiro + ' ' + this.nome.ultimo + 'e ' + this.idade + 'anos. E gosto de ' + this.interesses[0] + ' e ' + this.interesses[1] + '.');
+            };
+            //metodo do obj
+            this.saudacao = function() {
+                alert('Ei! Eu sou ' + this.nome.primeiro + '.');
+            };
+      }
+
+      //criando uma istancia da classe PessoaCompleta() pelo seu construtor 
+      let pessoaTeste1 = new PessoaCompleta('Bob', 'Smith', 32, 'masculino', ['musica','skiar']);
+
+      //criando uma nova instancia de PessoaCompleta a partir de um metodo da instancia de objeto01, somente usando o metodo constructor de pessoaTeste1
+      var pessoa3 = new pessoaTeste1.constructor('Karen', 'Stephenson', 26, 'female', ['playing drums', 'mountain climbing']);
+
+      //o seguinte código, que adiciona um novo método à propriedade prototype do construtor: 
+      
+      PessoaCompleta.prototype.farewell = function() {
+          alert(this.nome.primeiro + 'deixou o prédio. Tchau agora!');
+      };
+
+
+  </script>
+</html>

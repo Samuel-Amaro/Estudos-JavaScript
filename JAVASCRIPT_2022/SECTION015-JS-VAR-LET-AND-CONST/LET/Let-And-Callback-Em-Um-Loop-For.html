@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT LET E CALLBACK(FUNÇÃO DE RETORNO DE CHAMADA) EM UM LOOP FOR
+         * 
+         * Veja o exemplo a seguir.
+        */
+        
+        //define um loop for que ira iterar 5 vezes
+        //a variavel controladora do loop e declarada usando a palavra-chave var, declara uma variavel global chamada i
+        for(var i = 0; i < 5; i++) {
+            //o seguinte condigo simula 1 segundo de atraso para poder mostrar o numero iterado a cada iteração do loop
+            //so que quando a callback function e executada o loop for ja foi executada antes ja iterou os numeros até sua condição ser satisfeita, assim o callback quando referencia a variavel global i, o loop ja foi executado,
+            setTimeout(function() {
+                //mostrar um numero no console a cada 1 segundo passado
+                console.log(i);
+            }, 1000);
+        }
+
+        /**
+         * A intenção do código é enviar números de 0 a 4 para o console a cada segundo. No entanto, ele exibe o número 5 cinco vezes:
+         *
+         * Neste exemplo, a variável i é uma variável global. Após o loop, seu valor é 5. Quando as funções de retorno de chamada(callbacks) são passadas para a setTimeout()função executada, elas referenciam a mesma variável i com o valor 5.
+         * 
+         * No ES5, você pode corrigir esse problema criando outro escopo para que cada função de retorno de chamada faça referência a uma nova variável. E para criar um novo escopo, você precisa criar uma função. Normalmente, você usa o padrão IIFE da seguinte maneira:
+        */
+
+        //declara um loop para iterar 5 vezes, a variavel controladora e uma variavel global declarada com var
+        for(var i = 0; i < 5; i++) {
+            //declara uma IIFE que e executada imeditamente apos sua criação, uma IIFE so pode ser executada uma unica vez quando e chamada, aqui sera executada a cada iteração do loop
+            //a cada iteração recebe como argumento o valor incrementado pela variavel controladora
+            (function(j) {
+                //o seguinte condigo simula 1 segundo de atraso para poder mostrar o numero iterado a cada iteração do loop
+                setTimeout(function() {
+                    console.log(j);
+                }, 1000);
+            })(i);
+        }
+
+        /**
+         * No ES6, a palavra-chave let declara uma nova variável em cada iteração do loop. Portanto, você só precisa substituir a var palavra-chave pela let palavra-chave para corrigir o problema:
+        */
+
+        //define um loop for que ira iterar 5 vezes
+        //a variavel controladora do loop e declarada usando a palavra-chave let, declara uma variavel de escopo de bloco so existe dentro do bloco do for
+        for(let i = 0; i < 5; i++) {
+            //o seguinte condigo simula 1 segundo de atraso para poder mostrar o numero incrementado pela variavel controladora do loop
+            setTimeout(function() {
+                //mostrar um numero no console a cada 1 segundo passado
+                console.log(i);
+            }, 1000);
+        }
+
+        /**
+         * Para deixar o código completamente no estilo ES6, você pode usar uma função de seta da seguinte forma:
+        */
+
+        //usando arrow function para passar a callback
+        for(let i = 0; i < 5; i++) {
+            //passa a callback como um arrow function anonima sem parametro
+            setTimeout(() => console.log(i), 1000);
+        }
+        
+    </script>
+
+</body>
+</html>

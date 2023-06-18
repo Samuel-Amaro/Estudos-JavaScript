@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <p id="p">Hello</p>
+    
+    <script>
+        /**
+         * * SELECIONANDO O TEXTO PARCIALMENTE
+         * 
+         * O interessante é que o primeiro argumento node em ambos os métodos pode ser um nó de texto ou um nó de elemento, e o significado do segundo argumento depende disso.
+         * 
+         * Se node for um nó de texto, então offset deve ser a posição em seu texto.
+         * 
+         * Por exemplo, dado o elemento <p>Hello</p>, podemos criar o intervalo contendo as letras “ll” da seguinte forma:
+        */
+
+        //cria um objeto range sem precisar informar argumentos, o objeto range e um par de pontos de fronteira inicio e fim do intervalo de uma seleção
+        let range = new Range();
+
+        //definindo os limites da seleção
+
+        //definimos onde o intervalo de seleção deve começar
+        //chamando o metodo range.setStart(node, offset) do objeto range
+        //se passarmos um no de texto para ambos os metodos o segundo argumento offset tem que ser a posição em seu texto 
+        //deve selecionar o texto dentro do elemento <p>, o primeiro filho de <p> o no de texto
+        //começando pelo 3 caractere indexado por 2
+        range.setStart(p.firstChild, 2);
+        //para especificar o final do intervalo de seleção usar o metodo range.setEnd(node, offset);
+        //o intervalo de seleção deve ir até o 5 caractere indexado pelo indice 4
+        range.setEnd(p.firstChild, 4);
+
+        // toString de um range retorna seu conteúdo como texto
+        console.log(range);
+        console.log(range.toString());
+
+        /**
+         * Aqui pegamos o primeiro filho de <p> (que é o nó de texto) e especificamos as posições do texto dentro dele:
+        */
+    </script>
+</body>
+</html>

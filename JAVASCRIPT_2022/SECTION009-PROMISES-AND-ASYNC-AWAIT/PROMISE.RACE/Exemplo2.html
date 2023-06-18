@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2 Promise.race()</title>
+    <link rel="stylesheet" href="css/promise-race.css">k
+</head>
+<body>
+
+    <div id="container">
+        <button id="btnGet">Get Message</button>
+        <div id="message"></div>
+        <div id="loader"></div>
+    </div>
+
+    <script>
+
+        /**
+         * * 2) EXEMPLO PRÁTICO DE JS Promise.race()
+         * 
+         * Suponha que você precise mostrar um spinner se o processo de carregamento de dados do servidor estiver demorando mais do que alguns segundos.
+         * 
+         * Para fazer isso, você pode usar o Promise.race() método estático. Se ocorrer um tempo limite, você mostra o indicador de carregamento, caso contrário, você mostra a mensagem.
+         *
+         * O seguinte ilustra o código HTML:
+         *
+         * Para criar o indicador de carregamento, usamos o recurso de animação CSS. Consulte o promise-race.css para mais informações. Tecnicamente falando, se um elemento possui a .loader classe, ele mostra o indicador de carregamento.
+         * 
+         * Primeiro, defina uma nova função que carrega dados. Ele usa o setTimeout() para emular uma operação assíncrona:
+        */
+
+        //define uma constante chamada DATA_LOAD_TIME e a inicializa com o valor numerico 5000
+        const DATA_LOAD_TIME = 5000;
+
+        //define uma function chamada getData que não declara paramentro
+        //uma function que simula a operação assincrona de carregamento de dados
+        function getData() {
+            //a function ira retornar uma instancia de uma promise anonima, que e invoca usando o construto da class Promise recebendo um callbak como argumento, conhecida como executor
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser realizada, tentar simular uma com o setTimeout
+                //espera 5 segundos de atraso para resolver a promise
+                setTimeout(() => {
+                    const message = 'Promise.race() Demo';
+                    //invocando a callback argumento function resolve, que e responsavel por mudar o estado da promise de pendente para cumprida com valor(promise resolvida), o valor de resultado e o argumento passado para o resolve
+                    resolve(message);
+                }, DATA_LOAD_TIME);
+            });
+        }
+
+        /**
+         * Segundo, desenvolva uma função que mostre alguns conteúdos:
+        */
+
+        //declara uma function chamada showContent que declara um paramentro chamado message
+        function showContent(message) {
+            document.querySelector('#message').textContent = message;
+        }
+
+        /**
+         * Esta função também pode ser usada para definir como message em branco.
+         * 
+         * Terceiro, defina a timeout() função retorna uma promessa que rejeita quando o TIMEOUT é passado.
+        */
+
+        //declara uma constante chamada TIMEOUT e a inicializa com o valor 500
+        //declara uma function chamada timeout sem declarar paramentro
+        function timeout() {
+            //essa function retorna uma instancia de objeto anonima de uma promise que e invocada usando o construtor da class Promise recebendo um callbak como argumento, conhecida como executor
+            return new Promise((resolve, reject) => {
+                //simula a operação assicrona a ser executada com o setTimeout
+                //espera atrasa cerca de 500 milisegundos para rejeitar a promise
+                //a reject callbakc function argumento do executor e uma callbak que e responsavel por mudar o estado da promise de pendente para rejeitada com o motivo do erro, o argumento para a reject function e o motivo do erro da rejeição
+                //aqui não informamos o motivo da rejeição
+                setTimeout(() => reject(), TIMEOUT);
+            });
+        }
+
+        /**
+         * Quarto, desenvolva algumas funções que mostram e ocultam o indicador de carregamento:
+        */
+
+        //declara uma function chamada showLoadingIndicator que não declara paramentro
+        function showLoadingIndicator() {
+            document.querySelector('#loader').className = 'loader';
+        }
+
+        //declara uma function chamada hideLoadingIndicator que não declara paramentro
+        function hideLoadingIndicator() {
+            document.querySelector('#loader').className = '';
+        }
+
+        /**
+         * Quinto, anexe um ouvinte de evento de clique ao botão Obter mensagem . Dentro do manipulador de cliques, use o Promise.race() método estático:
+        */
+
+        //manipular evento de clique do botão
+        const btn = document.querySelector('#btnGet');
+
+        //adicionando uma arrow function que sera a manipuladora do evento de clique no btn
+        btn.addEventListener('click', () => {
+            //redefine a interface do usuário se os usuários clicarem na 2ª, 3ª, ... hora
+            reset();
+
+            //mostra o conteúdo ou indicador de carregamento
+            //usando o metodo estatico Promise.race(), para ver qual promesa de entrada em menor tempo atinja o estado de resolvida ou rejeitada
+            //e passada duas promises de entrada, a primeira e retornado do metodo getData, que usando o método then podera obter o valor da promise quando ela for resolvida(estado de pendente para cumprida com valor), ai o showContent function callbakc e invocado pelo then metodo e mostra o resultado, assim o proximo método na then cadeia de promesssas, não necessariamente obtem resultado do then método anterior, ele so simplementes encadeia uma proxima obtenção de valor, chamando invoca a function hideLoadingIndicator, quando o then anterior tiver ja o estado de resolvido pelo showContent
+            //a segunda promise e retornada pelo método timeout para o promise race
+            //o catch método e chamado quando alguma das promises de entrada passadas por argumento por meio de um array, for rejeitada em menor tempo. ai mostra o motivo da rejeição chamando a function showLoadingIndicator
+            Promise.race([getData().then(showContent).then(hideLoadingIndicator), timeout()]).catch(showLoadingIndicator);
+        });
+
+        /**
+         * Passamos duas promessas para o Promise.race() método:
+
+            - A primeira promessa obtém dados do servidor, mostra o conteúdo e oculta o indicador de carregamento. A segunda promessa define um tempo limite.
+
+            - Se a primeira promessa demorar mais de 500 ms para se estabelecer, o catch()é chamado para mostrar o indicador de carregamento. Depois que a primeira promessa é resolvida, ela oculta o indicador de carregamento.
+
+            - Por fim, desenvolva uma reset()função que esconda a mensagem e o indicador de carregamento se o botão for clicado pela segunda vez.
+        */
+
+        //declara uma functin chamada reset que não declara paramentro
+        function reset() {
+            hideLoadingIndicator();
+            showContent('');
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * O Promise.race(iterable) método retorna uma nova promessa que cumpre ou rejeita assim que uma das promessas em um iterável cumpre ou rejeita, com o valor ou erro dessa promessa.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div>First div</div>
+
+    <script type="text/javascript">
+        /**
+         * * Live Collections(Coleções ao vivo)
+         * 
+         *  Todos os métodos "getElementsBy*" retornam uma coleção ativa . Essas coleções sempre refletem o estado atual do documento e “atualizam automaticamente” quando ele é alterado.
+         * 
+         * No exemplo abaixo, há dois scripts.
+         
+            1. O primeiro cria uma referência para a collection de <div>. A partir de agora, seu comprimento é 1.
+
+            2. O segundo script é executado depois que o navegador encontra mais um <div>, então seu comprimento é 2.
+        */
+
+        //obtem todas os elementos <div> do documento
+        //retorna uma collection live ativa, com todos os elementos div encontrados
+        let divs = document.getElementsByTagName('div');
+        //encontrou somente um elemento <div> dentro do documento.
+        console.log(divs.length); //1
+    </script>
+
+    <!-- adicionamos mais uma nova tag div no documento apos a execução do script acima, no script acima so temos uma div neste documento, a collection so possui um elemento-->
+    <div>Second div</div>
+
+    <!--
+        este script e executado apos adicionarmos uma nova tag div no documento, assim a collection que obtem as divs do documento, e atualizada automaticamente e seu comprimento aumenta para dois pois temos duas divs agora no documento.
+    -->
+    <script>
+
+        //O segundo script é executado depois que o navegador encontra mais um <div>, então seu comprimento é 2.
+        console.log(divs.length); //2
+
+    </script>
+
+</body>
+</html>

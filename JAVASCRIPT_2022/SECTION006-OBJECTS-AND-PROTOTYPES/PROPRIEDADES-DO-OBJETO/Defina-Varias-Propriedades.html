@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * DEFINA VÁRIAS PROPRIEDADES: Object.defineProperties()
+         * 
+         * No ES5, você pode definir várias propriedades em uma única instrução usando o Object.defineProperties()método. Por exemplo:
+        */
+
+        //declara um objeto chamado product usando a sintaxe literal, declara um objeto vazio sem propriedade
+        var product = {};
+
+        //definindo varias propriedades, de forma indireta no objeto person, propriedades de data e propriedades acessoras
+        //usando o metodo Object.defineProperties()
+        //precisa de 2 argumentos
+        //primeiro argumento e o objeto literal
+        //segundo argumento são as propriedades a serem definidas
+        Object.defineProperties(product, {
+            //propriedade de data
+            name : {
+                //o valor da propriedade, porem o [[Configurarable]], [[Wriclosing]], possuem valor falso pois propriedade foi criada depois do objeto não foi criada junto, assim e uma propriedade que pode ser iterada com for loop in, mas não pode ser configurada e nem deletada
+                value : 'Smartphone'
+            },
+            //propriedade de data, mesma logica
+            price : {
+                value: 799
+            },
+            //propriedade de data, mesma logica
+            tax: {
+                value: 0.1
+            },
+            //propriedade acessora
+            netPrice: {
+                //e invocado quando o netPrice propriedade acessora tiver seu valor sendo lido
+                get: function() {
+                    return this.price * (1 + this.tax);
+                }
+            }
+        });
+
+        //acessando as propriedades de data e acessora para teste
+        console.log(`The net price of a ${product.name} is ${product.netPrice.toFixed(2)} USD`);
+
+        /**
+         * Neste exemplo, definimos três propriedades de dados: name, price e tax, e um acessador de propriedade netPrice para o product objeto.
+         * */
+    </script>
+
+</body>
+</html>

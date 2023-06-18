@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução Ao Await De Nivel Superior</title>
+</head>
+<body>
+
+    <h2>Introudução ao await de nível superior do JS</h2>
+
+    <img src="./JavaScript-top-level-await.svg" alt="imagen">
+
+    <div class="container"></div>
+    
+    <img src="./JavaScript-top-level-await-example.svg" alt="imagen">
+
+    <script type="module" src="./app.mjs">
+
+        /**
+         * * TOP-LEVEL AWAIT(ESPERA DE NÍVEL SUPERIOR DO JS)
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o await de nível superior do JavaScript e seus casos de uso.
+         * 
+         * * INTRODUÇÃO AO AWAIT DE NÍVEL SUPERIOR DO JS
+         * 
+         * O ES2020 introduziu o recurso de espera de nível superior que permite que um módulo se comporte como uma async função. Um módulo que importa o módulo await de nível superior aguardará o carregamento antes de avaliar seu corpo.
+         * 
+         * Para entender melhor o recurso de espera de nível superior, vamos dar um exemplo:
+         * 
+         * Neste exemplo, teremos três arquivos: index.html, app.mjs, e user.mjs:
+         
+            - O index.html usa o app.mjs arquivo.
+
+            - O app.mjs importa o user.mjs arquivo.
+
+            - O user.mjs busca os dados do usuário no formato JSON de uma API com o endpoint de URL https://jsonplaceholder.typicode.com/users
+
+         * Aqui está o arquivo de índice que usa o módulo app.mjs:
+         * 
+         
+            <!DOCTYPE html>
+            <html lang="en">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>JavaScript Top-Level Await Demo</title>
+            </head>
+
+            <body>
+                <div class="container"></div>
+                <script type="module" src="app.mjs"><script>
+            <body>
+
+            <html>
+
+         * A seguir mostra o user.mjs arquivo:
+
+            let users;
+
+            (async () => {
+                const url = 'https://jsonplaceholder.typicode.com/users';
+                const response = await fetch(url);
+                users = await response.json();
+            })();
+
+            export { users }; 
+
+         *
+         * O user.mjs módulo usa a API de busca para obter os usuários no formato JSON de uma API e exportá-lo.
+         * 
+         * Como só podemos usar a palavra- await chave dentro de uma async função (antes do ES2020), precisamos envolver a chamada da API dentro de uma expressão de função assíncrona imediatamente invocada (IIAFE).
+         * 
+         * A seguir mostra o app.mjs módulo:
+         
+            import { users } from './user.mjs';
+
+            function render(users) {
+                if (!users) {
+                    throw 'The user list is not available';
+                }
+
+                const list = users
+                    .map((user) => {
+                    return `<li> ${user.name}(<a href="email:${user.email}">${user.email}</a>)</li>`;
+                    })
+                    .join('');
+
+                    return `<ol>${list}</ol>`;
+                }
+
+                const container = document.querySelector('.container');
+                try {
+                    container.innerHTML = render(users);
+                } catch (e) {
+                    container.innerHTML = e;
+                }
+            }
+
+         * 
+         * Como funciona.
+         * 
+         * Primeiro, importe users do user.mjs módulo:
+         
+            import { users } from './user.mjs';
+
+         *
+         * Segundo, crie uma render() função que renderize a lista de usuários para uma lista ordenada no formato HTML:
+         
+            function render(users) {
+            if (!users) {
+                throw 'The user list is not available.';
+            }
+
+            const list = users
+                .map((user) => {
+                return `<li> ${user.name}(<a href="email:${user.email}">${user.email}</a>)</li>`;
+                })
+                .join('');
+
+                return `<ol>${list}</ol>`;
+            }
+
+         * 
+         * Terceiro, adicione a lista de usuários ao elemento HTML com a classe .container:
+         
+            const container = document.querySelector('.container');
+            try {
+                container.innerHTML = render(users);
+            } catch (e) {
+                container.innerHTML = e;
+            }
+
+         * 
+         * Se você abrir o index.html, verá a seguinte mensagem:
+         
+            The user list is not available
+
+         * 
+         * O seguinte mostra o fluxo principal:
+         *
+         * Neste fluxo:
+         
+            - Primeiro, app.mjs importa o user.mjs módulo.
+
+            - Segundo, o user.mjs módulo executa e faz uma chamada de API.
+            
+            - Terceiro, enquanto a segunda etapa ainda está em andamento, ele app.mjs começa a usar os users dados importados do user.mjs módulo
+
+         * 
+         * Como a etapa 2 não foi concluída, a users variável foi undefined. Portanto, você viu a mensagem de erro na página.
+         * */
+
+    </script>
+</body>
+</html>

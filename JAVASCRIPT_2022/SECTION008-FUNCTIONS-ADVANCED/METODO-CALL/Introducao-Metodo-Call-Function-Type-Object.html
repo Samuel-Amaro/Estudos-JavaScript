@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Metodo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * METODO JAVASCRIPT CALL() - LIGAR()
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o call() método JavaScript e como usá-lo de forma mais eficaz.
+         * 
+         * * INTRODUÇÃO AO MÉTODO CALL() DO JS
+         * 
+         * Em JavaScript, uma função é uma instância do Function tipo. Por exemplo:
+        */
+
+        //declara uma function regular chamada show sem paramentros declarados e valor de retorno
+        function show() {
+            //corpo da fucntion
+        }
+
+        //toda function declara e uma instancia de objeto do tipo Function, a instancia possui propriedades e metodos para serem usados
+        //verificando se a function show instancia de objeto e do tipo Function
+        //operador relacional instanceof compara seus operando e retorna um valor booleano baseado em se a comparação e verdadeira
+        console.log(`Function show() e uma instancia de objeto de Function = ${show instanceof Function}`); //true
+
+        /**
+         * O Function tipo tem um método nomeado call() com a seguinte sintaxe:
+         
+            functionName.call(thisArg, arg1, arg2, ...);
+
+         *
+         * O call() método chama uma função functionName com um determinado this valor e argumentos.
+         * 
+         * O primeiro argumento do call()método thisArg é o this valor. Ele permite que você defina o this valor para qualquer objeto.
+         * 
+         * Os argumentos restantes do call()método arg1, arg2,… são os argumentos da função.
+         * 
+         * Quando você invoca uma função, o mecanismo JavaScript invoca o call()método desse objeto de função.
+         * 
+         * Suponha que você tenha a show()função da seguinte forma:
+        */
+
+        //declara uma function regular chamada show1 sem paramentro, e sem retorno de valor
+        function show1() {
+            console.log('Show function');
+        }
+
+        /**
+         * E invoque a show() função:
+        */
+
+        //invoca - chama a fuction show
+        show();
+
+        /**
+         * É equivalente a invocar o call()método no show objeto de função:
+        */
+
+        //invoca o metodo call, da instancia de objeto de Function que e uma function regular
+        //não passa argumento para o call metodo
+        show.call();
+
+        /**
+         * Por padrão, o this valor dentro da função é definido para o objeto global, ou seja, window em navegadores da web e global em node.js:
+        */
+
+        //declara uma function regular sem parametro, e com o nome de show2
+        function show2() {
+            //o this valor dentro do escopo da função e referenciado por this window objeto, o objeto global do navegador
+            //no modo estrito e definido como undefined
+            console.log(`this = ${this}`);
+        }
+
+        //invoca - chama a function    
+        show2();
+
+        /**
+         * Observe que no modo estrito, o this interior da função é definido como undefined em vez do objeto global.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function regular chamada add que possui dois paramentros nomeados a e b
+        function add(a, b) {
+            //a function retorna um valor que e a soma dos paramentros a mais b
+            return a + b;
+        }
+
+        //usando o call metodo vamos chamar a function add com o this valor objeto global que aqui no navegador e definido como window sem estar no modo estrito
+        //assim o window invocara a function add passando argumentos e retornando o resultado
+        //o primeiro argumento do call metodo e o this valor objeto, que no caso e o this represetando o proprio window objeto do navegador, e os segundos argumentos são o valor 10 e 20 para o add function
+        let result = add.call(this, 10, 20);
+        console.log(`result = ${result}`);
+
+        /**
+         * Neste exemplo, em vez de chamar a add() função diretamente, usamos o call() método para invocar a add()função. O this valor é definido para o objeto global.
+         * 
+         * Veja o seguinte código:
+        */
+
+        //declara uma variavel chamada saudacao com o valor de texto que e do tipo primitivo string, essa string por esta no contexto global ela automaticamente e adicionado ao this objeto window global pelo proprio motor JS
+        var greeting = 'Hi';
+
+        //declara um objeto literal anonimo, esse objeto e atribuido por referencia a variavel messenger, messeger referencia o objeto anonimo
+        //objeto e declarado usando a sintaxe de objeto literal
+        var messenger = {
+            //propriedade
+            greeting: 'Hello'
+        }
+
+        //declara uma function regular chamada say que possui que possui um paramentro declarado chamado name
+        function say(name) {
+            //referencia a variavel greeting que foi atribuida ao this valor global window por ter sido declarada dentro do contexto de execução global do objeto
+            console.log(`${this.greeting} ${name}`);
+        }
+
+        /**
+         * Dentro da say() função, referenciamos a greeting via o this valor.
+         * 
+         * Se você acabou de invocar a say()função por meio do call() método da seguinte forma:
+        */
+
+        //invocando a function say por meio do this valor global
+        //no ambiente de navegador o this valor e o window objeto no qual o this valor referencia, sem estar no modo estrito
+        //o call metodo da instancia de objeto do tipo function say vai permitir o this valor invocar a say function passando o argumento para say por meio do call
+        say.call(this, 'John');
+
+        /**
+         * Porém, quando você invoca o call()método da say() função e passa o messenger objeto como this valor:
+        */
+
+        //aqui, o messager objeto literal que sera o this valor invocara a say function por meio do call metodo passando o argumento para call para ser passado para say
+        //o messager objeto literal possui uma propriedade chamada greeting que e a mesma propriedade que e referenciada pelo this valor dentro da say function, que no caso aqui o this valor sera o messenger objeto literal
+        //o objto messenger podera invocar a say function por meio de call metodo da instancia de objeto de Funtion tipo que no caso e o proprio say
+        say.call(messenger, 'John');
+
+        /**
+         * Nesse caso, o this valor dentro da say() função faz referência ao messenger objeto, não ao objeto global.
+        */
+        
+    </script>
+</body>
+</html>

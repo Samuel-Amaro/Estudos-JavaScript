@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - atribui um manipulador de evento por meio do atributo html
+        - o manipulador e para um evento de teclado de cada chave do teclado pressionada aciona o manipulador passando o caractere da chave pressionada como argumento para o manipulador por meio do objeto de evento de teclado
+    -->
+    <input type="tel" placeholder="Telefone por favor" onkeydown="return checkPhoneKey(event.key)"/>
+
+    <script type="text/javascript">
+        /**
+         * * AÇÕES PADRÃO
+         * 
+         * As ações padrão variam, pois há muitas coisas possíveis que podem ser iniciadas pelo teclado.
+         * 
+         * Por exemplo:
+         
+            Um caractere aparece na tela (o resultado mais óbvio).
+
+            Um caractere é excluído ( Delete tecla).
+
+            A página é rolada ( PageDown tecla).
+
+            O navegador abre a caixa de diálogo “Salvar página” (Ctrl+S )
+
+            …e assim por diante.
+
+         * Impedir a ação padrão em keydown pode cancelar a maioria deles, com exceção de chaves especiais baseadas em SO. Por exemplo, no Windows Alt+F4 fecha a janela atual do navegador. E não há como pará-lo impedindo a ação padrão no JavaScript. 
+         * 
+         * Por exemplo, o <input> abaixo espera um número de telefone, portanto, não aceita chaves, exceto dígitos +, () ou -:
+        */
+
+        let character = ['+', '(', ')', '-'];
+
+        //function manipuladora
+        function checkPhoneKey(key) {
+            //se a chave pressionada tiver o caractere entre 0 e 9 ou for +, (, ), - retorna true, se não tiver nesse intervalo de caracteres retorna false, e um manipulador retornar false e exceção pois isso diz ao navegador para impedir a ação padrão do navgador
+            return (key >= '0' && key <= '9' || character.includes(key));
+        }
+
+        /**
+         * O onkeydown manipulador aqui usa checkPhoneKey para verificar a tecla pressionada. Se for válido (de 0..9 ou um de + - ( ) ), ele retornará true, caso contrário false.
+         * 
+         * Como sabemos, o false valor retornado do manipulador de eventos, atribuído usando uma propriedade DOM ou um atributo, como acima, impede a ação padrão, portanto, nada aparece nas <input> chaves for que não passem no teste. (O true valor retornado não afeta nada, apenas o retorno false importa)
+         * 
+         * Observe que teclas especiais, como Backspace, Left, Right, não funcionam na entrada. Isso é um efeito colateral do filtro estrito checkPhoneKey. Essas chaves fazem com que ele retorne false.
+         * 
+         * Vamos relaxar um pouco o filtro permitindo as teclas de seta Left, Righte Delete, Backspace:
+        */
+
+        //aumenta o numero de caracteres permitidos que possam ser pressionados no campo de tel, como deletar, setas, voltar
+        //a ação padrão impedia que esses chaves fossem presionadas pois o filtro aplicado estava muito limitado
+        character.push(...['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace']);
+
+        /**
+         * Agora as setas e a exclusão funcionam bem.
+         * 
+         * Mesmo que tenhamos o filtro de chave, ainda é possível inserir qualquer coisa usando o mouse e clicar com o botão direito do mouse + Colar. Os dispositivos móveis fornecem outros meios para inserir valores. Portanto, o filtro não é 100% confiável.
+         * 
+         * A abordagem alternativa seria rastrear o oninput evento – ele é acionado após qualquer modificação. Lá podemos verificar o novo input.value e modificá-lo/destacar <input> quando for inválido. Ou podemos usar os dois manipuladores de eventos juntos.
+        */
+    </script>
+</body>
+</html>

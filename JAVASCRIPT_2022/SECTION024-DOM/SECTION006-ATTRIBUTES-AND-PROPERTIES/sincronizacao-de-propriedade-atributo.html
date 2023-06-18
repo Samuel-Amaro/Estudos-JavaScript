@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input>
+    
+    <script type="text/javascript">
+        /**
+         * * SINCRONIZAÇÃO DE PROPRIEDADE-ATRIBUTO
+         * 
+         * Quando um atributo padrão é alterado, a propriedade correspondente é atualizada automaticamente e (com algumas exceções) vice-versa.
+         * 
+         * No exemplo abaixo id está modificado como um atributo, e podemos ver a propriedade alterada também. E depois o mesmo para trás:
+        */
+
+        //seleciona o primeiro elemento que corresponder ao seletor css input
+        let input = document.querySelector('input');
+
+        //attibute => property
+        
+        //usando o metodo acessor de atributo para definir um atributo e valor no no dom input, que e o elemento html <input>
+        //usando o metodo elem.setAttribute(nome, value);
+        input.setAttribute('id', 'id');
+        //no codigo acima acabamos de definir um atributo no elemento <input> mas ja podemos acessar esse atributo mapeado para propriedade id no objeto no dom correspondente input, acessando a propriedade id, que e mapeação do atributo id do elemento <input>
+        console.log(input.id); //id (atualizado)
+
+
+        //property => attribute
+
+        //alterando o valor do atributo
+        //property => attribute
+        input.id = 'newId';
+
+        //a alteração do valor do atributo ja foi refletida no elemento html, acessando o valor do atributo, obtendo o valor do atributo id no elemento html <input>
+        console.log(input.getAttribute('id')); //newId (atualizado)
+
+
+
+        
+
+    </script>
+
+</body>
+</html>

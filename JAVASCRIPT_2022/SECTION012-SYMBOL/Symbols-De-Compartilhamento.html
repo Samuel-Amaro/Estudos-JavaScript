@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbols De Compartilhamento</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * SYMBOLS DE COMPARTILHAMENTO
+         * 
+         *  O ES6 fornece o registro global de símbolos que permite compartilhar símbolos globalmente. Se você quiser criar um símbolo que será compartilhado, use o Symbol.for()método em vez de chamar a Symbol()função.
+         * 
+         * O Symbol.for() método aceita um único parâmetro que pode ser usado para a descrição do símbolo, conforme mostrado no exemplo a seguir:
+        */
+
+        //cria um Symbol valor exclusivo unico que sera compartilhado globalmente, usando o método Symbol.for() que recebe um argumento que pode ser usado para descrição do simbolo.
+        let ssn = Symbol.for('ssn');
+
+        /**
+         * O Symbol.for() método primeiro procura o símbolo com a ssn chave no registro de símbolo global. Ele retorna o símbolo existente se houver um. Caso contrário, o Symbol.for()método cria um novo símbolo, registra-o no registro de símbolo global com a chave especificada e retorna o símbolo.
+         * 
+         * Mais tarde, se você chamar o Symbol.for() método usando a mesma chave, o Symbol.for() método retornará o símbolo existente.
+        */
+
+        //como ja existe um symbol valor criado pelo método Symbol.for com a chave 'ssn', o método Symbol.for('ssn') vai procurar o symbol com a seguinte chave passada por argumento no registro de simbolos global, ele retorna o symbolo exisitente se tiver um.
+        let citizenID = Symbol.for('ssn');
+
+        //mesmo simbolo, o método procurou o symbol com a respectivia chave e retornou o existente
+        console.log(ssn === citizenID);
+
+        /**
+         * Neste exemplo, usamos o Symbol.for()método para procurar o símbolo com a   ssn chave. Como o registro de símbolo global já o continha, o Symbol.for()método retornou o símbolo existente.
+         *
+         * Para obter a chave associada a um símbolo, use o Symbol.keyFor() método conforme mostrado no exemplo a seguir:
+        */
+
+        //usando o método Symbol.keyFor('chave'), podemos obter a chave associada a um symbol valor, aqui queremos descobrir a chave associada ao symbol armazenado pela varaivel citizenID
+        console.log(Symbol.keyFor(citizenID)); //'ssn'
+
+        /**
+         * Se um símbolo que não existe no registro de símbolo global, o System.keyFor() método retorna undefined.
+        */
+
+        //cria um Symbol valor unico exclusivo que como descritor possui o sys
+        let systemID = Symbol('sys');
+
+        //cria o symbol mas não o compartilha ou define uma chave a ele
+
+        //tentando descobrir chave de um symbolo valor que não foi registrado no registro de simbolo global e nem compartilhado        
+        console.log(Symbol.keyFor(systemID)); //undefined    
+    </script>
+</body>
+</html>

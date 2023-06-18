@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador De Spread Vs. Object.assign()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * OPERADOR DE SPREAD VS Object.assign()
+         * 
+         * O operador de propagação (...) define novas propriedades no objeto de destino enquanto o Object.assign()método as atribui. Tem dois efeitos colaterais.
+         * 
+         * * EXEMPLO 1) OBJETOS DE DESTINO COM SETTERS
+         * 
+         * O Object.assign() invoca setters no objeto alvo enquanto o operador spread não. O seguinte ilustra como clonar um objeto usando Object.assign() e o operador spread (...). No entanto, apenas o método Object.assign() aciona os setters:
+        */
+
+        //define uma class chamada Circle, que e declarada usando a palavra-chave class
+        class Circle{
+            //define construtor para a clas circle, o construtor declara um parametro chamado radius
+            constructor(radius) {
+                //declara uma propriedade chamada radius e a inicializa com o argumento
+                this.radius = radius;
+            }
+            //define um método set, com parametro value
+            set diameter(value) {
+                this.radius = value / 2;
+                console.log('SET', value);
+            }
+            //define um método get
+            get diameter() {
+                return this.radius * 2;
+            }
+        }
+
+        //declara uma nova instancia de objeto, invocando o construtor da class Circle passando o arguumento de valor 10
+        let circle = new Circle(100);
+
+        //O Object.assign() copia todas as propriedades enumeráveis ​​e próprias dos objetos de source(origem) para o objeto de target(destino). Ele retorna o objeto de source(origem).
+        //O Object.assign() invoca os getters nos objetos de origem e os setters no destino. Ele atribui apenas propriedades, não copiando ou definindo novas propriedades.
+        //usando  o método Object.assign, para clonar as propriedades proprias do objeto literal com propriedade diameter:200, para o objeto referenciado por circle
+        //ele retorna o circle objeto, com as propriedade clonadas, invaocando os getter e setter dos objetos envolvidos
+        let cloneCircle1 = Object.assign(circle, {
+            diameter: 200
+        });
+
+        //usando o spread operador para descompactar as prorpiedade enumeraveis proprias do objeto referenciado por circle em um novo objeto, como um clone
+        let cloneCircle2 = {
+            ...circle
+        };
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de promessa personalizada</title>
+</head>
+<body>
+    <script>
+        //definir função de promessa personalizada
+        //O exemplo acima não é muito flexível - a promessa só pode ser cumprida com uma única string e não tem nenhum tipo de reject()condição especificada (na verdade, setTimeout()não tem realmente uma condição de falha, então não importa para isso exemplo simples).
+        let timeoutPromisse = new Promise(function(resolv, reject) {
+            setTimeout(function() {
+                resolv('Sucesso!');
+            }, 2000);
+        });
+        timeoutPromisse.then(function(mensagem) {
+            alert(mensagem);
+        });
+    </script>
+</body>
+</html>

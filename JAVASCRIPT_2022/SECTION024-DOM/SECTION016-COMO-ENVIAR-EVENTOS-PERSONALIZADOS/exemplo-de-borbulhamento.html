@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1 id="elem">Olá de um script!</h1>
+
+    <script type="text/javascript">
+        /**
+         * * Exemplo de borbulhamento
+         * 
+         * Podemos criar um evento borbulhante com o nome "hello" e capturá-lo document.
+         * 
+         * Tudo o que precisamos é definir bubbles para true:
+        */
+
+        //captura no documento
+        //atribui um manipulador de evento por meio do metodo elem.addEventListener(event, handler, options);
+        //atribui um manipulador de evento para o objeto de evento personalizdo chamado "hello", o evento e do tipo hello(evento personalizavel novo gerado por script)
+        document.addEventListener("hello", function(event) { //(1)
+            alert("Hello de " + event.target.tagName); //Hello from H1
+        });
+
+        //criando um objeto de evento personalizado, um evento personalizado nosso para nossos propositos. um objeto de evento novo.
+        //gerando um evento JavaScript novo
+        //o evento e do tipo "hello" um tipo de evento nosso proprio mesmo, o objeto de argumento options {bubbles: true}, ativa o borbulhamento no evento.
+        let event = new Event("hello", {bubbles: true}); // (2)
+        //o metodo elem.dispatchElement(event);
+        //o metodo permite executar o evento em um elemento.
+        //aqui iremos executar o objeto de evento personalizado criado por nos mesmos no elemento elem
+        //assim que chamado o metodo, ele executa o evento no elemento, e logo em seguida o manipulador e acionado
+        elem.dispatchEvent(event);
+
+        //o manipulador no documento será ativado e exibirá a mensagem.
+
+        /**
+         * Notas:
+         
+            1. Devemos usar addEventListener para nossos eventos personalizados, pois on<event> só existe para eventos internos, document.on hello não funciona.
+
+            2. Deve definir bubbles:true, caso contrário, o evento não será exibido.
+
+         * A mecânica de borbulhamento é a mesma para eventos internos (click) e personalizados( ). hello Há também estágios de captura e borbulhamento.
+        */
+    </script>
+</body>
+</html>

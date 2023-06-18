@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.race()</title>
+</head>
+<body>
+
+    <p>Diagrama</p>
+
+    <img src="JavaScript-Promise-Race-Fulfilled (2).svg" alt="imagen">
+
+    <p>Outro Diagrama</p>
+
+    <img src="JavaScript-Promise-Race-Rejected.svg" alt="imagen">
+
+    <script>
+
+        /**
+         * * JAVASCRIPT Promise.race()
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o Promise.race()método estático JavaScript.
+         * 
+         * * INTRODUÇÃO AO MÉTODO ESTÁTICO JS Promise.race()
+         * 
+         * O Promise.race() método estático aceita uma lista de promessas  como um objeto iterável e retorna uma nova promessa que cumpre ou rejeita assim que houver uma promessa que cumpra ou rejeite, com o valor ou motivo dessa promessa.
+         * 
+         * Segue a sintaxe do Promise.race()método:
+
+            Promise.race(iterable);
+
+         * 
+         * Nessa sintaxe, o iterable é um objeto iterável que contém uma lista de promessas.
+         * 
+         * O nome de Promise.race() implica que todas as promessas competem entre si com um único vencedor, resolvido ou rejeitado.
+         * 
+         * Neste diagrama:
+
+            - O promise1 é preenchido com o valor v1 em t1.
+
+            - O promise2 é rejeitado com o error at t2.
+
+            - Como o promise1 é resolvido antes do promise2, o promise1 ganha a corrida. Portanto, o Promise.race([promise1, promise2])retorna uma nova promessa que é cumprida com o valor v1 em t1.
+
+         * 
+         * Neste diagrama:
+
+            - O promise1 é cumprido com v1 em t2.
+
+            - O promise2 é rejeitado com error at t1.
+
+            - Como o promise2 é resolvido antes do promise1, o promise2 ganha a corrida. Portanto, o Promise.race([promise1, promise2])retorna uma nova promessa que é rejeitada com o error at t1.
+        */
+
+    </script>
+</body>
+</html>

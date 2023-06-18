@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterators</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O GUIA ESSENCIAL PARA ITERADORES(ITERATORS) JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o iterador JavaScript e como usar iteradores para processar uma sequência de dados com mais eficiência.
+         *
+         * 
+         * * PROBLEMA DO LAÇO FOR
+         *
+         * Quando você tem uma array de dados, normalmente usa um for loop para iterar sobre seus elementos. Por exemplo:
+        */
+
+        //declara um array literal dense anonima, inicializada com 3 elementos essa array e atribuida por referencia a variavel ranks
+        let ranks = ['A', 'B', 'C'];
+
+        //usando um laço de repetição, for para iterar sobre os elementos do array referenciado por ranks
+        for(let i = 0; i < ranks.length; i++) {
+            console.log(ranks[i]);
+        }
+
+        /**
+         * O for loop usa a variável   i para rastrear o índice da ranks array. O valor de i incrementa cada vez que o loop é executado, desde que o valor de i seja menor que o número de elementos na ranks array.
+         * 
+         * Este código é direto. No entanto, sua complexidade aumenta quando você aninha um loop dentro de outro loop. Além disso, manter o controle de várias variáveis ​​dentro dos loops é propenso a erros.
+         * 
+         * O ES6 introduziu uma nova construção de loop chamada for...of para eliminar a complexidade do loop padrão e evitar os erros causados ​​pelo acompanhamento dos índices de loop.
+         *
+         * Para iterar sobre os elementos da ranks array, você usa a seguinte for...of construção:
+        */
+
+        //usando a nova construção de loop for...of do ES6, para eliminar complexidade do loop padrão e evitar erros causados por indices de loop
+        //usando o loop for...of para iterar sobre os elementos do array ranks
+        for(let rank of ranks) {
+           console.log(rank); 
+        }
+
+        /**
+         * O for...of é muito mais elegante que o for loop porque mostra a verdadeira intenção do código – itere sobre um array para acessar cada elemento na sequência.
+         * 
+         * Além disso, o for...of loop tem a capacidade de criar um loop sobre qualquer objeto iterável , não apenas um array.
+         * 
+         * Para entender o objeto iterável, você precisa primeiro entender os protocolos de iteração.
+        */
+        
+    </script>
+</body>
+</html>

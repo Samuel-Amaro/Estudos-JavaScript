@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.any()</title>
+</head>
+<body>
+
+    <h2>Promise.any()</h2>
+
+    <img src="image/JavaScript-Promise.any-Fulfilled.svg" alt="imagen">
+
+    <pre>
+        - O <span style="color: red;">promise1</span> resolve para um valor <span style="color: red;">v1</span> em <span style="color: red;">t1</span>.
+
+        - O <span style="color: red;">promise2</span> resolve para um valor <span style="color: red;">V2</span> em <span style="color: red;">t2</span>.
+
+        - O <span style="color: red;">Promise.any()</span> retorna uma promessa que resolve para um valor <span style="color: red;">v1</span>, que é o resultado do <span style="color: red;">promise1</span>, em <span style="color: red;">t1</span>
+    </pre>
+
+    <p>O <span style="color: red;">Promise.any()</span> retorna uma promessa que é cumprida com qualquer primeira promessa cumprida, mesmo que algumas promessas no objeto iterável sejam rejeitadas:</p>
+
+    <img src="image/JavaScript-Promise.any-rejected.svg" alt="imagen">
+
+    <pre>
+        - O <span style="color: red;">promise1</span> rejeitado com um <span style="color: red;">error</span> em <span style="color: red;">t1</span>.
+
+        - O <span style="color: red;">promise2</span> é cumprido ao valor <span style="color: red;">v2</span> em <span style="color: red;">t2</span>.
+
+        - O <span style="color: red;">Promise.any()</span> retorna a promesa que resolve para um valor <span style="color: red;">v2</span> que é o resultado do <span style="color: red;">promise2</span>. Observe que o <span style="color: red;">Promise.any()</span> método ignora a promessa rejeitada(<span style="color: red;">promise1</span>).
+    </pre>
+
+    <p>Se todas as promesas no objeto iterável forem rejeitadas ou se o objeto iterável estiver vazio, <span style="color: red;">Promise.any()</span> retornrá uma promesa que rejeita com um <span style="color: red;">AggregateError</span> contendo todos os motivos de rejeição. O <span style="color: red;">AggregateError</span> é uma subclasse de <span style="color: red;">Error.</span></p>
+
+    <img src="image/JavaScript-Promise.any-all-rejected.svg" alt="imagen">
+
+    <p>Neste diagrama:</p>
+
+    <pre>
+        - O <span style="color: red;">promise1</span> é rejeitado com um <span style="color: red;">error1</span> em <span style="color: red;">t1</span>.
+
+        - O <span style="color: red;">promise2</span> é rejeitado para um <span style="color: red;">error2</span> em <span style="color: red;">t2</span>.
+
+        - O <span style="color: red;">Promise.any()</span> retorna a promesa que é rejeitada <span style="color: red;">t2</span> com um <span style="color: red;">AggregateError</span> contendo o <span style="color: red;">error1</span> e <span style="color: red;">error2</span> de todas as promessas rejeitadas.
+    </pre>
+    
+    <script>
+
+        /**
+         * * JS Promise.any() - qualquer
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o Promise.any()método JavaScript para compor promessas.
+         *
+         * * INTRODUÇÃO AO MÉTODO JS Promise.any()
+         * 
+         * O Promise.any() método aceita uma lista de objetos Promise como um objeto iterável:
+
+            Promise.any(iterable);
+
+         * 
+         * Se uma das promessas no objeto iterável for cumprida, o Promise.any() retorna uma única promessa que resolve para um valor que é o resultado da promessa cumprida:
+        */
+
+    </script>
+</body>
+</html>

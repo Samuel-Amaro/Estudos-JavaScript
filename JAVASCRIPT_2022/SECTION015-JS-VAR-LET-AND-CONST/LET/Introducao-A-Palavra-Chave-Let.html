@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT LET: DECLARANDO VARIÁVEIS COM ESCOPO DE BLOCO
+         * 
+         * Resumo : neste tutorial, você aprenderá como usar a let palavra-chave JavaScript para declarar variáveis ​​com escopo de bloco.
+         *
+         * * INTRODUÇÃO Á PALAVRA-CHAVE LET JS
+         * 
+         * No ES5, quando você declara uma variável usando a palavra- chave var, o escopo da variável é global ou local. Se você declarar uma variável fora de uma função, o escopo da variável será global. Quando você declara uma variável dentro de uma função, o escopo da variável é local.
+         * 
+         * O ES6 fornece uma nova maneira de declarar uma variável usando a palavra- chave let. A let palavra-chave é semelhante à palavra- chave var, exceto que essas variáveis ​​são de escopo bloqueado. Por exemplo:
+
+            let variable_name;
+
+         * 
+         * Em JavaScript, os blocos são indicados por chaves {}, por exemplo, o if else,  for, do while, while e try catch assim por diante:
+        */
+
+        //if(condition) {
+            //dentro de um bloco
+        //}
+
+        /**
+         * Veja o seguinte exemplo:
+        */
+
+        //a variavel declarada  no inicio do script usando a palavra-chave let, e uma variavel de escopo bloqueado
+        //declara uma variavel com escopo de bloco
+        //declara uma variavel chamada x que e inicializada com o valor numerico 10
+        let x = 10;
+
+        //declara uma condição, cria um bloco
+        if(x == 10) {
+            //declara uma nova variavel dentro do bloco do if, a variavel e chamada de x também e e inicalizada com valor 20
+            //cria uma nova variavel com o mesmo nome da do inicio do script mas no escopo diferente, dentro do bloco do if
+            //a variavel criada aqui oculta a variavel criada no inicio do script, na parte superio do script
+            let x = 20;
+            console.log(x); //20: referência x dentro do bloco
+        }
+
+        //quando o mecanismo JS conclui a execução do bloco if a x variavel dentro do if bloco esta fora do escopo. ai a varaivel x criada no inicio do script e usada apos execução do bloco if
+        console.log(x); //10 referência no início do script
+
+        /**
+         * Como o script functiona:
+
+            - Primeiro, declare uma variável x e inicialize seu valor como 10.
+
+            - Segundo, declare uma nova variável com o mesmo nome x dentro do if bloco, mas com um valor inicial de 20.
+
+            - Terceiro, imprima o valor da variável x dentro e depois do  if bloco.
+
+         * 
+         * Como a palavra-chave let declara uma variável com escopo de bloco, a x variável dentro do if bloco é uma nova variável e oculta a x variável declarada na parte superior do script. Portanto, o valor de x no console é 20.
+         * 
+         * Quando o mecanismo JavaScript conclui a execução do if bloco, a x variável dentro do if bloco está fora do escopo. Portanto, o valor da x variável que segue o if bloco é 10.
+        */
+
+    </script>
+
+</body>
+</html>

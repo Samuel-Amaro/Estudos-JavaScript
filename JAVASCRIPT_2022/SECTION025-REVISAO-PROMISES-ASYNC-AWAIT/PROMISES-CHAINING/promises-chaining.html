@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./promise-then-chain.svg" alt="image"/>
+
+    <script type="text/javascript">
+        /**
+         * * PROMISES CHAINING(ENCADEAMENTO DE PROMESSAS)
+         * 
+         * Voltemos ao problema mencionado no capítulo Introdução: callbacks : temos uma sequência de tarefas assíncronas a serem executadas uma após a outra — por exemplo, carregar scripts. Como podemos codificá-lo bem?
+         * 
+         * As promessas fornecem algumas receitas para fazer isso.
+         * 
+         * Neste capítulo, abordamos o encadeamento de promessas.
+         * 
+         * Se parece com isso:
+        */
+
+        new Promise(function(resolve, reject) {
+            //executa um trabalho assincrono
+            //apos 1s promisse e resolvida com valor 1
+            setTimeout(() => resolve(1), 1000); //(*)
+        })
+            //o then function manipulador abaixo consome o valor resolvido da promisse acima, a cada chamada para um .then retorna um nova promisse para que possa chamar mais manipuladores
+            .then(function(result) {
+
+                alert(result); //1
+                //a promisse retornada pelo .then metodo e resolvida com o valor retornado aqui
+                return result * 2;
+
+            })
+            //obtem o resultado do manipulador anterior encadeado acima, o metodo ja e chamado com o value , consome o valor resolvido da promisse retornado pelo then metodo acima, e retorna um nova promisse 
+            .then(function(result) {//(***)
+
+                alert(result); //2
+                //a promisse retornada pelo .then metodo e resolvida com o valor retornado aqui
+                return result * 2;
+
+            })
+            //obtem o resultado do manipulador anterior encadeado acima, consome o valor resolvido da promisse retornado pelo then metodo encadeado acima, e retorna uma nova promisse
+            .then(function(result) {
+
+                alert(result); //4
+                //o valor retornado aqui pelo .then metodo e o valor da promisse resolvida
+                return result * 2;
+
+            });
+
+        /**
+         * A ideia é que o resultado seja passado pela cadeia de .then manipuladores.
+         * 
+         * Aqui o fluxo é:
+         * 
+            * A promessa inicial resolve em 1 segundo (*)
+            * 
+            * Em seguida, o .then manipulador é chamado (**), que por sua vez cria uma nova promessa (resolvida com 2 valor).
+            * 
+            * O próximo then (***)obtém o resultado do anterior, processa (duplica) e passa para o próximo manipulador.
+            * 
+            * …e assim por diante.
+            *
+         * À medida que o resultado é passado ao longo da cadeia de manipuladores, podemos ver uma sequência de alert chamadas: 1 → 2 → 4. 
+         * 
+         * A coisa toda funciona, porque cada chamada para a .then retorna uma nova promessa, para que possamos chamar a próxima .then.
+         * 
+         * Quando um manipulador retorna um valor, ele se torna o resultado dessa promessa, então o próximo .then é chamado com ele.
+        */
+    </script>
+</body>
+</html>

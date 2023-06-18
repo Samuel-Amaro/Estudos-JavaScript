@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Arrays</title>
+</head>
+<body>
+    
+   <header>
+       <h1>Arrays JavaScript</h1>
+       <p>Tutorial</p>
+       <h2>Modificando propriedade JavaScript Array Length</h2>
+   </header>
+
+   <script>
+       /***
+        * * MODIFICANDO PROPRIEDADE JAVASCRIPT ARRAY LENGTH
+        * 
+        * JavaScript permite que você altere o valor da length propriedade da matriz(array). Alterando o valor do comprimento, você pode remover elementos da matriz(array) ou tornar a matriz(Array) esparsa.
+        * 
+        * * 1) Esvazie uma Array
+        * 
+        * Se você definir o comprimento como zero, a matriz(Array) ficará vazia :
+        * */
+
+        const frutas = ['Maçã', 'Laranja', 'Strawberry'];
+        //define o comprimento da array como zero, ela fica vazia
+        frutas.length = 0;
+
+        console.log(frutas); //[] array vazio sem elementos
+
+        /**
+         * * 2) Remova os elementos
+         * 
+         * Se você definir a length propriedade de uma matriz(array) com um valor inferior ao índice mais alto, todos os elementos cujo índice for maior ou igual ao novo comprimento serão removidos
+         * 
+         * O exemplo a seguir altera a length propriedade da fruits matriz(array) para dois, o que remove o terceiro elemento da matriz(Array):
+         * */
+
+        const frutas = ['Maçã', 'Laranja', 'Strawberry'];
+        //define o comprimento da array como 2, somente com dois elementos, exclui o terceiro elemento
+        frutas.length = 2;
+
+        console.log(frutas); //['Apple', 'Orange']
+
+        /***
+         * 
+         * * 3) Faça a array esparsa
+         * 
+         * Se você definir a length propriedade de uma matriz(Array) com um valor superior ao índice mais alto, a matriz(array) será sobressalente. Por exemplo:
+         * */
+
+         const frutas = ['Apple', 'Laranaja', 'Strawberry'];
+         //define o comprimeto da array maior do que a aquantidade de elemento que possui, vai sobressari dois elementos vazios
+         frutas.length = 5;
+         console.log(frutas); //['Apple', 'Orange', 'Strawberry', <2 itens vazios>]
+   </script>
+</body>
+</html>

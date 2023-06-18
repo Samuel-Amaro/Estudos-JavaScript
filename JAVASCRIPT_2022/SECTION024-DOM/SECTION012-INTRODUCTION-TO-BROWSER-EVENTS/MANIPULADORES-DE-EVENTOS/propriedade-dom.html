@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input id="elem" value="Clique Aqui!" type="button"/>
+
+    <!--
+        - atribuindo um manipulador de evento por meio de atributo html
+        - atribuindo um manipulador que ira reagir a um evento de click no input button
+        - o manipulador de evento pode ser definido em HTML por meio do atributo de evento chamado on<event> 
+        - aqui como exemplo iremos definir um click manipulador para um input, usando o atributo de evento onclick
+        - no clique do mouse o codigo dentro onclick e executado
+        - aqui neste exemplo so usamos html porem e usando para inicializa o button.onclick propriedade no no dom
+    -->
+    <input value="Clique Aqui!" onclick="alert('Click!')" type="button"/>
+
+    <!--
+        - atribuindo um manipulador de evento por meio de atributo html que logo depois sera subsituido por um novo manipulador mas por meio do JS
+    -->
+    <input type="button" id="button1" onclick="alert('Before')" value="Clique Aqui!"/>
+
+    <script type="text/javascript">
+        /**
+         * * PROPRIEDADES DOM
+         * 
+         * Podemos atribuir um manipulador usando uma propriedade DOM on <event>.
+         * 
+         * Por exemplo, elem.onclick:
+        */
+
+        //Outra forma de atribuir um manipulador de evento e usando uma propriedade DOM on <event>
+        //a propriedade elem.onclick e um manipulador de evento, podemos atribuir um manipulador de evento a ela como um valor, neste caso atribuimos uma function anonima por referencia a propriedade elem.onclick essa function ira manipular o evento de click em elem no dom
+        elem.onclick = function() {
+            alert('Obrigado!');
+        };
+
+        /**
+         * Se o manipulador for atribuído usando um atributo HTML, o navegador o lerá, criará uma nova função a partir do conteúdo do atributo e a gravará na propriedade DOM.
+         * 
+         * Portanto, este caminho é realmente o mesmo que o anterior.
+         * 
+         * Como há apenas uma onclick propriedade, não podemos atribuir mais de um manipulador de eventos.
+         * 
+         * No exemplo abaixo, adicionar um manipulador com JavaScript substitui o manipulador existente:
+        */
+
+        //sobrescreve o manipulador antigo de evento atribuido por meio do atributo html onclick no elemento html button1
+        //por esse novo manipulador atribuido por propriedade de no dom
+        button1.onclick = function() { //sobrescreve o manipulador existente
+            alert('After'); // somente isso será mostrado
+        }
+
+        /*
+         * Para remover um manipulador – atribua elem.onclick = null.
+        */
+    </script>
+</body>
+</html>

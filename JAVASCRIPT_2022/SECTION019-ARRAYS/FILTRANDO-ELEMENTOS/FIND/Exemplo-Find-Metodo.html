@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Método Exemplo</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * FIND() EXEMPLOS DE JS
+         * 
+         * O exemplo a seguir usa o find()método para pesquisar o primeiro número par em uma ARRAY de números:
+        */
+
+        //declara uma array literal dense inicializada com 5 elementos 
+        //essa array e atribuido a variavel numbers, assim numbers referencia o array
+        let numbers = [1, 2, 3, 4, 5];
+        //usando o find metodo que retorna o primeiro elemento em uma array que satisfaça uma função fornecida.
+        //o primeiro argumento do find metodo e um callback function que implemente a condição para trazer os elementos
+        //a callback é uma função que é executada em cada elemento do array.
+        //a callback função e executada em cada element do array
+        //a callback function e um arrow function anonima que possui somente um paramentro esse paramentro e o valor do elemento avaliado no array
+        //essa arrow function verifica se o valor do argumento passado(que e um elemento do array e um valor par, isso se o valor divido por 2 tiver o resto 0 e par)
+        //O find() executa a callback função para cada elemento na array até callback retornar um valor verdadeiro.
+        //a callback retorna true quando o argumento passado for um valor par
+        //aqui nesse caso o find metodo retorna o primeiro elemento do array que e par
+        console.log(numbers.find(e => e % 2 == 0)); //2
+
+        /**
+         * Suponha que tenhamos uma lista de objetos de cliente com name e credit propriedades da seguinte forma:
+        */
+
+        //declara um array dense, inicialiazado com 3 elementos, esse array e atribuido por referencia a variavel customers, assim customers referencia o array
+        let customers = [
+            //declara um array literal anonimo usando sintaxe array literal
+            {
+                //declara propriedades usando sintaxe chave : valor
+                name: 'ABC Inc',
+                credit: 100
+            },{
+                name: 'ACME Corp',
+                credit: 200
+            },{
+                name: 'IoT AG',
+                credit: 300
+            }
+        ];
+
+        /**
+         * O código a seguir usa o find()método para localizar o primeiro cliente cujo crédito é maior que 100.
+        */
+
+        //usando o find metodo para encontrar o primeiro cliente que possui o credito maior que 100
+        //usando o find metodo que retorna o primeiro elemento em uma array que satisfaça uma função fornecida.
+        //o primeiro argumento do find metodo e uma função callback
+        //a callback é uma função que é executada em cada elemento do array.
+        //aqui passaremos uma arrow function com um parametro, que e o elemento do array avalido no momento pelo find metodo e passado como argumento para a callback
+        //a callback e um arrow function com um paramentro, a arrow function verifica se o argumento passado possui um valor maior que 100, se possui esse valor e retornado 
+        //O find() executa a callback função para cada elemento na array até callback retornar um valor verdadeiro.
+        //a callback retorna verdadeiro quando um elemento do array for maior que 100, assim o find metodo retorna o elemento que satisfez a condição da callback e o find metodo para de ser executado
+        console.log(customers.find(c => c.credit > 100));
+
+        /**
+         * Neste tutorial, você aprendeu como usar o find() método do JavaScript Array para pesquisar a primeira ocorrência de um elemento que satisfaça um teste. 
+        */
+    </script>
+</body>
+</html>

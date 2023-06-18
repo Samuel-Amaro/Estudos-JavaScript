@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * QUANTIDADE
+         * 
+         * * O INTERVALO{N, M} -> THE RANGE {n, m}
+         * 
+         * O intervalo corresponde a um caractere ou classe de caracteres de n a m vezes.
+         * 
+         * Por exemplo, para encontrar números com dois, três ou quatro dígitos, você usa a expressão regular /\d{2,4}/g:
+        */
+
+        //declara uma varaivel de escopo de bloco chamada str que e inicilizada com uma string literal para pesquisa
+        let str = 'The official name do ES11 is ES2020';
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //no exemplo abaixo o padrão entre os caracteres de /padrão/
+        // /\d{2, 4}/g
+        //corresponde ao seguinte, um quantificador de intervalo {n, m} O intervalo corresponde a um caractere ou classe de caracteres de n a m vezes., o \d -> e uma classe de caractere que correponde a qualquer digito ou caractere, o padrão aqui e corresponder a um intervalo de 2, 3, e 4 digitos, e retorna todoas correspondencias.
+        //a flag g(global) quando esta disponivel no padrão, o RegExp busca por todas as correspondências e retorna todas elas.
+        let re = /\d{2,4}/g;
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        let result = str.match(re);
+
+        console.log(result);
+        
+        /**
+         * Como o limite superior é opcional, o {n,} procura uma sequência de n vezes ou mais. Por exemplo, a expressão regular /\d{2,}/ corresponderá a qualquer número que tenha dois ou mais dígitos.
+        */
+
+        //string literal a ser usada na pesquisa
+        str = 'The official name of ES6 is ES2015';
+
+        //modifica o padrão da expressão regular acima, para não ter limite superior m, no quantificador de intervalo{n, m}, assim fara o padrão corresponder a qualquer numero que tenha dois ou mais digitos
+        re = /\d{2,}/g;
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        result = str.match(re);
+
+        console.log(result);
+
+        /**
+         * O exemplo a seguir usa a expressão regular /\d{1,}/g para corresponder a qualquer número que tenha um ou mais dígitos em um número de telefone:
+        */
+
+        //a expressão regular abaixo usa o seguinte padrão, uma padrão que corresponda a qualquer numero que tenha 1 ou mais digitos, a flag g, ira retornar todas as ocorrencias do padrão
+        //o padrão usa o quantifificar de intervalo sem especificar o limite superior e uma a classe de caracteres de \d, para corresponder digitos, e a flag g(global)
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        let numbers = '+1(-(408)-555-0105'.match(/\d{1,}/g);
+        console.log(numbers);
+
+    </script>
+</body>
+</html>
+
+
+

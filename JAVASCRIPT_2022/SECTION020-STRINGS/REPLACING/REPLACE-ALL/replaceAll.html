@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método replaceAll() String</title>
+</head>
+<body>
+    <script>
+        /**
+         * * STRING JS replaceAll() - SubstituirTudo
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o replaceAll()método String que substitui todas as ocorrências de uma substring por uma nova string.
+         * 
+         * * INTRODUÇÃO AO ReplaceAll() MÉTODO DE STRING JS
+         * 
+         * O método String replace() permite substituir a primeira ocorrência de uma substring em uma string por uma nova.
+         * 
+         * Para substituir todas as ocorrências de uma substring por uma nova, você pode chamar o replace() método repetidamente ou usar uma expressão regular com um sinalizador global (g).
+         * 
+         * O ES2021 introduziu o replaceAll()método String que retorna uma nova string com todas as correspondências de um padrão substituídas por uma substituição:
+         
+            String.prototype.replaceAll(pattern, replacement);
+
+         * 
+         * O pattern pode ser uma string ou uma expressão regular. Quando o pattern é uma expressão regular, ele precisa incluir o sinalizador global (g); caso contrário, replaceAll() lançará uma exceção.
+         * 
+         * A suposição é que você cometeu um erro e deveria ter usado o replace() método para substituir a primeira ocorrência que corresponde apenas ao padrão.
+         * 
+         * O replacement argumento pode ser uma string ou uma função de retorno de chamada(callback) que será invocada para cada correspondência.
+         * 
+         * Quando o replacement é uma função de retorno de chamada(callback), ele tem o seguinte formato:
+         
+            replacement(match, offset, str);
+
+         * O replacement retorno de chamada tem os seguintes argumentos:
+
+            - match é a substring correspondente.
+
+            - offset é o deslocamento da substring correspondente dentro da string original. Por exemplo, se a string original for 'Hello' e a substring correspondente for 'll', então offset será 2.
+
+            - str é a string original.
+
+         * 
+         * Assim como o replace() método, o replaceAll() método não altera a string original. Ele retorna a nova string completamente nova com o padrão substituído pela substituição.
+        */
+
+    </script>
+</body>
+</html>

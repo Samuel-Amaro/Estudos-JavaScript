@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * O response objeto retornado fetch também inclui o método response.json()que lê os dados remotos e os analisa como JSON. No nosso caso, isso é ainda mais conveniente, então vamos mudar para ele.
+         * 
+         * Também usaremos funções de seta(arrow functions) para brevidade:
+        */      
+
+        //usando metodo fetch para realizar uma solicitação de rede para o url passado por argumento e retorna um promese
+        //a promise retornada e resolvida com um response objeto quando o servidor remoto responde com headers, mas antes que a resposta completa seja baixada
+        fetch("https://javascript.info/article/promise-chaining/user.json")
+        //registrando um function .then manipulador para consumir a response objeto resolvido da promise
+        //.then abaixo é executado quando o servidor remoto responde com um header
+        .then((response) => {
+            //response.json() retorna uma nova promessa que e resolvida quando a promisse ja leu os dados remotos e os analise e retorna como JSON
+            //a promisse so e resolvida quando o dados foram analisados e carregados
+            //quando carrega
+            return response.json();
+        })
+        //registrando outro .then manipulador para consumir o json do resolve metodo da promisse retornada pelo .then manipulador anterior
+        .then(user => alert(user.name));
+    </script>
+
+</body>
+</html>

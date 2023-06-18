@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de saudação de pessoa</title>
+</head>
+<body>
+    
+    <h1>Exemplo Simples de setTimeout()</h1>
+
+    <script>
+        //O setTimeout() método do mixin define um cronômetro que executa uma função ou parte do código especificado quando o cronômetro expira.
+        //Sintaxe
+        //var timeoutID = setTimeout(function[, delay, arg1, arg2, ...]);
+        //var timeoutID = setTimeout(function[, delay]);
+        //var timeoutID = setTimeout(code[, delay]);
+        //A function a ser executado após o temporizador expirar.
+        //delay Opcional
+        //O tempo, em milissegundos, que o cronômetro deve esperar antes que a função ou código especificado seja executado. Se este parâmetro for omitido, um valor de 0 é usado, significando executar "imediatamente", ou mais precisamente, o próximo ciclo de evento.
+        //arg1, ..., argN Opcional
+        //Argumentos adicionais que são passados ​​para a função especificada por function.
+        //Valor de retorno O retornado timeoutID é um valor inteiro positivo que identifica o cronômetro criado pela chamada para setTimeout()
+        
+        //vai esperar 2000 milissegundos(2 segundos) para mostra executar a função.
+        //a função anonima e responsavel por mostrar um alert.
+        let minhaSaudacao = setTimeout(function() {
+            alert('Olá, Mr. Universo!');
+        }, 2000);
+    </script>
+</body>
+</html>

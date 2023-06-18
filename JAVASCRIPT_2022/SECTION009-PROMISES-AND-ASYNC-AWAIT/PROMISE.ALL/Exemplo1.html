@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DO MÉTODO JS Promise.all()
+         * 
+         * Vamos dar alguns exemplos para entender como o Promise.all() método funciona.
+         * 
+         * * 1) EXEMPLO DE PROMISES RESOLVIDAS
+         * 
+         * As promessas a seguir são resolvidas para 10, 20 e 30 após 1, 2 e 3 segundos. Usamos o setTimeout()para simular as operações assíncronas:
+        */
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 10
+                resolve(10);
+            }, 1 * 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 20
+                resolve(20);
+            }, 2 * 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p3
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p3 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 3 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 10
+                resolve(30);
+            }, 3 * 1000);
+        });
+
+        //usando o método estatico Promise.all()
+        //método retorna uma única promessa que resolve quando todas as promessas de entrada foram resolvidas. A promessa retornada resolve para uma array dos resultados das promessas de entrada
+        //o método recebe como argumento um array com as variaveis que refenciam as promises de entrada
+        //o then método e usado para obter o resultado de todas as promesas que forma crumpridas, tiveram seu estado modificado de pendente para cumpridas com valor, neste caso o valor que a Promise.all método resolve e um array com os resultados das promesas de entrada resolvidas
+        //a callbak argumento function anonima do then método e chamada quando o promisse.all tiver cumprido sua promise com valor(resolvido).
+        Promise.all([p1, p2, p3]).then((results) => {
+            //o results argumento e o resultado agregado das promisis resolvidas, um array com os resultados das promisis individuais
+            //utilizando o reducec método do array para retornar o resultado acumulado dos elementos do array
+            const total = results.reduce((p, c) => p + c);
+
+            console.log(`Results = ${results}`);
+            console.log(`Total = ${total}`);
+        });
+
+        /**
+         * Quando todas as promessas forem resolvidas, os valores dessas promessas serão passados ​​para o retorno de chamada(callback) do then() método como uma array.
+         * 
+         * Dentro do callback, usamos o reduce() método do Array para calcular o valor total e usamos o console.log para exibir o array de valores, bem como o total.
+        */
+        
+    </script>
+</body>
+</html>

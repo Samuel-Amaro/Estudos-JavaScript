@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * FUNCTION HOISTING(FUNÇÕES DE ELEVAÇÃO)
+         * 
+         * Assim como as variáveis, o mecanismo JavaScript também eleva as declarações de função. Isso significa que o mecanismo JavaScript também move as declarações de função para o início do script.
+         * 
+         * Por exemplo:
+        */
+       
+        //declara duas variaveis de escopo de bloco, chamadas x e y que são inicializadas com valores numericos
+        let x = 20, y = 10;
+        
+        //quando esses script e executado pela primeira vez pelo mecanismo JS, ele cria o contexto de execução global, que possui duas fases a de criação e execução, na fase de criação o mecanismo js move as declarações de variaveis e funções para topo do codigo inicio do script(isso e conhecido como içamento - hosting)
+        //declara uma variavel chamada result que e inicializada com o resultado da invocação da function add
+        //invocando a function add e fornecendo as variaveis x e y como argumentos, antes da function ser declarada
+        //durante a fase de criação do contexto de execução global o mecanismo JS coloca a declaração da function add na memoria heap(espaço de memoria onde armazena informações do codigo de forma não ordenada).
+        //o mecanismo cria um objeto do tipo Function e adiciona esse objeto por referencia a uma variavel chamada add que ira referenciar o objeto de função
+        //tudo isso no inicio do script(içamento)
+        let result = add(x, y);
+        console.log(result);
+
+        //declara uma function chamada add que declara dois paramentros chamados a, e b
+        //obs: uma function e uma instancia de objeto do tipo function e essa intancia e atribuida por referencia a uma variavel chamada add, e a add variavel referencia a function
+        function add(a, b) {
+            return a + b;
+        }
+
+        /**
+         * Neste exemplo, chamamos a add()função antes de defini-la. O código acima é equivalente ao seguinte:
+         
+            function add(a, b) {
+                return a + b;
+            }
+
+            let x = 20, y = 10;
+
+            let result = add(x, y);
+            console.log(result);
+            
+         *
+         * Durante a fase de criação do contexto de execução, o mecanismo JavaScript coloca a add() declaração da função na memória heap. Para ser preciso, o mecanismo JavaScript cria um objeto do Function tipo e uma referência de função chamada add que se refere ao objeto de função.
+        */
+
+    </script>
+
+</body>
+</html>

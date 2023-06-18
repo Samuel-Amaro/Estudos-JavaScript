@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <pre id="rabbit">
+        |\   /|
+         \|_|/
+         /. .\
+        =\_Y_/=
+         {>o<}
+    </pre>
+
+    <!--
+        - atribui uma manipulador de evento por meio do atributo html
+    -->
+    <button onclick="hide()">Hide()</button>
+
+    <script type="text/javascript">
+        /**
+         * * event.preventDefault()
+         * 
+         * Muitos eventos do navegador têm uma “ação padrão”, como navegar para um link, iniciar uma seleção e assim por diante.
+         * 
+         * Para eventos novos e personalizados, definitivamente não há ações padrão do navegador, mas um código que despacha tal evento pode ter seus próprios planos sobre o que fazer após acionar o evento.
+         * 
+         * Ao chamar event.preventDefault(), um manipulador de eventos pode enviar um sinal de que essas ações devem ser canceladas.
+         * 
+         * Nesse caso, a chamada para elem.dispatchEvent(event) retorna false. E o código que o despachou sabe que não deve continuar.
+         * 
+         * Vamos ver um exemplo prático – um coelho escondido (pode ser um menu de fechamento ou outra coisa).
+         * 
+         * Abaixo você pode ver uma função #rabbit and hide() que despacha "hide" um evento nele, para que todos os interessados ​​saibam que o coelho vai se esconder.
+         * 
+         * Qualquer manipulador pode ouvir esse evento rabbit.addEventListener('hide',...) e, se necessário, cancelar a ação usando event.preventDefault(). Então o coelho não vai desaparecer:
+        */
+
+        //declara uma function regular sem paramentro 
+        function hide() {
+            //declara um objeto de evento de tipo novo e personalizado 
+            //o tipo do evento e hide e o options argumento objeto e passado com uma propriedade de controle de ações do navegador
+            let event = new CustomEvent("hide", {
+                cancelable: true //sem esse sinalizador preventDefault não funciona, o evento personalizado tem que possuir essa propriedade para que event.preventDefault() no evento functione
+                //se true, então a “ação padrão” pode ser evitada. 
+            });
+            //o metodo elem.dispatchEvent(event) executa o evento no elem, e apos retorna true ou false, true e quando a açãos padrão a fazer apos execução do clique, false e quando as ações padrão foram impedidas de ser executadas
+            //se o evento dispachado em rabbit retorna false, ação padrão não e para ser executada
+            if(!rabbit.dispatchEvent(event)) {
+                alert('A ação foi impedida por um manipulador');
+            }else{
+                //elemento e ocultado, esta e a ação padrão
+                rabbit.hidden = true;
+            }
+        }
+
+        //atribuindo uma manipulador de evento por meio do metodo elem.addEventListener(event, handler, options{});
+        //atribui um manipulador para o evento novo e personalizavel de tipo novo hide
+        rabbit.addEventListener('hide', function(event) {
+            //se o usuario der ok retorna true, cancel false
+            if(confirm("Chamar preventDefault?")) {
+                //impede a ação padrão do navegador ao executar o evento personalizado de tipo "hide"
+                event.preventDefault();
+            }
+
+            //se esoclher cancel
+            //executa a ação padrão do navegador
+
+        });
+
+        /**
+         * Atenção: o evento deve ter o sinalizador cancelable: true, caso contrário a chamada event.preventDefault() será ignorada.
+         * */
+    </script>
+</body>
+</html>

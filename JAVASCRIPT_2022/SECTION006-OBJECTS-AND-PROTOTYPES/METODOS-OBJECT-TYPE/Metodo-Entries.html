@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.entries()</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * JAVASCRIPT Object.entries()
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o Object.entries()método JavaScript.
+         * 
+         * * INTRODUÇÃO AO OBJEC.ENTRIES() - ENTRADAS - MÉTODO JS
+         * 
+         * O ES2017 apresenta o Object.entries() método que aceita um objeto e retorna os próprios pares de propriedade [chave, valor] com chave de string enumerável do objeto.
+         * 
+         * Segue a sintaxe do Object.entries() método:
+         
+            Object.entries();
+
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //A Symbol função cria um novo valor exclusivo toda vez que você a chama.
+        //cria um valor de string chamado ssn
+        const ssn = Symbol('ssn');
+        //declara um objeto anonimo com propriedades, esse objeto e atribuido a person variavel por referencia, assim a variavel person referencia o objeto
+        const person = {
+            //propriedades do objeto usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            age: 25,
+            //usando a sintaxe de notação de colchetes parecida com a do array para criar uma propriedade que tera a chave como o valor defino pelo symbol tipo e o valor e uma string 
+            //essa propriedade ssn não e do tipo key-value por isso não sera enumerada pelo metodo entries
+            //mas isso não e uma propriedade enumeravel do objeto
+            [ssn]: '123-345-789'
+        };
+
+        //usando o metodo Objec.entries(person);
+        //para obter todas as entradas de chave : valores de propriedades definidas no objeto  literal referenciado por person variavel
+        //todoas as propriedade que são enumeraveis
+        //retorna uma array com o par de todas as propriedades
+        const kv = Object.entries(person);
+        console.log(kv);
+
+        /**
+         * Neste exemplo:
+         
+            - O firstName, lastName e age são propriedades de chave de string enumeráveis ​​do objeto person, portanto, eles são incluídos no resultado.
+
+            - The ssn não é uma propriedade string-key do objeto person, portanto, não é incluída no resultado.
+
+         * 
+         * * Object.entries() Vs For ... in
+         * 
+         * A principal diferença entre the Object.entries() e o for...in loop é que o loop também enumera as propriedades for...in do objeto na cadeia de protótipos .
+        */
+    </script>
+</body>
+</html>

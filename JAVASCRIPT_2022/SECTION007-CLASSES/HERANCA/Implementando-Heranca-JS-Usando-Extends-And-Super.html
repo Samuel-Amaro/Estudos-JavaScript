@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herança</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * HERANÇA JS USANDO EXTENDS(Estende) & SUPER
+         * 
+         * Resumo : neste tutorial, você aprenderá como implementar a herança JavaScript usando extends e super no ES6.
+         * 
+         * * IMPLEMENTANDO A HERANÇA JS USANDO EXTENDS AND SUPER
+         * 
+         * Antes do ES6, a implementação de uma herança adequada exigia várias etapas. Uma das estratégias mais utilizadas é a herança prototípica . 
+         * 
+         * O seguinte ilustra como Bird herda as propriedades do Animal uso da técnica de herança prototípica:
+        */
+
+        //declara uma function construtora, chamada Animal, essa function declara um parametro chamado legs
+        //obse: essa function e uma instancia de objeto do tipo function
+        function Animal(legs) {
+            //this = {};
+            //declara uma propriedade chamada legs e a inicializa com o argumento
+            this.legs = legs;
+        }
+
+        //o seguinte define um metodo no objeto de prototipo do Animal Function Constructor
+        //Adiciona um metodo no objeto prototipo referenciado por Animal.prototype
+        //Adiciona uma propriedade no objeto prototipo e inicializa essa propriedade com uma function anonima como um valor
+        //A Animal.prototype referencia um objeto anonimo do prototipo que possui uma propriedade chamada constructor que referencia A  Animal construtor function
+        //a walk propriedade recebe uma function anonima sem paramentros declarados e não retorna valor, a walk propriedade ira referencia a function anonima, por referencia
+        //propriedades definidos no objeto prototipo, são compartilhados por todas as instancias criadas pela function contrutora Animal
+        Animal.prototype.walk = function() {
+            console.log('walking on ' + this.legs + ' legs');
+        }
+
+        //declara uma function construtora chamada Bird, que declara um paramentro chamado legs
+        //a function e uma instancia de objeto do tipo function
+        function Bird(legs) {
+            //como a Animal function e uma instancia de objeto podemos chamar metodos e acessa propriedades do mesmo
+            //aqui chamamos o metodo call, para fazer a ligação de um novo this valor, chamando a Animal function passando o paramentro legs
+            //o call método chama uma função functionName com um determinado this valor e argumentos.
+            //o primeiro argumento aqui o this valor sera a instancia de objeto a ser criada pelo new operador, um objeto anonimo que sera referenciado por this
+            //o segundo argumento e os argumentos a serem passados para a function construtora Animal
+            Animal.call(this, legs);
+        }
+
+        //implementando a herança prototipa do JS antes do ES6
+        //Na herança prototípica, um objeto “herda” - (INHERITS) propriedades de outro objeto por meio da ligação do protótipo(PROTOTYPE LINKAGE).
+        //Object.create() método cria um novo objeto e usa um objeto existente como protótipo do novo objeto.
+        //Aqui faremos uma ligação de prototipo, isso e o Bird.prototype que referencia o objeto de prototipo anonimo do Bird function construtor ira se vincular ao prototipo do Animal.prototype objeto anonimo, o Bird.prototype recebera um novo objeto anonimo de prototipo e esse objeto sera o Animal.prototype, assim Bird.prototype esta vinculado a Animal.prototype, e todas intancias de objeto criado pelo new operador invocando Bird function tera as propriedades de Animal e de bird, Herança prototipica
+        Bird.prototype = Object.create(Animal.prototype);
+        //o Bird.prototype objeto anonimo possui uma propriedade chamada constructor que referencia a function construtora a qual o objeto prototipo esta vinculado, aqui neste caso estamos vinculando o construtor propriedade para a function construtora de Animal, fazendo a ligação
+        //a Bird.prototype.constructor recebera por referencia a Animal function, e se vinculara a ela, fazendo assim poder acessar propriedades e metodos definidos pela mesma 
+        Bird.prototype.constructor = Animal;
+
+        //o seguinte define um metodo no objeto de prototipo do Animal Function Constructor
+        //Adiciona um metodo no objeto prototipo referenciado por Animal.prototype
+        //Adiciona uma propriedade no objeto prototipo e inicializa essa propriedade com uma function anonima como um valor
+        //essa propriedade add pelo Bird.prototype no objeto anonimo que e o Animal.prototype e uma especialização, somente os objetos criados por new operador invocando o Bird poderão acessar pois esta no mesmo prototipo mas somente Instancias de Bird poderão acessar
+        //define uma propriedade chamada fly no Bird.prototype objeto anonimo de prototipo vinculado a Animal.prototype
+        //essa propriedade recebe como valor uma function anonima que não declara paramentro e nem retorna valor
+        Bird.prototype.fly = function() {
+            console.log('flying');
+        }
+
+        //declara uma nova instancia de objeto usando o new Operador e invocando o Bird function construtor
+        //o new operador cria um objeto vazio e o atribui ao this valor e atribui os argumentos as propriedades e logo depois retorna o this
+        //assim a variavel pigeon referencia a instancia de objeto criada 
+        var pigeon = new Bird(2);
+
+        //verificando se a herança prototipica esta funcionando, acessando o metodo definido no Animal function construtor, e no Animal.prototype, por meio do Bird instancia de objeto
+        pigeon.walk(); //walking 2 legs
+        //metodo definido de especialização no Bird function construtor, mas esta no mesmo objeto prototipico referenciado por Animal.prototype ou Bird.prototype
+        pigeon.fly(); //flying
+
+        /**
+         * O ES6 simplificou essas etapas usando as palavras-chave extends e super.
+         * 
+         * O exemplo a seguir define as classes Animal and Bird e estabelece a herança por meio das palavras-chave extends and super.
+        */
+
+        //define uma class chamada Animal, usando a palavra chave class
+        class Animal2{
+            //define um construtor com paramentros declarados, como legs, esses paramentros inicializam propriedades
+            constructor(legs) {
+                //declara uma propriedade chamda legs e a inicializa com o argumento legs
+                this.legs = legs;
+            }
+            //declara um método da classe, chamado walk, sem paramentros declarados
+            walk() {
+                console.log(`Walking on ${this.legs} legs`);
+            }
+        }
+
+        //define uma class chamada Bird que extendera(herdara) tudo da class Animal usando a palavra chave extends na definição da class Bird, a classe bird e a classe derivada, classe filha
+        class Bird2 extends Animal2{
+            //define um construtor que declara um paramentro chamda legs para inicializar propriedade das Bird classe
+            constructor(legs) {
+                //chama o construtor da super classe - classe pai que e o Animal
+                //o argumento e para inicializar o construtor da classe Pai
+                //invoca o construtor da classe pai
+                super(legs);
+            }
+
+            //declara um metodo na classe Bird, chamado de fly que não declara paramentros
+            fly() {
+                console.log('Flying');
+            }
+        }
+
+        //declara uma instancia de objeto do tipo Bird invocando a class com o new operador passando o argumento 2
+        let bird = new Bird2(2);
+
+        //invoca o metodo da class Animal por meio da instancia de objeto bird para verificar herança
+        bird.walk();
+        //chama o metodo da bird class mesmo por meio de uma instancia de bird
+        bird.fly();
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, use a extends palavra-chave para fazer a Bird classe herdar da Animal classe:
+         * 
+         * A Animal classe é chamada de  classe base ou classe pai, enquanto a Bird classe é conhecida como classe derivada ou classe filha . Ao fazer isso, a Bird classe herda todos os métodos e propriedades da Animal classe.
+         * 
+         * Segundo, no construtor do Bird, chame super() para invocar o construtor do Animal com o argumento das pernas.
+         * 
+         * JavaScript requer que a classe filha chame super() se tiver um construtor. Como você pode ver na classe Bird, o super(legs) é equivalente à seguinte declaração no ES5: 
+         * 
+         * Se a Bird classe não tiver um construtor, você não precisará fazer mais nada:
+        */
+
+        class Bird3 extends Animal2{
+            fly() {
+                console.log('flying');
+            }
+        }
+
+        //É equivalente à seguinte classe:
+
+        class Bird4 extends Animal2 {
+            constructor(...args) {
+                super(...args);
+            }
+            fly() {
+                console.log('flying');
+            }
+        }
+
+        /**
+         * No entanto, a classe filha tem um construtor, ela precisa chamar super(). Por exemplo, o código a seguir resulta em um erro:
+        */
+
+        class Bird5 extends Animal2 {
+            constructor(legs) {
+            }
+            fly() {
+                console.log('flying');
+            }
+        }
+
+        /**
+         * Como o super() inicializa o this objeto, você precisa chamar o super() antes de acessar o this objeto. Tentar acessar this antes de chamar super() também resulta em erro.
+        */
+
+        //define uma class chamada Bird6 que extendera(herdara) tudo da class Animal2 usando a palavra chave extends na definição da class Bird, a classe bird e a classe derivada, classe filha
+        class Bird6 extends Animal2 {
+            //define um construtor para a class Bird6 esse construtor declara dois paramentros legs e color
+            constructor(legs, color) {
+                //antes de declarar ou acessar propriedades da class Bird6 e necessario invocar o construtor da classe pai, classe base, Super classe Animal2, passando o argumento legs para o construtor de Animal
+                //o super inicializa o this objeto da Bird6 classe e necessario chamalo antes de tentar acessar o this objeto
+                super(legs);
+                //apos invocar o construtor da classe pai podemos declarar propriedades para a class bird6, essas propriedades são especializações
+                //declara uma propriedade chamada color e a inicializa com a color argumento
+                this.color = color;
+            }
+            fly() {
+                console.log("flying");
+            }
+            getColor() {
+                return this.color;
+            }
+        }
+
+        //declara uma instancia de objeto da classe Bird6, usando o operador new e a class Bird6
+        //a instancia de objeto de Bird6 e atribuida por referencia a variavel pegion, assim pegion referencia a Bird6
+        //invocamos o construtor por meio da Bird6 passando argumentos para inicializar a propriedade da class
+        let pegion = new Bird6(2, "white");
+        //chamando o método da class Bird6
+        console.log(pegion.getColor());
+        
+    </script>
+</body>
+</html>

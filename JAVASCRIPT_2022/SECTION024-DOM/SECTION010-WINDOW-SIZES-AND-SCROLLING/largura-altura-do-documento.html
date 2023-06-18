@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * LARGURA/ALTURA DO DOCUMENTO
+        * 
+        * Teoricamente, como o elemento raiz do documento é document.documentElement, e inclui todo o conteúdo, poderíamos medir o tamanho total do documento como document.documentElement.scrollWidth/scrollHeight.
+        * 
+        * Mas nesse elemento, para a página inteira, essas propriedades não funcionam conforme o esperado. No Chrome/Safari/Opera, se não houver rolagem, documentElement.scrollHeight pode ser ainda menor que documentElement.clientHeight! Estranho, certo?
+        * 
+        * Para obter de forma confiável a altura total do documento, devemos obter o máximo dessas propriedades:
+        */
+
+        let scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+
+        console.log('Altura total do documento, com parte rolada para fora: ' + scrollHeight);
+
+        /**
+         * Por quê então? Melhor não perguntar. Essas inconsistências vêm de tempos antigos, não de uma lógica “inteligente”.
+         * */
+    </script>
+</body>
+</html>

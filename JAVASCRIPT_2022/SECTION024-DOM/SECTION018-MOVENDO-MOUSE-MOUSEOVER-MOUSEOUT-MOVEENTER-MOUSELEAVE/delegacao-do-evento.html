@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #text {
+            display: block;
+            height: 100px;
+            width: 456px;
+        }
+        #table th {
+            text-align: center;
+            font-weight: bold;
+        }
+        #table td {
+            width: 150px;
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: bottom;
+            padding-top: 5px;
+            padding-bottom: 12px;
+            cursor: pointer;
+        }
+        #table .nw {
+            background: #999;
+        }
+        #table .n {
+            background: #03f;
+            color: #fff;
+        }
+        #table .ne {
+            background: #ff6;
+        }
+        #table .w {
+            background: #ff0;
+        }
+        #table .c {
+            background: #60c;
+            color: #fff;
+        }
+        #table .e {
+            background: #09f;
+            color: #fff;
+        }
+        #table .sw {
+            background: #963;
+            color: #fff;
+        }
+        #table .s {
+            background: #f60;
+            color: #fff;
+        }
+        #table .se {
+            background: #0c3;
+            color: #fff;
+        }
+        #table .highlight {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="table">
+        <tr>
+          <th colspan="3"><em>Bagua</em> Chart: Direction, Element, Color, Meaning</th>
+        </tr>
+        <tr>
+          <td class="nw"><strong>Northwest</strong>
+            <br>Metal
+            <br>Silver
+            <br>Elders
+          </td>
+          <td class="n"><strong>North</strong>
+            <br>Water
+            <br>Blue
+            <br>Change
+          </td>
+          <td class="ne"><strong>Northeast</strong>
+            <br>Earth
+            <br>Yellow
+            <br>Direction
+          </td>
+        </tr>
+        <tr>
+          <td class="w"><strong>West</strong>
+            <br>Metal
+            <br>Gold
+            <br>Youth
+          </td>
+          <td class="c"><strong>Center</strong>
+            <br>All
+            <br>Purple
+            <br>Harmony
+          </td>
+          <td class="e"><strong>East</strong>
+            <br>Wood
+            <br>Blue
+            <br>Future
+          </td>
+        </tr>
+        <tr>
+          <td class="sw"><strong>Southwest</strong>
+            <br>Earth
+            <br>Brown
+            <br>Tranquility
+          </td>
+          <td class="s"><strong>South</strong>
+            <br>Fire
+            <br>Orange
+            <br>Fame
+          </td>
+          <td class="se"><strong>Southeast</strong>
+            <br>Wood
+            <br>Green
+            <br>Romance
+          </td>
+        </tr>
+    </table>
+    
+    <textarea id="text"></textarea>
+    
+    <input type="button" onclick="text.value=''" value="Clear">
+    
+
+    <script type="text/javascript">
+        /**
+         * * DELEGAÇÃO DO EVENTO
+         * 
+         * Os eventos mouseenter/leave são muito simples e fáceis de usar. Mas eles não borbulham. Portanto, não podemos usar delegação de eventos com eles.
+         * 
+         * Imagine que queremos manipular a entrada/saída do mouse para as células da tabela. E há centenas de células.
+         * 
+         * A solução natural seria – ativar o manipulador <table> e processar eventos lá. Mas mouseenter/leave não borbulhe. Portanto, se esse evento ocorrer em <td>, apenas um manipulador <td> poderá capturá-lo.
+         * 
+         * Os manipuladores para mouseenter/leave on <table> são acionados apenas quando o ponteiro entra/sai da tabela como um todo. É impossível obter qualquer informação sobre transições dentro dele.
+         * 
+         * Então, vamos usar mouseover/mouseout.
+         * 
+         * Vamos começar com manipuladores simples que destacam o elemento sob o mouse:
+        */
+
+        // vamos destacar um elemento sob o ponteiro
+        
+        //atribui um manipulador de evento por meio de uma propriedade dom
+        //o manipulador e uma function anonima que declara o paramentro event que e um objeto de evento com informações do evento
+        //atribui um manipulador para o evento que quando o mouse estiver sobre um elemento
+        table.onmouseover = function(event) {
+            //obtem o elemento que iniciou o evento, obtem o elemento de onde o mouse veio
+            let target = event.target;
+            //muda a cor de fundo dele(destaca)
+            target.style.background = 'pink';
+        };
+
+        //atribui manipulador de evento
+        //atribui um manipulador para o evento de mouse, evento de ponteiro do mouse fora de elem
+        table.onmouseout = function(event) {
+            //obtem o elemento que inicio o evento, obtem o elemento que o ponteiro do mouse deixou
+            let target = event.target;
+            //destaca o elemento que o mouse deixou
+            target.style.background = '';
+        };
+
+        /**
+         * 
+         * Aqui eles estão em ação. À medida que o mouse percorre os elementos desta tabela, o atual é destacado:
+         * 
+        */
+    </script>
+</body>
+</html>

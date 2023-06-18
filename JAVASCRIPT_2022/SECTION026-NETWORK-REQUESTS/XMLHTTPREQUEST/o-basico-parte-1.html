@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * O BÁSICO
+         * 
+         * XMLHttpRequest tem dois modos de operação: síncrono e assíncrono.
+         * 
+         * Vamos ver primeiro o assíncrono, pois é usado na maioria dos casos.
+         * 
+         * Para fazer o pedido(request), precisamos de 3 passos:
+         * 
+         * Criar XMLHttpRequest:
+        */
+
+        //1. passo para fazer request
+        let xhr = new XMLHttpRequest();
+
+        /**
+         * O construtor não tem argumentos.
+         * 
+         * Inicialize-o, geralmente logo após new XMLHttpRequest:
+        */
+
+        //2. passo para fazer request
+        xhr.open(method, URL, [async, user, password]);
+
+        /**
+         * Este método especifica os principais parâmetros da solicitação(request):
+         *  
+            * method– Método HTTP. Normalmente "GET"ou "POST".
+            * 
+            * URL– a URL a ser solicitada, uma string, pode ser um objeto URL .
+            * 
+            * async– se explicitamente definido como false, a solicitação será síncrona(request sincrona), abordaremos isso um pouco mais tarde.
+            * 
+            * user, password – login e senha para autenticação HTTP básica (se necessário).
+            * 
+         * Observe que a open chamada, ao contrário do nome, não abre a conexão. Ele apenas configura a solicitação(request), mas a atividade da rede só começa com a chamada de send.
+         * 
+         * Envie-o.
+        */
+
+        //3. passo para fazer request
+        xhr.send([body]);
+
+        /**
+         * Este método abre a conexão e envia a solicitação(request) ao servidor. body O parâmetro opcional contém o corpo da solicitação.
+         * 
+         * Alguns métodos de solicitação como GET não possuem um corpo. E alguns deles como POST usam body para enviar os dados para o servidor. Veremos exemplos disso mais adiante.
+         * 
+         * Ouça xhr os eventos para resposta(response).
+         * 
+         * Estes três eventos são os mais utilizados:
+         * 
+            * load– quando a solicitação(request) for concluída (mesmo que o status HTTP seja 400 ou 500) e a resposta for totalmente baixada. 
+            * 
+            * error– quando a solicitação(request) não pôde ser feita, por exemplo, rede inativa ou URL inválido.
+            * 
+            * progress – dispara periodicamente enquanto a resposta(response) está sendo baixada, relata quanto foi baixado.
+        */
+
+        //acionado quando a request for concluida, e a response for totalmente baixada
+        xhr.onload = function() {
+            alert(`Loaded: ${xhr.status} ${xhr.response}`);
+        };
+
+        //acionado quando a request não pode ser feita
+        xhr.onerror = function() { // só aciona se a requisição não puder ser feita
+            alert(`Network Error`);
+        };
+
+        //acionado a todo momento, enquanto a response esta sendo baixada, relata quanto foi baixado
+        xhr.onprogress = function(event) { // aciona periodicamente
+            // event.loaded - quantos bytes foram baixados
+            // event.lengthComputable = true se o servidor enviou o cabeçalho Content-Length
+            // event.total - número total de bytes (se lengthComputable)
+            alert(`Received ${event.loaded} of ${event.total}`);
+        };
+    </script>
+
+</body>
+</html>

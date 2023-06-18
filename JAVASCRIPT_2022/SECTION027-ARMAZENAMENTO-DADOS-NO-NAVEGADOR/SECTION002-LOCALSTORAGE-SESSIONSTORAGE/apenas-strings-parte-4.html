@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * APENAS STRINGS
+         * 
+         * Observe que a chave e o valor devem ser strings.
+         * 
+         * Se fosse qualquer outro tipo, como um número ou um objeto, ele é convertido em string automaticamente:
+        */
+
+        //definindo a propriedade user do objeto local storage como uma chave , e o valor como um objeto anonimo, definir o valor como objeto  o mecanismo JS converte em string automaticamente
+        localStorage.user = {name: "John"};
+        alert(localStorage.user); //[object Object]
+
+        /**
+         * Podemos usar JSON para armazenar objetos:
+        */
+
+        //usando o método JSON.stringify para converte um objeto literal anonino em JSON(JavaScript Object Notation), em uma string
+        //conteudo armazenado na chave user e uma string resultante chamada de objeto codificado em JSON ou serializado ou stringified(encadeado) ou empacotado.
+        localStorage.user = JSON.stringify({name: "John"});
+
+        // algum tempo depois
+        //Para decodificar uma string JSON, precisamos de outro método chamado JSON.parse.
+        //decodifica a string json em um objeto anonimo
+        let user = JSON.parse(localStorage.user);
+        alert(user.name); //John
+
+        /**
+         * Também é possível stringificar todo o objeto de armazenamento, por exemplo, para fins de depuração:
+        */
+        
+        // adicionamos opções de formatação ao JSON.stringify para deixar o objeto mais bonito
+        //Aqui space = 2 diz ao JavaScript para mostrar objetos aninhados em várias linhas, com recuo de 2 espaços dentro de um objeto:
+        alert(JSON.stringify(localStorage, null, 2) );
+    </script>
+
+</body>
+</html>

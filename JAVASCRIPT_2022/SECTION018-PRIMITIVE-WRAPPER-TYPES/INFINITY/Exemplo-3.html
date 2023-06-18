@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ARMADILHAS DO INFINITY
+         * 
+         * * 3) MÉTODOS MATEMÁTICOS
+         * 
+         * Algumas funções matemáticas retornam um número infinito.
+         * 
+         * O Math.min() método a seguir retorna os menores números na ratings array:
+        */
+
+        //declara um array literal, dense, anonimo, inicializado com 5 elementos, o array e atribuido por referencia a varaivel ratings
+        let ratings = [1, 2, 3, 4, 5];
+
+        //usando o método Math.min para retornar os menores numeros na array referenciado por ratings
+        //o operador spread, ira descompacter o array ratings em elementos individuais e passar como argumento para o metodo min, o metodo aceita um numero indefinido de argumentos
+        let max = Math.min(...ratings);
+        console.log(max); //1
+
+        /**
+         * No entanto, quando a ratings array está vazia, o Math.min()método retorna Infinity:
+         * 
+        */
+
+        //em algum lugar do código
+        //atribui um novo array literal dense anonimo sem inicializar a variavel ratings, um array vazio
+        ratings = [];
+
+        //usando o método Math.min para retornar os menores numeros na array referenciado por ratings
+        //o operador spread, ira descompacter o array ratings em elementos individuais e passar como argumento para o metodo min, o metodo aceita um numero indefinido de argumentos
+        //como o array esta vazio o metodo ira retorna Infinity que represeta um valor infinito
+        let max2 = Math.min(...ratings);
+        console.log(max2); //Infinity
+
+        /**
+         * * RESUMO
+         * 
+         *  O Infinity representa um número infinito. É uma variável global cujo valor é Infinity.
+         * 
+         * O Infinity é maior do que qualquer número finito, enquanto o -Infinity é menor do que qualquer número finito.
+         * 
+         * Os parseFloat('Infinity')retornos Infinity.
+        */
+       
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criaçaõ de Arrays</title>
+</head>
+<body>
+
+    <h2>Criação de arrays JavaScript</h2>
+
+    <script>
+        
+        /*JavaScript fornece duas maneiras de criar um array. O primeiro é usar o Arrayconstrutor da seguinte maneira:*/
+        let scores = new Array();
+
+        /*
+         * O scores array está vazio, ou seja, não contém nenhum elemento.
+         * 
+         * Se você souber o número de elementos que a matriz conterá, poderá criar uma matriz com um tamanho inicial, conforme mostrado no exemplo a seguir:
+        */
+
+        let scoresTamDefinido = Array(10);
+
+        /**
+         * Para criar uma array com alguns elementos, você passa os elementos como uma lista separada por vírgulas para o Array() construtor.
+         * 
+         * Por exemplo, o seguinte cria a scores array que possui cinco elementos (ou números):
+        */
+
+        let scores3 = new Array(9, 10, 8, 7, 6);
+
+        /**
+          * É importante notar que se você usar o construtor de array para criar um array e passar para um número, você está criando um array com um tamanho inicial.
+          * 
+          * No entanto, quando você passa um valor de outro tipo string para o Array() construtor, você cria uma array com um elemento desse valor. Por exemplo:
+        */
+
+        let atletas = new Array(3); //cria uma array com tamanho inicial 3
+        let pontuacoes = new Array(1, 2, 3); //cria um array com 3 numeros 1, 2, 3
+        let sinais = new Array('Red'); //cria um array com um elemento 'Red'
+
+        /**
+         * JavaScript permite que você omita o new operador ao usar o construtor de array. Por exemplo, a instrução a seguir cria a  artists array.
+         * */
+
+        let artistas = Array();
+        
+        /**
+         * Na prática, você raramente usará o Array() construtor para criar um array.
+         * 
+         * A maneira mais preferida de criar uma array é usar a notação literal da array:
+         * */
+
+        //let arrayNomes = [element1, element2, element3, ...];
+
+        /**
+         * A forma literal de array usa colchetes [] para envolver uma lista de elementos separados por vírgulas.
+         * 
+         * O exemplo a seguir cria a colors array que contém três strings
+         * */
+
+        let colors = ['red', 'green', 'blue'];
+
+        /**
+         * Para criar uma array vazia, você usa colchetes sem especificar nenhum elemento como este:
+         * */
+
+        let arrayVazio = []; 
+    </script>
+</body>
+</html>

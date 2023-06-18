@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * Um exemplo maior com a busca de informações do usuário para uma array de usuários do GitHub por seus nomes (podemos buscar uma array de mercadorias por seus ids, a lógica é idêntica):
+         * 
+        */
+
+        //uma array
+        let names = ['iliakan', 'remy', 'jeresig'];
+
+        //o map metodo abaixo chama cada callback para cada elemento do array url, a callback usa o fetch para fazer uma solicitaçaõ de rede usando o elemento como url e retorna um promise para o novo array mapeado
+        let requests = names.map(name => fetch(`https://api.github.com/users/${name}`));
+
+        //Promise.all espera até que todos os trabalhos sejam resolvidos
+        //chama metodo statico Promise.all(iterable), para executar varias promessas simultaneamente
+        //o argumento passado e um array de promises a serem executadas
+        //o metodo retorna uma nova promise
+        Promise.all(requests)
+            //o metodo acima retorna uma nova promise, essa promise e resolvida quando todas as promises passadas por argumento foram resolvidas, assim o resolve metodo e chamado com um array de resultado de todas as promises
+            //consumindo o array de resultado das promises resolvidas
+            .then(responses => {
+                //todas as respostas são resolvidas com sucesso
+                for(let response of responses) {
+                    alert(`${response.url}: ${response.status}`); // mostra 200 para cada url
+                }
+                //esse valor retornado, e o valor resolvido pela promise, para que o proximo manipulador possa consumilo
+                return responses;
+            })
+            //consomi o array de resultados das promises resolvidas
+            // mapeia a array de respostas em uma array de response.json() para ler seu conteúdo
+            .then((responses) => {
+                //para cada resultado resolvido de uma promisse, executa uma callback para que obtenha um objeto json
+                //um array de promises para obter objetos json
+                //retorna uma nova promise, que so e resolvida quando todoas as promises do array estiverem resolvidas, resolve com um array de objetos json
+                return Promise.all(responses.map(r => r.json())); 
+            })
+            //consome o array de objetos jsons
+            //todas as respostas JSON são analisadas: "users" é a array delas
+            .then((users) => {
+                //cada user e um objeto json, como resultado de um promise resolvida do manipulador anterior
+                users.forEach(user => {
+                    alert(user.name);
+                });
+            });
+    </script>
+</body>
+</html>

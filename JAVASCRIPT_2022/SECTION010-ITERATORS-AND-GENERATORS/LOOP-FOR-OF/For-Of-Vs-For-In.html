@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Of Vs For In</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * FOR...OF Vs FOR...IN
+         * 
+         * O for...in itera sobre todas as propriedades enumeráveis ​​de um objeto. Ele não itera sobre uma coleção como Array, Map ou Set.
+         *
+         * Ao contrário do for...in loop, for...of ele itera uma coleção, em vez de um objeto. Na verdade, for...of itera sobre elementos de qualquer coleção que tenha a  [Symbol.iterator]propriedade.
+         * 
+         * O exemplo a seguir ilustra as diferenças entre for...of e for...in
+        */
+
+        //declara um array literal dense anonimo inicializado com 3 elementos, o array e atribuido por referencia a variavel scores
+        //o array literal anonimo e uma instancia de objeto anonimo do tipo Array
+        let scores = [10, 20, 30];
+        //o seguinute atribui uma propriedade chamada message ao instancia de objeto de array referenciado por scores, inicializa a prorpiedade messagen com a stirng literal 'hi'
+        scores.message = 'Hi';
+
+        //utilizando o loop for in para iterar sobre um objeto que possua propriedades enumeraveis que tenha o seu descritor como [[enumerable]] definido como true para todas as propriedades, itera sobre as propriedades do objeto
+        console.log("For..in:");
+        //atribui cada propriedade a variavel score a cada iteração
+        for(let score in scores) {
+            console.log(score);
+        }
+
+        //utilizando o loop for of para iterar sobre um coleção, itera sobre objetos iteraveis como coleções, Array, Set, Map, itera sobre os elementos da coleção
+        //atribui cada elemento da coleção a variavel score a cada iteração
+        for(let score of scores) {
+            console.log(score);
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * Use o for...of loop para iterar sobre elementos de um objeto iterável.
+        */
+    </script>
+
+</body>
+</html>

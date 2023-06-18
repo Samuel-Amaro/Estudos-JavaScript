@@ -1,0 +1,66 @@
+<!--
+    * Abra-o e dê uma olhada - você verá que temos um <div> elemento cobrindo uma pequena parte da tela, que tem um bloco de fundo aplicado a ele. Usaremos isso para representar nossa área de interface do usuário do aplicativo.
+-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de redimensionamento de janela</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        div{
+            box-sizing: border-box;
+            width: 100px;
+            height: 100px;
+            background-image: url(bgtile.png);
+            border-top: 10px;
+            border-right: 10px;
+            border-bottom: 10px;
+            border-left: 10px;
+            border-color: white;
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+
+    <!--script local-->
+    <script>
+
+        //obtendo referencia ao elemento <div>
+        const div = document.querySelector('div');
+
+        //pegar a largura e a altura da janela de visualização (a janela interna, onde seu documento é exibido) e armazená-los em variáveis ​​
+        let larguraJan = window.innerWidth;
+        let alturaJan = window.innerHeight;
+
+        //A seguir, alteraremos dinamicamente a largura e a altura do div para igualar a da janela de visualização.
+        //estaticamente
+        div.style.width = larguraJan + 'px';
+        div.style.height = alturaJan + 'px';
+
+        //Salve e tente atualizar seu navegador - agora você deve ver o div se tornar tão grande quanto sua janela de visualização, seja qual for o tamanho da tela que estiver usando. Se você tentar redimensionar a janela para torná-la maior, verá que a div permanece do mesmo tamanho - estamos configurando apenas uma vez.
+
+        //Que tal usarmos um evento para que o div seja redimensionado conforme redimensionamos a janela? O Window objeto tem um evento disponível chamado resize, que é disparado toda vez que a janela é redimensionada - vamos acessar isso por meio do Window.onresize manipulador de eventos e executar novamente nosso código de dimensionamento cada vez que ele mudar.
+
+        //registrando um manipulador de eventos, quando o evento for disparado realizar a tarefa descrita na função anonima
+        window.onresize = function() {
+            //obtem referencia a largura interna da janela
+            larguraJan = window.innerWidth;
+            //obtem referencia da altura interna da janela
+            alturaJan = window.innerHeight;
+            //seta um novo valor de largura para o elemento <div>
+            div.style.width = larguraJan + 'px';
+            //seta um novo valor de altura para o elemento <div>
+            div.style.height = alturaJan + 'px';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script type="text/javascript">
+        
+        /**
+         * * PROMPT() EXEMPLOS DE JS
+         * 
+         * Vamos dar alguns exemplos para ver como prompt() funciona.
+         * 
+         * * 2) CONVERTA UMA ENTRADA DO USUÁRIO EM UM NÚMERO
+         * 
+         * O resultado do prompt() é uma string. Se você quiser obter a resposta como um número, você deve sempre converter a string em um número.
+         *
+         * O exemplo a seguir usa prompt() para exibir uma caixa de diálogo que pergunta a idade dos usuários. Se os usuários tiverem 16 anos ou mais, eles poderão participar. Caso contrário, eles não serão. 
+        */
+
+        //Usando o método prompt() do window objeto global em ambiente de navegador,  para exibir uma caixa de dialogo com uma mensagem solicitando a entrada do usuario e dois botões OK  e Cancel
+        //a caixa de dialog solicita que o usuario insira alguma texto e espera ate que o usuario o envie ou cancele, a entrada fornceida na caixa de dialogo
+        //o argumento passado para a functino prompt e a string a ser exibida se omitir e não sera exibido nada na caixa de dialogo
+        //o prompt retorna o texto(tipo string) pelo usuario ou null
+        let ageStr = prompt('Quantos anos você tem?');
+        //converte o texto(string) em um numero, a string tem que ser uma string numerica, contém so texto numerico
+        let age = Number(ageStr);
+
+        //obtem uma mensagem dinamica de acordo com o texto fornecido no input pelo usuario
+        let feedback = age >= 16 ? 'Você está qualificado para participar.' : 'Você deve ter pelo menos 16 anos para participar.';
+        //o método alert(message) invoca uma caixa de dialogo de alerta do sistema
+        //a caixa de dialogo depende do navegador e do sistema operacional
+        //passamos como argumento para o método alert(message) uma string, que contem informações que desejamos mostrar para os usuarios
+        alert(feedback);
+
+        /**
+         * * RESUMO
+         *  
+         * O prompt() é um método do window objeto.
+         * 
+         * O prompt() mostra uma caixa de diálogo que solicita que o usuário insira um texto e aguarde até que o usuário envie ou cancele a caixa de diálogo.
+         * 
+         * O prompt() retorna uma string contendo uma string digitada pelo usuário ou null se o usuário não digitou nada.
+        */
+    </script>
+
+</body>
+</html>

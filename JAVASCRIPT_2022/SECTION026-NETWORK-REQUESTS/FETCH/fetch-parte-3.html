@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        /**
+         * Como exemplo para leitura em formato binário, vamos buscar e mostrar uma imagem de logotipo da especificação “fetch” (veja o capítulo Blob para detalhes sobre operações em Blob):
+        */
+
+        let u = 'https://javascript.info/article/fetch/logo-fetch.svg';
+
+        async function loadImg(url) {
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            let response = await fetch(url);
+
+            //o metodo reponse.blob() obtem corpo do response objeto, retorna uma promise que resolve a resposta como Blob (dados binários com tipo),
+            let blob = await response.blob(); //baixar como objeto Blob
+
+            //cria <img>
+            let img = document.createElement('img');
+            img.style = 'position: fixed; top: 10px; left: 10px; width: 100px';
+            document.body.append(img);
+
+            //mostra 
+            img.src = URL.createObjectURL(blob);
+
+            //apos 3s oculta a img, a remove
+            setTimeout(() => {
+                img.remove();
+                URL.revokeObjectURL(img.src);
+            }, 3000);
+        }
+
+        loadImg(u);
+       
+        /**
+         * * IMPORTANTE
+         * 
+         * Podemos escolher apenas um método de leitura corporal(body).
+         * 
+         * Se já tivermos a resposta com response.text(), response.json()não funcionará, pois o conteúdo do corpo já foi processado.
+        */
+
+        //let text = await response.text(); // response body consumed
+        //let parsed = await response.json(); // fails (already consumed)
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo B</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * EXEMPLO B) Array.from() com uma função de mapeamento
+         * 
+         *  O Array.from() método aceita uma função de retorno de chamada(callback) que permite executar a função de mapeamento em cada elemento do array que está sendo criado. Veja o seguinte exemplo:
+        */
+
+        //declara uma function chamada addOne que não declara paramentro
+        //a function addOne e uma instancia de objeto do tipo function
+        function addOne() {
+            //utilizando o metodo Array.from() podemos criar um novo array a partir de um objeto tipo array ou iterável(iterable).
+            //o Metodo Array.from() retorna uma nova instância de Array que contém todos os elementos do target objeto.
+            //o Array.from() metodo chamada aqui recebe dois argumento o primeiro argumento e um objeto do tipo array que e o objeto usado para criar um novo array a partir dele, criar um novo array com os mesmos elementos do arguments objeto
+            //o segundo argumento e uma arrow function anonima que possui um paramentro chamado x, essa arrow function e uma callback é a função map para chamar todos os elementos do array
+            //cada elemeento do  array chamara essa callback function passando como paramentro para callbakc o proprio elemento a callbak retorna o elemento somado + 1
+            //para ser adicionado ao array de resultado retornado
+            return Array.from(arguments, x => x + 1);
+        }
+
+        //invoca a function addOne passando um numero indefinido de argumentos a function retorna um array
+        console.log(addOne(1, 2, 3));
+
+        /**
+         * Neste exemplo, aumentamos cada argumento da addOne() função em um e adicionamos o resultado ao novo array.
+        */
+    </script>
+</body>
+</html>

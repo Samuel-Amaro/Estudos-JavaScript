@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!--
+        - atribui um manipulador de evento por meio de um atributo html
+    -->
+    <span ondblclick="alert('dblclick')">Clique Duplo aqui!</span>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <!--
+        - atribui um manipulador de evento por meio de um atributo html
+        - atribuimos um manipulador de evento para o evento de clique duplo no elemento b
+        - e um outro manipulador de evento para o evento de quando o botão do mouse e clicado sobre o elemento b. o manipulador desse evento retorna false para que impeça a ação padrão do navegador, de selecionar o texto que recebeu dois cliques do mouse
+    -->
+    Antes...
+    <b ondblclick="alert('Click!')" onmousedown="return false">Clique duas vezes em min</b>
+    ...Depois
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <!--
+        - atribuindo um manipulador de evento por meio do atributo HTML
+        - atribuindo um manipulador para o evento oncopy evento de seleção de conteudo da pagina de copiar e colar.
+        - o manipulador retorna false, para que seka impedida a ação padrão do navegador. desabilitamos a ação padrão do navegador de o usuario poder copiar e colar conteudo da pagina.
+    -->
+    <div oncopy="alert('Copiar proibido!'); return false;">
+        Caro usuário,
+        A cópia é proibida para você. 
+        Se você conhece JS ou HTML, pode obter tudo da fonte da página.
+    </div>
+
+    <script type="text/javascript">
+
+        /**
+         * * Impedindo a seleção ao clicar com o mouse
+         *  
+         * O clique duplo do mouse tem um efeito colateral que pode ser perturbador em algumas interfaces: ele seleciona texto.
+         * 
+         * Por exemplo, clicar duas vezes no texto abaixo seleciona-o além do nosso manipulador:
+         * 
+         * Se alguém pressiona o botão esquerdo do mouse e, sem soltá-lo, move o mouse, isso também torna a seleção, muitas vezes indesejada.
+         * 
+         * Existem várias maneiras de evitar a seleção, que você pode ler no capítulo Seleção e Intervalo .
+         * 
+         * Nesse caso específico, a maneira mais razoável é impedir a ação do navegador no mousedown. Ele impede essas duas seleções:
+         * 
+         * Agora o elemento em negrito não é selecionado em cliques duplos, e pressionar o botão esquerdo sobre ele não iniciará a seleção.
+         * 
+         * Observe: o texto dentro dele ainda é selecionável. No entanto, a seleção deve começar não no próprio texto, mas antes ou depois dele. Geralmente isso é bom para os usuários.
+         * 
+         * * IMPEDINDO A CÓPIA
+         * 
+         * Se quisermos desabilitar a seleção para proteger o conteúdo de nossa página de copiar e colar, podemos usar outro evento: oncopy.
+         * 
+         * Se você tentar copiar um pedaço de texto no <div>, isso não funcionará, porque a ação padrão oncopy é impedida.
+         * 
+         * Certamente o usuário tem acesso ao código-fonte HTML da página, e pode tirar o conteúdo de lá, mas nem todo mundo sabe como fazer isso.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript IIFE - jQuery</title>
+</head>
+<body>
+    
+    <h1>jQuery Demo</h1>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+    integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+
+    <script>
+        
+        /**
+         * * jQuery and IIFE(Immediately Invoked Function Expression)
+         * 
+         *  O seguinte documento HTML usa a biblioteca jQuery:
+        */
+        
+        let counter = 1;
+        $('h1').click(function() {
+           $(this).text(`jQuery Demo Clicked ${counter++}`); 
+        });
+
+        /**
+         * Ao importar a biblioteca jQuery, você pode acessar muitas funções jQuery úteis por meio do objeto $ ou jQuery. Nos bastidores, o jQuery usa o IIFE para expor sua funcionalidade.
+         * 
+         * Ao fazer isso, o jQuery só precisa usar uma variável global ( $) para expor toneladas de funções sem poluir o objeto global.
+         * 
+         * O exemplo a seguir ilustra como alterar o jQuery $ object para _ dentro do IIFE:
+        */
+
+        //declara uma expressão de função imediatamente invocada
+        //passando um argumento para ela na chamada, o argument e um objeto jQuery que dentro da expressão da função muda o argumento para _
+        (function(_) {
+            let counter = 1;
+            _('h1').click(function() {
+                _(this).text(`jQuery Demo Clicked ${counter++}`);
+            });
+        })(jQuery);
+
+        /**
+         * Neste exemplo, passamos o objeto jQuery para o IIFE. Na função dentro do IIFE, use o _ argumento.
+         * 
+         * Neste tutorial, você terá aprendido sobre as expressões de função imediatamente invocadas (IIFE) do JavaScript e seus propósitos.
+         * */
+    </script>    
+</body>
+</html>

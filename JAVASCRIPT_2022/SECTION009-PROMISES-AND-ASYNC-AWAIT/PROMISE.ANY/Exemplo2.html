@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * 
+         * * 2) UM EXEMPLO DE PROMESSA REJEITADA
+         * 
+         * O exemplo a seguir usa o Promise.any() método com lista de promessas que tem uma promessa rejeitada:
+        */
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para rejeitar a promise
+            setTimeout(() => {
+                console.log('Promise 1 reject');
+                //usando o callbakc function reject, para mudar o estado da promise de pendente para rejeita por um motivo
+                //o motivo e o argumento do reject function callbakc argumento
+                reject('error');
+            }, 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para resolver a promise
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                //usando o callbakc function resolve, para mudar o estado da promise de pendente para cumprida com valor(resolvida)
+                //o valor e o 2
+                resolve(2);
+            }, 2000);
+        });
+
+        //usando o método Promise.any(), retorna uma única promessa que resolve para um valor que é o resultado da promessa cumprida(em menor tempo, a primeira promessa a ser cumprida com valor), o promise.any() ignora as promessas rejeitas, so olha para as promises cumpridas com valor:
+        //o método retorna uma nova promessa que resolve para o valor da primeira promessa de entrada que atingir o estado de cumprida com valor em menor tempo
+        //a primeira promise a atingir um estado e a promise 1 que atingi o estado de rejeitada em menor tempo do que promise 2 que e resolvida com valor em um tempo maior, mas o método Promise.any() ignora as promises rejeitadas, so olha para as promises cumpridas com valor
+        //a promisse retornada por Promise.any() e atribuida por referencia a variavel p
+        //o método any recebe um array literal anonimo com as variaveis que referenciam as promises
+        //inicializa o array com 2 promises
+        const p = Promise.any([p1, p2]);
+        //usando o then método para obter o valor da promise referenciada por p, quando ela for cumprida(resolvida), o valor e o resultado da primeira promise de entrada resolvida em menor tempo, entre as promises resolvidas(cumpridas por valor)
+        //a callbak passada para o then método e invocada quando a promise refrenciada por p for revolvida(cumprida com valor)
+        p.then((value) => {
+            //mostra o valor da segunda promise de entrada passada para Promise.any, tiver sido resolvida
+            console.log('Returned Promise');
+            console.log(value); //2
+        });
+
+        /**
+         * Neste exemplo, o Promise.any()ignora a promessa rejeitada. Quando o p2 resolve com o valor 2, o Promise.any() retorna uma promessa que resolve para o mesmo valor do resultado do p2.
+        */
+        
+    </script>
+</body>
+</html>

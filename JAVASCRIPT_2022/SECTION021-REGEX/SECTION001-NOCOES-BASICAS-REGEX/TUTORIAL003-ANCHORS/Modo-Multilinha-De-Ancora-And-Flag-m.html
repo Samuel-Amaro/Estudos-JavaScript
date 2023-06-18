@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MODO MULTILINHA DE ÂNCORAS ^ E $: O FLAG M
+         * 
+         * O padrão da âncora ^ ou $ é o modo de linha única. No modo de linha única, a âncora ^ e $ corresponde ao início e ao fim de uma string.
+         * 
+         * Para habilitar o modo multilinha, você usa flag m. No modo de várias linhas, a âncora ^ ou $ corresponde ao início ou fim da string, bem como ao início ou fim das linhas.
+         * 
+         * O exemplo a seguir retorna apenas o primeiro dígito da string de várias linhas:
+        */
+
+        //declara uma variavel de escopo de bloco chamada str, que e inicilizada com uma string literal a ser usada na pesquisa
+        let str = `1st line
+        2nd line
+        3rd line`;
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo o padrão /^\d/g e para qualquer texto que comece com um digito, a utilização da flag no padrão e uma configuração que altera o comportamento da pesquisa, a flag g(global), instrui o objeto RegExp busca por todas as correspondecias e retorna todas elas, no modo de linha unica, as ancoras correspondem somente a uma string, ou inicio ou final.
+        //o padrão e qualquer texto que corresponda o seguinte, que comece com um digito. o texto tem que iniciar com um digito
+        //essa expressão regular e do tipo RegExp, então podemos chamar métodos de instancia a partir do mesmo
+        let re = /^\d/g;
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        //o método ira retornar todoas as correspondecias da expressão regular referenciado por re na string str
+        let matches = str.match(re);
+
+        console.log(matches);
+
+        //modificando o padrão abaixo da expressão regular, para adicionar uma nova flag, a flag m(multiline),
+        //no exemplo abaixo o padrão /^\d/gm e para qualquer texto que comece com um digito, a utilização da flag no padrão e uma configuração que altera o comportamento da pesquisa, a flag g(global), instrui o objeto RegExp busca por todas as correspondecias e retorna todas elas, no modo de linha unica, as ancoras correspondem somente a uma string, ou inicio ou final.
+        //usando a glag (m) - multiline, habilita o modo multilinha, no modo multinlinha as ancoras correspondem ao inicio e final de uma string bem como ao inicio e final das linhas.
+        //O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+        let re2 = /^\d/gm;
+        //o método ira retornar todoas as correspondecias da expressão regular referenciado por re na string str multilinha, uma string de varias linhas
+        let matches2 = str.match(re2);
+
+        console.log(matches2);
+
+        /**
+         * * RESUMO
+         * 
+         * Use a ^ âncora para corresponder ao início do texto.
+         * 
+         * Use a $ âncora para corresponder ao final do texto.
+         * 
+         * Use o m sinalizador para ativar o modo de várias linhas que instrui as âncoras ^ e $ a corresponderem ao início e ao fim do texto, bem como ao início e ao fim da linha.
+        */
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body id="body" something="não-padrão" type="...">
+    <input id="input" type="text"/>
+
+    <div id="elem" about="Elephant"></div>
+
+    <script type="text/javascript">
+
+        /**
+         * Observe que um atributo padrão para um elemento pode ser desconhecido para outro. Por exemplo, "type" é padrão para <input>( HTMLInputElement ), mas não para <body>( HTMLBodyElement ). Os atributos padrão são descritos na especificação da classe de elemento correspondente.
+        */
+
+        //o input e uma variavel global nomeada pelo id que referencia o elemento no dom
+        //acessado a propriedade type do objeto dom input, sendo que essa propriedade no html e um atributo padrão para elementos <input>
+        console.log(input.type);
+
+        //porem para elementos html <body> esse atributo não existe, não e padrão
+        console.log(body.type); //undefined: propriedade DOM não criada, porque não é padrão
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Simples de codigo assicrono e sincrono</title>
+</head>
+<body>
+   
+    <h1>Exemplo simples de código Assicrono e sicrono</h1>
+
+    <script>
+        console.log('Iniciando');
+        let image;
+
+        //A Fetch API fornece uma interface para buscar recursos (por exemplo, em toda a rede). Parecerá familiar para qualquer pessoa que tenha usado XMLHttpRequest, porém a nova API oferece um conjunto de recursos mais poderoso e flexível.
+        //O Fetch fornece uma definição genérica de objetos de Request e Response  (e outras coisas envolvidas com solicitações de rede). 
+        //Para fazer uma solicitação e buscar um recurso, use o método GlobalFetch.fetch (en-US) . Ele é implementado em várias interfaces, especificamente Window e WorkerGlobalScope (en-US). 
+        //O método  fetch() do  WindowOrWorkerGlobalScope mixin inicia um processo de busca de um recurso da rede. Este, retorna uma promessa que resolve o objeto  Responseque representa a resposta a sua requisição. 
+        //WorkerOrGlobalScopeé implementado por Windowe WorkerGlobalScope (en-US) , o que significa que o método  fetch()está disponível em praticamente qualquer contexto em que você quer obter obter recursos.
+        //Busca uma imagen da internet
+        fetch('coffee.jpg').then((response) => {
+            console.log("Funcionou.");
+            return response.blob();
+        }).then((myBlob) => {
+            let objectURL = URL.createObjectURL(myBlob);
+            image = document.createElement('img');
+            image.src = objectURL;
+            document.body.appendChild(image);    
+        }).then(() => {
+            console.log('Tudo Feito!' + image.src + 'mostrada');
+        })
+        .catch((error) => {
+            console.log('Ocorreu um problema com sua operação de busca: ' + error.message);
+        });
+
+    </script>
+</body>
+</html>

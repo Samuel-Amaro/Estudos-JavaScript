@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * BROWSER ENVIRONMENT, SPECS(AMBIENTE DO NAVEGADOR E ESPECIFICAÇÕES)
+         * 
+         * A linguagem JavaScript foi inicialmente criada para navegadores web. Desde então, evoluiu e se tornou uma linguagem com muitos usos e plataformas.
+         * 
+         * Uma plataforma pode ser um navegador, um servidor web ou outro host , até mesmo uma máquina de café “inteligente”, se puder executar JavaScript. Cada um deles fornece funcionalidade específica da plataforma. A especificação JavaScript chama isso de ambiente host .
+         * 
+         * Um ambiente host fornece objetos próprios e funções adicionais ao núcleo da linguagem. Os navegadores da Web fornecem um meio de controlar as páginas da Web. O Node.js fornece recursos do lado do servidor e assim por diante.
+         * 
+         * Aqui está uma visão geral do que temos quando o JavaScript é executado em um navegador da web:
+         * 
+         * Existe um objeto “raiz” chamado window. Tem dois papéis:
+         
+            1. Primeiro, é um objeto global para código JavaScript, 
+
+            2. Em segundo lugar, representa a “janela do navegador - browser window” e fornece métodos para controlá-la.
+
+         * Por exemplo, aqui nós o usamos como um objeto global:
+         * */
+
+        //function regular de escopo global
+        function sayHi() {
+            alert("Hello");
+
+        }
+
+        //funções globais são métodos do objeto global:
+        window.sayHi();
+
+        /**
+         * 
+         * E aqui nós a usamos como uma janela do navegador, para ver a altura da janela:
+        */
+
+        alert(window.innerHeight); //altura da janela interna
+
+        /**
+         * Existem mais métodos e propriedades específicos de janela, nós os abordaremos mais tarde.
+         * 
+         * */
+    </script>
+</body>
+</html>

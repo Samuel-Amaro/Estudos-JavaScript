@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ANINHANDO CALLBACKS E A PIRAMIDE DA DESTRUIÇÃO
+         * 
+         * Como você baixa três fotos e as processa sequencialmente? Uma abordagem típica é chamar a download() função dentro da função de retorno de chamada(callback), assim:
+         * */
+
+        function download(url, callback) {
+            //function setTimeout recebe uma callback implementada com arrow function como argument para setTimeout funciton
+            setTimeout(() => {
+                //script para baixar a imagem aqui
+                console.log(`Downloading ${url} ...`);
+                //processar a imagem assim que estiver concluída
+                callback(url);
+            }, 3000);
+        }
+
+        const url1 = 'https://www.javascripttutorial.net/pic1.jpg';
+        const url2 = 'https://www.javascripttutorial.net/pic2.jpg';
+        const url3 = 'https://www.javascripttutorial.net/pic3.jpg';
+
+        //a download function recebe 2 argumentos
+        //o ultimo argumento são a callback functions anonimas regular que possui paramentro que e uma picture
+        //passa uma callback function regular anonima como argument para download function
+        download(url1 , function(picture) {
+                console.log(`Processing ${picture}`);
+            //download da segunda imagem
+            //invoca a mesma função como, usando a recursividade e passando uma nova callback anonima que possui uma paramentro picture
+            download(url2, function (picture) {
+                console.log(`Processing ${picture}`);
+                //mesma coisa dos exemplos acima, usando recursividade, uma function que chama ela mesma dentro dela mesma
+                //download da terceira imagem
+                download(url3, function(picture) {
+                    console.log(`Processing ${picture}`);
+                }); 
+            });
+        });
+
+        /**
+         * O script funciona perfeitamente bem.
+         * 
+         * No entanto, essa estratégia de retorno de chamada não se adapta bem quando a complexidade aumenta significativamente.
+         * 
+         * O aninhamento de muitas funções assíncronas dentro de retornos de chamada(callbakcs) é conhecido como a pirâmide da desgraça ou inferno de retorno de chamada(callbakc):
+         * */
+
+         asyncFunction(function(){
+            asyncFunction(function(){
+                asyncFunction(function(){
+                    asyncFunction(function(){
+                        asyncFunction(function(){
+                            //....
+                        });
+                    });
+                });
+            });
+        });
+
+        /**
+         * Para evitar a pirâmide da desgraça, você usa promessas ou funções assíncronas/espera .
+         * */
+    </script>
+
+</body>
+</html>

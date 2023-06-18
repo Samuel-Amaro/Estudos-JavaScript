@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        /**
+         * * DATE AND TIME(DATA E HORA)
+         * 
+         *  Vamos conhecer um novo objeto interno: Date . Ele armazena a data, hora e fornece métodos para gerenciamento de data/hora.
+         * 
+         * Por exemplo, podemos usá-lo para armazenar os tempos de criação/modificação, para medir o tempo ou apenas para imprimir a data atual.
+         * 
+         * * CREATION(CRIAÇÃO)
+         * 
+         * Para criar uma nova Date chamada de objeto new Date() com um dos seguintes argumentos:
+         
+            new Date() -> cria um novo objeto do tipo date
+
+         * 
+         * Sem argumentos – crie um Date objeto para a data e hora atuais:
+        */
+
+        //cria uma nova instancide de objeto do tipo Date invocando o construtor date sem passar argumentos, cria uma nova intancia de objeto para a data e hora atual
+        let now = new Date();
+        console.log(now); //Mostra data/hora atual
+
+        /**
+            new Date(milliseconds)
+            
+            * Crie um Date objeto com o tempo igual ao número de milissegundos (1/1000 de segundo) passados ​​após 1º de janeiro de 1970 UTC+0.
+        */
+
+        //0 significa 01.01.1970 UTC+0
+        //declara uma nova instancia de objeto date, passando o argumento 0, que e igual a 01.01.1970, o timestamp 0, e um representação numerica leve de uma data
+        //criamos uma nova instancia de objeto para representar uma data a partir do timestamp 0
+        let Jan01_1970 = new Date(0);
+        console.log(Jan01_1970);
+
+        //agora adicione 24 horas, obtenha 02.01.1970 UTC+0
+        //declara uma nova instancia de objeto date, passando o argumento 24 * 3600 * 1000(um timestamp)
+        //criamos uma nova instancia de objeto para representar uma data a partir do timestamp 24 * 3600 * 1000
+        let Jan02_1970 = new Date(24 * 3600 * 1000);
+        console.log(Jan02_1970);
+
+        /**
+         * Um número inteiro que representa o número de milissegundos que se passaram desde o início de 1970 é chamado de timestamp(carimbo data/hora).
+         * 
+         * É uma representação numérica leve de uma data. Sempre podemos criar uma data a partir de um timestamp usando new Date(timestamp) e converter o Date objeto existente em um timestamp usando o date.getTime()método (veja abaixo).
+         * 
+         * Datas anteriores a 01.01.1970 têm carimbos de data/hora negativos, por exemplo:
+        */
+
+        //31 Dec 1969
+        //declara uma nova instancia de objeto date, passando o argumento -24 * 3600 * 1000(um timestamp)
+        //criamos uma nova instancia de objeto para representar uma data a partir do timestamp -24 * 3600 * 1000
+        let Dec31_1969 = new Date(-24 * 3600 * 1000);
+        console.log(Dec31_1969);
+
+        /**
+            new Date(datestring)
+            
+            Se houver um único argumento e for uma string, ele será analisado automaticamente. O algoritmo é o mesmo que Date.parse usa, vamos cobri-lo mais tarde.
+        */
+
+        //declara uma nova instancia de objeto invocando o construtor Date passando como argumento uma data numerica em formato de string
+        let date = new Date("2017-01-26");
+        console.log(date);
+        //A hora não está definida, então supõe-se que seja meia-noite GMT e
+        // é ajustado de acordo com o fuso horário em que o código é executado
+        // Então o resultado pode ser
+        // Qui, 26 de janeiro de 2017 11:00:00 GMT+1100 (horário de verão do leste australiano)
+        // ou
+        // Quarta-feira, 25 de janeiro de 2017 16:00:00 GMT-0800 (Horário Padrão do Pacífico)
+
+        /**
+           
+            new Date(year, month, date, hours, minutes, seconds, ms);
+
+            - Crie a data com os componentes fornecidos no fuso horário local. Apenas os dois primeiros argumentos são obrigatórios.
+
+            - O year deve ter 4 dígitos: 2013 está bem, 98 não está.
+            - A month contagem começa com 0(Jan), até 11 (Dez).
+            - O date parâmetro é, na verdade, o dia do mês, se ausente, 1 é assumido.
+            - Se hours/minutes/seconds/ms estiver ausente, eles são considerados iguais 0.
+
+         * Por exemplo:
+        */
+
+        //cria um nova instancia de objeto do tipo date fornecendo 7 argumentos para o construtor, isso cria uma data com os argumentos fornecidos no fuso horario local
+        let d = new Date(2011, 0, 1, 0, 0, 0, 0); //1 Jan 2011 00:00:00
+        //mesmo exemplo porem passando so três argumentos, os dois primeiros são obrigatorios, o restante e opcional
+        //cria uma data como 1 dia de janeiro de 2011 00:00:00
+        let d1 = new Date(2011, 0, 1); // o mesmo, horas etc são 0 por padrão
+
+        /**
+         * A precisão máxima é de 1 ms (1/1000 seg):
+         
+            1 milisegundos e igual a 1000 segundos
+            1000 segundos e igual a 16,66 minutos
+            //cria uma nova instancia de objeto date passando 7 argumentos para criar uma data no horario local
+        */
+
+        let d2 = new Date(2011, 0, 1, 2, 3, 4, 567);
+        console.log(d2); //1.01.2011, 02:03:04.567
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * Aqui está o exemplo completo com fetch abortado após 1 segundo:
+        */
+
+        (async() => {
+            //criando um controlador
+            //usando Class AbortController Ele pode ser usado para abortar não apenas fetch, mas também outras tarefas assíncronas.
+            let controller = new AbortController();
+
+            //apos 1s aborta a request
+            setTimeout(() => {
+                //abortando, cancelando, uma tarefa assincrona, aborta a request, apos 1s
+                //chamando metodo controller.abort();
+                //apos chamada do metodo a propriedade controller.signal emite o "abort" evento, acionando o manipulador atribuido em objeto signal, se estiver definido um manipulador
+                //e controller.signal.aborted propriedade se torna true.
+                controller.abort();
+            }, 1000);
+
+            try {
+                //enviando uma request para o url
+                //passamos como argumento para o metodo fetch o url que a request ira ser enviada, e passamos um objeto com informações adicionais para o request
+                let response = await fetch('https://javascript.info/article/fetch-abort/demo/hang', {
+                    //option signal para abortar o fetch, cancelar/abortar request
+                    //obtemos o valor da propriedade controller.signal, que permite definir ouvintes de eventos nele, obtem um objeto
+                    signal: controller.signal //passa objetct AbortSignal
+                });     
+            } catch (error) {
+                //quando a request enviado por fetch e abortada a promessa que o metodo retorna e rejeitada com um erro AbortError
+                if(error.name == 'AbortError') { //manipulador do evento abort
+                    alert("Aborted!");
+                }else{
+                    throw err;
+                }
+            }
+        })();
+
+        
+        
+
+    </script>
+
+</body>
+</html>

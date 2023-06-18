@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MÉTODO JAVASCRIPT REGEX MATCH()
+         * 
+         * Vamos dar alguns exemplos de uso do match() método.
+         * 
+         * * 2) USANDO O MÉTODO JAVASCRIPT REGEX MATCH() COM O GRUPO DE CAPTURA NOMEADO
+         * 
+         * Veja a seguir como usar o match()método com um grupo de captura nomeado . Ele captura o "yellow" em um grupo chamado "color":
+        */
+
+        //string literal a ser usada para pesquisa
+        let str = 'I like yellow color palete!';
+
+        //cria uma expressão regular com o seguinte padrão:  um grupo de captura nomeado chamada color que possui a seguinte regra como padrão, corresponder a string literal yellow, depois continunado o padrão corresponder a um espaço em branco string literal color
+        let re = /(?<color>yellow) color/;
+        //usando o método str.match(regexp) ira retorna a primeira correspondencia da str na expressão regular, retorna um array com a primeira correspondencia e propriedades adicionais no array, como groups(é o objeto literal anonimo de grupos de captura nomeados cujas chaves e valores são os nomes e os grupos de captura respectivamente. as chaves são os nomes dos grupos nomeados os valores são os valores capturados pelo respectivo grupo), input, index
+        let result = str.match(re);
+        console.log(result);
+
+        /**
+         * Neste tutorial, você aprendeu como usar o match() método JavaScript String para corresponder uma string a uma expressão regular.
+        */
+    </script>
+
+</body>
+</html>

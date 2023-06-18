@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * ALTERNAÇÃO(ALTERNATION) REGEX
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre a alternância de regex JavaScript, que é o operador “OR” em expressões regulares.
+         * 
+         * * INTRODUÇÃO À ALTERNÂNCIA REGEX
+         * 
+         * Regex usa o operador pipe (|) para representar uma alternância, que é como o operador OR lógico em expressões regulares. A alternância permite que você combine A ou B:
+         
+            A | B
+
+         * 
+         * O exemplo a seguir usa a alternância para corresponder a JavaScript ou JS na string 'JavaScript and JS':
+        */
+
+        //declara uma string literal a ser usada na pesquisa
+        const s = 'JavaScript and JS';
+        //declara uma expressão regular que define o seguinte padrão, um padrão que corresponda a JavaScript ou a JS na string s, usando o operador pipe(|) para representar uma alternancia, ou corresponda a JavaScript ou a JS
+        //a flag g(global) instrui o RegExp a retornar todas as correspondecias
+        const pattern = /JavaScript|JS/g;
+        //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string
+        //retorna uma array com todas as correspodencias
+        const match = s.match(pattern);
+
+        console.log(match);
+        
+    </script>
+</body>
+</html>
+
+
+

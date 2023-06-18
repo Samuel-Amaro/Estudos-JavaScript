@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div>Begin</div>
+
+    <ul>
+        <li>Information</li>
+    </ul>
+
+    <div>End</div>
+
+    <script type="text/javascript">
+       
+        /**
+         * * NAVEGAÇÃO SOMENTE DE ELEMENTOS(ELEMENT-ONLY NAVIGATION)
+         * 
+         * As propriedades de navegação listadas acima referem-se a todos os nós. Por exemplo, childNodes podemos ver nós de texto, nós de elemento e até nós de comentário, se existirem.
+         * 
+         * Mas para muitas tarefas não queremos nós de texto ou comentário. Queremos manipular nós de elementos que representam tags e formam a estrutura da página.
+         * 
+         * Então, vamos ver mais links de navegação que levam em consideração apenas nós de elemento :
+    
+            - Os links são semelhantes aos dados acima, apenas com a Element palavra dentro:
+                - children – apenas os filhos que são nós de elemento.
+                - firstElementChild, lastElementChild – filhos do primeiro e último elemento.
+                - previousElementSibling, nextElementSibling – elementos vizinhos.
+                - parentElement – elemento pai.
+
+         * 
+         *  Por quê parentElement? O pai não pode ser um elemento?
+         * 
+         * A parentElement propriedade retorna o pai “elemento”, enquanto parentNode retorna o pai “qualquer nó”. Essas propriedades geralmente são as mesmas: ambas obtêm o pai.
+         * 
+         * Com a única exceção de document.documentElement:
+         * */
+
+        //retorna o no pai do elemento <html>  que e o proprio documento
+        alert(document.documentElement.parentNode); //document
+        //retorna o no pai que seja um no de tipo elemento
+        alert(document.documentElement.parentElement); //null
+
+        /**
+         * A razão é que o nó raiz document.documentElement(<html>) tem document como pai. Mas document não é um nó de elemento, então parentNode o retorna e parentElement não o faz.
+         * 
+         * Este detalhe pode ser útil quando queremos viajar de um elemento arbitrário elem para <html>, mas não para o document:
+         
+            while(elem = elem.parentElement) { // vá até <html>
+                alert(elem);
+            }
+
+         * 
+         * Vamos modificar um dos exemplos acima: substitua childNodes por children. Agora mostra apenas elementos:
+         * */
+
+        //usando a propriedade children do objeto body, a propriedade retorna todos os elementos filho de body que sejam um no do tipo element
+        for(let elem of document.body.children) {
+            console.log(elem); //DIV, UL, DIV, SCRIPT
+        }
+
+
+    </script>
+
+
+</body>
+</html>

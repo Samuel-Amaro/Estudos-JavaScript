@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto Tipo Array</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO O ARRAY JS SHIFT() COM OBJETO TIPO ARRAY
+         * 
+         *  O shift() método é genérico. Portanto, você pode usá-lo com objetos do tipo array. Para usar o shift() método com um objeto do tipo array, você usa o método call() ou apply().
+         * 
+         * Considere o seguinte exemplo:
+        */
+
+        //declara um objeto literal com propriedades e metodos, este objeto literal e atribuido a variavel greetings por referencia, assim a variavel referencia greetings
+        //declara um objeto do tipo array
+        let greetings = {
+            //declara propriedades do objeto usando sintaxe chave : valor
+            0: 'Hi',
+            1 : 'Hello',
+            2 : 'Howdy',
+            length: 3,
+            //declara um metodo do objeto usando a sintaxe ES6, ocultando palavra chave function e o :, o metodo não declara nenhum parâmetro, metodo chamado removeFirst, lembrando que isso e uma function, então e uma instancia de objeto do tipo function possui propriedades e metodos
+            removeFirst() {
+                //vamos utilizar o metodo shift com um objeto do tipo array
+                //usando a ligação por meio do metodo call vamos poder usar um novo this valor para poder invocar o metodo shift
+                //aqui usaremos o this como valor, aqui o this e o proprio objeto literal declarado
+                //então o proprio objeto literal ira invocar o metodo shift por meio de call retornando o primeiro elemento(propriedade) removida do objeto    
+                return [].shift.call(this);
+            }
+        }; 
+
+        //invocando o metodo removeFirst() para remover a primeira propriedade do objeto referenciado por greeting
+        const greeting = greetings.removeFirst();
+
+        //propriedade(elemento removido)
+        console.log(greeting);
+        //objeto com propriedades reindexadas pelo metodo shift
+        console.log(greetings);
+
+        /**
+         * * RESUMO
+         * 
+         * Use o shift() método para remover o primeiro elemento de uma array e retornar esse elemento.
+         * 
+         * Use o shift() método com um objeto do tipo array por meio do método call() ou apply().
+         * */
+    </script>
+</body>
+</html>

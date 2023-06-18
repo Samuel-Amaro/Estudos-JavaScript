@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * Há também o readystatechange evento que é acionado quando o estado muda, para que possamos imprimir todos esses estados assim:
+        */
+
+        //estado atual
+        //a propriedade document.readyState propriedade nos informa sobre o estado de carregamento atual
+        //pode ser 'loading' - 'interactive' - 'complete'
+        console.log(document.readyState);
+
+        //mudanças de estado de impressão
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //atribuimos um manipulador para o evento readyStateChange, que e acionado quando o estado do carregamento atual muda
+        //o evento sempre e acionado toda vez que o estado de carregamento da pagina muda, assim informa periodicamente em qual estado de carregamento a pagina se encontra
+        document.addEventListener('readystatechange', () => console.log(document.readyState));
+    </script>
+
+</body>
+</html>

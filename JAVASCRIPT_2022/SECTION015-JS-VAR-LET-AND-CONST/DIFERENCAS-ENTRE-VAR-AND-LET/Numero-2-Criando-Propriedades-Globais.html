@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script>
+
+        /**
+         * * #2 - CRIANDO PROPRIEDADES GLOBAIS
+         *
+         * As variáveis globais var são adicionadas ao objeto global como propriedades. O objeto global é window no navegador da web e global no Node.js:
+         * 
+        */
+        
+        //declarando uma variavel usando a var palavra-chave, declara uma variavel global em todo script, essa variavel global no script e adicionada como propriedade ao objeto global window, isso em mecanismos JS de ambiente de navegador, a variavel criada e adicionada como propriedade do objeto global window
+        //declara uma variavel global chamada counter inicializada com valor 0
+        var counter = 0;
+        //verificando se o mecanismo JS adicionou a variavel criada com a var palavra-chave como propriedade do window objeto global
+        console.log(window.counter); //0
+
+        /**
+         * No entanto, as let variáveis ​​não são adicionadas ao objeto global:
+        */
+
+        //cria um nova varaivel usando a palavra-chave let, cria um varaivel com escopo de bloco, essa variavel não e adicionada pelo mecanismo JS como uma propriedade do objeto global window
+        //declara uma varaivel chamada counterLet e a inicializa com vlaor 0
+        let counterLet = 0;
+        //verificando se o mecanismo JS adicionou a variavel counterLet como uma propriedade do objeto globalWindow, nesse caso não porque usamos a palavra-chave let, que cria uma varaivel de escopo de bloco
+        console.log(window.counterLet); //undefined
+        
+    </script>
+
+</body>
+</html>

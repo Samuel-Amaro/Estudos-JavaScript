@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basico Async/await</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O BÁSICO DE ASYNC/AWAIT
+         * 
+         *  Existem duas partes para usar async/ await em seu código.
+         * 
+         * * A PALAVRA-CHAVE ASSÍNCRONA(async)
+         * 
+         * 
+         * Em primeiro lugar, temos a async palavra - chave, que você coloca antes de uma declaração de função para transformá-la em uma função assíncrona. Uma função assíncrona é uma função que sabe como esperar a possibilidade de a await palavra - chave ser usada para invocar código assíncrono.
+         * 
+         * Tente digitar as seguintes linhas no console JS do seu navegador:
+        */
+
+        //declarando uma função normal
+        function hello() {
+            return "Hello"; //retorna uma string
+        }
+
+        console.log("Chama Função Normal: " + hello());
+
+        /**
+         *  A função retorna "Hello" - nada de especial, certo?
+         * 
+         * Mas e se transformarmos isso em uma função assíncrona? Experimente o seguinte:
+        */
+
+        //declarando uma função assincrona
+        async function hello2() {
+            return "Hello"; //retorna um promise com uma valor de retorno "Hello"
+        }
+
+        console.log("Chama 1ª exemplo Função Assincrona: " + hello2());
+
+        /**
+         * Ah. Invocar a função agora retorna uma promessa. Esta é uma das características das funções assíncronas - seus valores de retorno são garantidos para serem convertidos em promessas.
+         * 
+         * Você também pode criar uma expressão de função assíncrona , como:
+        */
+
+        //a variavel hello esta associada a função assincrona anonima que retorna uma promisse
+        let hello3 = async function() {
+            return "Hello";
+        }
+
+        console.log("Chama 2ª exemplo Função Assincrona: " + hello3()); //retorna uma promisse
+
+        /**
+         * E você pode usar as funções de seta:
+         * */
+
+        let hello4 = async() => {
+            return "Hello"
+        };
+
+        /**
+         * Todos eles fazem basicamente a mesma coisa.
+         * 
+         * Para realmente consumir o valor retornado quando a promessa é cumprida, já que está retornando uma promessa, poderíamos usar um .then() bloco:
+         * */
+
+        hello4().then(function(value) {
+            console.log("Chamada a let hello4(), promessa cumprida: " + value);
+        });
+
+        /**
+         * ou mesmo apenas uma abreviatura, como
+         *  
+         * */
+
+        hello4().then(console.log);
+
+        /**
+         * Como vimos no último artigo.
+         * 
+         * Portanto, a async palavra-chave é adicionada às funções para instruí-las a retornar uma promessa em vez de retornar o valor diretamente.
+         *
+         * 
+         * * A PALAVRA-CHAVE await
+         * 
+         *  A vantagem de uma função assíncrona só se torna aparente quando você a combina com a palavra-chave await. await só funciona dentro de funções assíncronas dentro do código JavaScript regular; no entanto, pode ser usado sozinho com módulos JavaScript.
+         * 
+         * await pode ser colocado na frente de qualquer função baseada em promessa assíncrona para pausar seu código nessa linha até que a promessa seja cumprida e, em seguida, retornar o valor resultante.
+         * 
+         * Você pode usar await ao chamar qualquer função que retorna uma promessa, incluindo funções de API da web.
+         * 
+         * Aqui está um exemplo trivial
+         * */
+
+        //uma função declarada como assincrona que so retorna a promisse quando estiver comprida, e resolvida, o await assegura que o codigo pare nessa linha e so prossiga quando a promisse so seja retornada o resultado dela quando estiver resolvida
+        async function hello5() {
+            //Promise.resolve(valor)
+            //Retorna um objeto Promise que foi resolvido com um dado valor. Se o valor é thenable (possui um método then), a promise retornada "seguirá" este método, adotando esse estado eventual; caso contrário a promise retornada será realizada com o valor. Geralmente, se você quer saber se um valor é uma promise ou não, utilize Promise.resolve(valor) e trabalhe com a valor de retorno que é sempre uma promise.
+            //O método Promise.resolve(value) retorna um objeto Promise que é resolvido com o valor passado.
+            //Sintaxe
+            //Promise.resolve(value);   
+            //Promise.resolve(promise);
+            //Promise.resolve(thenable);
+            //value : Argumento a ser resolvido pela Promise. Pode também ser uma Promise ou um thenable a resolver.
+            //A Promise que será resolvida com o valor passado ou com a Promise passada como valor, caso o valor seja um objeto Promise
+            //o operador await para o codigo nessa linha até que a promise seja resolvida e traga o valor de retorno 
+            return saudacao = await Promise.resolve("Hello Sou o resultado de uma promisse!");
+        };
+
+        //quando a promessa que ja foi resolvida(liberada pelo await) e retornou o valor. e executada assicronamente em um bloco then passando o resultado da promisse resolvida
+        //hello5().then(alert);
+        hello5().then(function(message) {
+            alert(message);
+        });
+
+        /**
+         * Claro, o exemplo acima não é muito útil, embora sirva para ilustrar a sintaxe. Vamos prosseguir e ver um exemplo real.
+        */
+    </script>
+</body>
+</html>
+

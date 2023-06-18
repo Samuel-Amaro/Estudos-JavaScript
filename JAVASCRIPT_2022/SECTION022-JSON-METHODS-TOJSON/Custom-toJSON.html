@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * CUSTOM "toJSON" - "toJSON" PERSONALIZADO
+         * 
+         * Assim como toString na conversão de string, um objeto pode fornecer um método toJSON para conversão em JSON. JSON.stringify chama automaticamente se disponível.
+        */
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel room
+        let room = {
+            //declara propriedade usando sintaxe chave valor
+            number: 23
+        };
+
+        //declara outro objeto literal anonimo, que e atribuido por referencia a varaivel meetup
+        let meetup = {
+            //declara propriedade usando sintaxe chave : valor
+            title: "Conference",
+            //declara uma propriedade chamada date, que tem como valor um objeto do tipo date
+            date: new Date(Date.UTC(2017, 0, 1)),
+            room //propriedade chamada room que tem como valor a referencia ao objeto anonimo literal referenciado pela variavel room, se o objeto anonimo literal tiver um método embutido chamado toJSON em sua definição, esse objeto literal aqui referenciaod por meetup ao ser codificado em string JSON, ira invocar esse método embutido toJSON, para codificar a referencia em string JSON também
+        };
+
+        //Usando o método JSON.stringify(value, replace, space), para converte um objeto literal anonimo referenciado por meetup em string JSON(JavaScript Object Notation).
+        //retorna uma string resultante chamada de objeto codificado em JSON ou serializado ou stringified(encadeado) ou empacotado do objeto literal.
+        //ao converte o objeto literal referenciado por meetup, o método JSON.stringify, invoca o toJSON, método embutido no valor da propriedade date, pois ele e um objeto também, do tipo date, assim ao converter o objeto literal anonimo em string JSON, o método também invoca o método embutido toJSON, do valor da propriedade date para ser convertido
+        console.log(JSON.stringify(meetup));
+        /*
+        {
+            "title":"Conference","date":"2017-01-01T00:00:00.000Z", (1)
+            "room":{"number":23} (2)
+        }
+        */
+
+        /**
+         * Aqui podemos ver que date (1) se tornou uma string. Isso porque todas as datas têm um toJSON método embutido que retorna esse tipo de string.
+         * 
+         * Agora vamos adicionar um custom toJSON para nosso objeto room (2):
+        */
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel room
+        let room2 = {
+            //declara propriedade usando sintaxe chave valor
+            number: 23,
+            //declara método de instancia para o objeto literal, um metodo e declarado usando sintaxe ES6 sem precisar usar palaavra-chave function e :
+            //adicionar um método personalizado chamado toJson que converte o objeto literal anonimo em string JSON
+            toJSON() {
+                return this.number;
+            }
+        };
+
+        //converte o objeto literal anonimo referenciado por room em uma string JSON
+        //ao chamar o método JSON.stringigy, para converte o objeto literal referenciado por room em uma string JSON, o método internamente verifica se o objeto possui algum método embutido chamado toJSON, se sim, usa esse método para converte o objeto literal em string JSON, se não o proprio JSON.stringify codifica para string JSON
+        console.log(JSON.stringify(room)); //23 {"number":23}
+
+        /**
+         * Como podemos ver, toJSON é usado tanto para a chamada direta JSON.stringify(room) quanto quando room está aninhado em outro objeto codificado.
+         * 
+        */
+    </script>
+</body>
+</html>

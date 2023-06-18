@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * ALGUNS CASOS DE USO PRÁTICOS DE JS import()
+         * 
+         * O import() tem os seguintes casos de uso práticos:
+         * 
+         * * EXEMPLO 1) MÓDULO DE CARREGAMENTO SOB DEMANDA
+         * 
+         * Algumas funcionalidades podem não precisar estar disponíveis quando os aplicativos são iniciados. Para diminuir o tempo de carregamento, você pode colocar essa funcionalidade em módulos e usar o import() para carregá-los sob demanda assim:
+         * */
+
+        function eventHandler() {
+            import('./module1.js').then((ns) => {
+                //usando o modulo
+                ns.func();
+            }).catch((error) => {
+                //manipulando error
+            });
+        }
+    </script>
+</body>
+</html>

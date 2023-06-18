@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo do Método Array At()</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO DO MÉTODO JS ARRAY AT()
+         * 
+         * O exemplo a seguir mostra como usar o at() método para retornar um elemento de array:
+        */
+
+        //declara um array literal dense chamado de scores inicializado com 3 elementos
+        const scores = [5, 6, 7];
+
+        //usando o metodo at da intancia de objeto literal do tipo array para obter o elemento encontrado no indice 1 do array por meio do metodo at
+        //passando o argumento de valor 1 para o at metodo o argumento representa um indice do array
+        console.log(`scores[1] = ${scores.at(1)}`); //some as scores[1]
+
+        //Obtem o ultimo elemento
+        //o metodo at permite passar indices negativos como argumento
+        //o indice negativo diz ao at metodo procurar a partir do final do array isso e o ultimo elemento e o -1 o penultimo -2
+        //aqui queremos obter o ultimo elemento passando indice negativo, so o metodo at permite isso, a indexação do array por meio da notação de colchetes não permite isso como ex: scores[-1] isso não pode ser feito so por meio do metodo at
+        //chamamos o metodo at passando como argumento o valor -1 como indice
+        console.log(`scores[-1] = ${scores.at(-1)}`);  //7
+
+        console.log(`scores.at(-1) === scores[scores.length - 1] = ${scores.at(-1) === scores[scores.length - 1]}`); //true
+
+        /**
+         * * RESUMO 
+         * 
+         *  Use o at() método para retornar um elemento de uma array por um índice.
+         * 
+         * O at() método com um índice negativo retornará um elemento do final do array.
+        */
+    </script>
+</body>
+</html>

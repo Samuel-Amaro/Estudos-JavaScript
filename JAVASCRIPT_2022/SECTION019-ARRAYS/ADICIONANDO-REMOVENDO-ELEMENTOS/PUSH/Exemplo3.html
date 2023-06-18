@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 3</title>
+</head>
+<body>
+    <script>
+        /**
+         * * 3) USANDO O PUSH() PARA ANEXAR ELEMENTOS DE UM ARRAY A OUTRO ARRAY
+         * 
+         * Suponha que você tenha dois arrays colors e cmyk:
+        */
+
+        //declara um novo array literal dense chamado colors inicializado com 3 elementos
+        let colors = ['red', 'green', 'blue'];
+        //declara um novo array literal dense chamado cmyk inicializado com 4 elementos
+        let cmyk = ['cyan', 'magenta', 'yellow', 'back'];
+
+        /**
+         * E você deseja anexar os elementos do cmyk ao colors array.
+         * 
+         * Para fazer isso, você pode usar um for...of loop que itera sobre os elementos do cmyk array e usar o push() método para anexar cada elemento ao colors array assim:
+        */
+
+        //usando o for of loop para iterar sobre os elementos do array cmyk
+        for(const color of cmyk) {
+            //cada elememto iterado do array cmyk e adicionado ao final do array colors
+            //assim cada elemento iterador e adicionado ao final do array colors por meio do metodo push da instancia de objeto do tipo array
+            colors.push(color);
+        }
+
+        console.log(`colors = ${colors}`);
+
+        /**
+         * A partir do ES6, você pode usar o operador spread (...) para espalhar os elementos do cmyk array e empurrá-los para o colors array ao mesmo tempo assim:
+        */
+
+        //para anexar os elementos do cmyk array ao colors array podemos usar  o operador spread
+        //o 3 pontos na frente do array cmyk fazem o array ser descompactado para elementos individuais, para serem argumentos do metodo push, e o metodo push ira adiconar esse argumentos ao final do array colors
+        //a descompactação e feita pela ordem declarada no array dos elementos
+        
+        colors.push(...cmyk);
+        
+        console.log(`colors = ${colors}`);
+    </script>
+</body>
+</html>

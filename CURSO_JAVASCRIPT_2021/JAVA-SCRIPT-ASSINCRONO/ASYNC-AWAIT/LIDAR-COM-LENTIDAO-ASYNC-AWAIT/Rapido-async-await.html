@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostração de async/await Rapido</title>
+</head>
+<body>
+    <script>
+
+        //definindo função de promessa personalizada
+
+        //declrando uma função que retorna uma promessa resolvida
+        function timeoutPromise(interval) {
+            return new Promise(function(resolve, reject) {
+                //espera o interval(segudos) antes de executar a função anonima
+                setTimeout(function() {
+                    //valor que a promisse resolveu e retorna
+                    resolve("done");
+                }, interval);
+            });
+        }
+
+        //função assincrona que retorna promessas resolvidas a cada chamda da função timeout
+        async function timeTest() {
+            const timeoutPromise1 =  timeoutPromise(3000);
+            const timeoutPromise2 = timeoutPromise(3000);
+            const timeoutPromise3 = await timeoutPromise(3000);
+            //retorna uma promise ao passar 3 segundos
+            //await so permitira executar a proxima linha quando a promisse for retornada
+            await timeoutPromise1;
+            await timeoutPromise2;
+            await timeoutPromise3;
+        }
+
+        //retorna o tempo em formato 00:00:00:00
+        let tempoInicial = Date.now();
+        //executando a promessa resolvida por timeTest()
+        timeTest().then(function() {
+            let tempoFinal = Date.now();
+            let tempoTotal = tempoFinal - tempoInicial;
+            alert("Tempo gasto em milissegundos: " + tempoTotal);
+        });
+        
+    </script>
+</body>
+</html>

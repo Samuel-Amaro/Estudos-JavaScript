@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * SEARCHING STRINGS(PESQUISANDO STRINGS)
+         * 
+         * O método str.match(regexp) retorna todas as correspondências de regexp na string str.
+         * 
+         * Para encontrar todas as correspondências, você usa o sinalizador global (g). E para encontrar as correspondências independentemente dos casos, você usa o sinalizador ignore (i).
+         * 
+         * O exemplo a seguir mostra como usar o match() método:
+        */
+
+        //declara uma variavel de escopo de bloco chamada str, que e inicilizada com uma string literal, que sera usada para pesquisa
+        let str = "Are you Ok? Yes, I'm OK";
+
+        //Usando o método String.match(regexp) que retorna todas as correspondecias de regexp na string
+        //o regex argumento a ser passado e uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo /OK/ e um padrão que corresponde a somente a string 'OK', por padrão as pesquisas diferenciam maiusculas de minusculas.
+        //Para podermos procurar uma string 'OK' em qualquer caso tanto em maiuscula quanto em minuscula, usamos a flag (i)
+        //A flag (i): uma flag e uma configuração que altera o comportamento de pesquisa, a flag i, ignora os casos ao pesquisar, a i significa ignore
+        //os casos de não correspondencia ao padrão OK serão ignorados e retornados pelo match metodo como uma correspondecia
+        //A flag(g): quando esta disponivel no padrão o RegExp instrui o objeto a busca por todas as correspondecias e retorna todas elas.
+        let result = str.match(/OK/gi);
+
+        console.log(result);
+        
+    </script>
+</body>
+</html>
+
+
+

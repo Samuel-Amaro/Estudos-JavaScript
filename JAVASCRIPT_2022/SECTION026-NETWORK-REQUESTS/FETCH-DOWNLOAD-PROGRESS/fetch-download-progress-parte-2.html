@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * Aqui está o exemplo completo de trabalho que obtém a resposta e registra o progresso no console, mais explicações a seguir:
+         * 
+        */
+
+        (async () => {
+            //Etapa 1: iniciar a busca e obter um leitor
+            //enviar uma request GET para o url e retorna uma promise resolvida com o objeto response
+            let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits?per_page=100');
+            
+            //para acompanhar o progresso do download de um response recebido, podemos usar a propriedade response.body que retorna um objeto é um ReadableStream – um objeto especial que fornece o corpo pedaço por pedaço, como vem.
+            //a partir do objeto ReadableStream chamamos o metodo ReadableStream.getReader()
+            //obtemos um stream reader(leitor de fluxo)
+            const reader = response.body.getReader();
+
+            // Etapa 2: obter o comprimento total
+            //acessamos os headers e queremos header content-lenght e obtemos o seu valor
+            //obtendo o comprimento total da response do Content-Length header.
+            const contentLength = +response.headers.get('Content-Length');
+
+            // Passo 3: leia os dados
+            let receivedLength = 0; // recebeu essa quantidade de bytes no momento
+            let chunks = []; // array de pedaços binários recebidos (compreende o corpo)
+            
+            // loop infinito enquanto o corpo está baixando
+            while(true) {
+                //reader.read() retorna uma promise resolvida com um objeto com duas propriedades, done e value
+                //Recebemos pedaços de resposta
+                const {done, value} = await reader.read();
+
+                //done – true quando a leitura estiver completa, caso contrário false.
+                if(done) {
+                    break;
+                }
+
+                //value: uma array digitada de bytes: Uint8Array.
+                //reunimos pedaças de resposta, a cada pedaço lido
+                chunks.push(value);
+                receivedLength += value.length;
+
+                //informa progresso do download do response dados
+                console.log(`Recebido: ${receivedLength} of ${contentLength}`);
+            }
+
+            // Etapa 4: concatenar pedaços em um único Uint8Array
+            //No final, temos chunks– uma array de Uint8Array pedaços de bytes, que precisa ser juntado
+            //criamos um array do mesmo tipo com o comprimento combinado
+            let chunksAll = new Uint8Array(receivedLength);
+            let position = 0;
+            for(let chunk of chunks) {
+                //Em seguida, use .set(chunk, position) o método para copiar cada chunkum após o outro.
+                //tira o chunk do array original na position e copia para chunckAll
+                chunksAll.set(chunk, position);
+                position += chunk.length;
+            }
+
+            // Etapa 5: decodificar em uma string
+            //Temos o resultado em chunksAll. É uma array de bytes, não uma string
+            //Para criar uma string, precisamos interpretar esses bytes. O TextDecoder integrado faz exatamente isso. Então nós podemos JSON.parse, se necessário.
+            let result = new TextDecoder("utf-8").decode(chunksAll);
+
+            //Foram realizadas!
+            //converse string para um json objeto
+            let commits = JSON.parse(result);
+            alert(commits[0].author.login);
+
+        })();
+
+        /**
+         * Vamos explicar isso passo a passo:
+         * 
+            * Realizamos fetch como de costume, mas em vez de chamar response.json(), obtemos um stream reader response.body.getReader().
+            * 
+            * Observe que não podemos usar esses dois métodos para ler a mesma resposta: use um leitor ou um método de resposta para obter o resultado.
+            * 
+            * Antes da leitura, podemos descobrir o comprimento total da resposta do Content-Length cabeçalho.
+            * 
+            * Ele pode estar ausente para solicitações de origem cruzada (consulte o capítulo Buscar: solicitações de origem cruzada ) e, bem, tecnicamente um servidor não precisa configurá-lo. Mas geralmente está no lugar.
+            * 
+            * Ligue await reader.read() até terminar.
+            * 
+            * Reunimos pedaços de resposta no array chunks. Isso é importante, porque depois que a resposta for consumida, não poderemos “reler” usando response.json()ou de outra forma (você pode tentar, haverá um erro).
+            * 
+            * No final, temos chunks – uma array de Uint8Array pedaços de bytes. Precisamos juntá-los em um único resultado. Infelizmente, não há um método único que os concatene, então há algum código para fazer isso:
+            * 
+                * Criamos chunksAll = new Uint8Array(receivedLength)– uma matriz do mesmo tipo com o comprimento combinado.
+                * 
+                * Em seguida, use .set(chunk, position)o método para copiar cada chunkum após o outro. 
+                * 
+            * Temos o resultado em chunksAll. É uma matriz de bytes, não uma string. 
+            * 
+            * Para criar uma string, precisamos interpretar esses bytes. O TextDecoder integrado faz exatamente isso. Então nós podemos JSON.parse, se necessário.
+            * 
+            * E se precisarmos de conteúdo binário em vez de uma string? Isso é ainda mais simples. Substitua as etapas 4 e 5 por uma única linha que cria um Blobde todos os pedaços:
+            
+                let blob = new Blob(chunks);
+
+            * 
+            * No final, temos o resultado (como uma string ou um blob, o que for conveniente) e o acompanhamento do progresso no processo.
+            * 
+            * Mais uma vez, observe que isso não é para o progresso do upload (de jeito nenhum agora com fetch), apenas para o progresso do download .
+            * 
+            * Além disso, se o tamanho for desconhecido, devemos verificar receivedLength o loop e quebrá-lo quando atingir um determinado limite. Para que chunks não transborde a memória.
+        */
+    </script>
+
+</body>
+</html>

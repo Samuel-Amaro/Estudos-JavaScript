@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <!--o dom e processa até aqui-->
+    <p>..conteúdo antes do script...</p>
+
+    <!-- enquanto o script não for baixado processado e executado o dom não e construido, o dom espera o script-->
+    <script type="text/javascript" src="https://javascript.info/article/script-async-defer/long.js?speed=1">
+        /**
+         * * SCRIPTS: ASYNC(ASSÍNCRONO)/DEFER(ADIAR)
+         * 
+         * Em sites modernos, os scripts costumam ser “mais pesados” que o HTML: o tamanho do download é maior e o tempo de processamento também é maior.
+         * 
+         * Quando o navegador carrega HTML e encontra uma <script:>...<script> tag, ele não pode continuar construindo o DOM. Ele deve executar o script agora. O mesmo acontece com scripts externos <script src="..."><script>: o navegador deve aguardar o download do script, executar o script baixado e só então poderá processar o restante da página.
+         * 
+         * Isso leva a duas questões importantes:
+         * 
+            * Scripts não podem ver elementos DOM abaixo deles, então eles não podem adicionar manipuladores etc.
+            * 
+            * Se houver um script volumoso no topo da página, ele “bloqueia a página”. Os usuários não podem ver o conteúdo da página até que ele seja baixado e executado:
+        */
+    </script>
+
+    <!--Isso não é visível até que o script seja carregado, o script não ve elementos dom abaixo dele. apos o script ter sido carregado esse elemento e visto pelo script-->
+    <p>...conteúdo após script...</p>
+
+</body>
+</html>

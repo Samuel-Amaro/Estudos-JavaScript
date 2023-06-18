@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando This</title>
+</head>
+<body>
+    
+    <h1>Usando This para referencia De Objetos</h1>
+    
+    <h2>Trabalhando com Objetos</h2>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, reprehenderit ea perferendis officia doloremque repellendus ratione dolore voluptatem deserunt? Corrupti quasi at, inventore porro tempora nulla! Iusto ipsam iure quos.</p>
+
+    <form action="#" name="myForm">
+        <p>
+            <!-- onchange() O evento de mudança é disparado para os elementos, e quando uma mudança no valor do elemento é confirmada pelo usuário.
+              - Então, você poderia chamar validate no manipulador de evento onchange em cada elemento do formulário, usando this para passar o elemento, como no exemplo a seguir:
+            -->
+            <input type="text" name="age" size="3" onchange="validate(this, 18, 99)">
+        </p>
+        <p>
+            <label for="label">Nome do form:<input type="text" name="text1" value="Beluga"></label>
+        </p>
+        <p>
+            <!--
+                - Quando combinado com a propriedade form , this pode referenciar a forma original do objeto atual. No exemplo seguinte, o formulário myForm contém um objeto Text e um botão. Quando o usuário clica no botão, o valor do objeto Text é definido como nome do formulário. O manipulador de eventos onclick do botão usa this.form para referenciar a forma original, myForm.
+            -->
+            <input type="button" name="button1" value="Mostre o Nome do Form" onclick="this.form.text1.value = this.form.name">
+        </p>
+    </form>
+    <script>
+        /**
+             * * USANTO THIS PARA REFERÊNCIA DE OBJETOS
+            * 
+            *  JavaScript tem uma palavra-chave especial, this, que você pode usar dentro de um método para referenciar o objeto corrente. Por exemplo, suponha que você tenha uma função chamada validate que valida o valor da propriedade de um objeto, dado o objeto e os valores altos e baixos:
+        */
+
+        function validate(obj, lowval, hival) {
+            if((obj.value < lowval) || (obj.value > hival)) {
+                alert("Valor inválido!");
+            }
+        }
+
+        /**
+         * No geral, this referencia o objeto chamando um método.
+         * 
+         * Quando combinado com a propriedade form , this pode referenciar a forma original do objeto atual. No exemplo seguinte, o formulário myForm contém um objeto Text e um botão. Quando o usuário clica no botão, o valor do objeto Text é definido como nome do formulário. O manipulador de eventos onclick do botão usa this.form para referenciar a forma original, myForm.
+        */  
+    </script>
+</body>
+</html>
+

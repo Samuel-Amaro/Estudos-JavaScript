@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <h2>Contexto de Execução</h2>
+
+    <h3>A fase de execução</h3>
+
+    <img src="./image/javascript-execution-context-global-execution-context-in-creation-phase.png" alt="imagen">
+
+    <img src="./image/javascript-execution-context-function-execution-context-in-creation-phase.png" alt="imagen">
+
+    <img src="./image/javascript-execution-context-function-execution-context-in-execution-phase.png" alt="imagen"> 
+
+    <script>
+
+        /**
+         * * A FASE DE EXECUÇÃO
+         * 
+         * Durante a fase de execução, o mecanismo JavaScript executa o código linha por linha, atribui os valores às variáveis ​​e executa as chamadas de função.
+         * 
+         * Para cada chamada de função, o mecanismo JavaScript cria um novo contexto de execução de função .
+         * 
+         * O contexto de execução da função é semelhante ao contexto de execução global. Mas ao invés de criar o objeto global, a engine JavaScript cria o arguments objeto que é uma referência para todos os parâmetros da função:
+         * 
+         * Em nosso exemplo, o contexto de execução da função cria o arguments objeto que faz referência a todos os parâmetros passados ​​para a função, define this o valor para o objeto global e inicializa o aparâmetro como undefined.
+         * 
+         * Durante a fase de execução do contexto de execução da função, o mecanismo JavaScript atribui 10 ao parâmetro a e retorna o resultado ( 100) ao contexto de execução global:
+         * 
+         * Para acompanhar todos os contextos de execução, incluindo o contexto de execução global e os contextos de execução de função, o mecanismo JavaScript usa a pilha de chamadas , que você aprenderá no próximo tutorial.
+         * 
+         * Neste tutorial, você aprendeu sobre os contextos de execução do JavaScript, incluindo o contexto de execução global e os contextos de execução de função.
+        */
+
+        
+    </script>
+
+</body>
+</html>

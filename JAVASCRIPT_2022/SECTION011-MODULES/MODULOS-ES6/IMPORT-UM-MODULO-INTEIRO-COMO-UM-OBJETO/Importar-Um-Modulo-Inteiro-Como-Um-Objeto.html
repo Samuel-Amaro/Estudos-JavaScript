@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importar Modulo Como Objeto</title>
+</head>
+<body>
+    <script src="./app.js" type="module">
+
+        /**
+         * * IMPORTAR UM MÓDULO INTEIRO COMO UM OBJETO
+         * 
+         * Para importar tudo de um módulo como um único objeto, você usa o padrão de asterisco (*) da seguinte forma:
+         
+            import * as cal from './cal.js';
+
+         * 
+         * Neste exemplo, importamos todas as ligações do cal.js módulo como cal objeto. Nesse caso, todas as associações se tornam propriedades do cal objeto, então você pode acessá-las conforme mostrado abaixo:
+         
+            cal.a;
+            cal.b;
+            cal.sum();
+
+         * 
+         * Essa importação é chamada de importação de namespace(namespace import).
+         * 
+         * É importante ter em mente que o módulo importado executa apenas uma vez, mesmo importá-lo várias vezes. Considere este exemplo:
+         
+            import { a } from './cal.js';
+            import { b } from './cal.js';
+            import {result} from './cal.js';
+
+         * 
+         * Após a primeira import instrução, o cal.js módulo é executado e carregado na memória, sendo reutilizado sempre que for referenciado pela  import instrução subsequente.
+         * */
+
+    </script>
+</body>
+</html>

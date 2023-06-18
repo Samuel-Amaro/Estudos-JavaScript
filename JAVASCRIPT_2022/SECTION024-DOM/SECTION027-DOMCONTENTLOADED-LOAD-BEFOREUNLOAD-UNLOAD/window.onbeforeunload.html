@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * window.onbeforeunload(janela antes de descarregar)
+         * 
+         * Se um visitante iniciar a navegação fora da página ou tentar fechar a janela, o beforeunload manipulador solicitará uma confirmação adicional.
+         * 
+         * Se cancelarmos o evento, o navegador pode perguntar ao visitante se ele tem certeza.
+         * 
+         * Você pode tentar executando este código e recarregando a página:
+        */
+
+        //atribui um manipulador de evento por meio da propriedade dom ao objeto window
+        //o manipulador de evento e para o evento beforeunload(antes de descarregar), esse evcento e acionado quando um visitante inicia a nevegação fora da pagina ou tenta fechar a janela, assim o manipulador solicitara uma confirmação adicional
+        window.onbeforeunload = function(event) {
+            //um manipulador com return false e uma exceção, e para informar ao navegador que impeça a ação padrão do evento
+            return false;
+        };
+    </script>
+
+</body>
+</html>

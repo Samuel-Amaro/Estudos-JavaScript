@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO 2) USANDO O ARRAY PUSH() PARA ADICIONAR VARIOS ELEMENTOS AO FINAL DE UM ARRAY
+         * 
+         * O exemplo a seguir mostra como usar o push() método para adicionar vários elementos ao final de uma array:
+        */
+
+        //declara um array literal denso nomeado de numbers inicializado com 3 elementos
+        let numbers = [10, 20, 30];
+
+        //usando o metodo push da instancia de objeto literal do tipo array nomeado numbers, para adicionar os valores 40 e 50 como elementos do array, o metodo push permite adicionar varios elementos de uma so vez ao final do array
+        //aqui adicionara o elemento 40 ao final do array e logo em seguida adicionara o elmeento 50 no final do array logo apos o 40 e retorna o novo valor do comprimento do array
+        const length = numbers.push(40, 50);
+
+        console.log(`length de numbers = ${length}`);
+        console.log(`numbers = ${numbers}`);
+    </script>
+</body>
+</html>

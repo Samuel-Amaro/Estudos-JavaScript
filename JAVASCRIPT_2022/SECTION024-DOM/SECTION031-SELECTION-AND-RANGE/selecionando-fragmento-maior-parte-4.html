@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <p id="p">Exemplo: <i>itálico</i> e <b>negrito</b></p>
+
+    <!--
+    no de elemento como um todo
+    <p id="p">       no de elemento completo <p>
+        Exemplo:     no de texto com indice 0 como numero filho <p>
+        <i>          no de elemento com indice 1 como numero filho <p>
+            itálico  no de texto como numero filho 0 de <i>
+        </i>    
+        e            no de texto com indice 2 como numero filho <p>
+        <b>          no de elemento com indice 3 como numero filho <p>
+            negrito  no de texto como numero filho 0 de <b>
+        </b>
+    </p>
+    -->
+
+    <script type="text/javascript">
+        /**
+         * * SELECIONANDO UM FRAGMENTO MAIOR
+         * 
+         * Vamos fazer uma seleção maior em nosso exemplo, assim:
+         * 
+         * Já sabemos como fazer isso. Só precisamos definir o início e o fim como um deslocamento relativo nos nós de texto.
+         * 
+         * Precisamos criar um intervalo, que:
+         * 
+            *  começa a partir da posição 2 no <p>primeiro filho (tomando todas as primeiras letras, exceto as duas primeiras, de "Exemplo : ")
+            * 
+            * termina na posição 3 no <b>primeiro filho (tomando as três primeiras letras de “ bol d”, mas não mais):
+        */
+
+        //SELECIONANDO TEXTO
+
+
+        //cria um objeto range sem precisar informar argumentos, o objeto range e um par de pontos de fronteira inicio e fim do intervalo de uma seleção
+        let r = new Range();
+
+        //definindo os limites da seleção
+
+        //especificando o inicio do intervalo de seleção por meio de range.setStart(node, offset);
+        //onde node e um no de texto e offset o numero da posição no texto, isso e para ambos os metodos
+        //a nossa seleção ira inicar no no de texto do elemento p pai, que e o numero 0 como numero filho
+        //vamos iniciar nossa seleção a partir da posição 2 indexada do texto(terceiro caractere do texto)
+        r.setStart(p.firstChild, 2);
+        //o final do intervalo da seleção sera o no de texto do elemento <b> que e o numero filho 3 o <b> o texto e numero filho 0
+        //queremos que a nossa seleção termine na posição do texto 3, mas sem incluir o 3(quarto caractere do texto)
+        r.setEnd(p.querySelector('b').firstChild, 6);
+
+        // toString de um intervalo retorna seu conteúdo como texto, sem tags
+        console.log(r.toString()); // ample: italic and bol
+        console.log(r);
+
+        // usa este intervalo para seleção (explicado mais adiante)
+        window.getSelection().addRange(r);
+
+        /**
+         * Como você pode ver, é bastante fácil fazer uma variedade do que quisermos.
+         * 
+         * Se quisermos pegar os nós como um todo, podemos passar elementos em setStart/setEnd. Caso contrário, podemos trabalhar no nível do texto.
+         * */
+
+    </script>
+</body>
+</html>

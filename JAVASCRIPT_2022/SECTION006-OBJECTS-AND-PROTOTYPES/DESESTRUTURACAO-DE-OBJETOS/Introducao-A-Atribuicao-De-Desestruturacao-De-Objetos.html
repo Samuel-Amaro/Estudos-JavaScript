@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturação de Objetos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * DESESTRUTURAÇÃO DE OBJETOS JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre a desestruturação de objetos JavaScript que atribui propriedades de um objeto a variáveis ​​individuais.
+         * 
+         * Se você quiser aprender como desestruturar um array , você pode conferir o tutorial de desestruturação de array.
+         * 
+         * * INTRODUÇÃO Á ATRIBUIÇÃO DE DESESTRUTURAÇÃO DE OBJETOS JS
+         * 
+         * Suponha que você tenha um person objeto com duas propriedades: firstName e lastName.
+        */
+
+        //declara uma objeto anonimo literal com propriedades, esse objeto e atribuido por referencia a variavel person, assim person referencia o ojbeto
+        let person = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        /**
+         * Antes do ES6, quando você deseja atribuir propriedades do person objeto a variáveis, normalmente faz assim:
+        */
+
+        //maneira antiga de fazer desestruturação de objetos, atribuir propriedades a valores individuais de variaveis
+        let fisrtName = person.firstName;
+        let lastName = person.lastName;
+
+        /**
+         * O ES6 apresenta a sintaxe de desestruturação de objetos que fornece uma maneira alternativa de atribuir propriedades de um objeto a variáveis:
+        */
+
+        //maneira tradicional e correta no ES6 de fazer desestruturação de objetos usando esta sintaxe, podendo atribuir propriedades de um objeto a variaveis
+        //aqui as propriedades firtsName são atribuidas a varaivel fname, e a propriedade lastName e atribuida a variavel lname, as propriedades pertence ao objeto que e referenciado pela varaivel person
+        let {firstName: fname, lastName: lname} = person;
+
+        /**
+         * Neste exemplo, as propriedades firstName and lastName são atribuídas às variáveis fName and respectivamente. lName
+         * 
+         * Nesta sintaxe:
+         
+            let {property1: variable1, property2: variable2: variable2} = object;
+
+         * 
+         * O identificador antes dos dois pontos (:) é a propriedade do objeto e o identificador depois dos dois pontos é a variável.
+         * 
+         * Observe que o nome da propriedade está sempre à esquerda, seja um literal de objeto ou uma sintaxe de desestruturação de objeto.
+         * 
+         * Se as variáveis ​​tiverem os mesmos nomes que as propriedades do objeto, você poderá tornar o código mais conciso da seguinte forma:
+        */
+
+        //exemplo de desetruturação de objetos, atribuir propriedades a variaveis individuais por meio do ES6
+        //quando o nome das variaveis forem iguais aos nomes das propriedades codigo de desetruturação pode se resumir em:
+        //pode se omitir o nome das propriedades, deixando somente o nome das variaveis
+        let {firstName, lastName} = person;
+
+        //mostrando as variaveis individuais
+        console.log(firstName); //'John'
+        console.log(lastName); //'Doe'
+
+        /**
+         * Neste exemplo, declaramos duas variáveis firstName e lastName, e atribuímos as propriedades do objeto pessoa às variáveis ​​na mesma instrução.
+         * 
+         * É possível separar a declaração e a atribuição. No entanto, você deve colocar as variáveis ​​entre parênteses:
+         
+            ({firstName, lastName} = person);
+
+         * 
+         * Se você não usar os parênteses, o mecanismo JavaScript interpretará o lado esquerdo como um bloco e lançará um erro de sintaxe.
+         * 
+         * Quando você atribui uma propriedade que não existe a uma variável usando a desestruturação de objetos, a variável é definida como undefined. Por exemplo:
+        */
+
+        //desestruturando o objeto referenciado por person usando a sintaxe do ES6
+        //como o nome das variaveis são iguais aos nomes das propriedades podemos explicitar somente o nome das variaveis
+        //como não temos uma propriedade chamda middleName, a variavel e definida como undefined
+        let {firstName, lastName, middleName} = person;
+        console.log(middleName); //undefined
+
+        /**
+         * Neste exemplo, a middleName propriedade não existe no person objeto, portanto, a middleName variável é undefined.
+        */
+
+    </script>
+
+</body>
+</html>

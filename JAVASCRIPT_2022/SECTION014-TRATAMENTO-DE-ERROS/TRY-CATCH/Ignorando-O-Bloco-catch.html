@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Ignorando o Bloco catch</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * * IGNORANDO O BLOCO CATCH
+         * 
+         * O exemplo a seguir define a add() função que retorna a soma de dois argumentos:
+        */
+
+        //declara uma arrow function anonima com dois paramentros, que e atribuida por referencia a variavel add, assim add referencia a arrow function
+        const add = (x, y) => x + y;
+
+
+        //usando a instrução try...catch para manipular e lidar com o erro
+        try{
+            //codigo que pode causar um erro vai aqui dentro
+
+            //declara uma variavel chamada result, que recebe o resultado da invocação da function add, passando dois argumentos do tipo number
+            //neste bloco nenhum erro ira acontecer, portanto o mecanismo JS ignorara o catch bloco não o executara porque não tem erro para ele tratar
+            let result = add(10, 20);
+            console.log(result);
+        }catch(e) {
+            //aqui vai a logica para tratar o erro
+            //abaixo esta o objeto de erro com suas respectivas propriedades, um objeto que contém informações mais detalhadas sobre erro
+            //propriedade e.name e o nome do erro
+            //propriedade e.message explica o erro em detalhes
+            console.log({name: e.name, message: e.message});
+        }
+        
+        //executa a ultima instrução, apos tratar o erro
+        console.log('Bye');
+
+        /**
+         * Neste exemplo, nenhum erro ocorre porque a add() função existe. Portanto, o mecanismo JavaScript ignora o catch bloco
+        */
+    </script>
+
+</body>
+</html>

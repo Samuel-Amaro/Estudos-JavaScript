@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exempo de synchronous JavaScrit</title>
+</head>
+<body>
+    
+    <h1>Exemplo de sicronismo no JavaScript</h1>
+
+    <button>Clique Aqui!</button>
+
+    <script>
+        /*
+         * No nosso exemplo simple-sync.html (veja aqui), nós adicionamos um evento de click em um botão para que, quando clicado, ele executa uma tarefa pesada (calcula 10 milhões de datas e depois imprime a última delas no console) e depois adiciona um parágrafo no DOM:
+        */
+
+        //obtem referncia do elemento <button> por meio DA API DOM
+        const btn = document.querySelector('button');
+
+        //registra um manipulador de evento no botão, ao botão ser clicado vai acionar o tratador do evento
+        //o evento e o evento de click, ao botão ser clicado executara o manipulador do evento
+        //registra uma arrow function anonima que manipula o evento de clique
+        btn.addEventListener('click', () => {
+            //variavel
+            let myDate;
+            //um for de 10 milhões de iteração
+            for(let i = 0; i < 10000000; i++) {
+                //instancia um novo objeto da class Date
+                let date = new Date();
+                myDate = date;
+            }
+            
+            //mostra a variavel no console, mostra a ultima instancia de objeto da class Date criada no console
+            console.log(myDate);
+
+            //cria um elemento HTML <p>
+            let pElem = document.createElement('p');
+            //conteudo do elemento
+            pElem.textContent = 'Este é um parágrafo recém-adicionado.';
+            //add o elemento criado no corpo da pagina
+            document.body.appendChild(pElem);
+        });
+
+    </script>
+</body>
+</html>

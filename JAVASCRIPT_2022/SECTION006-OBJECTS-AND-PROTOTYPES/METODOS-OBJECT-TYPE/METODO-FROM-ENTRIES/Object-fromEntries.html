@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Object.fromEntries()</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * JS Object.fromEntries()
+         *
+         * Resumo : neste tutorial, você aprenderá como usar o Object.fromEntries() método JavaScript para transformar uma lista de pares chave-valor em um objeto.
+         *
+         * O ES6 apresenta o Object.entries() método que permite transformar um objeto em um array :
+        */
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel boxStyle
+        const boxStyle = {
+            //declara propriedades usando sintaxe chave : valor
+            color: 'red',
+            borderWidth: '1px'
+        };
+
+        //usando o método Object.entries(object) método que aceita um objeto e retorna os próprios pares de propriedade [chave, valor] com chave de string enumerável do objeto.
+        //O método retorna um array com os elementos sendo um para chave valor, de um objeto
+        let arr = Object.entries(boxStyle);
+
+        //mostra o array retornado
+        console.log(arr);
+
+        /**
+         * Mas e se você quisesse fazer o oposto e converter uma lista de pares de valores-chave em um objeto?
+         * 
+         * O ES2019 introduziu o Object.fromEntries() método que permite converter facilmente uma lista de pares de valores-chave em um objeto.
+        */
+
+        //usando o método Object.fromEntries(array), ele ira pegar um array inicializado com elementos que sejam um par de propriedade na sintaxe chave valor, para construtir um objeto que ira possui as propriedades que serão mapeados do elemento do array
+        //recebe um array como argumento
+        let obj = Object.fromEntries(arr);
+
+        //mostrando o objeto criado com o array passando os elementos como um par de propriedade
+        console.log(obj);
+    </script>
+
+</body>
+</html>

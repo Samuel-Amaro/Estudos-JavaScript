@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passagem por valor</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * PASSANDO POR VALOR DE VALORES PRIMITIVOS
+         * 
+         * Vamos dar uma olhada no exemplo a seguir.
+         * 
+        */
+
+        //declara uma function regular chamada square que declara uma parametro chamado x
+        //a square function retorna um valor
+        function square(x) {
+            x = x * x;
+            return x;
+        }
+
+        //declara uma variavel chamada y no escopo global essa variavel e inicializada com o valor 10 que um numero inteiro um Number tipo primitivo
+        //essa variavel so pode ser acessada por valor, isso e manipula o valor real direto dentro da variavel
+        //variavel que armazena valor primitivo so pode ser acessada por valor
+        var y = 10;
+        //invoca a function square passando o a variavel y como argumento, o y variavel e passado por valor, isso e o y variavel tera uma copia de seu valor atribuida ao argumento x
+        //a square so modifia o argumento x, não modifica a varaivel y 
+        //a variavel y não tem vinculo com x argumento
+        var result = square(y);
+        //mostra o valor da variavel y acessa variavel por valor, mostra que não foi modificada, por passar uma copia de seu valor para square function por meio do argumento
+        console.log(`y = ${y}`); //10 -- não modificado
+        //mostra o valor retornado pela function square, isso demostra que a passagem de valor não afeta a variavel externa
+        console.log(`result = ${result}`);
+
+        /**
+         * Como o roteiro funciona.
+         *
+         * Primeiro, defina uma square()função que aceite um argumento x. A função altera o valor do x argumento.
+         * 
+         * Em seguida, declare a variável y e inicialize seu valor para 10:
+
+            var y = 10;
+
+         * 
+         * Em seguida, passe a y variável para a square() função. Ao passar a variável y para a square() função, o JavaScript copia o valor de y para a xvariável.
+
+            square(y); x : 10 e y : 10
+
+         * 
+         * Depois disso, a square() função altera a variável x. No entanto, isso não afeta o valor da y variável. Isso porque x e y são variáveis ​​totalmente diferentes. Eles não têm vínculo.
+
+            x = x * x; x : 100 e y : 10
+
+         * 
+         * Finalmente, o valor da y variável não muda após a conclusão da square() função.
+
+            console.log(y); y : 10
+
+         * 
+         * Se JavaScript usa passagem por referência, o valor da variável y mudaria para 100.
+        */
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Jogadores jogo reação</title>
+    <style>
+
+        /* General styles */
+  
+        html {
+          background-color: white;
+          height: 100%;
+          font-family: sans-serif;
+        }
+  
+        body {
+          height: inherit;
+          background-color: red;
+          margin: 0;
+        }
+  
+        * {
+          box-sizing: border-box;
+        }
+  
+        /* UI Layout */
+  
+        section {
+          width: 100%;
+          height: inherit;
+          padding: 30px;
+        }
+  
+        .topbar {
+          height: 50%;
+          display: flex;
+          justify-content: space-between;
+        }
+  
+        .topbar p, button {
+          margin: 0;
+          font-size: 1.5rem;
+          border: 5px solid;
+          border-radius: 20px;
+          padding: 10px 20px;
+        }
+  
+        .p1, .p2 {
+          align-self: flex-start;
+        }
+  
+        .topbar .p1 {
+          order: 0;
+          border-color: yellow;
+          color: yellow;
+        }
+  
+        .topbar .p2 {
+          order: 2;
+          border-color: cyan;
+          color: cyan;
+        }
+  
+        .topbar .middlebar {
+          order: 1;
+        }
+  
+        .middlebar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+        }
+  
+        /* Button-specific styling */
+  
+        button {
+          border: 0;
+          padding: 12.75px 20px;
+          background-color: #ddd;
+          cursor: pointer;
+        }
+  
+        button:hover, button:focus {
+          background-color: #eee;
+        }
+  
+        button:active {
+          background-color: #fff;
+        }
+  
+        /* spinner-specific styling */
+  
+        .spinner {
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+  
+        .spinner div {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+  
+        .spinner p {
+          margin: 0;
+          font-size: 10rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="spinner">
+        <div>
+            <p>↻</p>
+        </div>
+    </div>
+
+    <section class="ui">
+      <div class="topbar">
+        <p class="p1">Player 1: "A"</p>
+        <p class="p2">Player 2: "L"</p>
+        <div class="middlebar">
+          <button>Start game</button>
+          <p class="result"></p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+
+        const spinner = document.querySelector('.spinner p');
+        const spinnerContainer = document.querySelector('.spinner');
+        let rotateCount = 0;
+        let startTime = null;
+        let rAF;
+        const btn = document.querySelector('button');
+        const result = document.querySelector('.result');
+
+        /**
+         * 
+         *  Ele simplesmente pega dois números e retorna um número aleatório entre os dois
+         * */
+        function random(min, max) {
+
+            var num = Math.floor(Math.random() * (max-min) + min);
+            return num;
+        }
+
+        /**
+         * 
+         * draw()função, que anima o botão giratório. 
+         * */
+        function draw(timestamp) {
+            //inverte o valor do operando startTime
+            //!null(inversso de null e true)
+            if(!startTime) {
+                startTime = timestamp;
+            }   
+
+            rotateCount = (timestamp - startTime) / 3;
+
+            if(rotateCount > 359) {
+                //resto da divisão de rotateCount por 360
+                rotateCount = rotateCount % 360;
+            }
+
+            //aplica uma propriedade css 3D
+            //de girar o elemento por meio do metodo CSS 3D 
+            spinner.style.transform = 'rotate(' + rotateCount + 'deg)';
+
+            //faz a animação aconter para o usuario
+            rAF = requestAnimationFrame(draw);
+
+        }
+
+        //ocultam o parágrafo de resultados e o contêiner giratório usando
+        result.style.display = 'none';
+        spinnerContainer.style.display = 'none';
+
+        /**
+         * 
+         * restaura o aplicativo ao estado original necessário para iniciar o jogo novamente após ele ter sido jogado
+         * */
+        function reset() {
+            btn.style.display = 'block';
+            result.textContent = '';
+            result.style.display = 'none';
+        }
+
+        //registrando um manipulador de evento de clique no elemento.
+        //quando elemento for clicado ira chamar a função start
+        btn.addEventListener('click', start);
+
+        /**
+         * função chama draw()para iniciar o spinner girando e exibi-lo na IU, oculta o botão Iniciar para que você não possa bagunçar o jogo iniciando-o várias vezes ao mesmo tempo e executa uma setTimeout()chamada que executa uma setEndgame()função após um intervalo aleatório entre 5 e 10 segundos se passaram.
+         * */
+        function start() {
+            //da vida ao circulo giratorio
+            draw();
+            //permite o elemento container ser visivel
+            spinnerContainer.style.display = 'block';
+            //oculta o elemento btn
+            btn.style.display = 'none';
+            //registra um intevalo de tempo para que a função setEndGame seja executada. o tempo estara entre 5000(5 segundos) a 10000(10 segundos), tempo sera escolhido aleatoriamente nesse intervalo.
+            //a função sera executada ao passar o tempo.
+            //so vai ser excutada uma vez
+            //como o intevalo não vai precisar ser cancelado antes de executar não precisa armazenar o id do setTimeout executado
+            setTimeout(setEndgame, random(5000, 10000));
+        }
+
+        /**
+         * 
+         * O resultado líquido do código anterior é que, quando o botão Iniciar é pressionado, o botão giratório é mostrado e os jogadores são obrigados a esperar um período de tempo aleatório antes de serem solicitados a pressionar o botão. Esta última parte é tratada pela setEndgame()função,
+         * */
+
+        function setEndgame() {
+            //cancela a animação que esta ocorrendo no momento, a animação do momento e obtida pela variavel rAF que obtem a referencia a animação.
+            cancelAnimationFrame(rAF);
+            //o elemento nãi sera visivel na UI
+            spinnerContainer.style.display = 'none';
+            //elemento se torna visivel na UI
+            result.style.display = 'block';
+            //seta conteudo no elemento da UI
+            result.textContent = 'JOGADORES VÃO!!';
+
+            //registra um manipulador de eventos
+            //evento keydown - Qualquer tecla foi pressionada
+            //O keydown evento é disparado quando uma tecla é pressionada.
+            //o keydown evento é disparado para todas as chaves, independentemente de elas produzirem um valor de caractere.
+            //Os eventos keydown e keyup fornecem um código que indica qual tecla foi pressionada, 
+            //a função keyHandler manipulara o evento quando for disparado obtendo como parametro o codigo que indica qual tecla foi pressionada
+            //Anexe um keydownouvinte de evento ao documento. Quando qualquer botão é pressionado, a keyHandler()função é executada.
+            document.addEventListener('keydown', keyHandler);
+
+            //função que manipula o evento de quando uma tecla for pressionada
+            function keyHandler(e) {
+                //mostra a tecla pressionada
+                console.log(e.key);
+                //se a tecla pressionada for a
+                if(e.key === 'a') {
+                    result.textContent = 'O jogador 1 venceu !!';
+                }else if(e.key === '1') {
+                    result.textContent = 'O jogador 2 ganhou!!';
+                }
+
+                //retira os evento de pressionar tecla
+                document.removeEventListener('keydown', keyHandler);
+
+                //e cria um intervalo de execução da função reset
+                //a função reset sera executada ao passar 5milissegundos(5 segundos);
+            }
+        } 
+    </script>
+</body>
+</html>

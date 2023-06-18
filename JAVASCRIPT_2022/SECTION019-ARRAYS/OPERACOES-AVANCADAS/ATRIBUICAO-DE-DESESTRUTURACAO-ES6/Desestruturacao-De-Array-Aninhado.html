@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturação de Arrays</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DESESTRUTURAÇÃO DE ARRAY ANINHADO
+         * 
+         * A função a seguir retorna um array que contém um elemento que é outro array, ou array aninhado:
+         * */
+
+        //declara uma function chamada getProfile que não possui paramentro
+        //a function e instancia de objeto do tipo function
+        function getProfile() {
+            //a function retorna um array literal denso que possui um elemento que e outro array 
+            return [
+                'John',
+                'Doe',
+                ['Red', 'Green', 'Blue']
+            ];
+        } 
+
+        /**
+         * Como o terceiro elemento do array retornado é outro array, você precisa usar a sintaxe de desestruturação do array aninhado para desestrutura-lo, assim:
+        */
+
+        //aqui iremos desestruturar o array retorna pela invocação da function getProfile, que retorna um array aninhado, um array que possui elementos que são outro array
+        //para desestruturar array dessa formas temos que usar a sintaxe de desestruturação de array aninhado
+        //as primeirias duas variaveis individuais são para desestruturar os primeiros dois elementos que são elementos de string, o terceiro elemento e um outro elemento so que especificado variaveis locais para desestruturar o elemento que e um array aninhado
+        let[
+            firstName,
+            lastName,
+            [
+                color1,
+                color2,
+                color3
+            ]
+        ] = getProfile();
+
+        //acessando as variaveis individuasi que receberam a desestruturação do array aninhado desestruturado
+        console.log(color1, color2, color3); //red green blue
+        
+    </script>
+</body>
+</html>

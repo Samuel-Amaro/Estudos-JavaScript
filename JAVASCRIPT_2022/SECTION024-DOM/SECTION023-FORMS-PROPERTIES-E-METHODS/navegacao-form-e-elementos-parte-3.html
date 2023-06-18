@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <!--
+        um elemento form no documento 
+    -->
+    <form action="#" method="post" enctype="multipart/form-data" accept-charset="utf-8" autocomplete="on" name="my" id="form">
+        <!--elementos do formulario, para agrupar elementos-->
+        <fieldset name="userFields">
+            <!--elementos do form-->
+            <legend>info</legend>
+            <input type="text" name="login" id="text"/>
+        </fieldset>
+    </form>
+
+    <script>
+        /**
+         * * FIELDSETS COMO "SUBFORMULÁRIOS"
+         * 
+         * Um formulário pode ter um ou vários <fieldset> elementos dentro dele. Eles também têm elements propriedades que listam os controles de formulário dentro deles.
+         * 
+         * Por exemplo:
+        */
+
+        //acessando o elemento de entrada do formulario por meio do nome especificado no atributo name html no elemento
+        //acessando o form elemento, acessando a colection elements, e invocando o nome do elemento login, para obter o elemento de entrada do form o input
+        console.log(form.elements.login);
+
+        //outra forma de obter o mesmo elemento de formulario acima e atraves do elemento fieldset
+        //obtendo o elemento do formulario fieldset por meio da colection form.elements atraves do nome do elemento 
+        let fieldSet = form.elements.userFields;
+        console.log(fieldSet);
+
+        //podemos obter a entrada pelo nome tanto do formulário quanto do fieldset
+        //agora vamos obter o mesmo elemento do formulario de duas formas
+        //1. chamando a collection elements no elemento fieldset, pois essa colection lista os elementos de formulario dentro dele, por meio do nome do elemento
+        //2. acessando o elemento dom formulario, chamando a propriedade elements que retorna a collection, que invocamos o elemento pelo nome login
+        //as duas formas traz o memso elemento
+        console.log(fieldSet.elements.login === form.elements.login); //true
+
+    </script>
+</body>
+</html>

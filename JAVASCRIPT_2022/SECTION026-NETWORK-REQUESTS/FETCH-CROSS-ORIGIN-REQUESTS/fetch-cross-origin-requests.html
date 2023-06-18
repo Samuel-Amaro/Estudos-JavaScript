@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * FETCH: CROSS-ORIGIN REQUESTS(BUSCAR SOLICITAÇÕES DE ORIGEM CRUZADA)
+         * 
+         * Se enviarmos uma fetch solicitação para outro site, provavelmente ela falhará.
+         * 
+         * Por exemplo, vamos tentar buscar http://example.com:
+        */
+
+        (async() => {
+            try {
+                //usando a fetch API para enviar uma request para o url informado
+                //enviando uma request para outro site, isso ira falhar, porque as requests de origem cruzada - aquelas enviadas para outro domain/protocol/port exigem um header especial do lado remoto(do servidor que estamos enviando uma request).
+                //Essa politica e chamada de CORS
+                await fetch('http://example.com');
+            } catch (error) {
+                alert(error); //Falha para fetch
+            }        
+        })();
+
+        /**
+         * A busca falha, como esperado.
+         * 
+         * O conceito central aqui é origem(origin) – um tripe domínio(domain)/porta(port)/protocolo(protocol).
+         * 
+         * As solicitações(requests) de origem cruzada – aquelas enviadas para outro domínio (mesmo um subdomínio) ou protocolo ou porta – exigem cabeçalhos(headers) especiais do lado remoto.
+         * 
+         * Essa política é chamada de “CORS”: Compartilhamento de Recursos de Origem Cruzada(Cross-Origin Resource Sharing).
+         * 
+        */
+        
+    </script>
+
+</body>
+</html>

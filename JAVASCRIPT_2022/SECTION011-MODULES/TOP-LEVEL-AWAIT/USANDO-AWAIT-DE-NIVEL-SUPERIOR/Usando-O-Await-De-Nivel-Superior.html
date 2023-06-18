@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Await De Nivel Superior</title>
+</head>
+<body>
+
+    <div class="container"></div>
+
+    <script type="module" src="./app.mjs">
+
+        /**
+         * * USANDO O AWAIT DE NÍVEL SUPERIOR
+         *
+         * Primeiro, altere o user.mjs para o seguinte:
+         
+            const url = 'https://jsonplaceholder.typicode.com/users';
+            const response = await fetch(url);
+            let users = await response.json();
+
+            export { users };
+
+         * 
+         * Neste módulo, você pode usar a palavra-chave await sem colocar uma instrução dentro de uma async função.
+         * 
+         * Segundo, importe os usuários do user.mjs módulo e use-o:
+         
+            import { users } from './user.mjs';
+
+            function render(users) {
+            if (!users) {
+                throw 'The user list is not available.';
+            }
+            let list = users
+                .map((user) => {
+                return `<li> ${user.name}(<a href="email:${user.email}">${user.email}</a>)</li>`;
+                })
+                .join(' ');
+
+                return `<ol>${list}</ol>`;
+            }
+
+            let container = document.querySelector('.container');
+
+            try {
+                container.innerHTML = render(users);
+            } catch (error) {
+                container.innerHTML = error;
+            }
+
+         *
+         * Nesse caso, o app.mjs módulo aguardará user.mjs a conclusão do módulo antes de executar seu corpo.
+        */
+    </script>
+
+</body>
+</html>

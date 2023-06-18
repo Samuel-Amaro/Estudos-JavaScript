@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro Normal</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * ERRO NORMAL
+         * 
+         * Primeiro, altere a getUserById()função para lançar um erro fora da promessa:
+        */
+
+        //declara uma function chamada getUserById, que declara um parametro chamado id
+        function getUserById(id) {
+            //se o argumento id não for do tipo numerico e for menor ou igual a 0, lança erro
+            if(typeof id !== 'number' || id <= 0) {
+                //lança uma exceção fora da promise
+                throw new Error('Invalid id argument');
+            }
+
+            //a function ira retorna uma instancia de objeto anonima de uma promise, que o seu construtor recebe uma callback function com dois paramentros declarados conhecida como executor
+            return new Promise((resolve, reject) => {
+                //simula uma operação assicrona
+                //usando o resolve function callbakc para resolver a promise, o callbak muda o estado da promise de pendente para cumprida com valor
+                //o valor a ser resolvido e um objeto literal anonimo com duas propriedades
+                resolve({
+                    id: id,
+                    username: 'admin'
+                });
+            });
+        }
+
+        /**
+         * Em segundo lugar, lide com a promessa usando os métodos then() and :catch()
+        */
+
+        //chamando o método getUserById passando o argumento 'a' ele retorna uma promise, Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //aqui o then método ira invocar a sua callbakc recebeida por argumento, quando a promise for cumprida com valor, a callbak obtem esse valor e o manipula
+        //o catch método e para obter o erro apenas quando o estado da promessa for rejeitado, a catch método ira chamar sua callbakc argumento quando a promisse for rejeitada, assim a callback obtera o motivo da rejeição da promisse
+        getUserById('a').then(user => console.log(user.username)).catch(err => console.log(err));
+
+        /**
+         * O código lança um erro:
+         
+            Uncaught Error: Invalid id argument
+
+         * Quando você levanta uma exceção fora da promessa, você deve capturá-la com try/catch:
+         * 
+        */
+
+        //usando o try/catch para capturar a exceção que e lançada pelo método getUserById, quando o argumento passado não e do tipo number, lança uma exceção fora da promise
+        try {
+            getUserById('a')
+                        .then(user => console.log(user.username))
+                        .catch(err => console.log(`Caught by .catch ${error}`));
+        } catch (error) {
+            console.log(`Caught by try/catch ${error}`);
+        }
+
+    </script>
+
+</body>
+</html>

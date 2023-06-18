@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * JAVASCRIPT LET E OBJETO GLOBAL
+         * 
+         * Ao declarar uma variável global usando a palavra- chave var, você adiciona essa variável à lista de propriedades do objeto global . No caso do navegador da web, o objeto global é o window. Por exemplo:
+        */
+        
+        //declara uma variavel usando palavra chave var, o escopo da mesma e global
+        //declara uma variavel chamada a que e inicializada com o valor 10
+        var a = 10;
+
+        //ao declarar variaveis globais usando a palavra-chave var, adiciona-se automaticamente essa variavel a lista de propriedades do objeto global do ambiente do JS.
+        //no ambiente do navegador o objeto global e o window
+        //acessando a propriedade a, definida quando criamos a variavel a global usando a var palavra-chave
+        console.log(window.a);
+
+        /**
+         * No entanto, quando você usa a let palavra-chave para declarar uma variável, essa variável não é anexada ao objeto global como uma propriedade. Por exemplo:
+        */
+
+        //ao usamos a palavra-chave let, que declara uma variavel a nivel de bloco, ela não e anexada ao objeto global como uma propriedade
+        //declara uma varaivel a nivel de bloco chamada b e a inicializa com o valor 20
+        let b = 20;
+        //variaveis criadas com a let palavra-chave não são adicionadas ao objeto global
+        console.log(window.b); //undefined
+    </script>
+
+</body>
+</html>

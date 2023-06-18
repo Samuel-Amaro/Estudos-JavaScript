@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Encademento Opcional</title>
+</head>
+<body>
+    <script>
+
+        //declara uma function regular chamada getUser que possui um paramentro declarado chamado id essa function e uma instancia de objeto do tipo function
+        //essa function retorna uma instancia de objeto anonima 
+        function getUser(id) {
+            if(id <= 0) {
+                return null;
+            }
+            // obtém o usuário do banco de dados
+            // e retorna null se o id não existir
+            // ...
+            // se o usuário foi encontrado, retorna o usuário
+            //retorna uma instancia de objeto anonimo literal com propriedades
+            return {
+                //propriedades do objeto usando sintaxe chave : valor
+                id: id,
+                username: 'admin',
+                //a propriedade profile refrencia um objeto literal com propriedades
+                profile: {
+                    avatar: '/avatar.png',
+                    language: 'English'
+                }
+            }
+        }
+
+        //invocando a function getUser() passando um valor de argumento -1, a user não ira retorna a instancia de objeto anonima para que a user varaivel referencie pois o argumento passado não existe no banco de dados, o id passado não existe, assim não retorna a instancia de objeto
+        //assim o user variavel possui o valor null
+        let user = getUser(-1);
+
+        /**
+         * * EMPILHANDO O OPERADOR DE ENCADEAMENTO OPCIONAL
+         *  
+         * Caso o user objeto retornado pelo getUser() não tenha a profile propriedade. Tentar acessar o avatar sem verificar o user.profile primeiro resultará em um erro.
+         * 
+         * Para evitar o erro, você pode usar o operador de encadeamento opcional várias vezes assim:
+        */
+
+        //aqui usamos o operador de encademanto opcional para verificar se o user objeto e null ou undefined antes de tentar acessar a profile propriedade, e verificamos se a propria propriedade profile também e undefined ou null porque ela referencia outro objeto, assim verificamos se profile e undefined ou null, sem algum desses for undefine ou null o operador de encadeamento opciona retorna undefined para avatar
+        //assim pode se verificar em forma de encademaneto propriedade por propriedade vendo se todas estão definidas e se existem
+        let avatar = user ?. profile ?. avatar; 
+
+        //aqui o avatar e undefined pois o user objeto e null
+    </script>
+</body>
+</html>

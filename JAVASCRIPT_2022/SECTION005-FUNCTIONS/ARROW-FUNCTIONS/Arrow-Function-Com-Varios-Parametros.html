@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function com vários parâmetros</title>
+</head>
+<body>
+    <script>
+        /**
+         * * ARROW FUNCTION COM VÁRIOS PARÂMETROS
+         * 
+         * Se uma arrow function tiver dois ou mais parâmetros, use a seguinte sintaxe:
+         
+            (p1, p2, ..., pn) => expression;
+
+         * 
+         * A seguinte expressão:
+         
+            => expression
+
+         * 
+         * é equivalente à seguinte expressão:
+         
+            => { return expression; }
+
+         * 
+         * Por exemplo, para classificar uma array de números em ordem decrescente, você usa o sort()método do objeto de array da seguinte maneira:
+        */
+
+        //declara um array literal inicializado com 6 elementos
+        //uma array dense
+        let numbers = [4, 2, 6];
+
+        console.log(`numbers = [${numbers}]`);
+
+        //utilizando o metodo sort para classificar os elementos da array numbers em ordem decrecente do maior para o menor
+        //para isso devemos passar um argument para o sort metodo
+        //o argument e um callback function que define como a classificação deve ocorrer
+        //aqui neste exemplo a callback sera um function anonima
+        //que possuira dois paramentros
+        //os arguments da callback function são passados a cada iteração do sort internamente para a function anonima
+        numbers.sort(function(a, b) {
+            //de acordo com o valor retornado o elemento que esta sendo avalido sera classificado, ou trocado de posição no array
+            //se (b - a) : retorna um valor negativo < 0, classificara o a elemento com um elemento inferior a b, assim o a vem primeiro que b na classificação, mesmo o (a) sendo maior que b, porque e classificação decrecente, inverte-se a logica
+            //se (b-a) : : retorna um valor positivio > 0, classificara o (b) para um indice inferior a (a), assim o (b) vem primeiro que (a) na classificação
+            //se (b-a) : retorna 0, os elementos comparados são iguais e não muda nada na classificação
+            return b - a;
+        });
+
+        console.log(`numbers = [${numbers}]`); //[6, 4, 2]
+
+        /**
+         * O código é mais conciso com a sintaxe da arrow function:
+         * */
+
+        //ao inves de usar a callback argument para sort metodo com um a function anonima trocaremos por uma arro function sintaxe
+        //a arrow function que recebera dois argumentos a, b e tera uma expressão no final que retorna o resultado para o sort metodo para classificar os elementos
+        numbers.sort((a, b) => b - a);
+        
+        console.log(`numbers = [${numbers}]`); //[6, 4, 2]
+
+    </script>
+</body>
+</html>

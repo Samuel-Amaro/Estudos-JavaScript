@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url = new URL('https://javascript.info/profile/admin');
+
+        /*
+         * Podemos criar facilmente uma nova URL com base no caminho relativo a uma URL existente:
+        */
+
+        //criando uma nova instancia de objeto URL, informando os argumento, o primeiro argumento e um caminho, o segundo argumento e uma url base opcional, se o primeiro argumento possuir somente o caminho, então a URL e gerada em relação a base.
+        let newUrl = new URL('tester', url);
+
+        alert(newUrl); // https://javascript.info/profile/tester
+
+
+    </script>
+
+</body>
+</html>

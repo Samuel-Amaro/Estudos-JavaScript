@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * Usando scripts
+         * 
+         * Outro truque foi usar uma script tag. Um script pode ter qualquer src, com qualquer domínio, como <script src="http://another.com/…">. É possível executar um script de qualquer site.
+         * 
+         * Se um site, por exemplo, another.com pretendia expor dados para esse tipo de acesso, então era usado um protocolo chamado “JSONP (JSON com preenchimento)”.
+         * 
+         * Aqui está como funcionou.
+         * 
+         * Digamos que nós, em nosso site, precisamos obter os dados de http://another.com, como o clima:
+         * 
+            * Primeiro, antecipadamente, declaramos uma função global para aceitar os dados, por exemplo gotWeather.
+        */
+
+        //exemplo de comunicação entre servidores, diferentes, quando não existia metodos para solicitação de rede
+
+        //1. Declare a função para processar os dados meteorológicos
+        function gotWeather({temperature, humidity}) {
+            alert(`temperature: ${temperature}, humidity: ${humidity}`);
+        }
+
+        //Então fazemos uma <script> tag com src="http://another.com/weather.json?callback=gotWeather", usando o nome da nossa função como callback parâmetro de URL.
+        let script = document.createElement('script');
+        //carrega um script externo
+        script.src = `http://another.com/weather.json?callback=gotWeather`;
+        //anexa script no final do corpo do documento
+        document.body.append(script);
+
+        // servidor remoto another.com gera dinamicamente um script que chama gotWeather(...)com os dados que deseja que recebamos.
+        //A resposta esperada do servidor é assim:
+
+        gotWeather({
+            temperature: 25,
+            humidity: 78
+        });
+
+        //Quando o script remoto carrega e executa, gotWeather roda e, como é nossa função, temos os dados.
+
+        /**
+         * Isso funciona e não viola a segurança, porque ambos os lados concordaram em passar os dados dessa maneira. E, quando ambos os lados concordam, definitivamente não é um hack. Ainda existem serviços que fornecem esse acesso, pois funciona mesmo para navegadores muito antigos.
+         * 
+         * Depois de um tempo, os métodos de rede apareceram no JavaScript do navegador.
+         * 
+         * No início, as solicitações de origem cruzada eram proibidas. Mas, como resultado de longas discussões, solicitações de origem cruzada foram permitidas, mas com quaisquer novos recursos que exigissem uma permissão explícita do servidor, expressa em cabeçalhos especiais.
+        */
+    </script>
+
+</body>
+</html>

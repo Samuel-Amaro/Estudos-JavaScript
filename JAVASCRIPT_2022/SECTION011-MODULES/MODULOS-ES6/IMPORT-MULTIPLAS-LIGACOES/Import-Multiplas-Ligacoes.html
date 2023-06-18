@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Multiplas Ligações</title>
+</head>
+<body>
+    <script>
+        /**
+         * * IMPORTAR VÁRIAS LIGAÇÕES
+         * 
+         * Suponha que você tenha o cal.js módulo da seguinte forma:
+         
+            // cal.js
+            export let a = 10,
+                    b = 20,
+                    result = 0;
+
+            export function sum() {
+                result = a + b;
+                return result;
+            }
+
+            export function multiply() {
+                result = a * b;
+                return result;
+            }
+
+         * E você deseja importar essas associações do cal.js, pode listá-las explicitamente da seguinte maneira:
+
+            import {a, b, result, sum, multiply } from './cal.js';
+            sum();
+            console.log(result); // 30
+
+            multiply();
+            console.log(result); // 200
+
+         * */
+    </script>
+    <script src="./modules/app.js" type="module"></script>
+</body>
+</html>

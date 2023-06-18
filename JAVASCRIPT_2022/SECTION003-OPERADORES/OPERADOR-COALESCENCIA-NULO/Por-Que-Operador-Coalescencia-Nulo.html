@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Coalescencia Nulo</title>
+</head>
+<body>
+    <script>
+        /**
+         * * POR QUE OPERADOR DE COALESCÊNCIA NULO
+         * 
+         * Ao atribuir um valor padrão a uma variável, você geralmente usa o operador lógico OR (||). Por exemplo:
+         * 
+        */
+
+        let count;
+        //atribui 1 porque o count possui o valor undefined e undefined e falso
+        let result = count || 1;
+        console.log(`result = ${result}`); //1
+
+        /**
+         * Neste exemplo, a count variável é undefined, ela é coagida a false. Portanto, o result é 1.
+         * 
+         * OR - OU - No entanto, o operador lógico (||) às vezes confunde se você considerar 0 ou strings vazias '' como um valor válido como este:
+        */
+
+        let count = 0;
+        //aqui o operador considera 1 como verdadeiro e 0 como falso
+        //assim a variavel result recebe o valor de count pois e falso
+        //mas isso não acontece pois o operador se confunde com valores como 0 ou string vazias ''
+        //para resolver isso usar o operador de coalescencia null por verifica se o valor 1 e null ou undefined se sim retorna o valor2
+        let result = count || 1;
+
+        /**
+         * O resultado é 1, não 0, o que você pode não esperar.
+         * 
+         * O operador de coalescência nulo ajuda a evitar essa armadilha. Ele só retorna o segundo valor quando o primeiro é nullou undefined.
+        */
+    </script>
+</body>
+</html>

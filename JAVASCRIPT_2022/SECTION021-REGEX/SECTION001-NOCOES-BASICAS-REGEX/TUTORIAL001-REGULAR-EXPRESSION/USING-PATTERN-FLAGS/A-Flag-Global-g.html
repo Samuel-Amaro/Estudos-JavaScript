@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * USING PATTERN FLAGS(USANDO OS SINALIZADORES PADRÃO)
+         * 
+         * Além de um padrão, um RegExp objeto também aceita um parâmetro opcional de flag. Os sinalizadores(flags) são configurações que alteram o comportamento de pesquisa. As expressões regulares têm muitos sinalizadores.
+         * 
+         * * 2) A BANDEIRA GLOBAL - (g) - THE GLOBAL FLAG
+         * 
+         * Outro sinalizador(flag) comumente usado é o sinalizador global ( g). Sem o sinalizador global, o RegExp objeto apenas verifica se há uma correspondência em uma string e retorna a primeira correspondência.
+         * 
+         * Quando o g sinalizador está disponível, o RegExp busca por todas as correspondências e retorna todas elas.
+         * 
+         * É possível combinar sinalizadores, por exemplo, gi sinalizadores combinam os sinalizadores ignore ( i) e global ( g).
+         * 
+         * O exec() método do RegExp realiza uma busca por uma correspondência em uma string e retorna uma array que contém informações detalhadas sobre a correspondência.
+         * 
+         * O exec() método retorna null se não encontrar nenhuma correspondência. No entanto, ele retorna uma única correspondência de uma só vez. Para obter todas as correspondências, você precisa executar exec() várias vezes.
+         * 
+         * O exemplo a seguir usa o exec() método com um do...while loop para retornar todas as correspondências:
+        */
+
+        //declara uma variavel de escopo de bloco chamada message, que e inicilizada com uma string literal, que sera usada para pesquisa
+        let message = 'Hi, are you there? hi, HI...';
+
+        //criando uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo /hi/ e um padrão que corresponde a somente a string 'hi', por padrão as pesquisas diferenciam maiusculas de minusculas.
+        //Para podermos procurar uma string 'hi' em qualquer caso tanto em maiuscula quanto em minuscula, usamos a flag (i)
+        //A flag (i): uma flag e uma configuração que altera o comportamento de pesquisa, a flag i, ignora os casos ao pesquisar, a i significa ignore
+        //A flag(g): quando esta disponivel no padrão o RegExp instrui o objeto a busca por todas as correspondecias e retorna todas elas.
+        //essa expressão regular e uma instancia de objeto literal do tipo RegExp, assim podemos invocar métodos e propriedades
+        let re = /hi/gi; 
+
+        //declara um array literal atribuido por referencia a variavel matches
+        let matches = [];
+        let match;
+
+        //usando o método RegExp.exec(string), que realiza uma busca por uma correspondencia em uma string e retorna uma array que contém informações detalhadas sobre a correspondecia
+        //o método retorna uma unica correspondecia de uma so vez, para obter todoas as correspondcias precisa executar o exec varias vezes
+        //usando o método RegExp.exec(string) em um loop para executar o método varias vezes e a cada execuçao obter a correspondecia do padrão
+        do{
+            //cada chamada ao metodo exec retorna uma correspondecia do padrão referenciado por re na string message
+            match = re.exec(message);
+            if(match) {
+                //cada correspondecia e um array adicionado no array
+                matches.push(match);
+            }
+        }while(match != null);
+
+        console.dir(matches);
+
+        /**
+         * Como Funciona:
+         
+            - Primeiro, declare uma message string que será usada para pesquisa.
+
+            - Em seguida, crie um objeto de expressão regular com o padrão /hi/gi. O sinalizador ignore (i) permite que re o objeto ignore casos ao executar a pesquisa e o sinalizador global ( g) instrui o re objeto a encontrar todas as correspondências, não apenas a primeira.
+
+            - Terceiro, execute o exec() método até que nenhuma correspondência seja encontrada.
+
+            - Por fim, mostre a array de resultados no console.
+        */
+    </script>
+</body>
+</html>
+
+
+

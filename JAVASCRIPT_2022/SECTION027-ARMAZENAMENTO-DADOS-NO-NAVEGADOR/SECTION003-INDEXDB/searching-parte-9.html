@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * SEARCHING(PROCURANDO)
+         * 
+         * Existem dois tipos principais de pesquisa em um armazenamento de objetos(STORE OBJETOS):
+         * 
+            * Por um valor de chave ou um intervalo de chaves. Em nosso armazenamento de “livros”, seria um valor ou intervalo de valores de book.id. 
+            * 
+            * Por outro campo de objeto, por exemplo book.price. Isso exigia uma estrutura de dados adicional, chamada “índice - index”.
+            * 
+         * * POR CHAVE(BY KEY)
+         * 
+         * Primeiro vamos lidar com o primeiro tipo de busca: por chave.
+         * 
+         * Os métodos de pesquisa suportam valores de chave exatos e os chamados “intervalos de valores” – objetos IDBKeyRange que especificam um “intervalo de chave” aceitável.
+         * 
+         * IDBKeyRange objetos são criados usando as seguintes chamadas:
+         * 
+            * IDBKeyRange.lowerBound(lower, [open]) significa: ≥ lower(ou > lower se open for verdade) 
+            * 
+            * IDBKeyRange.upperBound(upper, [open]) significa: ≤ upper(ou < upper se open for verdade)
+            * 
+            * IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])significa: entre lower e upper. Se os sinalizadores abertos forem verdadeiros, a chave correspondente não será incluída no intervalo.
+            * 
+            * IDBKeyRange.only(key)– um intervalo que consiste em apenas um key, raramente usado.
+            * 
+            * Veremos exemplos práticos de como usá-los muito em breve.
+            * 
+         * Para realizar a pesquisa real, existem os seguintes métodos. Eles aceitam um query argumento que pode ser uma chave exata ou um intervalo de chaves:
+         * 
+            * store.get(query)– procure o primeiro valor por uma chave ou um intervalo.
+            * 
+            * store.getAll([query], [count])– procure por todos os valores, limite por count se fornecido.
+            * 
+            * store.getKey(query)– procure a primeira chave que satisfaça a consulta, geralmente um intervalo.
+            * 
+            * store.getAllKeys([query], [count])– procure todas as chaves que satisfaçam a consulta, geralmente um intervalo, até count se fornecido.
+            * 
+            * store.count([query])– obtém a contagem total de chaves que satisfazem a consulta, geralmente um intervalo.
+            * 
+         * Por exemplo, temos muitos livros em nossa loja. Lembre-se, o idcampo é a chave, portanto, todos esses métodos podem pesquisar por id. 
+         * 
+         * Exemplos de solicitação(request):
+        */
+
+        //procura o primeiro valor que correponda a chave 'js'
+        books.get('js');
+
+        //store.getAll([query], [count])– procure por todos os valores, limite por count se fornecido.
+        //“intervalos de valores” – objetos IDBKeyRange que especificam um “intervalo de chave” aceitável.
+        //IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])significa: entre lower e upper. Se os sinalizadores abertos forem verdadeiros, a chave correspondente não será incluída no intervalo.
+        //procurarar valores entre as chaves css e html
+        //obtem livros com 'css' <= id <= 'html'
+        books.getAll(IDBKeyRange.bound('css', 'html'));
+
+        //obtem livros com 'id' < html
+        books.getAll(IDBKeyRange.upperBound('html', true));
+
+        //obtem todos livros
+        books.getAll();
+
+        //obtem todas chaves, onde id > 'js'
+        books.getAllKeys(IDBKeyRange.lowerBound('js', true));
+
+        /**
+         * * O armazenamento de objetos é sempre classificado
+         * 
+         * Um armazenamento de objetos classifica os valores por chave internamente.
+         * 
+         * Portanto, solicitações que retornam muitos valores sempre os retornam em ordem de chave.
+         * */
+    </script>
+
+</body>
+</html>

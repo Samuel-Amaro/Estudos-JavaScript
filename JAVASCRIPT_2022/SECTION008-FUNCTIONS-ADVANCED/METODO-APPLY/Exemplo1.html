@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> 
+    <title>Apply exemplo 1</title>
+</head>
+<body>
+    <script>
+        /**
+         * * APPLY() EXEMPLO DE MÉTODO
+         * 
+         * Vamos dar alguns exemplos de uso do apply() método.
+         * 
+         * * EXEMPLO APPLY() MÉTODO JS SIMPLES
+         * 
+         * Suponha que você tenha um person objeto:
+        */
+
+        //declara um objeto anonimo literal com duas propriedades, esse objeto e atribuido por referencia ao person variavel, assim person variavel referencia objeto anonimo
+        const person = {
+            //propriedades do objeto declaradas usando a sintaxe chave valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        /**
+         * … e uma função nomeada greet() da seguinte forma:
+        */
+
+        //declara uma function regular chamada greet que possui dois paramentros declarados nomeados de greeting e message
+        //a function declarada greet e uma instancia de objeto do tipo Function que possui metodos e propriedades
+        function greet(greeting, message) {
+            //o this valor esta referenciando o objeto global window sem o script esta no modo estrito
+            //o this valor esta referenciando um objeto que possui a firstName propriedade
+            //aqui o this valor ira referenciar o person objeto por meio da apply
+            return `${greeting} ${this.firstName}. ${message}`;
+        }
+
+        /**
+         * A greet() função aceita dois parâmetros: greeting e message. Dentro da greet() função, referenciamos um objeto que possui a firstName propriedade.
+         * 
+         * O exemplo a seguir mostra como usar o apply() método para chamar a greet() função com o this conjunto para o person objeto:
+        */
+
+        //o apply metodo da instancia de objeto greet que e uma function e reponsavel por permitir um this valor chamar uma função como os argumentos fornecidos por array
+        //o apply metodo recebe o person objeto como o this valor
+        //e o array e os argumentos para o greet function
+        //o apply ira permitir o person objeto invocar a greet function passando o array como argumentos para o greet function
+        let result = greet.apply(person, ['Hello', 'How are you?']);
+        //mostra o valor retornado por greet
+        console.log(`result Apply = ${result}`);
+
+        /**
+         * Neste exemplo, definimos o this valor dentro da função para o person objeto. Os argumentos da greet()função foram passados ​​para o apply() método como um array.
+         * 
+         * O apply() método invocou a greet()função com o this valor definido para o person objeto e os argumentos como uma array ['Hello', 'How are you?'].
+         * 
+         * Se você usar o call() método, precisará passar os argumentos da greet() função separadamente da seguinte forma:
+        */
+
+        //usando o call metodo que permiti passar os argumentos da função individualmente separados por virgula
+        //aqui usando o call metodo da instacia de objeto do tipo function greet
+        //vamos invocar o greet function por meio do person objeto usando o call metodo e passando os argumentos por meio de call para greet
+        let resultCall = greet.call(person, 'Hello', 'How are you?');
+        console.log(`result Call = ${resultCall}`);
+    </script>
+</body>
+</html>

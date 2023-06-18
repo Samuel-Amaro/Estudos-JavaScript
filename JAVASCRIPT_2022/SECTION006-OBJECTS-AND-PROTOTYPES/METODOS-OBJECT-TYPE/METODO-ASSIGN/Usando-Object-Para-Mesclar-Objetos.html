@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesclagem de Objetos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * USANDO JAVASCRIPT Object.assign() para mesclar objetos
+         * 
+         * O Object.assign() pode mesclar objetos de origem em um objeto de destino que possui propriedades que consistem em todas as propriedades dos objetos de origem. Por exemplo:
+        */
+
+        //declara um objeto literal anonimo, que e atribuido por referencia a variavel box, a variavel box referencia o objeto
+        let box = {
+            //declara propriedades do objeto usando a sintaxe chave : valor
+            height : 10,
+            width : 20
+        };
+
+        //declara um objeto anonimo literal, que sera referenciado pela varaivel style
+        let style = {
+            //propriedades do objeto usando sintaxe chave : valor
+            color : 'Red',
+            borderStyle : 'Solid'
+        };
+
+        
+        //usando o metodo Object.assign(target, source);
+        //podemos clonar um objeto
+        //o metodo ira clonar todas as propriedades enumeraveis e proprias do objeto de origem para o objeto de destino
+        //o metodo ira retorna o objeto de origem
+        //o metodo atribui todas as propriedades enumeraveis do objeto source referenciado por box, e propriedades enumeraveis e proprias do source2 objeto referenciado por style, ao objeto target anonimo literal
+        //o assign mescla as propriedades do referenciadas por box, e style ao target objeto literal, atribindo as propriedades ao target objeto literal anonimo
+        let styleBox = Object.assign({}, box, style);
+
+        //mostra o target literal objeto com as propriedades mecladas por assign dos ojbetos box e style
+        console.log(styleBox);
+
+        /**
+         * Se os objetos de origem tiverem a mesma propriedade, a propriedade do objeto posterior substituirá a anterior:
+        */
+
+        //declara objeto anonimo literal que sera referenciado por box varaivel
+        let box2 = {
+            //sintaxe prop chave : valor
+            height: 10,
+            width: 20,
+            color: 'Red'
+        };
+
+        //declara objeto anonimo literal que sera referenciado por style variavel
+        let style2 = {
+            color: 'Blue',
+            borderStyle: 'solid'
+        };
+
+        //o metodo assign ira mesclar as propriedades que estão nos objetos referenciados por box2 e style2
+        //so que esses objetos possue ambos uma unica propriedade igual assim no objeto target que recebera as propriedades, dos sources objetos box2 e style2, a propriedade igual do ojbeto box2 sera substituida pela propriedade igual do style2, objeto no objeto target mesclado pelo metodo assign
+        let styleBox2 = Object.assign({}, box2, style2);
+
+        //objeto target mesclado
+        console.log(styleBox2);
+
+        /**
+         * * RESUMO
+         * 
+         *  Object.assign() atribui propriedades enumeráveis ​​e próprias de um objeto de origem a um objeto de destino.
+         * 
+         * Object.assign()pode ser usado para clonar um objeto ou mesclar objetos .
+        */
+    </script>
+</body>
+</html>

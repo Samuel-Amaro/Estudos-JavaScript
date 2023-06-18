@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literais Binarios</title>
+</head>
+<body>
+    <script>
+        /**
+         * * LITERAIS BINÁRIOS
+         * 
+         * No ES5, o JavaScript não fornecia nenhuma forma literal para números binários. Para analisar uma string binária, você usa a parseInt()função da seguinte forma:
+        */
+
+        //converte a string 111 em binario
+        let e = parseInt('111', 2);
+        console.log(e); //7 em hexadecimal
+
+        /**
+         * O ES6 adicionou suporte para literais binários usando o 0b prefixo seguido por uma sequência de números binários (0 e 1). Aqui está um exemplo:
+        */
+
+        //declara uma variavel e a inicializa usando o literal binario com o prefixo 0b
+        let f = 0b111;
+        console.log(f);//mostra o valor binario em hexadecimal
+
+        /**
+         * * RESUMO
+         * 
+         *  Literais octais começam com 0o seguido por uma sequência de números entre 0 e 7.
+         * 
+         * Os literais binários começam com 0b seguidos por uma sequência de números 0 e 1.
+        */
+
+    </script>
+</body>
+</html>

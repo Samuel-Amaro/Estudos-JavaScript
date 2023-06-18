@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For in Loop</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * O FOR IN LOOP AND ARRAY
+         * 
+         *  É uma boa prática não usar o for...in para iterar em uma array, especialmente quando a ordem dos elementos da array é importante.
+         * 
+         * O exemplo a seguir funciona perfeitamente:
+        */
+
+        //declara um array literal denso inicializado com 3 elementos
+        const items = [10, 20, 30];
+        let total = 0;
+
+        //itera sobre os elementos de um array literal
+        for(const item in items) {
+            total = total + items[item];
+        }
+
+        console.log(total);
+
+        /**
+         * No entanto, alguém pode definir uma propriedade do Array tipo integrado em suas bibliotecas da seguinte maneira:
+        */
+
+        //acessa o objeto prototipico anonimo do tipo Array, por meio da Array.prototype
+        //define uma propriedade nesse objeto anonimo chamada foo com valor 100, para ser acessado pelas instancias que estiverem ligada ao objeto anonimo
+        Array.prototype.foo = 100;
+
+        /**
+         * Portanto, o for...in não funcionará corretamente:
+        */
+
+        //itera sobre os elementos do array literal items
+        for(var prop in items) {
+            total = total + items[prop];
+        }
+
+        console.log(total);
+
+        /**
+         * Ou outro exemplo:
+        */
+
+        //declara uma array literal vazio não inicializado chamado arr
+        var arr = [];
+        //defina o terceiro elemento como 3, os outros elementos são `indefinidos`
+        arr[2] = 3; //torna o array contiguo
+
+        //itera sobre os todos os elementos do array
+        for(let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+
+        //A saída mostra três elementos da array, que estão corretos:
+        //undefined
+        //undefined
+        //3
+
+        /**
+         * No entanto, o  for...in loop ignora os primeiros dois elementos:
+        */
+
+        //itera(percorre) sobre todos os elementos do array que estão inicializados, mas aqui vai um erro pois ira percorrer as propriedades herdados do array definidas no prototipico 
+        for(const key in arr) {
+            console.log(arr[key]);
+        }
+
+        /**
+         * A saída mostra apenas o terceiro elemento, não os primeiros dois elementos.
+         * 
+         * * RESUMO
+         * 
+         * O for...in loop itera sobre as propriedades enumeráveis de um objeto. Ele também sobe para a cadeia de protótipos e enumera as propriedades herdadas.
+         * 
+         * Evite usar for...in loop para iterar sobre os elementos de uma array, especialmente quando a ordem do índice é importante.
+        */
+    </script>
+
+</body>
+</html>

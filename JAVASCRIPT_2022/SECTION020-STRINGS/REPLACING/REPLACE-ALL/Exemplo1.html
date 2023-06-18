@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLOS DE JS STRING REPLACEALL()
+         * 
+         * Vejamos alguns exemplos de uso do replaceAll() método JavaScript String.
+         * 
+         * * 1) EXEMPLO SIMPLES DE JS replaceAll()
+         * 
+         * O exemplo a seguir usa o replaceAll() método String para substituir a string JS pela string JavaScript na string ' JS will, JS will, JS will rock you':
+        */
+
+        //declara uma variavel chamada str, essa variavel e inicializada com uma string literal
+        let str = 'JS will, JS will, JS will rock you.';
+        //utilizando o metodo string.replaceAll(), para retorna uma nova string com todas as correspondências de um padrão substituídas por uma substituição
+        //aqui o metodo recebe dois argumentos o primeiro argumento e O pattern pode ser uma string ou uma expressão regular.
+        //o segundo argumento e O replacement argumento pode ser uma string ou uma função de retorno de chamada(callback) que será invocada para cada correspondência.
+        //aqui vamos substituir a string 'JS' por a string 'JavaScript' em todas as correspondecias encontradas na string literal str
+        //retorna uma nova string não modifica a original
+        let newStr = str.replaceAll('JS', 'JavaScript');
+        console.log(str);
+        console.log(newStr);
+
+    </script>
+</body>
+</html>

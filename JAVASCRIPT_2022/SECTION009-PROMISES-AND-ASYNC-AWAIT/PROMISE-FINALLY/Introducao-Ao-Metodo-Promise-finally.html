@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Promise finally()</title>
+</head>
+<body>
+
+    <script> 
+
+        /**
+         * * JS PROMISE FINALLY() - FINALMENTE
+         * 
+         * Resumo : neste tutorial, você aprenderá a usar o finally() método JavaScript Promise para executar o código assim que a promessa for estabelecida, independentemente de seu resultado.
+         * 
+         * * INTRODUÇÃO AO MÉTODO JS Promise finally()
+         * 
+         * Suponha que você tenha uma promessa(promise):
+
+            promise
+                .then(result => {...})
+                .then(result => {...})
+                .finally(() => {...})
+
+         * 
+         * O finally() método é sempre executado se a promessa for cumprida ou rejeitada. Em outras palavras, o finally() método é executado quando a promessa é liquidada.
+         * 
+         * O finally() método foi introduzido no ES2018. No finally() método, você pode colocar o código que limpa o recurso quando a promessa é liquidada, independentemente de seu resultado. Ao usar o finally()método, você pode evitar código duplicado nos métodos then() e como este: catch()
+
+            promise
+                  .then(result => {
+                    //processa o resultado
+                    //limpa os recursos
+                  })
+                  .catch(error => {
+                    //trata o erro
+                    // limpa os recursos
+                  });
+
+         * 
+         * Agora, você pode mover a parte de limpeza dos recursos para o finally()método da seguinte maneira:
+
+            promise
+                  .then(result => {
+                    //processa o resultado
+                  })
+                  .catch(error => {
+                    //trata o erro
+                  })
+                  .finally(() => result {
+                      //limpa os recursos
+                  });
+
+         * 
+         * O finally() método é semelhante ao finallynbloco na try...catch...finally instrução. No código síncrono, você usa o finally bloco para limpar os recursos. No código assíncrono, você usa o finally()método.
+                  
+        */
+
+    </script>
+
+</body>
+</html>

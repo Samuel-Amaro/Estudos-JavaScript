@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body><!-- comment-->
+
+    <script type="text/javascript">
+        /**
+         * * TAG: nodeName e tagName
+         * 
+         *  Dado um nó DOM, podemos ler seu nome de tag nodeName ou tagName propriedades:
+        */
+
+        // a propriedade elem.nodeName, obtem o nome do no de elemento da arvore DOM
+        console.log(document.body.nodeName); //BODY
+
+        //a propriedade elem.tagName obtem o nome da tag que representa este no de elemento DOM, na estrutura html
+        console.log(document.body.tagName); //BODY
+
+        /**
+         * Existe alguma diferença entre tagName e nodeName?
+         * 
+         * Claro, a diferença se reflete em seus nomes, mas na verdade é um pouco sutil.
+         
+            - A tagName propriedade existe apenas para Element nós.
+
+            - O nodeName é definido para qualquer Node:
+
+                - para elementos significa o mesmo que tagName.
+
+                - para outros tipos de nó (texto, comentário, etc.) tem uma string com o tipo de nó.
+
+            - Em outras palavras, tagName é suportado apenas por nós de elemento (como se origina da Element classe), enquanto nodeName pode dizer algo sobre outros tipos de nós.
+
+         *  Por exemplo, vamos comparar tagName e nodeName para o document e um nó de comentário:
+        */
+
+        //para comentar
+        //obtendo o nome da tag do primeiro no filho do no body
+        //essa propriedade so funciona para nos de elemento
+        console.log(document.body.firstChild.tagName); //undefined (não e um element)
+
+        //obtendo o nome do no que seja o primeiro no filho direto do no body
+        console.log(document.body.firstChild.nodeName); //#comment
+
+        //para comentar
+        //obtendo o nome da tag que representa o document no na estrutura html
+        //a propriedade elem.tagName so funciona em nos de elemento
+        console.log(document.tagName); //undefined (não e um element)
+
+        //obtendo o nome do no de objeto de documento que e um no dom
+        console.log(document.nodeName); //#document
+
+
+        /**
+         * Se lidarmos apenas com elementos(element), podemos usar ambos tagName e nodeName – não há diferença.
+         * 
+         * * O nome da tag é sempre maiúsculo, exceto no modo XML
+         * 
+         *  O navegador possui dois modos de processamento de documentos: HTML e XML. Normalmente, o modo HTML é usado para páginas da web. O modo XML é ativado quando o navegador recebe um documento XML com o cabeçalho: Content-Type: application/xml+xhtml.
+         * 
+         * No modo HTML tagName/nodeName é sempre maiúscula: é BODY para <body> ou <BoDy>.
+         * 
+         * No modo XML, o caso é mantido “como está”. Hoje em dia o modo XML raramente é usado.
+         * */
+    </script>
+
+</body>
+</html>

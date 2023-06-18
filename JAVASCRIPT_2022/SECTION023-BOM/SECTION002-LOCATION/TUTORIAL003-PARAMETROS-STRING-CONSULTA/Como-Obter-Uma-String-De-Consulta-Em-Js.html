@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+       /**
+        * * COMO OBTER UMA STRING DE CONSULTA EM JS(HOW TO GET QUERY STRING IN JS)
+        * 
+        * Resumo : neste tutorial, você aprenderá como usar o URLSearchParams  para obter parâmetros de string de consulta em JavaScript.
+        * 
+        * Para obter uma string de consulta, você pode acessar a search propriedade do location objeto:
+        
+            location.search
+
+            -  O location.search é uma string que representa a string de consulta da URL:
+
+        * Assumindo que o valor de location.search é:
+        
+            '?type=list&page=20'
+
+        * 
+        * Para trabalhar com a string de consulta, você pode usar o URLSearchParams objeto.
+        * */
+
+        //location.search é uma string que representa a string de consulta da URL:
+        //o URLSearchParams retorna uma instancia de objeto atribuida por referencia a constante urlParams
+        //o construtor URLSearchParams recebe como argumento uma string com paramentros de consulta de uma URL
+        const urlParams = new URLSearchParams(location.search);
+
+        /**
+         * O URLSearchParams é um objeto iterável , portanto, você pode usar a for...of estrutura para iterar sobre seus elementos que são parâmetros de string de consulta:
+         * */
+        
+        //usando a construção for...of para iterar sobre os elementos da instancia de objeto iteravel refernciada por urlParams
+        for(const [key, value] of urlParams) {
+            console.log(`${key}:${value}`);
+        }
+    </script>
+</body>
+</html>

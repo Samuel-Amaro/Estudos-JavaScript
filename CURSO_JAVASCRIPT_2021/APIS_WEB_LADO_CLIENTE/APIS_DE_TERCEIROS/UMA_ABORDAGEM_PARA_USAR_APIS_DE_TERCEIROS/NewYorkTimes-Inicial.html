@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NY Times API exemplo</title>
+  <link href="nytimes.css" rel="stylesheet">
+</head>
+<body>
+  <h1>New York Times pesquisa artigo</h1>
+
+  <div class="wrapper">
+
+    <div class="controls">
+      <form>
+        <p>
+          <label for="search">Digite um único termo de pesquisa (obrigatório): </label>
+          <input type="text" id="search" class="search" required>
+        </p>
+        <p>
+          <label for="start-date">Digite uma data de início (formato AAAAMMDD):</label>
+          <input type="date" id="start-date" class="start-date" pattern="[0-9]{8}">
+        </p>
+        <p>
+          <label for="end-date">Digite uma data final (formato AAAAMMDD):</label>
+          <input type="date" id="end-date" class="end-date" pattern="[0-9]{8}">
+        </p>
+        <p>
+          <button class="submit">submeter pesquisa</button>
+        </p>
+      </form>
+    </div>
+
+    <div class="results">
+      <nav>
+        <button class="prev">Anterior 10</button>
+        <button class="next">Próximos 10</button>
+      </nav>
+
+      <section>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+
+  //Definindo uma chave para baseURL e como parte do URL de solicitação
+  //CONECTANDO API AO meu aplicativo
+
+  const baseURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+  const key = 'hwjIA2yjSPVX7Etb0NttNHKNWaDCbtix';
+  let url;
+
+  // Grav todas as referências aos elementos Dom que você precisa para manipular
+
+  const searchTerm = document.querySelector('.search');
+  const startDate = document.querySelector('.start-date');
+  const endDate = document.querySelector('.end-date');
+  const searchForm = document.querySelector('form');
+
+  // This is never used
+  // const submitBtn = document.querySelector('.submit');
+
+  const nextBtn = document.querySelector('.next');
+  const previousBtn = document.querySelector('.prev');
+
+  const section = document.querySelector('section');
+  const nav = document.querySelector('nav');
+
+  // Oculte a navegação "Anterior" / "Próximo" para começar, pois não precisamos dela imediatamente
+  nav.style.display = 'none';
+
+  //definir o número da página inicial e o status da navegação sendo exibida 
+  let pageNumber = 0;
+
+  // This is never used
+  // let displayNav = false;
+
+  //Ouvintes de eventos para controlar a funcionalidade
+  //registrando uma manipulador de eventos para o evento submit do formulario(quando o formulário é enviado o botão e pressionado)
+  searchForm.addEventListener('submit', submitSearch);
+
+
+  //Conectando os botões de paginação
+  //Para fazer os botões de paginação funcionarem, iremos incrementar (ou decrementar) o valor da pageNumbervariável e, em seguida, executar novamente a solicitação de busca com o novo valor incluído no parâmetro de URL da página. Isso funciona porque a API NYTimes retorna apenas 10 resultados por vez - se mais de 10 resultados estiverem disponíveis, ela retornará os primeiros 10 (0-9) se o pageparâmetro de URL estiver definido como 0 (ou não estiver incluído - 0 é o valor padrão), os próximos 10 (10-19) se estiver definido como 1 e assim por diante.
+
+  //registrando um manipulador de eventos quando o elemento <button> tiver sido clicado 
+  nextBtn.addEventListener('click', nextPage);
+  
+  //registrando manipulador de eventos
+  previousBtn.addEventListener('click', previousPage);
+
+  /**
+   * função JS que recebem um parametro de objeto de evento
+   * 
+   * A primeira função é simples - incrementamos a pageNumbervariável e, em seguida, executamos a fetchResults()função novamente para exibir os resultados da próxima página.
+   * */
+  function nextPage(e) {
+      pageNumber++;
+      fetchResults(e);
+  };
+
+  /**
+   *
+   * função JS que recebem um parametro de objeto de evento
+   * 
+   *  A segunda função funciona quase exatamente da mesma maneira ao contrário, mas também temos que realizar a etapa extra de verificar pageNumberse já não é zero antes de diminuí-lo - se a solicitação de busca for executada com um pageparâmetro de URL negativo , isso pode causar erros. Se o pageNumberjá for 0, saímos returnda função, para evitar desperdício de poder de processamento (Se já estamos na primeira página, não precisamos carregar os mesmos resultados novamente).
+   */
+  function previousPage(e) {
+    if(pageNumber > 0) {
+      pageNumber--;
+    }else{
+      return;
+    }
+    fetchResults(e);
+  };
+  /**
+   *  função JS que tem como parametro um objeto de evento
+   * 
+   * submitSearch()configura o número da página de volta para 0 para começar e, em seguida, liga fetchResults().
+   * 
+  */
+  function submitSearch(e) {
+      pageNumber = 0;
+      fetchResults(e);
+  }
+
+  /**
+   * FUNÇÃO JS, que tem como parametro um objeto de evento 
+   * 
+   * Isso primeiro chama preventDefault()o objeto de evento, para interromper o envio do formulário (o que interromperia o exemplo).
+   * 
+   * Em seguida, usamos alguma manipulação de string para montar a URL completa para a qual faremos a solicitação. Começamos montando as peças que consideramos obrigatórias para esta demonstração:
+  */
+  function fetchResults(e) {
+    //Use preventDefault () para interromper o envio do formulário
+    e.preventDefault();
+
+    //Monte o URL completo
+    //O URL base (obtido da baseURLvariável).
+    //A chave API, que deve ser especificada no api-keyparâmetro URL (o valor é obtido da keyvariável).
+    //O número da página, que deve ser especificado no page parâmetro URL (o valor é retirado da pageNumber variável).
+    //O termo de pesquisa, que deve ser especificado no q parâmetro URL (o valor é retirado do valor do searchTerm texto <input>).
+    //O tipo de documento para o qual retornar resultados, conforme especificado em uma expressão passada por meio do fq parâmetro URL. Neste caso, queremos devolver artigos. 
+    url = baseURL + '?api-key=' + key + '&page=' + pageNumber + '&q=' + searchTerm.value + '&fq=document_type:("article")';
+
+    //data inicial não vazia, Se o fizerem, acrescentamos seus valores à URL, especificados nos parâmetros begin_datee end_date URL, respectivamente.
+    if(startDate.value !== '') {
+       url += '&begin_date=' + startDate.value;
+    };
+
+    //data final não vazia
+    if(endDate.value !== '') {
+      url += '&end_date=' + endDate.value;
+    };
+
+    //Solicitando dados da API
+    //Agora que construímos nossa URL, vamos fazer uma solicitação a ela. Faremos isso usando a API Fetch 
+    //Adicione o seguinte bloco de código dentro da fetchResults() função, logo acima da chave de fechamento:
+
+    ////Aqui, executamos a solicitação passando nossa url variável para fetch(), convertemos o corpo da resposta em JSON usando a json() função e, em seguida, passamos o JSON resultante para a displayResults()função para que os dados possam ser exibidos em nossa IU.
+
+    // Use fetch () para fazer a solicitação à API
+    fetch(url).then(function(result) {
+      return result.json();
+    }).then(function(json) {
+      displayResults(json);
+    });
+  }
+
+  /**
+   * exibindo dados
+   * 
+   * esta função exibira os dados que a API restful retorna em formato json
+   * 
+   * esta função precisa de um parametro json, dados formatados como json
+   * 
+   * 
+  */
+  function displayResults(json) {
+
+     //retorna o primeiro elemento HTML filho da section
+     //O whileloop é um padrão comum usado para excluir todo o conteúdo de um elemento DOM, neste caso, o <section> elemento. Continuamos verificando se o <section> tem um primeiro filho e, se tiver, removemos o primeiro filho. O loop termina quando <section>não houver mais filhos.
+     while(section.firstChild) {
+         //remove o primeiro elemento filho da section 
+         section.removeChild(section.firstChild);
+     }
+
+     //return um array que armazenara os artigos de acordo com a url especificada
+     //Em seguida, definimos a articles variável como igual json.response.docs- esta é a array que contém todos os objetos que representam os artigos retornados pela pesquisa. Isso é feito exclusivamente para tornar o código a seguir um pouco mais simples.
+     const articles = json.response.docs;
+
+     //se a quantidade de artigos que a API retorna for igual a 10
+     //O primeiro if()bloco verifica se 10 artigos são retornados (a API retorna até 10 artigos por vez)
+     if(articles.length === 10) {
+        //<nav>Nesse caso, exibimos o que contém os botões de paginação 10 anteriores / 10 seguintes . Se menos de 10 artigos forem retornados, todos eles caberão em uma página, portanto, não precisamos mostrar os botões de paginação.
+        //muda a forma como o elemento HTML sera exibido
+        nav.style.display = 'block';
+     }else{
+       //O próximo if()bloco verifica se nenhum artigo é retornado. Nesse caso, não tentamos exibir nenhum - criamos um <p> contendo o texto "Nenhum resultado retornado." e insira-o no.<section>
+       //elemento HTML sera ocultado
+       nav.style.display = 'none';
+     }
+
+     //Se alguns artigos são retornados, nós, em primeiro lugar, criamos todos os elementos que queremos usar para exibir cada notícia, inserimos os conteúdos certos em cada um e depois os inserimos no DOM nos locais apropriados
+
+     //api não retornou nenhum artigo que corresponda aos parametros especificados na URL
+     if(articles.length === 0) {
+        //cria elemento <p>
+        const para = document.createElement('p');
+        //add conteudo ao elemento
+        para.textContent = 'Sem resultados retornados.';
+        //add o elemento <p> como filho de <section>
+        section.appendChild(para);
+     }else{
+        //para cada artigo retornado pela API 
+        for(let i = 0; i < articles.length; i++) {
+          //cria elementos HTML
+          const article = document.createElement('article');
+          const heading = document.createElement('h2');
+          const link = document.createElement('a');
+          const img = document.createElement('img');
+          const para1 = document.createElement('p');
+          const para2 = document.createElement('p');
+          const clearfix = document.createElement('div');
+
+          //obtem o artigo atual
+          let current = articles[i];
+          //mostra para o dev no console
+          console.log(current);
+
+          link.href = current.web_url; //string
+          link.textContent = current.headline.main;//string 
+          para1.textContent = current.snippet; //string
+          para2.textContent = 'Keywords: ';
+
+          //para cada palavra-chave de um artigo
+          //Usamos um for loop ( for(var j = 0; j < current.keywords.length; j++) { ... }) para percorrer todas as palavras-chave associadas a cada artigo e inserir cada uma dentro da sua <span>, dentro de um <p>. Isso foi feito para facilitar o estilo de cada um.
+          for(let j = 0; j < current.keywords.length; j++) {
+            const span = document.createElement('span');
+            span.textContent += current.keywords[j].value + ' ';
+            para2.appendChild(span);
+          }
+
+          //Usamos um if()bloco ( if(current.multimedia.length > 0) { ... }) para verificar se cada artigo tem alguma imagem associada a ele (algumas histórias não). Exibimos a primeira imagem apenas se ela existir (caso contrário, um erro seria gerado).
+          if(current.multimedia.length > 0) {
+            img.src = 'http://www.nytimes.com/' + current.multimedia[0].url;
+            img.alt = current.headline.main;
+          }
+
+          //add uma propriedade de class no elemento para estilizar
+          //Demos ao nosso <div>elemento uma classe de "clearfix", para que possamos aplicar a limpeza a ele facilmente.
+          clearfix.setAttribute('class','clearfix');
+
+          //add os elementos HTML criados ao documento
+          article.appendChild(heading);
+          heading.appendChild(link);
+          article.appendChild(img);
+          article.appendChild(para1);
+          article.appendChild(para2);
+          article.appendChild(clearfix);
+          section.appendChild(article);
+        }
+     }
+  }
+
+
+
+
+  </script>
+
+
+</body>
+</html>

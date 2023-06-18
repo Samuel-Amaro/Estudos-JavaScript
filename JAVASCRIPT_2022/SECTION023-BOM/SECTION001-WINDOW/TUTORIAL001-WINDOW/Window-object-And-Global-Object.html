@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * WINDOW(JANELA) JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o window objeto JavaScript que é o objeto global do JavaScript no navegador e expõe a funcionalidade do navegador.
+         * 
+         * * O WINDOW OBJETO É O GLOBAL OBJETO
+         * 
+         * O objeto global do JavaScript no navegador é o window objeto. Isso significa que todas as variáveis ​​e funções declaradas globalmente com a palavra-chave var se tornam as propriedades e métodos do window objeto. Por exemplo:
+        */
+
+        //declara uma variavel de escopo global chamada counter inicializada com o valor 1
+        var counter = 1;
+        //uma expressão de função
+        //declara uma arrow function anonima sem paramentro que e atribuida por referencia a variavel de escopo global chamada showCounter
+        var showCounter = () => console.log(counter);
+
+        //funções e variaveis declaradas globalmente com a palavra-chave var se tornam propriedades e métodos do window objeto
+        //pois o window objeto e o objeto global do JavaScript no ambiente de navegador
+
+        //acessa variavel como propriedade
+        console.log(window.counter);
+        //acessa function showCounter como um método de window
+        window.showCounter();
+
+        /**
+         * Como a counter variável e a showCounter() função são declaradas globalmente com a palavra-chave var, elas são adicionadas automaticamente ao window objeto. Se você não quiser poluir o window objeto, você pode usar a let palavra-chave para declarar variáveis ​​e funções.
+        */
+
+
+    </script>
+</body>
+</html>

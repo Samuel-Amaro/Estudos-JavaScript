@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * A OPÇÃO DE MANIPULADOR "PASSIVO"
+         * 
+         * A opção passive: true opcional de addEventListener(event, handler, options) sinaliza ao navegador que o manipulador não chamará preventDefault().
+         * 
+         * Por que isso pode ser necessário?
+         * 
+         * Existem alguns eventos como touchmove em dispositivos móveis (quando o usuário move o dedo pela tela), que causam rolagem por padrão, mas essa rolagem pode ser evitada usando preventDefault() o manipulador.
+         * 
+         * Assim, quando o navegador detecta tal evento, ele deve primeiro processar todos os manipuladores e, se preventDefault não for chamado em nenhum lugar, pode prosseguir com a rolagem. Isso pode causar atrasos desnecessários e “tremulação” na interface do usuário.
+         * 
+         * As passive: true opções informam ao navegador que o manipulador não cancelará a rolagem. Em seguida, o navegador rola imediatamente, proporcionando uma experiência fluente ao máximo, e o evento é tratado pelo caminho.
+         * 
+         * Para alguns navegadores (Firefox, Chrome), passive é true por padrão para touchstart e touchmove eventos.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * OBJECT METHODS
+         * 
+         * Veja o seguinte counter objeto:
+         *
+         * */
+
+        //exemplo de onde não pode usar arrow function
+        //metodos de obejto não se pode usar arrow function 
+        //declara um objeto literal
+        //const counter = {
+            //declara uma propriedade
+        //    count: 0,
+            //declara um metodo de objeto
+            //o metodo e um arrow function anonima que referencia a propriedade atual por meio do this valor, a arrow function não posssui paramentro e nem declarações, possui uma expressão de valor aritimetica que resulta em um valor
+        //    next: () => ++this.count,
+            //metodo de objeto
+        //    current: () => this.count
+        //};
+
+        /**
+         * O counter objeto possui dois métodos: current() e next(). O current() método retorna o valor do contador atual e o next() método retorna o próximo valor do contador.
+         * 
+         * O seguinte mostra o próximo valor do contador, que deve ser 1:
+         * */
+
+        //console.log(counter.next());
+
+        /**
+         * No entanto, ele retorna NaN.
+         * 
+         * O motivo é que, quando você usa a arrow function do objeto, ela herda o this valor do escopo léxico que o inclui, que é o escopo global neste exemplo.
+         * 
+         * O this.count dentro do next()método é equivalente a window.count(no navegador da web).
+         * 
+         * O window.count é undefined por padrão porque o window objeto não tem a count propriedade. O next()método adiciona um ao undefined que resulta em NaN.
+         * 
+         * Para corrigir isso, você usa funções regulares como o método de um objeto literal da seguinte maneira:
+         * */
+
+        //forma correta de declarar um objeto literal e usar functions regulares 
+        //declara um objeto literal
+        const counter = {
+            //declara uma propriedade do obejto
+            count: 0,
+            //declara um metodo do objeto usando uma function regular
+            next() {
+                return ++this.count;
+            },
+            current() {
+                return this.count;
+            }
+        };
+
+        /**
+         * Agora, chamar o next() método retornará um conforme o esperado:
+         * */
+        console.log(counter.next()); //1
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Paramentros</title>
+</head>
+<body>
+    <script>
+        /**
+         * * MAIS EXEMPLOS DE PARÂMETROS REST JS
+         * 
+         *  Veja o seguinte exemplo:
+        */
+
+        //declara uma function regular chamada sum, com um paramentro rest chamado args, o parametro rest representa o numero indefinido de paramentros como um array, e definido usando o prefixo de três pontos
+        function sum(...args) {
+            let total = 0;
+            //como args e um array usamos o loop for of para iterar os elementos
+            for(const a of args) {
+                total += a;
+            }
+            return total;
+        }
+
+        //invoca a function passando três argumentos para o rest parametro
+        sum(1, 2, 3);
+
+        /**
+         * Neste exemplo, args em uma array Portanto, você pode usar o for..of loop para iterar sobre seus elementos e resumi-los.
+         * 
+         * Supondo que o chamador da sum()função possa passar argumentos com vários tipos de dados, como number , string e boolean , e você deseja calcular apenas o total de números:
+        */
+
+        //declara uma function regular chmada sum2 que possui uma paramentro rest declarado chamado de args esse paramentro pode receber um numero indefinido de paramentros como um  array
+        function sum2(...args) {
+            return args.filter(function(e) {
+                //se o elemento em args que represeta um argumento passado para function sum2 for do tipo number um numero ele sera filtrado e add eum novo array de subconjunto filtrados usando o filter metodo
+                return typeof e === 'number';    
+            }).reduce(function(prev, curr) {
+                //o reduce metodo e chamado para cada elemento do args array para que retorne um valor que e um resultado acumulado e esse resultado e fornecido como argumento na proxima chamada de reducer, acumula a soma de todos argumentos passados para args
+                return prev + curr;
+            });
+        }
+
+        /**
+            * O script a seguir usa a nova sum() função para somar apenas argumentos numéricos:
+            * 
+            * 
+        */
+
+        //invoca a function sum passando uma serie de argumentos para serem mapeados para paramentro rest, a function vai retorna a soma dos argumentos que forem numericos
+        let result = sum2(10, 'Hi', null, undefined, 20);
+        console.log(result);
+
+        /**
+         * Observe que sem os parâmetros rest, você deve usar o arguments objeto da função.
+         * 
+         * No entanto, o arguments próprio objeto não é uma instância do Array tipo. Portanto, você não pode usar o filter() método diretamente. No ES5, você deve usar Array.prototype.filter.call() da seguinte forma:
+        */
+
+        //declara uma function regular chamada sum3 que não possui paramentro declarado
+        function sum() {
+            //por não haver paramentro declardo na function usaremos o arguments objeto se comporta como um array mas nã e uma instancia do tipo array, e o arguments objeto não e uma instancia do tipo array assim temos que referencia o metodos de array por prototipo do Array tipo
+            //para permitir que o filter seja executado no arguments objeto temos que usar o call metodo de instancia da function filter para que o this valor seja o argumets objeto que chame o metodo filter do array para filtragem de valores e o reduce para soma dos mesmos
+            return Array.prototype.filter.call(arguments, function(e) {
+                //se o elemento em arguments que representa um argumento passado para function sum3 for do tipo number um numero ele sera filtrado e add um novo array de subconjunto filtrados usando o filter metodo
+                return typeof e === 'number';
+            }).reduce(function(prev, curr) {
+                //o reduce metodo e chamado para cada elemento do arguments array para que retorne um valor que e um resultado acumulado e esse resultado e fornecido como argumento na proxima chamada de reducer, acumula a soma de todos argumentos passados para arguments
+                return prev + curr;
+            });
+        }
+
+        /**
+         * Como você vê, o parâmetro rest torna o código mais elegante. Suponha que você precise filtrar os argumentos com base em um tipo específico, como números, strings, booleano e nulo. A função a seguir ajuda você a fazer isso:
+        */
+
+        //declara uma function regular chamada filterBy que possui dois paramentros declados o primeiro paramentro e um paramento regular chamdo type, o segundo parametro e do tipo rest pode receber um numero indefinido de paramentros como um array
+        function filterBy(type, ...args) {
+            //como o args rest paramentro e uma  instancia de array podemos usar seus metodos
+            return args.filter(function(e) {
+                //se o elemento do array args for do tipo do type argumento forncecido o elemento sera filtrado e adciionado em um novo subconjunto e retornado como elementos filtrados
+                return typeof e === type;
+            });
+        }
+    </script>
+</body>
+</html>

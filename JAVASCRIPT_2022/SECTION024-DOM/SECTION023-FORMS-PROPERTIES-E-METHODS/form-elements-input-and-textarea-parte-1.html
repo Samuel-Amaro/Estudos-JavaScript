@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * FORMS ELEMENTS(ELEMENTOS DO FORMULÁRIO)
+         * 
+         * Vamos falar sobre controles de formulário.
+         * 
+         * * INPUT É TEXT AREA
+         * 
+         * Podemos acessar seu valor como input.value(string) ou input.checked(boolean) para caixas de seleção(checkboxes) e botões de opção(radio buttons).
+         * 
+        */
+
+        //a propriedade input.value acessa o valor de um elemento input ou atribui um novo valor (string)
+        input.value = "New value";
+        //a mesma propriedade funcionada para o text area também, atribuindo ou obtendo um texto(string)
+        textarea.value = "Nex text";
+
+        //para elementos de entrada como checkboxes ou radio button temos a propriedade input.checked, para obter ou atribuir um valor(boolean)
+        input.checked = true; //para um checkbox ou radio button
+
+        /**
+         * * USAR textarea.value, não textarea.innerHTML
+         * 
+         * Observe que, embora <textarea>...</textarea> mantenha seu valor como HTML aninhado, nunca devemos usar textarea.innerHTML para acessá-lo.
+         * 
+         * Ele armazena apenas o HTML que estava inicialmente na página, não o valor atual.
+         * */
+    </script>
+</body>
+</html>

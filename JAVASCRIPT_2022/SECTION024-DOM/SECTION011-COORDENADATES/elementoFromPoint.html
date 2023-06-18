@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+       
+       /**
+        * * elementFromPoint(x, y)
+        * 
+        * A chamada para document.elementFromPoint(x, y) retorna o elemento mais aninhado nas coordenadas da janela(WINDOW) (x, y).
+        * 
+        * sintaxe é:
+        
+            let elem = document.elementFromPoint(x, y);
+
+        * 
+        * Por exemplo, o código abaixo destaca e gera a tag do elemento que agora está no meio da janela:
+        */
+
+        //obtem a largura e altura da area do conteudo do documento html e divide pela metade para achar as cordenadas do centro do documento.
+        let centerX = document.documentElement.clientWidth / 2;
+        let centerY = document.documentElement.clientHeight / 2;
+
+        //o metodo elem.elementFromPoint(x, y) retorna o elemento mais aninhado nas cordenadas da janela 
+        //retorna o elemento mais aninhando dentro de documento html que esteja nas cordenadas passadas
+        let elem = document.elementFromPoint(centerX, centerY);
+
+        //destaca o elemento mudando sua cor de fundo
+        elem.style.backgroud = "red";
+        console.log(elem.tagName);
+
+        /**
+         * Como utiliza as coordenadas da janela, o elemento pode ser diferente dependendo da posição de rolagem atual.
+         * 
+         * * Para coordenadas fora da janela, os elementFromPoint retornos null
+         * 
+         * O método document.elementFromPoint(x,y) só funciona se (x,y) estiver dentro da área visível.
+         * 
+         * Se alguma das coordenadas for negativa ou exceder a largura/altura da janela, ela retornará null.
+         * 
+         * Aqui está um erro típico que pode ocorrer se não o verificarmos:
+        */
+
+        //let elem = document.elementFromPoint(x, y);
+        //se as coordenadas estiverem fora da janela, então elem = null
+        //elem.style.background = ''; //Error!
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * JavaScript usa o undefined valor nas seguintes situações.
+         * 
+         * * 4) ACESSANDO ELEMENTOS DE ARRAY FORA DOS LIMITES
+         * 
+         * Quando você acessa um elemento de array que está fora dos limites, você obtém o undefined valor. Por exemplo:
+        */
+
+        //declara um array literal dense anonimo, inicializado com 3 elementos, o array e atribuido por referencia a constante colors
+        const colors = ['red', 'green', 'blue'];
+        //tentando acessar um elemento do array, por meio de um indice, so que o indice não existe, o array indexado vai ate o indice 2
+        //o mecanismo JS retorna o undefined valor ao tentar acessar um elemento por meio de um indice que não existe, tentar acessar um indice de um elemento que não existe, não existe nehum elemento no indice
+        console.log(colors[3]); //undefined
+
+        /**
+         * Neste exemplo, a colors array não possui nenhum elemento no índice 3. Portanto, o colors[3]retorno undefined.
+         * 
+         * * RESUMO
+         * 
+         * O undefined é um tipo primitivo que tem um único valor undefined.
+         * 
+         * Acessar uma variável não inicializada retorna undefined.
+         * 
+         * Acessar uma propriedade inexistente de um objeto retorna undefined.
+         * 
+         * Acessar um elemento de array fora dos limites retorna undefined.
+         * 
+         * Uma função sem uma return instrução ou com uma return instrução mas sem uma expressão retorna undefined.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <form action="" id="formElem">
+        <div>   
+            <label for="name">Entre com seu nome:</label>
+            <input type="text" name="name" value="Jhon"/>
+        </div>
+        <div>
+            <label for="surname">Entre com seu sobrenome:</label>
+            <input type="text" name="surname" value="Smith"/>
+        </div>
+        <div>
+            <label for="image">Imagen perfil</label>
+            <input type="file" name="image" id="image" accept="image/*"/>
+        </div>
+        <div>
+            <input type="submit" value="Submit"/>
+        </div>
+    </form>
+
+    <script>
+        /**
+         * * ENVIANDO UM FORMULÁRIO COM UM ARQUIVO
+         * 
+         * O formulário é sempre enviado como Content-Type: multipart/form-data, esta codificação permite enviar arquivos. Assim, <input type="file"> os campos também são enviados, semelhante a um envio de formulário usual.
+         * 
+        */
+
+        //quando formulario for submetido, submit clicado, etc... manipulador e acionado, a function manipuladora e uma function assincrona
+        formElem.onsubmit = async function(event) {
+            //cancela a ação padrão do navegador, de enviar o formulario, automanticamente
+            event.preventDefault();
+
+            //enviando um request para o url informado, e passa o options argumento objeto como informações adicionais para o request
+            //o metodo retorna uma promise resolvida com response objeto
+            let response = await fetch('https://javascript.info/article/formdata/post/user-avatar', {
+                method: 'POST',//metodo http
+                body: new FormData(formElem) //os dados a serem enviados, o objeto FormData(form) captura automaticamente os campos do form, esse objeto representa os dados do formulario html
+                // codificado e enviado com Content-Type: multipart/form-data.
+            });
+
+            //o metodo response.json() retorna uma promise que e resolvida apos analisar e retornar o conteudo como um objeto json
+            let result = await response.json();
+
+            alert(result.message);
+        };
+
+    </script>
+
+</body>
+</html>

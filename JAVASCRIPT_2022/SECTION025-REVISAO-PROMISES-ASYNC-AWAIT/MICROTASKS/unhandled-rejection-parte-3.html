@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * E se lidarmos com o erro mais tarde? Assim:
+        */
+
+        //usa o metodo estatico reject para rejeitar uma promise com um objeto error
+        //essa promessa rejeitada não e tratada por nenhum manipulador, por enquanto
+        let promise = Promise.reject(new Error("Falha promise!"));
+        //apos 1s atribui uma manipulador para tratar o erro da promisse
+        setTimeout(() => {
+            promise.reject(err => alert('caught'));
+        }, 1000);
+
+        //a rejeição não tratada ocorre quando um erro de promessa não e tratado no final da fila de microtarefas
+        //o manipulador aqui e acionado porque um erro em uma promise que esta na fila de microtarefas não foi tratado
+        window.addEventListener('unhandledrejection', event => alert(event.reason));
+
+        /**
+         * Agora, se executarmos, veremos Promise Failed!primeiro e depois caught.
+         * 
+         * Se não soubéssemos sobre a fila de microtarefas, poderíamos nos perguntar: “Por que o unhandledrejection manipulador foi executado? Nós pegamos e lidamos com o erro!”
+         * 
+         * Mas agora entendemos que unhandledrejection é gerado quando a fila de microtarefas é concluída: o mecanismo examina as promessas e, se alguma delas estiver no estado “rejeitado”, o evento é acionado.
+         * 
+         * No exemplo acima, .catchadicionado por setTimeouttambém triggers. Mas faz isso depois, depois unhandledrejectionde já ter ocorrido, então não muda nada.
+         * 
+         * * RESUMO
+         * 
+         * A manipulação de promessas é sempre assíncrona, pois todas as ações de promessa passam pela fila interna de “tarefas de promessa”, também chamada de “fila de microtarefas” (termo V8).
+         * 
+         * Portanto .then/catch/finally, os manipuladores são sempre chamados após a conclusão do código atual.
+         * 
+         *Se precisarmos garantir que um pedaço de código seja executado após .then/catch/finally, podemos adicioná-lo em uma .thenchamada encadeada
+         * 
+         Na maioria dos mecanismos Javascript, incluindo navegadores e Node.js, o conceito de microtarefas está intimamente ligado ao “loop de eventos” e às “macrotarefas”. Como elas não têm relação direta com as promessas,
+        */
+
+    </script>
+
+</body>
+</html>

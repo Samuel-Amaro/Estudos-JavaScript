@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input>
+    
+    <script type="text/javascript">
+        /**
+         * Mas há exclusões, por exemplo, input.value sincroniza apenas do atributo → para a propriedade, mas não de volta:
+        */
+
+        //seleciona o primeiro elemento que corresponder ao seletor css input
+        let input = document.querySelector('input');
+
+        //attribute => property
+
+        //usando o metodo acesso de atributo, vamos definir um novo atributo e valor no elemento html <input> que esta sendo referenciado pelo no dom input
+        //usando o metodo elem.setAttribute(name, value), para definir um atributo html no elemento
+        input.setAttribute('value', 'text');
+        //obtendo o valor do atributo recem criado por meio da propriedade mapeada para o objeto no dom correspondente
+        //acessando o valor do atributo value
+        //criamos um atributo no elemento e acessamos seu valor por meio da propriedade
+        console.log(input.value); //text
+        
+        //NOT property => attribute
+        //modificando o valor do atributo value no elemento <input> por meio da sua propriedade mapeada value
+        input.value = 'newValue';
+        //esse tipo não pode ser feito em atributo de value, somente para esse atributo não pode ser feito o caminho de volta, so pode a sincronização de atributo para propriedade, o contrario não pode essa sincronização não acontece de propriedade para atributo
+        //tentando obter o valor do atributo por meio do metodo acessor de atributo elem.getAttribute(name)
+        //o metodo retorna um texto so que não esta atualizado sincronizado com a modificação que fizemos
+        console.log(input.getAttribute('value')); //text (não atualizado!)
+
+        /**
+         * No exemplo acima:
+         
+            - Alterar o atributo value atualiza a propriedade.
+
+            - Mas a mudança de propriedade não afeta o atributo.
+
+         * Esse “recurso” pode realmente ser útil, pois as ações do usuário podem levar a  alterações value, e depois delas, se quisermos recuperar o valor “original” do HTML, ele está no atributo.
+         * */
+</script>
+
+</body>
+</html>

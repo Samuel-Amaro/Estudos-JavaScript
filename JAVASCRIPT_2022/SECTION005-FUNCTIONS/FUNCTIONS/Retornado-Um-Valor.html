@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retornando um valor</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * * RETORNANDO UM VALOR
+         *  
+         * Cada função em JavaScript retorna undefined, a menos que seja especificado de outra forma. Veja o seguinte exemplo:
+         * */
+
+        //declara um função chamada say
+        //possui um paramentro  chamado message 
+        //e seu retorno e o valor undefined
+        //valor padrão de retorno
+        function say(message) {
+            //corpo da função(implementa logica)
+            console.log(message);
+        }
+
+        //chama um função(invoca)
+        //passando o argumento 'Hello'
+        let result = say('Hello');
+        //mostra o retorno da chamada da function
+        console.log(`Result: ${result}`);
+
+        /**
+         * Para especificar um valor de retorno para uma função, você usa a returninstrução seguida por uma expressão ou um valor, como este:
+         
+            return expression;
+
+         * 
+         * Por exemplo, a add() função a seguir retorna a soma dos dois argumentos:
+        */
+
+        //declara um função chamada add
+        //declara dois paramentros um chamado a e outro b
+        //especifica um retorno que a função tem que fazer que e a soma de dois argumentos a serem passados
+        function add(a, b) {
+            return a + b;
+        }
+
+        /**
+         * O seguinte mostra como chamar a add() função:
+         * */
+
+        //invocando - chamando a add function
+        //passando dois argumentos  
+        //a add function retorna a soma dos dois argumentos passados
+        let sum = add(10, 20);
+        //mostrando o valor da sum
+        console.log(`Sum: ${sum}`);
+
+        /**
+         * O exemplo a seguir mostra como usar várias return instruções na função para retornar valores diferentes com base nas condições:
+        * */
+
+        //declara um function chamada compare
+        //que declara dois paramentros
+        //e retorna valores baseado em condições
+        function compare(a, b) {
+            if(a > b) {
+                //retorna -1 se o argumento a for maior que b
+                return -1;
+            }else if(a < b) {
+                //retorna 1 se o argumento a for menor que b
+                return 1;
+            }
+            //retorna 0 se os argumentos forem iguais
+            return 0;
+        }
+
+        /**
+         * A compare() função compara dois valores. Ele retorna:
+         
+            - -1 se o primeiro argumento for maior que o segundo.
+
+            - 1 se o primeiro argumento for menor que o segundo.
+
+            - 0 se o primeiro argumento for igual ao segundo.
+
+         * 
+         * A execução da função pára imediatamente quando a return instrução é alcançada. Portanto, você pode usar a return instrução sem um valor para sair da função prematuramente, assim:
+         * */
+
+        //declara uma function chamada dizer
+        //declara um paramentro chamado message
+        function dizer(message) {
+            //não mostra nada se mesage parametro estiver vaziz
+            if(!message) {
+                //interrope a execução da função imediatamente, forçando a sair da funçao prematuramente
+                //quando se utiliza a return instrução sem um valor de retorno
+                return;
+            }
+            console.log(message);
+        }
+        
+        /**
+         * Neste exemplo, se message estiver em branco (ou undefined), a say()função não mostrará nada.
+         * 
+         * A função pode retornar um único valor. Se você deseja retornar vários valores de uma função , você precisa empacotar esses valores em uma array ou um objeto.
+         * */
+    </script>
+
+</body>
+</html>

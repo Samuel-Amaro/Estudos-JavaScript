@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+
+    <button id="btn">Save</button>
+
+    <script>
+
+        /**
+         * * O QUE SÃO CALLBAKS(FUNÇÕES DE RETORNO DE CHAMADA)
+         * 
+         * Em JavaScript, um retorno de chamada(callback) é uma função passada para outra função como um argumento a ser executado posteriormente.
+         * 
+         * Suponha que você tenha a seguinte numbers array:
+        */
+
+        let numbers = [1, 2, 4, 7, 3, 5, 6];
+
+        /**
+         * Para encontrar todos os números ímpares na array, você pode usar o filter() método do objeto Array .
+         * 
+         * O filter() método cria uma nova array com os elementos que passam no teste implementado por uma função.
+         * 
+         * A seguinte função de teste retorna true se um número for ímpar:
+        */
+
+        //declara um function chamada isOddNumber que possui um paramentro chamado number e retorna um valor
+        //essa function sera usado como teste para verificar se um numero e impar
+        //essa function sera uma callback argument para outro metodo
+        function isOddNumber(number) {
+            //se for impar retorna (1) - 1 e 1 e igual a true - e incluido no array de retorno
+            //se for par retorna (0) - 0 e igual a false - não e incluido no array de retorno
+            return number % 2;
+        }
+
+        /**
+         * Agora, você pode passar o isOddNumber() para o filter()método:
+        */
+
+        //chama o filter metodo da array object tipo para filtrar os elementos do array baseado em um teste
+        //passando uma function chamada isOddNumber que sera a callback argument do filter metodo
+        //a callback precisa de outro argumento que e o elemento do array a ser testado, se passar no teste e inserido em um subconjunto do array para ser retornado pela filter
+        //o filter internamente itera sobre cada elemento da array e passa cada elemento para a callback function
+        //se a callback retorna true o elemento sera incluido no array de retorno de subcobjunto
+        //como isOddNumber e um callback não precisa de chamar a function ao passa como argumento, a gente so passa a referncia da function ou seja o nome da function sem parenteses 
+        let oddNumbers = numbers.filter(isOddNumber);
+        console.log(`array = [${numbers}]  | impares = [${oddNumbers}]`); //[1, 7, 3, 5]
+
+        /**
+         * Neste exemplo, isOddNumber é uma função de retorno de chamada(Callback). Quando você passa uma função de retorno de chamada para outra função, você apenas passa a referência da função, ou seja, o nome da função sem os parênteses ().
+         * 
+         * Para encurtar, você pode usar uma função anônima como retorno de chamada(callback):
+         * */
+
+        //pode-se usar uma function anonima como uma callback
+        //mesma logica do exemplo acima so que agora implementado a callback usando uma function anonima
+        oddNumbers = numbers.filter(function(number) {
+            return number % 2;
+        });
+        console.log(`array = [${numbers}]  | impares = [${oddNumbers}]`); //[1, 7, 3, 5]
+
+        /**
+         * No ES6, você pode usar as arrow functions:
+         * 
+         * */
+
+        //implementando um callback anonima diretamente no argumento do filter metodo, usando a arrow function 
+        //mesma logica so muda a forma como a function callback argument de filter esta sendo implementada
+        //a callback e um arrow function anonima
+        oddNumbers = numbers.filter(element => {return element % 2}); 
+
+        /**
+         * Quando você usa o JavaScript em navegadores da web, muitas vezes ouve um evento, por exemplo, um clique de botão e realiza algumas ações se o evento ocorrer.
+         * 
+         * Suponha que você tenha um botão com o id btn:
+         * 
+         * Para executar algum código quando o botão é clicado, você usa um retorno de chamada(callback) e o passa para o addEventListener()método:
+         * */
+
+        //declara uma function callback manipuladora do evento de clique do botão do mouse no button elemeento HTML 
+        function btnClicked() {
+            //faça alguma coisa
+        }
+
+        let btn = document.querySelector('#btn');
+        //so passa a callback argument para o metodo addEventListener como referencia, so o nome da function callback sem parenteses, e so uma referencia, e não invocação da function
+        btn.addEventListener('click', btnClicked);
+
+        /**
+         * O btnClicked neste exemplo é um retorno de chamada(callback). Quando o botão é clicado, a btnClicked() função é chamada para realizar algumas ações.
+         * 
+         * Agora, você tem as idéias básicas de callbacks: passar uma função para outra função.
+         * 
+         * Callbacks são usados ​​de duas maneiras: funções síncronas e assíncronas.
+         * */
+
+    </script>
+
+</body>
+</html>

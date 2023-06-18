@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <img src="./cookie-xsrf.svg" alt="imagen"/>
+
+    <script>
+        /**
+         * * SAMESITE(mesmo site)
+         * 
+         * Esse é outro atributo de segurança samesite. Ele foi projetado para proteger dos chamados ataques XSRF (falsificação de solicitação entre sites - cross-site request forgery).
+         * 
+         * Para entender como funciona e quando é útil, vamos dar uma olhada nos ataques XSRF.
+         * 
+         * * ATAQUE XSRF(falsificação de solicitação entre sites - cross-site request forgery)
+         * 
+         * Imagine, você está logado no site bank.com. Ou seja: você tem um cookie de autenticação desse site. Seu navegador o envia a bank.com em cada solicitação(request), para que o reconheça e execute todas as operações financeiras confidenciais.
+         * 
+         * Agora, enquanto navega na Web em outra janela, você acidentalmente acessa outro site evil.com. Esse site tem código JavaScript que envia um formulário <form action="https://bank.com/pay"> com bank.com campos que iniciam uma transação para a conta do hacker.
+         * 
+         * O navegador envia cookies sempre que você visita o site bank.com, mesmo que o formulário tenha sido enviado de evil.com. Assim, o banco reconhece você e realmente realiza o pagamento.
+         * 
+         * Esse é o chamado ataque “Cross-Site Request Forgery” (em resumo, XSRF).
+         * 
+         * Os bancos reais estão protegidos disso, é claro. Todos os formulários gerados por bank.com possuem um campo especial, o chamado “token de proteção XSRF”, que uma página maligna não pode gerar ou extrair de uma página remota. Ele pode enviar um formulário lá, mas não pode obter os dados de volta. O site bank.com verifica esse token em todos os formulários que recebe.
+         * 
+         * Tal proteção leva tempo para implementar embora. Precisamos garantir que cada formulário tenha o campo de token obrigatório e também devemos verificar todas as solicitações(requests).
+         * 
+         * * INSIRA A OPÇÃO cookie samesite
+         * 
+         * A opção de cookie samesite fornece outra forma de proteção contra tais ataques, que (em teoria) não deveria exigir “tokens de proteção xsrf”.
+         * 
+         * Tem dois valores possíveis:
+         *
+            * samesite=strict(o mesmo que samesite sem valor)
+            * 
+         * Um cookie com samesite=strict nunca é enviado se o usuário vier de fora do mesmo site.  
+         * 
+         * Em outras palavras, se um usuário seguir um link de seu e-mail ou enviar um formulário de evil.com, ou realizar qualquer operação originada de outro domínio, o cookie não será enviado.
+         * 
+         * Se os cookies de autenticação tiverem a samesite opção, um ataque XSRF não terá chance de sucesso, porque um envio de evil.com vem sem cookies. Portanto bank.com, não reconhecerá o usuário e não prosseguirá com o pagamento.
+         * 
+         * A proteção é bastante confiável. Somente as operações provenientes de bank.com enviarão o samesite cookie, por exemplo, um envio de formulário de outra página em bank.com.
+         * 
+         * Embora, há um pequeno inconveniente.
+         * 
+         * Quando um usuário segue um link legítimo para bank.com, como em suas próprias notas, ele ficará surpreso por bank.com não reconhecê-lo. De fato, samesite=strict os cookies não são enviados nesse caso.
+         * 
+         * Poderíamos contornar isso usando dois cookies: um para “reconhecimento geral”, apenas para dizer: “Olá, John” e outro para operações de alteração de dados com samesite=strict. Em seguida, uma pessoa vinda de fora do site verá as boas-vindas, mas os pagamentos devem ser iniciados a partir do site do banco, para que o segundo cookie seja enviado.
+         * 
+            * samesite=lax
+            * 
+         * Uma abordagem mais relaxada que também protege contra XSRF e não prejudica a experiência do usuário.
+         * 
+         * O modo Lax, assim como strict o , proíbe o navegador de enviar cookies vindos de fora do site, mas adiciona uma exceção.
+         * 
+         * Um samesite=lax cookie é enviado se ambas as condições forem verdadeiras:
+         * 
+            * O método HTTP é “seguro” (por exemplo, GET, mas não POST).
+            * 
+            *A lista completa de métodos HTTP seguros está na especificação RFC7231 . Basicamente, esses são os métodos que devem ser usados ​​para leitura, mas não para gravação dos dados. Eles não devem realizar nenhuma operação de alteração de dados. Seguir um link é sempre GET, o método seguro.
+            * 
+            * A operação realiza uma navegação de nível superior (altera a URL na barra de endereços do navegador).
+            * 
+            * Isso geralmente é verdade, mas se a navegação for realizada em um <iframe>, não será de nível superior. Além disso, os métodos JavaScript para solicitações de rede não executam nenhuma navegação, portanto, não se encaixam.
+            * 
+         * Então, o que samesite=lax faz é basicamente permitir que a operação “ir para URL” mais comum tenha cookies. Por exemplo, abrir um link de site a partir de notas que satisfaçam essas condições. 
+         *
+         * Mas qualquer coisa mais complicada, como uma solicitação de rede(request network) de outro site ou um envio de formulário, perde cookies.
+         * 
+         * Se isso for bom para você, adicionar samesite=lax provavelmente não interromperá a experiência do usuário e adicionará proteção.
+         * 
+         * No geral, samesite é uma ótima opção.
+         * 
+         * Há uma desvantagem:
+            *
+            * samesite é ignorado (não suportado) por navegadores muito antigos, ano 2017 ou mais.  
+            * 
+         * Portanto, se confiarmos apenas em samesite fornecer proteção, os navegadores antigos ficarão vulneráveis.
+         * 
+         * Mas certamente podemos usar samesite em conjunto com outras medidas de proteção, como tokens xsrf, para adicionar uma camada adicional de defesa e, no futuro, quando os navegadores antigos morrerem, provavelmente poderemos descartar tokens xsrf.
+        */
+
+
+    </script>
+
+</body>
+</html>

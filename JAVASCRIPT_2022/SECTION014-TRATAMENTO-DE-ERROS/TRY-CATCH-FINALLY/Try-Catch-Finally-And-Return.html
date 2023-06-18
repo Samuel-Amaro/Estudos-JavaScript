@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Try...Catch...finally e retorne</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * Try...Catch...Finally e return
+         * 
+         * O finally bloco sempre é executado quer ocorram exceções ou não. Além disso, você não pode fazer nada para impedir que ele seja executado, incluindo o uso de uma return instrução. Por exemplo:
+        */
+
+        //declara uma fucntion chamada fn que não declara paramentros
+        function fn() {
+            //instrução da try...catch...finally instrução, para tratar e lidar com erros e executar um bloco de codígo apos tratamento do erro ou não
+            try{
+                //código pode causar erro
+                //a instrução return o valor 1 abaixo e ignorada pois quando a o bloco finally
+                return 1;
+            }catch{
+                //código para lidar com erro
+                //a instrução return o valor 2 abaixo e ignorada pois quando a o bloco finally
+                return 2;
+            }finally{
+                //código para executar se as exceções ocorrem ou não
+                //a instrução return valor 3 e executada pois independetende de haver error ou não sera executa, as return instrução nos blocos try...catch são ignoradas por causa dessa intrução que obrigatoriamente e executada no final indepdentende do que aconteça
+                //try...catch...finally instrução ignora a return instrução nos blocos try e catch porque o finally bloco sempre é executado.
+                return 3;
+            }
+        }
+        
+        //invoca a functino fn()
+        console.log(fn());
+
+        /**
+         * Neste exemplo, a return instrução no try bloco retorna 1. Portanto, a fn() função deve ter retornado 1. No entanto, não é o caso.
+         * 
+         * Como o finally bloco sempre é executado, a return instrução no finally bloco retorna 3. Portanto, a fn() função retorna 3.
+         * 
+         * Em outras palavras, as instruções return nos blocos try e catch são ignoradas na instrução try...catch...finally.
+         * 
+         * * RESUMO
+         * 
+         * Use a finally cláusula na try...catch...finally instrução para executar um bloco, independentemente de ocorrerem exceções ou não.
+         * 
+         * A try...catch...finally instrução ignora a return instrução nos blocos try e catch porque o finally bloco sempre é executado.
+        */
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * USANDO UMA FUNÇÃO DE SUBSTITUIÇÃO
+         * 
+         * Em vez de passar a newSubstr para o segundo parâmetro do replace() método, você pode passar uma função de substituição da seguinte forma:
+         
+            let newStr = str.replace(substr | regexp, replacer);
+
+         * 
+         * Nesta sintaxe, o replace()método invocará a replacer função após a execução da correspondência. Em seguida, ele usa o resultado dessa função como a string de substituição.
+         * 
+         * Se você usar o sinalizador global (g) na expressão regular, o replace() método invocará a replacer função para cada correspondência. Por exemplo, se houver três correspondências, o replace() método invocará a replacer() função três vezes.
+         * 
+         * A replacer() função tem a seguinte sintaxe:
+         
+            - function replacer(match, p1, p2, ..., offset, string);
+
+         * 
+         * A seguir estão os significados de cada parâmetro:
+         
+            - match: é a substring correspondente.
+
+            - p1, p2, … pn são a enésima string encontrada por um grupo de captura entre parênteses fornecido pela expressão regular.
+
+            - offset: é o deslocamento da substring correspondente dentro de toda a string que está sendo pesquisada.
+
+            - string: é toda a string que está sendo examinada.
+
+         * 
+         * O exemplo a seguir usa a replace() função para alterar as substrings apples e bananas para maiúsculas. Ele passa uma função de substituição para a replace()função:
+        */
+
+        //declara uma variavel de escopo de bloco, chamada str, que e inicializada com uma string literal
+        let str = 'I like to eat, eat, eat apples and bananas';
+        //declara uma expressão regular que procura substrings como apples e bananas
+        let re = /apples|bananas/gi;
+        //usando o método String.replace(), para substituir a substring 'JS' da string referenciada por str, por uma nova susbtring 'JavaScript'
+        //o metodo retorna uma nova string, não altera a string original
+        //passamos uma expressão regular que procura as correspondencias de substring a serem susbstituidas
+        //aqui mudamos um pouco, pois ao inves de passarmos a novaSubstring que ira substituir a substring antiga, passamos uma função, uma arrow function que declara um paramentro
+        //o replace() método invocará a replacer função após a execução da correspondência. Em seguida, ele usa o resultado dessa função como a string de substituição.
+        let newStr = str.replace(re, (match) => {
+            //o argumento match da arrow function a substring correspondente
+            console.log({match});
+            //tranforma cada correspondencia antiga de subStr a ser susbstituida em maisucula, o seu resultado em maisucula substirui o a sua correspondencia antiga, isso e feito para todas correspondecias
+            return match.toLocaleUpperCase();
+        });
+
+        //mostra a string nova substituida
+        console.log(newStr);
+
+        /**
+         *  =Use o replace() método para retornar uma nova string com uma substring substituída por uma nova.
+         * 
+         * Use uma expressão regular com o sinalizador global ( g) para substituir todas as ocorrências de uma substring por uma nova.
+        */
+
+    </script>
+
+</body>
+</html>

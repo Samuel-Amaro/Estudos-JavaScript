@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * CALLBACKS(FUNÇÕES DE RETORNO DE CHAMADA) SINCRONAS
+         * 
+         * Se o seu código for executado sequencialmente de cima para baixo, ele é síncrono. A isOddNumber () função é um exemplo de callback function síncrona.
+         * 
+         * No exemplo a seguir, a arrow function é um callback usado em uma função síncrona.
+         * 
+         * O sort() método é concluído primeiro, antes de ser console.log() executado:
+        */
+
+        //exemplo de codigo onde as callbacks são utlizadas de forma sincrona, codigo executada sequencialemnte de cima para baixo
+
+        //declara um array literal denso inicializado com 7 elementos
+        let numbers = [1, 2, 4, 7, 3, 5, 6];
+
+        //utilizando o metodo sort do tipo array objetc para classficiar os elementos do array numbers
+        //o sort metodo precisa de uma callback function argument para ser executada
+        //a callback function precisa de 2 argumentos do array no momento atual da interação que esta sendo avaliada internamente
+        //a callback utilizada aqui e uma arrow function que recebe dois argumentos, dois elementos do arrayq que esta sendo avaliados na iteração atual internamente
+        //o sort metodo classifica em ordem crescente, 
+        //a callback retorna um valor para determinar se o elemento deve ser classificado ou não
+        //se a - b for resultado maior que 0 e porque b e menor que a deve vir primeiro na classificação
+        //se a - b for resultado negativo menor que 0 e porque a e menor que b assim a vem primeiro que b na classificação
+        //se retorna 0 e porque elementos são iguais
+        let result = numbers.sort((a, b) => a - b);
+
+        console.log(`array = [${numbers}]  | classificados = [${result}]`); 
+    </script>
+
+</body>
+</html>

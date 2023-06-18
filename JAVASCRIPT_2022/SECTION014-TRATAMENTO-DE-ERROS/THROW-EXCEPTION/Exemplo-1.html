@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo da instrução throw</title>
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE LANÇAMENTO(THROW) DE EXCEÇÃO DE JS
+         * 
+         * Vamos dar alguns exemplos de uso da throw declaração.
+         * 
+         * * 1) USANDO A INSTRUÇÃO THROW DO JS PARA LANÇAR UMA EXCEÇÃO
+         * 
+         * O exemplo a seguir usa a throw instrução para lançar uma exceção em uma função :
+        */
+
+        //declara uma function chamada add que declara dois paramentros chamados x e y
+        function add(x, y) {
+            //se o tipo de dado do argumento x não for number
+            if(typeof x !== 'number') {
+                //lança uma exceção, o valor da exceção e uma string literal
+                //o mecanismo JS para a execução e passa o controle para o primeiro bloco catch encontrado na pilha de chamadas, se não exisitir nenhum bloco catch o Js encerra a execução do script
+                throw 'O primeiro argumento deve ser um número';
+            }
+            if(typeof y !== 'number') {
+                //lança uma exceção, o valor da exceção e uma string literal
+                throw 'O segundo argumento deve ser um número';
+            }
+
+            return x + y;
+        }
+
+        //invoca a function add, passando dois argumentos, o primeiro argumento e uma string literal o segundo e um valor numerico 10
+        //const result = add('a', 10);
+        //console.log(result);
+        
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina a add()função que aceita dois argumentos e retorna a soma deles. A add() função usa o typeof operador para verificar o tipo de cada argumento e lança uma exceção se o tipo não for número.
+         * 
+         * Segundo, chame a add() função e passe uma string e um número para ela.
+         * 
+         * Terceiro, mostre o resultado para o console.
+         * 
+         * O script causa um erro porque o primeiro argumento ("a") não é um número:
+         
+                Uncaught The first argument must be a number
+
+         *
+         * Para manipular a exceção, você pode usar a try...catch instrução. Por exemplo:
+        */
+
+        //usando a instrução try...catch para lidar com erros e exceeções e manipulalos
+        try{
+            //o codigo que gera o erro vai aqui
+            //invoca a function add, passando dois argumentos, o primeiro argumento e uma string literal o segundo e um valor numerico 10, passar um argumento que não seja do tipo number faz a function lançar um exceção, de proposito passaremos uma argumento de tipo string literal para que seje lançado uma exceção para ser tratada no bloco catch
+            const result = add('a', 10);
+            console.log(result);
+        }catch(e) {
+            //a logica de tratamento do erro vai aqui
+            //usando o indentificador de exceção a variavel e recebe o objeto de exceção lançado no bloco try, aqui no caso não e um objeto e uma string literal que e o valor da exceção
+            console.log(e);
+        }
+
+        /**
+         * Neste exemplo, colocamos a chamada para a add() função em um try bloco. Como expression na throw instrução é uma string, a exceção no catch bloco é uma string conforme mostrado na saída.
+        */
+       
+    </script>
+
+</body>
+</html>

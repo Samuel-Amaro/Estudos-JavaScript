@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passando pelo valor do objeto</title>
+</head>
+<body>
+    <script>
+        
+        /**
+         * * PASSANDO PELO VALOR DO OBJETO
+         * 
+         * É óbvio ver que as variáveis ​​primitivas são passadas por valores. No entanto, não é o caso de objetos. Tome isso por exemplo:
+         * 
+        */
+
+        //declara uma function regular chamada turnOn que declara uma parametro chamado machine
+        function turnOn(machine) {
+            //atribui um novo valor a propriedade propria do objeto
+            machine.isOn = true;
+        }
+
+        //declara uma objeto anonimo que possui uma propriedade
+        //o objeto e atribuido a variavel computer para obter a referencia do objeto
+        //o computer variavel recebe um valor que e um objeto referencia personalizado, assim o cumputer so pode acessar o oobjeto por referencia, sem manipular o valor real do objeto
+        //o cumputer variavel e acessada por referncia por receber um objeto
+        //a computer variavel e que faz referencia ao objeto real
+        var computer = {
+            //propriedade propria do objeto
+            isOn: false
+        };
+
+        console.log(`computer.isOn = ${computer.isOn}`);
+
+        //invoca a function turnOn passando a variavel computer como argumento para turnOn o computer varaivel e passado por referencia assim o argumento machine referencia o mesmo objeto que computer, tanto a variavel computer e o arguento machine referencia o mesmo objeto na memoria do motor JS
+        //o argumento da function turnOn o machine não recebe o valor real do objeto mas sim a referencia do objeto na memoria para poder manipulalo
+        turnOn(computer);
+
+        //visualizando a modificação aplicada pelo argumento da function turnOn
+        console.log(`computer.isOn = ${computer.isOn}`); //true
+
+        /**
+         * Como o roteiro funciona:
+         *
+         * Primeiro, defina a turnOn() função que aceita um objeto machine. A função define a isOnpropriedade do objeto como true.
+         *
+         * Em seguida, declare uma variável computer e atribua a ela um objeto cuja isOn propriedade seja definida como false.
+         * 
+         * Internamente, o  computer é uma variável que faz referência ao objeto real:
+
+            var computer = {isOn: 'false'};
+
+            computer -> {isOn: 'false'};
+
+         * 
+         * Em seguida, passe a computer variável para a turnOn() função.
+         * 
+         * JavaScript copia o valor da computer variável para machine variável. Como resultado, ambas as variáveis compute re machine estão referenciando o mesmo objeto na memória:
+
+            turnOn(computer); 
+
+            computer --> {isOn : 'false'}
+             machine --> {isOn : 'false'}
+
+         * 
+         * Depois disso, dentro da turnOn()função, a isOn propriedade do objeto é definida por true meio da machine variável.
+
+            machine.isOn = true;
+
+         * Por fim, acessar a isOn propriedade da computer variável retorna true.
+
+            console.log(computer.isOn);
+
+         * 
+         * Parece que o JavaScript passa um objeto por referência porque as alterações no objeto são refletidas fora da função. No entanto, este não é o caso.
+         * 
+         * Na verdade, quando você passa um objeto para uma função, você está passando a referência desse objeto, não o objeto real (computador). Portanto, a função pode modificar as propriedades do objeto por meio de sua referência.
+         * 
+         * Além disso, quando você passa um objeto para uma função, a função não pode alterar a variável de referência para fazer referência a outro objeto.
+         * 
+         * Vamos provar isso através do seguinte exemplo:
+        */
+
+        //declara uma function regular chamada turnOn2 que declara um paramentro chamado machine
+        function turnOn2(machine) {
+            //o argumento machine recebera uma nova atribuiçaõ de valor simples, um objeto
+            //assim o machine fara referencia a um objeto na memoria
+            //isso e o machine recebe um argumento ao alguem ter invocado a function e recebe aqui dentro da function um novo valor
+            machine = {
+                isOn: true //prop
+            };
+        }
+
+        //invoca a function turnOn passando a variavel computer como argumento para turnOn2 o computer varaivel e passado por referencia assim o argumento machine referencia o mesmo objeto que computer, tanto a variavel computer e o arguento machine referencia o mesmo objeto na memoria do motor JS
+        //o argumento da function turnOn o machine não recebe o valor real do objeto mas sim a referencia do objeto na memoria para poder manipulalo
+        turnOn2(computer);
+
+        //mostra que não e possivel alterar a referencia de uma variavel para apontar para outra referencia
+        //mostra que não e possivel a função alterar a variavel de referencia para fazer referncia a outro objeto
+        //exemplo mostrando que quando passamos um valor de referncia para function e so a referencia do objeto na memoria e não o objeto em si, assim aqui se fossem objeto real em si teria sido modificado seu valor original
+        console.log(`computer.isOn = ${computer.isOn}`); //false;
+
+        /**
+         * Desta vez, a turnOn() função altera o machine argumento para que faça referência a outro objeto.
+         * 
+         * Antes de passar o computer objeto para a turnOn() função, a isOn propriedade do computer objeto é  false;
+         * 
+         * Se a computer variável fosse passada por referência, a computer variável seria alterada e referenciada ao novo objeto cuja isOn propriedade é true.
+         * 
+         * No entanto, quando acessamos a isOn propriedade fora da função, os valores são false. Indica que a referência original não foi alterada mesmo que o argumento tenha sido alterado dentro da função.
+         * 
+         * JavaScript passa todos os argumentos para uma função por valor.
+        */
+    </script>
+</body>
+</html>

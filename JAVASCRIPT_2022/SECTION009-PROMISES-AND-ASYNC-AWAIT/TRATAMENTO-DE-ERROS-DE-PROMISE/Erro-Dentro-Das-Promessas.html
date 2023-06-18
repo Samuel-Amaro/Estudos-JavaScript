@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro Normal</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * ERROS DENTRO DAS PROMESSAS
+         * 
+         * Mudamos a getUserById() função para lançar um erro dentro da promessa:
+        */
+
+        //declara uma variavel chamada authorized e a inicializa com o valor booleano false
+        let authorized = false;
+
+        //declara uma function chamada getUserById, que declara um parametro chamado id
+        function getUserById(id) {
+            //a function ira retorna uma instancia de objeto anonima de uma promise, que o seu construtor recebe uma callback function com dois paramentros declarados conhecida como executor
+            return new Promise((resolve, reject) => {
+                //lançara um erro de dentro da promise
+                if(!authorized) {
+                    //lança exceção
+                    throw new Error('Unauthorized acess to the user data');
+                }
+
+                //simula uma operação assicrona
+                //usando o resolve function callbakc para resolver a promise, o callbak muda o estado da promise de pendente para cumprida com valor
+                //o valor a ser resolvido e um objeto literal anonimo com duas propriedades
+                resolve({
+                    id: id,
+                    username: 'admin'
+                });
+            });
+        }
+
+        /**
+         * E consuma a promessa:
+        */
+
+        //chamando o método getUserById passando o argumento 10 ele retorna uma promise.
+        //Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //aqui o then método ira invocar a sua callbakc recebeida por argumento, quando a promise for cumprida com valor, a callbak obtem esse valor e o manipula.
+        //o catch método e para obter o erro apenas quando o estado da promessa for rejeitado, a catch método ira chamar sua callbakc argumento quando a promisse for rejeitada, assim a callback obtera o motivo da rejeição da promisse
+        //usando o try/catch para capturar a exceção que e lançada pela propria promise de dentro dela mesmo, lança um erro sem modificar o estado da promise.
+        //so que nesse caso quem ira pegar o erro lançado de dentro da promise e o método catch encadeado no then, o método catch se as promises estiver encadeadas ele detecta erros sem precisar que a promise seja rejeitada, basta o erro esta dentro da promise.
+        //o catch método trata os erros lançados pela promise retornada pelo getUserById mas o cathc tem que estar encadeada na mesma promise, para ter o relacionamento
+        try {
+            getUserById(10)
+                        .then(user => console.log(user.username))
+                        .catch(err => console.log(`Caught by .catch ${err}`));
+        } catch (error) {
+            console.log(`Caught by try/catch ${error}`);
+        }
+
+        /**
+         * Se você lançar um erro dentro da promessa, o catch() método irá pegá-lo, não o try/catch.
+         * 
+         * Se você encadear promessas, o método catch() detectará erros ocorridos em qualquer promessa. Por exemplo:
+        */
+
+        promise1
+                .then(promise2)
+                .then(promise3)
+                .then(promise4)
+                .catch(err => console.log(err));
+
+        /**
+         * Neste exemplo, se houver algum erro na promessa1, promessa2 ou promessa4, o catch() método o tratará.
+        */
+    </script>
+
+</body>
+</html>

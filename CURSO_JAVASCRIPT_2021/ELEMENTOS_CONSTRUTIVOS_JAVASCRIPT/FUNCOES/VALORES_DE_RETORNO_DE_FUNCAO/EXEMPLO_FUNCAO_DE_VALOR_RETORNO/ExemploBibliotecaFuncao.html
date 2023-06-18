@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Exemplo Biblioteca Função</title>
+  <style>
+    input {
+      font-size: 2em;
+      margin: 10px 1px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <input class="numberInput" type="text">
+  
+  <p></p>
+
+  <script>
+    
+    const input = document.querySelector('.numberInput');
+    const para = document.querySelector('p');
+
+    /**
+     *  retorna o quadrado de um numero
+     * */
+    function squared(num) {
+        return num * num;
+    }
+
+    /**
+     * retorna o cubo de um numero
+     * */
+    function cubed(num) {
+        return num * num * num;
+    }
+
+    /**
+     * retorna o fatorial de um numero fornecido
+     * */
+    function factorial(num) {
+        var x = num;
+        while(x > 1) {
+            num = num * x - 1;
+            x--;
+        }
+        return num;
+    }
+
+    //manipulador de eventos onchange(do elemento input) que é executado sempre que o evento de mudança e acionado na entrada de texto, ou seja quando um novo valor e inserido na entrada de texto e enviado(inserir um valor e pressionar tab)
+    input.onchange = function() {
+        var num = input.value;
+
+        //se num não for numero
+        //função isNaN() -> para testar se o valor num não e um numero - retorna true, e se não false
+        if(isNaN(num)) {
+            para.textContent = 'Você precisa digitar um número!'
+        }else{
+            para.textContent = num + ' quadrado e:  ' + squared(num) + '. ' +  num + ' cubo e: ' + cubed(num) + '. ' + num + ' fatorial e: ' + factorial(num) + '.';
+
+        }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript">
+        /**
+         * * ÁRVORE DOM
+         * 
+         * A espinha dorsal de um documento HTML são as tags.
+         * 
+         * De acordo com o Document Object Model (DOM), cada tag HTML é um objeto. As tags aninhadas são “filhas” da que as inclui. O texto dentro de uma tag também é um objeto.
+         * 
+         * Todos esses objetos são acessíveis usando JavaScript e podemos usá-los para modificar a página.
+         * 
+         * Por exemplo, document.body é o objeto que representa a <body> tag.
+         * 
+         * A execução deste código deixará o <body> vermelho por 3 segundos:
+         * 
+         * */
+
+        //document : object
+        //body : object
+        //document.body object -> <body>
+        document.body.style.background = 'red'; //deixar o fundo vermelho
+
+        setTimeout(() => document.body.style.background = '', 3000); //apos 3 segundos volta para cor normal o fundo
+
+        /**
+         * Aqui usamos style.background para alterar a cor de fundo de document.body, mas existem muitas outras propriedades, como:
+         
+          - innerHTML– Conteúdo HTML do nó.
+          - offsetWidth– a largura do nó (em pixels).
+          - …e assim por diante.
+            
+         * Em breve aprenderemos mais formas de manipular o DOM, mas primeiro precisamos conhecer sua estrutura.
+         * */
+    </script>
+</body>
+</html>

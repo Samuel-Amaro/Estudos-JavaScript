@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * 
+         * * MÉTODO JAVASCRIPT REGEX REPLACE() COM FUNÇÃO DE SUBSTITUIÇÃO
+         * 
+         * O segundo argumento do replace()método pode ser uma função como esta:
+         
+            replace(regexp, replaceFunction)
+
+         * 
+         * O replace() método chama o replacerFunction após encontrar a primeira correspondência. O replacerFunction é usado para criar uma substring para substituir a correspondência.
+         * 
+         * Se regexp usar o sinalizador global ( g), o replace() método chamará o replacerFunction após cada correspondência.
+         * 
+         * O replacerFunction tem os seguintes argumentos:
+         
+            - match especifica a substring correspondente.
+            - p1, p2, … os valores dos grupos de captura no regexp.
+            - offset é um inteiro que especifica o deslocamento da substring correspondente na string de entrada.
+            - string é a cadeia de entrada.
+            - groups é um objeto cujos são o grupo de captura nomeado e os valores são os valores correspondentes.
+
+         * 
+         * Vamos dar um exemplo de uso do replace() método com uma função de substituição.
+         * 
+         * Suponha que você tenha uma string como esta:
+         
+            backgroundColor
+
+         * 
+         * E você quer transformá-lo em algo como:
+         
+            background-color
+
+         * 
+         * Para fazer isso, você pode usar o replace() método com uma função de substituição.
+         * 
+         * Primeiro, construa uma expressão regular que corresponda a uma letra maiúscula:
+         
+            /[A-Z]/g 
+
+            - a expressão regular acima, possui o seguinte padrão, corresponda a qualquer caracte do conjunto entre A-Z maiusculos.
+            - a flag g(global) instrui o objeto RegExp a retorna todoas as correspondecias.
+
+         * 
+         * Segundo, defina uma função de substituição:
+        */  
+
+        //declara uma function regular chamada replacer que possui dois paramentros chamados match e offset
+        //o paramentro match especifica a substring correspondente, a correspondedencia da str no padrão.
+        //o paramentro offset é um inteiro que especifica o deslocamento da substring correspondente na string de entrada.
+        function replacer(match, offset) {
+            //se a correspondecia tiver sido encontrada na string de entrada em um indice maior que 0, retornamos um - e a correspondecia em minuscula
+            //retorna um hifen e concatena a letra correspondente do padrão covertida em minuscula
+            return (offset > 0 ? '-' : '') + match.toLowerCase();
+        }
+
+        /**
+         * A replacer() função adiciona um hífen se a letra correspondente não estiver no início da string e concatena o hífen com a letra correspondente convertida em minúscula.
+         * 
+         * Terceiro, use o replace() método para substituir a correspondência pela substring retornada da replacer()função:
+        */
+
+        //declara uma function regular chamada, addHyphen, que declara uma paramentro chamada prop
+        function addHyphen(prop) {
+            //aqui invocamos a function Str.replace(regex, newSubstr), para susbstituir todas ocorrencias de regexp na string prop, 
+            //o padrão e a expressão regular acima, possui o seguinte padrão, corresponda a qualquer caracte do conjunto entre A-Z maiusculos.
+            //a flag g(global) instrui o objeto RegExp a retorna todoas as correspondecias.
+            //O replace() método chama o replacerFunction após encontrar a primeira correspondência.
+            //Se regexp usar o sinalizador global ( g), o replace() método chamará o replacerFunction após cada correspondência.
+            //chama o replacer function para cada correspondecia de um caractere maiusculo na string prop
+            return prop.replace(/[A-Z]/g, replacer);
+        }
+
+        /**
+         * Para tornar o código mais conciso, você pode usar funções de seta(arrow function) com a função de substituição como uma função de retorno de chamada(callback) como esta:
+        */
+
+        //declara uma arrow function anonima que declara uma paramentro chamado prop, essa arrow function e atribuida por referencia a constante addHypen
+        //a função de substiruição e uma arrow function anonima que declara dois paramentros, a function retorna um hifen se a correspondencia não tiver no inico da string, retorna o hifen concatenado com a correspondecia covertida em minuscula
+        //const addHyphen = (prop) => prop.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase());
+
+
+        const prop = 'backgroundColor';
+        console.log(addHyphen(prop));
+
+        /**
+         * * RESUMO 
+         * 
+         * Use o replace() método para encontrar correspondências em uma expressão regular e substitua as correspondências por uma nova substring.
+        */
+    </script>
+
+</body>
+</html>

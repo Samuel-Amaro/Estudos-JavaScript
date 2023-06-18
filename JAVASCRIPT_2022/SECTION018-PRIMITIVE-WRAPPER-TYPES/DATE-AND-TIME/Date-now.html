@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * DATE.now() - Agora
+         * 
+         * Se queremos apenas medir o tempo, não precisamos do Date objeto.
+         * 
+         * Existe um método especial Date.now() que retorna o timestamp atual.
+         * 
+         * É semanticamente equivalente a new Date().getTime(), mas não cria um Date objeto intermediário. Portanto, é mais rápido e não pressiona a coleta de lixo.
+         * 
+         * É usado principalmente por conveniência ou quando o desempenho é importante, como em jogos em JavaScript ou outros aplicativos especializados.
+         * 
+         * Então provavelmente é melhor:
+        */
+
+        //O método Date.now() retorna o timestamp(carimbo data/hora) atual
+        //tempo inicial para medir quanto tempo e gasto para realizar a tarefa abaixo
+        let start = Date.now(); //milissegundos contam a partir de 1º de janeiro de 1970
+
+        //simula uuma operação pesada de um programa ou sistema para medir o tempo gasto
+        //faça o trabalho
+        for(let i = 0; i < 100000; i++) {
+            let doSomething = i * i * i;
+        }
+        
+        //tempo final
+        //O método Date.now() retorna o timestamp(carimbo data/hora) atual
+        let end = Date.now();
+
+        console.log(`The loop took ${end-start} ms`); //subtrair números, não datas
+    </script>
+</body>
+</html>

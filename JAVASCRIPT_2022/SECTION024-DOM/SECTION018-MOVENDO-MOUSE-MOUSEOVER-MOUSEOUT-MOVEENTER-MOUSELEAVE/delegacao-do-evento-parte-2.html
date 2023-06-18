@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #text {
+            display: block;
+            height: 100px;
+            width: 456px;
+        }
+        #table th {
+            text-align: center;
+            font-weight: bold;
+        }
+        #table td {
+            width: 150px;
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: bottom;
+            padding-top: 5px;
+            padding-bottom: 12px;
+            cursor: pointer;
+        }
+        #table .nw {
+            background: #999;
+        }
+        #table .n {
+            background: #03f;
+            color: #fff;
+        }
+        #table .ne {
+            background: #ff6;
+        }
+        #table .w {
+            background: #ff0;
+        }
+        #table .c {
+            background: #60c;
+            color: #fff;
+        }
+        #table .e {
+            background: #09f;
+            color: #fff;
+        }
+        #table .sw {
+            background: #963;
+            color: #fff;
+        }
+        #table .s {
+            background: #f60;
+            color: #fff;
+        }
+        #table .se {
+            background: #0c3;
+            color: #fff;
+        }
+        #table .highlight {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="table">
+        <tr>
+          <th colspan="3"><em>Bagua</em> Chart: Direction, Element, Color, Meaning</th>
+        </tr>
+        <tr>
+          <td class="nw"><strong>Northwest</strong>
+            <br>Metal
+            <br>Silver
+            <br>Elders
+          </td>
+          <td class="n"><strong>North</strong>
+            <br>Water
+            <br>Blue
+            <br>Change
+          </td>
+          <td class="ne"><strong>Northeast</strong>
+            <br>Earth
+            <br>Yellow
+            <br>Direction
+          </td>
+        </tr>
+        <tr>
+          <td class="w"><strong>West</strong>
+            <br>Metal
+            <br>Gold
+            <br>Youth
+          </td>
+          <td class="c"><strong>Center</strong>
+            <br>All
+            <br>Purple
+            <br>Harmony
+          </td>
+          <td class="e"><strong>East</strong>
+            <br>Wood
+            <br>Blue
+            <br>Future
+          </td>
+        </tr>
+        <tr>
+          <td class="sw"><strong>Southwest</strong>
+            <br>Earth
+            <br>Brown
+            <br>Tranquility
+          </td>
+          <td class="s"><strong>South</strong>
+            <br>Fire
+            <br>Orange
+            <br>Fame
+          </td>
+          <td class="se"><strong>Southeast</strong>
+            <br>Wood
+            <br>Green
+            <br>Romance
+          </td>
+        </tr>
+    </table>
+    
+    <textarea id="text"></textarea>
+    
+    <input type="button" onclick="text.value=''" value="Clear">
+    
+
+    <script type="text/javascript">
+
+      /**
+         * 
+         * Aqui eles estão em ação. À medida que o mouse percorre os elementos desta tabela, o atual é destacado:
+         * 
+         * No nosso caso, gostaríamos de lidar com as transições entre as células da tabela <td>: entrar e sair de uma célula. Outras transições, como dentro da célula ou fora de qualquer célula, não nos interessam. Vamos filtrá-los.
+         * 
+         * Aqui está o que podemos fazer:
+         
+            Lembre-se do atualmente destacado <td> em uma variável, vamos chamá-lo de currentElem.
+
+            On mouseover– ignore o evento se ainda estivermos dentro do atual <td>.
+
+            On mouseout– ignore se não deixamos o atual <td>.
+
+            Aqui está um exemplo de código que considera todas as situações possíveis:
+      */
+
+      //<td> sob o mouse agora (se houver)
+      let currentElem = null;
+
+      //atribui um manipulador de evento por meio de uma propriedade dom
+      //o manipulador e uma function anonima que declara o paramentro event que e um objeto de evento com informações do evento
+      //atribui um manipulador para o evento que quando o mouse estiver sobre um elemento
+      table.onmouseover = function(event) {
+        // antes de inserir um novo elemento, o mouse sempre sai do anterior
+        // se currentElem estiver definido, não deixamos o <td> anterior,
+        // isso é um mouseover dentro dele, ignore o evento
+        //estamos ainda no td atual, não saimos dele, estamos sobre ele ainda
+        if(currentElem)
+          return;
+          
+        //obtem o elemento td mais proximo do elemento que inicou o evento
+        //obtem o elemento td mais proximo de onde o mouse veio sobre
+        let target = event.target.closest('td');
+
+        // não mudamos para um <td> - ignore
+        //não obtemos o td ainda, não estamos sobre um td ainda
+        if(!target) 
+          return;
+
+        // movido para <td>, mas fora da nossa tabela (possível no caso de tabelas aninhadas)
+        // ignora
+        if(!table.contains(target))
+          return;
+
+        //viva! entramos em um novo <td>
+        //agora estamos sobre um td
+        currentElem = target;
+        onEnter(currentElem);
+      };
+
+      //atribui manipulador de evento
+      //atribui um manipulador para o evento de mouse, evento de ponteiro do mouse fora de elem
+      table.onmouseout = function(event) {
+        // se estivermos fora de qualquer <td> agora, então ignore o evento
+        // provavelmente é um movimento dentro da tabela, mas fora de <td>,
+        // por exemplo. de <tr> para outro <tr>
+        //se não estivemos sobre um elemento td agora sai do manipulador
+        if(!currentElem) //null -> true
+          return;
+
+        //estamos deixando o elemento – para onde? Talvez para um descendente?
+        //obtendo o novo elemento sob o qual o ponteiro do mouse acabou de deixar
+        let relatedTarget = event.relatedTarget;
+
+        while(relatedTarget) {
+          // sobe a cadeia pai e verifica – se ainda estamos dentro de currentElem
+          // então isso é uma transição interna – ignore-a
+          if(relatedTarget == currentElem)
+            return;
+
+          //obtem o elemento pai
+          relatedTarget = relatedTarget.parentNode;
+        }
+
+        //saímos do <td>. verdade.
+        onLeave(currentElem);
+        currentElem = null;
+      };
+
+      //quaisquer funções para lidar com a entrada/saída de um elemento
+      function onEnter(elem) {
+        elem.style.background = 'pink';
+
+        //mostre isso em textarea
+        text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
+      }
+
+      function onLeave(elem) {
+        elem.style.background = '';
+
+        //mostre isso em textarea
+        text.value += `out <- ${elem.tagName}.${elem.className}\n`;
+        text.scrollTop = 1e6;
+      }
+
+      /**
+       * Mais uma vez, as características importantes são:
+       
+        - Ele usa delegação de eventos para lidar com a entrada/saída de qualquer um <td> dentro da tabela. Portanto, em mouseover/out vez disso mouseenter/leave, ele não borbulha e, portanto, não permite delegação.
+
+        Eventos extras, como mover-se entre descendentes de <td> são filtrados, de modo que são onEnter/Leave executados somente se o ponteiro sair ou entrar <td> como um todo.
+
+        Tente mover o cursor para dentro e para fora das células da tabela e dentro delas. Rápido ou lento – não importa. Apenas <td> como um todo é destacado, ao contrário do exemplo anterior.
+      */
+        
+    </script>
+</body>
+</html>

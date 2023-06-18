@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <p>JavaScript setTimeout Demo</p>
+
+    <button onclick="showAlert();">Show</button>
+    <button onclick="clearAlert();">Cancel</button>
+
+    <script type="text/javascript">
+
+        /**
+         * * EXEMPLO setTimeout()
+         * 
+         * O seguinte cria dois botões simples e os conecta ao setTimeout() e clearTimeout().
+         * 
+         * Quando você clica no Show botão, o showAlert() é invocado e mostra uma caixa de diálogo de alerta após 3 segundos. Para cancelar o tempo limite, clique no Cancel botão.
+        */
+
+        //declara uma variavel de escopo global, chamada timeoutID não inicializada
+        var timeoutID;
+
+        //declara uma function regular chamada showAlert() que não declara paramentros
+        function showAlert() {
+            //usando o setTimeout() para invocar o método alert para mostrar uma caixa de dialogo com uma mensagem, apos se passar 3 segundos
+            //o setTimeout(cb, delay, arg1, arg2, ...) e um método do window objeto global, o setTimeout define um cronometro e executa uma callback passada por argumento apos o cronometro expirar
+            //como primeiro argumento passamos a callback, que e um referencia ao método alert(exibe uma caixa de dialogo com uma mensagem)
+            //o segundo argumento e o delay o tempo em milisegundos(1 milisegundo e igual a 0.001segundos) que o cronometro deve esperar antes de executar a callback
+            //o terceiro argumento são os argumentos a serem passados para a callback
+            //o método setTimeout() retorna um timeoutID um inteiro positivo que identifica o cronometro criado, como resultado da chamada do método
+            timeoutID = setTimeout(alert, 3000, 'setTimeout Demo!');
+        }
+
+        //declara uma function regular chamada clearAlert() que não declara paramentros
+        function clearAlert() {
+            //o método clearTimeout(timeoutID); cancela o cronometro criado, de acordo com o timeoutID retornado para identificar cada cronometro criado.
+            //passamos a identificação de um cronometro criado e o método ira cancelar aquele cronometro
+            clearTimeout(timeoutID);
+        } 
+    </script>
+
+</body>
+</html>

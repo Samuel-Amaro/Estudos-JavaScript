@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um simples Exemplo</title>
+    <style>
+        :root{
+            --cor01: #a9a5f5;
+            --cor02: aliceblue;
+            --cor03: #121212;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: var(--cor01);
+        }
+        h2{
+            width: 100%;
+            text-align: center;
+            padding: 25px;
+            background-color: var(--cor02);
+        }
+        p{
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        button{
+            width: 150px;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 19px;
+            background-color: var(--cor03);
+            margin-left: 35px;
+            border: none;
+            color: var(--cor02);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Um Simples Exemplo</h2>
+
+    <p>Um exemplo simples de AJAX - JS</p>
+
+    <button id="ajaxButton">Faça Request</button>
+
+    <script type="text/javascript">
+        
+        /**
+         * PASSO 3 - UM EXEMPLO SIMPLES
+         * 
+         * Vamos colocar tudo junto e fazer uma simples requisição HTTP. Nosso JavaScript irá solicitar um documento HTML ( test.html) com o conteúdo "I'm a test." e depois usaremos alert() para ver o conteúdo do arquivo test.html.
+         * 
+         * NESTE EXEMPLO:
+         * 
+         * O usuário clica no link "Fazer uma solicitação" em seu navegador (navegador);
+         * 
+         * O manipulador de eventos chama uma função makeRequest () com um parâmetro - o nome test.htmlde um arquivo HTML no mesmo diretório.
+         * 
+         * A requisição é realizada e então ( onreadystatechange) a execução é passada para alertContents();
+         * 
+         * alertContents()checa se a resposta foi recebida e se está OK, então alert()mostra o conteúdo do arquivotest.html.
+        */
+        
+        (function() {
+            var httpRequest;
+            let button = document.getElementById("ajaxButton");
+            button.addEventListener("click", function() {
+                makeRequest('test.html');
+            });
+            //onclick = function() { makeRequest('test.html'); };
+
+        function makeRequest(url) {
+            if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+            httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE
+            try {
+                httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch (e) {
+                try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                catch (e) {}
+            }
+            }
+
+            if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+            }
+            httpRequest.onreadystatechange = alertContents;
+            httpRequest.open('GET', url);
+            httpRequest.send();
+        }
+
+        function alertContents() {
+            if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                alert(httpRequest.responseText);
+            } else {
+                alert('There was a problem with the request.');
+            }
+            }
+        }
+        })();
+
+    </script>
+</body>
+</html>

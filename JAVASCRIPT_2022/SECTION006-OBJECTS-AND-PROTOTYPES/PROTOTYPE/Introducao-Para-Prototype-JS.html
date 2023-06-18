@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo de objeto JavaScript</title>
+</head>
+<body>
+    
+    <p>Suponha que um círculo represente uma função e um quadrado represente um objeto.</p>
+
+    <p><b>Exemplo:</b> A figura a seguir ilustra as relações entre a Object() função e o Object.prototype objeto:</p>
+
+    <img src="JavaScript-Prototype-Object.prototype-Object.png" alt="imagen">
+
+    <p>Nos bastidores, o JavaScript cria uma nova função Person() e um objeto anônimo:</p>
+
+    <img src="JavaScript-Prototype-Person-Function-Object.png" alt="imagen">
+
+    <p>O JavaScript vincula o Person.prototype objeto ao Object.prototype objeto via [[Prototype]], o que é conhecido como vinculação de protótipo. A ligação do protótipo é denotada por [[Prototype]] na figura a seguir:</p>
+
+    <img src="JavaScript-Prototype-Person.prototype-Object.png" alt="imagen">
+    
+    <script>
+        /**
+         * * PROTÓTIPO(PROTOTYPE) JAVASCRITP
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre o protótipo JavaScript e como ele funciona nos bastidores.
+         * 
+         * * INTRODUÇÃO AO PROTÓTIPO(PROTOTYPE)
+         * 
+         * Por padrão, o JavaScript fornece a Object() função:
+        */
+
+        //Object e uma function e não um objeto
+        console.log(Object);
+
+        /**
+         * Observe que Object() é uma função, não um objeto. É muito confuso se esta for a primeira vez que você aprendeu sobre o protótipo JavaScript.
+         * 
+         * Ele também fornece um objeto anônimo que pode ser referenciado por meio da prototype propriedade da Object função:
+        */
+
+        //acessando o objeto anonimo referenciado por meio da prototype propriedade da objet function
+        //um objeto anonimo foi atribuida a propriedade prototype
+        console.log(Object.prototype);
+
+        /**
+         * O Object.prototype objeto possui muitos métodos e propriedades, como toString() e valueOf().
+         * 
+         * Observe que quando uma função é um valor de uma propriedade de um objeto, ela é chamada de método. Portanto, os métodos são basicamente propriedades de um objeto.
+         * 
+         * O Object.prototype também tem uma propriedade importante chamada constructor que faz referência à Object() função.
+         * 
+         * A declaração a seguir confirma que a Object.prototype.constructor propriedade faz referência à Object função:
+        */
+       
+        //acessando um propriedade do objeto anonimo retornado pela propriedade prototype da fuction Object, a propriedade acessa o construtor propriedade do objeto anonimo retornado, vendo que essa propriedade faz referncia a propria fucntion Objetct
+        console.log(`${Object.prototype.constructor} ${Object.prototype.constructor === Object}`); //true
+
+        /**
+         * Suponha que um círculo represente uma função e um quadrado represente um objeto.
+         * 
+         * A figura a seguir ilustra as relações entre a Object() função e o Object.prototype objeto:
+         * 
+         * Primeiro, defina uma função construtora chamada da Person seguinte maneira:
+        */
+
+        //declara um fuction construtora chamada Person que possui um parametro, que e um argumento para se tornar valor de uma propriedade do objeto this
+        //essa function retorna uma instancia de um objeto this com as propriedades e metodos definidas dentro da function
+        function Person(name) {
+            //add uma propriedade ao Person objeto this instancia que sera retornado
+            this.name = name;
+        }
+
+        /**
+         * Neste exemplo, a Person() função aceita um name argumento e atribui o name argumento à name propriedade do this objeto.
+         * 
+         * Nos bastidores, o JavaScript cria uma nova função Person() e um objeto anônimo:
+         * 
+         * Como a Object() função, a Person()função tem uma propriedade chamada prototype que faz referência a um objeto anônimo. E o objeto anônimo tem a constructor propriedade que faz referência à Person() função.
+         * 
+         * O seguinte mostra a Person() função e o objeto anônimo referenciado por Person.prototype:
+        */
+
+        //mostra a Function Construtora Person
+        console.log(Person);
+        //O Person.prototype faz referencia a um objeto anonimo, e esse objeto anonimo possui uma propriedade construtor que faz referencia a Person function construtora
+        console.log(Person.prototype);//constuctor
+        
+        /**
+         * Além disso, o JavaScript vincula o Person.prototype objeto ao Object.prototype objeto via [[Prototype]], o que é conhecido como vinculação de protótipo(prototype linkage).
+         * 
+         * A ligação do protótipo(prototype linkage) é denotada por [[Prototype]]na figura a seguir:
+         * 
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <span id="elem">Hello!</span>
+
+    <script type="text/javascript">
+       
+       /**
+        * * NÃO PEGUE LARGURA(WIDTH)/ALTURA(HEIGHT) DO CSS
+        * 
+        * Acabamos de abordar as propriedades geométricas dos elementos DOM, que podem ser usadas para obter larguras, alturas e calcular distâncias.
+        * 
+        * Mas como sabemos do capítulo Estilos e classes , podemos ler CSS-height e width usando getComputedStyle.
+        * 
+        * Mas como sabemos do capítulo Estilos e classes , podemos ler CSS-height e width usando getComputedStyle.
+        * */
+
+        //obtem o no dom <body>
+        let elem = document.body;
+            
+        //lendo a propriedade css width do elemento <body>
+        //usando metodo getComputeStyle que retorna um style objeto de css inline
+        console.log(getComputedStyle(elem).width); //mostra css width do elem
+
+        /**
+         * Por que devemos usar propriedades de geometria em vez disso? Existem duas razões:
+         
+            1. Primeiro, o CSS width/height depende de outra propriedade: box-sizing que define “o que é” a largura e a altura do CSS. Uma alteração box-sizing para fins de CSS pode quebrar esse JavaScript.
+
+            2.Segundo, CSS width/height pode ser auto, por exemplo, para um elemento inline:
+
+        */
+
+        //lendo a propriedade css width do elemento <span>
+        //usando metodo getComputeStyle que retorna um style objeto de css inline
+        console.log(getComputedStyle(elem).width); //auto
+
+        /**
+         * Do ponto de vista CSS, width:auto é perfeitamente normal, mas em JavaScript precisamos de um tamanho exato px que possamos usar nos cálculos. Então aqui a largura do CSS é inútil.
+         * 
+         * E há mais uma razão: uma barra de rolagem. Às vezes, o código que funciona bem sem uma barra de rolagem fica com erros, porque uma barra de rolagem ocupa o espaço do conteúdo em alguns navegadores. Portanto, a largura real disponível para o conteúdo é menor que a largura do CSS. E clientWidth/clientHeight leve isso em consideração.
+         * 
+         * …Mas com getComputedStyle(elem).width a situação é diferente. Alguns navegadores (por exemplo, Chrome) retornam a largura interna real, menos a barra de rolagem, e alguns deles (por exemplo, Firefox) – largura CSS (ignore a barra de rolagem). Essas diferenças entre navegadores são o motivo para não usar getComputedStyle, mas sim confiar nas propriedades da geometria.
+         * 
+         * Se o seu navegador reservar espaço para uma barra de rolagem (a maioria dos navegadores para Windows o faz), você poderá testá-lo abaixo.
+         * 
+         * Em um sistema operacional Windows, Firefox, Chrome, Edge, todos reservam o espaço para a barra de rolagem. Mas o Firefox mostra 300px, enquanto o Chrome e o Edge mostram menos. Isso porque o Firefox retorna a largura do CSS e outros navegadores retornam a largura “real”.
+         * 
+         * Observe que a diferença descrita é apenas sobre a leitura getComputedStyle(...). width do JavaScript, visualmente tudo está correto.
+        */
+    </script>
+</body>
+</html>

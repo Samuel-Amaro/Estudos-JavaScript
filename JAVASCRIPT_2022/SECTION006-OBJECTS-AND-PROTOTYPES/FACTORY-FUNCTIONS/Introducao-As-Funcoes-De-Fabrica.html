@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory function</title>
+</head>
+<body>
+    <script>
+        /**
+         * * FUNÇÕES DE FÁBRICA DE JS
+         *  
+         * Resumo : neste tutorial, você aprenderá sobre as funções de fábrica do JavaScript, que são funções que retornam objetos.
+         * 
+         * * INTRODUÇÃO ÁS FUNÇÕES DE FÁBRICA EM JS
+         * 
+         * Uma função de fábrica é uma função que retorna um novo objeto . O seguinte cria um objeto de pessoa chamado john:
+        */
+
+        //declara um objeto literal chamado john, que usa a sintaxe literal de objeto
+        let john = {
+            //declara propridades do objeto literal john usando a sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            //metodo do objeto john
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        };
+
+        //acessa o metodo getFullName() criado no objeto literal john
+        console.log(john.getFullName());
+
+        /**
+         * O john objeto possui duas propriedades: firstName e lastName, e um método getFullName() que retorna o nome completo.
+         * 
+         * Suponha que você precise criar outro objeto semelhante chamado jane, você pode duplicar o código da seguinte maneira:
+        */
+
+        //declara um objeto literal chamado jane, que usa a sintaxe literal de objeto
+        let jane = {
+            //declara propridades do objeto literal jane usando a sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe',
+            //metodo do objeto jane
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        };
+
+        //acessa o metodo getFullName() criado no objeto literal jane
+        console.log(jane.getFullName());
+
+        /**
+         *  jane objeto tem as mesmas propriedades e métodos do john objeto.
+         * 
+         * Quanto mais objetos você deseja criar, mais códigos duplicados precisam ser copiados.
+         * 
+         * Para evitar copiar o mesmo código repetidamente, você pode desenvolver uma função que crie o person objeto:
+        */
+
+        //cria uma função regular de fabrica, chamada createPerson, que declara dois paramentros, firstName e lastName, essa função retorna uma instancia de objeto
+        function createPerson(firstName, lastName) {
+            //retorna um objeto anonimo usando a sintaxe literal de objeto
+            return {
+                //propriedades do objeto
+                firstName: firstName,
+                lastName: lastName,
+                //metodo do objeto
+                getFullName() {
+                    return `${firstName} ${lastName}`;
+                }
+            }
+        }
+
+        /**
+         *  Quando uma função cria um objeto, é chamada de função de fábrica. O createPerson() é uma função de fábrica porque retorna um novo person objeto.
+         * 
+         * O código a seguir usa a createPerson() função de fábrica para criar dois objetos john e jane:
+        */
+
+        //cria umas instancias de objetos usando a função de fabrica createPerson
+        let john2 = createPerson('John', 'Doe'), jane2 = createPerson('Jane', 'Doe');
+
+        //acessa os metodos do objeto
+        console.log(john2.getFullName());
+        console.log(jane2.getFullName());
+
+        /**
+         * Com a função de fábrica, você cria quantos person objetos quiser sem duplicar o código.
+         * 
+         * Quando você cria um objeto, esse objeto requer um espaço na memória. Se você tem mil person objetos, precisa de mil espaços na memória para armazenar esses objetos. Esses objetos pessoais, no entanto, têm o mesmo getFullName() método.
+         * 
+         * Para evitar a repetição da mesma getFullName() função na memória, você pode remover o getFullName()método do person objeto:
+        */
+
+        //cria uma função regular de fabrica, chamada createPerson2, que declara dois paramentros, firstName e lastName, essa função retorna uma instancia de objeto
+        function createPerson2(firstName, lastName) {
+            //retorna um objeto anonimo usando a sintaxe literal de objeto
+            return {
+                //propriedades do objeto
+                firstName: firstName,
+                lastName: lastName,
+            }
+        }
+
+        /**
+         * E mova este método para outro objeto:
+        */
+
+        //cria um objeto literal chamado behavior usando a sintaxe de objeto literal
+        const behavior = {
+            //declara um metodo chamado getFullName que pertence ao behavior objeto, este metodo e declarado aqui por causa da ocupação do espaço de memoria de varias instancias de objetos terem metodos iguais
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        }
+
+        /**
+         * E antes de chamar o getFullName()método no person objeto, você pode atribuir o método do behavior objeto ao person objeto da seguinte maneira:
+        */
+
+        //cria dois objetos usando a função de fabrica que retorna instancia de objetos
+        let john3 = createPerson2('John', 'Doe'), jane3 = createPerson2('Jane', 'Doe');
+
+        //adiciona uma propriedade chamada getFullName ao john2 objeto, essa propriedade recebe um valor retornado por behavior objeto acessando a getFullName metodo, essa acesso a propriedade getFullName de behavior objeto ira retornar uma function para ser atribuida a getFullName de john3 objeto e jane
+        john3.getFullName = behavior.getFullName;
+        jane3.getFullName = behavior.getFullName;
+
+        //acessa a propriedade recem add nos objetos
+        console.log(john3.getFullName());
+        console.log(jane3.getFullName());
+
+        /**
+         * Será mais difícil se você tiver muitos métodos e precisar atribuí-los manualmente.
+         * 
+         * É por isso que o Object.create()método entra em jogo.
+        */
+    </script>    
+
+</body>
+</html>

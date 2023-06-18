@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo C</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * EXEMPLO C) Array.from() com um this valor
+         * 
+         * Se a função de mapeamento pertencer a um objeto, você pode opcionalmente passar o terceiro argumento para o Array.from() método. O objeto representará o  this valor dentro da função de mapeamento. Considere este exemplo:
+        */
+
+        //declara um objeto literal, atribuido por referencia a variavel doubler
+        let doubler = {
+            //declara propriedades usando a sintaxe chave : valor
+            factor: 2,
+            //aqui declaramos um metodo do objeto literal usando a sintaxe do ES6 para extensões do objeto literal omitindo a palavra chave function e os dois pontos :
+            //o metodo declarado aqui declara uma parametro chamado x
+            double(x) {
+                //o metodo retorna o argumento x * 
+                //a propriedade factor do this valor
+                return x * this.factor;
+            }
+        };
+
+        //declara um array literal dense chamado scores inicializado com 3 elementos
+        let scores = [5, 6, 7];
+
+        //utilizando o metodo Array.from() para cria um novo array a partir de um objeto tipo array ou iterável.
+        //aqui passamos três argumentos para a chamado do from metodo
+        //o primeiro argumento e o objeto array que queremos usar para criar um novo array a partir dele
+        //o segundo argumento e uma function callback passada como valor para o from metodo, a callback e função map para chamar todos os elementos do array
+        //cada array sera chamado pela callback function e retornara um valor, a callbakc recebe como argumento o elemento do array avalido no momento e retorna a multiplicação dele pelo this valor passado para o map metodo que e um objeto que tem propriedadades
+        //o terceiro paramentro e o this valor que e usado dentro do escopo do map metodo que e callbakc que usa o this objeto para multiplicar o elemento atual pela propridade factor do objeto referenciado pelo doubler
+        let newScores = Array.from(scores, doubler.double, doubler);
+
+        //mostra o array retornado pelo from metodo criado a partir do array scores, possuindo todos seus elementos multilicados por 2
+        console.log(newScores);
+ 
+    </script>
+</body>
+</html>

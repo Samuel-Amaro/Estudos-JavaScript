@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>fetch() promise.finally() example</title>
+  </head>
+  <body>
+    <script>
+       // Define a função para buscar um arquivo e retorná-lo em uma forma utilizável
+      function fetchAndDecode(url, type) {
+        // Retornando a promessa de nível superior, então o resultado de toda a cadeia é retornado da função
+        return fetch(url).then(response => {
+          // Dependendo do tipo de arquivo que está sendo buscado, use a função relevante para decodificar seu conteúdo
+          if(!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          } else {
+            if(type === 'blob') {
+              return response.blob();
+            } else if(type === 'text') {
+              return response.text();
+            }
+          }
+        })
+        .catch(e => {
+          console.log(`Houve um problema com sua operação de busca para o recurso: "${url}": ` + e.message);
+        }) //Isso registra uma mensagem simples no console para nos informar quando cada tentativa de busca foi concluída.
+        .finally(() => {
+          console.log(`tentativa de busca por "${url}" finished.`);
+        });
+      }
+
+      // Chame o método fetchAndDecode() para buscar as imagens e o texto, e armazenar suas promessas em variáveis
+      let coffee = fetchAndDecode('coffee.jpg', 'blob');
+      let tea = fetchAndDecode('tea.jpg', 'blob');
+      let description = fetchAndDecode('description.txt', 'text');
+
+       // Use Promise.all () para executar o código apenas quando todas as três chamadas de função forem resolvidas
+      Promise.all([coffee, tea, description]).then(values => {
+        console.log(values);
+         // Armazena cada valor retornado das promessas em variáveis ​​separadas; criar URLs de objetos a partir dos blobs
+        let objectURL1 = URL.createObjectURL(values[0]);
+        let objectURL2 = URL.createObjectURL(values[1]);
+        let descText = values[2];
+
+        // Exibir as imagens em elementos <img>
+        let image1 = document.createElement('img');
+        let image2 = document.createElement('img');
+        image1.src = objectURL1;
+        image2.src = objectURL2;
+        document.body.appendChild(image1);
+        document.body.appendChild(image2);
+
+         // Mostra o texto em um parágrafo
+        let para = document.createElement('p');
+        para.textContent = descText;
+        document.body.appendChild(para);
+      });
+    </script>
+  </body>
+</html>

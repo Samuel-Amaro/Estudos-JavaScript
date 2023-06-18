@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encadeamento De Promessas</title>
+</head>
+<body>
+
+    <h2>Cadeia de promessas</h2>
+
+    <p><b>Cadeia de promessas:</b> A imagem a seguir ilustra a cadeia de promessas:</p>
+
+    <img src="JavaScript-Promise-Chaining.png" alt="imagen de cadeia de promises">
+    
+    <script>
+
+        /**
+         * * ENCADEAMENTO DE PROMESSAS(PROMISE CHAINING)
+         *
+         * Resumo : neste tutorial, você aprenderá sobre o padrão de encadeamento de promessas JavaScript que encadeia as promessas para executar operações assíncronas em sequência.
+         * 
+         * * INTRODUÇÃO AO ENCADEAMENTO DE PROMESSAS JS
+         * 
+         * Às vezes, você deseja executar duas ou mais operações assíncronas relacionadas, em que a próxima operação começa com o resultado da etapa anterior. Por exemplo:
+         * 
+         * Primeiro, crie uma nova promessa que resolva para o número 10 após 3 segundos:
+        */
+
+        //declarando uma nova instancia de objeto de promise que recebe como argumento em seu construtor uma callback function anonima conhecida como executora, que declara dois paramentros chamados resolve e reject que são callbakcs que mudam o estado da promisse
+        //a promisse e atribuida a variavel p por referencia
+        //cria uma nova instancia de objeto promise invocando o construtor da class Promise e usando o new operador
+        let p = new Promise((resolve, reject) => {
+            //o codigo abaixo e uma operação assincrona ou simula uma operação a ser executa(encapsulada) pela promisse
+            //a setTimeout espera cerca de 3 segundos antes de executar sua callbakc
+            setTimeout(() =>{
+                //a resolve function callbak resolve a promise, mudando seu estado de pendente para comprida com um valor, no caso resolve a promisse para o numero 10
+                //o argumento 10 e o valor
+                resolve(10);
+            }, 3 * 100);
+        });
+
+        /**
+         * Observe que a setTimeout() função simula uma operação assíncrona.
+         * 
+         * Em seguida, invoque o then() método da promessa:
+        */
+
+        //usando o método then 
+        //Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa.
+        //a callbak function anonima com o paramentro result e a function que o then metodo chama com um valor quando a promisse for cumprida com um valor, o result paramentro da callback argumento e o valor 
+        //a callbak argumento passado para o the método e executado assim que a promise e resolvida - mudar seu estado
+        p.then((result) => {
+            //mostra resultado da promisse
+            console.log(result);
+            //retorna o valor do resultado multiplicado por 2
+            return result * 2;
+        });
+
+        /**
+         * O retorno de chamada(callbak) passado para o then() método é executado assim que a promessa é resolvida. No callback, mostramos o resultado da promessa e retornamos um novo valor multiplicado por dois (result*2).
+         * 
+         * Como o método then() retorna uma nova Promise com um valor resolvido para um valor, você pode chamar o método then() na Promise de retorno assim:
+        */
+
+        //exemplo do encademaneto de promises com métodos then
+        //encadeamento de métodos que retorna um promisse ou um valor
+        //o p variavel referencia uma promisse assim podemos encadear um método then na promisse retornada
+        p.then((result) => {
+            //resultado da promisse resolvida
+            console.log(result);
+            //retorna o valor da promisse resolvida multiplicado por dois
+            return result * 2;
+            //no seguinte o valor de retorno do primeirio método then que resolve a promisse e passado para o segundo método then como um argumento, devido ao encademaneto de promises
+        }).then((result) => {
+            //resultado da primeira operação assincrona resolvida pelo primeiro metodo then e passado para esse método
+            console.log(result);
+            return result * 3;
+        });
+
+        /**
+         * Neste exemplo, o valor de retorno no primeiro then() método é passado para o segundo then() método. Você pode continuar chamando o then()método sucessivamente da seguinte forma:
+        */
+
+        //os valores de retorno de cada then metodo e passado para o proximo metodo then encadeado
+        p.then((result) => {
+            console.log(result); //10
+            return result * 2; 
+        }).then((result) => {
+            console.log(result); //20
+            return result * 3; 
+        }).then((result) => {
+            console.log(result); //60
+            return result * 4; 
+        });
+
+        /**
+         * A maneira como chamamos os then()métodos como esse é geralmente chamada de cadeia de promessas.
+        */
+    </script>
+</body>
+</html>

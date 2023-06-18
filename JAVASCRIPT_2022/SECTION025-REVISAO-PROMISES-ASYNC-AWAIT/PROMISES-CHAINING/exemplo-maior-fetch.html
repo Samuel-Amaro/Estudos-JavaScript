@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO MAIOR: fetch(buscar)
+         * 
+         * Na programação de front-end, as promessas são frequentemente usadas para solicitações de rede. Então, vamos ver um exemplo estendido disso.
+         * 
+         * Usaremos o método fetch para carregar as informações sobre o usuário do servidor remoto. Ele tem muitos parâmetros opcionais cobertos em capítulos separados , mas a sintaxe básica é bem simples:
+         * 
+         
+            let promise = fetch(url);
+
+         * 
+         * Isso faz uma solicitação de rede para o url e retorna uma promessa. A promessa é resolvida com um response objeto quando o servidor remoto responde com cabeçalhos(headers), mas antes que a resposta completa seja baixada.
+         * 
+         * Para ler a resposta completa, devemos chamar o método response.text(): ele retorna uma promessa que resolve quando o texto completo é baixado do servidor remoto, com esse texto como resultado.
+         * 
+         * O código abaixo faz uma solicitação user.json e carrega seu texto do servidor:
+        */      
+
+        //usando metodo fetch para realizar uma solicitação de rede para o url passado por argumento e retorna um promese
+        //a promise retornada e resolvida com um response objeto quando o servidor remoto responde com headers, mas antes que a resposta completa seja baixada
+        fetch("https://javascript.info/article/promise-chaining/user.json")
+        //registrando um function .then manipulador para consumir a response objeto resolvido da promise
+        //.then abaixo é executado quando o servidor remoto responde com um header
+        .then(function(response) {
+            //response.text() retorna uma nova promessa que resolve com o texto de resposta completo e baixado do servidor remoto, o texto o resultado do resolve
+            //quando carrega
+            return response.text();
+        })
+        //registrando outro .then manipulador para consumir o text do resolve metodo da promisse retornada pelo .then manipulador anterior
+        .then(function(text) {
+            // ...e aqui está o conteúdo do arquivo remoto
+            alert(text); // {"name": "iliakan", "isAdmin": true}
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+       /**
+        * * REDIRECIONAR PARA UM NOVO URL
+        * 
+        * Para redirecionar para um novo URL da página atual, você usa o location objeto:
+        
+            location.href = 'new_url'
+
+         * Por exemplo:
+        */
+
+        //O location.href é uma string que contém a URL inteira.
+        //O Location objeto representa a localização atual (URL) de um documento.
+        //atribuir um novo valor a propriedade href, e o mesmo que chamar o método location.assign(URL) para navegar até a url fornecida por argumento, e fazer uma entrada na pilha de historico do navegador
+        //uma forma de fazer redirecionamento de endereço so pelo lado do cliente
+        location.href = 'https://www.javascripttutorial.net/';
+
+        /**
+         * Atribuir um valor à href propriedade do location objeto tem o mesmo efeito que chamar o assign()método do location objeto:
+        */
+
+        location.assign('https://www.javascripttutorial.net/');
+
+        /**
+         * Qualquer uma dessas chamadas redirecionará para a nova URL e criará uma entrada na pilha de histórico do navegador. Isso significa que você pode voltar para a página anterior através do botão Voltar do navegador.
+         * 
+         * Para redirecionar para uma nova URL sem criar uma nova entrada na pilha de histórico do navegador, use o replace() método do location objeto:
+         * */
+
+        //chamar o método location.replace(URL) para navegar até a url fornecida por argumento, do que esse método não faz entrada na pilha do historico de navegação do navegador
+        //uma forma de fazer redirecionamento de endereço so pelo lado do cliente
+        location.replace('https://www.javascripttutorial.net/');
+    </script>
+</body>
+</html>

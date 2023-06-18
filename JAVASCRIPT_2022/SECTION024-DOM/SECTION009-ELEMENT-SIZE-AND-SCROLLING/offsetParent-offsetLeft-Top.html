@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <main style="position: relative;" id="main">
+        <article>
+            <div id="example" style="position: absolute; left: 180px; top: 180px;">...</div>
+        </article>
+    </main>
+
+    <h2>Exemplo</h2>
+
+    <img src="./metric-offset-parent.svg" alt="offsetParent"/>
+
+    <script type="text/javascript">
+       
+       /**
+        * Vamos começar a explorar as propriedades começando do lado de fora do elemento.
+        * 
+        * começando pelas propriedades de geometria de um elemento que representa o lado de fora do elemento
+        * 
+        * * offsetParent, offsetLeft/Top
+        * 
+        * Essas propriedades raramente são necessárias, mas ainda são as propriedades geométricas “mais externas”, então vamos começar com elas.
+        * 
+        * O offsetParent é o ancestral mais próximo que o navegador usa para calcular as coordenadas durante a renderização.
+        * 
+        * Esse é o ancestral mais próximo que é um dos seguintes:
+        
+            1. Posicionado por CSS ( position e absolute, relative, fixed ou sticky), ou
+
+            2. <td>, <th>, ou <table>, ou
+
+            3. body
+
+        * 
+        * As propriedades offsetLeft/offsetTop fornecem as coordenadas x/y relativas ao offsetParent canto superior esquerdo.
+        * 
+        * No exemplo abaixo, o <div> interno tem <main> como offsetParent e offsetLeft/offsetTop se desloca de seu canto superior esquerdo (180):
+        */
+
+        //propriedades geometricas mais externas de um elemento
+
+
+        //a propriedade elem.offsetParent e o ancestral mais proximo que o navegador usa para calcular as coordenadas durante renderização
+        //nesse caso o ancestral mais proximo do elemento example e um elemento que esta posicionado por css com position relative
+        //e o elemento html main, a propriedade id retorna o valor do atributo id especificado no elemento ancestral mais proximo de example
+        console.log(example.offsetParent.id); //main
+
+        //a propriedade elem.offsetLeft fornece as coordenada x relativa ao elem.offsetParent canto superior esquerdo
+        //a propriedade elem.offsetLeft fornece a cordenada x relativa ao elemento ancestral canto superior esquerdo
+        //distancia horizontal em relação ao elemento ancestral a partir da  esquerda superior do ancestral até o elemento
+        //o elemento elem.offsetLeft se desloca 180 do seu canto superio esquerdo
+        console.log(example.offsetLeft); //180(obs: um numero, não uma string "180px")
+
+        //a propriedade elem.offsetTop fornece a cordenada y relativa ao elem.offsetParent canto superior esquerdo
+        //distancia vertical em relação ao elemento ancestral mais proximo ao elemento example a partir do topo superior esquerdo do ancestral até o elemento example
+        //o elemento elem.offsetTop se desloca 180 do seu canto superio esquerdo
+        console.log(example.offsetTop); //180
+
+        /*
+         * Há várias ocasiões em que offsetParent é null:
+        
+            1. Para elementos não mostrados ( display: none ou não no documento).
+
+            2. Para <body> e <html>.
+
+            3. Para elementos com position:fixed.
+        */
+    </script>
+</body>
+</html>

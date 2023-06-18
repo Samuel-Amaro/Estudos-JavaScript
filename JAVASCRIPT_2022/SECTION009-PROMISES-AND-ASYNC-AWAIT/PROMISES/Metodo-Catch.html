@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Método Catch()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O MÉTODO CATCH() - PEGAR
+         * 
+         * Se você quiser obter o erro apenas quando o estado da promessa for rejeitado, você pode usar o catch()método do Promise objeto:
+
+            promise.catch(onRejected);
+
+         * 
+         * Internamente, o catch() método invoca o then(undefined, onRejected)método.
+         * 
+         * O exemplo a seguir altera o success sinalizador false para simular o cenário de erro:
+        */
+
+        //declara uma variavel chamada sucess e a inicializa com  o valor booleano false
+        let sucess = false;
+
+        //tentando simular um erro em uma operação assincrona encapsulada por uma promisse
+
+        //a function getUsers retorna uma promisse
+        function getUsers() {
+            //promisse e iniciada com o estado pendente
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser executada
+                setTimeout(() => {
+                    //operação foi concluida com sucesso, resolve a promessa com uma lista de usuarios, chama resolve, callback argumento para mudar o estado da promisse de pendente para cumprida com um valor, o valor e o argumento passado para o resolve callback
+                    if(sucess) {
+                        resolve([{username: 'john', email: 'john@test.com'},{username: 'jane', email: 'jane@test.com'}
+                        ]);
+                    }else{
+                        //se a operação assincrona não for concluida, rejeita promisse com o motivo do erro, der um erro
+                        //Em caso de erro, o executor chamará a reject() função para alterar o estado da promessa de pendente para rejeitada com o motivo do erro.
+                        //o argumento da reject callback e o motivo do erro
+                        reject('Failed to the user list');
+                    }
+                }, 1000);
+            });
+        }
+
+
+        //invoca a function getUser que retorna uma instancia de promisse encapsulando uma operação assincrona
+        //a promisse e atribuida por referncia a variavel promise
+        const promise = getUsers();
+
+        //usando o método cath para obter o erro da promessa quando seu estado for modificado de pendente para rejeitado
+        //o cath metodo precisa de um argumento, uma callbakc function que e executa para obter o motivo do erro 
+        //aqui o argumento do cath metodo e uma arrow function que define um paramentro chamado error que o motivo do erro da operação assincrona não ter sido executada
+        promise.catch((error) => console.log(error));
+
+    </script>
+</body>
+</html>

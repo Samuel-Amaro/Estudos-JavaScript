@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * window.onload(janela ao carregar)
+         * 
+         * O load evento no window objeto é acionado quando a página inteira é carregada, incluindo estilos, imagens e outros recursos. Este evento está disponível através da onload propriedade.
+         * 
+         * O exemplo abaixo mostra corretamente os tamanhos das imagens, pois window.onload aguarda todas as imagens:
+        */
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //atribuindo um manipulador para o evento load, no window objeto, este evento e acionado quando a pagina inteira esta carregada, incluindo estilos, imagens e outros recursos.
+        window.onload = function(event) { //também pode usar window.addEventListener('load', (event) => {
+            alert('Página carregada!');
+            //a imagem é carregada neste momento, quando acessamos o no dom img a img ja esta carregada.
+            alert(`Image size: ${img.offsetWidth}x${img.offsetHeight}`);
+        }
+    </script>
+
+    <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0"/>
+
+</body>
+</html>

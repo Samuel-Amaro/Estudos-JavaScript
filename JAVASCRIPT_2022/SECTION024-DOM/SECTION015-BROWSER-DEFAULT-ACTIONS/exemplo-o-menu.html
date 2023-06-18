@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .menu li {
+        display: inline-block;
+        margin: 0;
+    }
+
+    .menu > li a {
+        display: inline-block;
+        margin: 0 2px;
+        outline: none;
+        text-align: center;
+        text-decoration: none;
+        font: 14px/100% sans-serif;
+        padding: .5em 2em .55em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        border-radius: .5em;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        color: #d9eef7;
+        border: solid 1px #0076a3;
+        background: #0095cd;
+    }
+
+    .menu > li:hover a {
+        text-decoration: none;
+        background: #007ead;
+    }
+</style>
+<body>
+
+    <nav>
+        <ul id="menu" class="menu">
+            <li><a href="/html">HTML</a></li>
+            <li><a href="/javascript">JavaScript</a></li>
+            <li><a href="/css">CSS</a></li>
+        </ul>
+    </nav>
+
+    <!--
+        - atribui um manipulador de evento por meio do atributo html.
+    -->
+    <input value="Focus works" onfocus="this.value=''"/>
+    <!--
+        - atribui dois manipuladores de evento  para o elemento, mas para elementos diferentes.
+        - o primeiro evento e quando o botão do mouse e pressionado por cima de um elemento. o manipulador impede que a ação padrão do navegador seja executada.
+        - o manipulador do evento onfocus e quando o elemento recebe o foco do mouse ou de outros elementos.
+    --->
+    <input onmousedown="return false" onfocus="this.value=''" value="Clique Aqui"/>
+
+    <script type="text/javascript">
+        /**
+         * * EXEMPLO: O MENU
+         * 
+         * Considere um menu de site, como este:
+         * 
+         * Os itens de menu são implementados como links HTML <a>, não botões <button>. Há várias razões para fazê-lo, por exemplo:
+         
+            Muitas pessoas gostam de usar “clique direito” – “abrir em uma nova janela”. Se usarmos <button> ou <span>, isso não funciona.
+
+            Os mecanismos de pesquisa seguem os <a href="...">links durante a indexação.
+
+         * 
+         * Então usamos <a> na marcação. Mas normalmente pretendemos lidar com cliques em JavaScript. Portanto, devemos impedir a ação padrão do navegador.
+         * 
+         * como aqui
+        */
+
+        //atribui uma manipulador de evento por meio de uma propriedade dom
+        //o manipulador e uma function anonima que declara paramentro event, objeto de evento que contém informações sobre o evento, a function e atribuida por referencia a propriedade onclick
+        menu.onclick = function(event) {
+            //- exemplo de ações padrão do navegador. o evento de click no elemento <a> leva automaticamento o navegador a executar uma ação. a de navegação para a url fornecida
+            //se o nome do elemento que iniciou o evento não for "A", for diferente de "A", faz nada
+            if(event.target.tagName != 'A') {
+                return;
+            }
+
+            //se o elemento que iniciou o evento for "a" - anchor
+            //obtem o valor do atributo href
+            let href = event.target.getAttribute('href');
+            console.log(href); // ...pode ser carregado do servidor, geração de UI etc
+
+            //o manipulador que retorna false, e uma exceção, e uma forma de impedir a ação padrão do navegador em determinados eventos, aqui retornamos false para que o navegador seja impedido de levar o user a url ao clicar no anchor elemento
+            return false; //impedir a ação do navegador (não vá para o URL)
+        }
+
+        /**
+         * Se omitirmos return false, depois que nosso código for executado, o navegador fará sua “ação padrão” – navegando até a URL em href. E não precisamos disso aqui, pois estamos lidando com o clique sozinhos.
+         * 
+         * A propósito, usar a delegação de eventos aqui torna nosso menu muito flexível. Podemos adicionar listas aninhadas e estilizá-las usando CSS para “deslizar para baixo”.
+         * 
+         * * Eventos de acompanhamento
+         * 
+         * Certos eventos fluem um para o outro. Se impedirmos o primeiro evento, não haverá o segundo.
+         * 
+         * Por exemplo, mousedown em um <input> campo leva a focar nele e no focus evento. Se impedirmos o mousedown evento, não há foco.
+         * 
+         * Tente clicar no primeiro <input> abaixo – o focus evento acontece. Mas se você clicar no segundo, não há foco.
+         * 
+         * Isso porque a ação do navegador é cancelada em mousedown. A focagem ainda é possível se usarmos outra maneira de inserir a entrada. Por exemplo, a Tab chave para mudar da 1ª entrada para a 2ª. Mas não com o clique do mouse mais.
+        */
+
+    </script>
+</body>
+</html>

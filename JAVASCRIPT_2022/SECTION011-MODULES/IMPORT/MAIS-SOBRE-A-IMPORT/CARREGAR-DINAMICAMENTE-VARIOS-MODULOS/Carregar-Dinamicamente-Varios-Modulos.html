@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregar Modulos Dinamicamente</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CARREGAR DINAMICAMENTE VÁRIOS MODULOS
+         *  
+         * Para carregar vários módulos dinamicamente, você pode usar o Promise.all() método:
+        */
+
+        Promise.all([import(module1), import(module2), ...]).then(([module1, module2, module3]) => {
+            //usa os modules
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MÉTODO JAVASCRIPT REGEX MATCH()
+         * 
+         * Vamos dar alguns exemplos de uso do match() método.
+         * 
+         * * 1) USANDO O MÉTODO JAVASCRIPT REGEX MATCH() COM A EXPRESSÃO QUE TEM O SINALIZADOR GLOBAL
+         * 
+         * O exemplo a seguir mostra como usar o match() método com o sinalizador global ( g). Ele retorna uma array de correspondências:
+        */
+
+        //declara a string de pesquisa a ser usada 
+        let str = "Price: $5-$10";
+        //cria uma expressão regular com o seguinte padrão: uma string literal $, escapada, seguida de um ou mais digitos
+        //o g e uma flag, g(global) que instrui o objeto RegExp a procurar todoas as correspondecias, retorna todoas correspondecias
+        //a expressão regular e passada como paramentro para o metodo Str.match(regexp), o método match ira retornar todas as correspencidas da str, na regexp.
+        //padrão: corresponder a uma string literal $ que seje seguida de um ou mais digitos
+        let result = str.match(/\$\d+/g);
+        //todas as correspondencias da str string no padrão especificado por regexp
+        console.log(result);
+
+        /**
+         * Neste exemplo, a match() pesquisa por qualquer número que segue o $ sinal.
+         * 
+        */
+    </script>
+
+</body>
+</html>

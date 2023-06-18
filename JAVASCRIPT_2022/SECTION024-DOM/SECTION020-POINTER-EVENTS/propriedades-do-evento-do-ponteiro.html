@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+
+      /**
+       * * PROPRIEDADES DO EVENTO DO PONTEIRO
+       * 
+       * Eventos de ponteiro têm as mesmas propriedades que eventos de mouse, como clientX/Y, target, etc., além de algumas outras:
+       
+        - pointerId – o identificador exclusivo do ponteiro que está causando o evento.
+
+            - Gerado pelo navegador. Permite lidar com vários ponteiros, como uma tela sensível ao toque com caneta e multitoque (exemplos a seguir). 
+
+        - pointerType – o tipo de dispositivo apontador. Deve ser uma string, uma das seguintes: “mouse”, “pen” ou “touch”.
+
+            - Podemos usar essa propriedade para reagir de maneira diferente em vários tipos de ponteiro.
+
+        - isPrimary – é true para o ponteiro principal (o primeiro dedo em multitoque).
+
+        - Alguns dispositivos de ponteiro medem a área de contato e a pressão, por exemplo, para um dedo na tela sensível ao toque, existem propriedades adicionais para isso:
+
+            width – a largura da área onde o ponteiro (por exemplo, um dedo) toca o dispositivo. Onde não há suporte, por exemplo, para um mouse, é sempre 1.
+
+            height – a altura da área onde o ponteiro toca o dispositivo. Onde não há suporte, é sempre 1.
+
+            pressure – a pressão da ponta do ponteiro, na faixa de 0 a 1. Para dispositivos que não suportam pressão, deve ser 0.5(pressionado) ou 0.
+
+            tangentialPressure – a pressão tangencial normalizada.
+
+            tiltX, tiltY, twist – propriedades específicas da caneta que descrevem como a caneta é posicionada em relação à superfície.
+
+        * Essas propriedades não são compatíveis com a maioria dos dispositivos, portanto, raramente são usadas. Você pode encontrar os detalhes sobre eles na especificação , se necessário.
+      */
+    </script>
+</body>
+</html>

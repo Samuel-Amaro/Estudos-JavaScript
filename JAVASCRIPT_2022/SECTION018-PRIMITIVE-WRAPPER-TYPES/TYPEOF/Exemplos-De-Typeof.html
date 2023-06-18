@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * EXEMPLOS DE TYPEOF JS
+         * 
+         * O exemplo a seguir mostra como usar o typeof operador com valores de vários tipos:
+         * 
+        */
+
+        //declara uma variavel de escopo de bloco chamada type, que não e inicializada, mas o mecanismo JS atribui a ela o tipo undefined com o valor undefined
+
+        //usando o operador typeof
+        //O typeof operador aceita um operando e retorna uma string representando o tipo do operando.
+        //pode usar alternativamente o operador typeof com os parenteses ou não
+        //a variavel sera inicializada com o resultado do retorno do operador typeof
+        type = typeof 'Hi';
+        console.log(`'${'Hi'}' : ${type}`); //'string'
+
+        type = typeof 100;
+        console.log(`${100} : ${type}`); //'number'
+
+        type = typeof 100n;
+        console.log(`${100n} : ${type}`); //'bigInt'
+
+        type = typeof false;
+        console.log(`${false} : ${type}`);//'boolean'
+
+        type = typeof Symbol('morning');
+        console.log(`${'Symbol(morning)'} : ${type}`);//'Symbol'
+
+        type = typeof undefined;
+        console.log(`${undefined} : ${type}`);//'undefined
+
+        type = typeof new Date();
+        console.log(`${new Date()} : ${type}`);//'object'
+
+        /**
+         * Em JavaScript, null é um valor primitivo do tipo null. No entanto, seu tipo não é null, mas object porque o JavaScript trata null como um objeto vazio:
+        */
+
+        type = typeof null;
+        console.log(`${null} : ${type}`);//'object'
+
+        /**
+         * Tecnicamente, JavaScript trata funções como objetos . Portanto, seus tipos são 'object'. No entanto, as funções têm algumas propriedades especiais, o JavaScript precisa diferenciar funções e outros objetos usando um operador typeof. Por exemplo:
+        */
+
+        //declara uma function regular chamada add, que declara dois paramentros chamados x e y
+        //uma function e uma instancia de objeto do tipo function
+        function add(x, y) {
+            return x + y;
+        }
+
+        type = typeof add;
+        console.log(`${add} : ${type}`);//'function'
+
+    </script>
+
+</body>
+</html>

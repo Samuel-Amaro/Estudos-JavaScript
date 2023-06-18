@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desestruturando Argumentos Função</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DESESTRUTURANDO ARGUMENTOS DE FUNÇÃO
+         * 
+         * Suponha que você tenha uma função que exibe o objeto pessoa:
+        */
+
+        //declara uma arrow function anonima, que possui um paramentro chamado person, a arrow não retorna nenhum valor
+        //a arrow function e atribuida por referencia a variavel display, assim display referencia a arrow function
+        //a arrow function e uma instancia de objeto do tipo function
+        let display = (person) => console.log(`${person.firstName} ${person.lastName}`);
+
+        //declara uma objeto anonimo literal com propriedades, esse objeto e atribuido por referencia a variavel person, assim person referencia o ojbeto
+        let person = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //invoca a arrow function por meio da variavel display fornecendo o objeto literal referenciado por person como argumento para a arrow
+        display(person);
+
+        /**
+         * É possível desestruturar o argumento do objeto passado para a função assim:
+        */
+        
+        //declara uma arrow function anonima, que possui um paramentro de desestruturação de objeto, esse e um unico paramatro, porem necessita de receber um objeto como argumento e desestruturalo em variaveis como paramentros individuais para a arrow function, mas a arrow function so necessita de um paramentro que o objeto a arrow não retorna nenhum valor, ela so mostra os paramentros declarados
+        //a arrow function e atribuida por referencia a variavel display2, assim display referencia a arrow function
+        //a arrow function e uma instancia de objeto do tipo function
+        //aqui os paramentros são a desestruturação do objeto passado como argumento em variaveis indiduais, aqui so tem duas varaiveis pois o objeto passado como argumento so possui duas propriedades, assim e desestrutura em duas variaveis
+        //assim as variaveis, possui o mesmo nome das propriedades do ojbeto passado como argumento, assim atribui as propriedadades do objeto de argumento a variaveis com o mesmo nome, por padrão as variaveis tem que possui o mesmo nome das propriedades do objeto de argumento
+        let display2 = ({firstName, lastName}) => console.log(`${firstName} ${lastName}`);
+
+        //chama invoca a arrow function refrenciado pela varaivel display2 passando um objeto referenciado pela varaivel person como argumento para ser desestruturado em varaiveis para serem usados na arrow function
+        display2(person);
+
+        /**
+         * Parece menos detalhado, especialmente quando você usa muitas propriedades do objeto de argumento. Esta técnica é frequentemente usada em React.
+         * 
+         * * RESUMO
+         * 
+         * A desestruturação de objetos atribui as propriedades de um objeto a variáveis ​​com os mesmos nomes por padrão.
+        */
+
+    </script>
+</body>
+</html>

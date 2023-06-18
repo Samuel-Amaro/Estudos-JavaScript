@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <img src="./images/javascript-event-loop-callstack.png" alt="imagen">
+
+    <img src="./images/javascript-event-loop-step-1.png" alt="imagen">
+
+    <img src="./images/javascript-event-loop-step-2.png" alt="imagen">
+
+    <img src="./images/javascript-event-loop-step-3.png" alt="imagen">
+
+    <img src="./images/javascript-event-loop.png" alt="imagen">
+
+    <script>
+
+        //declara uma function chamada task que declara um paramentro chamado message
+        //essa e uma função de bloqueio porque demora muito para ser executada, e esse tipo de função bloqueia todoas as interações da pagina da web como o clique do mouse.
+        function task(message) {
+            //emular tarefa demorada
+            let n = 10000000000; //10 bilhões de iteração
+            //while(n > 0) {
+            //    n--;
+            //}
+            console.log(message);
+        }
+
+        /**
+         * * CHAMADAS DE RESGATE(CALLBACKS TO THE RESCUE)
+         * 
+         * Para evitar que uma função de bloqueio bloqueie outras atividades, você normalmente a coloca em uma função de retorno de chamada(CALLBAK) para execução posterior. Por exemplo:
+        */
+
+        console.log('Start script...');
+
+        //atrasa 1 segundo, antes de invocar a function bloqueante task
+        setTimeout(() => {
+            task('Download a file.');
+        }, 1000);
+
+        console.log('Done!');
+
+        /**
+         * Neste exemplo, você verá a mensagem 'Start script...' e 'Done!' imediatamente. E depois disso, você verá a mensagem 'Download a file' 
+         * 
+         * Como mencionado anteriormente, o mecanismo JavaScript pode fazer apenas uma coisa de cada vez. No entanto, é mais preciso dizer que o tempo de execução do JavaScript pode fazer uma coisa de cada vez.
+         * 
+         * O navegador da web também possui outros componentes, não apenas o mecanismo JavaScript.
+         * 
+         * Quando você chama a setTimeout() função, faz uma solicitação de busca ou clica em um botão, o navegador da Web pode realizar essas atividades simultaneamente e de forma assíncrona.
+         * 
+         * Os eventos setTimeout(), fetch requests e DOM são partes das APIs da Web do navegador da Web.
+         * 
+         * Em nosso exemplo, ao chamar a setTimeout() função, o mecanismo JavaScript a coloca na pilha de chamadas e a API da Web cria um cronômetro que expira em 1 segundo. 
+         * 
+         * Em seguida, o mecanismo JavaScript coloca a task() função em uma fila chamada fila de retorno de chamada(callback) ou fila de tarefas:
+         * 
+         * O loop de eventos é um processo em execução constante que monitora a fila de retorno de chamada e a pilha de chamadas.
+         * 
+         * Veja outro exemplo:
+        */
+
+        console.log('Hi!');
+
+        //atrasa 0 segundo, antes de invocar a function bloqueante task
+        setTimeout(() => {
+            console.log('Execute immediately');
+        }, 0);
+
+        console.log('Bye!');
+
+        /**
+         * Neste exemplo, o tempo limite é de 0 segundo, portanto, a mensagem 'Execute immediately.'deve aparecer antes da mensagem 'Bye!'. No entanto, não funciona assim.
+         * 
+         * O mecanismo JavaScript coloca a seguinte chamada de função na fila de retorno de chamada(stack callback) e a executa quando a pilha de chamadas(call stack) está vazia. Em outras palavras, o mecanismo JavaScript o executa após o console.log('Bye!').
+         * 
+         * A imagem a seguir ilustra o tempo de execução do JavaScript, a API da Web, a pilha de chamadas e o loop de eventos:
+         * 
+         * Neste tutorial, você aprendeu sobre o loop de eventos JavaScript, um processo em execução constante que coordena as tarefas entre a pilha de chamadas e a fila de retorno de chamada para obter simultaneidade.
+        */
+        </script>
+
+</body>
+</html>

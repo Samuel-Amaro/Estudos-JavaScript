@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbolos Conhecidos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * SÍMBOLOS CONHECIDOS
+         * 
+         * O ES6 fornece símbolos predefinidos que são chamados de símbolos conhecidos. Os símbolos conhecidos representam os comportamentos comuns em JavaScript. Cada símbolo conhecido é uma propriedade estática do Symbol objeto.
+         *
+         * * Symbol.hasInstance(tem instancia)
+         *
+         * O Symbol.hasInstance é um símbolo que altera o comportamento do instanceof operador. Normalmente, quando você usa o instanceof operador:
+
+            obj instanceof type;
+
+         * 
+         * JavaScript chamará o Symbol.hasIntance método da seguinte forma:
+
+            type[Symbol.hasInstance](obj);
+
+         * 
+         * Em seguida, depende do método para determinar se  obj é uma instância do type objeto. Veja o exemplo a seguir.
+        */
+
+        //define um class chamada Stack, usando a palavra-chave class
+        class Stack{}
+
+        //usando o operador instanceof verificamos se o array literal vazio e uma instancia da Stack class
+        //aqui retorna false
+        //o instanceof operador normal verficia se o objeto especificado e do tipo especificado
+        console.log([] instanceof Stack); //false
+
+        /*
+         * A [] array não é uma instância da Stack classe, portanto, o instanceof operador retorna false neste exemplo.
+         *
+         * Supondo que você queira que o []array seja uma instância da Stack classe, você pode adicionar o Symbol.hasInstance método da seguinte forma:
+        */
+
+        //define um class chamada Stack usando a palavra-chave stack
+        class Stack2{
+            //define um método estatico que seu nome e oriundo de uma propriedade computada, e declara um paramentro chamdo obj
+            //exemplo de propriedade computada, usando expressão entre colchetes
+            //usa o resultado da expressão como nome do método
+            //a expressão e derivada de um symbol valor conhecido, predefinido que define um comportamento
+            //aqui usamos o symbol Symbol.hasInstance(que é um simbolo que altera o comportamento do operador instanceof)
+            static [Symbol.hasInstance](obj) {
+                //retorna o resultado da verificaçaõ se o obj e um array
+                return Array.isArray(obj);
+            }
+        }
+
+        //o Symbol.hasInstance muda o comportamento do operador instanceof, por definir o método verificador se e uma instancia do tipo especificado, definie o mesmo como estatico, isso e posso colocar o método me qualquer lugar, isso não influenciara na verificação, nos passamos um array para verificar se o array e do tipo Stack, mas implicitamente não e do mesmo tipo, e porque o método estatito da a entender isso mas não e do mesma instancia de tipo
+        console.log([] instanceof Stack2); //true
+        
+    </script>
+</body>
+</html>

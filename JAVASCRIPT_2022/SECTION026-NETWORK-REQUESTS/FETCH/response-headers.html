@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * RESPONSE HEADERS(CABEÇALHOS DE RESPOSTA)
+         *
+         * Os cabeçalhos de resposta estão disponíveis em um objeto de cabeçalhos do tipo Map no response.headers.
+         * 
+         * Não é exatamente um Map, mas possui métodos semelhantes para obter cabeçalhos individuais por nome ou iterar sobre eles:
+        */
+
+        //Os cabeçalhos HTTP permitem que o cliente e o servidor passem informações adicionais com a solicitação(REQUEST) ou a resposta(RESPONSE) HTTP.
+        //OBSE: Um cabeçalho de resposta é um cabeçalho HTTP que pode ser usado em uma resposta HTTP e que não está relacionado ao conteúdo da mensagem. Os cabeçalhos de resposta, como Age, Location ou Server são usados ​​para fornecer um contexto mais detalhado da resposta.
+
+        async function getHeaders() {
+
+            //envia uma solicitação de rede(request) para o url informado, e retorna um promise resolvida com objeto reponse assim que o servidor responder com headers
+            let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
+
+            //obter um header
+            //o reponse headers estão disponiveis em um objeto de headers do tipo Map no response.headers
+            //response.headers e um objeto headers do tipo Map
+            //Não é exatamente um Map, mas possui métodos semelhantes para obter cabeçalhos individuais por nome ou iterar sobre eles:
+            //neste exemplo vamos obter um header que tenha o nome Content-Type e utilizado para indicar o tipo de arquivo do recurso
+            alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
+
+            //itera sobre todos os headers
+            for(let [key, value] of response.headers) {
+                alert(`${key} = ${value}`);
+            }
+        }
+        
+
+        getHeaders();
+        
+
+    </script>
+
+</body>
+</html>

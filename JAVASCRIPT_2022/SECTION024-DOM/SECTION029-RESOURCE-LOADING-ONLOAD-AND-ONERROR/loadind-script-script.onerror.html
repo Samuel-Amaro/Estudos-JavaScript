@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /**
+         * * script.onerror
+         * 
+         * Erros que ocorrem durante o carregamento do script podem ser rastreados em um error evento.
+         * 
+         * Por exemplo, vamos solicitar um script que não existe:
+        */
+
+        //cria uma script dinamico
+        let script = document.createElement('script');
+
+        // pode carregar qualquer script, de qualquer domínio
+        //carrega um script externo
+        script.src = "https://example.com/404.js"; // nenhum script desse tipo
+        //anexa ao final da section head no documento
+        document.head.append(script);
+
+        //atribuindo um manipulador de evento por meio da propriedade dom
+        //o manipulador e para o evento error, esse evento e acionado depois que o recurso externo houve um erro no carregamento do mesmo. e acionado quando ha erros no carregamento do recurso
+        script.onerror = function(event) {
+            alert("Erro carregamento: " + this.src); // Erro ao carregar https://example.com/404.js
+        };
+
+        /**
+         * Observe que não podemos obter detalhes do erro HTTP aqui. Não sabemos se foi um erro 404 ou 500 ou outra coisa. Só que o carregamento falhou.
+         * 
+         * * Importante:
+         * 
+         * Eventos onload/ onerror acompanhar apenas o próprio carregamento.
+         * 
+         * Erros que podem ocorrer durante o processamento e execução do script estão fora do escopo desses eventos. Ou seja: se um script foi carregado com sucesso, então onload dispara, mesmo que tenha erros de programação nele. Para rastrear erros de script, pode-se usar window.onerror scripto manipulador global.
+        */
+    </script>
+
+</body>
+</html>

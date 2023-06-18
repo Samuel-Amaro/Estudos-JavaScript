@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * Vamos dividir o trabalho usando setTimeout chamadas aninhadas:
+        */
+
+        //Como temos uma tarefa muito grande que pode travar o navegador, impedind o que outras tarefas sejam executadas enquanto a atual não estiver sido executada
+        //Podemos evitar problemas dividindo a grande tarefa em partes.
+        //dividindo a tarefa
+
+        let i = 0;
+
+        let start = Date.now();
+
+        function count() {
+            // faz um trabalho 
+            //tarefa: conta de 1 até 1000000000 ou 1e6
+            //primeira execução conta de 1 até um milhão (1000000)
+            //segunda execução conta de 1000001 até 1000000000 
+            //faça um pedaço do trabalho pesado (*)
+            do{
+                i++;
+            }while(i % 1000000 != 0);
+            
+            //verifica se chegamos a um bilhão
+            if(i == 1e9) {
+                alert("Feito em " + (Date.now() - start) + 'ms'); //5070ms
+            }else{
+                //outra parte da tarefa
+                //tarefa divida para fazer outra chamada a count
+                //apos 0s continua contando
+                setTimeout(count); // agenda a nova chamada (**)
+            }
+        }
+
+        count(); //Feito em 16652ms
+
+        /**
+         * Agora a interface do navegador está totalmente funcional durante o processo de “contagem”.
+         * 
+         * Uma única execução de count faz parte do trabalho (*)e, em seguida, se reagenda, (**)se necessário:
+         * 
+            *  Contagens da primeira execução: i=1...1000000.
+            * 
+            * Contagens da segunda execução: i=1000001..2000000.
+            * 
+            * …e assim por diante.
+         * */
+    </script>
+</body>
+</html>

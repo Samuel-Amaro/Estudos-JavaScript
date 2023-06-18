@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo instrução try...catch</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * * EXEMPLO DE INSTRUÇÕES JS try...catch
+         * 
+         * O exemplo a seguir usa a try...catch instrução para lidar com o erro:
+        */
+
+        //usando a instrução try...catch para manipular e lidar com o erro emitido pela invocação de function abaixo
+        try{
+            //codigo que pode causar um erro vai aqui dentro
+
+            //declara uma variavel chamada result, que recebe o resultado da invocação da function add, passando dois argumentos do tipo number
+            //so que a add function não foi definida anteriormente, aqui esta invocando uma function que não existe que não foi definida
+            //isso emite um erro gera um erro
+            //dentro dessa intrução, a partir daqui ira pular para o catch bloco para tratar o erro lançado
+            let result = add(10, 20);
+            console.log(result);
+        }catch(e) {
+            //aqui vai a logica para tratar o erro
+            //abaixo esta o objeto de erro com suas respectivas propriedades, um objeto que contém informações mais detalhadas sobre erro
+            //propriedade e.name e o nome do erro
+            //propriedade e.message explica o erro em detalhes
+            console.log({name: e.name, message: e.message});
+        }
+        
+        //executa a ultima instrução, apos tratar o erro
+        console.log('Bye');
+
+        /**
+         * Neste exemplo, chamamos a add() função e atribuímos o valor de retorno à result variável. Como a add() função não existe, o mecanismo JavaScript ignora a instrução que gera o resultado no console:
+        
+            console.log(result);
+
+         * E executa imediatamente a instrução no catch bloco que gera o nome e a mensagem do erro:
+
+            console.log({name: e.name, message: e.message});
+
+         * 
+         * Como já tratamos do erro, o mecanismo JavaScript continua a executar a última instrução:
+         
+            console.log('Bye');
+
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * ESCREVENDO PARA document.cookie
+         * 
+         * Podemos escrever para document.cookie. Mas não é uma propriedade de dados, é um acessador (getter/setter) . Uma atribuição a ele é tratada especialmente.
+         * 
+         * Uma operação de gravação para document.cookie atualizar apenas os cookies mencionados nela, mas não afeta outros cookies.
+         * 
+         * Por exemplo, esta chamada define um cookie com o nome user e o valor John:
+        */
+
+        //escrevendo para document.cookie, define um cookie com o nome user e  o valor John
+        document.cookie = "user=John"; //atualizar apenas o cookie chamado 'usuário'
+        //para acessar os cookies do navegador usamos a propriedade document.cookie, o valor retornado e um par de name=value; delimitado por ; cada par e um cookie separado
+        alert(document.cookie); // mostra todos os cookies
+
+        /**
+         * Se você executá-lo, provavelmente verá vários cookies. Isso porque a document.cookie=operação não substitui todos os cookies. Apenas define o cookie mencionado user.
+         * 
+         * Tecnicamente, nome e valor podem ter qualquer caractere. Para manter a formatação válida, eles devem ser escapados usando uma encodeURIComponent função interna:
+        */
+
+        //caracteres especiais(espaços), não codificados
+        let name = "my name";
+        let value = "John Smith";
+
+        //para maneter a formatação valida devemos escapar o nome e o valor do cookie usando uma encodeURIComponet function interna, ​codifica um componente de URL, como um parâmetro de pesquisa, um hash ou um nome de caminho.
+        //escrevendo para document.cookie, define um cookie com o nome valor codificado, e um valor codificado
+        //codifica o cookie para my%20name=John%20Smith
+        document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value); 
+
+        alert(document.cookie); //...; my%20name=John%20Smith
+
+        /**
+         * * LIMITAÇÕES 
+         * 
+         * Existem algumas limitações:
+         * 
+            * O par nome=valor, após encodeURIComponent, não deve exceder 4 KB. Portanto, não podemos armazenar nada enorme em um cookie.
+            * 
+            * O número total de cookies por domínio é limitado a cerca de 20+, o limite exato depende do navegador.
+            * 
+         * Os cookies têm várias opções, muitas delas são importantes e devem ser definidas
+         * 
+         * As opções são listadas após key=value, delimitadas por ;, assim: 
+        */
+
+        document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038  03:14:07 GMT";
+    </script>
+
+</body>
+</html>

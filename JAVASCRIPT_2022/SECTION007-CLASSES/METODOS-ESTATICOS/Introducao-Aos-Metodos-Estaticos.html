@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Estáticos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * MÉTODOS ESTÁTICOS JS
+         * 
+         * Resumo : neste tutorial, você aprenderá sobre os métodos estáticos JavaScript e como usá-los de forma eficaz.
+         * 
+         * * INTRODUÇÃO AOS MÉTODOS ESTÁTICOS JS
+         * 
+         * Por definição, métodos estáticos são vinculados a uma classe, não às instâncias dessa classe. Portanto, os métodos estáticos são úteis para definir métodos auxiliares ou utilitários.
+         * 
+         * Para definir um método estático antes do ES6, você o adiciona diretamente ao construtor da classe. Por exemplo, suponha que você tenha um Person tipo da seguinte forma:
+        */
+
+        //declara uma function Construtora chamada Person que declara um paramentro chamado name
+        //uma function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //declara uma propriedade chamada name e as inicializa com a name argumento
+            this.name = name;
+        }
+
+        //definindo um metodo no objeto de prototipo
+        //O objeto de prototipo e uma objeto anonimo referenciado por Person.prototype
+        //define uma propriedade chamada getName essa propriedade recebe uma function anonima sem paramentro declarado como um valor
+        //a function retorna um valor
+        Person.prototype.getName = function() {
+            return this.name;
+        };
+
+        /**
+         * O seguinte adiciona um método estático chamado createAnonymous()ao Person tipo:
+        */
+
+        //o seguinte adiciona uma propriedade chamda createAnonymous que e atribuido a ela uma function anonima que declara uma paramentro chamado gender, a function e atribuida por referencia assim a propriedade referencia a function
+        //a propriedade chamda createAnonymous e adiciona na instancia de objeto do tipo function chamada Person
+        //metodo estatico antes do ES6
+        //adiciona o metodo na instancia de objeto do tipo function chamada Person 
+        Person.createAnonymous = function(gender) {
+            let name = gender == "male" ? "John Doe" : "Jane Doe";
+            //retorna uma instancia de objeto anonima
+            return new Person(name);
+        }
+
+        /**
+         * O createAnonymous() método é considerado um método estático porque não depende de nenhuma instância do Person tipo para seus valores de propriedade.
+         * 
+         * Para chamar o createAnonymous()método, você usa o Person tipo em vez de suas instâncias:
+        */
+
+        //invocando um metodo estatico sem precisar se uma instancia de objeto do tipo Person
+        //posso invocar o metodo estatico so por meio do person function construtora
+        //metodos estaticos são vinculados a classe e não ha instancias
+        var anonymous = Person.createAnonymous();
+
+
+    </script>
+</body>
+</html>

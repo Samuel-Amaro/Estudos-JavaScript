@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * SECURE(SEGURO)
+         * 
+         * secure
+         * 
+         * O cookie deve ser transferido apenas por HTTPS.
+         * 
+         * Por padrão, se definirmos um cookie em http://site.com, ele também aparecerá em https://site.com e vice-versa.
+         * 
+         * Ou seja, os cookies são baseados em domínio, eles não fazem distinção entre os protocolos.
+         * 
+         * Com esta opção, se um cookie for definido por https://site.com, ele não aparecerá quando o mesmo site for acessado por HTTP, como http://site.com. Portanto, se um cookie tiver conteúdo confidencial que nunca deve ser enviado por HTTP não criptografado, o secure sinalizador é a coisa certa.
+        */
+
+        // supondo que estamos em https:// agora
+        // configura o cookie para ser seguro (acessível apenas por HTTPS)
+        //Os cookies têm várias opções, muitas delas são importantes e devem ser definidas
+        //As opções são listadas após key=value, delimitadas por ;, assim: 
+        //definimos um cookie com o name user e o value John
+        //e definimos uma serie de opções importantes
+        //a option secure, define que o cookie deve ser tranferido apenas por HTTPS
+        document.cookie = "user=John; secure";
+
+    </script>
+
+</body>
+</html>

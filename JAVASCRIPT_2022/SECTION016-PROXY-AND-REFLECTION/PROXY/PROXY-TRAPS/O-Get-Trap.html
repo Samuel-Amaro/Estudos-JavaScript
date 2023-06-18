@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+        
+        /**
+         * * PROXY TRAPS - ARMADILHAS DE PROXY
+         * 
+         * * A GET() TRAP - ARMADILHA
+         * 
+         * A get() trap - armadilha é acionada quando uma propriedade do target objeto é acessada por meio do objeto proxy.
+         * 
+         * No exemplo anterior, uma mensagem é impressa quando uma propriedade do user objeto é acessada pelo proxyUser objeto.
+         * 
+         * Geralmente, você pode desenvolver uma lógica personalizada no get() trap quando uma propriedade é acessada.
+         * 
+         * Por exemplo, você pode usar o get() trap para definir propriedades computadas para o objeto de destino(target). As propriedades computadas são propriedades cujos valores são calculados com base nos valores das propriedades existentes.
+         * 
+         * O user objeto não possui uma propriedade fullName, você pode usar a get() armadilha para criar a fullNamepropriedade com base nas propriedades firstName e lastName:
+        */
+
+        //declarando um objeto literal anonimo com 2 propriedades, esse objeto e atribuido por referencia a constante user, assim user so pode referenciar esse unico objeto
+        const user = {
+            //declara propriedades usando sintaxe chave : valor
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        //definindo um objeto manipulador, que ira interceptar as operações fundamentais do objeto de destino(target) apontado pelo objeto proxy a ser criado 
+        //um manipulador(handler) é um objeto que contém métodos para controlar os comportamentos do alvo(target). Os métodos dentro do objeto manipulador são chamados de traps.
+        //declarando um objeto literal anonimo que e atribuido por referencia a constante handler
+        const handler = {
+            //definindo um metodo que ira controlar o comportamento do target objeto, esse método e chamado de trap(armadilhas)
+            //o metodo e definido usando a sintaxe de extensão de objetos literais do ES6, que torna o metodo do objeto mais suscinto removendo os dois pontos e a palavra-chave function
+            //esse método e usado, quando um objeto proxy tentar acessar as propriedades de outro objeto chamado target por meio do proxy objeto, usando este manipualdor 
+            get(target, property) {
+               //desenvolvendo uma logica personalizada para quando o objeto proxy estiver tentando acessar alguma proprieade do target objeto
+               return property === 'fullName' ? `${target.firstName} ${target.lastName}` : target[property];
+            }
+        };
+
+        //declarando uma instancia de objeto proxy, invocando o construtor da class Proxy, passando dois argumentos, um objeto alvo - target, e um manipulador do objeto alvo
+        //um proxy objeto é um objeto que envolve outro objeto (destino) - TARGET e intercepta as operações fundamentais do objeto de destino.
+        //o target paramentro e o objto de destino(o target a ser embrulhado pelo proxy)
+        //o handler argumento e o objeto controlador dos argumentos
+        //o proxyUser objeto usa o user objeto para armazenar dados
+        //o objeto proxyUser pode acessar todas as propriedades do user objeto
+        const proxyUser = new Proxy(user, handler);
+
+        //por meio do objeto proxyUser iremos acessar a propriedade fullName do target objeto, o mecanismo JS usa o get método trap do objeto manipulador para acessar as propriedades do target objeto 
+        console.log(proxyUser.fullName);
+
+        
+    </script>
+
+</body>
+</html>

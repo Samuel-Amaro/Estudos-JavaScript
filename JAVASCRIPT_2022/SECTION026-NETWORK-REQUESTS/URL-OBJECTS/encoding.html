@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * ENCODING(CODIFICAÇÃO)
+         * 
+         * Existe um RFC3986 padrão que define quais caracteres são permitidos em URLs e quais não são.
+         * 
+         * Aqueles que não são permitidos devem ser codificados, por exemplo, letras e espaços não latinos – substituídos por seus códigos UTF-8, prefixados por %, como %20(um espaço pode ser codificado por +, por razões históricas, mas isso é uma exceção).
+         * 
+         * A boa notícia é que os URL  objetos lidam com tudo isso automaticamente. Nós apenas fornecemos todos os parâmetros não codificados e, em seguida, convertemos URL para string:
+        */
+
+        //usando alguns caracteres cirílicos para este exemplo
+        //cria um objeto URL, passando como argumento para a function construtor o URL completo
+        let url = new URL('https://ru.wikipedia.org/wiki/Тест');
+
+        //add parametros de pesquisa na url, podemos adicionar parametros diretamente na string de url mesmo, mas os pamentros precisam ser codificados(aqueles caracteres que não são permitidos devem ser codificados) se possuirem espaços em branco, caracteres especiais, letras não latinas etc.., eles deve ser susbstituidos por seus codigos UTF-8, prefixados por %
+        //para isso usamos a propriedade url.searchParams que retorna um objeto URLSearchParams que atraves de seus metodos podemos manipular os paramentros de pesquisa da url
+        //o objeto URL lidam com tudo isso automaticamente
+        //o metodo set add o paramentro key com o valor 'ъ'
+
+        url.searchParams.set('key', 'ъ');
+
+        alert(url); //https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82?key=%D1%8A
+
+        /**
+         * Como você pode ver, tanto Тест no caminho da url quanto ъ no parâmetro são codificados.
+         * 
+         * A URL ficou mais longa, pois cada letra cirílica é representada com dois bytes em UTF-8, portanto, existem duas %.. entidades.
+         * 
+        */
+    </script>
+
+</body>
+</html>

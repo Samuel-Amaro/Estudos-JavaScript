@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos Wrapper primitivos versus tipos de referencia</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * TIPOS DE WRAPPER PRIMITIVOS VERSUS TIPOS DE REFERÊNCIA
+         * 
+         * Quando você cria um objeto de um tipo de referência usando o new operador, o objeto permanecerá na memória até sair do escopo.
+         * 
+         * A variável a seguir s permanecerá no heap até sair do escopo:
+        */
+
+        //declara uma instancia de objeto do tipo string Invocando o String function constructor e passando um argumento e usando o new operador palavra chave
+        //a instancia de objeto e atribuida a s variavel onde obtera a referecia para poder acessar o objeto por referencia
+        //esse objeto permanecera na memoria até sair do escopo
+        let s = new String('JavaScript');
+        console.log(`s = ${s}`);
+        
+        /**
+         *  No entanto, um objeto wrapper primitivo criado automaticamente existe apenas para uma linha de código. Veja o seguinte exemplo:
+        */
+
+        //declara uma variavel chamada s que possui uma valor de texto, esse valor e uma tipo primitivo string
+        let s2 = 'JavaScritp';   
+        //tentando adicionar uma propriedade, chamada language a s variavel por causa que nos bastidores o JS a converte em um objeto do tipo Primito string e chama a propriedade s.language mas isso não e refletido aqui no codigo pois isso so acontece em tempo de execução, então a propriedade e definida mas logo em seguida apos o objeto ser desativo pelo JS apos ser executado diz a propriedade possui o valor undefined
+        s2.language = 'ECMAScritp';
+
+        //tenta acessar a propriedade recem add ao tipo warrper primitvo interno ao ser executado e criado
+        console.log(`s.language = ${s2.language}`); //undefined
+
+        /**
+         * Neste exemplo, tentamos acessar a language propriedade da s variável e recebemos um valor de em undefined vez de 'ECMAScript':
+         * 
+         * O motivo é que o código a seguir cria um String objeto e atribui um valor à language propriedade.
+         
+            s.language = 'ECMAScript';
+
+         * 
+         * No entanto, o objeto String com a language propriedade só existe durante a execução desta linha de código.
+         * 
+         * Não é recomendado criar explicitamente objetos wrapper primitivos como os seguintes:
+        */
+
+        //não e recomendado criar wrraper primitos explicitamente dessa forma
+
+        //a variavel n recebera a referencia a instancia de objeto recem criada
+        let n = new Number(10); //Number objeto
+        //Objeto do tipo string em que s recebe a referencia da instancia de objeto recem criada
+        let s3 = new String('JS');
+        //a variavel b recebera a referencia da instancia de objeto recem criada invocando a Boolean function construtora passando argumento
+        let b = new Boolean(false);
+
+        /**
+         * No entanto, você deve saber quais métodos estão disponíveis para um valor primitivo para manipulá-lo de forma mais eficaz.
+         * 
+         * Neste tutorial, você aprendeu sobre os tipos de wrapper primitivos de JavaScript para booleanos, números e strings.
+         */
+    </script>
+</body>
+</html>

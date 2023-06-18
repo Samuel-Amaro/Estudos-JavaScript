@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * 
+         * * 3) EXEMPLO DE TODAS AS PROMESSAS REJEITADAS
+         * 
+         * O exemplo a seguir demonstra como usar o Promise.any() método com todas as promessas rejeitadas:
+        */
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p1
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p1 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 1 segundo de atraso para rejeitar a promise
+            setTimeout(() => {
+                console.log('Promise 1 reject');
+                //usando o callbakc function reject, para mudar o estado da promise de pendente para rejeita por um motivo
+                //o motivo e o argumento do reject function callbakc argumento
+                reject('error');
+            }, 1000);
+        });
+
+        //declara uma instancia de uma promise e atribui por referencia a variavel p2
+        //a callback argumento passado para o construtor da promise e conhecida como executor
+        const p2 = new Promise((resolve, reject) => {
+            //simulando uma operação assicrona usando o setTimeout
+            //espera 2 segundo de atraso para rejeitar a promise
+            setTimeout(() => {
+                console.log('Promise 2 rejected');
+                //usando o callbakc function reject, para mudar o estado da promise de pendente para rejeitar por um motivo
+                //o argumento da reject callbak e o motivo da rejeição
+                reject('error2');
+            }, 2000);
+        });
+
+        //Se todas as promesas no objeto iterável forem rejeitadas ou se o objeto iterável estiver vazio, Promise.any() retornará uma promesa que rejeita com um AggregateError contendo todos os motivos de rejeição
+        //a promisse retornada por Promise.any() e atribuida por referencia a variavel p
+        //o método any recebe um array literal anonimo com as variaveis que referenciam as promises
+        //inicializa o array com 2 promises
+        const p = Promise.any([p1, p2]);
+        //usando o catch método para obter o valor da promise referenciada por p, quando ela for rejeita, a promise p e rejeitada para mostrar o motivo das rejeições de todas as promesis de entrada terem sido rejeitadas
+        //a callbak passada para o catch método e invocada quando a promise refrenciada por p for rejeitada
+        p.catch((e) => {
+            //mostra o motivo das promises de entrada passada para Promise.any, terem sido rejeitdas 
+            console.log('Returned Promise');
+            console.log(e, e.errors);
+        });
+
+        /**
+         * Neste exemplo, ambos p1 e p2 foram rejeitados com a string error1 e error2. Portanto, o Promise.any()método foi rejeitado com um AggregateError objeto que possui a errors propriedade contendo todos os erros das promessas rejeitadas.
+        */
+        
+    </script>
+</body>
+</html>

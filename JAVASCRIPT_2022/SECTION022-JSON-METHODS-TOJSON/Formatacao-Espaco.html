@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * FORMATAÇÃO: ESPAÇO
+         * 
+         *  O terceiro argumento de JSON.stringify(value, replacer, space) é o número de espaços a serem usados ​​para formatação bonita.
+         * 
+         * Anteriormente, todos os objetos stringificados não tinham recuos e espaços extras. Tudo bem se quisermos enviar um objeto por uma rede. O space argumento é usado exclusivamente para uma boa saída.
+         * 
+         * Aqui space = 2 diz ao JavaScript para mostrar objetos aninhados em várias linhas, com recuo de 2 espaços dentro de um objeto:
+        */
+
+        //declara objeto literal anonimo que e atribuido por referencia a variavel user
+        let user = {
+            //declara propriedades usando sintaxe chave : valor
+            name : "John",
+            age : 25,
+            //declara propriedade chamada roles, que tem como valor outro objeto literal, objetos literais aninhados
+            roles : {
+                isAdmin: false,
+                isEditor: true
+            }
+        };
+
+        //Usando o método JSON.stringify(value, replace, space), para converte um objeto literal anonimo referenciado por user em string JSON(JavaScript Object Notation).
+        //retorna uma string resultante chamada de objeto codificado em JSON ou serializado ou stringified(encadeado) ou empacotado do objeto literal.
+        //passamos como primeiro argumento a referencia ao objeto literal, o valor a ser codificado para string JSON
+        //como segundo argumento passamos um valor null, nenhum propriedade a ser codificada em especial para string JSON
+        // o terceiro argumento passamos um valor 2, que e a quantidade de espaço a ser usado para formatação, dois espaços em branco, o recuo da formatação da string json resultante
+        console.log(JSON.stringify(user, null, 2));
+        /* recuos de dois espaços:
+        {
+          "name": "John",
+          "age": 25,
+          "roles": {
+            "isAdmin": false,
+            "isEditor": true
+          }
+        }
+        */
+        /*para JSON.stringify(user, null, 4) o resultado seria mais recuado:
+        {
+            "name": "John",
+            "age": 25,
+            "roles": {
+                "isAdmin": false,
+                "isEditor": true
+            }
+        }
+       */
+
+       /**
+            * O terceiro argumento também pode ser uma string. Nesse caso, a string é usada para recuo em vez de vários espaços.
+            * 
+            * O space parâmetro é usado apenas para fins de registro e saída agradável.
+        */
+    </script>
+</body>
+</html>

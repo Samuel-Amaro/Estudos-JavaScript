@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * MÉTODO JAVASCRIPT REGEX MATCH()
+         * 
+         * Vamos dar alguns exemplos de uso do match() método.
+         * 
+         * * 2) USANDO O MÉTODO JAVASCRIPT REGEX MATCH() COM A EXPRESSÃO QUE POSSUI O SINALIZADOR GLOBAL
+         * 
+         * O exemplo a seguir ilustra como usar o match() método com uma expressão regular que não tem um sinalizador global. Ele retorna uma array da primeira correspondência com propriedades adicionais.
+        */
+
+        //declara a string de pesquisa a ser usada 
+        let str = "Price: $5-$10";
+        //cria uma expressão regular com o seguinte padrão: uma string literal $, escapada, seguida de um ou mais digitos
+        //a expressão regular e passada como paramentro para o metodo Str.match(regexp), o método match ira retornar todas as correspencidas da str se a flag global g estiver presenta, na regexp.
+        //se não tiver o método so retorna a primeira correspondencia da str no regexp, como um array com a correspondecia e propriedades adicionais
+        //padrão: corresponder a uma string literal $ que seje seguida de um ou mais digitos
+        let result = str.match(/\$\d+/);
+        //retorna a primeira correspondecia do str no padrão, retorna como um array com propriedades adicionais
+        console.log(result);
+
+        /**
+         * As propriedades adicionais são:
+         
+            - index: é o índice no qual a correspondência foi encontrada.
+            - input: uma cópia da string de pesquisa.
+            - groups: é o objeto de grupos de captura nomeados cujas chaves e valores são os nomes e os grupos de captura respectivamente. Neste exemplo, é undefined porque definimos quaisquer grupos de captura nomeados.
+        */
+    </script>
+
+</body>
+</html>

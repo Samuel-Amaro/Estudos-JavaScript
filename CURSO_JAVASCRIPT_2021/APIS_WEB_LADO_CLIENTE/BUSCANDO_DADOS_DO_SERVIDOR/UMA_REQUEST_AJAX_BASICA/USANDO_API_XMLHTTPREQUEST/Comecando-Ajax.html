@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto de partida Ajax</title>
+    <style>
+        html, pre {
+          font-family: sans-serif;
+        }
+  
+        body {
+          width: 500px;
+          margin: 0 auto;
+          background-color: #ccc;
+        }
+  
+        pre{
+          line-height: 1.5;
+          letter-spacing: 0.05rem;
+          padding: 1rem;
+          background-color: white;
+        }
+  
+        label {
+          width: 200px;
+          margin-right: 33px;
+        }
+  
+        select {
+          width: 350px;
+          padding: 5px;
+        }
+      </style>
+</head>
+<body>
+
+    <h1>Ponto de partida Ajax</h1>
+
+    <!--formulario simples sem uma ação de submissão-->
+    <form action="">
+        <label for="escolha-verso">Escolha um verso</label>
+        <select name="escolha-verso" id="escolha-verso">
+            <option>Verso 1</option>
+            <option>Verso 2</option>
+            <option>Verso 3</option>
+            <option>Verso 4</option>
+        </select>
+    </form>
+
+    <h2>O Verme conquistador <em>Edgar Allen Poe, 1843</em></h2>
+
+    <pre>
+
+    </pre>
+
+    <!-- 
+        - java script local referente ao documento HTML5;
+        - Neste exemplo, carregaremos um verso diferente do poema (que você pode reconhecer) via XHR - API CLIENTE XMLHttpRequest. quando ele for selecionado no menu suspenso.
+        - Os navegadores modernos não executarão solicitações XHR se você apenas executar o exemplo de um arquivo local. Isso se deve a restrições de segurança.
+        - Para contornar isso, precisamos testar o exemplo executando-o por meio de um servidor web local.
+    -->
+    <script>
+
+        //seleciona elementos HTML5 no documento e os armazena em constantes
+        //<select>
+        const escolhaVerso = document.querySelector('select');
+        //<pre>
+        const poemDisplay = document.querySelector('pre');
+
+        //registrando um manipulador de eventos, para o evento de onchange no elemento <select>, quando o valor do select for alterador o evento vai ser disparado e a função trata a o evento
+        escolhaVerso.onchange = function() {
+            //obtem o conteudo do elemento <select>
+            const verso = escolhaVerso.value;
+            atualizaExibimento(verso);
+        };
+
+        /**
+          * função JavaScript que recebe um parametro;
+        **/
+        function atualizaExibimento(verso) {
+            //Começaremos nossa função construindo uma URL relativa apontando para o arquivo de texto que queremos carregar, pois precisaremos dele mais tarde
+            // O valor do <select>elemento a qualquer momento é o mesmo que o texto dentro do selecionado <option>(a menos que você especifique um valor diferente em um atributo de valor) - por exemplo, "Verso 1". O arquivo de texto do versículo correspondente é "verse1.txt" e está no mesmo diretório do arquivo HTML, portanto, apenas o nome do arquivo será suficiente.
+            //No entanto, os servidores da web tendem a fazer distinção entre maiúsculas e minúsculas, e o nome do arquivo não tem um espaço nele. Para converter "Verso 1" em "verse1.txt", precisamos
+            verso = verso.replace(" ",""); //tirando os espaços em branco
+            verso = verso.toLowerCase(); //converte a string para minuscula
+            let url = verso + '.txt'; //concatena a extensão do arquivo
+
+            //XMLHttpRequesté um objeto que oferece função ao cliente para transferir dados entre um cliente e um servidor. Ele oferece uma maneira fácil de recuperar dados de um URL sem ter que fazer uma atualização de página inteira. Isso permite que uma página da Web atualize apenas uma parte do conteúdo sem interromper o que o usuário está fazendo. XMLHttpRequest é usado constantemente na programação de AJAX .
+            //Para criar uma instância de XMLHttpRequest, basta fazer isso
+            // criar um novo objeto de solicitação usando o XMLHttpRequest()construtor
+            let requisicao = new XMLHttpRequest();
+
+            //void open(DOMString method, 
+            //            DOMString url, 
+            //            optional boolean async, 
+            //            optional DOMString? user, 
+            //            optional DOMString? password);
+            //method = O método HTTP para usar, como "GET", "POST", "PUT", "DELETE", etc. ignorado para URLs não-HTTP (S).
+            // url = O URL para o qual enviar uma solicitação.
+            //Inicializa um pedido. Este método é para ser usado a partir do código JavaScript;
+            //usar o  open()método para especificar qual método de solicitação HTTP usar para solicitar o recurso da rede e qual é o seu URL. Vamos apenas usar o GET método aqui e definir a URL como nossa url variável.
+            requisicao.open('GET', url);
+
+            
+            //A seguir, definiremos o tipo de resposta que esperamos - que é definido pela responseTypepropriedade da solicitação - como text. Isso não é estritamente necessário aqui - o XHR retorna texto por padrão - mas é uma boa ideia adquirir o hábito de definir isso no caso de desejar buscar outros tipos de dados no futuro.
+            //XMLHttpRequest.responseType(); -> Pode ser configurado para alterar o tipo de resposta.
+            //Tipo de dados  resposta de propriedade
+            //"text" -> Fragmento
+            requisicao.responseType = 'text';
+            
+            //Buscar um recurso da rede é uma operação assíncrona , o que significa que você tem que esperar a conclusão da operação (por exemplo, o recurso é retornado da rede) antes de fazer qualquer coisa com essa resposta, caso contrário, um erro será gerado. O XHR permite que você controle isso usando seu onload manipulador de eventos - ele é executado quando o load evento é disparado (quando a resposta é retornada). Quando isso ocorrer, os dados de resposta estarão disponíveis na response propriedade do objeto de solicitação XHR.
+            //regitrando um manipulador de eventos, para o evento assicrono de resposta de uma solicitação a um servidor, este evento e acionado quando a solicitação ja foi enviada e a resposta ja foi obtida, isso preve erro, de usar a resposta antes dela chegar
+            //load A transferência foi concluída; todos os dados estão agora noresponse
+            requisicao.onload = function() {
+                //XMLHttpRequest.response Somente leitura Retorna um ArrayBuffer, Blob, Document, JavaScript objeto, ou um DOMString, dependendo do valor de XMLHttpRequest.responseType, que contém o corpo da entidade de resposta.
+                poemDisplay.textContent = requisicao.response;
+            };
+
+            //send() Envia a solicitação(requeste). Se o pedido é assíncrono (que é o padrão), este método retorna assim que o pedido for enviado. Se o pedido é síncrono, este método não retorna até a resposta chegar.
+            requisicao.send();
+        }
+
+        //Um problema com o exemplo tal como está é que ele não mostrará nenhum trecho do poema quando for carregado pela primeira vez.
+        //para carregar o versículo 1 por padrão e certifique-se de que o <select>elemento sempre mostra o valor correto.
+        atualizaExibimento('Verso 1');
+        escolhaVerso.value = 'Verso 1';
+    </script>
+</body>
+</html>

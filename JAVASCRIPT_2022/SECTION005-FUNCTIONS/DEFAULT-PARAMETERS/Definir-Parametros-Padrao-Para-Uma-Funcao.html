@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parâmetros Padrão</title>
+</head>
+<body>
+    <script>
+        /**
+         * * DEFINIR PARÂMETROS PADRÃO DE JS PARA UMA FUNÇÃO
+         * 
+         * Em JavaScript, um parâmetro tem um valor padrão de undefined. Isso significa que se você não passar os argumentos para a função , seus parâmetros terão os valores padrão de undefined.
+         * 
+         * Veja o seguinte exemplo:
+        */
+
+        //declara uma function chamada say, que possui um paramentro chamado message que possui um valor padrão undefined fornecido pelo JS para variaveis não inicializadas, isso como o paramentro não recebe nenhum argumento ao function ser invocada o paramentro fica com o valor padrão undefined definido pois não recebeu nehum argumento
+        //obs: uma function e uma instancia de objeto do tipo function possui propriedades e metodos
+        function say(message) {
+            console.log(message);
+        }
+
+        //invoca a function say, sem fornecer nenhum valor como argumento para o paramentro message
+        say(); //undefined - valor padrão do paramentro message
+
+        /**
+         * A say() função recebe o message parâmetro. Como não passamos nenhum argumento para a say()função, o valor do  message parâmetro é undefined.
+         * 
+         * Suponha que você queira dar ao message parâmetro um valor padrão 10.
+         * 
+         * Uma maneira típica de conseguir isso é testar o valor do parâmetro e atribuir um valor padrão se estiver  undefined usando um operador ternário :
+        */
+
+        //declara uma function chamada falar, que possui um paramentro definido chamado message, o paramentro message possui um valor padrão 'undefined', que e atribuido ao paramentro pelo proprio JS por que o paramentro ainda não foi inicializado com nenhum argumento
+        //a function e uma instancia de objeto do tipo function
+        function say(message) {
+            //se o parametro message não receber nenhum argumento ao ter a function invocada a propria function ira atribuir um valor padrão ao paramentro para inicializalo com um valor padrão
+            message = typeof(message) !== 'undefined' ? message : 'Hi';
+            console.log(message);
+        }
+
+        //invoca - chama a function say sem passar nenhum argumento e o proprio JS atribui um valor padrão ao paramentro message, por não temos passando um argumento para o parametro message
+        say(); //'Hi'
+
+        /**
+         * Neste exemplo, não passamos nenhum valor para a say() função. Portanto, o valor padrão do argumento de mensagem é undefined. Dentro da função, reatribuímos a message variável a Hi string.
+         * 
+         * O ES6 fornece uma maneira mais fácil de definir os valores padrão para os parâmetros da função como este:
+        */
+
+        //exemplo de sintaxe, de como definir valores padrões para os paramentros de uma function regular no JS
+        function fn(param1=default1, param2=default2) {
+            //corpo da function
+        }
+
+        /**
+         * Na sintaxe acima, você usa o operador de atribuição (=) e o valor padrão após o nome do parâmetro para definir um valor padrão para esse parâmetro. Por exemplo:
+        */
+
+        //declara uma function regular chamada say2, que possui um parametro chamado message, esse paramentro possui um valor padrão definido como 'Hi', define um valor padrão para o parametro message
+        //a say2 e uma instancia de objeto nomeada say do tipo function
+        function say(message='Hi') {
+            //mostra o valor do argumento passado para o message paramentro ou mostra o valor padrão do parametro caso não tenha passado argumento ao invocar a function
+            console.log(message);
+        }
+
+        //invoca a function sem fornecer argumento para o message parametro, aqui mostra o valor padrão do argumento
+        say(); //'Hi'
+        //invoca a function sem fornecendo um argumento, um valor undefined, valor primitivo do tipo JS
+        //esse argumento não e atribuido ao paramentro pois o paramentro ja possui um valor padrão de inicialização o 'Hi'
+        //portanto undefined não e atribuido como valor para o paramentro message
+        say(undefined); //'Hi'
+        //invoca a function fornecendo o argumento Hello uma string literal de texto, esse argumento e mapeado para o paramentro message
+        say('Hello'); //Hello
+
+        /**
+         * Como funciona.
+
+            - Na primeira chamada de função, não passamos nenhum argumento para a say() função, portanto message o parâmetro assumiu o valor padrão 'Hi'.
+
+            - Na segunda chamada de função, passamos o undefined para a say() função, portanto, o message parâmetro também recebeu o valor padrão 'Hi'
+
+            - Na terceira chamada de função, passamos a 'Hello' string para a say()função, portanto message o parâmetro tomou a string 'Hello' como o valor padrão.
+        */
+        
+    </script>
+</body>
+</html>

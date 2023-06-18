@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input type="text" id="elem" value="value"/>
+
+    <script type="text/javascript">
+        /**
+         * * MAIS PROPRIEDADES
+         * 
+         * Os elementos DOM também possuem propriedades adicionais, em particular aquelas que dependem da classe:
+         
+            - value – o valor para <input>, <select> e <textarea>( HTMLInputElement, HTMLSelectElement…).
+
+            - href – o “href” para <a href="...">( HTMLAnchorElement).
+
+            - id – o valor do atributo “id”, para todos os elementos ( HTMLElement).
+
+            - …e muito mais…
+         * */
+
+        //o elem e uma variavel nomeada por id que representa um elemento DOM elem
+        //propriedades adicionais para um elemento dom que correspondam a um elemento <input>, propriedades adicionais da classe interna HTMLInputElement
+        console.log(elem.type); //valor do atributo type #text
+        console.log(elem.type); //valor do atributo id "elem"
+        console.log(elem.value); //valor do atributo value
+
+        /**
+         * A maioria dos atributos HTML padrão tem a propriedade DOM correspondente, e podemos acessá-la assim.
+         * 
+         * Se quisermos conhecer a lista completa de propriedades suportadas para uma determinada classe, podemos encontrá-las na especificação. Por exemplo, HTMLInputElementestá documentado em https://html.spec.whatwg.org/#htmlinputelement .
+         * 
+         * Ou se quisermos obtê-los rapidamente ou estivermos interessados ​​em uma especificação concreta do navegador – sempre podemos gerar o elemento usando console.dir(elem)e ler as propriedades. Ou explore as “propriedades DOM” na guia Elementos das ferramentas de desenvolvedor do navegador.
+         * 
+         * * RESUMO
+         * 
+         * Cada nó DOM pertence a uma determinada classe. As classes formam uma hierarquia. O conjunto completo de propriedades e métodos vem como resultado da herança.
+         * */
+    </script>
+
+</body>
+</html>

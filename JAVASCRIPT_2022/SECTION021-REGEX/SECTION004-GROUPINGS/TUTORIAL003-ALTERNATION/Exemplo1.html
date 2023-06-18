@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE ALTERNÂNCIA REGEX
+         * 
+         * O exemplo a seguir ilustra as aplicações práticas da alternância regex.
+         * 
+         * * 1) USANDO A ALTERNÂNCIA REGEX PARA CORRESPONDER À STRING DE TEMPO NO FORMATO hh:mm
+         * 
+         * A seguinte expressão regular que combina o classe de caracteres \d com os quantificadores {} para corresponder a uma string de tempo no formato hh:mm:
+         
+            /\d{2}:\d{2}/
+
+         * 
+         * Nesta expressão regular:
+        
+            \d{2} corresponde a dois dígitos.
+
+            : corresponde ao caractere de dois pontos.
+
+            \d{2} corresponde a dois digitos
+
+         * 
+         * Mas a regra \d{2} também corresponde a uma hora ou minuto inválido, por exemplo 99. Para torná-lo mais preciso, você pode usar uma alternância.
+         * 
+         * Como as horas válidas são de 01 até 23, você pode usar o seguinte padrão para corresponder à parte da hora:
+         
+            [01]\d|2[0-3]
+
+         *
+         * Neste padrão:
+         
+            - A regra [01] corresponde a um único dígito 0 ou 1 e a regra \d corresponde a um único dígito de 0 a 9. Portanto, a regra [01]\d corresponde a 00, 01 a 19
+
+            - O número literal 2 corresponde ao dígito 2 e a regra [0-3]corresponde a um único dígito de 0 a 3, incluindo 0, 1, 2, 3. Portanto, a regra 2 [0-3]corresponde a dois dígitos 20, 21, 22 e 23.
+
+         * Portanto, a regra [01]\d|2[0-3]corresponde a dois dígitos de 00 a 23.
+         *
+         * Da mesma forma, você pode usar a seguinte regra para corresponder a um minuto válido que varia de 00 a 59:
+         
+            [0-5]\d
+
+         * 
+         * A expressão regular a seguir combina essas regras para corresponder a uma string de hora no hh:mm formato:
+         
+            /[01]\d|2[0-3]:[0-5]\d/g
+
+            - a expressão regular acima, possui o seguinte padrão, um conjunto que corresponda a 0 ou 1 digito numerico, logo em seguida corresponda a qualquer digito ou corresponda a dois, com um conjunto que corresponda a 0, 1, 2, 3, seguido, dois pontos, corresponda a 0, 1, 2, 3, 4, 5, depois corresponda a qualquer digito, a flag g instrui o objeto a retorna todas as correspondencias
+
+         * 
+         * No entanto, essa expressão regular não funcionará conforme o esperado. Por exemplo:
+        */
+
+        //declara string literal a ser pesquisada
+        const time = '05:30 31:62 23:45 26:99';
+        //declara a expressão regular
+        //a expressão regular acima, possui o seguinte padrão, um conjunto que corresponda a 0 ou 1, logo em seguida corresponda a qualquer digito, seguido pela alternancia, corresponda a dois, com um conjunto que corresponda a 0, 1, 2, 3, seguido, dois pontos, corresponda a 0, 1, 2, 3, 4, 5, depois corresponda a qualquer digito, a flag g instrui o objeto a retorna todas as correspondencias
+        //o padrão busca correspondecias de uma string de tempo no formato hh:mm
+        const pattern = /[01]\d|2[0-3]:[0-5]\d/g;
+        //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string
+        //retorna uma array com todas as correspodencias
+        const match = time.match(pattern);
+
+        console.log(match);
+
+        /**
+         * Neste exemplo, o mecanismo regex trata o padrão [01]\d|2[0-3]:[0-5]\d como duas partes separadas pela alternância:
+         
+            ([01]\d
+
+            OR
+
+            2[0-3]):([0-5]\d)
+
+         * 
+         * Para corrigi-lo, você usa parênteses para envolver a alternância. Indica que apenas a parte envolvida é alternada, não todo o padrão:
+        
+            ([01]\d|2[0-3]):[0-5]\d
+
+            - a expressão regular acima possui o seguinte padrão, um grupo de captura que possui a seguinte regra: um padrão que corresponda a um conjunto como os digitos 0 e 1, seguido de outro digito, alternancia ou corresponda ao digito 2, seguido por conjunto que corresponda a 0, 1, 2, 3, seguindo padrão geral dois pontos, correponda a um conjunto como 0,1,2,3,4,5 seguido de outro digito 
+
+         *
+         * Agora, o script funciona como esperado:
+        */
+
+        //usando o método String.match(regexp) para obter todas as correspondecias do regexp na string
+        //retorna uma array com todas as correspodencias
+        //o padrão corresponde a uma string numerica ao seguinte formato hh:mm
+        let match2 = time.match(pattern);
+
+        console.log(match);
+
+        /**
+         * * RESUMO
+         * 
+         * A alternância A | B corresponde a A ou B.
+         * 
+         * A alternância é como um operador OR em expressões regulares.
+         * 
+         * Use parênteses ()para envolver as partes que você deseja aplicar a alternância.
+        */
+    </script>
+</body>
+</html>
+
+
+

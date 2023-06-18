@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O operador instanceof e a herança</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * O OPERADOR INSTANCEOF E A HERANÇA
+         * 
+         * O exemplo a seguir define a Employee classe que estende a Person classe:
+        */
+
+        //define uma function construtora chamada Person que declara uma paramentro chamado name
+        //essa function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //declara uma propriedade chamada name que e inicializada com a name argumento
+            this.name = name;
+        }
+
+        //define uma class chamada Employee usando a palavra chave class
+        //a Employee class e uma class derivada, class filha, class Base da class Person
+        //a Employee class estende(herda) tudo da Person class
+        class Employee extends Person{
+            //define um construtor para a class Employee declara dois paramentros chamados name e title
+            constructor(name, title) {
+                //invoca-chama o construtor da super classe, da classe pai, da classe Base Person, fornecendo o argumento para inicializar propriedade
+                super(name);
+                //declara propriedade chamada title e a inicializa com o title argumento
+                this.title = title;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o construtor da Employee classe fornecendo nenhum argumento, e usando o new operador
+        //a instancia de objeto criada e atribuida por referencia a variavel e1
+        let e1 = new Employee();
+
+        //usando o operador instanceof para verificar se a instancia de objeto referenciada por e1 e uma instancia da Employee class
+        //verifica se o objeto prototipo de employee contem na cadeia de prototipos do e1
+        console.log(e1 instanceof Employee); //true
+        //verifica se o  objeto prototipo da super class Person esta contido na e1 cadeia de prototipo
+        console.log(e1 instanceof Person); //true
+        //verifica na cadeia de prototipo
+        console.log(e1 instanceof Object); //true
+
+        /**
+         * Como e1 é uma instância da Employee classe, também é uma instância das classes Person and Object(classes base).
+        */
+    </script>
+</body>
+</html>

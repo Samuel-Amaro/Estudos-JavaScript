@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory function</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * O OBJECT.CREATE() MÉTODO
+         * 
+         * O Object.create() método cria um novo objeto usando um objeto existente como protótipo do novo objeto:
+         
+            Object.create(proto, [propertiesObject]);
+
+         * 
+         * Portanto, você pode usar o Object.create() seguinte:
+        */
+        
+        //cria um objeto literal chamado behavior usando a sintaxe de objeto literal
+        const behavior = {
+            //declara um metodo chamado getFullName que pertence ao behavior objeto
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+        }
+
+        //declara uma function de fabrica chamada createPerson que declara dois paramentros o firstName, e o lastName, essa function retorna uma instancia de objeto
+        function createPerson(firstName, lastName) {
+            //O metodo Object.create declara o behavior objeto como o objeto prototipico do person objeto,
+            //esse objeto pode ser acessado por meio da propriedade Object.prototype ira referencialo como um objeto anonimo
+            //o behavior objeto prototipo de person tera propriedades essas proriedades podera ser acessado por meio de person por meio da ligaçaõ de prototipo e cadeia de prototipos
+            //O JS por padrão fornece ao person objeto literal o Object.function como função construtora e o Object.protoype objeto anonimo referenciado por Object.protoype como objeto prototipico, mas aqui isso foi substituido pelo behavior objeto literal 
+            let person = Object.create(behavior);
+            //declara propriedade do person objeto
+            person.firstName = firstName;
+            person.lastName = lastName;
+            return person;
+        }
+
+
+
+        /**
+         * Agora, você pode criar person objetos e chamar os métodos do behavior objeto:
+        */
+
+        //cria instancia de objetos usando a função de fabrica createPerson, a invocando e passando argumentos para propriedades do objeto
+        let john = createPerson('John', 'Doe'), jane = createPerson('Jane', 'Doe');
+
+        //acessa o metodo definido no prototipico objeto de john e jane objetos instancias, o JS primeiro procura o metodo nas instancias de john e jane, não encontra ai parte para a cadeia de prototipo por meio da ligação de prototipo e encontra no Objec.prototype propriedade definida o objeto prototipico das instancias de john e jane, assim pode compartilhar as propriedades definidas no objeto prototipico por meio das instancias
+        console.log(john.getFullName());
+        console.log(jane.getFullName());
+
+        /**
+         * O código funciona perfeitamente bem. No entanto, na prática, você raramente verá as funções de fábrica. Em vez disso, você verá os construtores de função ou as classes .
+        */
+    </script>
+
+</body>
+</html>

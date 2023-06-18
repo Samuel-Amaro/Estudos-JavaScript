@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipos de objeto</title>
+</head>
+<body>
+    
+    <script>
+
+        //declara um fuction construtora chamada Person que possui um parametro, que e um argumento para se tornar valor de uma propriedade do objeto this
+        //essa function retorna uma instancia de um objeto this com as propriedades e metodos definidas dentro da function
+        function Person(name) {
+            //add uma propriedade ao Person objeto this instancia que sera retornado
+            this.name = name;
+        }
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o argumento
+        //o p1 objeto e vinculado ao objeto anonimo refernciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim p1 aponta para esse objeto anonimo também
+        let p1 = new Person('John');
+
+        //cria uma nova instancia(objeto) do tipo Person, usando o new palavra-chave e invocando a function constutora e passando o argumento
+        //o jane objeto e vinculado ao objeto anonimo que e referenciado pela Person.prototype propriedade usando a vinculação de prototipo
+        //assim Jane aponta para esse objeto anonimo também
+        //com esse tipo de ligação acaba o erro de duplicação de metodos definidos na function construtora, asssim exsite somente um objeto anonino de referencia, que ira ter as instancias vinculadas para ele
+        let p2 = new Person('Jane');
+
+        /**
+         * * OBTENDO A LIGAÇÃO DO PROTÓTIPO(PROTOTYPE LINKAGE) 
+         * 
+         * O __proto__é pronunciado como dunder proto. O __proto__é uma propriedade de acesso(acessor property) do Object.prototype objeto. Ele expõe a ligação do protótipo interno ( [[Prototype]]) de um objeto por meio do qual ele é acessado.
+         * 
+         * O __proto__ foi padronizado em ES6 para garantir a compatibilidade para navegadores da web. No entanto, ele pode ser preterido em favor de Object.getPrototypeOf() no futuro. Portanto, você nunca deve usar __proto__ em seu código de produção.
+         * 
+         * O  p1.__proto__ expõe o [[Prototype]] que faz referência ao Person.prototype objeto.
+         * 
+         * Da mesma forma, p2.__proto__ também faz referência ao mesmo objeto que p1.__proto__:
+         * 
+        */
+
+        //acessando o atributo de propriedade de acesso __proto__ que pertence ao Objeto acessor, esse atributo expoe a ligação do prototipo interno do qual por meio do o objeto e acessado
+        //Aqui neste caso o p1.__proto__ faz referencia ao Person.prototype objeto anonimo de referencia, e o qual o p1 objeto esta vinculado
+        //o p2.__proto__ e a mesma coisa
+        console.log(`p1.__proto__ = ${p1.__proto__} && p1.__proto__ === Person.prototype : ${p1.__proto__ === Person.prototype}`);
+        console.log(p1.__proto__ === p2.__proto__); //true
+
+        /**
+         * Conforme mencionado anteriormente, você deve usar o Object.getPrototypeOf() método em vez do __proto__.
+         * 
+         * O Object.getPrototypeOf() método retorna o protótipo de um objeto especificado.
+        */
+
+        //o p1.__proto__ aponta, mostra a ligação do prototipo interno que a em p1 instancia, no caso do p1 instancia esta vinculado a Person.prototype object reference
+        //utilizando o Object.getPrototypeOf() retorna o prototipo de uma instancia de objeto
+        //retorna o prototipo da instancia p1, mostra o Person.prototype objeto reference
+        //o p1 esta vinculado ao Person.prototype pela ligação de prototipo
+        console.log(`p1.__proto__ === Object.getPrototypeOf(p1) = ${p1.__proto__ === Object.getPrototypeOf(p1)}`); //true
+
+        /**
+         * Outra maneira popular de obter a ligação do protótipo quando o Object.getPrototypeOf() método não estava disponível é por meio da constructor propriedade da seguinte maneira:
+        */
+
+        //obtem a ligação do protipo interno da p1 instancia object
+        //mostra que p1 esta ligada a Person.prototype object reference
+        //a propriedade constructor  pertecene ao objeto anonimo que Person.prototype se refere, o contructor propriedade aponta para a function construtora Person, essa function possui a propriedade
+        //o prototype propriedade se refere ao objeto anonimo que e referencia para as instancias de Person
+        p1.constructor.prototype;
+
+        /**
+         * Os p1.constructor retornos Person, portanto, p1.constructor.prototype retornam o objeto de protótipo.
+         * */
+    </script>
+</body>
+</html>

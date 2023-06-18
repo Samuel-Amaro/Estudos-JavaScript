@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedades Dinâmicas</title>
+</head>
+<body>
+    <script>
+        /**
+         * * PRÔPRIEDADES DINÂMICAS
+         * 
+         *  Um valor de referência permite adicionar, alterar ou excluir propriedades a qualquer momento. Por exemplo:
+        */
+
+        //declara um objeto literal anonimo, e atribui esse objeto a variavel person, variavel person referencia o o objeto anonimo
+        let person = {
+            //declara propriedade usando sintaxe, chave valor
+            name : 'John',
+            age: 25
+        };
+
+        //add uma propriedade chamada ssn ao objeto que e referenciado por person
+        person.ssn = '123-45-6789';
+
+        //modifica o valor da propriedade name do objeto
+        person.name = 'John Doe';
+
+        //deleta a propriedade age do objeto
+        delete person.age;
+
+        //mostra objeto
+        console.log(person);
+
+        /**
+         * Ao contrário de um valor de referência, um valor primitivo não pode ter propriedades. Isso significa que você não pode adicionar uma propriedade a um valor primitivo.
+         * 
+         * JavaScript permite adicionar uma propriedade a um valor primitivo. No entanto, não terá nenhum efeito. Por exemplo:
+        */
+
+        //adicionando uma propriedade a um valor primitivo mas isso não tem efeito
+        let name = 'John';
+
+        //add propriedade a um valor primitivo
+        name.alias = 'Knight';
+
+        //sem efeito não se pode adicionar propriedade a valor primitivo
+        console.log(name.alias); //undefined
+
+        /**
+         * Neste exemplo, adicionamos a alias propriedade ao name valor primitivo. Mas quando acessamos a alias propriedade através do name valor primitivo, ela retorna undefined 
+        */
+    </script>
+</body>
+</html>

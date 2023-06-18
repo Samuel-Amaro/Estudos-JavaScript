@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Mapquest</title>
+    <style>
+        #map{
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <script>
+      // 1. The basic part of the example
+      var L;
+
+      window.onload = function() {
+        //chave obtida atraves do cadastro no site do desenvolvedor da API se logam e solicitar a chave  
+        L.mapquest.key = 'qutcSisTpVMppvlCAcHkJ0fbllH1Z7Kh';
+
+        // 'map' refers to a <div> element with the ID map
+        var map = L.mapquest.map('map', {
+          center: [53.480759, -2.242631],
+          layers: L.mapquest.tileLayer('hybrid'),
+          zoom: 12
+        });
+
+        //Adicionando controles diferentes
+        //O mapa possui vários controles diferentes disponíveis; por padrão, mostra apenas um controle de zoom. Você pode expandir os controles disponíveis usando o map.addControl() método;
+        //O mapquest.control()método apenas cria um conjunto de controle simples com todos os recursos e é colocado no canto superior direito por padrão. Você pode ajustar a posição especificando um objeto de opções como um parâmetro para o controle que contém uma positionpropriedade, cujo valor é uma string especificando uma posição para o controle.
+        map.addControl(L.mapquest.control({position: 'bottomright'}));
+
+        //Adicionar um marcador personalizado
+        //Adicionar um marcador (ícone) em um determinado ponto do mapa é fácil - basta usar o L.marker()
+        //Como você pode ver, em sua forma mais simples, são usados ​​dois parâmetros, uma matriz contendo as coordenadas nas quais o marcador deve ser exibido e um objeto de opções contendo uma iconpropriedade que define o ícone a ser exibido naquele ponto.
+        //O ícone é definido por meio de um mapquest.icons.marker()método que, como você pode ver, contém informações como cor e tamanho do marcador.
+        //No final da primeira chamada de método, encadeamos .bindPopup('This is Manchester!'), que define o conteúdo a ser exibido quando o marcador é clicado.
+        //Finalmente, encadeamos .addTo(map)até o final da cadeia para realmente adicionar o marcador ao mapa.
+        
+        L.marker([53.480759, -2.242631], {
+            icon: L.mapquest.icons.marker({
+                primaryColor: '#22407F',
+                secondaryColor: '#3B5998',
+                shadow: true,
+                size: 'md',
+                symbol: 'A'
+            })
+        }).bindPopup('Este e o Manchester').addTo(map);
+      }
+    </script>
+</head>
+<body>
+   
+   <h1>Exemplo simples Mapquest</h1>
+
+   <div id="map"></div>
+</body>
+</html>

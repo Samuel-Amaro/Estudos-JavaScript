@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+
+      /**
+       * * EVENTOS DE PONTEIRO(POINTER EVENTS)
+       * 
+       * Eventos de ponteiro são uma maneira moderna de manipular a entrada de uma variedade de dispositivos apontadores, como mouse, caneta/stylus, tela sensível ao toque e assim por diante.
+       * 
+       * * A BREVE HISTÓRIA
+       * 
+       * Vamos fazer uma pequena visão geral, para que você entenda o quadro geral e o lugar dos Pointer Events entre outros tipos de eventos.
+       
+         - Há muito tempo, no passado, havia apenas eventos de mouse.
+
+            - Em seguida, os dispositivos de toque tornaram-se difundidos, telefones e tablets em particular. Para que os scripts existentes funcionem, eles geraram (e ainda geram) eventos de mouse. Por exemplo, tocar em uma tela sensível ao toque gera mousedown. Portanto, os dispositivos de toque funcionaram bem com as páginas da web.
+
+            Mas os dispositivos de toque têm mais recursos do que um mouse. Por exemplo, é possível tocar vários pontos ao mesmo tempo (“multitoque” - multi-touch). Embora os eventos de mouse não tenham propriedades necessárias para lidar com esses multitoques.  
+            
+         - Assim, os eventos de toque foram introduzidos, como touchstart, touchend, touchmove, que possuem propriedades específicas de toque (não os abordamos em detalhes aqui, porque os eventos de ponteiro são ainda melhores).
+
+            - Ainda assim, não foi suficiente, pois existem muitos outros dispositivos, como canetas, que possuem recursos próprios. Além disso, escrever código que escute eventos de toque e mouse era complicado.
+
+         - Para resolver esses problemas, o novo padrão Pointer Events foi introduzido. Ele fornece um único conjunto de eventos para todos os tipos de dispositivos apontadores.
+
+
+        * A partir de agora, a especificação Pointer Events Level 2 é suportada em todos os principais navegadores, enquanto o mais recente Pointer Events Level 3 está em andamento e é compatível principalmente com o Pointer Events nível 2.
+        * 
+        * A menos que você desenvolva para navegadores antigos, como o Internet Explorer 10, ou para o Safari 12 ou inferior, não há mais sentido em usar eventos de mouse ou toque – podemos alternar para eventos de ponteiro
+        * 
+        * Então seu código funcionará bem com dispositivos de toque e mouse.
+        * 
+        * Dito isso, existem algumas peculiaridades importantes que se deve conhecer para usar os Pointer Events corretamente e evitar surpresas. Vamos anotá-los neste artigo.
+      */
+    </script>
+</body>
+</html>

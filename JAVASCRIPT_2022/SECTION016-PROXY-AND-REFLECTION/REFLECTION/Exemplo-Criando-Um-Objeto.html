@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+
+        /**
+         * * REFLECTION JS - REFLEXÃO
+         * 
+         * * CRIANDO OBJETOS - REFLECT.CONSTRUCT()
+         * 
+         * O Reflect.construct() retorna a nova instância do target, ou o newTarget se especificado, inicializado pelo target como um construtor com os argumentos de objeto semelhantes a array fornecidos. Veja o seguinte exemplo:
+        */
+
+        //declara uma class chamada Person usando palavra-chave class
+        class Person{
+            //define um construtor para a class Person, o construtor declara dois paramentros chamado firstName e lastName
+            constructor(firstName, lastName) {
+                //declara propriedades, e as inicializa com os argumentos
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+
+            //declara um metodo acessor de atributo, define um metodo de instancia com a palavra-chave get, toda vez que uma instancia de class for acessar a propriedade fullName o get metodo e invocado
+            get fullName() {
+                return  `${this.firstName} ${this.lastName}`; 
+            }
+        };
+
+        //declara um array literal dense anonimo, iniciazado com dois elementos, o array e atribuido por referencia a variavel args
+        let args = ['John', 'Doe'];
+
+        //usando a API Reflect
+        //usando o objeto global Reflect, que não e construtor e nem uma function, podemos invocar métodos estativos por meio dele
+        //o reflect Api permite chamar métodos, construir objetos, obter e definir propriedades, manipular e estender propriedades, por meio de em tempo de execução.
+        //Por meio da api reflect iremos invocar o método estatico construct que ira retorna uma nova instancia de objeto do target argumento passado, recebendo os args para serem passados para o target objeto
+        //retorna uma nova isntancia de objeto da class Person, invocando o construtor person passando o array literal args como argumento para o construtor person, por meio da construct function estatica
+        //cria uma nova instancia de objeto em tempo de execução em quanto o script esta sendo executado
+        let john = Reflect.construct(Person, args);
+
+        //usando o operador instanceof para verificar se o objeto referenciado por variavel john e do tipo especificado
+        console.log(john instanceof Person); //true
+        //acessa uma propriedade do objeto, invoca o metodo get definido na class
+        console.log(john.fullName); //John Doe
+
+        /**
+         * Neste exemplo:
+         
+            - Primeiro, defina uma classe chamada Person.
+
+            - Segundo, declare um args array que contenha duas strings.
+
+            - Terceiro, crie uma nova instância da Person classe usando o Reflect.construct()método. O john objeto é uma instância da Person classe, portanto, tem a fullName propriedade.
+        */
+    </script>
+
+</body>
+</html>

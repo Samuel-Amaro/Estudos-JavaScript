@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+
+        .alert{
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * REMOÇÃO DE NÓS
+         * 
+         *  Para remover um nó, existe um método node.remove().
+         * 
+         * Vamos fazer nossa mensagem desaparecer após um segundo:
+        */
+
+        //usando metodo de criação de nos de elemento
+        //o metodo document.createElement(tag) cria um novo no de elemento com a tag fornecida
+        //cria um no de elemento div
+        let div = document.createElement('div');
+        //adiciona uma classe ao no div
+        div.className = "alert";
+        //usando a propriedade elem.innerHTML para inserir conteudo html no nó div, inseri a string html como codigo html
+        div.innerHTML = "<strong>Hi there!</strong> You've read an important message.";
+
+        //usando o metodo de inserção elem.append(div) para anexar o nó div no final de body
+        document.body.append(div);
+        //ao se passar 1s setTimeout(callback, timeout) ira executar a callback que remove o no div da arvore dom
+        setTimeout(() => div.remove(), 1000);
+
+        /**
+         * Atenção: se quisermos mover um elemento para outro lugar – não há necessidade de removê-lo do antigo.
+         * 
+         * Todos os métodos de inserção removem automaticamente o nó do local antigo.
+         * 
+         * Por exemplo, vamos trocar elementos:
+        */
+    </script>
+</body>
+</html>

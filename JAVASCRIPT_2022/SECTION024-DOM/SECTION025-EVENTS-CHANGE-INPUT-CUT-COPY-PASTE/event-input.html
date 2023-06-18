@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <label for="oninput">oninput:</label>
+    <input type="text" id="input" name="oninput"/>
+    <span id="result"></span>
+
+    <script>
+        /**
+         * * EVENTO: input(inserir, entrada)
+         * 
+         * O input evento é acionado toda vez que um valor é modificado pelo usuário.
+         * 
+         * Ao contrário dos eventos de teclado, ele é acionado em qualquer alteração de valor, mesmo aqueles que não envolvem ações do teclado: colar com o mouse ou usar reconhecimento de fala para ditar o texto.
+        */
+
+        //atribuindo uma manipulador de evento, por meio da propriedade dom
+        //atribuindo uma manipulador de evento para o evento input(inserir, entrada)
+        //este evento e acionado toda vez que um valor e modificado pelo usuario no input elemento
+        input.oninput = function(event) {
+            result.innerHTML = input.value;
+        };
+
+        /**
+         * Se quisermos lidar com todas as modificações de um <input>, esse evento é a melhor escolha.
+         * 
+         * Por outro lado, o evento input não é acionado na entrada do teclado e outras ações que não envolvem alteração de valor, por exemplo, pressionar as teclas de seta ⇦ ⇨ enquanto estiver na entrada.
+         * 
+         * * NÃO PODE IMPEDIR NADA em oninput
+         * 
+         * O input evento ocorre depois que o valor é modificado.
+         * 
+         * Então não podemos usar event.preventDefault() lá – é tarde demais, não haveria efeito.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    
+    <script>
+        /**
+         * * Ready States(Estados prontos)
+         * 
+         * XMLHttpRequest muda entre os estados à medida que avança. O estado atual é acessível como xhr.readyState.
+         * 
+         * Todos os estados, como na especificação:
+         * 
+    
+            UNSENT = 0; // Estado inicial
+            OPENED = 1; // chamada aberta
+            HEADERS_RECEIVED = 2; // cabeçalhos de resposta recebidos
+            LOADING = 3; // resposta está carregando (um pacote de dados é recebido)
+            DONE = 4; // request completa
+
+         * 
+         * Um XMLHttpRequest objeto os percorre na ordem 0 → 1 → 2 → 3 → … → 3 → 4. O estado 3 se repete toda vez que um pacote de dados é recebido pela rede.
+         * 
+         * Podemos rastreá-los usando readystatechange event:
+        */
+
+        //evento que e acionado para informar os estados a medida que request avança
+        xhr.onreadystatechange = function() {
+            //estado atual acessivel pela propriedade xhr.readyState
+            if(xhr.readyState == 3) {
+                //carregando
+            }
+            if(xhr.readyState == 4) {
+                //request finalizada
+            }
+        };
+
+        /**
+         * Você pode encontrar readystatechange ouvintes em código muito antigo, está lá por razões históricas, pois houve um tempo em que não havia load e outros eventos. Hoje em dia, load/error/progress os manipuladores o depreciam.
+        */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 2</title>
+</head>
+<body>
+    <script>
+        /**
+         * * EXEMPLO 2 DE FUNÇÕES COM VALORES PADRÃO
+         * 
+         * * 2) AVALIANDO OS PARÂMETROS PADRÃO
+         * 
+         * O mecanismo JavaScript avalia os argumentos padrão no momento em que você chama a função. Veja o seguinte exemplo:
+        */
+
+        //declara uma function chamada regular chamada put que possui dois paramentros declarados, o primeiro paramentro chamado toy possui nenhum valor padrão definido, somente o valor padrão que o proprio JS fornece no caso o undefined, e o paramentro toyBox que possui um valor padrão definido, um array literal
+        function put(toy, toyBox=[]) {
+            //add o argumento toy no final do array do argumento toyBox
+            toyBox.push(toy);
+            return toyBox;
+        }
+
+        //invoca chama a function put passando somente um argumento para o primeiro paramentro, isso e so passa um argumento para o paramentro toy, invoca a function put passando somente um argumento
+        console.log(put('Toy Car'));
+        //->['Toy Car']
+        //invoca a function passando somente um argumento
+        console.log(put('Teddy Bear'));
+        //->['Teddy Bear'], não  ['Toy Car', 'Teddy Bear']   
+
+        /**
+         * O parâmetro pode ter um valor padrão que é resultado de uma função.
+         * 
+         * Considere o seguinte exemplo:
+        */
+
+        //declara uma function chamada date, que possui um paramentro chamado d que possui um valor padrão que e retorna de uma function chamado today() que e uma function que retorna um valor
+        //uma function e uma instancia de objeto do tipo function
+        function date(d = today()) {
+            console.log(d);
+        }
+
+        //declara uma function chamada today que não possui nenhum paramentro definido mas retorna um valor
+        function today() {
+            //retorna a data de hoje em um formato de string especificado
+            return (new Date()).toLocaleDateString("pt-br");
+        }
+        
+        //invoca chama a function date(), sem fornecer nenhum argumento, somente usando os valores padrão dos paramentros definidos na declaraão da função
+        date();
+        
+        /**
+         * A date() função recebe um parâmetro cujo valor padrão é o valor retornado da today() função. A today() função retorna a data de hoje em um formato de string especificado.
+         * 
+         * Quando declaramos a date()função, a today() função ainda não foi avaliada até que chamamos a date() função.
+         * 
+         * Podemos usar esse recurso para tornar os argumentos obrigatórios. Se o chamador não passar nenhum argumento, lançamos um erro da seguinte forma:
+        */
+
+        //declara uma function regular chamada requiredArg que não possui nenhum parametro declarado e nem definido
+        function requiredArg() {
+            //lança uma instancia de objeto da class Error com uma seguinte message
+            throw new Error('The argument is required');
+        }
+
+        //declara uma function chamada add, que possui dois paramentros declarados, chamados de x, e , y, os dois paramentros possum valores padrões que so são atribuidos a eles quando a function e chamada, pois são valores obtidos de funções
+        //avaliados somente na chamada da function
+        function add(x = requiredArg(), y = requiredArg()) {
+            //retorna a soma dos argumentos
+            return x + y;
+        }
+
+        //invoca chama a function add fornecendo somente um argumento para o paramentro x, fornecer somente um argumento para essa function gera um erro pois os valores padrões dos paramentros são funções que lança erro quando são invocadas somente quando os paramentros não recebem argumentos, isso torna a passagem de argumentos para a function obrigatoria para os paramentros não terem seus valores padrões que são lançamentos de erros avaliados
+        //o exemplo abaixo gera um erro pois chamaa a function fornecendo somente um argumento
+        add(10); //error
+        //invoca a function forncendo dois argumentos para os paramentros declarados
+        add(10, 20); //OK
+    </script>
+</body>
+</html>

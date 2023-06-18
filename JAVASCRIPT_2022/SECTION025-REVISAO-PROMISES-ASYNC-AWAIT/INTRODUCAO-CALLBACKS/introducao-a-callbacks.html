@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <script type="text/javascript">
+        /**
+         * * INTRODUÇÃO: CALLBACKS(RETORNOS DE CHAMADA)
+         * 
+         * * Usamos métodos de navegador em exemplos aqui
+         * 
+         * Para demonstrar o uso de callbacks, promessas e outros conceitos abstratos, usaremos alguns métodos do navegador: especificamente, carregar scripts e realizar manipulações simples de documentos.
+         * 
+         * Se você não estiver familiarizado com esses métodos, e seu uso nos exemplos for confuso, você pode querer ler alguns capítulos da próxima parte do tutorial.
+         * 
+         * Embora, vamos tentar deixar as coisas claras de qualquer maneira. Não haverá nada realmente complexo em termos de navegador.
+         * 
+         * Muitas funções são fornecidas por ambientes host JavaScript que permitem agendar ações assíncronas. Em outras palavras, ações que iniciamos agora, mas terminam depois.
+         * 
+         * Por exemplo, uma dessas funções é a setTimeout função.
+         * 
+         * Existem outros exemplos do mundo real de ações assíncronas, por exemplo, carregar scripts e módulos (nós os abordaremos em capítulos posteriores).
+         * 
+         * Dê uma olhada na função loadScript(src), que carrega um script com o dado src:
+        */
+
+        function loadScript(src) {
+            //cria um elemento <script>
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+            //add esse script no final da head section do documento
+            document.head.append(script);
+        }
+
+        /**
+         * Ele insere no documento uma nova tag, criada dinamicamente, <script src="…"> com o dado src. O navegador começa a carregá-lo automaticamente e é executado quando concluído.
+         * 
+         * Podemos usar essa função assim:
+        */
+
+        // carrega e executa o script no caminho dado
+        //script e executado de forma assincrona, começa a carregar agora mas e executado mais tarde, quando a função ja tiver terminado
+        loadScript('/my/script.js');
+        //o código abaixo loadScript
+        // não espera o carregamento do script terminar
+        // ...
+
+
+        /**
+         * O script é executado “de forma assíncrona”, pois começa a carregar agora, mas é executado mais tarde, quando a função já tiver terminado.
+         * 
+         * Se houver algum código abaixo loadScript(…), ele não espera até que o carregamento do script termine.
+         * 
+         * Digamos que precisamos usar o novo script assim que ele for carregado. Ele declara novas funções e queremos executá-las.
+         * 
+         * Mas se fizermos isso imediatamente após a loadScript(…) chamada, não funcionaria:
+        */
+
+        //o script tem "função newFunction() {…}"
+        //usando o novo script assim que for carregado
+        //problema: essa chamada de function não espera que o script termine de carregar então chama antes do script estar carregado para uso
+        newFunction(); //sem essa função!
+
+        /**
+         * Naturalmente, o navegador provavelmente não teve tempo de carregar o script. A partir de agora, a loadScript função não fornece uma maneira de rastrear a conclusão do carregamento. O script é carregado e, eventualmente, executado, isso é tudo. Mas gostaríamos de saber quando isso acontece, para usar novas funções e variáveis ​​desse script.
+         * 
+         * Vamos adicionar uma callback função como segundo argumento loadScript que deve ser executada quando o script for carregado:
+        */
+
+        function loadScript(src, callback) {
+            //cria um no de elemento script
+            let script = document.createElement('script');
+            //carrega um script externo
+            script.src = src;
+
+            //atribui uma manipulador de evento por meio da propriedade dom
+            //o manipulador e para o evento load que e acionado quando o script foi carregado e executado
+            //assim que isso aconter o callback e executado
+            script.onload = () => callback(script);
+
+            //add o script externo no final da section head do documento
+            document.head.append(script);
+        }
+        
+    </script>
+</body>
+</html>

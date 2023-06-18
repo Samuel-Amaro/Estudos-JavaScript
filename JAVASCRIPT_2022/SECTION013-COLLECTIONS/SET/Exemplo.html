@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE SET JS
+         *
+         * * CRIAR UM NOVO SET A PARTIR DE UM ARRAY
+         * 
+         * O exemplo a seguir mostra como criar um novo Set a partir de um array.
+        */
+
+        console.log("### CRIANDO UM SET OBJETO ###");
+
+        //declara uma instancia de objeto do tipo Set invocando o construtor Set, e passando como argumento um array iteravel anonimo literal dense, inicializado com 5 elementos
+        //os elementos do iteravel array serão adicionados so Set objeto
+        //o set tipo armazena uma coleção de valores unicos e exclusivos, mesmo o iteravel tendo valores não unicos e repetidos, o set so obtem do iteravel os valores unicos que neste caso são 'a', 'b', 'c'
+        let chars = new Set(['a', 'a', 'b', 'c', 'c']);
+
+        /**
+         * Todos os elementos do conjunto devem ser únicos, portanto, o   chars único contém 3 elementos distintos a, b e c.
+         * 
+        */
+
+        //mostra o set tipo inicializado com o literal array com valores unicos
+        console.log(chars);
+
+        /**
+         * Quando você usa o   typeof operador para o chars, ele retorna object.
+        */
+
+        console.log("### TYPEOF ###");
+
+        //usando o operador unario typeof para descobrir qual o tipo de valor que esta armazenado por referencia na variavel chars
+        console.log(typeof(chars)); //Object
+
+        /**
+         * O chars conjunto é uma instância do Set tipo, portanto, a instrução a seguir retorna true.
+        */
+
+        console.log("### INSTANCEOF ###");
+
+        //usando o operador intanceof para verificar se um determinado tipo e de um tipo espeficiado, se sim retorna true se não false
+        console.log(chars instanceof Set); //true
+
+        /**
+         * * OBTER O TAMANHO DE UM SET
+         * 
+         * Para obter o número de elementos que o conjunto contém, você usa a size propriedade do Set objeto:
+        */
+
+        console.log("### TAMANHO DE UM SET OBJETO INICIALIZADO ###");
+
+        //usando a propriedade Set.size para obter o numero de elementos que contém no set Objet
+        let size = chars.size;
+        console.log(size); //3
+
+        /**
+         * * ADICIONAR ELEMENTOS A UM CONJUNTO
+         * 
+         * Para adicionar um elemento ao conjunto, você usa o add() método:
+        */
+
+        console.log("### ADICIONANDO ELEMENTOS AO SET OBJETO ###");
+
+        //usando o método Set.add(value), acrescenta um novo elemento com valor no set objeto, o método retorna o proprio Set instancia de objeto, para usar o método de forma encadeada
+        //aqui adicionaremos o valor 'd' ao set objeto
+        chars.add('d');
+        console.log(chars);
+
+        /**
+         * Como o add() método pode ser encadeado, você pode adicionar vários itens a um conjunto usando uma instrução chain(encadeada):
+        */
+
+        //usando o método Set.add(value) de forma encadeada
+        //adiciona os valores exclusivos 'e' e 'f' no set conjunto
+        chars.add('e').add('f');
+        console.log(chars);
+
+        /**
+         * * VERIFIQUE SE UM VALOR ESTÁ NO SET
+         * 
+         * Para verificar se um conjunto possui um elemento específico, você usa o has() método. O has() método retorna true se o conjunto contiver o elemento, caso contrário, ele retorna false. Como o chars conjunto contém 'a', a seguinte instrução retorna true:
+        */
+
+        console.log("### VERIFICANDO SE UM DETERMINADO ELEMENTO CONTÉM NO SET OBJETO ###");
+
+        //usando o método Set.has(value) para verificar se um determinado elemento especifico esta no Set, se o Set conter o elemento, o método retorna true, se não false
+        //verifica se o elemento com valor 'a' esta no set objeto referenciado por chars variavel
+        let exist = chars.has('a');
+        console.log(exist); //true
+
+        /**
+         * A instrução a seguir retorna false porque o chars conjunto não contém o 'z' valor.
+        */
+
+        //verifica se o elemento com valor 'z' esta no set objeto referenciado por chars variavel
+        exist = chars.has('z');
+        console.log(exist); //false
+
+        /**
+         * * REMOVER ELEMENTOS DE UM CONJUNTO
+         * 
+         * Para excluir um elemento especificado de um conjunto, você usa o delete() método. A instrução a seguir exclui o 'f' valor do   chars conjunto.
+        */
+
+        console.log("### REMOVENDO ELEMENTOS DO SET OBJETO ###");
+
+        //usando o método Set.delete(value), para exlcuir um elemento especificado por um valor
+        //o elemento sera exlcuido do Set objeto
+        //aqui excluiremos o elemento 'f' do set objeto referenciado por variavel chars
+        chars.delete('f'); //retorna true se o elemento foi exlcuido com sucesso
+        console.log(chars); 
+
+        /**
+         * O delete() método retorna true indicando que o elemento foi removido com sucesso. Para excluir todos os elementos de um conjunto, você usa o clear() método:
+        */
+
+        //usando o método Set.clear(), para remover todos os elementos do set objeto especificado por chars variavel
+        chars.clear();
+        console.log(chars);
+
+    </script>
+
+</body>
+</html>

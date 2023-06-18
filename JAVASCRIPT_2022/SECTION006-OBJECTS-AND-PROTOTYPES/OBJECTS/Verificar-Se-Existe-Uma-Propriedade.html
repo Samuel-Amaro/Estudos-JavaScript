@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    
+    <script>
+        
+        /**
+         * * VERIFICAR SE EXISTE UMA PROPRIEDADE
+         * 
+         * Para verificar se uma propriedade existe em um objeto, você usa o in operador:
+         
+            propertyName in objectName
+
+         * 
+         * O in operador retorna true se property Name existe no objectName.
+         * 
+         * O exemplo a seguir cria um employee objeto e usa o in operador para verificar se as propriedades ssn e employeeId existem no objeto:
+        */
+
+        //declara um objeto literal chamado employee usando a sintaxe literal de objeto
+        let employee = {
+            //declara propriedades usando o par chave:valor, separados por virgula
+            firstName: 'Peter',
+            lastName: 'Doe',
+            employeeId: 1
+        };
+
+        //o exemplo abaixo verifica se a propriedade 'ssn' existe no objeto literal employee, se sim retorna true, isso utilizando o operador relacional de in que compara operandos e retorna um valor booleano sendo o resultado da comparação
+        console.log(`property -> 'ssn' existe em employee object ? ${'ssn' in employee}`);
+        //mesma logica
+        console.log(`property -> 'employeeId' existe em employee object ? ${'employeeId' in employee}`);
+
+    </script>
+
+</body>
+</html>

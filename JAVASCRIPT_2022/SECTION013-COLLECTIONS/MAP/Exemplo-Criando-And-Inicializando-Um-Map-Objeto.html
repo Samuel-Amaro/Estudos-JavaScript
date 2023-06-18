@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * EXEMPLOS DE MAP JS
+         * 
+         * * CRIAR UM NOVO MAP OBJETO
+         *
+         * Suponha que você tenha uma lista de objetos de usuário da seguinte forma:        
+        */
+
+        //inicializa variaveis atribuindo a cada uma por referencia um objeto literal anonimo com somente uma unica propriedade
+        let john = {name: 'John Doe'}, lily = {name: 'Lily Bush'}, peter = {name: 'Peter Drucker'};
+
+        /**
+         * Supondo que você tenha que criar um mapa de usuários e funções. Nesse caso, você usa o seguinte código
+        */
+
+        //cria uma nova instancia de objeto do Tipo Map() invocando o construtor, atribui a instancia por referencia a variavel userRoles, a instancia do tipo Map criada, não foi inicializada
+        let userRoles = new Map();
+
+        /**
+         * O userRoles é uma instância do Map objeto e seu tipo é um objeto conforme ilustrado no exemplo a seguir:
+        */
+
+        //usando o operador unario typeof podemos saber o tipo de valor que contém na variavel userRoles, a variavel esta referenciado um Objeto do tipo Map
+        console.log(typeof(userRoles)); //Object
+        //usando o operador instanceof verificamos se o userRoles e do tipo especificado Map, se sim retorna true
+        console.log(userRoles instanceof Map);
+
+        /**
+         * * ADICIONANDO ELEMENTOS A UM MAPA
+         * 
+         * Para atribuir uma função a um usuário, você usa o set() método:
+        */
+
+        //usando o método Map.set(key, value), para definir um valor da chave no map objeto. logo apos a chamada ele retorna a referencia do this valor para que possa usar o map de forma encadeada
+        //aqui definimos uma chave chamada chamada john, que referencia uma instancia de objeto literal, que sera mapeada para o valor admin
+        //lembrando que uma chave ou valor pode ser de qualquer tipo
+        userRoles.set(john, 'admin');
+
+        /**
+         * O set() método mapeia o usuário john com a admin função. Como o set() método pode ser encadeado, você pode salvar algumas digitações conforme mostrado neste exemplo:
+        */
+
+        //usando o método Map.set(key, value) de forma encadeada, o método retorna a propria referencia ao this valor, isso e o proprio objeto criado com o new operador
+        //assim definiremos novas chaves que são objetos para serem mapeadas para valores
+        userRoles.set(lily, 'editor').set(peter, 'subscriber');
+
+        /**
+         * * INICIALIZAR UM MAP COM UM OBJETO ITERÁVEL
+         * 
+         * 
+        */
+    </script>
+
+</body>
+</html>

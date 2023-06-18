@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol.hasInstance</title>
+</head>
+<body>
+    <script>
+
+        /** 
+         * * SYMBOL.hasInstance
+         * 
+         * No ES6, o instanceof operador usa a Symbol.hasInstance função para verificar o relacionamento. O Symbol.hasInstance() aceita um objeto e retorna true se um tipo tiver esse objeto como instância. Por exemplo:
+        */
+
+        //define uma function construtora chamada Person que declara uma paramentro chamado name
+        //essa function e uma instancia de objeto do tipo function
+        function Person(name) {
+            //declara uma propriedade chamada name que e inicializada com a name argumento
+            this.name = name;
+        }
+
+        //declara uma instancia de objeto invocando a function construtora Person fornecendo o argumento 'John' com o operador new, o new operador cria um objeto anonimo vazio e atribui ao this valor a function construrtora define propriedades nesse objeto e o new operador retorna o this
+        //assim a p1 varaivel referencia o objeto instanciado por new
+        let p1 = new Person('John');
+
+        //verifica se o p1 objeto e do tipo da person class
+        console.log(Person[Symbol.hasInstance](p1)); //true
+
+        /** 
+         * Como o Symbol.hasInstance está definido no Function protótipo, está automaticamente disponível por padrão em todas as funções e classes.
+         * 
+         * E você pode redefinir o Symbol.hasInstance em uma subclasse como um método estático. Por exemplo:
+        */
+
+        //define uma class chamada Android que estende(herda) tudo da class Person
+        //e definida usando a palavra chave class
+        class Android extends Person{
+            //define um metodo estatico usando palavra chave static, metodo estatico vinculado a classe
+            //o nome do metodo e derivado do Symbol.hasInstance
+            static [Symbol.hasInstance]() {
+                return false;
+            } 
+        }
+
+        //declara uma instancia de objeto invocando o contrutor da class Android fornecendo o argumento Sonny e usando o new operador
+        //o objeto e atribuido a variavel a1
+        let a1 = new Android('Sonny');
+
+        //usando o operador instaciof para verificar se o objeto referenciado por a1 e uma instancia de objeto do tipo android
+        console.log(a1 instanceof Android); //false
+        console.log(a1 instanceof Person); //false
+
+        /**
+         * * RESUMO
+         * 
+         * Use o instanceofoperador para verificar se o constructor.protoype objeto está na cadeia de protótipos.
+        */
+
+    </script>
+</body>
+</html>

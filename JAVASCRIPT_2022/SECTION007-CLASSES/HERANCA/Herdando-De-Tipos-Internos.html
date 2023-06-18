@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herdando De Tipos Internos</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * HERDANDO DE TIPOS INTERNOS
+         * 
+         * JavaScript permite estender um tipo interno, como Array , String, Map e Set por meio de herança.
+         * 
+         * A Queue classe a seguir estende o Array tipo de referência. A sintaxe é muito mais limpa do que a Queue implementada usando o padrão construtor/protótipo.
+        */
+
+        //define uma class chamada Queue usando a palavra chave class, a Queue(fila) e uma classe derivada, classe filha, da Super class Array(tipo interno)
+        //a Queue(fila) extende(herda) tudo da array tipo interno
+        class Queue extends Array{
+            //declara método chamado enqueue(enfileirar) e declara um paramentro chamado e
+            enqueue(e) {
+                //invoca um metodo da super classe, da classe base, class pai, por meio do super
+                super.push(e);
+            }
+            //declara método chamado(desenfileirar) sem paramentro
+            dequeue() {
+                //invoca metodo da super classe, da classe base, class pai, por meio do super
+                return super.shift();
+            }
+            //declara um método chamado peek(olhadinha) sem paramentro
+            peek() {
+                return !this.empty() ? this[0] : undefined;
+            }
+            //declara um método chamado empty(vazio) sem paramentro
+            empty() {
+                return this.length === 0;
+            }
+        }
+
+        //declara uma instancia de objeto invocando o Queue construtor
+        //a instancia criada e atribuida por referencia a variavel customers
+        var customers = new Queue();
+        //chamando metodos da class
+        customers.enqueue('A');
+        customers.enqueue('B');
+        customers.enqueue('C');
+
+        while(!customers.empty()) {
+            console.log(customers.dequeue());
+        }
+
+        /**
+         * * RESUMO
+         * 
+         * Use a palavra-chave extends para implementar a herança no ES6. A classe a ser estendida é chamada de classe base ou classe pai. A classe que estende a classe base ou classe pai é chamada de classe derivada ou classe filha.
+         * 
+         * Chame o super(arguments)construtor da classe filha para invocar o construtor da classe pai.
+         * 
+         * Use super a palavra-chave para chamar métodos da classe pai nos métodos da classe filha.
+        */
+    </script>
+</body>
+</html>

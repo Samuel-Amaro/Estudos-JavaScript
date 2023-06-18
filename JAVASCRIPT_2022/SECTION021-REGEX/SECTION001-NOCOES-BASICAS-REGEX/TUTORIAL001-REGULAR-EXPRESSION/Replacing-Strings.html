@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <script>
+        
+        /**
+         * * REPLACING STRINGS
+         * 
+         * O exemplo a seguir usa o replace()método para substituir a primeira ocorrência da string 'Ok' na string str:
+        */
+
+        //declara uma variavel de escopo de bloco chamada str, que e inicilizada com uma string literal, que sera usada para pesquisa
+        let str = "Are you Ok? Yes, I'm OK.";
+        //usando o método String.replace(subStr, newSubstr) para substituir uma substring em uma string por uma nova substring, somente a primeira ocorrencia da substring e substituida
+        //o metodo retorna uma nova string modifica com as substituições, a string original não e modificada.
+        let result1 = str.replace('Ok', 'fine');
+
+        console.log(`${str} = ${result1}`);
+
+        /**
+         * Para substituir todas as ocorrências de OK, você usa uma expressão regular com o sinalizador global ( g):
+        */
+
+        //usando o método String.replace(), para substituir a substring 'OK' da string referenciada por str, por uma nova susbtring 'fine'
+        //o metodo retorna uma nova string, não altera a string original
+        //usando expressão regular para encontrar as ocorrencias de 'OK' na string referenciada por str
+        //o regex argumento a ser passado e uma expressão regular(uma string que descreve um padrão)
+        //para criar uma expressão regular em JS, colocamos o padrão em caracteres de barra(/), o padrão esta entre as barras
+        //no exemplo abaixo /OK/ e um padrão que corresponde a somente a string 'OK', por padrão as pesquisas diferenciam maiusculas de minusculas.
+        //A flag(g): quando esta disponivel no padrão o RegExp instrui o objeto a busca por todas as correspondecias.
+        //aqui o replace ira susbstituir todas as correspondecias de regexp na string str por fine
+        let newStr = str.replace(/OK/g, 'fine');
+
+        console.log(`${str} = ${newStr}`);
+
+        /**
+         * O exemplo a seguir usa sinalizadores ignore e globais para substituir todas as ocorrências de OK independentemente dos casos pela string fine:
+        */
+        
+        //o exemplo abaixo e igual ao acima porem a expressão regular usa o flag i como configuração para mudança de comportamento da expressão regular, assim para encontrar as ocorrencias de OK em str, usamos uma expressão regular que ira ignorar todos os casos de não correspondecia, os casos que não corresponderem ao padrão serão ignorados e substituidos pelo nova str, casos que correspondem ou não são substituidos.
+        let result2 = str.replace(/OK/gi, 'fine');
+        console.log(`${str} = ${result2}`);
+
+        /**
+         * * RESUMO
+         * 
+         * Use /.../ou RegExp construtor para criar uma expressão regular.
+         * 
+         * Use o sinalizador de padrão, por exemplo, ignore ( i) e global ( g) para modificar o comportamento correspondente.
+         * 
+         * Use o RegExp.test() método para determinar se um padrão foi encontrado em uma string.
+         * 
+         * Use o RegExp.exec() método para localizar a correspondência e retornar uma array que contém as informações da correspondência.
+        */
+    </script>
+</body>
+</html>
+
+
+

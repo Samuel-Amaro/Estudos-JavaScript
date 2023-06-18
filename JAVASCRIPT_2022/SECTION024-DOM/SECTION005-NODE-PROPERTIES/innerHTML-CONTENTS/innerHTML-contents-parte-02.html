@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        
+        /**
+         * Podemos tentar inserir HTML inválido, o navegador corrigirá nossos erros: 
+         * 
+         *  
+        */
+
+        //esqueci de fechar a tag
+        //tentando inserir conteudo html invalido como um novo conteudo para o no de elemento <body>
+        //o navegador corrigira o conteudo html invalido para valido e inserira no body
+        document.body.innerHTML = '<b>test';
+        //lendo o conteudo atual do body
+        //obtem o conteudo html atual que esta dentro de body
+        console.log(document.body.innerHTML); //<b>test</b> (fixed)
+
+        /**
+         * * Scripts não são executados
+         * 
+         * Se innerHTML insere uma <script> tag no documento – ela se torna parte do HTML, mas não é executada.
+         * */
+    </script>
+
+</body>
+</html>

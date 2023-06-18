@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * * keydown(chave pressionada) é keyup(chave liberada)
+         * 
+         *  Os keydown eventos acontecem quando uma tecla é pressionada e depois keyup – quando é liberada.
+         * 
+         * * event.code é event.key 
+         * 
+         * A key propriedade do objeto de evento permite obter o caractere, enquanto a code propriedade do objeto de evento permite obter o “código da chave física”.
+         * 
+         * Por exemplo, a mesma tecla Z pode ser pressionada com ou sem Shift. Isso nos dá dois caracteres diferentes: minúsculas z e maiúsculas Z.
+         * 
+         * O event.key é exatamente o caractere, e será diferente. Mas event.code é o mesmo:
+         
+            KEY: Z
+            event.key: z(minúsculas)
+            event.code: KeyZ
+            ------------------------------
+            KEY: Shift+Z
+            event.key: Z(maiúsculas)
+            event.code: KeyZ
+
+         * 
+         * Se um usuário trabalha com idiomas diferentes, mudar para outro idioma criaria um caractere totalmente diferente em vez de "Z". Isso se tornará o valor de event.key, enquanto event.code é sempre o mesmo: "KeyZ".
+         * 
+         * * "KeyZ" e outros códigos de chave
+         * 
+         * Cada tecla tem o código que depende de sua localização no teclado. Códigos de chave descritos na especificação de código de eventos de interface do usuário .
+         * 
+         * Por exemplo:
+         
+            As teclas de letras possuem códigos "Key<letter>": "KeyA", "KeyB" etc.
+
+            As chaves de dígito têm códigos: "Digit<number>": "Digit0", "Digit1" etc.
+
+            As chaves especiais são codificadas por seus nomes: "Enter", "Backspace", "Tab" etc.
+
+         * Existem vários layouts de teclado difundidos, e a especificação fornece códigos de teclas para cada um deles.
+         * 
+         * Leia a seção alfanumérica da especificação para mais códigos, ou apenas pressione uma tecla no teststand acima.
+         * 
+         * * Caso importante: "KeyZ" não "keyZ"
+         * 
+         * Parece óbvio, mas as pessoas ainda cometem erros.
+         * 
+         * Evite erros de digitação: é KeyZ, não keyZ. A verificação como event.code=="keyZ" não funcionará: a primeira letra de "Key" deve ser maiúscula.
+         * 
+         * E se uma chave não der nenhum caractere? Por exemplo, Shift ou F1 ou outros. Para essas chaves, event.key é aproximadamente o mesmo que event.code:
+         
+            KEY: F1
+            event.key: F1
+            event.code: F1
+            --------------------------
+            KEY: Backspace
+            event.key: Backspace
+            event.code: Backspace
+            --------------------------
+            Key: Shift
+            event.key: Shift
+            event.code: ShiftRight ou ShiftLeft
+
+         * 
+         * Observe que event.code especifica exatamente qual tecla é pressionada. Por exemplo, a maioria dos teclados tem duas Shift teclas: à esquerda e à direita. O event.code nos diz exatamente qual foi pressionado e event.key é responsável pelo “significado” da tecla: o que é (um “Shift”).
+         * 
+         * Digamos que queremos lidar com uma tecla de atalho: Ctrl+Z ( ou Cmd+Z para Mac). A maioria dos editores de texto conecta a ação “Desfazer” nele. Podemos ativar um ouvinte keydown(chave pressionada) e verificar qual tecla é pressionada.
+         * 
+         * Há um dilema aqui: em tal ouvinte, devemos verificar o valor de event.key ou event.code?
+         * 
+         * Por um lado, o valor de event.key é um caractere, ele muda dependendo do idioma. Se o visitante tiver vários idiomas no sistema operacional e alternar entre eles, a mesma tecla fornecerá caracteres diferentes. Então faz sentido verificar event.code, é sempre o mesmo.
+         * 
+         * Assim
+        */      
+       
+        //atribui um manipulador de evento por meio do metodo elem.addEventListener(event, handler, options);
+        //o evento aqui e de quando uma chave do teclado e pressionada, em qualquer lugar do documento como uma forma de entrada para algun elemento
+        //usamos a fase de captura para que o evento desça até o elemento que inicio o evento e depois subimos por meio de borbulhamento para manipulalo
+        document.addEventListener("keydown", function(event) {
+            //verfica o codigo da chave fisica pressionada e se teclas modificadoras foram pressionadas
+            //como Shift ou Cmd para mac
+            if(event.code == 'KeyZ' && (event.ctrlKey) || event.metaKey) {
+                alert('Desfazer!');
+            }
+        }); 
+
+        /**
+         * Por outro lado, há um problema com event.code. Para layouts de teclado diferentes, a mesma tecla pode ter caracteres diferentes.
+         * 
+         * Por exemplo, aqui estão o layout dos EUA (“QWERTY”) e o layout alemão (“QWERTZ”) abaixo dele (da Wikipedia):
+         * 
+         * Para a mesma chave, o layout americano tem “Z”, enquanto o layout alemão tem “Y” (as letras são trocadas).
+         * 
+         * Literalmente, event.code será igual KeyZ para pessoas com layout alemão quando pressionarem Y.
+         * 
+         * Se verificarmos event.code == 'KeyZ' nosso código, para pessoas com layout alemão, esse teste será aprovado quando eles pressionarem Y.
+         * 
+         * Isso soa muito estranho, mas é assim. A especificação menciona explicitamente tal comportamento.
+         * 
+         * Portanto, event.code pode corresponder a um caractere errado para um layout inesperado. As mesmas letras em layouts diferentes podem ser mapeadas para chaves físicas diferentes, levando a códigos diferentes. Felizmente, isso acontece apenas com vários códigos, por exemplo keyA, keyQ, keyZ(como vimos), e não acontece com chaves especiais como Shift. Você pode encontrar a lista na especificação.
+         * 
+         * Para rastrear de forma confiável caracteres dependentes de layout, event.key pode ser uma maneira melhor.
+         * 
+         * Por outro lado, event.code tem a vantagem de permanecer sempre o mesmo, vinculado ao local da chave física. Portanto, as teclas de atalho que dependem dele funcionam bem mesmo no caso de uma troca de idioma.
+         * 
+         * Queremos lidar com chaves dependentes de layout? Então event.key é o caminho a seguir.
+         * 
+         * Ou queremos que uma tecla de atalho funcione mesmo após uma troca de idioma? Então event.code pode ser melhor.
+        */
+    </script>
+</body>
+</html>

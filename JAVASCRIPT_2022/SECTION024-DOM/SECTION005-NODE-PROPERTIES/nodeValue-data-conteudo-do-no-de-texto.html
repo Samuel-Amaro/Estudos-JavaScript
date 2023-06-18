@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    Hello
+    <!-- comment -->
+
+    <script type="text/javascript">
+        
+        /**
+          * * nodeValue/data: conteúdo do nó de texto
+          * 
+          *  A innerHTML propriedade só é válida para nós de elemento.
+          * 
+          * Outros tipos de nós, como nós de texto, têm sua contraparte: nodeValue e data propriedades. Estes dois são quase os mesmos para uso prático, existem apenas pequenas diferenças de especificação. Então vamos usar data, porque é mais curto.
+          * 
+          * Um exemplo de leitura do conteúdo de um nó de texto e um comentário:
+          * 
+          * 
+        */
+
+        //obtem o no que seja o primeiro filho do no de elemento <body>
+        let text = document.body.firstChild;
+
+        //o primeiro no filho de body e um no de texto
+        //para acessar o conteudo do no de texto usamos a propriedade node.data que le o conteudo 
+        console.log(text.data); //Hello
+
+        //obtem o no que seja o proximo elemento e que seja irmão do no atual
+        let comment = text.nextSibling;
+        
+        //o proximo no depois de text no dom e um no de comentario
+        //para acessar o conteudo de um no de comentario usamos a propriedade data node.data;
+        console.log(comment.data); //comment
+
+        /**
+         * 
+         * Para nós de texto, podemos imaginar um motivo para lê-los ou modificá-los, mas por que comentários?
+         * 
+         * Às vezes, os desenvolvedores incorporam informações ou instruções de modelo em HTML neles, assim:
+         
+            <!-- if isAdmin -->
+                <div>Welcome, Admin!</div>
+            <!-- /if -->
+
+         *
+         * …Então o JavaScript pode lê-lo da data propriedade e processar instruções incorporadas.
+         * */
+    </script>
+
+</body>
+</html>

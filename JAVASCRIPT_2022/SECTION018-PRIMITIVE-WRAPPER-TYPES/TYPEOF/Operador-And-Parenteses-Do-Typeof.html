@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <script>
+
+        /**
+         * * OPERADOR E PARÊNTESES DO TYPEOF JS
+         * 
+         * Ao passar uma expressão para o typeof operador, você precisa usar parênteses. Por exemplo:
+         * 
+        */
+
+        //usando o operador typeof
+        //O typeof operador aceita um operando e retorna uma string representando o tipo do operando.
+        //pode usar alternativamente o operador typeof com os parenteses ou não
+        //so usa parenteses com o operador typeof quando o operando for uma expressão
+        //no exemplo abaixo so sera inicializada a variavel type quando o typeof operador retornar o tipo da expressão
+        let type = typeof(100 + '10'); //'10010'
+        console.log(type); //'string'
+
+        /**
+         * Neste exemplo, a expressão 100 + '10' retorna a string '10010'. Portanto, seu tipo é 'string'. Se você não usar os parênteses, obterá um resultado inesperado. Por exemplo:
+         * 
+        */
+
+        //se não usarmos parenteses quando o operando for uma expressão para o typeof o resultado não e como esperado
+        type = typeof 100 + '10';
+        console.log(type); //'number10'
+
+        /**
+         * Neste exemplo, o typeof 100 retorna 'number'. Portanto, o resultado é uma string que é a concatenação da string 'number' e '10'.
+         * 
+         * * RESUMO
+         * 
+         * Use o operador JavaScript typeof para obter uma string que representa o tipo de valor.
+        */
+    </script>
+
+</body>
+</html>

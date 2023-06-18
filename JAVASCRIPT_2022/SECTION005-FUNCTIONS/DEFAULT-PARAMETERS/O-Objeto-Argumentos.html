@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto de Argumentos</title>
+</head>
+<body>
+    <script>
+        /**
+         * * O OBJETO DE ARGUMENTOS
+         * 
+         * O valor do arguments objeto dentro da função é o número de argumentos reais que você passa para a função. Por exemplo:
+        */
+
+        //declara uma function chamada add, que possui 3 paramentros declarados
+        //o primeiro paramentro x não possui valor padrão definido somente o valor atribuido pelo proprio JS para paramentros não inicializados o valor undefined
+        //o segundo paramentro y possui um valor padrão definido o 1
+        //o terceiro paramentro z possui o valor padrão definido 2
+        function add(x, y = 1, z = 2) {
+            //mostra o numero de argumentos realmente passado para a function add
+            console.log(arguments.length);
+            //retorna a soma dos argumentos
+            return x + y + z;
+        }
+
+        //invoca a function add passando somente um argumento, os outros paramentros utilizem o proprio valor padrão
+        add(10);
+        //invoca a function add passando somente dois argumentos, o terceiro utiliza o valor padrão do paramentro definido
+        add(10, 20); //2
+        //invoca a function passando 3 argumentos
+        add(10, 20, 30);
+
+        /**
+         * Agora, você deve entender os parâmetros de função padrão do JavaScript e como usá-los de forma eficaz. 
+        */
+    </script>
+</body>
+</html>

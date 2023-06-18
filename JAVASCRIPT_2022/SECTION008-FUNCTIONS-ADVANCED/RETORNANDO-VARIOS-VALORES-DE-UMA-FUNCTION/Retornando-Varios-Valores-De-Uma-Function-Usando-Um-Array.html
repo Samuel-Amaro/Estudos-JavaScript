@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retornando Varios Valores</title>
+</head>
+<body>
+    <script>
+        /**
+         * * RETORNANDO VÁRIOS VALORES DE UMA FUNÇÃO USANDO UM ARRAY
+         * 
+         *  Suponha que a getNames() função a seguir recupere o nome e o sobrenome de um banco de dados no back-end ou do resultado de uma chamada de API de terceiros e os retorne como elementos de uma array:
+        */
+
+        //declara uma function regular chamada getNames que não possui paramentro e retorna um array
+        function getNames() {
+            //obtem nomes do banco de dados ou API
+            //declara duas variaveis e as inicializa com valores de texto, string do tipo primitivo
+            let firstName = 'John', lastName = 'Doe';
+
+            //retorna como uma array literal com dois elementos
+            return [firstName, lastName];
+        }
+
+        /**
+         * Veja a seguir como obter o valor de retorno da getNames() função:
+        */
+
+        //invoca a function getNames() que retorna um array com dois elementos
+        //names sera uma array literal
+        let names = getNames();
+
+        /**
+         * Como a names variável é um array, você pode referenciar seus elementos usando os colchetes, assim:
+        */
+
+        const firstName = names[0], lastName = names[1];
+
+        /**
+         * No ES6, você pode usar a sintaxe de atribuição de desestruturação para descompactar valores de um array de forma mais intuitiva, assim:
+        */
+
+        const [firstName, lastName] = getNames();
+
+        /**
+         * Nesse código, as variáveis firstName e lastName pegarão o primeiro e o segundo elementos da array de retorno.
+        */
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * IMPEDIR A ROLAGEM ATUAL
+         * 
+         * Como fazer algo não poder rolar?
+         * 
+         * Não podemos impedir a rolagem usando event.preventDefault() no onscroll listener, porque ele é acionado depois que a rolagem já aconteceu.
+         * 
+         * Mas podemos evitar a rolagem por event.preventDefault() em um evento que causa a rolagem, por exemplo, evento keydown para pageUp e pageDown.
+         * 
+         * Se adicionarmos um manipulador de eventos a esses eventos e neles event.preventDefault(), a rolagem não será iniciada.
+         * 
+         * Existem muitas maneiras de iniciar uma rolagem, então é mais confiável usar CSS, overflow propriedade.
+         * 
+         * 
+        */
+    </script>
+</body>
+</html>

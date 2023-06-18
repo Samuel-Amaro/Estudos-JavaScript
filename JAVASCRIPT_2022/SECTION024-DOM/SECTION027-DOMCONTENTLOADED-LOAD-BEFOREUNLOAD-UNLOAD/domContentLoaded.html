@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <script>
+        /**
+         * * DOMContentLoaded(Conteudo DOM carregado)
+         * 
+         * O DOMContentLoaded evento acontece no document objeto.
+         * 
+         * Devemos usar addEventListener para pegá-lo:
+        */
+
+        //document.addEventListener("DOMContentLoaded", ready);
+        //não "document.onDOMContentLoaded = ..."
+
+        function ready(event) {
+            alert('DOM é lido');
+
+            //a imagem ainda não foi carregada (a menos que tenha sido armazenada em cache), então o tamanho é 0x0
+            alert(`Image size: ${img.offsetWidth}x${img.offsetHeight}`);
+        }
+
+        //atribuindo um manipulador de evento por meio do metodo elem.addEventListener(event, handler, {options...});
+        //o manipulador e para o evento DOMContentLoaded, o navegador HTML totalmente carregado e a árvore DOM é construída, mas recursos externos como imagens <img> e folhas de estilo podem ainda não ter sido carregados.
+        //esse evento so e acionado quando o documento e carregado, o HTML, á arvore DOM
+        document.addEventListener("DOMContentLoaded", ready);
+
+        /**
+         * No exemplo, o DOMContentLoaded manipulador é executado quando o documento é carregado, para que possa ver todos os elementos, inclusive os <img> abaixo.
+         * 
+         * Mas não espera a imagem carregar. Então alert mostra zero tamanhos.
+         * 
+         * À primeira vista, o DOMContentLoaded evento é muito simples. A árvore DOM está pronta – aqui está o evento. Existem algumas peculiaridades embora.
+         * */
+    </script>
+
+    <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0" alt="image"/>
+
+</body>
+</html>

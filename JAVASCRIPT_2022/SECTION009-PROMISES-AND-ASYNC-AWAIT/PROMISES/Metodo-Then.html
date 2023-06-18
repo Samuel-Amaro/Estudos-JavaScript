@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O método Then()</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * * CONSUMINDO UMA PROMISSE: THEN(ENTÃO), CACTH(PEGUE), FINALLY(FINALMENTE).
+         * 
+         * * 1) O MÉTODO THEN() - ENTÃO
+         * 
+         * Para obter o valor de uma promessa quando ela for cumprida, você chama o then() método do objeto de promessa. Veja a seguir a sintaxe do then()método:
+
+            //obter o valor da promisse, quando seu estado for cumprida, chamar esse método
+
+            promise.then(onFulfilled, onRejected);
+
+         * 
+         * O then() método aceita duas funções de retorno de chamada(callbak): onFulfilled e onRejected.
+         * 
+         * O método then() chama o onFulfilled() com um valor, se a promessa for cumprida ou o onRejected() com um erro se a promessa for rejeitada.
+         * 
+         * Observe que os argumentos onFulfilled e onRejected são opcionais.
+         * 
+         * O exemplo a seguir mostra como usar o método then() do objeto Promise retornado pela função getUsers():
+        */
+
+        //declara uma function chamda getUsers que não declara parametro
+        //uma function e uma instancia de objeto do tipo function
+        function getUsers() {
+            //a function ira retorna uma instancia de objeto de promisse a ser resolvida
+            // instancia um objeto de promisse anonimo, invocando construtor, e usando o operador new
+            //o construtor recebe um arrow function anonima que e conhecida como executor que declara dois paramentros chamados resolv e reject que serão callbacks
+            //o corpo dessa callbakc executor sera a operação assincrona
+            //quando uma promisse e instanciada seu estado e de pendente
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser executada
+                //usando a function setTimeout para ter um atraso de 1 segundo de espera para mudar o estado da operação assicrona de pendente para cumprida com valor
+                setTimeout(() => {
+                    //a resolve callback function argumento e chamada pelo executor para muda o estado da operação de pendente para cumprida com valor
+                    //a resolve callbakc recebe como argumento um array dense literal anonimo de objetos literal anonimos que o inicalizam
+                    resolve([
+                        {username: 'john', email: 'john@test.com'},{username: 'jane', email: 'jane@test.com'}
+                    ]);
+                }, 1000);
+            });
+        }
+
+        //declara uma function chamada onFulfilled que declara um paramentro chamado users
+        //essa e a definição da function a ser chamada quando a promessa for cumprida, tiver seu estado alterado de pendente para cumprida
+        function onFulfilled(users) {
+            console.log(users);
+        }
+
+        //invocando chamando o metodo getUsers sem precisar de fornecer argumento, o metodo retorna uma instancia de uma promisse a ser resolvida
+        //a promisse e atribuida por referencia a variavel promise
+        const promise = getUsers();
+        //invocando o metodo then da promisse
+        //o metodo then obtem o valor de uma promessa quando ela for cumprida
+        //o argumento passado para o then metodo e uma referencia da function onFulfiled, que e passada como um argumento, uma callback.
+        //O método then() chama o onFulfilled() com um valor, se a promessa for cumprida. ter seu estado de pendente para cumprida assim e resolvida
+        promise.then(onFulfilled);
+
+        /**
+         * Neste exemplo:
+
+            - Primeiro, defina a onFulfilled()função a ser chamada quando a promessa for cumprida.
+
+            - Segundo, chame a getUsers()função para obter um objeto de promessa.
+
+            - Terceiro, chame o then() método do objeto promise e envie a lista de usuários para o console.
+
+         * 
+         * Para tornar o código mais conciso, você pode usar uma função de seta(arrow function) como argumento do then() método assim:
+        */
+
+        //tornando o codigo mais conciso com arrow functions
+        //a function getUsers retorna uma promisse
+        function getUsers2() {
+            //promisse e iniciada com o estado pendente
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser executada
+                setTimeout(() => {
+                    //operação foi concluida com sucesso, chama resolve, callback argumento para mudar o estado da promisse de pendente para cumprida com um valor
+                    resolve([
+                        {username: 'john', email: 'john@test.com'},{username: 'jane', email: 'jane@test.com'}
+                    ]);
+                }, 1000);
+            });
+        }
+
+        //invocando a function que retorna uma instancia de objeto de promisse que e atribuida a variavel promise
+        const promise2 = getUsers2();
+        //usando metodo then podemos obter o valor da promisse ja resolvida, isso tendo seu estado de pendente para cumprida, ou quando a promisse for comprida(resolvida)
+        //o then metodo recebe como argumento uma arrow function anonima que possui um users paramentro que e o valor que a promisse retorna quando e comprida apos operação assincrona ter sido executada, essa arrow function, anonima paramentro passado para o then metodo  e chamada com um valor quando a promisse e comprida.
+        promise2.then((users) => {
+            console.log(users);
+        });
+
+        /**
+         * Como a função getUsers() retorna um objeto de promessa, você pode encadear a chamada da função com o método then assim:
+        */
+
+        //simplificando ja que o getUser retorna um objeto podemos encadear os metodos
+        getUsers2().then((users) => {
+            console.log(users);
+        });
+
+        /**
+         * Neste exemplo, a getUsers() função sempre é bem-sucedida. Para simular o erro, podemos usar um success sinalizador como o seguinte:
+        */
+
+        //declara uma variavel chamada sucess e a inicializa com  o valor booleano true
+        let sucess = true;
+
+        //tentando simular um erro em uma operaçaõ assincrona encapsulada por uma promisse
+
+        //a function getUsers retorna uma promisse
+        function getUsers3() {
+            //promisse e iniciada com o estado pendente
+            return new Promise((resolve, reject) => {
+                //operação assincrona a ser executada
+                setTimeout(() => {
+                    //operação foi concluida com sucesso, chama resolve, callback argumento para mudar o estado da promisse de pendente para cumprida com um valor, o valor e o argumento passado para o resolve callback
+                    if(sucess) {
+                        resolve([{username: 'john', email: 'john@test.com'},{username: 'jane', email: 'jane@test.com'}
+                        ]);
+                    }else{
+                        //se a operação assincrona não for concluida, der um erro
+                        //Em caso de erro, o executor chamará a reject() função para alterar o estado da promessa de pendente para rejeitada com o motivo do erro.
+                        //o argumento da reject callback e o motivo do erro
+                        reject('Failed to the user list');
+                    }
+                }, 1000);
+            });
+        }
+
+        //declara uma function chamada onFulfilled que declara um paramentro chamado users, o valor que a promisse retorna apos resolvida
+        //essa e a definição da function a ser chamada quando a promessa for cumprida, tiver seu estado alterado de pendente para cumprida
+        //essa function obtera o valor da promisse resolvida
+        function onFulfilled2(users) {
+            console.log(users);
+        }
+
+        //declara uma functino chamada onRejected declarando um paramentro chamado error o motivo do erro da promisse ter sido rejeitada
+        //essa e a definição da function a ser chamada quando a promessa for rejeitada, tiver seu estado modificado de pendente, para rejeitado
+        function onRejected(error) {
+            console.log(error);
+        }
+
+        //invoca a function getUser que retorna uma instancia de promisse encapsulando uma operação assincrona
+        //a promisse e atribuida por referncia a variavel promise
+        const promise3 = getUsers3();
+        //usando o metodo then para obter o valor da promisse quando ela for cumprida ou rejeitada
+        //O método then() chama o onFulfilled() com um valor, se a promessa for cumprida
+        //onRejected() com um erro se a promessa for rejeitada
+        //os argumentos passados para o metodo then são as referncias das funções, a serem executas quando a promisse for resolvida ou rejeitada
+        promise3.then(onFulfilled2, onRejected);
+
+        /**
+         * Como funciona.
+         * 
+         * Primeiro, defina a success variável e inicialize seu valor como true.
+         *
+         * Se o sucesso for true, a promessa na getUsers() função será cumprida com uma lista de usuários. Caso contrário, ele será rejeitado com uma mensagem de erro.
+         * 
+         * Em segundo lugar, defina as funções onFulfilled e onRejected.
+         * 
+         * Terceiro, obtenha a promessa da getUsers() função e chame o then()método com as funções onFulfilled e onRejected.
+         * 
+         * Veja a seguir como usar as funções de seta como argumentos do then()método:
+        */
+
+        const promise4 = getUsers3();
+        promise4.then((users) => console.log(users), (error) => console.log(error));
+    </script>
+
+</body>
+</html>

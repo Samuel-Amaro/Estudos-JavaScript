@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+    <script>
+
+        /**
+         * * REDECLARACAO
+         * 
+         * A var palavra-chave permite que você redeclare uma variável sem nenhum problema:
+        */
+
+        //somente as variaveis criadas com var palavra-chave permitem redeclaração
+        //declara uma varaivel global chamada counter que e inicialziada com valor 0
+        var counter = 0;
+        //tentando redeclarar uma variavel existente com o mesmo nome
+        //redeclara uma variavel com o mesmo nome so que sem inicializala
+        var counter;
+
+        console.log(counter);
+
+        /**
+         * No entanto, redeclarar uma variável usando a palavra-chave let resultará em um erro:
+        */
+
+        //variaveis criadas com let não permite redeclaracao, gera um erro
+
+        try {
+            //declara um variavel de escopo de bloco usando palavra-chave let, variavel e chamada de counter e inicializada com valor 0
+            //tentando redeclarar um  variavel ja exisitente usando palavra chave let, gera um erro
+            let counterLet = 0;
+            let counterLet;
+            console.log(counterLet);
+        } catch (error) {
+            console.log(error.e, error.name);
+        }
+
+    </script>
+
+</body>
+</html>
